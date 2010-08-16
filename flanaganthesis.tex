@@ -1,0 +1,665 @@
+
+% Cal Poly Thesis
+% 
+% based on UC Thesis format
+%
+% modified by Mark Barry 2/07.
+%
+
+
+
+
+\documentclass[12pt]{ucthesis}
+
+\newif\ifpdf
+\ifx\pdfoutput\undefined
+    \pdffalse % we are not running PDFLaTeX
+\else
+\pdfoutput=1 % we are running PDFLaTeX
+\pdftrue \fi
+
+\usepackage{url}
+\ifpdf
+
+    \usepackage[pdftex]{graphicx}
+    % Update title and author below...
+    \usepackage[pdftex,plainpages=false,breaklinks=true,colorlinks=true,urlcolor=blue,citecolor=blue,%
+                                       linkcolor=blue,bookmarks=true,bookmarksopen=true,%
+                                       bookmarksopenlevel=3,pdfstartview=FitV,
+                                       pdfauthor={!!Author goes here!!},
+                                       pdftitle={!!Title goes here!!},
+                                       pdfkeywords={thesis, masters, cal poly}
+                                       ]{hyperref}
+    %Options with pdfstartview are FitV, FitB and FitH
+    \pdfcompresslevel=1
+
+\else
+    \usepackage{graphicx}
+\fi
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[letterpaper]{geometry}
+\usepackage[overload]{textcase}
+\usepackage{subfig}
+\usepackage{float}
+
+
+\bibliographystyle{abbrv}
+
+\setlength{\parindent}{0.25in} \setlength{\parskip}{6pt}
+
+\geometry{verbose,nohead,tmargin=1.25in,bmargin=1in,lmargin=1.5in,rmargin=1.3in}
+
+\setcounter{tocdepth}{2}
+
+
+% Different font in captions (single-spaced, bold) ------------
+\newcommand{\captionfonts}{\small\bf\ssp}
+
+\makeatletter  % Allow the use of @ in command names
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{{\captionfonts #1: #2}}%
+  \ifdim \wd\@tempboxa >\hsize
+    {\captionfonts #1: #2\par}
+  \else
+    \hbox to\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
+\makeatother   % Cancel the effect of \makeatletter
+% ---------------------------------------
+
+
+
+
+\begin{document}
+
+% Declarations for Front Matter
+
+% Update fields below!
+\title{Spatial Reasoning in Architectural Design}
+\author{Gregory Flanagan}
+\degreemonth{September} \degreeyear{2010} \degree{Master of Science}
+\defensemonth{September} \defenseyear{2010}
+\numberofmembers{3} \chair{Franz Kurfess, Ph.D.} \othermemberA{Mehul Bhatt, Ph.D.} \othermemberB{John Seng, Ph.D.} \field{Computer Science} \campus{San Luis Obispo}
+\copyrightyears{seven}
+
+
+
+\maketitle
+
+\begin{frontmatter}
+
+% Custom made for Cal Poly (by Mark Barry, modified by Andrew Tsui).
+\copyrightpage
+
+% Custom made for Cal Poly (by Andrew Tsui).
+\committeemembershippage
+
+\begin{abstract}
+CAD systems lack the technology to capture and represent underlying building design
+knowledge beyond purely geometrical information. The common thread of the work
+ discussed here, are ways to capture, represent, and reason about building design
+knowledge for use in creating intelligent building design systems.  
+
+
+
+\end{abstract}
+
+%\begin{acknowledgements}
+
+%   Thank you...
+
+%\end{acknowledgements}
+
+
+\tableofcontents
+
+
+\listoftables
+
+\listoffigures
+
+\end{frontmatter}
+
+\pagestyle{plain}
+
+
+
+
+\renewcommand{\baselinestretch}{1.66}
+
+
+% ------------- Main chapters here --------------------
+
+
+
+
+
+\chapter{Introduction}
+\label{intro}
+
+
+This is the introduction.
+
+
+
+\chapter{Preliminaries}
+\label{preliminaries}
+
+\section{Qualitative Spatial Representation and Reasoning}
+\subsection{Applications of Spatial Reasoning}
+\subsubsection{Architectural Design}
+\subsubsection{Geographic Information Systems}
+\subsubsection{Robotics}
+\section{Constraint Logic Programming}
+
+
+\chapter{Previous Work}
+\label{previous-work}
+\section{Design Support Systems}
+\subsection{SEEDS}
+The SEEDS project, described in \cite{FlemmingIKM94}, proposed a architectural design platform for capturing and representing functional (i.e. spatial requirements) and structural (geometric) design knowledge. The aim of which is to support the architectural design process by providing design knowledge during the initial design phase of a building. Within the SEEDS project, design knowledge is partitioned into two categories: design units, and functional units. Design units represent spatial and physical elements of a building, while functional units represent requirement that constrain design units
+based on shape, size, placement, etc.. Additionally, SEEDS pioneered the idea that architectural design knowledge, specifically design requirements, could be represented as constraints to automatically generate layouts.
+
+
+
+\section{AI in Design}
+\subsection{Intelligence Virtual Environments}
+Caldern \cite{CalderónCLP06} built upon the ideas in \cite{FlemmingIKM94} for representing design knowledge, to develop an Intelligent Virtual Environment that solves spatial configuration problems based on spatial design knowledge. Additionally, the tool added non-geometric semantics (i.e. environmental, lighting) for functional units to demonstrate that their approach could be extended to non-geometric design knowledge.
+
+Caldern argued that spatial knowledge By representing design knowledge as constraints, the tool was able to use constraint logic programming to solve spatial configuration problems. In general, constraint are classified as: topological, local, and global. Topological constraints describe the topological characteristics of the environment, such as a regions where a lighting is less then 300 lux. Local constraints describe the attributes of a
+single object and how it interacts with topological characteristics. In general these characteristics are in the form of, a desk should be at least 4 meters from a ventilation duct, or an object should be within an area that has more then 300 lux of light. Global constraints express design requirements for a group of objects.  
+
+Axling \cite{AxlingEURO96} and Codognet \cite{CodognetDMS99} proposed the use constraint  logic programming in Virtual Environments for intelligent object behavior. Their approaches focuses on the behavior of single objects without taking into consideration behavior of a set of object or how objects constrained by the specific environment. 
+
+\subsection{V-SIMSPLACE}
+\cite{LertlakkhanakulIBPSA06} describes a platform that 'embodies spatial context-aware information' so that users can visualize an architectural design before it is deployed. The aim of the tool is to simulate a users experience in a Smart Home environment, in order to study the interactions of the user within his/her environment. The crux of the system is that behavioral semantics of a Smart Home are integrated into the building design knowledge so that the interactions a user has within the Virtual Environment will closely mimic the real world.
+
+Unlike \cite{CalderónCLP06}, V-PLACESIMS does not attempt to capture design requirements or reason about the consistency of an environment. Rather, it's focus is providing a platform for users to interact with a Smart Home environment to discover the behaviors and interactions that take place.
+
+\subsection{Intelligence for Ambient Design}
+Bhatt proposed a system in \cite{BhattDH09} that provides validation for the satisfiability of functional requirements, which are grounded to a qualitative spatial calculi, within the Ambient Environment domain. The system accomplishes this by modeling the functional requirements as constrains in an ontology and uses an ontology reasoner to discover if a model is realizable for a design, i.e. no models will be found if on or more functional constraints are not satisfied. 
+
+\subsection{Decision Support for Virtual Environment}
+\cite{Nomura92} used a Decision Support System to validate the design configuration. The system was used more as a diagnostic system, rather then providing feedback on how to reconfigure the environment. Note: I have not read \cite{Nomura92} because I haven't been able to track it down. Therefore my description here is based on the related works section of \cite{CalderónCLP06}.
+
+
+
+\chapter{DSpace Reasoner}
+The DSpace Reasoner is a prototype tool for validating conceptual design requirements against CAAD based architectural design plans. Conceptual design requirements here refer to requirements as they pertain to the functional and experiential aspects of the design from a semantic and qualitative perspective. For example, architects commonly describe aspects of a design in a qualitative fashion, such as a design being private, accessible, or continuous. These architectural aspects emerge from the spatial structures / arrangements of the building form and are experienced in the building. 
+
+The goal of the DSpace reasoner is to build a computational framework to represent and reason about conceptual design requirements to validate conceptual design requirement to the real world, CAAD based architectural plans.     
+
+
+\section{Design Problem}
+
+to do this dspace need to:
+ - representation of design
+ 	- spatial abstraction / multiple perspectives
+ 	- artefacts
+ - design requirements - define / identify
+ 	- define architectural qualities
+ 		- perceptual
+ 		- intrinsic / geometric
+ 	- define architectural concepts
+	- spatial interpretation / explicit characterization
+ - qualitative spatial reasoning
+ 	- topological 
+ 	- orientation
+ 		- intrinsic vs extrinsic
+ 	- distance
+
+
+\section{DSpace: Design and Implementation}
+
+
+\chapter{Representation of Architectural Designs in DSpace}
+\section{Multiple Perspectives and Spatial Abstraction}
+\section{Artefacts}
+\section{IFC / ArchiCAD import}
+
+\chapter{Spatial Reasoning in Constraint Logic Programming Framework}
+The spatial reasoning module in DSpace is built in a constraint logic programming framework. 
+
+Constraint Handling Rules
+
+Qualification
+
+\section{Topology}
+Topological reasoning works over points, lines, and regions (convex hulls). The main form of spatial topological reasoning is qualification. The following are the topological relationships that can be qualified: partially overlapping, ntpp, ntppi, disconnected and equals. 
+
+Topological qualifications uses properties of line intersections and convex hulls to detect topological relationships. Constraint handling rules are used to simplify topological constraints until a simple constraint of line intersection checking and point / convex hull containment. The partially overlapping relationship is detected if and lines intersect between objects and 
+
+\section{Orientation}
+
+\subsection{Intrinsic Orientation}
+OPRA
+Relationships
+  - i, j
+
+Geometric Detection
+  - partition of space in to half planes
+  - linear inequalities
+
+\subsection{Extrinsic Orientation}
+SCC
+Relationships
+  - SCC rel
+  
+Geometric Detection
+  - partition of space into half planes
+  - linear inequalities
+
+\section{Distance}
+Uses Sindalog reasoner's distance constraints
+Variation of distance constraints
+
+\section{Sample Queries}
+Examples with shapes
+Examples with architectural elements in the DSpace reasoner
+
+
+\chapter{Conceptual Design Requirements}
+
+
+\section{Qualitative Spatial Attributes in Architecture}
+This section presents a set of qualitative spatial attributes found in architecture and shows how they are spatially interpreted and represented in DSpace. These attributes are architectural qualities that are emerge from the spatial relationships and configurations between the spatial elements of the structural building (doors, walls, windows, etc.) and interior design (furniture, lights, decorations, etc.). Attributes can be perceptual, qualities that are described from a specific vantage point, or intrinsic, qualities that are inherent in the build's spatial structure. The goal of this section, is to develop a tool-kit of qualitative attributes that describe an architectural design in the spatial environments they emerge in. TBD - needs work: Thes attributes can be used to build together to build conceptual design requirements.
+
+The set of qualitative spatial attributes developed in the section were taken from architectural design textbooks \cite{TBD}, museum research on visitor behaviour \cite{TBD}, and building codes \cite{TBD}. The objective here is not to develop an exhaustive list of qualitative spatial attributes for architecture or a validation of the interpretation of the attributes, rather it is to demonstrate a computational framework in which these qualities can be represented and used to reason about architectural design requirements.
+
+TBD: heuristic / explicit characterization / experience / common sense
+
+TBD: spatial abstraction so attributes are not precise. Some fringe cases are pointed out, but all such cases are not identified and handled.
+
+\subsection{Facing}
+The facing attribute defines an intrinsic orientational relationship between two objects as each relates to the other. The definition used here is based on a common sense interpretation of facing, in which an object \emph{A} is facing towards an object \emph{B}, if object \emph{B} is in front of object \emph{A} and object \emph{A} is directionally oriented at object \emph{B}. Under this definition, a pair of objects can be facing towards or away from each other. Given a pair of objects,\emph{A} and \emph{B}, there are four possible facing configurations between the pair: 
+
+\begin{figure}[H]
+ \centering
+ \subfloat[A, B towards]{\label{fig:facing-towards}\includegraphics[width=25mm]{facing-towards}}
+ \hspace{10 mm}
+ \subfloat[A, B away]{\label{fig:facing-away}\includegraphics[width=28mm]{facing-ABaway}}
+  \hspace{10 mm}
+ \subfloat[A towards, B away]{\label{fig:facing-A}\includegraphics[width=28mm]{facing-Atowards-Baway}}
+ \hspace{10 mm}
+ \subfloat[A away, B towards]{\label{fig:facing-A}\includegraphics[width=28mm]{facing-Aaway-Btowards}}
+ \caption{facing}
+\label{display-arrangement}
+\end{figure}
+
+The facing attribute is modelled in the DSpace reasoner using the Oriented Point Relation Algebra \cite{Moratz} (OPRA). The advantage of using OPRA is that it models the intrinsic orientational relationships between pairs of directed points. OPRA partitions space into half planes, which are defined by lines emanating outwards from the reference point, and defines the qualitative orientational relationships by the half plane in which a second point is located. Figure \ref{facing-opra-base-rel} shows the partitioning of space with labels for base relationships in OPRA$_{4}$. A second point is located in sector 6 of the partitioning scheme, so that the second point has an OPRA$_{4}$ 6 relationship with the point. Note that the arrow depicts the point's direction and the sectors are labelled starting in the point's direction and incrementing counter-clockwise. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=40mm]{facing-opra-base-rel}
+\caption{OPRA$_{4}$ Space Partitioning}
+\label{facing-opra-base-rel}
+\end{figure}
+
+Using OPRA$_{4}$, the facing attribute can be defined in terms of the half plane sectors. A point \emph{A} is facing towards another point \emph{B}, if point \emph{B} is located in sectors 1, 2, or 16 of point \emph{A's} partitioned space. Similarly, if point \emph{A} is located in sectors 1, 2, or 16 of point \emph{B's} partitioned space then point \emph{B} is facing towards point \emph{A}. In this case points \emph{A} and \emph{B} are facing towards each other. Figure \ref{fig:facing-opra-towards} shows a pair of points facing towards each other; note that each point is located in sector 16 of the other's partitioned space. Conversely, a point \emph{A} is facing away from a point \emph{B} if point \emph{B} is located in sectors 3 - 15 of point \emph{A's} partitioned space. Figure \ref{fig:facing-opra-away} shows a pair of points that are facing away from each other and are located in sectors 11 and 7. 
+
+\begin{figure}[H]
+ \centering
+ \fbox{
+ \subfloat[facing towards]{\label{fig:facing-opra-towards}\includegraphics[width=60mm]{facing-opra}}
+ }
+  \hspace{10 mm}
+  \fbox{
+ \subfloat[facing away]{\label{fig:facing-opra-away}\includegraphics[width=60mm]{facing-away-opra}}
+ }
+ \caption{OPRA Partitioning }
+\label{opra-facing}
+\end{figure}
+
+In DSpace the facing attribute can be used to check if two architectural elements or interior design objects are facing towards or away from the other. As an example, doorways and windows that face towards the other promote air flow through the room / space that they inhibit. A design requirement that promotes air circulation might include the use of windows and doorways that face towards each other. Figure XXX shows and example room where a window and door face each other. Additionally, the facing attribute can be used to describe requirements between interior design element, such as desks, chairs, beds as they related to windows, and doorways and other interior design elements.  
+
+fig:window door facing towards ....
+
+Special case: Walls
+ Within the context of architecture, care needs to be taken to account for interior design objects and architectural elements that are axis, such as the general   case of a wall, because the orientational spatial abstraction for OPRA is a directed point. Within the facing definition used here, an object is in facing towards another if the object is in front of and directed at the object with respect to the directed point abstractions of both objects. This becomes a problem in the case of walls because they are
+
+
+\subsection{Proximity / Distance}
+The proximity attribute defines a qualitative distance relationship between two objects. In DSpace there are two proximity relationships: near and far. The spatial interpretation of these relationships depends on the context and scale in which the objects inhibit. For the purposes here, and in the context and scale of architectural space, proximity is defined using heuristics based on the scale of building elements, i.e. rooms, apartments, buildings.
+
+Using these heuristics a pair of objects are considered near if the minimum distance between them is less then or equal to 3 meters. Conversely, a pair of objects are considered far if the minimum distance between the pair is greater then 3 meters. While the definition of proximity used here pivots around 3 meters, it can easily be change by using an extra parameter in a proximity predicate. 
+
+TBD fig:proximity
+   
+In DSpace the proximity attribute can be used to check if two architectural elements or interior design objects are close or far away from the other. An example of the use of the proximity attribute would be a requirement that all desks should be close to at least one power outlet. This is important because desks often house computer and lamps which require the use of an electrical plug. TBD: example for far away
+
+
+
+\subsection{Positioning}
+The positioning attribute defines an orientational relationship between a pair of objects as each relate to the other within an extrinsic context, i.e. a defined space such as a room, apartment, building, or user defined space. There are four basic positioning relationships using this scheme: opposing-side of space, same-side of space, left-side of space, and right-side of space. The opposing-side and same-side relationships can be combined, via conjunction, with the left-side or right-side relationships to form the following compound relationships: opposing-left-side, opposing-right-side, same-left-side, same-right-side.
+
+TBD fig:positioning 
+
+The positioning attribute is interpreted spatially in DSpace using the Single Cross (SCC) orientation calculus \cite{Freksa}. SCC defines the orientation of a point C (referent) with respect to a point B (relatum) from the viewpoint of a point A (origin). The positioning attribute uses the SCC scheme to relate two points (origin, referent) in the context of an external frame of reference (the relatum). In this case the relatum is a central point of the context space. In DSpace, the reference point is defined as the centroid of the space. The assumption here is that the context space will be generally rectangular in space (rooms, buildings, etc.).
+
+TBD fig: SCC
+
+Under this scheme, a pair of points are define as being on opposing sides of a space if they have an SCC relationship of 0, 1, 7, as related by the centroid of the context space. Conversely, a pair of points are defined to be on the same side of the room if they have and SCC relationship of 2 - 6 as related by the centrod of the context space. On object is on the left side of the room from if it has an scc relationship of 0 -4, and right side if it has an scc relationship of 5 - 7. 
+
+TBD fig:opposing / same / left /right side of space as defined in SCC
+
+In DSpace the positioning attribute can be used to check if two architectural elements or interior design object are on the opposing or same side of a space to the other. An example of the use is a requirement that a bedroom is positioned at the back of the house from the main entrance. A bedroom might be positioned in the back of the house because it is generaly a private area of the house. In this requirement the origin is the entrance the referent and bedroom and the relatum is the centroid of the space that defines the floor in which the entrance and bedroom share. 
+
+TBD: fig:room back of house
+
+\subsection{Visibility}
+The visibility attribute defines a boolean relationship between a viewpoint and an object with respect to if the object is visible or not from the viewpoint. Within this definition, an object is visible if there are no obstructions in-between the viewpoint and the object. It should be noted that this interpretation of visibility does not take into account effects of distance on visibility, i.e. an object might not be visible because it is very far away. However, within the context of a architecture and buildings, distances that effect visibility are usually not a factor. 
+
+The spatial interpretation of visibility is based on the topological structures of the space in-between the viewpoint and object. This space will is defined here as the view-space. An object is visible if the view-space is not obstructed by an surrounding objects or structures. An obstructing object is defined as having a topological relationship of partially overlapping of containing with the view-space. This version of the visibility attribute does not detect the degree to which an obstruction is blocking visibility, but could be done by further analysis of the topological spatial structures.
+
+TBD fig:visibility
+
+In DSpace the visibility attribute can be used to check if an architectural element is visible from a given viewpoint. An example of this is a requirement where a stairway should be visible from the entrance.
+
+
+\subsection{Alignment}
+The alignment attribute defines 
+
+\subsection{Pathways / Turns}  right turn (hard) / left turn (hard) / straight 
+
+
+\section{Architectural Concepts}
+Architectural concepts are terms, such as privacy, continuity, enclosure, and accessibility, that describe an experiential aspect of architecture as used by an architect to describe the functionality of a building \cite{Koile}. These terms are defined in DSpace in a hierarchical manner in which architectural concepts are defined by logically combining, via conjunction and disjunction, architectural qualities and geometric primitives. 
+
+This section defines four architectural concepts and shows how they can be logically defined. As in the previous section, the purpose here is not to investigate the correctness of the concepts or an attempt to look at a complete list of these concepts, rather it's to look at how these concepts cab be defined logically using architectural qualities and spatial / geometric primitives.
+
+\subsection{Privacy}
+The concept of privacy in architecture .... 
+In DSpace, privacy is defined for spaces, such as a room or an apartment, which have the following functional attributes:
+\begin{enumerate}
+\item \emph{positioned on the opposing side of the building from the main entrance}
+\item \emph{doorways into a private space facing away from the central location of any adjacent rooms}
+\item \emph{doorways into a private space are not visible from the main living area}
+\end{enumerate} 
+
+Logically, privacy can be defined as follows:
+\begin{equation} 
+\begin{split}
+privacy(room) \rightarrow & opposingSide(space, space) \wedge \\
+                          & facingAway(doorway, adjacentSpace) \wedge \\
+                          & notVisible(doorway, mainLivingSpace	).
+\end{split}
+\end{equation}	
+
+
+\subsection{Continuity}
+Continuity in architecture is ....
+In DSpace, continuity is defined by a network of points that are all visible between each other \cite{Key}. 
+\begin{equation}
+\begin{split}
+continuity(setobjects_{n}) \rightarrow &isVisible(object_{0} - object_{n-1})
+\end{split}
+\end{equation}
+
+
+\subsection{Enclosure} narrow / spacious
+In DSpace, enclosure is defines a space terms of it being narrow or spacious. The formal definition is based on the minimum distance between each wall \cite{Key} 
+
+\subsection{Security}
+Security in architecture .....
+In DSpace, security is defined by the doorways being observed by the a security camera \cite{Bhatt}. 
+
+\subsection{Symmetry}
+
+
+\section{Hierarchy}
+
+
+
+\chapter{Museum Case Study}
+This chapter is a case study that demonstrates the application of the DSpace reasoner to the design of an art museum. The purpose is twofold: first, to examine several design requirements of an art museum with regards to the spatial interpretation of the requirements; and second, to show how the museum design requirements can be represented and reasoned about in a computational framework, in order to detect design inconsistencies as per the design requirements.
+
+The remainder of the chapter is divided into three sections. The first section examines design requirements in art museums in three parts: the first part looks at requirements that influence museum visitors' behaviour. The second part looks at requirements for promoting exploration in the museum. The third part looks at the requirements of accessibility and security within the museum. The second section, looks at how these requirements can be interpreted spatially and represented in the DSpace reasoner. The third section tests the DSpace reasoner using sample museum floor plans that are both consistent and inconsistent per the design requirements for several art museums. The objective of this demonstration is to show that the DSpace reasoner can validate a design against its design requirements.
+
+
+
+\section{Case Study Scenario: an art museum}
+Museums are a place of public education, in which art, historical artefacts, and scientific exhibits are put on display for the public to view \cite{Falk}. While museums in general have many common threads in terms of their design requirements, this case study takes the approach of narrowing the study to that of an art museum. This focuses the discussion to specific real world examples and maintains the perspective that this is not an exhaustive study of museum design requirements, rather it's an investigation into the nature and interpretation, with respect to spatial properties / characteristics, of a set of design requirements. Additionally, the point is not to prove the validity of these requirements in an empirical sense; rather it is to show the process of representing and reasoning about design requirements in a formal computational framework.
+
+The art museum is a unique and fruitful choice for this case study because it provides a rich set of design properties that have been formally studied and reported \cite{Melton} \cite{Bitgood02} \cite{Falk}. Within museum studies, visitor behaviour has been one of the primary focuses, starting with experiments dating back to the 1930's. 
+
+
+
+\subsection{Museum Design Requirements}
+Pretend for a moment that you are an architect working on the initial design for a new modern art museum. During your first visit with the museum's curator you discuss several design requirements that are important for the new museum. Your discussion reveals that the curator wants the new art museum to adhere to the following requirements:
+
+\begin{enumerate}
+\item Maximize visitor utilization of exhibitions
+\item Encourage free-flowing exploration throughout the museum
+\item Adhere to museum requirements of accessibility and security
+\end{enumerate}
+
+TBD: explain how these high level requirements can be interpreted into concrete properties of the museums design. from here the requirements can be spatially interpreted and represented in the DSpace reasoner.
+
+\subsection{Maximizing Visitor Utilization of Exhibitions}
+This portion of the case study will look into four factors that influence visitors' movement patters: positioning of doorways, spatial arrangement of display cases, positioning of furniture and statues, and congestion. These properties inform museum architects, during the design process, about the spatial characteristics that can maximize the utilization of the museum by increasing the frequency and duration with which visitors view exhibition objects. 
+
+\subsubsection{Positioning of doorways}
+In an important study, Melton \cite{Melton} discovered that the most influential factor to determine  the amount of attention an object receives is the object's position relative to doorways in a gallery room. Prior to this, museum researchers believed that the object's intrinsic properties of 'interestingness', color, and size were the real factors that determined the amount of attention an object received. Melton explained why this happens; he demonstrated that the amount of attention an object receives is directly related to the visitor circulation patterns within the museum and these circulation patterns emerge from the spatial characteristics of the museum's architecture.
+
+\begin{figure}[H]
+ \centering
+ \subfloat[circulation pattern]{\label{fig:door-opposite}\includegraphics[width=35mm, angle=90]{melton-circulation}}
+ \hspace{10 mm}
+ \subfloat[frequency of visits]{\label{fig:door-opposite}\includegraphics[width=35mm, angle=90]{melton-frequency}}
+ \label{melton}
+ \caption{Results from Melton's experiments on the effects of door positioning in an Art Museum}
+\label{Melton-studies}
+\end{figure}
+
+The crux of Melton's experiments suggested that visitors exit through the first door they encounter, which he referred to as the exit gradient. Figure \ref{Melton-studies} shows the results of an extensive study of visitors circulation patterns and stopping frequencies in an art museum. The studies reported that almost 80 percent of visitors exited through the first exit they encountered before viewing the entire exhibition. Additionally, the studied showed that the most frequently visited objects where those located along the shortest path from the entrance to the exit. 
+
+The results of Melton's studies inform architects of spatial characteristics that influence movement patterns in exhibitions. Specifically, doorways that are positioned on the same side of the room cause visitors to pay attention to fewer exhibits than doorways that are positioned on opposing sides of the room.
+
+\begin{description}
+\item[Requirement 1:] Exhibition doorways should be positioned on opposing sides of gallery rooms. 
+\end{description}
+
+Figure \ref{door-position} shows a possible exhibition design where the red door is positioned on the same side of the room as the entrance, while the black door is positioned on the opposing side.
+\begin{figure}[H]
+\centering
+\subfloat[consistent design]{\label{fig:door-opposite}\includegraphics[width=85mm]{door-possitioning}}
+\caption{Schematization of the opposing door requirement.}
+\label{door-position}
+\end{figure}
+
+Bitgood suggests that visitors tend to follow along the wall that is closest to the door they entered \cite{Bitgood95}. Given that visitors also tend to exit through the first doorway they encounter, doorways should not be positioned in a wall that is adjacent to another doorway.  
+ 
+\begin{description}
+\item[Requirement 2:] Exhibition doorways should not be positioned on a wall that is adjacent to another doorway.
+\end{description}
+
+
+\subsubsection{Spatial arrangement of display cases}
+The spatial arrangement of display cases in galleries has been shown to influence visitors' movement patterns. \cite{Bitgood92} showed that display case arrangements that form a perimeter or a peninsula generate the most amount of attention, while display case arrangements that form an island in the middle of the room received the lowest amount of attention.
+
+   \begin{figure}[H]
+ \centering
+ \subfloat[island]{\label{fig:door-opposite}\includegraphics[width=35mm]{island}}
+ \hspace{10 mm}
+ \subfloat[perimeter]{\label{fig:door-opposite}\includegraphics[width=35mm]{perimeter}}
+  \hspace{10 mm}
+ \subfloat[peninsula]{\label{fig:door-opposite}\includegraphics[width=35mm]{peninsula}}
+ \caption{Display case arrangements}
+\label{display-arrangement}
+\end{figure}
+ 
+\begin{description}
+\item[Requirement 3:] Display case arrangements should not form an island near the center of the room.
+\end{description} 
+
+Circulation patterns can be disrupted when a peninsula arrangement cuts horizontally across the view of a visitor as they are entering the room. This type of display pattern will cut off part of the room from the visitor and will make it less likely to be visited.
+
+\begin{description}
+\item[Requirement 4:] Display cases arrangements that form a peninsula should not cut horizontally across the view of a visitor located at an entrance.
+\end{description} 
+
+\begin{figure}[H]
+\centering
+\subfloat[consistent design]{\label{fig:door-opposite}\includegraphics[width=65mm]{display-not-cut}}
+\hspace{10 mm}
+\subfloat[inconsistent design]{\label{fig:door-opposite}\includegraphics[width=65mm]{door-cut-room}}
+\end{figure}
+
+
+\subsubsection{Congestion}
+Congestion in museums can be caused by interference of displayed objects and their viewing spaces with movement pathways of visitors. In order to reduce congestion in museums, designers should be aware of the placement of display cases, statues, furniture (seating benches), and information kiosks within the gallery. The following are requirements that should be followed to reduce congestion in museums:
+
+\begin{description}
+\item[Requirement 5:] The viewing area of display cases, functional space of doors, function space of seating areas, and operation space of information kiosks should not interfere with each other.
+\end{description}
+
+\subsubsection{Positioning of benches, statues, and information kiosks}
+The positioning and orientation of benches and statues can increase the amount of attention an exhibition receives and change circulation patterns within a gallery \cite{Stavroulaki} \cite{Museum}. Studies have shown that seating directly facing an object will increase the attention the object receives, even if no one uses the seating. 
+
+\begin{description}
+\item[Requirement 6:] Seating should directly face a gallery wall or display case.
+\end{description}
+
+The orientation of a statue to doorways can increase the attention the statue receives as well as the object close to it. Statues that face away from doorways encourage visitors to move around the statues in order to get a better view.  
+\begin{description}
+\item[Requirement 7:] Statues should face away from doorways.
+\end{description}
+
+\subsubsection{Visitor Orientation in the lobby}
+The lobby is the first place visitors encounter when they enter a museum. The design of the lobby is important because it not only provides a first glimpse of the museum's exhibits but it is the place where the museum provides services to its visitors, including: a ticketing desk, bathrooms, an information desk, and entrances to exhibitions \cite{Bitgood02}. The aim of the requirements for the lobby focus on making it easy for visitors to locate services and orient themselves to the new environment. 
+
+Upon entering the lobby most visitors need to find the ticket area and/or an information desk. It is important, therefore, that the ticketing area and information desk are visible from the entrance. If there is more then one entrance, then it is important that the ticket area and information desk are visible from all entrances. 
+
+\begin{description}
+\item[Requirement 8:] The ticketing and information desks should be visible from the main entrance(s).
+\end{description}
+
+Additionally, studies have shown that people first look to their right hand side when entering a building. By placing the ticket and information desks on the right hand side of the lobby, visitors are more likely to notice them immediately when they enter the lobby. 
+
+\begin{description}
+\item[Requirement 9:] The ticketing area should be on the right side of the lobby from the main entrance(s).
+\end{description}
+
+The ticketing area should be close to visitors when they enter because it is likely one of the first places they will need to visit.
+\begin{description}
+\item[Requirement 10:] The ticketing are should be on the same side of the lobby as the entrance(s).
+\end{description}
+
+Bathrooms are an important services for museum visitors. Surprisingly, the place of the bathroom can have an impact on how long visitors stay in the museum. Studies \cite{tbd} have found that bathrooms that are located on the same side of the lobby as the entrance / exit encourage visitors to leave earlier compared to museums with bathrooms on the opposing side of the lobby from the entrance / exit. 
+
+\begin{description}
+\item[Requirement 11:] The bathroom should be on the opposing side of the lobby from the entrance / exit.
+\end{description}
+
+The doors should be private to maintain as much privacy in the bathrooms as possible.
+
+\begin{description}
+\item[Requirement 12:] Bathroom doors should be private.  
+\end{description}
+
+The main exhibition entrance should be clearly visible from several parts of the lobby to make it easy for visitors to find where they need to go. 
+\begin{description}
+\item[Requirement 13:] Exhibit entrance should be visible from the ticketing area and central lobby location
+\end{description}
+
+
+\subsection{Exploration}
+The way visitors explore an exhibition is influenced by the spatial characteristics of the layout, as well as the characteristics of each gallery room. Layouts that are sequential, i.e. one way in / one way out, promote a controlled and orderly flow of movement. Museums of history and science are well served by this type of design because they have a narrative to tell that is chronological. On the other hand, layouts that present the visitor with path choices, i.e. multiple doorways, promote free-flowing exploration. In this type of layout it is important that visitors are aware of the path choices that are available. This means that doorways are visible between each other throughout the layout. This concept of visibility between a network of points is referred to as continuity and is an important characteristic of layouts that present visitors with multiple path choices.  
+
+\begin{description}
+\item[Requirement 14:] The layout of the museum should maintain continuity between doorways within each exhibition and gallery room.
+\end{description}
+
+Within a Gallery, rooms that are open promote more free-flowing exploration than rooms that are narrow. Narrow rooms inhibit exploration because of space limitations and confinement. Rooms that are open provide more space for visitors to explore the room in a free-flowing manner.
+\begin{description}
+\item[Requirement 15:] Gallery rooms should be open, rather than narrow, in order to promote free-flowing exploration.
+\end{description}
+
+
+\subsection{Accessibility and Security}
+Museums should be accessible and easy to navigate. TBD - I have some ideas here but nothing concrete. Maybe you have some ideas that you can share with me. 
+\begin{description}
+\item[Requirement 16:] Museums should be accessible.
+\end{description}
+Museums should be secure.
+\begin{description}
+\item[Requirement 17:] The functional space of every gallery doorway should overlap with the range space of at least one security camera.
+\end{description}
+
+
+\section{Representation and Reasoning for Museums of Art in DSpace} 
+
+
+\subsection{Representation}
+
+\subsubsection{Spatial Interpretation of a Design Requirement}
+
+\subsubsection{Using the Building Blocks from DSpace}
+
+\subsection{Case Study Tests}
+
+\subsubsection{ArchiCAD / IFC}
+
+\subsubsection{Detecting Inconsistent and Consistent Designs}
+
+\chapter{Evaluation}
+
+
+\chapter{Future Work / Conclusion}
+
+
+\chapter{graveyard}
+This case study will take on two parts: the first part looks at how visitor behaviour patterns can inform designers to increase visitor utilization of the museum, and the second part is a look at general design requirements for museums of accessibility and security.  
+
+\section{The Art Museum}
+At this point these requirements could be interpreted in many ways, so it is important that for the case study that they are grounded to precise interpretations. To do this requires an understanding of the purpose and function of the building. For the purposes of this case study, the museums' primary focus is to display art for the public to view. The first requirements, maximize visitor utilization of exhibitions, can be interpreted in this context to maximize attention to exhibition, reduce congestion, and ensure visitor orientation in the Lobby. 
+
+The second requirement 
+
+Finally, the requirements of adhering to general requirements will in this case study will refer to the accessibility of the museum, and security.  
+
+Museum visitor behaviour research investigates visitors movement and attention patterns in museum exhibitions.
+
+\begin{figure}[h]
+   \centering
+   \subfloat[consistent design]{\label{fig:door-opposite}\includegraphics[width=60mm]{museum-room-con}}
+   \hspace{10 mm}
+   \subfloat[inconsistent design]{\label{fig:door-opposite}\includegraphics[width=60mm]{museum-room-incon}}
+\end{figure}
+
+more exhibitions will be viewed more frequently when doorways are positioned at opposing ends of the exhibition room. Taking Melton's rules a step further, exhibition designers should be careful not to position exits on the right hand side, if it's also on the same side of the room. These rules can be formally written as a requirement that help designers in the positioning of doorways in exhibits:
+
+Maximizing visitor's utilization of exhibits is defined by two metrics: frequency of visits to and the duration of viewing the exhibited object. Empirical studies \cite{Falk} \cite{Melton} \cite{Bitgood} \cite{Porter}  on  visitor behaviour in Museums have shown that the physical context in which exhibition objects are displayed has a significant effect on these two metrics (frequency and duration). Therefore it seems possible to predict the utilization of an exhibition based on the its spatial characterises. 
+
+
+A museum's exhibition layout influences visitor's exploration patterns \cite{TBD}. Layouts that promote a sequential and orderly exploration pattern are defined by gallery rooms having a single entrance and exit (fig). Museums of history and science are well served by this type of design because the items on display have a chronically or educational purpose that needs to be told in an orderly and controlled way. Layouts that promote unordered and random exploration patterns are largely interconnected between gallery rooms  (fig). In this type of layout, visitors are presented with a choice of gallery rooms to explore throughout the layout, promoting the visitor to explore the exhibit. 
+
+It is the latter type of exhibition layout that we are interested in for this portion of the case study. However, it is not the purpose here to examine the specific properties of the connection patterns that emerge from a museum's layout, rather it to describe several design requirements that emerge from the properties of an interconnected layout and that enhance and promote visitors to explore the exhibits in a free flowing way.
+
+\section{Melton}
+"the objects along the shortest route between the entrance and exit of the gallery receive the greatest amount of attention."
+"if follows that the exit in the museum gallery has a two-fold effect on the behaviour of the visitors. On the one hand, it attracts the visitors and causes them to frequent some sections of the gallery more than others. On the other hand, it competes with the exhibits for the attention of the visitors" p.125
+\section{The Organization of Museums}
+"Windows at the usual level ... have one serious drawback, in that the wall in which they are placed is rendered useless and the opposite wall practically useless, because showcase, painting .. if placed against the wall facing the source of light, will inevitably cause an interplay of reflections which impedes visibility" p. 153
+"instead of lighting the entire room it is found preferable to light the showcase from within" p. 156
+"avoid the confusion of too many adjacent doors, or of rooms running parallel to one another; visitors must not be made to feel that they are in a maze ... " p. 161
+"It [entrance hall] must therefore be spacious ..." p. 162
+"It is not advisable to have only one door here to the exhibition rooms; there should be two, an entrance and an exit, far enough apart to prevent delay should there be a crowd ... " p 162
+"doors are not opposite one another, providing and 'telescopic view through the building" p 162
+"On the other hand, by varying the position of doors we are also able to place the visitor, from the moment of his entrance, at the point chosen by the organizer of the display as the best for conveying an immediate and striking impression of it's general contents, or for giving a view of the most important piece in that particular room. In principle, the door should be placed in such a way that a visitor coming through it will see the full length of the opposite wall. It is therefore not advisable for it to face a window ..." p. 162
+"Theoretically, the door between two laterally lit rooms should be placed near the wall next to the window, because otherwise the two walls meet in a dark corner where nothing can be exhibited." p 164
+
+
+
+% ------------- End main chapters ----------------------
+
+\clearpage
+\bibliographystyle{abbrv}
+\bibliography{museum}
+\bibliography{design}
+%\addcontentsline{toc}{chapter}{Bibliography}
+
+\end{document}
