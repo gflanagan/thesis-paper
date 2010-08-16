@@ -371,8 +371,7 @@ Architectural concepts are terms, such as privacy, continuity, enclosure, and ac
 This section defines four architectural concepts and shows how they can be logically defined. As in the previous section, the purpose here is not to investigate the correctness of the concepts or an attempt to look at a complete list of these concepts, rather it's to look at how these concepts cab be defined logically using architectural qualities and spatial / geometric primitives.
 
 \subsection{Privacy}
-The concept of privacy in architecture .... 
-In DSpace, privacy is defined for spaces, such as a room or an apartment, which have the following functional attributes:
+The concept of privacy in architecture implies a notion of separation and obscurity (not being visible). In DSpace, privacy has been defined specifically for spaces (i.e. rooms, apartments) and doorways. Privacy is defined with the following functional attributes:
 \begin{enumerate}
 \item \emph{positioned on the opposing side of the building from the main entrance}
 \item \emph{doorways into a private space facing away from the central location of any adjacent rooms}
@@ -387,6 +386,13 @@ privacy(room) \rightarrow & opposingSide(space, space) \wedge \\
                           & notVisible(doorway, mainLivingSpace	).
 \end{split}
 \end{equation}	
+
+\begin{equation}
+\begin{split}
+privacy(doorway) \rightarrow & facingAway(doorway, adjacentSpace) \wedge \\
+                             & notVisible(doorway, adjacentSpace). 
+\end{split}
+\end{equation}
 
 
 \subsection{Continuity}
@@ -405,8 +411,6 @@ In DSpace, enclosure is defines a space terms of it being narrow or spacious. Th
 \subsection{Security}
 Security in architecture .....
 In DSpace, security is defined by the doorways being observed by the a security camera \cite{Bhatt}. 
-
-\subsection{Symmetry}
 
 
 \section{Hierarchy}
