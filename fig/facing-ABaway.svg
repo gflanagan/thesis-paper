@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="96.985573"
+   height="61.421074"
+   id="svg5464">
+  <defs
+     id="defs5466">
+    <marker
+       refX="0"
+       refY="0"
+       orient="auto"
+       id="Arrow2Mend"
+       style="overflow:visible">
+      <path
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)"
+         id="path3624"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round" />
+    </marker>
+  </defs>
+  <g
+     transform="translate(-174.86203,-333.40461)"
+     id="layer1">
+    <rect
+       width="20"
+       height="40"
+       x="-207.99011"
+       y="331.88681"
+       transform="matrix(0.52114447,-0.85346848,0.85346848,0.52114447,0,0)"
+       id="rect2818"
+       style="opacity:0.75;fill:#000000;fill-opacity:1;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none" />
+    <rect
+       width="20"
+       height="40"
+       x="-437.89661"
+       y="35.624203"
+       transform="matrix(-0.46820294,-0.88362096,0.88362096,-0.46820294,0,0)"
+       id="rect2818-9"
+       style="opacity:0.75877195;fill:#000000;fill-opacity:1;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none" />
+    <path
+       d="M 192.75358,361.39891 185,377.36218"
+       inkscape:connection-start="#rect2818"
+       id="path6220"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)" />
+    <path
+       d="m 254.00068,360.98367 7.84692,15.54348"
+       inkscape:connection-start="#rect2818-9"
+       id="path6406"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)" />
+    <text
+       x="187.48734"
+       y="394.82568"
+       id="text8526"
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+         x="187.48734"
+         y="394.82568"
+         id="tspan8528">A</tspan></text>
+    <text
+       x="245.68687"
+       y="394.51773"
+       id="text8530"
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+         x="245.68687"
+         y="394.51773"
+         id="tspan8532">B</tspan></text>
+  </g>
+</svg>
