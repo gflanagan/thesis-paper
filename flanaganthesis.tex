@@ -263,16 +263,14 @@ Examples with architectural elements in the DSpace reasoner
 
 
 \chapter{Conceptual Design Requirements}
+TBD: heuristic / explicit characterization / experience / common sense
 
+TBD: spatial abstraction so attributes are not precise. Some fringe cases are pointed out, but all such cases are not identified and handled.
 
 \section{Qualitative Spatial Attributes in Architecture}
 This section presents a set of qualitative spatial attributes found in architecture and shows how they are spatially interpreted and represented in DSpace. These attributes are architectural qualities that are emerge from the spatial relationships and configurations between the spatial elements of the structural building (doors, walls, windows, etc.) and interior design (furniture, lights, decorations, etc.). Attributes can be perceptual, qualities that are described from a specific vantage point, or intrinsic, qualities that are inherent in the build's spatial structure. The goal of this section, is to develop a tool-kit of qualitative attributes that describe an architectural design in the spatial environments they emerge in. TBD - needs work: Thes attributes can be used to build together to build conceptual design requirements.
 
 The set of qualitative spatial attributes developed in the section were taken from architectural design textbooks \cite{TBD}, museum research on visitor behaviour \cite{TBD}, and building codes \cite{TBD}. The objective here is not to develop an exhaustive list of qualitative spatial attributes for architecture or a validation of the interpretation of the attributes, rather it is to demonstrate a computational framework in which these qualities can be represented and used to reason about architectural design requirements.
-
-TBD: heuristic / explicit characterization / experience / common sense
-
-TBD: spatial abstraction so attributes are not precise. Some fringe cases are pointed out, but all such cases are not identified and handled.
 
 \subsection{Facing}
 The facing attribute defines an intrinsic orientational relationship between two objects as each relates to the other. The definition used here is based on a common sense interpretation of facing, in which an object \emph{A} is facing towards an object \emph{B}, if object \emph{B} is in front of object \emph{A} and object \emph{A} is directionally oriented at object \emph{B}. Under this definition, a pair of objects can be facing towards or away from each other. Given a pair of objects,\emph{A} and \emph{B}, there are four possible facing configurations between the pair: 
@@ -299,7 +297,7 @@ The facing attribute is modelled in the DSpace reasoner using the Oriented Point
 \label{facing-opra-base-rel}
 \end{figure}
 
-Using OPRA$_{4}$, the facing attribute can be defined in terms of the half plane sectors. A point \emph{A} is facing towards another point \emph{B}, if point \emph{B} is located in sectors 1, 2, or 16 of point \emph{A's} partitioned space. Similarly, if point \emph{A} is located in sectors 1, 2, or 16 of point \emph{B's} partitioned space then point \emph{B} is facing towards point \emph{A}. In this case points \emph{A} and \emph{B} are facing towards each other. Figure \ref{fig:facing-opra-towards} shows a pair of points facing towards each other; note that each point is located in sector 16 of the other's partitioned space. Conversely, a point \emph{A} is facing away from a point \emph{B} if point \emph{B} is located in sectors 3 - 15 of point \emph{A's} partitioned space. Figure \ref{fig:facing-opra-away} shows a pair of points that are facing away from each other and are located in sectors 11 and 7. 
+Using OPRA$_{4}$, the facing attribute can be defined in terms of the half plane sectors. Point \emph{A} is facing towards point \emph{B}, if point \emph{B} is located in sectors 1, 2, or 16 of point \emph{A's} partitioned space. Similarly, if point \emph{A} is located in sectors 1, 2, or 16 of point \emph{B's} partitioned space then point \emph{B} is facing towards point \emph{A}. In this case points, both points are facing towards each other. Figure \ref{fig:facing-opra-towards} shows an example of two points facing towards each other; note that each point is located in sector 16 of the other's partitioned space. Conversely,  point \emph{A} is facing away from point \emph{B} if point \emph{B} is located in sectors 3 - 15 of point \emph{A's} partitioned space. Figure \ref{fig:facing-opra-away} shows an example of two points that are facing away from each other and are located in sectors 11 and 7. 
 
 \begin{figure}[H]
  \centering
@@ -314,7 +312,7 @@ Using OPRA$_{4}$, the facing attribute can be defined in terms of the half plane
 \label{opra-facing}
 \end{figure}
 
-In DSpace the facing attribute can be used to check if two architectural elements or interior design objects are facing towards or away from the other. As an example, doorways and windows that face towards the other promote air flow through the room / space that they inhibit. A design requirement that promotes air circulation might include the use of windows and doorways that face towards each other. Figure XXX shows and example room where a window and door face each other. Additionally, the facing attribute can be used to describe requirements between interior design element, such as desks, chairs, beds as they related to windows, and doorways and other interior design elements.  
+In DSpace the facing attribute can be used to check if two architectural elements or interior design objects are facing towards or away from the other. As an example, doorways and windows that face towards the other promote air flow through the room that they inhibit. A design requirement that promotes air circulation might include the use of windows and doorways that face towards each other. Figure XXX shows and example room where a window and door face each other. Additionally, the facing attribute can be used to describe requirements between interior design element, such as desks, chairs, beds as they related to windows, and doorways and other interior design elements.  
 
 fig:window door facing towards ....
 
@@ -325,7 +323,7 @@ Special case: Walls
 \subsection{Proximity / Distance}
 The proximity attribute defines a qualitative distance relationship between two objects. In DSpace there are two proximity relationships: near and far. The spatial interpretation of these relationships depends on the context and scale in which the objects inhibit. For the purposes here, and in the context and scale of architectural space, proximity is defined using heuristics based on the scale of building elements, i.e. rooms, apartments, buildings.
 
-Using these heuristics a pair of objects are considered near if the minimum distance between them is less then or equal to 3 meters. Conversely, a pair of objects are considered far if the minimum distance between the pair is greater then 3 meters. While the definition of proximity used here pivots around 3 meters, it can easily be change by using an extra parameter in a proximity predicate. 
+Using these heuristics, two objects are near if the minimum distance between them is less then or equal to 3 meters. Conversely, two objects are far if the minimum distance between them is greater then 3 meters. While the definition of proximity used here pivots around 3 meters, it can easily be change by using an extra parameter in a proximity predicate. 
 
 TBD fig:proximity
    
@@ -334,7 +332,7 @@ In DSpace the proximity attribute can be used to check if two architectural elem
 
 
 \subsection{Positioning}
-The positioning attribute defines an orientational relationship between a pair of objects as each relate to the other within an extrinsic context, i.e. a defined space such as a room, apartment, building, or user defined space. There are four basic positioning relationships using this scheme: opposing-side of space, same-side of space, left-side of space, and right-side of space. The opposing-side and same-side relationships can be combined, via conjunction, with the left-side or right-side relationships to form the following compound relationships: opposing-left-side, opposing-right-side, same-left-side, same-right-side.
+The positioning attribute defines an orientational relationship between a pair of objects as each object relate to the other, within an extrinsic context, i.e. a defined space such as a room, apartment, building, or user defined space. There are four positioning relationships using this scheme: opposing-side of space, same-side of space, left-side of space, and right-side of space. The opposing-side and same-side relationships can be combined, via conjunction, with the left-side or right-side relationships to form the following compound relationships: opposing-left-side, opposing-right-side, same-left-side, same-right-side.
 
 TBD fig:positioning 
 
@@ -342,7 +340,7 @@ The positioning attribute is interpreted spatially in DSpace using the Single Cr
 
 TBD fig: SCC
 
-Under this scheme, a pair of points are define as being on opposing sides of a space if they have an SCC relationship of 0, 1, 7, as related by the centroid of the context space. Conversely, a pair of points are defined to be on the same side of the room if they have and SCC relationship of 2 - 6 as related by the centrod of the context space. On object is on the left side of the room from if it has an scc relationship of 0 -4, and right side if it has an scc relationship of 5 - 7. 
+Under this scheme, two points are define as being on opposing sides of a space if they have an SCC relationship of 0, 1, 7, as related by the centroid of the context space. Conversely, a pair of points are defined to be on the same side of the room if they have and SCC relationship of 2 - 6 as related by the centrod of the context space. On object is on the left side of the room from if it has an scc relationship of 0 -4, and right side if it has an scc relationship of 5 - 7. 
 
 TBD fig:opposing / same / left /right side of space as defined in SCC
 
@@ -360,7 +358,7 @@ TBD fig:visibility
 In DSpace the visibility attribute can be used to check if an architectural element is visible from a given viewpoint. An example of this is a requirement where a stairway should be visible from the entrance.
 
 
-\subsection{Alignment}
+\subsection{Alignment / Symmetry}
 The alignment attribute defines 
 
 \subsection{Pathways / Turns}  right turn (hard) / left turn (hard) / straight 
@@ -369,25 +367,23 @@ The alignment attribute defines
 \section{Architectural Concepts}
 Architectural concepts are terms, such as privacy, continuity, enclosure, and security, that describe an experiential aspect of architecture as used by an architect to describe the functionality of a building \cite{Koile}. These terms are defined in DSpace in a hierarchical manner in which architectural concepts are defined by logically combining, via conjunction and disjunction, architectural qualities and geometric primitives. 
 
-This section defines four architectural concepts and shows how they can be logically defined. As in the previous section, the purpose here is not to investigate the correctness of the concepts or an attempt to look at a complete list of these concepts, rather it's to look at how these concepts cab be defined logically using architectural qualities and spatial / geometric primitives.
+This section defines four architectural concepts and demonstrates how they can are defined in DSpace. As in the previous section, the purpose here is not to investigate the correctness of the concepts or an attempt to look at a complete list of these concepts, rather it's to look at how these concepts cab be defined logically using architectural qualities and spatial / geometric primitives.
 
 \subsection{Privacy}
-The concept of privacy in architecture implies a notion of separation and obscurity (not being visible). In the case of a room, privacy is defined by the room being separated from the entrance of the building and having no visible entryways from the main living space. Similarly, a doorway can be considered private if it is not visible from some vantage point. The point here is that the concept of privacy is depended on the context, i.e. a room, building, doorway. Within DSpace, privacy has been formally defined for rooms and doorways. 
+The concept of privacy in architecture implies a notion of separation and obscurity (not being visible). In the case of a room, privacy is defined as the room being separated from the main entrance of the building and having no visible doorways into the room from the main living space. Similarly, a doorway can be considered private if it is not visible from some vantage point (i.e. hidden door). The point here is that the precise definition of privacy depends on the context, i.e. a room, building, doorway. Within DSpace, the concepts of privacy has been formally defined for rooms and doorways. 
 
-A doorway is private if it has the following attributes: (1) the doorway is not visible from a central location
-(2) the doorway does faces away from all other doorways within a room. A room is private if it has the following attributes: (1) positioned on the opposing side of the building from the main entrance (2) all doorways into room are private.
+A door is private if it has the following attributes: (1) it is not visible from a central location (2) it does not mutually faces towards another door (3) it does not face towards the centroid of an adjacent room or space. A room is private if it has the following attributes: (1) it is positioned on the opposing side of the building from the main entrance (2) all doors into the room are also private per the definition above.
  
-\noindent The concept of privacy is represented in DSpace as a Prolog predicate.
+The concept of privacy is represented in DSpace as a Prolog predicate. The single argument in the head indicates if the definition is for a room or door. The body is a conjunction of architectural qualities developed in the previous section.  
 
 \begin{verbatim}
-   private(room) :-  opposing_side(room, main_entrance), 
-                     private(doorway).
+   private(room) :-  opposing_side(room, main_entrance, building), 
+                     private(doorway_into_room).
 \end{verbatim}  
 
-
 \begin{verbatim}
-   private(doorway) :- facing_away(doorway, doorway),
-                       not_visible(doorway, main_living_area). 
+   private(door) :- facing_away(door, door),
+                    not_visible(door, adjacent_space). 
 \end{verbatim}
 
 \begin{figure}[H]
@@ -399,16 +395,20 @@ A doorway is private if it has the following attributes: (1) the doorway is not 
 \label{room-privacy}
 \end{figure}
 
+Figure \ref{room-privacy} shows two example floor plans for a small single bedroom house; figure \ref{fig:private-room-con} shows a floor plan where the bedroom is  private while figure \ref{fig:private-room-incon} shows a similar floor plan where the bedroom is not private. The red number 1 represents the requirements of the room being on the opposing side of the building from the main entrance. The red 2 represents the requirement that a door into a private room should not be visible from the main living area. The red 3 represents the requirement that a door into a private room should not mutually face towards another door. 
+
 
 \subsection{Continuity}
-The concept of continuity in architecture describes a structure of visibility between a set of points \cite{Key}. In DSpace, the interpretation of continuity deals with the visibility networks of doorways. A building where doorways are visible to each other maintain continuity from a navigational perspective throughout the building. 
+The concept of continuity in architecture describes a network of points that are mutually visible \cite{Key}. In DSpace, continuity is interpreted in the context of building navigation and wayfinding. Under this interpretation, a building, room or apartment is continuous if there is continuity between the doorways in the room, building, or apartment. 
 
-Continuity is defined, in DSpace, as a network of doorways that are all visible to each other. With respect to this definition, continuity is represented as a recursive predicate in Prolog that takes a list of doorways and checks that each doorway is visible to all other doorways within the list. (need to mention doorways within a room)
+In DSpace, continuity is defined as a network of doorways that are mutually visible to each other. The partitioning of doorways that should be continuous is based on a localized containment structure of rooms, in which doorways that are contained in the same room should maintain continuity. It would not make sense for doorways that are located on opposite sides of a building to be visible to each other, but doorways that are in the same room should be. With respect to this definition, continuity is represented as a recursive predicate in Prolog that takes a list of doorways and checks that each doorway is visible to all other doorways within the list. (need to mention doorways within a room). TBD: arguments: list of doors or room id that indicates containment level???
 
 \begin{verbatim}
-continuity([OBJ1,OBJ2|[]]) :- is_visible(OBJ1, OBJ2).
+continuous([OBJ1,OBJ2|[]]) :- is_visible(OBJ1, OBJ2).
 
-continuity([OBJ1,OBJ2|OBJS]) :- is_visible(OBJ1, OBJ2),
+continuous([OBJ1,OBJ2|OBJS]) :- is_visible(OBJ1, OBJ2),
+	                            is_visible(OBJ2, OBJ1),
+                                continuity([OBJ1|OBJS]),
                                 continuity([OBJ2|OBJS]).
 \end{verbatim}
 
@@ -416,11 +416,29 @@ TBD fig
 
 
 \subsection{Enclosure} 
-The concept of enclosure defines a space in a building as being narrow or spacious. A narrow space has an area with that is confined by walls or other structures, while a spacious is defined by an area that is open. This interpretation of enclosure is based on the proximity of walls and structures within a space. In DSpace a narrow space is defined by having a pair of walls that have a maximum distance of 5 meters. A spacious area is defined has having a spread out area where the maximum distance between walls is 5 meters \cite{Key} 
+The concept of enclosure in architecture defines a space, as experienced from a given vantage point, as being either confined or spacious. A confined space is defined as being confined by walls or columns, while a spacious space is defined as being open. In DSpace, enclosure is defined by localized spatial structures in terms of their proximity to a given point. Under this interpretation, a room, apartment, or building can be experienced as both confined and spacious based on the location of the vantage point within the space. Such a definition takes into account that enclosure is a locally experience. For example, an alcove in an otherwise spacious room, feels confined from the perspective of being inside the alcove.
 
-\subsection{Security}
-The concept of security is based on 
+In Dspace, a space is defined as spacious if less then 2 walls or columns are close-to the vantage point. Conversely, a space is experienced as confined if two or more walls or columns are close. While this interpretation of enclosure is naive, it still maintains the notion that proximity defines the spatial structures of spaciousness and confinement in a localized environment.   
+
+
+\begin{verbatim}
+confined(point) :-  
+
+spacious(point) :-
+
+\end{verbatim} 
+
+Figure XXX shows a that is spacious. Figure XXX shows a room that is confined. 
+
+\subsection{Building Codes}
+Building codes are a special case because they are precisely defined by an official body. 
+ 
 In DSpace, security is defined by the doorways being observed by the a security camera \cite{Bhatt}. 
+
+examples: camera range space door
+          start landing
+          sink bathroom
+          
 
 
 \section{Hierarchy}
