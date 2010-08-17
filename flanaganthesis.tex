@@ -52,6 +52,7 @@
 \geometry{verbose,nohead,tmargin=1.25in,bmargin=1in,lmargin=1.5in,rmargin=1.3in}
 
 \setcounter{tocdepth}{2}
+\graphicspath{{fig/}}
 
 
 % Different font in captions (single-spaced, bold) ------------
@@ -366,50 +367,59 @@ The alignment attribute defines
 
 
 \section{Architectural Concepts}
-Architectural concepts are terms, such as privacy, continuity, enclosure, and accessibility, that describe an experiential aspect of architecture as used by an architect to describe the functionality of a building \cite{Koile}. These terms are defined in DSpace in a hierarchical manner in which architectural concepts are defined by logically combining, via conjunction and disjunction, architectural qualities and geometric primitives. 
+Architectural concepts are terms, such as privacy, continuity, enclosure, and security, that describe an experiential aspect of architecture as used by an architect to describe the functionality of a building \cite{Koile}. These terms are defined in DSpace in a hierarchical manner in which architectural concepts are defined by logically combining, via conjunction and disjunction, architectural qualities and geometric primitives. 
 
 This section defines four architectural concepts and shows how they can be logically defined. As in the previous section, the purpose here is not to investigate the correctness of the concepts or an attempt to look at a complete list of these concepts, rather it's to look at how these concepts cab be defined logically using architectural qualities and spatial / geometric primitives.
 
 \subsection{Privacy}
-The concept of privacy in architecture implies a notion of separation and obscurity (not being visible). In DSpace, privacy has been defined specifically for spaces (i.e. rooms, apartments) and doorways. Privacy is defined with the following functional attributes:
-\begin{enumerate}
-\item \emph{positioned on the opposing side of the building from the main entrance}
-\item \emph{doorways into a private space facing away from the central location of any adjacent rooms}
-\item \emph{doorways into a private space are not visible from the main living area}
-\end{enumerate} 
+The concept of privacy in architecture implies a notion of separation and obscurity (not being visible). In the case of a room, privacy is defined by the room being separated from the entrance of the building and having no visible entryways from the main living space. Similarly, a doorway can be considered private if it is not visible from some vantage point. The point here is that the concept of privacy is depended on the context, i.e. a room, building, doorway. Within DSpace, privacy has been formally defined for rooms and doorways. 
 
-Logically, privacy can be defined as follows:
-\begin{equation} 
-\begin{split}
-privacy(room) \rightarrow & opposingSide(space, space) \wedge \\
-                          & facingAway(doorway, adjacentSpace) \wedge \\
-                          & notVisible(doorway, mainLivingSpace	).
-\end{split}
-\end{equation}	
+A doorway is private if it has the following attributes: (1) the doorway is not visible from a central location
+(2) the doorway does faces away from all other doorways within a room. A room is private if it has the following attributes: (1) positioned on the opposing side of the building from the main entrance (2) all doorways into room are private.
+ 
+\noindent The concept of privacy is represented in DSpace as a Prolog predicate.
 
-\begin{equation}
-\begin{split}
-privacy(doorway) \rightarrow & facingAway(doorway, adjacentSpace) \wedge \\
-                             & notVisible(doorway, adjacentSpace). 
-\end{split}
-\end{equation}
+\begin{verbatim}
+   private(room) :-  opposing_side(room, main_entrance), 
+                     private(doorway).
+\end{verbatim}  
+
+
+\begin{verbatim}
+   private(doorway) :- facing_away(doorway, doorway),
+                       not_visible(doorway, main_living_area). 
+\end{verbatim}
+
+\begin{figure}[H]
+ \centering
+ \subfloat[Private]{\label{fig:private-room-con}\includegraphics[width=65mm]{privacy-room-con}}
+  \hspace{10 mm}
+ \subfloat[Not Private]{\label{fig:private-room-incon}\includegraphics[width=65mm]{privacy-room-incon}}
+ \caption{Bedroom Privacy}
+\label{room-privacy}
+\end{figure}
 
 
 \subsection{Continuity}
-Continuity in architecture is ....
-In DSpace, continuity is defined by a network of points that are all visible between each other \cite{Key}. 
-\begin{equation}
-\begin{split}
-continuity(setobjects_{n}) \rightarrow &isVisible(object_{0} - object_{n-1})
-\end{split}
-\end{equation}
+The concept of continuity in architecture describes a structure of visibility between a set of points \cite{Key}. In DSpace, the interpretation of continuity deals with the visibility networks of doorways. A building where doorways are visible to each other maintain continuity from a navigational perspective throughout the building. 
+
+Continuity is defined, in DSpace, as a network of doorways that are all visible to each other. With respect to this definition, continuity is represented as a recursive predicate in Prolog that takes a list of doorways and checks that each doorway is visible to all other doorways within the list. (need to mention doorways within a room)
+
+\begin{verbatim}
+continuity([OBJ1,OBJ2|[]]) :- is_visible(OBJ1, OBJ2).
+
+continuity([OBJ1,OBJ2|OBJS]) :- is_visible(OBJ1, OBJ2),
+                                continuity([OBJ2|OBJS]).
+\end{verbatim}
+
+TBD fig
 
 
-\subsection{Enclosure} narrow / spacious
-In DSpace, enclosure is defines a space terms of it being narrow or spacious. The formal definition is based on the minimum distance between each wall \cite{Key} 
+\subsection{Enclosure} 
+The concept of enclosure defines a space in a building as being narrow or spacious. A narrow space has an area with that is confined by walls or other structures, while a spacious is defined by an area that is open. This interpretation of enclosure is based on the proximity of walls and structures within a space. In DSpace a narrow space is defined by having a pair of walls that have a maximum distance of 5 meters. A spacious area is defined has having a spread out area where the maximum distance between walls is 5 meters \cite{Key} 
 
 \subsection{Security}
-Security in architecture .....
+The concept of security is based on 
 In DSpace, security is defined by the doorways being observed by the a security camera \cite{Bhatt}. 
 
 
@@ -613,48 +623,6 @@ Museums should be secure.
 
 
 \chapter{Future Work / Conclusion}
-
-
-\chapter{graveyard}
-This case study will take on two parts: the first part looks at how visitor behaviour patterns can inform designers to increase visitor utilization of the museum, and the second part is a look at general design requirements for museums of accessibility and security.  
-
-\section{The Art Museum}
-At this point these requirements could be interpreted in many ways, so it is important that for the case study that they are grounded to precise interpretations. To do this requires an understanding of the purpose and function of the building. For the purposes of this case study, the museums' primary focus is to display art for the public to view. The first requirements, maximize visitor utilization of exhibitions, can be interpreted in this context to maximize attention to exhibition, reduce congestion, and ensure visitor orientation in the Lobby. 
-
-The second requirement 
-
-Finally, the requirements of adhering to general requirements will in this case study will refer to the accessibility of the museum, and security.  
-
-Museum visitor behaviour research investigates visitors movement and attention patterns in museum exhibitions.
-
-\begin{figure}[h]
-   \centering
-   \subfloat[consistent design]{\label{fig:door-opposite}\includegraphics[width=60mm]{museum-room-con}}
-   \hspace{10 mm}
-   \subfloat[inconsistent design]{\label{fig:door-opposite}\includegraphics[width=60mm]{museum-room-incon}}
-\end{figure}
-
-more exhibitions will be viewed more frequently when doorways are positioned at opposing ends of the exhibition room. Taking Melton's rules a step further, exhibition designers should be careful not to position exits on the right hand side, if it's also on the same side of the room. These rules can be formally written as a requirement that help designers in the positioning of doorways in exhibits:
-
-Maximizing visitor's utilization of exhibits is defined by two metrics: frequency of visits to and the duration of viewing the exhibited object. Empirical studies \cite{Falk} \cite{Melton} \cite{Bitgood} \cite{Porter}  on  visitor behaviour in Museums have shown that the physical context in which exhibition objects are displayed has a significant effect on these two metrics (frequency and duration). Therefore it seems possible to predict the utilization of an exhibition based on the its spatial characterises. 
-
-
-A museum's exhibition layout influences visitor's exploration patterns \cite{TBD}. Layouts that promote a sequential and orderly exploration pattern are defined by gallery rooms having a single entrance and exit (fig). Museums of history and science are well served by this type of design because the items on display have a chronically or educational purpose that needs to be told in an orderly and controlled way. Layouts that promote unordered and random exploration patterns are largely interconnected between gallery rooms  (fig). In this type of layout, visitors are presented with a choice of gallery rooms to explore throughout the layout, promoting the visitor to explore the exhibit. 
-
-It is the latter type of exhibition layout that we are interested in for this portion of the case study. However, it is not the purpose here to examine the specific properties of the connection patterns that emerge from a museum's layout, rather it to describe several design requirements that emerge from the properties of an interconnected layout and that enhance and promote visitors to explore the exhibits in a free flowing way.
-
-\section{Melton}
-"the objects along the shortest route between the entrance and exit of the gallery receive the greatest amount of attention."
-"if follows that the exit in the museum gallery has a two-fold effect on the behaviour of the visitors. On the one hand, it attracts the visitors and causes them to frequent some sections of the gallery more than others. On the other hand, it competes with the exhibits for the attention of the visitors" p.125
-\section{The Organization of Museums}
-"Windows at the usual level ... have one serious drawback, in that the wall in which they are placed is rendered useless and the opposite wall practically useless, because showcase, painting .. if placed against the wall facing the source of light, will inevitably cause an interplay of reflections which impedes visibility" p. 153
-"instead of lighting the entire room it is found preferable to light the showcase from within" p. 156
-"avoid the confusion of too many adjacent doors, or of rooms running parallel to one another; visitors must not be made to feel that they are in a maze ... " p. 161
-"It [entrance hall] must therefore be spacious ..." p. 162
-"It is not advisable to have only one door here to the exhibition rooms; there should be two, an entrance and an exit, far enough apart to prevent delay should there be a crowd ... " p 162
-"doors are not opposite one another, providing and 'telescopic view through the building" p 162
-"On the other hand, by varying the position of doors we are also able to place the visitor, from the moment of his entrance, at the point chosen by the organizer of the display as the best for conveying an immediate and striking impression of it's general contents, or for giving a view of the most important piece in that particular room. In principle, the door should be placed in such a way that a visitor coming through it will see the full length of the opposite wall. It is therefore not advisable for it to face a window ..." p. 162
-"Theoretically, the door between two laterally lit rooms should be placed near the wall next to the window, because otherwise the two walls meet in a dark corner where nothing can be exhibited." p 164
 
 
 
