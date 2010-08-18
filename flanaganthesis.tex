@@ -397,23 +397,26 @@ In DSpace, the positing attribute is represented in Prolog as several predicates
 
 \end{verbatim}
 
-
 The positioning attribute can be used to check if two architectural elements or interior design object are on the opposing or same side of a space to the other. For example, a requirement might state that a bedroom should be positioned to the bad of a house from the main entrance. The reason for this requirement is that rooms that are in the back of a house are more private than rooms in the front of the house. In this requirement, the origin is the entrance, the referent if the bedroom, and the relatum is the centroid of the house (context space).
-
-
-
-An example of the use is a requirement that a bedroom is positioned at the back of the house from the main entrance. A bedroom might be positioned in the back of the house because it is generaly a private area of the house. In this requirement the origin is the entrance the referent and bedroom and the relatum is the centroid of the space that defines the floor in which the entrance and bedroom share. 
 
 TBD: fig:room back of house
 
 \subsection{Visibility}
-The visibility attribute defines a boolean relationship between a viewpoint and an object with respect to if the object is visible or not from the viewpoint. Within this definition, an object is visible if there are no obstructions in-between the viewpoint and the object. It should be noted that this interpretation of visibility does not take into account effects of distance on visibility, i.e. an object might not be visible because it is very far away. However, within the context of a architecture and buildings, distances that effect visibility are usually not a factor. 
+The visibility attribute defines a boolean relationship between a viewpoint and an object with respect to the object being visible from the viewpoint. An objects is visible if the view space in-between the viewpoint and the object is not obstructed. It should be noted that this definition of visibility does not take into account effects of distance on visibility, i.e. an object that is very far away is not visible. However, within the context of a architecture and buildings, the magnitude of distances is limited and in general is not a factor in visibility.
 
-The spatial interpretation of visibility is based on the topological structures of the space in-between the viewpoint and object. This space will is defined here as the view-space. An object is visible if the view-space is not obstructed by any surrounding objects or structures. An obstructing object is defined as having a topological relationship of partially overlapping of containing with the view-space. This version of the visibility attribute does not detect the degree to which an obstruction is blocking visibility. 
+The spatial interpretation of visibility is based on the topological characteristics of the space in-between the viewpoint and object. This space is referred to as the view-space. An object is visible if the view-space is not obstructed by any surrounding structures or objects. An obstructing object is object that has a 
+partially overlapping or containment topological relationship with the view-space. This definition does not decipher between a view that is partially or totally obstructed.
 
 TBD fig:visibility
 
-In DSpace the visibility attribute can be used to check if an architectural element is visible from a given viewpoint. An example of this is a requirement where a stairway should be visible from the entrance.
+In DSpace visibility is represented as a predicate with two arguments in the head. The arguments are the viewpoint and an object. The body of the clause calculates the view-space in-between the viewpoint and object and checks the surrounding structures and objects for topological relationships.
+
+\begin{verbatim}
+   is_visible(ViewPoint, Obj) :- view_space(ViewPoint, Obj, ViewSpace),
+                                 topology(ViewSpace, SurroundingStructs).
+\end{verbatim}
+
+The visibility attribute can be used to check if an architectural element is visible from a given viewpoint. For example, an architect might want to ensure that a certain staircase is visible from the main entrance because she doesn't want the staircase to go unnoticed. Figure XXX shows ....  
 
 
 \subsection{Alignment / Symmetry}
