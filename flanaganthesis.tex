@@ -412,7 +412,18 @@ continuous([OBJ1,OBJ2|OBJS]) :- is_visible(OBJ1, OBJ2),
                                 continuity([OBJ2|OBJS]).
 \end{verbatim}
 
-TBD fig
+Figure \ref{continuity} shows a floor plan for a single room with 3 doors. Figure \ref{fig:continuity-con} shows a configuration of door in which each door is mutually visible to the other 2 doors. Figure \ref{fig:continuity-incon} shows a configuration of doors where the visibility between door 1 and the other two doors (2 and 3) are not visible. The visibility between door 1 and 2 is obstructed by a column. The visibility between door 1 and 3 is obstructed by a wall. The obstructing objects are in red. 
+
+\begin{figure}[H]
+ \centering
+ \subfloat[Consistent]{\label{fig:continuity-con}\includegraphics[width=45mm]{continuity-con}}
+  \hspace{30 mm}
+ \subfloat[Inconsistent]{\label{fig:continuity-incon}\includegraphics[width=45mm]{continuity-incon}}
+ \caption{Continuity}
+\label{continuity}
+\end{figure}
+
+
 
 
 \subsection{Enclosure} 
@@ -428,7 +439,17 @@ spacious(point) :-
 
 \end{verbatim} 
 
-Figure XXX shows a that is spacious. Figure XXX shows a room that is confined. 
+
+Figure \ref{enclosure} shows a floor plan for a single room with an alcove and a sequence of columns. Points in-between the columns and inside the alcove are confined because there are several walls and columns closely surrounding the points. The points outside of these areas are spacious because there are no few structures close by.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=50mm]{spacious-confined}
+\caption{Enclosure, Confined and Spacious}
+\label{enclosure}
+\end{figure}
+
 
 \subsection{Building Codes}
 Building codes are a special case because they are precisely defined by an official body. 
