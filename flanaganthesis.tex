@@ -267,8 +267,10 @@ TBD: heuristic / explicit characterization / experience / common sense
 
 TBD: spatial abstraction so attributes are not precise. Some fringe cases are pointed out, but all such cases are not identified and handled.
 
+TBD - needs work: Thes attributes can be used to build together to build conceptual design requirements.
+
 \section{Qualitative Spatial Attributes in Architecture}
-This section presents a set of qualitative spatial attributes found in architecture and shows how they are spatially interpreted and represented in DSpace. These attributes are architectural qualities that are emerge from the spatial relationships and configurations between the spatial elements of the structural building (doors, walls, windows, etc.) and interior design (furniture, lights, decorations, etc.). Attributes can be perceptual, qualities that are described from a specific vantage point, or intrinsic, qualities that are inherent in the build's spatial structure. The goal of this section, is to develop a tool-kit of qualitative attributes that describe an architectural design in the spatial environments they emerge in. TBD - needs work: Thes attributes can be used to build together to build conceptual design requirements.
+This section presents a set of qualitative spatial attributes found in architecture and shows how they are spatially interpreted and represented in DSpace. These attributes are architectural qualities that are emerge from the spatial relationships and configurations between the spatial elements of the structural building (doors, walls, windows, etc.) and interior design (furniture, lights, decorations, etc.). Attributes can be perceptual, qualities that are described from a specific vantage point, or intrinsic, qualities that are inherent in the build's spatial structure. The goal of this section, is to develop a tool-kit of qualitative attributes that describe an architectural design in the spatial environments they emerge in. 
 
 The set of qualitative spatial attributes developed in the section were taken from architectural design textbooks \cite{TBD}, museum research on visitor behaviour \cite{TBD}, and building codes \cite{TBD}. The objective here is not to develop an exhaustive list of qualitative spatial attributes for architecture or a validation of the interpretation of the attributes, rather it is to demonstrate a computational framework in which these qualities can be represented and used to reason about architectural design requirements.
 
@@ -323,7 +325,7 @@ Special case: Walls
 \subsection{Proximity / Distance}
 The proximity attribute defines a qualitative distance relationship between two objects. In DSpace there are two proximity relationships: near and far. The spatial interpretation of these relationships depends on the context and scale in which the objects inhibit. For the purposes here, and in the context and scale of architectural space, proximity is defined using heuristics based on the scale of building elements, i.e. rooms, apartments, buildings.
 
-Using these heuristics, two objects are near if the minimum distance between them is less then or equal to 3 meters. Conversely, two objects are far if the minimum distance between them is greater then 3 meters. While the definition of proximity used here pivots around 3 meters, it can easily be change by using an extra parameter in a proximity predicate. 
+Using these heuristics, two objects are near to each other if the minimum distance between them is less then or equal to 3 meters. Conversely, two objects are far away from each other if the minimum distance between them is greater then 3 meters. While the definition of proximity pivots around 3 meters, it can easily be change by using an extra parameter in a proximity predicate. 
 
 TBD fig:proximity
    
@@ -351,7 +353,7 @@ TBD: fig:room back of house
 \subsection{Visibility}
 The visibility attribute defines a boolean relationship between a viewpoint and an object with respect to if the object is visible or not from the viewpoint. Within this definition, an object is visible if there are no obstructions in-between the viewpoint and the object. It should be noted that this interpretation of visibility does not take into account effects of distance on visibility, i.e. an object might not be visible because it is very far away. However, within the context of a architecture and buildings, distances that effect visibility are usually not a factor. 
 
-The spatial interpretation of visibility is based on the topological structures of the space in-between the viewpoint and object. This space will is defined here as the view-space. An object is visible if the view-space is not obstructed by an surrounding objects or structures. An obstructing object is defined as having a topological relationship of partially overlapping of containing with the view-space. This version of the visibility attribute does not detect the degree to which an obstruction is blocking visibility, but could be done by further analysis of the topological spatial structures.
+The spatial interpretation of visibility is based on the topological structures of the space in-between the viewpoint and object. This space will is defined here as the view-space. An object is visible if the view-space is not obstructed by any surrounding objects or structures. An obstructing object is defined as having a topological relationship of partially overlapping of containing with the view-space. This version of the visibility attribute does not detect the degree to which an obstruction is blocking visibility. 
 
 TBD fig:visibility
 
@@ -378,12 +380,13 @@ Privacy is represented in DSpace as a Prolog predicate. The predicate takes a si
 
 \begin{verbatim}
    private(room) :-  opposing_side(room, main_entrance, building), 
-                     private(doorway_into_room).
+                     private(doorway).
 \end{verbatim}  
 
 \begin{verbatim}
    private(door) :- facing_away(door, door),
-                    not_visible(door, adjacent_space). 
+                    facing_away(door, adjacent_space),
+                    not_visible(door, main_living_space). 
 \end{verbatim}
 
 \begin{figure}[H]
@@ -395,15 +398,15 @@ Privacy is represented in DSpace as a Prolog predicate. The predicate takes a si
 \label{room-privacy}
 \end{figure}
 
-Figure \ref{room-privacy} shows two example floor plans for a small single bedroom house; figure \ref{fig:private-room-con} shows a floor plan where the bedroom is  private while figure \ref{fig:private-room-incon} shows a similar floor plan where the bedroom is not private. The red number 1 represents the requirements of the room being on the opposing side of the building from the main entrance. The red 2 represents the requirement that a door into a private room should not be visible from the main living area. The red 3 represents the requirement that a door into a private room should not mutually face towards another door. 
+Figure \ref{room-privacy} shows two example floor plans for a small single bedroom house; figure \ref{fig:private-room-con} shows a floor plan with a bedroom that is  private, while figure \ref{fig:private-room-incon} shows a similar floor plan with a bedroom that is not private. The numbers in the figures represent the following privacy requirements: (1) the bedroom is positioned on the opposing side of the building with regards to the main entrance, (2) the doorway is not visible from the main living space, and (3) the doorway is does not mutually face towards another doorway. Number that are in red indicate that the requirement has been broken, while numbers in green indicate that the requirement has been met.
 
 
 \subsection{Continuity}
 The concept of continuity in architecture describes a network of points that are mutually visible \cite{Key}. In DSpace, continuity is interpreted in the context of building navigation and wayfinding. Under this interpretation, a building, room or apartment is continuous if there is continuity between the doorways contained in the given space: room, building, or apartment. 
 
-In DSpace, continuity is defined as a network of doorways that are mutually visible. The partitioning of doorways that should be continuous is based on a localized containment structure of rooms, in which doorways that are contained in the same room should maintain continuity. It would not make sense for doorways that are located on opposite sides of a building to be visible to each other, but doorways that are in the same room should be. 
+In DSpace, continuity is defined as a network of doorways that are mutually visible. The partitioning of doorways that should be mutually visible is based on a localized containment hierarchy of rooms and doorways, in which doorways that are contained in the same room should maintain continuity. It would not make sense for doorways that are located on opposite sides of a building to be visible to each other, but doorways that are in the same room should be. 
 
-With respect to this definition, continuity is represented as a recursive predicate in Prolog, which takes a list of doorways and checks that each is mutually visible to the others within the list. (need to mention doorways within a room). TBD: arguments: list of doors or room id that indicates containment level???
+With respect to this definition, continuity is represented as a recursive predicate in Prolog, which takes a list of doorways and checks that each doorway is mutually visible to the others within the list. (need to mention doorways within a room). TBD: arguments: list of doors or room id that indicates containment level???
 
 \begin{verbatim}
 continuous([OBJ1,OBJ2|[]]) :- is_visible(OBJ1, OBJ2).
@@ -414,8 +417,6 @@ continuous([OBJ1,OBJ2|OBJS]) :- is_visible(OBJ1, OBJ2),
                                 continuity([OBJ2|OBJS]).
 \end{verbatim}
 
-Figure \ref{continuity} shows a floor plan for a single room with 3 doors. Figure \ref{fig:continuity-con} shows a configuration in which each door is mutually visible to the others 2. This design is consistent per the continuity requirement. Conversely, figure \ref{fig:continuity-incon} shows a configuration in which door 1 is not mutually visible to door 2 and door 1 is not mutually visible door 3. The visibility between door 1 and door 2 is obstructed by a column and the visibility between door 1 and door 3 is obstructed by a wall. This design is inconsistent per the continuity requirement.  
-
 \begin{figure}[H]
  \centering
  \subfloat[Consistent]{\label{fig:continuity-con}\includegraphics[width=45mm]{continuity-con}}
@@ -425,13 +426,13 @@ Figure \ref{continuity} shows a floor plan for a single room with 3 doors. Figur
 \label{continuity}
 \end{figure}
 
-
+Figure \ref{continuity} shows a floor plan for a single room with 3 doors. Figure \ref{fig:continuity-con} shows a configuration in which each door is mutually visible to the other doors. This design is consistent per the continuity requirement. Conversely, figure \ref{fig:continuity-incon} shows a configuration in which door 1 is not mutually visible to door 2 and door 1 is not mutually visible door 3. The visibility between door 1 and door 2 is obstructed by a column and the visibility between door 1 and door 3 is obstructed by a wall. Structural elements that are red indicated a visibility obstruction in-between doorways. This design does not met the continuity requirement. 
 
 
 \subsection{Enclosure} 
 The concept of enclosure in architecture defines a space, as experienced from a given vantage point, as being either confined or open. A confined space is defined as being confined by walls or columns, while an open space is defined as being spacious. In DSpace, enclosure is defined by localized spatial structures in terms of their proximity to a given point. Under this interpretation, a room, apartment, or building can be experienced as both confined and open based on the location of the vantage point within the space. Such a definition takes into account that enclosure is a locally experience. For example, an alcove in an otherwise open room, feels confined from the perspective of being inside the alcove.
 
-In Dspace, a point is defined as open if less then 2 walls or columns are close-to the vantage point. Conversely, a point is experienced as confined if two or more walls or columns are close. While this interpretation of enclosure is naive, it still maintains the notion that proximity defines the spatial structures of spaciousness and confinement in a localized environment.   
+In Dspace, a point is defined as open if less then three walls or columns are near-to the point. Conversely, a point is defined as confined if three or more walls or columns are near-to the point. While this interpretation of enclosure is naive, it maintains the notion that proximity defines the spatial structures of openness and confinement in a localized environment.   
 
 
 \begin{verbatim}
@@ -442,7 +443,7 @@ spacious(point) :-
 \end{verbatim} 
 
 
-Figure \ref{enclosure} shows a floor plan for a single room with an alcove and a sequence of columns. Points in-between the columns and inside the alcove are confined because there are several walls and columns closely surrounding the points. The points outside of these areas are spacious because there are no few structures close by.
+Figure \ref{enclosure} shows a floor plan for a single room with various enclosure properties. The room has an alcove and a sequence of columns that will provide an environment of confinement. Points in-between the columns and inside the alcove are confined because of the proximity of multiple walls or columns. The points outside of these areas are open because there are no or few structures near by.
 
 
 \begin{figure}[H]
