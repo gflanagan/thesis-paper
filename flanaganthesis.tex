@@ -365,14 +365,16 @@ The alignment attribute defines
 
 
 \section{Architectural Concepts}
-Architectural concepts are terms, such as privacy, continuity, enclosure, and security, that describe an experiential aspect of architecture as used by an architect to describe the functionality of a building \cite{Koile}. These terms are defined in DSpace in a hierarchical manner in which architectural concepts are defined by logically combining, via conjunction and disjunction, architectural qualities and geometric primitives. 
+Architectural concepts such as privacy, continuity, and enclosure, which describe an experiential aspect of architecture as used by an architect to describe the functionality of a building \cite{Koile}. These terms are defined, in DSpace, in a hierarchical manner in which architectural concepts are defined by logically combining, via conjunction and disjunction, architectural qualities (i.e. previous section) and geometric primitives (orientation, topology, distance). 
 
 This section defines four architectural concepts and demonstrates how they can are defined in DSpace. As in the previous section, the purpose here is not to investigate the correctness of the concepts or an attempt to look at a complete list of these concepts, rather it's to look at how these concepts cab be defined logically using architectural qualities and spatial / geometric primitives.
 
 \subsection{Privacy}
-The concept of privacy in architecture implies a notion of separation and obscurity (not being visible). In the case of a room, privacy is defined as the room being separated from the main entrance of the building and having no visible doorways into the room from the main living space. Similarly, a doorway can be considered private if it is not visible from some vantage point (i.e. hidden door). The point here is that the precise definition of privacy depends on the context, i.e. a room, building, doorway. Within DSpace, the concepts of privacy has been formally defined for rooms and doorways. 
+The concept of privacy in architecture implies a notion of separation and obscurity (not being visible). In the case of a room, privacy is defined as the room being separated from the main entrance of the building and having no visible doorways into the room from the main living space. Similarly, a doorway can be considered private if it is not visible from some vantage point (i.e. hidden door). The point here is that the precise definition of privacy depends on the context, i.e. a room, building, doorway. 
 
-A door is private if it has the following attributes: (1) it is not visible from a central location (2) it does not mutually faces towards another door (3) it does not face towards the centroid of an adjacent room or space. A room is private if it has the following attributes: (1) it is positioned on the opposing side of the building from the main entrance (2) all doors into the room are also private per the definition above.
+Within DSpace, the concepts of privacy has been formally defined for rooms and doorways. 
+
+A door is private if it has the following attributes: (1) it is not visible from a central location (2) it does not mutually faces towards another door (3) it does not face towards the centroid of an adjacent room or space. A room is private if it has the following attributes: (1) it is positioned on the opposing side of the building with regard to the main entrance (2) all doors into the room are private, per the private door definition.
  
 The concept of privacy is represented in DSpace as a Prolog predicate. The single argument in the head indicates if the definition is for a room or door. The body is a conjunction of architectural qualities developed in the previous section.  
 
@@ -399,9 +401,11 @@ Figure \ref{room-privacy} shows two example floor plans for a small single bedro
 
 
 \subsection{Continuity}
-The concept of continuity in architecture describes a network of points that are mutually visible \cite{Key}. In DSpace, continuity is interpreted in the context of building navigation and wayfinding. Under this interpretation, a building, room or apartment is continuous if there is continuity between the doorways in the room, building, or apartment. 
+The concept of continuity in architecture describes a network of points that are mutually visible \cite{Key}. In DSpace, continuity is interpreted in the context of building navigation and wayfinding. Under this interpretation, a building, room or apartment is continuous if there is continuity between the doorways contained in the given space: room, building, or apartment. 
 
-In DSpace, continuity is defined as a network of doorways that are mutually visible to each other. The partitioning of doorways that should be continuous is based on a localized containment structure of rooms, in which doorways that are contained in the same room should maintain continuity. It would not make sense for doorways that are located on opposite sides of a building to be visible to each other, but doorways that are in the same room should be. With respect to this definition, continuity is represented as a recursive predicate in Prolog that takes a list of doorways and checks that each doorway is visible to all other doorways within the list. (need to mention doorways within a room). TBD: arguments: list of doors or room id that indicates containment level???
+In DSpace, continuity is defined as a network of doorways that are mutually visible. The partitioning of doorways that should be continuous is based on a localized containment structure of rooms, in which doorways that are contained in the same room should maintain continuity. It would not make sense for doorways that are located on opposite sides of a building to be visible to each other, but doorways that are in the same room should be. 
+
+With respect to this definition, continuity is represented as a recursive predicate in Prolog, which takes a list of doorways and checks that each is mutually visible to the others within the list. (need to mention doorways within a room). TBD: arguments: list of doors or room id that indicates containment level???
 
 \begin{verbatim}
 continuous([OBJ1,OBJ2|[]]) :- is_visible(OBJ1, OBJ2).
@@ -412,7 +416,7 @@ continuous([OBJ1,OBJ2|OBJS]) :- is_visible(OBJ1, OBJ2),
                                 continuity([OBJ2|OBJS]).
 \end{verbatim}
 
-Figure \ref{continuity} shows a floor plan for a single room with 3 doors. Figure \ref{fig:continuity-con} shows a configuration of door in which each door is mutually visible to the other 2 doors. Figure \ref{fig:continuity-incon} shows a configuration of doors where the visibility between door 1 and the other two doors (2 and 3) are not visible. The visibility between door 1 and 2 is obstructed by a column. The visibility between door 1 and 3 is obstructed by a wall. The obstructing objects are in red. 
+Figure \ref{continuity} shows a floor plan for a single room with 3 doors. Figure \ref{fig:continuity-con} shows a configuration in which each door is mutually visible to the others 2. This design is consistent per the continuity requirement. Conversely, figure \ref{fig:continuity-incon} shows a configuration in which door 1 is not mutually visible to door 2 and door 1 is not mutually visible door 3. The visibility between door 1 and door 2 is obstructed by a column and the visibility between door 1 and door 3 is obstructed by a wall. This design is inconsistent per the continuity requirement.  
 
 \begin{figure}[H]
  \centering
@@ -427,9 +431,9 @@ Figure \ref{continuity} shows a floor plan for a single room with 3 doors. Figur
 
 
 \subsection{Enclosure} 
-The concept of enclosure in architecture defines a space, as experienced from a given vantage point, as being either confined or spacious. A confined space is defined as being confined by walls or columns, while a spacious space is defined as being open. In DSpace, enclosure is defined by localized spatial structures in terms of their proximity to a given point. Under this interpretation, a room, apartment, or building can be experienced as both confined and spacious based on the location of the vantage point within the space. Such a definition takes into account that enclosure is a locally experience. For example, an alcove in an otherwise spacious room, feels confined from the perspective of being inside the alcove.
+The concept of enclosure in architecture defines a space, as experienced from a given vantage point, as being either confined or open. A confined space is defined as being confined by walls or columns, while an open space is defined as being spacious. In DSpace, enclosure is defined by localized spatial structures in terms of their proximity to a given point. Under this interpretation, a room, apartment, or building can be experienced as both confined and open based on the location of the vantage point within the space. Such a definition takes into account that enclosure is a locally experience. For example, an alcove in an otherwise open room, feels confined from the perspective of being inside the alcove.
 
-In Dspace, a space is defined as spacious if less then 2 walls or columns are close-to the vantage point. Conversely, a space is experienced as confined if two or more walls or columns are close. While this interpretation of enclosure is naive, it still maintains the notion that proximity defines the spatial structures of spaciousness and confinement in a localized environment.   
+In Dspace, a point is defined as open if less then 2 walls or columns are close-to the vantage point. Conversely, a point is experienced as confined if two or more walls or columns are close. While this interpretation of enclosure is naive, it still maintains the notion that proximity defines the spatial structures of spaciousness and confinement in a localized environment.   
 
 
 \begin{verbatim}
