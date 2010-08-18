@@ -314,23 +314,57 @@ Using OPRA$_{4}$, the facing attribute can be defined in terms of the half plane
 \label{opra-facing}
 \end{figure}
 
-In DSpace the facing attribute can be used to check if two architectural elements or interior design objects are facing towards or away from the other. As an example, doorways and windows that face towards the other promote air flow through the room that they inhibit. A design requirement that promotes air circulation might include the use of windows and doorways that face towards each other. Figure XXX shows and example room where a window and door face each other. Additionally, the facing attribute can be used to describe requirements between interior design element, such as desks, chairs, beds as they related to windows, and doorways and other interior design elements.  
+In DSpace, the facing attribute is represented as several predicates that take two arguments in the head of the clause. These arguments are the objects that will be check for the facing attribute. The body of the predicate defines logically, via conjunction and disjunction, the attribute based on the spatial definition given above.
+
+\begin{verbatim}
+   facing_towards(Obj1, Obj2) :- (opra(Obj1, Obj2, 1) ;
+                                  opra(Obj1, Obj2, 2) ;
+                                  opra(Obj1, Obj2, 16)).
+                                 
+   facing_away(Obj1, Obj2) :- (opra(Obj1, Obj2, 3) ;
+                               opra(Obj1, Obj2, 4) ;
+                               opra(Obj1, Obj2, 5) ;
+                               opra(Obj1, Obj2, 6) ;
+                               opra(Obj1, Obj2, 7) ;
+                               opra(Obj1, Obj2, 8) ;
+                               opra(Obj1, Obj2, 9) ;
+                               opra(Obj1, Obj2, 10) ;
+                               opra(Obj1, Obj2, 11) ;
+                               opra(Obj1, Obj2, 12) ;
+                               opra(Obj1, Obj2, 13) ;
+                               opra(Obj1, Obj2, 14) ;
+                               opra(Obj1, Obj2, 15)).
+                                  
+\end{verbatim}
+
+In DSpace, the facing attribute can be used to check if two architectural structures and / or interior design objects are facing towards or away from the other. As an example, doorways and windows that face towards the other promote air flow through the room in which that they inhibit. A design requirement that promotes air circulation could include the use of windows and doorways that face towards each other. Figure XXX shows and example room where a window and door face each other. Additionally, the facing attribute can be used to build requirements between interior design element, such as desks, chairs, and beds as they related to windows, and doorways and other interior design elements. For example, an interior design requirement might be that a computer desk should not face towards a window, in order to reduce glare on the computer screen from direct sunlight. 
 
 fig:window door facing towards ....
 
-Special case: Walls
- Within the context of architecture, care needs to be taken to account for interior design objects and architectural elements that are axis, such as the general   case of a wall, because the orientational spatial abstraction for OPRA is a directed point. Within the facing definition used here, an object is in facing towards another if the object is in front of and directed at the object with respect to the directed point abstractions of both objects. This becomes a problem in the case of walls because they are
+Within the context of architecture, care needs to be taken to account for architectural structures that are long in one axis, such as walls, because the orientational spatial abstraction for OPRA is a directed point. This means that an object is facing a wall only if if is facing the wall's directed point abstraction. Under this definition, there are configurations where an object should be considered to be facing a wall but it is not. DSpace handles this special case by modifying the OPRA relationships that correspond to facing towards and away from. 
 
+fig: wall example
 
 \subsection{Proximity / Distance}
 The proximity attribute defines a qualitative distance relationship between two objects. In DSpace there are two proximity relationships: near and far. The spatial interpretation of these relationships depends on the context and scale in which the objects inhibit. For the purposes here, and in the context and scale of architectural space, proximity is defined using heuristics based on the scale of building elements, i.e. rooms, apartments, buildings.
 
+TBD fig:proximity
+
+
 Using these heuristics, two objects are near to each other if the minimum distance between them is less then or equal to 3 meters. Conversely, two objects are far away from each other if the minimum distance between them is greater then 3 meters. While the definition of proximity pivots around 3 meters, it can easily be change by using an extra parameter in a proximity predicate. 
 
-TBD fig:proximity
-   
-In DSpace the proximity attribute can be used to check if two architectural elements or interior design objects are close or far away from the other. An example of the use of the proximity attribute would be a requirement that all desks should be close to at least one power outlet. This is important because desks often house computer and lamps which require the use of an electrical plug. TBD: example for far away
+In DSpace, proximity is represented as two predicates (near, far) each with two arguments in the head of the clause. The arguments that will be checked for proximity. The body of the clause defines the distance constraint that defines proximity.
 
+\begin{verbatim}
+   near(Obj1, Obj2) :- minimum_distance_compare(Obj1, Obj2, <=, 3).
+   
+   far(Obj1, Obj2) :- minimum_distance_compare(Obj1, Obj2, >, 3)
+
+\end{verbatim}
+
+The proximity attribute can be used to check if two architectural structures and/or interior design objects are near or far. For example, a computer desk should be located near a power outlet to make it easy to power up the computer and desk lamp. Another example is the bathroom should be far away from the kitchen, so to keep a separation between the two.
+
+TBD: fig example
 
 
 \subsection{Positioning}
@@ -346,7 +380,29 @@ Under this scheme, two points are define as being on opposing sides of a space i
 
 TBD fig:opposing / same / left /right side of space as defined in SCC
 
-In DSpace the positioning attribute can be used to check if two architectural elements or interior design object are on the opposing or same side of a space to the other. An example of the use is a requirement that a bedroom is positioned at the back of the house from the main entrance. A bedroom might be positioned in the back of the house because it is generaly a private area of the house. In this requirement the origin is the entrance the referent and bedroom and the relatum is the centroid of the space that defines the floor in which the entrance and bedroom share. 
+In DSpace, the positing attribute is represented in Prolog as several predicates with three arguments. The first two arguments are the objects that are being related and the third is the context space. The body of the clause defines the positing relationship logically based on the SCC interpretation given above.
+
+\begin{verbatim}
+   opposing_side(Obj1, Obj2, Context) :- centroid(Context, centroid),
+                                         (scc(Obj1, centroid, Obj2, 0);
+                                          scc(Obj1, centroid, Obj2, 1);
+                                          scc(Obj1, centroid, Obj2, 7)).
+                                          
+   same_side(Obj1, Obj2, Context) :- centroid(Context, centroid),
+                                     (scc(Obj1, centroid, Obj2, 2) ;
+                                      scc(Obj1, centroid, Obj2, 3) ;
+                                      scc(Obj1, centroid, Obj2, 4) ;
+                                      scc(Obj1, centroid, Obj2, 5) ;
+                                      scc(Obj1, centroid, Obj2) 6)).   
+
+\end{verbatim}
+
+
+The positioning attribute can be used to check if two architectural elements or interior design object are on the opposing or same side of a space to the other. For example, a requirement might state that a bedroom should be positioned to the bad of a house from the main entrance. The reason for this requirement is that rooms that are in the back of a house are more private than rooms in the front of the house. In this requirement, the origin is the entrance, the referent if the bedroom, and the relatum is the centroid of the house (context space).
+
+
+
+An example of the use is a requirement that a bedroom is positioned at the back of the house from the main entrance. A bedroom might be positioned in the back of the house because it is generaly a private area of the house. In this requirement the origin is the entrance the referent and bedroom and the relatum is the centroid of the space that defines the floor in which the entrance and bedroom share. 
 
 TBD: fig:room back of house
 
