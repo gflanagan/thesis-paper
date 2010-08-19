@@ -267,14 +267,12 @@ This chapter presents a hierarchical structure of architectural concepts and qua
 
 The architectural concepts and spatial qualities presented in this chapter were ascertained from literature on architectural design \cite{tbd}, museum research on visitor behavior \cite{tbd}, and building regulations and codes \cite{tbd}. Their definitions are explicit characterizations of architectural concepts and qualities that are based on heuristic architectural knowledge, and common sense notions of spatial relationships. The objective is not to develop an exhaustive set of concepts and qualities or to validate their interpretation in terms of a spatial or design perspective, rather it is to demonstrate how they can be represent and reasoned with in a computational framework to validate conceptual design requirements against the quantitative structures and artefacts of the design. 
 
-The chapter is structured as follows. Section 1 describes the hierarchical structure of ..... Section 2 presents a set of qualitative spatial attributes in architecture, shows how they can be interpreted using formal qualitative spatial calculi, and represented formally within DSpace reasoner. Section 3 presents a set of architectural concepts that can built using the spatial qualities presented in the section 2 and shows how they can be used to reason about design requirements within the DSpace reasoner. 
+The chapter is structured as follows. Section 1 describes the hierarchical structure of architectural concepts. Section 2 presents a set of qualitative spatial attributes in architecture, shows how they can be interpreted using formal qualitative spatial calculi, and represented formally within DSpace reasoner. Section 3 presents a set of architectural concepts that can built using the spatial qualities presented in the section 2 and shows how they can be used to reason about design requirements within the DSpace reasoner. 
 
 \section{Hierarchy}
 Architectural concepts and qualitative spatial attributes are build on top of the physical / structural and artefactual geometries of the design in a hierarchical structure. Architectural concepts are defined by combining qualitative spatial attributes via the logical operators of conjunction and disjunction. Defining an architectural concept is not limited to combining qualitative spatial attributes, spatial relationships of orientation, topology, and distance can be used, as well as other geometric primitives such as area, angle, and length measurements. Similarly, qualitative spatial attributes in architecture are built by combining qualitative spatial relationships of orientation, topology, and distance. 
 
 This design hierarchy is built on the discretion of a design of the design problem into the design space, quality space, and quantity space. The design space, at the highest level, involves the architectural design semantics and qualities of architecture. The quantitative space, at the lowest level, involves the precise geometries and structures of the design. The middle layer, the qualitative space, mediates the two via qualitative spatial representations of orientation, topology, and distance.
-
-  
    
 \begin{figure}[H]
 \centering
@@ -287,10 +285,7 @@ Figure \ref{hierarchy} shows the design hierarchy of the DSpace reasoner.
 
 
 \section{Qualitative Spatial Attributes in Architecture}
-This section presents a set of qualitative spatial attributes found in architecture and shows how they are spatially interpreted and represented in DSpace. These attributes are architectural qualities that are emerge from the spatial relationships and configurations between the spatial structures of the building (doors, walls, windows, etc.) and interior design elements(furniture, lights, decorations, etc.). Attributes can be perceptual - qualities that are described from a specific vantage point - or intrinsic - qualities that are inherent in the build's spatial structure. The goal of this section, is to develop a tool-kit of qualitative attributes that describe architectural designs in the spatial environments in which they emerge. 
-
-
-TBD: spatial abstraction so attributes are not precise. Some fringe cases are pointed out, but all such cases are not identified and handled.
+This section presents a set of qualitative spatial attributes found in architecture and shows how they are spatially interpreted and represented in DSpace. These attributes are architectural qualities that are emerge from the spatial relationships and configurations between the physical structures of the building (doors, walls, columns, windows, etc.), artefactual extensions of the building (functional space, operational space, range space, etc.) and interior design elements (furniture, lights, decorations, etc.). Attributes can be perceptual - qualities that are described from a specific vantage point - or intrinsic - qualities that are inherent in the build's spatial structure. The goal of this section, is to develop a tool-kit of qualitative attributes that describe architectural designs in the spatial environments in which they emerge. Some boundary cases are identified and handled but it is not the purpose here to explore all possible case scenarios.
 
 \subsection{Facing}
 The facing attribute defines an intrinsic orientational relationship between two objects as each relates to the other. The definition used here is based on a common sense interpretation of facing, in which an object \emph{A} is facing towards an object \emph{B}, if object \emph{B} is in front of object \emph{A} and object \emph{A} is directionally oriented at object \emph{B}. Under this definition, a pair of objects can be facing towards or away from each other. Given a pair of objects,\emph{A} and \emph{B}, there are four possible facing configurations between the pair: 
@@ -335,24 +330,25 @@ Using OPRA$_{4}$, the facing attribute can be defined in terms of the half plane
 In DSpace, the facing attribute is represented as several predicates that take two arguments in the head of the clause. These arguments are the objects that will be check for the facing attribute. The body of the predicate defines logically, via conjunction and disjunction, the attribute based on the spatial definition given above.
 
 \begin{verbatim}
-   facing_towards(Obj1, Obj2) :- (opra(Obj1, Obj2, 1) ;
-                                  opra(Obj1, Obj2, 2) ;
-                                  opra(Obj1, Obj2, 16)).
+   facing_towards(Obj1, Obj2) :- 
+           (opra(Obj1, Obj2, 1) ;
+            opra(Obj1, Obj2, 2) ;
+            opra(Obj1, Obj2, 16)).
                                  
-   facing_away(Obj1, Obj2) :- (opra(Obj1, Obj2, 3) ;
-                               opra(Obj1, Obj2, 4) ;
-                               opra(Obj1, Obj2, 5) ;
-                               opra(Obj1, Obj2, 6) ;
-                               opra(Obj1, Obj2, 7) ;
-                               opra(Obj1, Obj2, 8) ;
-                               opra(Obj1, Obj2, 9) ;
-                               opra(Obj1, Obj2, 10) ;
-                               opra(Obj1, Obj2, 11) ;
-                               opra(Obj1, Obj2, 12) ;
-                               opra(Obj1, Obj2, 13) ;
-                               opra(Obj1, Obj2, 14) ;
-                               opra(Obj1, Obj2, 15)).
-                                  
+   facing_away(Obj1, Obj2) :- 
+           (opra(Obj1, Obj2, 3) ;
+            opra(Obj1, Obj2, 4) ;
+            opra(Obj1, Obj2, 5) ;
+            opra(Obj1, Obj2, 6) ;
+            opra(Obj1, Obj2, 7) ;
+            opra(Obj1, Obj2, 8) ;
+            opra(Obj1, Obj2, 9) ;
+            opra(Obj1, Obj2, 10) ;
+            opra(Obj1, Obj2, 11) ;
+            opra(Obj1, Obj2, 12) ;
+            opra(Obj1, Obj2, 13) ;
+            opra(Obj1, Obj2, 14) ;
+            opra(Obj1, Obj2, 15)).                       
 \end{verbatim}
 
 In DSpace, the facing attribute can be used to check if two architectural structures and/or interior design elements are facing towards or away from each other. For example, doorways and windows that face towards each other promote airflow through the space in which that they inhibit. A design that requires good air circulation could use this knowledge to ensure proper airflow. 
@@ -387,9 +383,11 @@ Using these heuristics, two objects are near if the minimum distance between the
 In DSpace, proximity is represented as two predicates (near, far) each with two arguments in the head of the clause. The arguments that will be checked for proximity. The body of the clause defines the distance constraint that defines proximity.
 
 \begin{verbatim}
-   near(Obj1, Obj2) :- minimum_distance_compare(Obj1, Obj2, <=, 3).
+   near(Obj1, Obj2) :- 
+           minimum_distance_compare(Obj1, Obj2, <=, 3).
    
-   far(Obj1, Obj2) :- minimum_distance_compare(Obj1, Obj2, >, 3)
+   far(Obj1, Obj2) :- 
+           minimum_distance_compare(Obj1, Obj2, >, 3)
 
 \end{verbatim}
 
@@ -419,17 +417,19 @@ TBD fig:opposing / same / left /right side of space as defined in SCC
 In DSpace, the positing attribute is represented in Prolog as predicates, each with three arguments. The first two arguments are the objects that are being related and the third is the context space. The body of the clause defines the positing relationship logically based on the SCC interpretation given above.
 
 \begin{verbatim}
-   opposing_side(Obj1, Obj2, Context) :- centroid(Context, centroid),
-                                         (scc(Obj1, centroid, Obj2, 0);
-                                          scc(Obj1, centroid, Obj2, 1);
-                                          scc(Obj1, centroid, Obj2, 7)).
+   opposing_side(Obj1, Obj2, Context) :- 
+           centroid(Context, centroid),
+           (scc(Obj1, centroid, Obj2, 0);
+            scc(Obj1, centroid, Obj2, 1);
+            scc(Obj1, centroid, Obj2, 7)).
                                           
-   same_side(Obj1, Obj2, Context) :- centroid(Context, centroid),
-                                     (scc(Obj1, centroid, Obj2, 2) ;
-                                      scc(Obj1, centroid, Obj2, 3) ;
-                                      scc(Obj1, centroid, Obj2, 4) ;
-                                      scc(Obj1, centroid, Obj2, 5) ;
-                                      scc(Obj1, centroid, Obj2) 6)).   
+   same_side(Obj1, Obj2, Context) :- 
+           centroid(Context, centroid),
+           (scc(Obj1, centroid, Obj2, 2) ;
+            scc(Obj1, centroid, Obj2, 3) ;
+            scc(Obj1, centroid, Obj2, 4) ;
+            scc(Obj1, centroid, Obj2, 5) ;
+            scc(Obj1, centroid, Obj2) 6)).   
 
 \end{verbatim}
 
@@ -448,8 +448,9 @@ TBD fig:visibility
 In DSpace visibility is represented as a predicate with two arguments in the head. The arguments are the viewpoint and an object. The body of the clause calculates the view-space, the space in-between the viewpoint and object, and checks the surrounding structures and objects for topological obstructions.
 
 \begin{verbatim}
-   is_visible(ViewPoint, Obj) :- view_space(ViewPoint, Obj, ViewSpace),
-                                 topology(ViewSpace, SurroundingStructs).
+   is_visible(ViewPoint, Obj) :- 
+           view_space(ViewPoint, Obj, ViewSpace),
+           topology(ViewSpace, SurroundingStructs).
 \end{verbatim}
 
 The visibility attribute can be used to check if an architectural element is visible from a given viewpoint. For example, an architect might want to ensure that a certain staircase is visible from the main entrance because she doesn't want the staircase to go unnoticed. Figure XXX shows ....  
@@ -474,14 +475,14 @@ Within DSpace, the concepts of privacy has been formally defined for rooms and d
 Privacy is represented in DSpace as a Prolog predicate. The predicate takes a single argument, in the head, which indicates the room or doorway that is being checked. The body of the predicate is a conjunction of architectural qualities (from the previous section) that logically defines privacy per the definition outlined above. Note that there are two predicates, one for the definition of privacy for a room and one for privacy of a doorway.  
 
 \begin{verbatim}
-   private(room) :-  opposing_side(room, main_entrance, building), 
-                     private(doorway).
-\end{verbatim}  
-
-\begin{verbatim}
-   private(door) :- facing_away(door, door),
-                    facing_away(door, adjacent_space),
-                    not_visible(door, main_living_space). 
+   private(room) :-  
+           opposing_side(room, main_entrance, building), 
+           private(doorway).
+                     
+   private(door) :- 
+           facing_away(door, door),
+           facing_away(door, adjacent_space),
+           not_visible(door, main_living_space). 
 \end{verbatim}
 
 \begin{figure}[H]
@@ -504,12 +505,14 @@ In DSpace, continuity is defined as a network of doorways that are mutually visi
 With respect to this definition, continuity is represented as a recursive predicate in Prolog, which takes a list of doorways and checks that each doorway is mutually visible to the others within the list. (need to mention doorways within a room). TBD: arguments: list of doors or room id that indicates containment level???
 
 \begin{verbatim}
-continuous([OBJ1,OBJ2|[]]) :- is_visible(OBJ1, OBJ2).
+   continuous([OBJ1,OBJ2|[]]) :- 
+           is_visible(OBJ1, OBJ2).
 
-continuous([OBJ1,OBJ2|OBJS]) :- is_visible(OBJ1, OBJ2),
-	                            is_visible(OBJ2, OBJ1),
-                                continuity([OBJ1|OBJS]),
-                                continuity([OBJ2|OBJS]).
+   continuous([OBJ1,OBJ2|OBJS]) :- 
+           is_visible(OBJ1, OBJ2),
+	       is_visible(OBJ2, OBJ1),
+           continuity([OBJ1|OBJS]),
+           continuity([OBJ2|OBJS]).
 \end{verbatim}
 
 \begin{figure}[H]
@@ -549,16 +552,36 @@ Figure \ref{enclosure} shows a floor plan for a single room with various enclosu
 \end{figure}
 
 
-\subsection{Building Codes}
-Building codes are a special case because they are precisely defined by an official body. 
- 
-In DSpace, security is defined by the doorways being observed by the a security camera \cite{Bhatt}. 
+\subsection{Building Regulations and Codes}
+Building regulations and codes are a special case in this section because they are not strictly architectural concepts. However, they provide a unique set of architectural requirements that incorporate a breadth of design aspects. This section will take a look at two such requirements: building security, artefactual interference. These requirements were specifically picked because they both incorporate artefactual aspects of the design problem. 
 
-examples: camera range space door
-          start landing
-          sink bathroom
-          
+\subsubsection{Building Security}
 
+
+\subsubsection{Artefactual Interference}
+Artefactual interference deals with the unintentional interactions of the operational and functional spaces of a building's structural elements. For example, the operational space of a bathroom doorway that overlaps with the functional space of the bathroom sink will cause circulation problems into and out of the bathroom. In DSpace this type of interaction can be detected using topological reasoning over the artefactual extensions. 
+
+TBD: fig:sink example
+
+This type of artefactual interaction can be check for in DSpace using a single predicate that takes two arguments in the head of the clause. The body of the clause retrieves the artefactual geometry of each element and checks the topological relationship, and fails if the artefacts have an overlapping relationship.
+
+\begin{verbatim}
+   bathroom_sink_door(sink, door) :- 
+           artefact_geometry(sink, Artefact_sink),
+           artefact_geometry(door, Artefact_door),
+           not_overlapping(Artefact_sink, Artefact_door).
+\end{verbatim}
+
+Artefactual interactions can be between a physical structure (door, wall, column, ect.) and artefactual extension. For example, the landing space (operational space in DSpace parlance) of a stair should be clear. Representing this requirement is similar to the bathroom sink example except that it checks for interactions between the stair artefactual space with the building physical space. This requirement could be extended to include the landing space be clear of the phyisical and aretefactual elements. In DSpace this can be represented as a single predicate. The body of the clause check for an overlapping relationship between the landing space of the stair and both the artefactual extension and physical structure of another element.
+
+\begin{verbatim}
+    clear_stair_landing(stair, Obj) :- 
+            artefact_geometry(stair, Artefact_stair),
+            artefact_geometry(Obj, Artefact_obj),
+            physical_geometry(Obj, Physical),
+            not_overlapping(Artefact_stair, Artefact_obj),
+            not_overlapping(Artefact_stair, Physical)
+\end{verbatim}  
 
 
 
