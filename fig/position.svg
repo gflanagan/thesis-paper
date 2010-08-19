@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="384.84781"
+   height="427.27423"
+   id="svg5200">
+  <defs
+     id="defs5202" />
+  <g
+     transform="translate(-199,-266.08798)"
+     id="layer1">
+    <rect
+       width="382.84781"
+       height="425.27423"
+       x="200"
+       y="267.08798"
+       id="rect5210"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       width="30"
+       height="30"
+       x="220"
+       y="612.36218"
+       id="rect5216"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       width="30"
+       height="30"
+       x="429.28571"
+       y="291.64792"
+       id="rect5216-5"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <path
+       d="m 390,472.36218 a 10,10 0 1 1 -20,0 10,10 0 1 1 20,0 z"
+       transform="matrix(0.5,0,0,0.5,206.42857,241.89537)"
+       id="path5240"
+       style="fill:#000000;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <path
+       d="M 250,613.63878 470,412.36218"
+       inkscape:connection-start="#rect5216"
+       id="path5754"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       d="m 340,422.36218 110,110"
+       id="path5756"
+       style="fill:none;stroke:#000000;stroke-width:1.10000002px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <text
+       x="352.14285"
+       y="620.21936"
+       id="text5758"
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+         x="352.14285"
+         y="620.21936"
+         id="tspan5760"
+         style="font-size:16px">same-right side</tspan></text>
+    <text
+       x="376.14285"
+       y="345.50507"
+       id="text5758-7"
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+         x="376.14285"
+         y="345.50507"
+         id="tspan5760-2"
+         style="font-size:16px">opposing-left side</tspan></text>
+    <path
+       d="m 400,652.36218 a 10,10 0 1 1 -20,0 10,10 0 1 1 20,0 z"
+       transform="translate(19,-61.857114)"
+       id="path5791"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+  </g>
+</svg>

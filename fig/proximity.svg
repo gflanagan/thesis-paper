@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="744.09448"
+   height="1052.3622"
+   id="svg4618">
+  <defs
+     id="defs4620" />
+  <g
+     id="layer1">
+    <rect
+       width="42.426407"
+       height="64.649765"
+       x="100.0051"
+       y="311.92038"
+       id="rect4628"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       d="m 306.07623,311.92038 a 19.192898,19.192898 0 1 1 -38.3858,0 19.192898,19.192898 0 1 1 38.3858,0 z"
+       transform="translate(-41.416254,-35.355339)"
+       id="path5140"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <text
+       x="170.71579"
+       y="320.00159"
+       id="text5144"
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+         x="170.71579"
+         y="320.00159"
+         id="tspan5146">near</tspan></text>
+    <path
+       d="m 143.4699,312.90228 82.77603,-29.23794"
+       id="path5148"
+       style="fill:none;stroke:#000000;stroke-width:1.05647528px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <rect
+       width="33.335033"
+       height="23.233509"
+       x="328.29959"
+       y="556.37726"
+       id="rect5150"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <path
+       d="m 142.43008,377.57886 185.87092,179.81"
+       id="path5152"
+       style="fill:none;stroke:#000000;stroke-width:0.99715775px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <text
+       x="242.43661"
+       y="467.48389"
+       id="text5154"
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+         x="242.43661"
+         y="467.48389"
+         id="tspan5156">far</tspan></text>
+  </g>
+</svg>
