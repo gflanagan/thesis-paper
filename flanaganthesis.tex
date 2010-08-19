@@ -26,8 +26,8 @@
     \usepackage[pdftex,plainpages=false,breaklinks=true,colorlinks=true,urlcolor=blue,citecolor=blue,%
                                        linkcolor=blue,bookmarks=true,bookmarksopen=true,%
                                        bookmarksopenlevel=3,pdfstartview=FitV,
-                                       pdfauthor={!!Author goes here!!},
-                                       pdftitle={!!Title goes here!!},
+                                       pdfauthor={Gregory Flanagan},
+                                       pdftitle={Conceptual Requirement Validation for Architecture Design Systems},
                                        pdfkeywords={thesis, masters, cal poly}
                                        ]{hyperref}
     %Options with pdfstartview are FitV, FitB and FitH
@@ -79,7 +79,7 @@
 % Declarations for Front Matter
 
 % Update fields below!
-\title{Spatial Reasoning in Architectural Design}
+\title{Conceptual Requirement Validation for Architecture Design Systems}
 \author{Gregory Flanagan}
 \degreemonth{September} \degreeyear{2010} \degree{Master of Science}
 \defensemonth{September} \defenseyear{2010}
@@ -270,9 +270,9 @@ TBD: spatial abstraction so attributes are not precise. Some fringe cases are po
 TBD - needs work: Thes attributes can be used to build together to build conceptual design requirements.
 
 \section{Qualitative Spatial Attributes in Architecture}
-This section presents a set of qualitative spatial attributes found in architecture and shows how they are spatially interpreted and represented in DSpace. These attributes are architectural qualities that are emerge from the spatial relationships and configurations between the spatial elements of the structural building (doors, walls, windows, etc.) and interior design (furniture, lights, decorations, etc.). Attributes can be perceptual, qualities that are described from a specific vantage point, or intrinsic, qualities that are inherent in the build's spatial structure. The goal of this section, is to develop a tool-kit of qualitative attributes that describe an architectural design in the spatial environments they emerge in. 
+This section presents a set of qualitative spatial attributes found in architecture and shows how they are spatially interpreted and represented in DSpace. These attributes are architectural qualities that are emerge from the spatial relationships and configurations between the spatial structures of the building (doors, walls, windows, etc.) and interior design elements(furniture, lights, decorations, etc.). Attributes can be perceptual - qualities that are described from a specific vantage point - or intrinsic - qualities that are inherent in the build's spatial structure. The goal of this section, is to develop a tool-kit of qualitative attributes that describe architectural designs in the spatial environments in which they emerge. 
 
-The set of qualitative spatial attributes developed in the section were taken from architectural design textbooks \cite{TBD}, museum research on visitor behaviour \cite{TBD}, and building codes \cite{TBD}. The objective here is not to develop an exhaustive list of qualitative spatial attributes for architecture or a validation of the interpretation of the attributes, rather it is to demonstrate a computational framework in which these qualities can be represented and used to reason about architectural design requirements.
+The set of qualitative spatial attributes developed in the section were taken from architectural design textbooks \cite{TBD}, museum research on visitor behaviour \cite{TBD}, and building codes \cite{TBD}. The objective is not to develop an exhaustive list of qualitative spatial attributes or a validation of the interpretation of the attributes, rather it is to demonstrate a computational framework in which these qualities can be represented and used to reason about architectural design requirements.
 
 \subsection{Facing}
 The facing attribute defines an intrinsic orientational relationship between two objects as each relates to the other. The definition used here is based on a common sense interpretation of facing, in which an object \emph{A} is facing towards an object \emph{B}, if object \emph{B} is in front of object \emph{A} and object \emph{A} is directionally oriented at object \emph{B}. Under this definition, a pair of objects can be facing towards or away from each other. Given a pair of objects,\emph{A} and \emph{B}, there are four possible facing configurations between the pair: 
@@ -337,19 +337,20 @@ In DSpace, the facing attribute is represented as several predicates that take t
                                   
 \end{verbatim}
 
-In DSpace, the facing attribute can be used to check if two architectural structures and / or interior design objects are facing towards or away from the other. As an example, doorways and windows that face towards the other promote air flow through the room in which that they inhibit. A design requirement that promotes air circulation could include the use of windows and doorways that face towards each other. Figure XXX shows and example room where a window and door face each other. Additionally, the facing attribute can be used to build requirements between interior design element, such as desks, chairs, and beds as they related to windows, and doorways and other interior design elements. For example, an interior design requirement might be that a computer desk should not face towards a window, in order to reduce glare on the computer screen from direct sunlight. 
+In DSpace, the facing attribute can be used to check if two architectural structures and/or interior design elements are facing towards or away from each other. For example, doorways and windows that face towards each other promote airflow through the space in which that they inhibit. A design that requires good air circulation could use this knowledge to ensure proper airflow. 
+
+Figure \ref{door-window-facing} shows and example floor plan of a room with a window and doorway which face each other. Additionally, the facing attribute can be used to build requirements between interior design element, such as desks, chairs, and beds as they related to windows, and doorways and other interior design elements. For example, an interior design requirement might be that a computer desk should not face towards a window, in order to reduce glare on the computer screen from direct sunlight. 
 
 \begin{figure}[H]
  \centering
  \subfloat[facing towards]{\label{fig:door-window-towards}\includegraphics[width=55mm]{door-facing-window-con}}
   \hspace{10 mm}
  \subfloat[facing away]{\label{fig:door-window-away}\includegraphics[width=53mm]{door-facing-window-incon}}
-
  \caption{Door, Window Facing}
 \label{door-window-facing}
 \end{figure}
 
-Within the context of architecture, care needs to be taken to account for architectural structures that are long in one axis, such as walls, because the orientational spatial abstraction for OPRA is a directed point. This means that an object is facing a wall only if if is facing the wall's directed point abstraction. Under this definition, there are configurations where an object should be considered to be facing a wall but it is not. DSpace handles this special case by modifying the OPRA relationships that correspond to facing towards and away from. 
+Within the context of architecture, care needs to be taken to account for architectural structures that are long in one axis, such as walls, because the spatial abstraction for OPRA is a directed point. This means that an object is facing a wall only if if is facing the wall's directed point abstraction. Under this definition, there are configurations where an object should be considered to be facing a wall but it is not. DSpace handles this special case by modifying the OPRA relationships that correspond to facing towards and away from. 
 
 fig: wall example
 
@@ -363,7 +364,7 @@ The proximity attribute defines a qualitative distance relationship between two 
 \label{proximity}
 \end{figure}
 
-Using these heuristics, two objects are near to each other if the minimum distance between them is less then or equal to 3 meters. Conversely, two objects are far away from each other if the minimum distance between them is greater then 3 meters. While the definition of proximity pivots around 3 meters, it can easily be change by using an extra parameter in a proximity predicate. 
+Using these heuristics, two objects are near if the minimum distance between them is less then or equal to 3 meters. Conversely, two objects are far if the minimum distance between them is greater then 3 meters. While the definition of proximity pivots around 3 meters, it can easily be change by using an extra parameter in a proximity predicate. 
 
 In DSpace, proximity is represented as two predicates (near, far) each with two arguments in the head of the clause. The arguments that will be checked for proximity. The body of the clause defines the distance constraint that defines proximity.
 
