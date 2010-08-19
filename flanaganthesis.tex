@@ -339,7 +339,15 @@ In DSpace, the facing attribute is represented as several predicates that take t
 
 In DSpace, the facing attribute can be used to check if two architectural structures and / or interior design objects are facing towards or away from the other. As an example, doorways and windows that face towards the other promote air flow through the room in which that they inhibit. A design requirement that promotes air circulation could include the use of windows and doorways that face towards each other. Figure XXX shows and example room where a window and door face each other. Additionally, the facing attribute can be used to build requirements between interior design element, such as desks, chairs, and beds as they related to windows, and doorways and other interior design elements. For example, an interior design requirement might be that a computer desk should not face towards a window, in order to reduce glare on the computer screen from direct sunlight. 
 
-fig:window door facing towards ....
+\begin{figure}[H]
+ \centering
+ \subfloat[facing towards]{\label{fig:door-window-towards}\includegraphics[width=55mm]{door-facing-window-con}}
+  \hspace{10 mm}
+ \subfloat[facing away]{\label{fig:door-window-away}\includegraphics[width=53mm]{door-facing-window-incon}}
+
+ \caption{Door, Window Facing}
+\label{door-window-facing}
+\end{figure}
 
 Within the context of architecture, care needs to be taken to account for architectural structures that are long in one axis, such as walls, because the orientational spatial abstraction for OPRA is a directed point. This means that an object is facing a wall only if if is facing the wall's directed point abstraction. Under this definition, there are configurations where an object should be considered to be facing a wall but it is not. DSpace handles this special case by modifying the OPRA relationships that correspond to facing towards and away from. 
 
@@ -348,8 +356,12 @@ fig: wall example
 \subsection{Proximity / Distance}
 The proximity attribute defines a qualitative distance relationship between two objects. In DSpace there are two proximity relationships: near and far. The spatial interpretation of these relationships depends on the context and scale in which the objects inhibit. For the purposes here, and in the context and scale of architectural space, proximity is defined using heuristics based on the scale of building elements, i.e. rooms, apartments, buildings.
 
-TBD fig:proximity
-
+\begin{figure}[H]
+\centering
+\includegraphics[width=45mm]{proximity}
+\caption{proximity}
+\label{proximity}
+\end{figure}
 
 Using these heuristics, two objects are near to each other if the minimum distance between them is less then or equal to 3 meters. Conversely, two objects are far away from each other if the minimum distance between them is greater then 3 meters. While the definition of proximity pivots around 3 meters, it can easily be change by using an extra parameter in a proximity predicate. 
 
@@ -370,7 +382,12 @@ TBD: fig example
 \subsection{Positioning}
 The positioning attribute defines an orientational relationship between a pair of objects as each object relate to the other, within an extrinsic context, i.e. a defined space such as a room, apartment, building, or user defined space. There are four positioning relationships using this scheme: opposing-side of space, same-side of space, left-side of space, and right-side of space. The opposing-side and same-side relationships can be combined, via conjunction, with the left-side or right-side relationships to form the following compound relationships: opposing-left-side, opposing-right-side, same-left-side, same-right-side.
 
-TBD fig:positioning 
+\begin{figure}[H]
+\centering
+\includegraphics[width=60mm]{position}
+\caption{Positioning}
+\label{position}
+\end{figure}
 
 The positioning attribute is interpreted spatially in DSpace using the Single Cross (SCC) orientation calculus \cite{Freksa}. SCC defines the orientation of a point C (referent) with respect to a point B (relatum) from the viewpoint of a point A (origin). The positioning attribute uses the SCC scheme to relate two points (origin, referent) in the context of an external frame of reference (the relatum). In this case the relatum is a central point of the context space. In DSpace, the reference point is defined as the centroid of the space. The assumption here is that the context space will be generally rectangular in space (rooms, buildings, etc.).
 
@@ -508,7 +525,7 @@ Figure \ref{enclosure} shows a floor plan for a single room with various enclosu
 \begin{figure}[H]
 \centering
 \includegraphics[width=50mm]{spacious-confined}
-\caption{Enclosure, Confined and Spacious}
+\caption{Enclosure, Confined and Open}
 \label{enclosure}
 \end{figure}
 
@@ -527,9 +544,29 @@ examples: camera range space door
 \section{Hierarchy}
 Architectural concepts and qualitative spatial attributes are build on top of the physical / structural and artefactual geometries of the design in a hierarchical structure. Architectural concepts are defined by combining qualitative spatial attributes via the logical operators of conjunction and disjunction. The definition of an architectural concept is not limited to combining qualitative spatial attributes, spatial relationships of orientation, topology, and distance can be used as well as other geometric primitives such as area, angle, and length measurements. Similarly, qualitative spatial attributes in architecture are built by combining qualitative spatial relationships of orientation, topology, and distance. 
 
-This design hierarchy is built on the notion of the design space, quality space, and quantity space. The design space is the highest level involved with the semantics of design. The quantitative level is the lowest level that involves the precise geometries and structures of the design. The middle layer, the qualitative space, mediates the two via qualitative spatial representations of orientation, topology, and distance.
+This design hierarchy is built on the discretion of a design space, quality space, and quantity space. The design space at the highest level, involves the architectural design semantics and qualities of architecture. The quantitative level is the lowest level that involves the precise geometries and structures of the design. The middle layer, the qualitative space, mediates the two via qualitative spatial representations of orientation, topology, and distance.
 
-Figure XXX shows the design hierarchy of the DSpace reasoner.
+design space 
+   architectural concepts
+   spatial qualities of architecture
+quality space
+   qualitative spatial relations
+   spatial abstractions
+quantitative space
+   structural geometry
+   artefactual geometry
+   
+   
+\begin{figure}[H]
+\centering
+\includegraphics[width=140mm]{hierarchy2}
+\caption{Design Space Hierarchy}
+\label{hierarchy}
+\end{figure}
+
+Figure \ref{hierarchy} shows the design hierarchy of the DSpace reasoner.
+
+
 
 \chapter{Museum Case Study}
 This chapter is a case study that demonstrates the application of the DSpace reasoner to the design of an art museum. The purpose is twofold: first, to examine several design requirements of an art museum with regards to the spatial interpretation of the requirements; and second, to show how the museum design requirements can be represented and reasoned about in a computational framework, in order to detect design inconsistencies as per the design requirements.
