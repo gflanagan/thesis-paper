@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="220.59785"
+   height="259.32205"
+   id="svg2">
+  <defs
+     id="defs4">
+    <marker
+       refX="0"
+       refY="0"
+       orient="auto"
+       id="Arrow2Mend"
+       style="overflow:visible">
+      <path
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)"
+         id="path7305"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round" />
+    </marker>
+  </defs>
+  <g
+     transform="translate(-39.849609,-263.54013)"
+     id="layer1">
+    <path
+       d="m 100,522.36218 0,0"
+       id="path2902"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <text
+       x="6.1313477"
+       y="262.13702"
+       transform="translate(39,208.50504)"
+       id="text10406"
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+         x="6.1313477"
+         y="262.13702"
+         id="tspan10408" /></text>
+    <text
+       x="82.084465"
+       y="490.00607"
+       id="text10410"
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+         x="82.084465"
+         y="490.00607"
+         id="tspan10412"
+         style="font-size:12px">view point</tspan></text>
+    <rect
+       width="71.027603"
+       height="51.762203"
+       x="58.782166"
+       y="309.27936"
+       transform="matrix(0.97337958,-0.229199,0.30646286,0.95188262,0,0)"
+       id="rect10523"
+       style="fill:none;stroke:#000000;stroke-width:2.21405959;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <path
+       d="M 40,222 200,52"
+       transform="translate(37,262.64538)"
+       id="path10529"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <text
+       x="193.91426"
+       y="408.79752"
+       id="text10410-5"
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+         x="193.91426"
+         y="408.79752"
+         id="tspan10412-6"
+         style="font-size:12px">view-space</tspan></text>
+    <path
+       d="m 190,152 c -40.65377,5.05248 -70.17733,-2.13827 -90,-20"
+       transform="translate(37,262.64538)"
+       id="path10556"
+       style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)" />
+    <path
+       d="m 249.50767,545.77069 a 3.5355339,3.5355339 0 1 1 -7.07107,0 3.5355339,3.5355339 0 1 1 7.07107,0 z"
+       transform="translate(-169.4736,-60.454921)"
+       id="path2999-8-2-4-2-8-1"
+       style="fill:#008000;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       width="28.106888"
+       height="30.450638"
+       x="123.89311"
+       y="319.19473"
+       id="rect10766-4"
+       style="fill:none;stroke:#d90000;stroke-width:1.5181129;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <path
+       d="M 40.732249,219.35607 90,87"
+       inkscape:connection-start="#path2999-8-2-4-2-8-1"
+       transform="translate(37,262.64538)"
+       id="path10794"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       d="M 100,57 115,17"
+       transform="translate(37,262.64538)"
+       id="path10798"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <text
+       x="39.1875"
+       y="315.58289"
+       id="text10410-5-5"
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+         x="39.1875"
+         y="315.58289"
+         id="tspan10412-6-5"
+         style="font-size:12px">obsruction</tspan></text>
+    <path
+       d="M 32.8125,56.843749 C 44.685078,66.064921 57.124121,74.719628 81.25,71.687499"
+       transform="translate(37,262.64538)"
+       id="path11013"
+       style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)" />
+  </g>
+</svg>

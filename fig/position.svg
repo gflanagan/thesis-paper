@@ -2,44 +2,129 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
-   width="384.84781"
+   width="429.01489"
    height="427.27423"
-   id="svg5200">
+   id="svg5200"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="position.svg">
+  <metadata
+     id="metadata2894">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1280"
+     inkscape:window-height="951"
+     id="namedview2892"
+     showgrid="false"
+     inkscape:zoom="1.1046769"
+     inkscape:cx="176.7685"
+     inkscape:cy="213.63714"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg5200"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2935"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
+  </sodipodi:namedview>
   <defs
-     id="defs5202" />
+     id="defs5202">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 213.63712 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="384.84781 : 213.63712 : 1"
+       inkscape:persp3d-origin="192.4239 : 142.42474 : 1"
+       id="perspective2896" />
+    <inkscape:perspective
+       id="perspective2908"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2951"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4786"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4808"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective4833"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+  </defs>
   <g
-     transform="translate(-199,-266.08798)"
+     transform="translate(-175.9563,-266.088)"
      id="layer1">
     <rect
-       width="382.84781"
-       height="425.27423"
-       x="200"
-       y="267.08798"
+       width="426.90323"
+       height="425.16257"
+       x="177.01213"
+       y="267.14383"
        id="rect5210"
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+       style="fill:none;stroke:#000000;stroke-width:2.11166286;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
     <rect
        width="30"
        height="30"
        x="220"
        y="612.36218"
        id="rect5216"
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+       style="fill:#008000;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
     <rect
        width="30"
        height="30"
        x="429.28571"
        y="291.64792"
        id="rect5216-5"
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
-    <path
-       d="m 390,472.36218 a 10,10 0 1 1 -20,0 10,10 0 1 1 20,0 z"
-       transform="matrix(0.5,0,0,0.5,206.42857,241.89537)"
-       id="path5240"
-       style="fill:#000000;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+       style="fill:#ffff00;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
     <path
        d="M 250,613.63878 470,412.36218"
        inkscape:connection-start="#rect5216"
@@ -50,13 +135,13 @@
        id="path5756"
        style="fill:none;stroke:#000000;stroke-width:1.10000002px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <text
-       x="352.14285"
-       y="620.21936"
+       x="346.92288"
+       y="639.36475"
        id="text5758"
        xml:space="preserve"
        style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
-         x="352.14285"
-         y="620.21936"
+         x="346.92288"
+         y="639.36475"
          id="tspan5760"
          style="font-size:16px">same-right side</tspan></text>
     <text
@@ -70,9 +155,49 @@
          id="tspan5760-2"
          style="font-size:16px">opposing-left side</tspan></text>
     <path
-       d="m 400,652.36218 a 10,10 0 1 1 -20,0 10,10 0 1 1 20,0 z"
-       transform="translate(19,-61.857114)"
+       d="m 413.08226,609.36478 a 10,10 0 0 1 -20,0 10,10 0 1 1 20,0 z"
        id="path5791"
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+       style="fill:#ffff00;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <text
+       x="204.4212"
+       y="473.7403"
+       id="text5758-3"
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+         x="204.4212"
+         y="473.7403"
+         id="tspan5760-3"
+         style="font-size:16px">same-left side</tspan></text>
+    <text
+       x="442.68381"
+       y="489.76324"
+       id="text5758-7-0"
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+         x="442.68381"
+         y="489.76324"
+         id="tspan5760-2-4"
+         style="font-size:16px">opposing-right side</tspan></text>
+    <path
+       d="m 401.60905,478.81987 a 5,5 0 0 1 -10,0 5,5 0 1 1 10,0 z"
+       id="path5240-6"
+       style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
   </g>
+  <rect
+     style="fill:#ffff00;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+     id="rect2898"
+     width="34.565548"
+     height="11.52185"
+     x="59.673531"
+     y="177.43103" />
+  <path
+     sodipodi:type="arc"
+     style="fill:#ffff00;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+     id="path4850"
+     sodipodi:cx="349.42343"
+     sodipodi:cy="181.95364"
+     sodipodi:rx="5.4314523"
+     sodipodi:ry="14.483872"
+     d="m 354.85488,181.95364 a 5.4314523,14.483872 0 1 1 -10.8629,0 5.4314523,14.483872 0 1 1 10.8629,0 z"
+     transform="translate(-6.3366943,6.3366943)" />
 </svg>

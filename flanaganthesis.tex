@@ -292,18 +292,21 @@ The positioning attribute defines an orientational relationship between a pair o
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=60mm]{position}
+\includegraphics[width=60mm]{scc}
+\caption{SCC Partitioning}
+\label{scc}
+\end{figure}
+
+The positioning attribute is interpreted spatially in DSpace using the Single Cross (SCC) orientation calculus \cite{Freksa92usingorientation}. SCC defines the orientation of a point C (referent) with respect to a point B (relatum) from the viewpoint of a point A (origin). The positioning attribute uses the SCC scheme to orientationally relate two points (origin, referent) in the context of an external frame of reference (relatum). In DSpace, the reference point is defined as the centroid of the context space. The assumption here is that the context space will be generally rectangular in shape.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=80mm]{position}
 \caption{Positioning}
 \label{position}
 \end{figure}
 
-The positioning attribute is interpreted spatially in DSpace using the Single Cross (SCC) orientation calculus \cite{Freksa}. SCC defines the orientation of a point C (referent) with respect to a point B (relatum) from the viewpoint of a point A (origin). The positioning attribute uses the SCC scheme to orientationally relate two points (origin, referent) in the context of an external frame of reference (relatum). In DSpace, the reference point is defined as the centroid of the context space. The assumption here is that the context space will be generally rectangular in shape.
-
-TBD fig: SCC
-
 Under this scheme, two points are define as being on opposing sides of a space if they have an SCC relationship of 0, 1 or 7, as related by the centroid of the space. Conversely, a pair of points are defined to be on the same side of a space if they have an SCC relationship of 3, 4 or 5, as related by the centroid of the  space. A point is on the left side of a space from another point if it has an SCC relationship of 1, 2, or 3, and is on the right side if it has an SCC relationship of 5, 6, or 7. 
-
-TBD fig:opposing / same / left /right side of space as defined in SCC
 
 Positioning is represented, in the DSpace reasoner, as Prolog rules. There is a single rule for opposing side, same-side, left-side, and right-side. The head of the rule takes three arguments, the first two for the architectural objects being compared and one for the context space. The body of the rule .... Given two objects and a context space, the rule returns true if the objects are on the same-side or opposing side as defined by the rule, and fails if they are not. The following is Prolog code for the positioning rules.
 
@@ -327,7 +330,12 @@ Positioning is represented, in the DSpace reasoner, as Prolog rules. There is a 
 
 The positioning attribute can be used to check if two architectural structure, artefactual extensions, or interior design elements are on the opposing or same side of a space to the other. For example, a requirement might state that a bedroom should be positioned to the back of a house from the main entrance. The reason for this requirement is that rooms that are in the back of a house are more private than rooms in the front of the house. In this requirement, the origin is the entrance, the referent is the bedroom, and the relatum is the centroid of the house (context space).
 
-TBD: fig:room back of house
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=95mm]{bedroom-back-house}
+ \caption{Bedroom Privacy}
+\label{privacy}
+\end{figure}
 
 
 \subsection{Facing}
@@ -350,8 +358,8 @@ The facing attribute is spatially modelled in the DSpace reasoner using the Orie
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=40mm]{facing-opra-base-rel}
-\caption{OPRA$_{4}$ Space Partitioning}
+\includegraphics[width=60mm]{facing-opra-base-rel}
+\caption{OPRA$_{2}$ Space Partitioning}
 \label{facing-opra-base-rel}
 \end{figure}
 
@@ -426,7 +434,12 @@ Proximity is represented, in the DSpace reasoner, as two Prolog rules. There is 
 
 The proximity attribute can be used to check if two architectural structures, artefactual extension, or interior design elements are near or far. For example, a computer desk should be located near a power outlet to make it easy to power up the desk's computer and desk's lamp. Another example is the bathroom should be far away from the kitchen, so to keep a separation between the two.
 
-TBD: fig example
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=50mm]{desk-proximity}
+ \caption{Desk Outlet Proximity}
+\label{desk-proximity}
+\end{figure}
 
 
 
@@ -435,7 +448,13 @@ The visibility attribute defines a boolean relationship between a viewpoint and 
 
 The spatial interpretation of visibility is based on the topological characteristics of the space in-between the viewpoint and object. This space is referred to as the view-space. An object is visible if the view-space is not obstructed by surrounding structures or objects. Artefactual extension is not considered here because they do not have a physical form. An obstructing object is an object that has a partially overlapping or containing topological relationship with the view-space. This definition does not distinguish between visibility that is partially or totally obstructed.
 
-TBD fig:visibility
+
+\begin{figure}[H]
+ \centering
+ \includegraphics[width=55mm]{visibility}
+ \caption{Visibility}
+\label{visibility}
+\end{figure}
 
 Visibility is represented, in the DSpace reasoner, as a single Prolog rule. The head of the rule takes two arguments, the viewpoint and the object that is being check for visibility. The body of the clause calculates the view-space and checks the surrounding objects for a topological obstruction. Given a viewpoint and an object, the rule returns true if the object is visible, and fails if it is not. The following is the Prolog code for the visibility rule.
 
@@ -479,9 +498,9 @@ Privacy is represented in DSpace as a Prolog rule. The rule takes a single argum
 
 \begin{figure}[H]
  \centering
- \subfloat[Private]{\label{fig:private-room-con}\includegraphics[width=65mm]{privacy-room-con}}
-  \hspace{10 mm}
- \subfloat[Not Private]{\label{fig:private-room-incon}\includegraphics[width=65mm]{privacy-room-incon}}
+ \subfloat[Private]{\label{fig:private-room-con}\includegraphics[width=69mm]{privacy-room-con}}
+  \hspace{5mm}
+ \subfloat[Not Private]{\label{fig:private-room-incon}\includegraphics[width=69mm]{privacy-room-incon}}
  \caption{Bedroom Privacy}
 \label{room-privacy}
 \end{figure}
@@ -781,7 +800,11 @@ Museums should be secure.
 \clearpage
 \bibliographystyle{abbrv}
 \bibliography{museum}
-\bibliography{design}
+%\bibliography{architecture}
+\bibliography{qsr}
+%\bibliography{clp}
+%\bibliography{relatedworks}
+
 %\addcontentsline{toc}{chapter}{Bibliography}
 
 \end{document}

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="562"
+   height="364.14035"
+   id="svg2">
+  <defs
+     id="defs4" />
+  <g
+     transform="translate(-39,-208.50504)"
+     id="layer1">
+    <path
+       d="m 40,212.36218 0,340"
+       id="path2824"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       d="m 100,522.36218 0,0"
+       id="path2902"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       d="m 0,344.14035 300,0"
+       transform="translate(39,208.50504)"
+       id="path10380"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       d="m 249.50767,545.77069 a 3.5355339,3.5355339 0 1 1 -7.07107,0 3.5355339,3.5355339 0 1 1 7.07107,0 z"
+       transform="translate(-80.507671,1.8746994)"
+       id="path2999-8-2-4-2-8"
+       style="fill:#008000;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <text
+       x="6.1313477"
+       y="262.13702"
+       transform="translate(39,208.50504)"
+       id="text10406"
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+         x="6.1313477"
+         y="262.13702"
+         id="tspan10408" /></text>
+    <text
+       x="174"
+       y="547.64539"
+       id="text10410"
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+         x="174"
+         y="547.64539"
+         id="tspan10412"
+         style="font-size:12px">power outlet</tspan></text>
+    <rect
+       width="95"
+       height="35"
+       x="64"
+       y="507.64539"
+       id="rect10416"
+       style="fill:#008000;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       width="95"
+       height="35"
+       x="278.37604"
+       y="-85.883209"
+       transform="matrix(0.00835562,0.99996509,-0.99996509,0.00835562,0,0)"
+       id="rect10416-8"
+       style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+  </g>
+</svg>
