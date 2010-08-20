@@ -287,6 +287,49 @@ Figure \ref{hierarchy} shows the design hierarchy of the DSpace reasoner.
 \section{Qualitative Spatial Attributes in Architecture}
 This section presents a set of qualitative spatial attributes found in architecture and shows how they are spatially interpreted and represented in DSpace. These attributes are architectural qualities that are emerge from the spatial relationships and configurations between the physical structures of the building (doors, walls, columns, windows, etc.), artefactual extensions of the building (functional space, operational space, range space, etc.) and interior design elements (furniture, lights, decorations, etc.). Attributes can be perceptual - qualities that are described from a specific vantage point - or intrinsic - qualities that are inherent in the build's spatial structure. The goal of this section, is to develop a tool-kit of qualitative attributes that describe architectural designs in the spatial environments in which they emerge. Some boundary cases are identified and handled but it is not the purpose here to explore all possible case scenarios.
 
+\subsection{Positioning}
+The positioning attribute defines an orientational relationship between a pair of objects as each object relate to the other, within an extrinsic context, i.e. a defined space such as a room, apartment, building, or user defined space. There are four positioning relationships using this scheme: opposing-side of space, same-side of space, left-side of space, and right-side of space. The opposing-side and same-side relationships can be combined, via conjunction, with the left-side or right-side relationships to form the following compound relationships: opposing-left-side, opposing-right-side, same-left-side, same-right-side.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=60mm]{position}
+\caption{Positioning}
+\label{position}
+\end{figure}
+
+The positioning attribute is interpreted spatially in DSpace using the Single Cross (SCC) orientation calculus \cite{Freksa}. SCC defines the orientation of a point C (referent) with respect to a point B (relatum) from the viewpoint of a point A (origin). The positioning attribute uses the SCC scheme to relate two points (origin, referent) in the context of an external frame of reference (the relatum). In this case the relatum is a central point of the context space. In DSpace, the reference point is defined as the centroid of the space. The assumption here is that the context space will be generally rectangular in space (rooms, buildings, etc.).
+
+TBD fig: SCC
+
+Under this scheme, two points are define as being on opposing sides of a space if they have an SCC relationship of 0, 1, 7, as related by the centroid of the context space. Conversely, a pair of points are defined to be on the same side of the room if they have and SCC relationship of 2 - 6 as related by the centrod of the context space. On object is on the left side of the room from if it has an scc relationship of 0 -4, and right side if it has an scc relationship of 5 - 7. 
+
+TBD fig:opposing / same / left /right side of space as defined in SCC
+
+Positioning is represented, in the DSpace reasoner, as Prolog rules. There is one rule for opposing side and one for same-side. The head of the rule takes three arguments, two for the architectural objects being compared and one for the context space. The body of the rule .... Given two objects and a context space, the rule returns true if the objects are on the same-side or opposing side as defined by the rule, and fails if they are not. The following is Prolog code for the positioning rules.
+
+
+\begin{verbatim}
+   opposing_side(Obj1, Obj2, Context) :- 
+           centroid(Context, centroid),
+           (scc(Obj1, centroid, Obj2, 0);
+            scc(Obj1, centroid, Obj2, 1);
+            scc(Obj1, centroid, Obj2, 7)).
+                                          
+   same_side(Obj1, Obj2, Context) :- 
+           centroid(Context, centroid),
+           (scc(Obj1, centroid, Obj2, 2) ;
+            scc(Obj1, centroid, Obj2, 3) ;
+            scc(Obj1, centroid, Obj2, 4) ;
+            scc(Obj1, centroid, Obj2, 5) ;
+            scc(Obj1, centroid, Obj2) 6)).   
+
+\end{verbatim}
+
+The positioning attribute can be used to check if two architectural elements or interior design object are on the opposing or same side of a space to the other. For example, a requirement might state that a bedroom should be positioned to the back of a house from the main entrance. The reason for this requirement is that rooms that are in the back of a house are more private than rooms in the front of the house. In this requirement, the origin is the entrance, the referent if the bedroom, and the relatum is the centroid of the house (context space).
+
+TBD: fig:room back of house
+
+
 \subsection{Facing}
 The facing attribute defines an intrinsic orientational relationship between two objects as each relates to the other. The definition used here is based on a common sense interpretation of facing, in which an object \emph{A} is facing towards an object \emph{B}, if object \emph{B} is in front of object \emph{A} and object \emph{A} is directionally oriented at object \emph{B}. Under this definition, a pair of objects can be facing towards or away from each other. Given a pair of objects,\emph{A} and \emph{B}, there are four possible facing configurations between the pair: 
 
@@ -303,7 +346,7 @@ The facing attribute defines an intrinsic orientational relationship between two
 \label{display-arrangement}
 \end{figure}
 
-The facing attribute is modelled in the DSpace reasoner using the Oriented Point Relation Algebra \cite{Moratz} (OPRA). The advantage of using OPRA is that it models the intrinsic orientational relationships between pairs of directed points. OPRA partitions space into half planes, which are defined by lines emanating outwards from the reference point, and defines the qualitative orientational relationships by the half plane in which a second point is located. Figure \ref{facing-opra-base-rel} shows the partitioning of space with labels for base relationships in OPRA$_{4}$. A second point is located in sector 6 of the partitioning scheme, so that the second point has an OPRA$_{4}$ 6 relationship with the point. Note that the arrow depicts the point's direction and the sectors are labelled starting in the point's direction and incrementing counter-clockwise. 
+The facing attribute is spatially modelled in the DSpace reasoner using the Oriented Point Relation Algebra \cite{Moratz} (OPRA). The advantage of using OPRA is that it models the intrinsic orientational relationships between pairs of directed points. OPRA partitions space into half planes, which are defined by lines emanating outwards from the reference point, and defines the qualitative orientational relationships by the half plane in which a second point is located. Figure \ref{facing-opra-base-rel} shows the partitioning of space with labels for base relationships in OPRA$_{8}$. A second point is located in sector 6 of the partitioning scheme, so that the second point has an OPRA$_{8}$ 6 relationship with the point. Note that the arrow depicts the point's direction and the sectors are labelled starting in the point's direction and incrementing counter-clockwise. 
 
 \begin{figure}[H]
 \centering
@@ -312,7 +355,7 @@ The facing attribute is modelled in the DSpace reasoner using the Oriented Point
 \label{facing-opra-base-rel}
 \end{figure}
 
-Using OPRA$_{4}$, the facing attribute can be defined in terms of the half plane sectors. Point \emph{A} is facing towards point \emph{B}, if point \emph{B} is located in sectors 1, 2, or 16 of point \emph{A's} partitioned space. Similarly, if point \emph{A} is located in sectors 1, 2, or 16 of point \emph{B's} partitioned space then point \emph{B} is facing towards point \emph{A}. In this case points, both points are facing towards each other. Figure \ref{fig:facing-opra-towards} shows an example of two points facing towards each other; note that each point is located in sector 16 of the other's partitioned space. Conversely,  point \emph{A} is facing away from point \emph{B} if point \emph{B} is located in sectors 3 - 15 of point \emph{A's} partitioned space. Figure \ref{fig:facing-opra-away} shows an example of two points that are facing away from each other and are located in sectors 11 and 7. 
+Using OPRA$_{8}$, the facing attribute can be defined in terms of the half plane sectors. Point \emph{A} is facing towards point \emph{B}, if point \emph{B} is located in sectors 1, 2, or 16 of point \emph{A's} partitioned space. Similarly, if point \emph{A} is located in sectors 1, 2, or 16 of point \emph{B's} partitioned space then point \emph{B} is facing towards point \emph{A}. In this case points, both points are facing towards each other. Figure \ref{fig:facing-opra-towards} shows an example of two points facing towards each other; note that each point is located in sector 16 of the other's partitioned space. Conversely,  point \emph{A} is facing away from point \emph{B} if point \emph{B} is located in sectors 3 - 15 of point \emph{A's} partitioned space. Figure \ref{fig:facing-opra-away} shows an example of two points that are facing away from each other and are located in sectors 11 and 7. 
 
 \begin{figure}[H]
  \centering
@@ -327,7 +370,7 @@ Using OPRA$_{4}$, the facing attribute can be defined in terms of the half plane
 \label{opra-facing}
 \end{figure}
 
-In DSpace, the facing attribute is represented as several predicates that take two arguments in the head of the clause. These arguments are the objects that will be check for the facing attribute. The body of the predicate defines logically, via conjunction and disjunction, the attribute based on the spatial definition given above.
+The facing attribute is represented, in the DSpace reasoner, as Prolog rules. There is a single rule for each relationship, facing-towards and facing-away. The head of the rule takes two arguments for the architectural objects being compared. The body of the rule is a disjunctive clause that checks for the OPRA relationship between the objects. Given two objects, the rule returns true if the objects are facing towards or away from each other as defined by the rule, and fails if they are not. The following is Prolog code for the facing rules.
 
 \begin{verbatim}
    facing_towards(Obj1, Obj2) :- 
@@ -380,7 +423,7 @@ The proximity attribute defines a qualitative distance relationship between two 
 
 Using these heuristics, two objects are near if the minimum distance between them is less then or equal to 3 meters. Conversely, two objects are far if the minimum distance between them is greater then 3 meters. While the definition of proximity pivots around 3 meters, it can easily be change by using an extra parameter in a proximity predicate. 
 
-In DSpace, proximity is represented as two predicates (near, far) each with two arguments in the head of the clause. The arguments that will be checked for proximity. The body of the clause defines the distance constraint that defines proximity.
+Proximity is represented, in the DSpace reasoner, as two Prolog rules. There is one rule for near and one for far. The head of the rule takes two arguments for the architectural objects being compared. The body of the rule .... Given two objects, the rule returns true if the objects are near or far from each other as defined by the rule, and fails if they are not. The following is Prolog code for the proximity rules.
 
 \begin{verbatim}
    near(Obj1, Obj2) :- 
@@ -396,46 +439,6 @@ The proximity attribute can be used to check if two architectural structures and
 TBD: fig example
 
 
-\subsection{Positioning}
-The positioning attribute defines an orientational relationship between a pair of objects as each object relate to the other, within an extrinsic context, i.e. a defined space such as a room, apartment, building, or user defined space. There are four positioning relationships using this scheme: opposing-side of space, same-side of space, left-side of space, and right-side of space. The opposing-side and same-side relationships can be combined, via conjunction, with the left-side or right-side relationships to form the following compound relationships: opposing-left-side, opposing-right-side, same-left-side, same-right-side.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=60mm]{position}
-\caption{Positioning}
-\label{position}
-\end{figure}
-
-The positioning attribute is interpreted spatially in DSpace using the Single Cross (SCC) orientation calculus \cite{Freksa}. SCC defines the orientation of a point C (referent) with respect to a point B (relatum) from the viewpoint of a point A (origin). The positioning attribute uses the SCC scheme to relate two points (origin, referent) in the context of an external frame of reference (the relatum). In this case the relatum is a central point of the context space. In DSpace, the reference point is defined as the centroid of the space. The assumption here is that the context space will be generally rectangular in space (rooms, buildings, etc.).
-
-TBD fig: SCC
-
-Under this scheme, two points are define as being on opposing sides of a space if they have an SCC relationship of 0, 1, 7, as related by the centroid of the context space. Conversely, a pair of points are defined to be on the same side of the room if they have and SCC relationship of 2 - 6 as related by the centrod of the context space. On object is on the left side of the room from if it has an scc relationship of 0 -4, and right side if it has an scc relationship of 5 - 7. 
-
-TBD fig:opposing / same / left /right side of space as defined in SCC
-
-In DSpace, the positing attribute is represented in Prolog as predicates, each with three arguments. The first two arguments are the objects that are being related and the third is the context space. The body of the clause defines the positing relationship logically based on the SCC interpretation given above.
-
-\begin{verbatim}
-   opposing_side(Obj1, Obj2, Context) :- 
-           centroid(Context, centroid),
-           (scc(Obj1, centroid, Obj2, 0);
-            scc(Obj1, centroid, Obj2, 1);
-            scc(Obj1, centroid, Obj2, 7)).
-                                          
-   same_side(Obj1, Obj2, Context) :- 
-           centroid(Context, centroid),
-           (scc(Obj1, centroid, Obj2, 2) ;
-            scc(Obj1, centroid, Obj2, 3) ;
-            scc(Obj1, centroid, Obj2, 4) ;
-            scc(Obj1, centroid, Obj2, 5) ;
-            scc(Obj1, centroid, Obj2) 6)).   
-
-\end{verbatim}
-
-The positioning attribute can be used to check if two architectural elements or interior design object are on the opposing or same side of a space to the other. For example, a requirement might state that a bedroom should be positioned to the back of a house from the main entrance. The reason for this requirement is that rooms that are in the back of a house are more private than rooms in the front of the house. In this requirement, the origin is the entrance, the referent if the bedroom, and the relatum is the centroid of the house (context space).
-
-TBD: fig:room back of house
 
 \subsection{Visibility}
 The visibility attribute defines a boolean relationship between a viewpoint and an object with respect to the object being visible from the viewpoint. An objects is visible if the view space in-between the viewpoint and the object is not obstructed. This definition of visibility does not take into account the effects of distance on visibility, i.e. an object that is very far away is not visible. However, within the context of a architecture and buildings, the magnitude of distances is limited and in general is not a factor in visibility.
@@ -445,7 +448,7 @@ partially overlapping or containing topological relationship with the view-space
 
 TBD fig:visibility
 
-In DSpace visibility is represented as a predicate with two arguments in the head. The arguments are the viewpoint and an object. The body of the clause calculates the view-space, the space in-between the viewpoint and object, and checks the surrounding structures and objects for topological obstructions.
+Visibility is represented, in the DSpace reasoner, as a single Prolog rule. The head of the rule takes two arguments, the viewpoint and the object that is being check for visibility. The body of the clause calculates the view-space, the space in-between the viewpoint and object, and checks the surrounding objects for topological obstructions. Given a viewpoint and an object, the rule returns true if the object is visible, and fails if it is not. The following is Prolog code for the visibility rule.
 
 \begin{verbatim}
    is_visible(ViewPoint, Obj) :- 
@@ -505,14 +508,14 @@ In DSpace, continuity is defined as a network of doorways that are mutually visi
 With respect to this definition, continuity is represented as a recursive predicate in Prolog, which takes a list of doorways and checks that each doorway is mutually visible to the others within the list. (need to mention doorways within a room). TBD: arguments: list of doors or room id that indicates containment level???
 
 \begin{verbatim}
-   continuous([OBJ1,OBJ2|[]]) :- 
-           is_visible(OBJ1, OBJ2).
+   continuous([Obj1,Obj2|[]]) :- 
+           is_visible(Obj1, Obj2).
 
-   continuous([OBJ1,OBJ2|OBJS]) :- 
-           is_visible(OBJ1, OBJ2),
-	       is_visible(OBJ2, OBJ1),
-           continuity([OBJ1|OBJS]),
-           continuity([OBJ2|OBJS]).
+   continuous([Obj1,Obj2|OS]) :- 
+           is_visible(Obj1, Obj2),
+	       is_visible(Obj2, Obj1),
+           continuity([Obj1|OS]),
+           continuity([Obj2|OS]).
 \end{verbatim}
 
 \begin{figure}[H]
@@ -555,9 +558,6 @@ Figure \ref{enclosure} shows a floor plan for a single room with various enclosu
 \subsection{Building Regulations and Codes}
 Building regulations and codes are a special case in this section because they are not strictly architectural concepts. However, they provide a unique set of architectural requirements that incorporate a breadth of design aspects. This section will take a look at two such requirements: building security, artefactual interference. These requirements were specifically picked because they both incorporate artefactual aspects of the design problem. 
 
-\subsubsection{Building Security}
-
-
 \subsubsection{Artefactual Interference}
 Artefactual interference deals with the unintentional interactions of the operational and functional spaces of a building's structural elements. For example, the operational space of a bathroom doorway that overlaps with the functional space of the bathroom sink will cause circulation problems into and out of the bathroom. In DSpace this type of interaction can be detected using topological reasoning over the artefactual extensions. 
 
@@ -574,6 +574,8 @@ This type of artefactual interaction can be check for in DSpace using a single p
 
 Artefactual interactions can be between a physical structure (door, wall, column, ect.) and artefactual extension. For example, the landing space (operational space in DSpace parlance) of a stair should be clear. Representing this requirement is similar to the bathroom sink example except that it checks for interactions between the stair artefactual space with the building physical space. This requirement could be extended to include the landing space be clear of the phyisical and aretefactual elements. In DSpace this can be represented as a single predicate. The body of the clause check for an overlapping relationship between the landing space of the stair and both the artefactual extension and physical structure of another element.
 
+TBD: figure of stair landing
+
 \begin{verbatim}
     clear_stair_landing(stair, Obj) :- 
             artefact_geometry(stair, Artefact_stair),
@@ -583,13 +585,15 @@ Artefactual interactions can be between a physical structure (door, wall, column
             not_overlapping(Artefact_stair, Physical)
 \end{verbatim}  
 
+\subsubsection{Surveillance}
+Surveillance involves the placement of cameras within a building to provide security. A well functioning surveillance system has specific spatial properties with regard to the placement of the cameras to the structures they survey. For example, a surveillance system could monitor activity at doorways. In this situation the spatial relationships between the camera, it's range space (i.e. the camera's surveillance area) and the doorways are important. Such a requirement could be expressed as the functional space of every doorway should overlap with the range space of at least one camera. 
 
+\section{Using The DSpace Reasoner}
 
 \chapter{Museum Case Study}
 This chapter is a case study that demonstrates the application of the DSpace reasoner to the design of an art museum. The purpose is twofold: first, to examine several design requirements of an art museum with regards to the spatial interpretation of the requirements; and second, to show how the museum design requirements can be represented and reasoned about in a computational framework, in order to detect design inconsistencies as per the design requirements.
 
 The remainder of the chapter is divided into three sections. The first section examines design requirements in art museums in three parts: the first part looks at requirements that influence museum visitors' behaviour. The second part looks at requirements for promoting exploration in the museum. The third part looks at the requirements of accessibility and security within the museum. The second section, looks at how these requirements can be interpreted spatially and represented in the DSpace reasoner. The third section tests the DSpace reasoner using sample museum floor plans that are both consistent and inconsistent per the design requirements for several art museums. The objective of this demonstration is to show that the DSpace reasoner can validate a design against its design requirements.
-
 
 
 \section{Case Study Scenario: an art museum}
