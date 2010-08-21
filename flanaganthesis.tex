@@ -426,14 +426,18 @@ The proximity attribute defines a qualitative distance relationship between two 
 
 Using these heuristics, two objects are near if the minimum distance between them is less then or equal to 3 meters, near+ if the minimum distance between then is between 3 - 6 meters, and far if the minimum distance between them is greater then 3 meters. While the definition of proximity pivots around 3 and 6 meters, it can easily be change by using an extra parameter in a proximity predicate. 
 
-Proximity is represented, in DSpace, as three Prolog rules. There is one rule for near and one for far. The head of the rule takes two arguments for the architectural objects being compared. The body of the rule .... Given two objects, the rule returns true if the objects are near or far from each other as defined by the rule, and fails if they are not. The following is Prolog code for the proximity rules.
+Proximity is represented, in DSpace, as three Prolog rules. There is one rule for near, one for near+, and one for far. The head of each rule takes two arguments for the architectural objects being related. The body of the rule .... Given two objects, the rule returns true if the objects are near, near+, or far from each other as defined by the rule, and fails if they are not. The following is Prolog code for the proximity rules.
 
 \begin{verbatim}
    near(Obj1, Obj2) :- 
            minimum_distance_compare(Obj1, Obj2, <=, 3).
    
+   near_plus(Obj1, Obj2) :-
+           minimum_distance_compare(Obj1, Obj2, <=, 6),
+           minimum_distance_compare(Obj1, Obj2, >, 3).   
+   
    far(Obj1, Obj2) :- 
-           minimum_distance_compare(Obj1, Obj2, >, 3)
+           minimum_distance_compare(Obj1, Obj2, >, 6)
 
 \end{verbatim}
 
@@ -446,13 +450,10 @@ The proximity attribute can be used to check if two architectural structures, ar
 \label{desk-proximity}
 \end{figure}
 
-
-
 \subsection{Visibility}
-The visibility attribute defines a boolean relationship between a viewpoint and an object with respect to the object being visible from the viewpoint. An objects is visible if the view-space in-between the viewpoint and the object is not obstructed. This definition of visibility does not take into account the effects of distance on visibility, i.e. an object that is very far away is not visible. However, within the context of a architecture and buildings, the magnitude of distances is limited and in general is not a factor to visibility.
+The visibility attribute defines a boolean relationship between a viewpoint and an object with respect to the object being visible from the viewpoint. An objects is visible if the view-space (i.e. the space in-between the viewpoint and the object) is not obstructed. This definition of visibility does not take into account the effects of distance on visibility, i.e. an object that is very far away is not visible. However, within the context of a architecture and buildings, the magnitude of distances is limited to a point that it is not a factor to visibility.
 
-The spatial interpretation of visibility is based on the topological characteristics of the space in-between the viewpoint and object. This space is referred to as the view-space. An object is visible if the view-space is not obstructed by surrounding structures or objects. Artefactual extension is not considered here because they do not have a physical form. An obstructing object is an object that has a partially overlapping or containing topological relationship with the view-space. This definition does not distinguish between visibility that is partially or totally obstructed.
-
+The spatial interpretation of visibility is based on the topological characteristics of the space in-between the viewpoint and object. This space is referred to as the view-space. An object is visible if the view-space is not obstructed by surrounding structures or objects. An obstructing object is an object that has a partially overlapping or containing topological relationship with the view-space. Artefactual extension is not considered as and obstructing object because they do not have a physical form. This definition does not distinguish between visibility that is partially or totally obstructed.
 
 \begin{figure}[H]
  \centering
@@ -461,7 +462,7 @@ The spatial interpretation of visibility is based on the topological characteris
 \label{visibility}
 \end{figure}
 
-Visibility is represented, in the DSpace reasoner, as a single Prolog rule. The head of the rule takes two arguments, the viewpoint and the object that is being check for visibility. The body of the clause calculates the view-space and checks the surrounding objects for a topological obstruction. Given a viewpoint and an object, the rule returns true if the object is visible, and fails if it is not. The following is the Prolog code for the visibility rule.
+Visibility is represented, in DSpace, as a single Prolog rule. The head of the rule takes two arguments, the viewpoint and the object that is being check for visibility. The body of the clause calculates the view-space and checks the surrounding objects for a topological obstruction. Given a viewpoint and an object, the rule returns true if the object is visible, and fails if it is not. The following is the Prolog code for the visibility rule.
 
 \begin{verbatim}
    is_visible(ViewPoint, Obj) :- 
@@ -469,8 +470,7 @@ Visibility is represented, in the DSpace reasoner, as a single Prolog rule. The 
            topology(ViewSpace, SurroundingStructs).
 \end{verbatim}
 
-The visibility attribute can be used to check if an architectural structure or interior design element is visible from a given viewpoint. For example, an architect might want to ensure that a certain staircase is visible from the main entrance because she doesn't want the staircase to go unnoticed. Figure \ref{visibility-door-stair} shows and example floor plan where the stairway is not visible from the doorway. In this example both the wall in red and column are obstructing the view from the doorway. 
-
+The visibility attribute can be used to check if an architectural structure or interior design element is visible from a given viewpoint. For example, an architect might want to ensure that a staircase is visible from the main entrance of a building, because she doesn't want the staircase to go unnoticed. Figure \ref{visibility-door-stair} shows and example floor plan where the stairway is not visible from the doorway. In this example both the wall in red and column are obstructing the view from the doorway. 
 
 \begin{figure}[H]
 \centering
@@ -479,7 +479,6 @@ The visibility attribute can be used to check if an architectural structure or i
 \label{visibility-door-stair}
 \end{figure}
 
-
 \subsection{Alignment / Symmetry}
 The alignment attribute defines 
 
@@ -487,16 +486,16 @@ The alignment attribute defines
 
 
 \section{Architectural Concepts}
-Architectural concepts, such as privacy, continuity, and enclosure, describe an experiential aspect of architecture as used by an architect to describe the functionality of a design \cite{Koile}. These terms are defined, in DSpace, in a hierarchical manner in which architectural concepts are built using spatial qualities found in architecture (i.e. previous section) and geometric primitives (orientation, topology, distance). 
+Architectural concepts, such as privacy, continuity, and enclosure, describe an experiential aspect of architecture as used by an architect to describe the functionality of a design \cite{Koile}. These terms are defined, in DSpace, in a hierarchical manner in which architectural concepts are built using QSAs and geometric primitives (orientation, topology, distance). 
 
-This section presents four architectural concepts and demonstrates how each is defined in DSpace. As in the previous section, the purpose is not to investigate the correctness of the concepts or an attempt to look at a complete list of these concepts, rather it's to look at how these concepts cab be defined logically using architectural qualities and spatial / geometric primitives.
+This section presents four architectural concepts and demonstrates how each is defined in DSpace. As in the previous section, the purpose is not to investigate the correctness of the concepts or an attempt to compile a complete list, rather it's to look at how these concepts cab be defined logically using architectural qualities and spatial / geometric primitives.
 
 \subsection{Privacy}
 In architecture, the concept of privacy implies a notion of separation and obscurity (not being visible). In the case of a room, privacy can be defined as being separated from the main entrance of the building and having doorways which enhances the room's privacy. A doorway can be be defined as private with respect to its functionality of connecting two adjacent areas (rooms, hallways, etc.) together. Under this consideration, a doorway can enhance or hinder the privacy of a room. A doorway enhances privacy of a room if the doorway faces away from other local doorways (doorways in adjacent rooms) and if it is not visible from the main living space. 
 
 Within DSpace, the concepts of privacy has been formally defined for rooms and doorways. A door is private if it has the following attributes: (1) it is not visible from the main living space, (2) it does not mutually faces towards another doorway and (3) it does not face towards the centroid of an adjacent room. A room is private if it has the following attributes: (1) it is positioned on the opposing side of the building with regard to the main entrance and (2) all doorways into the room are private, per the doorway privacy definition.
  
-Privacy is represented in DSpace as a Prolog rule. The rule takes a single argument, in the head, which indicates the room or doorway that is being checked. The body of the rule is a conjunction of architectural qualities (from the previous section) that logically defines privacy per the definition outlined above. Note that there are two predicates, one for the definition of privacy for a room and one for privacy of a doorway.  
+Privacy is represented, in DSpace, as Prolog rules. The rules take a single argument, in the head, which indicates if the rule is for a room or doorway. The body of the rule is a conjunction of architectural qualities (from the previous section) that logically defines privacy per the definition outlined above. Note that there are two predicates, one for the definition of privacy for a room and one for privacy of a doorway.  
 
 \begin{verbatim}
    private(room) :-  
@@ -522,9 +521,9 @@ Figure \ref{room-privacy} shows two floor plans for a small single bedroom house
 
 
 \subsection{Continuity}
-The concept of continuity in architecture describes a network of points that are mutually visible \cite{Key}. In DSpace, continuity is interpreted in the context of building navigation and wayfinding. Under this interpretation, a building, room or apartment is continuous if there is continuity between the doorways contained in the given space: room, building, or apartment. 
+In architecture, the concept of continuity describes a network of points that are mutually visible \cite{Key}. In DSpace, continuity is interpreted in the context of building navigation and wayfinding. Under this interpretation, a building, room or apartment is continuous if there is continuity between the doorways contained in a given space: room, building, or apartment. 
 
-In DSpace, continuity is defined as a network of doorways that are mutually visible. The partitioning of doorways that should be mutually visible is based on a localized containment hierarchy between rooms and doorways, in which doorways that are contained in the same room should maintain continuity. It would not make sense for doorways that are located on opposite sides of a building to be visible to each other, but doorways that are in the same room should be. 
+Continuity is defined as a network of doorways that are mutually visible. The partitioning of doorways that should be mutually visible is based on a localized containment hierarchy between rooms and doorways, in which doorways that are contained in the same room should maintain continuity. It does not make sense for doorways that are located on opposite sides of a building to be visible to each other, but doorways that are in the same room should be. 
 
 With respect to this definition, continuity is represented as a recursive rule in Prolog, which takes a list of doorways and checks that each doorway is mutually visible to the others within the list. (need to mention doorways within a room). TBD: arguments: list of doors or room id that indicates containment level???
 
@@ -548,11 +547,11 @@ With respect to this definition, continuity is represented as a recursive rule i
 \label{continuity}
 \end{figure}
 
-Figure \ref{continuity} shows a floor plan for a single room with 3 doors. Figure \ref{fig:continuity-con} shows a configuration in which each door is mutually visible to the other doors. This design is continuous. Conversely, figure \ref{fig:continuity-incon} shows a configuration in which door 1 is not mutually visible to door 2 and door 1 is not mutually visible door 3. The visibility between door 1 and door 2 is obstructed by a column and the visibility between door 1 and door 3 is obstructed by a wall. Structural elements that are colored red indicated a visibility obstruction. This design is not continuous. 
+Figure \ref{continuity} shows a floor plan for a single room with three doors. Figure \ref{fig:continuity-con} shows a configuration in which each door is mutually visible to the other doors. This design is continuous. Conversely, figure \ref{fig:continuity-incon} shows a configuration in which door 1 is not mutually visible to door 2 and door 1 is not mutually visible door 3. The visibility between door 1 and door 2 is obstructed by a column and the visibility between door 1 and door 3 is obstructed by a wall. Structural elements that are colored red indicated a visibility obstruction. This design is not continuous. 
 
 
 \subsection{Enclosure} 
-In architecture the concept of enclosure defines a space, as experienced from a given vantage point, as being confined or open. A confined space is defined as being confined by walls or columns, while an open space is defined as being spacious. In DSpace, enclosure is defined by localized spatial structures in terms of their proximity to a given point. Under this interpretation, a room, apartment, or building can be experienced as both confined and open based on the location of the vantage point within the space. Such a definition takes into account that enclosure is locally experience. For example, an alcove in an otherwise open room, feels confined when experienced from inside the alcove.
+In architecture, the concept of enclosure defines a space, as experienced from a given vantage point, as being confined or open. A confined space is defined as being confined by walls or columns, while an open space is defined as being spacious. In DSpace, enclosure is defined by localized spatial structures in terms of their proximity to a given point. Under this interpretation, a room, apartment, or building can be experienced as both confined and open based on the location of the vantage point within the space. Such a definition takes into account that enclosure is locally experience. For example, an alcove in an otherwise open room, feels confined when experienced from inside the alcove.
 
 In Dspace, a point is defined as open if less then three walls or columns are near-to the point. Conversely, a point is defined as confined if three or more walls or columns are near-to the point. While this interpretation of enclosure is naive, it maintains the notion that proximity defines the spatial structures of openness and confinement in a localized environment.   
 
@@ -577,11 +576,11 @@ Figure \ref{enclosure} shows a floor plan for a single room with various enclosu
 Building regulations and codes are a special case in this section because they are not strictly architectural concepts. However, they provide a unique set of architectural requirements that incorporate a breadth of design aspects. This section will take a look at two such requirements: building surveillance and artefactual interference. These requirements were specifically picked because each incorporate artefactual aspects of the design problem. 
 
 \subsubsection{Artefactual Interference}
-Artefactual interference deals with the unintentional interactions of the operational and functional spaces of a building's structural form. For example, the operational space of a bathroom doorway that overlaps with the functional space of the bathroom sink will cause circulation problems into and out of the bathroom. In DSpace this type of interaction can be detected using topological reasoning over the artefactual extensions of the entities. 
+Artefactual interference deals with the unintentional interactions of the operational and functional spaces of a building's structural form. For example, the operational space of a bathroom doorway that overlaps with the functional space of the bathroom sink will cause circulation problems into and out of the bathroom. In DSpace, this type of interaction can be detected using topological reasoning over the artefactual extensions of the entities. 
 
 TBD: fig:sink example
 
-This type of artefactual interaction can be check for in DSpace using a single rule that takes two arguments in the head of the clause. The body of the clause retrieves the artefactual geometry of each element and checks the topological relationship, and fails if the artefacts have an overlapping relationship.
+This type of artefactual interaction can be check for in DSpace using a single rule that takes two arguments in the head of the rule. The body of the rule retrieves the artefactual geometry of each element and checks their topological relationship. It fails if the artefacts have an overlapping relationship.
 
 \begin{verbatim}
    bathroom_sink_door(sink, door) :- 
