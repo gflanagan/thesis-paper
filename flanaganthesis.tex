@@ -265,14 +265,14 @@ Examples with architectural elements in the DSpace reasoner
 \chapter{Conceptual Design Requirements}
 This chapter presents a hierarchical structure for architectural concepts and qualitative spatial attributes in architecture, demonstrates how each can be spatially interpreted in the context of formal qualitative spatial calculi, and used to validate design requirements in the computational framework of the Dspace reasoner. 
 
-The architectural concepts and spatial qualities presented here were ascertained from literature on architectural design \cite{tbd}, museum research on visitor behavior \cite{tbd}, and building regulations and codes \cite{tbd}. Their definitions are explicit characterizations of architectural concepts and qualities that are based on heuristic architectural knowledge, and common sense notions of spatial relationships. The objective is not an exhaustive discussion of the concepts and qualities or to validate their interpretation in terms of a spatial or design perspective, rather it is to demonstrate how each can be represent and reasoned with in a computational framework to validate conceptual design requirements against the quantitative structures and artefacts of the design. 
+The architectural concepts and spatial qualities presented here were ascertained from literature on architectural design \cite{tbd}, museum research on visitor behavior \cite{tbd}, and building regulations and codes \cite{tbd}. Their definitions are explicit characterizations of architectural concepts and qualities that are based on heuristic architectural knowledge and common sense notions of spatial relationships. The objective is not an exhaustive discussion on these concepts and qualities or a validation for their interpretation in terms of a spatial or design perspective, rather it is to demonstrate how each can be represent and reasoned with in a computational framework to validate conceptual design requirements against the quantitative structures and artefacts of a design. 
 
-The chapter is structured as follows. Section 1 describes the hierarchical structure of architectural concepts. Section 2 presents a set of qualitative spatial attributes found in architecture, shows how each can be interpreted using formal qualitative spatial calculi, and represented formally within DSpace reasoner. Section 3 presents a set of architectural concepts that are built using the spatial qualities presented in the section 2 and shows how they can be used to reason about design requirements within the DSpace reasoner. Section 4 presents use case scenarios of the DSpace reasoner to show how a user can use DSpace to validate a design per the it's design requirements.
+The chapter is structured as follows: Section 1 describes the hierarchical structure of conceptual design requirements. Section 2 presents a set of qualitative spatial attributes found in architecture, shows how each can be interpreted using formal qualitative spatial calculi, and represented formally within DSpace reasoner. Section 3 presents a set of architectural concepts that are built using the spatial qualities presented in the section 2 and shows how they can be used to reason about design requirements within the DSpace reasoner. Section 4 presents use case scenarios of the DSpace reasoner to show how a user can use DSpace to validate a design per the it's design requirements.
 
 \section{Hierarchy}
-Architectural concepts and qualitative spatial attributes are build on top of the physical / structural and artefactual geometries of the design in a hierarchical structure. Architectural concepts are defined by combining qualitative spatial attributes found in architecture via the logical operators of conjunction and disjunction. Defining an architectural concept is not limited to qualitative spatial attributes, spatial relationships of orientation, topology, and distance can be used, as well as other geometric primitives such as area, angle, and length measurements. Similarly, qualitative spatial attributes found in architecture are defined by qualitative spatial relationships of orientation, topology, and distance. 
+This design hierarchy developed here, is built on the discretion of the design problem into a design space, a quality space, and a quantity space. At the highest level, the design space involves the architectural design semantics (architectural concepts) and qualities (qualitative spatial attributes found in architecture) that emerge in architecture. At the lowest level, the quantitative space involves the precise geometries of the architectural structures found in the design. The middle layer, the qualitative space, mediates the two via qualitative spatial representations of orientation, topology, and distance.
 
-This design hierarchy developed here, is built on the discretion of the design problem into a design space, a quality space, and a quantity space. At the highest level, the design space involves the architectural design semantics and qualities that emerge in architecture. At the lowest level, the quantitative space involves the precise geometries of the architectural structures of the design. The middle layer, the qualitative space, mediates the two via qualitative spatial representations of orientation, topology, and distance.
+Architectural concepts and qualitative spatial attributes found in architecture are build on top of the physical / structural and artefactual geometries of a design in a hierarchical structure. Architectural concepts are defined by combining qualitative spatial attributes found in architecture via the logical operators of conjunction and disjunction. Defining an architectural concept is not limited to qualitative spatial attributes, spatial relationships of orientation, topology, and distance can be used, as well as other geometric primitives such as area, angle, and length measurements. Similarly, qualitative spatial attributes found in architecture are defined by qualitative spatial relationships of orientation, topology, and distance. 
    
 \begin{figure}[H]
 \centering
@@ -285,19 +285,12 @@ Figure \ref{hierarchy} shows the design hierarchy of the DSpace reasoner.
 
 
 \section{Qualitative Spatial Attributes in Architecture}
-This section presents a set of qualitative spatial attributes found in architecture and shows how each are spatially interpreted and represented in DSpace. These attributes are architectural qualities that are emerge from the spatial relationships and configurations between the physical structures of the building (doors, walls, columns, windows, etc.), artefactual extensions of the building (functional space, operational space, range space, etc.) and interior design elements (furniture, lights, decorations, etc.). Attributes can be perceptual - qualities that are described from a specific vantage point - or intrinsic - qualities that are inherent in the build's spatial structure. The goal of this section, is to develop a tool-kit of qualitative attributes that describe architectural designs in the spatial environments in which they emerge. Some boundary cases are identified and handled but it is not the purpose here to explore all possible case scenarios.
+This section presents a set of qualitative spatial attributes found in architecture (QSA) and shows how each QSA is spatially interpreted and represented in DSpace. QSAs are architectural qualities that emerge from the spatial structures that form between the physical elements of the building (doors, walls, columns, windows, etc.), artefactual extensions (functional space, operational space, range space, etc.) and interior design elements (furniture, lights, decorations, etc.). QSAs can be perceptual, qualities that are described from a specific vantage point, or intrinsic, qualities that are inherent in the build's spatial structure. 
+
+This section presents five QSAs: positioning, facing, visibility, proximity, and symmetry. The goal of this section is to develop a tool-kit of QSAs that qualitatively describe architectural designs in the spatial environments in which they emerge. Some boundary cases are identified and handled, but it is not the purpose here to explore all possible case scenarios.
 
 \subsection{Positioning}
-The positioning attribute defines an orientational relationship between a pair of objects as each object relate to the other, within an extrinsic context, i.e. a defined space such as a room, apartment, building, or user defined space. There are four positioning relationships using this scheme: opposing-side of space, same-side of space, left-side of space, and right-side of space. The opposing-side and same-side relationships can be combined, via conjunction, with the left-side or right-side relationships to form the following compound relationships: opposing-left-side, opposing-right-side, same-left-side, same-right-side.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=60mm]{scc}
-\caption{SCC Partitioning}
-\label{scc}
-\end{figure}
-
-The positioning attribute is interpreted spatially in DSpace using the Single Cross (SCC) orientation calculus \cite{Freksa92usingorientation}. SCC defines the orientation of a point C (referent) with respect to a point B (relatum) from the viewpoint of a point A (origin). The positioning attribute uses the SCC scheme to orientationally relate two points (origin, referent) in the context of an external frame of reference (relatum). In DSpace, the reference point is defined as the centroid of the context space. The assumption here is that the context space will be generally rectangular in shape.
+The positioning attribute defines an orientational relationship between a pair of objects as each object relates to the other within an extrinsic context, i.e. a defined space such as a room, apartment, building, or user defined space. There are four positioning relationships using this scheme: opposing-side of space, same-side of space, left-side of space, and right-side of space. The opposing-side and same-side relationships can be combined, via conjunction, with the left-side or right-side relationships to form the following compound relationships: opposing-left-side, opposing-right-side, same-left-side, same-right-side.
 
 \begin{figure}[H]
 \centering
@@ -306,10 +299,18 @@ The positioning attribute is interpreted spatially in DSpace using the Single Cr
 \label{position}
 \end{figure}
 
-Under this scheme, two points are define as being on opposing sides of a space if they have an SCC relationship of 0, 1 or 7, as related by the centroid of the space. Conversely, a pair of points are defined to be on the same side of a space if they have an SCC relationship of 3, 4 or 5, as related by the centroid of the  space. A point is on the left side of a space from another point if it has an SCC relationship of 1, 2, or 3, and is on the right side if it has an SCC relationship of 5, 6, or 7. 
+The positioning attribute is interpreted spatially, in DSpace, using the Single Cross (SCC) orientation calculus \cite{Freksa92usingorientation}. SCC defines the orientation of a point C (referent) with respect to a point B (relatum) from the viewpoint of a point A (origin). The positioning attribute uses the SCC partitioning scheme to orientationally relate two points (origin, referent) in the context of an external frame of reference (relatum). In DSpace, the reference point is defined as the centroid of the context space. The assumption here is that the context space will be generally rectangular in shape.
 
-Positioning is represented, in the DSpace reasoner, as Prolog rules. There is a single rule for opposing side, same-side, left-side, and right-side. The head of the rule takes three arguments, the first two for the architectural objects being compared and one for the context space. The body of the rule .... Given two objects and a context space, the rule returns true if the objects are on the same-side or opposing side as defined by the rule, and fails if they are not. The following is Prolog code for the positioning rules.
+\begin{figure}[H]
+\centering
+\includegraphics[width=60mm]{scc}
+\caption{SCC Partitioning}
+\label{scc}
+\end{figure}
 
+Under this scheme, two points are define as being on opposing sides of a space if they have an SCC relationship of 0, 1 or 7, as related by the centroid of the space. Conversely, a pair of points are defined as being on the same side of a space if they have an SCC relationship of 3, 4 or 5, as related by the centroid of the  space. A point is defined as being on the left side of a space from another point if it has an SCC relationship of 1, 2, or 3, and is on the right side if it has an SCC relationship of 5, 6, or 7. Using the union set operation these relationships can be combined to form the opposing-left/right, and same-left/right relationships.
+
+Th positioning relationships are represented, in DSpace, as Prolog rules. There is a single rule for each relationships: opposing side, same-side, left-side, and right-side. The head of each rule takes three arguments, the first two for the architectural objects being related and one for the context space. The body of the rule .... Given two objects and a context space, the rule returns true if the objects are on the same-side, opposing-side, left-side, right-side as defined by its' rule, and fails if they are not. The following is Prolog code for the positioning rules.
 
 \begin{verbatim}
    opposing_side(Obj1, Obj2, Context) :- 
@@ -339,7 +340,7 @@ The positioning attribute can be used to check if two architectural structure, a
 
 
 \subsection{Facing}
-The facing attribute defines an intrinsic orientational relationship between two objects as each relates to the other. The definition used here is based on a common sense interpretation of facing, in which an object \emph{A} is facing towards an object \emph{B}, if object \emph{B} is in front of object \emph{A} and object \emph{A} is directionally oriented at object \emph{B}. Under this definition, a pair of objects can be facing towards or away from each other. Given a pair of objects,\emph{A} and \emph{B}, there are four possible facing configurations between the pair: 
+The facing attribute defines an intrinsic orientational relationship between two objects as each object relates to the other. The definition used here is based on a common sense interpretation of facing, in which an object \emph{A} is facing towards an object \emph{B}, if \emph{B} is in front of \emph{A} and \emph{A} is directionally oriented at \emph{B}. Under this definition, a pair of objects can be facing towards or away from each other. Given a pair of objects, \emph{A} and \emph{B}, there are four possible facing configurations between the pair: 
 
 \begin{figure}[H]
  \centering
@@ -354,7 +355,9 @@ The facing attribute defines an intrinsic orientational relationship between two
 \label{display-arrangement}
 \end{figure}
 
-The facing attribute is spatially modelled in the DSpace reasoner using the Oriented Point Relation Algebra \cite{Moratz} (OPRA). The advantage of using OPRA is that it models the intrinsic orientational relationships between pairs of directed points. OPRA partitions space into half planes, which are defined by lines emanating outwards from the reference point, and defines the qualitative orientational relationships by the half plane in which a second point is located. Figure \ref{facing-opra-base-rel} shows the partitioning of space with labels for base relationships in OPRA$_{8}$. A second point is located in sector 6 of the partitioning scheme, so that the second point has an OPRA$_{8}$ 6 relationship with the point. Note that the arrow depicts the point's direction and the sectors are labelled starting in the point's direction and incrementing counter-clockwise. 
+The facing attribute is spatially modelled, in DSpace, using the Oriented Point Relation Algebra \cite{Moratz} (OPRA). The advantage of using OPRA is that it models the intrinsic orientational relationships between a pair of directed points. OPRA partitions space into half planes, which are defined by lines emanating outwards from the reference point, and defines the qualitative orientational relationships by the half plane in which a second point is located. The granularity of a OPRA relationships is defined by the number of lines emanating from the point. 
+
+Figure \ref{facing-opra-base-rel} shows the OPRA$_{2}$ (two lines) partitioning of space, with labels for the base relationships. Point \emph{A} is located in sector 7 of point \emph{B}'s partitioned space, and \emph{B} is located in sector 1 of \emph{A}'s partitioned space. Note that the arrow depicts the point's direction and the half-plane sectors are labelled starting at the point's direction and incrementing counter-clockwise. 
 
 \begin{figure}[H]
 \centering
@@ -363,7 +366,9 @@ The facing attribute is spatially modelled in the DSpace reasoner using the Orie
 \label{facing-opra-base-rel}
 \end{figure}
 
-Using OPRA$_{8}$, the facing attribute can be defined in terms of the half plane sectors. Point \emph{A} is facing towards point \emph{B}, if point \emph{B} is located in sectors 1, 2, or 32 of point \emph{A's} partitioned space. Similarly, if point \emph{A} is located in sectors 1, 2, or 32 of point \emph{B's} partitioned space then point \emph{B} is facing towards point \emph{A}. In this case points, both points are facing towards each other. Figure \ref{fig:facing-opra-towards} shows an example of two points facing towards each other; note that each point is located in sector 32 of the other's partitioned space. Conversely,  point \emph{A} is facing away from point \emph{B} if point \emph{B} is located in sectors 3 - 31 of point \emph{A's} partitioned space. Figure \ref{fig:facing-opra-away} shows an example of two points that are facing away from each other and are located in sectors 11 and 7. 
+Using OPRA$_{8}$, the facing attribute can be defined in terms of the half plane sectors. Point \emph{A} is facing towards point \emph{B}, if \emph{B} is located in sectors 0, 1, or 32 of \emph{A}'s partitioned space. Similarly, if \emph{A} is located in sectors 0, 1, or 32 of \emph{B}'s partitioned space then point \emph{B} is facing towards point \emph{A}. In this case points, both points are facing towards each other. Conversely, point \emph{A} is facing away from point \emph{B} if \emph{B} is located in sectors 2 - 31 of \emph{A's} partitioned space. TBD: explain why I use OPRA$_{8}$ and sector 0,1,32.
+
+Figure \ref{fig:facing-opra-towards} shows an example of two points facing towards each other; note that each point is located in sector 32 of the other's partitioned space.  Figure \ref{fig:facing-opra-away} shows an example of two points that are facing away from each other and are not located in sectors 0, 1, 32 of the others' partitioned space. 
 
 \begin{figure}[H]
  \centering
@@ -378,13 +383,13 @@ Using OPRA$_{8}$, the facing attribute can be defined in terms of the half plane
 \label{opra-facing}
 \end{figure}
 
-The facing attribute is represented, in the DSpace reasoner, as Prolog rules. There is a single rule for facing-towards and facing-away. The head of each rule takes two arguments for the objects being compared. The body of the rule is a disjunctive clause that checks for the OPRA$_{8}$ relationship between the objects. Given two objects, the rule returns true if the objects are facing towards or away from each other as defined by the rule, and fails if they are not. The following is Prolog code for the facing rules.
+The facing attribute is represented, in DSpace, as Prolog rules. There is one rule for facing-towards and one for facing-away. The head of each rule takes two arguments for the objects being related. The body of the rule is a single disjunctive clause that checks for the OPRA$_{8}$ relationship between the objects. Given two objects, the rule returns true if the objects are facing towards or away from each other as defined by the rule, and fails if they are not. The following is Prolog code for the facing rules.
 
 \begin{verbatim}
    facing_towards(Obj1, Obj2) :- 
-           (opra(Obj1, Obj2, 1) ;
-            opra(Obj1, Obj2, 2) ;
-            opra(Obj1, Obj2, 16)).
+           (opra(Obj1, Obj2, 0) ;
+            opra(Obj1, Obj2, 1) ;
+            opra(Obj1, Obj2, 32)).
                                  
    facing_away(Obj1, Obj2) :- 
            not facing_towards(Obj1, Obj2).                     
@@ -410,7 +415,7 @@ Within the context of architecture, care needs to be taken to account for archit
 fig: wall example
 
 \subsection{Proximity / Distance}
-The proximity attribute defines a qualitative distance relationship between two objects. In DSpace, there are two proximity relationships: near and far. The spatial interpretation of proximity depends on the context and scale in which the objects inhibit. In the context and scale of architectural space, proximity is defined using heuristics based on the scale of building elements, i.e. rooms, apartments, buildings.
+The proximity attribute defines a qualitative distance relationship between two objects. In DSpace, there are three proximity relationships: near, near+, and far. The spatial interpretation of proximity depends on the context and scale in which the objects inhibit. In the context and scale of architectural space, proximity is defined using heuristics based on the scale of building elements, i.e. rooms, apartments, buildings.
 
 \begin{figure}[H]
 \centering
@@ -419,9 +424,9 @@ The proximity attribute defines a qualitative distance relationship between two 
 \label{proximity}
 \end{figure}
 
-Using these heuristics, two objects are near if the minimum distance between them is less then or equal to 3 meters. Conversely, two objects are far if the minimum distance between them is greater then 3 meters. While the definition of proximity pivots around 3 meters, it can easily be change by using an extra parameter in a proximity predicate. 
+Using these heuristics, two objects are near if the minimum distance between them is less then or equal to 3 meters, near+ if the minimum distance between then is between 3 - 6 meters, and far if the minimum distance between them is greater then 3 meters. While the definition of proximity pivots around 3 and 6 meters, it can easily be change by using an extra parameter in a proximity predicate. 
 
-Proximity is represented, in the DSpace reasoner, as two Prolog rules. There is one rule for near and one for far. The head of the rule takes two arguments for the architectural objects being compared. The body of the rule .... Given two objects, the rule returns true if the objects are near or far from each other as defined by the rule, and fails if they are not. The following is Prolog code for the proximity rules.
+Proximity is represented, in DSpace, as three Prolog rules. There is one rule for near and one for far. The head of the rule takes two arguments for the architectural objects being compared. The body of the rule .... Given two objects, the rule returns true if the objects are near or far from each other as defined by the rule, and fails if they are not. The following is Prolog code for the proximity rules.
 
 \begin{verbatim}
    near(Obj1, Obj2) :- 
