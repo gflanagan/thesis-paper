@@ -297,7 +297,7 @@ The positioning attribute defines an orientational relationship between a pair o
 \label{position}
 \end{figure}
 
-The positioning attribute is interpreted spatially, in DSpace, using the Single Cross (SCC) orientation calculus \cite{Freksa92usingorientation}. SCC defines the orientation of a point C (referent) with respect to a point B (relatum) from the viewpoint of a point A (origin). The positioning attribute uses the SCC partitioning scheme to orientationally relate two points (origin, referent) in the context of an external frame of reference (relatum). In DSpace, the reference point is defined as the centroid of the context space. By partitioning space using the centroid an approximation is made that partitions the space into the positioning relationships. The assumption here is that the context space will be generally rectangular in shape.
+The positioning attribute is interpreted spatially, in DSpace, using the Single Cross (SCC) orientation calculus \cite{Freksa92usingorientation}. SCC defines the orientation of a point C (referent) with respect to a point B (relatum) from the viewpoint of a point A (origin). The positioning attribute uses the SCC partitioning scheme to orientationally relate two points (origin, referent) in the context of an external frame of reference (relatum). In DSpace, the reference point is defined as the centroid of the context space. By partitioning space using the centroid, an approximation is made that divides the space into the positioning relationships. An assumption made in DSpace is that the space will generally be rectangular in shape.
 
 \begin{figure}[H]
 \centering
@@ -327,7 +327,7 @@ Th positioning relationships are represented, in DSpace, as Prolog rules. There 
 
 \end{verbatim}
 
-The positioning attribute can be used to check if two architectural structure, artefactual extensions, or interior design elements are on the opposing or same side of a space to the other. For example, a requirement might state that a bedroom should be positioned to the back of a house from the main entrance. The reason for this requirement is that rooms that are in the back of a house are more private than rooms in the front of the house. In this requirement, the origin is the entrance, the referent is the bedroom, and the relatum is the centroid of the house (context space).
+The positioning attribute can be used to check if architectural structures, artefactual extensions, or interior design elements are on the opposing or same side of a space to the other. For example, a requirement might state that a bedroom should be positioned to the back of a house from the main entrance. The reason for this requirement is that rooms that are in the back of a house are more private than rooms in the front of the house. In this requirement, the origin is the entrance, the referent is the bedroom, and the relatum is the centroid of the house (context space).
 
 \begin{figure}[H]
  \centering
@@ -364,7 +364,7 @@ Figure \ref{facing-opra-base-rel} shows the OPRA$_{2}$ (two lines) partitioning 
 \label{facing-opra-base-rel}
 \end{figure}
 
-Using OPRA$_{8}$, the facing attribute can be defined in terms of the half plane sectors. Point \emph{A} is facing towards point \emph{B}, if \emph{B} is located in sectors 0, 1, or 32 of \emph{A}'s partitioned space. Similarly, if \emph{A} is located in sectors 0, 1, or 32 of \emph{B}'s partitioned space then point \emph{B} is facing towards point \emph{A}. In this case points, both points are facing towards each other. Conversely, point \emph{A} is facing away from point \emph{B} if \emph{B} is located in sectors 2 - 31 of \emph{A's} partitioned space. TBD: explain why I use OPRA$_{8}$ and sector 0,1,32.
+Using OPRA$_{8}$, the facing attribute can be defined in terms of the half plane sectors. Point \emph{A} is facing towards point \emph{B}, if \emph{B} is located in sectors 0, 1, or 32 of \emph{A}'s partitioned space. Similarly, if \emph{A} is located in sectors 0, 1, or 32 of \emph{B}'s partitioned space then \emph{B} is facing towards \emph{A}. In this case points, both points are facing towards each other. Conversely, point \emph{A} is facing away from point \emph{B} if \emph{B} is located in sectors 2 - 31 of \emph{A's} partitioned space. An OPRA 8 granularity is used to define a narrow interpretation of the facing attribute. Within a room doorways, windows, and walls are generally face towards each other. By narrowing the space that is considered facing towards, it allows DSpace to detect elements that are more directly facing towards each other.
 
 Figure \ref{fig:facing-opra-towards} shows an example of two points facing towards each other; note that each point is located in sector 32 of the other's partitioned space.  Figure \ref{fig:facing-opra-away} shows an example of two points that are facing away from each other and are not located in sectors 0, 1, 32 of the others' partitioned space. 
 
@@ -393,11 +393,7 @@ The facing attribute is represented, in DSpace, as Prolog rules. There is one ru
            not facing_towards(Obj1, Obj2).                     
 \end{verbatim}
 
-In DSpace, the facing attribute can be used to check if two architectural structures, artefactual extensions, or interior design elements are facing towards or away from each other. For example, doorways and windows that face towards each other promote airflow through the space in which that they inhibit. A design that requires good air circulation could use this knowledge to ensure proper airflow. Figure \ref{door-window-facing} shows and example floor plan of a room with a window and doorway which face each other. 
-
-Additionally, the facing attribute can be used to build requirements between interior design element, such as desks, chairs, and beds as they related to windows, and doorways and other interior design elements. For example, an interior design requirement might be that a computer desk should not face towards a window, in order to reduce glare on the computer screen from direct sunlight. 
-
-TBD: example: operational space of information kiosk should face towards the entrance.
+In DSpace, the facing attribute can be used to check if two architectural structures, artefactual extensions, or interior design elements are facing towards or away from each other. For example, doorways and windows that face towards each other promote airflow through the space in which that they inhibit. A design that requires good air circulation could use this knowledge to ensure proper airflow. Figure \ref{door-window-facing} shows two example floor plans of a room with a window and doorway. Figure \ref{fig:door-window-towards} shows a configuration were the doorway and window are facing towards each other, while figure \ref{fig:door-window-away} shows a configuration were the doorway and window are facing away from each other. 
 
 \begin{figure}[H]
  \centering
@@ -407,6 +403,8 @@ TBD: example: operational space of information kiosk should face towards the ent
  \caption{Door, Window Facing}
 \label{door-window-facing}
 \end{figure}
+
+TBD: example, operational space of information kiosk should face towards the entrance.
 
 Within the context of architecture, care needs to be taken to account for architectural structures that are long in one axis, such as walls, because the spatial abstraction for OPRA is a directed point. This means that an object is defined as facing towards a wall if it is facing towards the wall's directed point abstraction (usually the centroid of the wall). Under this definition, there are configurations where an object should be considered to be facing a wall but it is not. DSpace handles this special case by modifying the OPRA$_{8}$ relationships that correspond to facing towards and away from a wall. 
 
@@ -493,7 +491,7 @@ In architecture, the concept of privacy implies a notion of separation and obscu
 
 Within DSpace, the concepts of privacy has been formally defined for rooms and doorways. A door is private if it has the following attributes: (1) it is not visible from the main living space, (2) it does not mutually faces towards another doorway and (3) it does not face towards the centroid of an adjacent room. A room is private if it has the following attributes: (1) it is positioned on the opposing side of the building with regard to the main entrance and (2) all doorways into the room are private, per the doorway privacy definition.
  
-Privacy is represented, in DSpace, as Prolog rules. The rules take a single argument, in the head, which indicates if the rule is for a room or doorway. The body of the rule is a conjunction of architectural qualities (from the previous section) that logically defines privacy per the definition outlined above. Note that there are two predicates, one for the definition of privacy for a room and one for privacy of a doorway.  
+Privacy is represented, in DSpace, as Prolog rules. The rules take a single argument, in the head, which indicates if the rule is for a room or doorway. The body of the rule is defines the properties of the privacy using QSAs, as defined above. Note that there are two predicates, one for the definition of privacy for a room and one for privacy of a doorway.  
 
 \begin{verbatim}
    private(room) :-  
