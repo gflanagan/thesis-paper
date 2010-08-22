@@ -12,7 +12,9 @@ XSI = '{http://www.w3.org/2001/XMLSchema-instance}'
 def main(argv):
     import_dspace(argv[1])
 
-
+def create_filename(name):
+    file_name = name.split('.')
+    return file_name[0]+'.pl'
  
 # parse the dspace schema 
 def import_dspace(dspace_schema):
@@ -22,7 +24,8 @@ def import_dspace(dspace_schema):
     iterator = tree.findall('DsProduct')
     for element in iterator:
         dsProductList.append(parse_DsProduct(element))
-    generate_pl_file(dsProductList)
+    pl_output_file = create_filename(dspace_schema)
+    generate_pl_file(dsProductList, pl_output_file)
 
 def parse_DsProduct(element):
     global XSI
@@ -45,12 +48,21 @@ def get_representation(element):
 
 
 # generate the prolog code for dspace schema
-def generate_pl_file(dsProductList):
-    with open('test_file.pl', 'w') as pl_file:
-	write_header(pl_file)
+def generate_pl_file(dsProductList, file_name):
+    with open(file_name, 'w') as pl_file:
+	#write_header(pl_file)
 	write_type(pl_file, dsProductList)
      	write_ifc_geometry(pl_file, dsProductList)
     pl_file.close()
+    with open('../dspace_include.pl', 'w') as include_file:
+        write_include(include_file, file_name)
+    include_file.close()
+
+def write_include(include_file, pl_name):
+    include_file.write(':-consult(\'./space/spatial_reasoner\').\n')
+    include_file.write(':-consult(\'./design/architecture\').\n')
+    include_file.write(':-consult(\'./design/design_repository\').\n')
+    include_file.write(':-consult(\'./parser/'+pl_name.split('.')[0]+'\').\n')
 
 def write_ifc_geometry(pl_file, dsProductList):
     for dsProduct in dsProductList:
