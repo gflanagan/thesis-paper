@@ -416,7 +416,7 @@ The proximity attribute defines a qualitative distance relationship between two 
 \begin{figure}[H]
 \centering
 \includegraphics[width=45mm]{proximity}
-\caption{proximity}
+\caption{Proximity}
 \label{proximity}
 \end{figure}
 
@@ -453,10 +453,14 @@ The spatial interpretation of visibility is based on the topological characteris
 
 \begin{figure}[H]
  \centering
- \includegraphics[width=55mm]{visibility}
+ \subfloat[obstructed view]{\label{fig:obstructed-view}\includegraphics[width=55mm]{visibility}}
+  \hspace{10 mm}
+ \subfloat[non-obstructed view]{\label{fig:no-obstruction}\includegraphics[width=55mm]{visibility-no-obstruction}}
  \caption{Visibility}
-\label{visibility}
+\label{Visibility}
 \end{figure}
+
+
 
 Visibility is represented, in DSpace, as a single Prolog rule. The head of the rule takes two arguments, the viewpoint and the object that is being check for visibility. The body of the clause calculates the view-space and checks the surrounding objects for a topological obstruction. Given a viewpoint and an object, the rule returns true if the object is visible, and fails if it is not. The following is the Prolog code for the visibility rule.
 
@@ -476,10 +480,12 @@ The visibility attribute can be used to check if an architectural structure or i
 \end{figure}
 
 \subsection{Alignment / Symmetry}
-The alignment attribute defines 
+
+TBD: I have a loose idea about this property but the idea needs more development
 
 \subsection{Pathways / Turns}  right turn (hard) / left turn (hard) / straight 
 
+TBD: I have a loose idea about this property but the idea needs more development
 
 \section{Architectural Concepts}
 Architectural concepts, such as privacy, continuity, and enclosure, describe an experiential aspect of architecture as used by an architect to describe the functionality of a design \cite{Koile}. These terms are defined, in DSpace, in a hierarchical manner in which architectural concepts are built using QSAs and geometric primitives (orientation, topology, distance). 
@@ -504,6 +510,8 @@ Privacy is represented, in DSpace, as Prolog rules. The rules take a single argu
            not_visible(door, main_living_space). 
 \end{verbatim}
 
+Figure \ref{room-privacy} shows two floor plans for a small single bedroom house; figure \ref{fig:private-room-con} shows a floor plan with a bedroom that is  private, while figure \ref{fig:private-room-incon} shows a similar floor plan with a bedroom that is not private. The numbers in the figures represent the following privacy requirements: (1) the bedroom is positioned on the opposing side of the building with regards to the main entrance, (2) the doorway is not visible from the main living space, and (3) the doorway is does not mutually face towards another doorway. Numbers that are colored red indicate that the requirement has been broken, while numbers in green indicate that the requirement has been met.
+
 \begin{figure}[H]
  \centering
  \subfloat[Private]{\label{fig:private-room-con}\includegraphics[width=69mm]{privacy-room-con}}
@@ -512,9 +520,6 @@ Privacy is represented, in DSpace, as Prolog rules. The rules take a single argu
  \caption{Bedroom Privacy}
 \label{room-privacy}
 \end{figure}
-
-Figure \ref{room-privacy} shows two floor plans for a small single bedroom house; figure \ref{fig:private-room-con} shows a floor plan with a bedroom that is  private, while figure \ref{fig:private-room-incon} shows a similar floor plan with a bedroom that is not private. The numbers in the figures represent the following privacy requirements: (1) the bedroom is positioned on the opposing side of the building with regards to the main entrance, (2) the doorway is not visible from the main living space, and (3) the doorway is does not mutually face towards another doorway. Numbers that are colored red indicate that the requirement has been broken, while numbers in green indicate that the requirement has been met.
-
 
 \subsection{Continuity}
 In architecture, the concept of continuity describes a network of points that are mutually visible \cite{Key}. In DSpace, continuity is interpreted in the context of building navigation and wayfinding. Under this interpretation, a building, room or apartment is continuous if there is continuity between the doorways contained in a given space: room, building, or apartment. 
@@ -534,6 +539,8 @@ With respect to this definition, continuity is represented as a recursive rule i
            continuity([Obj2|OS]).
 \end{verbatim}
 
+Figure \ref{continuity} shows a floor plan for a single room with three doors. Figure \ref{fig:continuity-con} shows a configuration in which each door is mutually visible to the other doors. This design is continuous. Conversely, figure \ref{fig:continuity-incon} shows a configuration in which door 1 is not mutually visible to door 2 and door 1 is not mutually visible door 3. The visibility between door 1 and door 2 is obstructed by a column and the visibility between door 1 and door 3 is obstructed by a wall. Structural elements that are colored red indicated a visibility obstruction. This design is not continuous. 
+
 \begin{figure}[H]
  \centering
  \subfloat[Consistent]{\label{fig:continuity-con}\includegraphics[width=45mm]{continuity-con}}
@@ -542,9 +549,6 @@ With respect to this definition, continuity is represented as a recursive rule i
  \caption{Continuity}
 \label{continuity}
 \end{figure}
-
-Figure \ref{continuity} shows a floor plan for a single room with three doors. Figure \ref{fig:continuity-con} shows a configuration in which each door is mutually visible to the other doors. This design is continuous. Conversely, figure \ref{fig:continuity-incon} shows a configuration in which door 1 is not mutually visible to door 2 and door 1 is not mutually visible door 3. The visibility between door 1 and door 2 is obstructed by a column and the visibility between door 1 and door 3 is obstructed by a wall. Structural elements that are colored red indicated a visibility obstruction. This design is not continuous. 
-
 
 \subsection{Enclosure} 
 In architecture, the concept of enclosure defines a space, as experienced from a given vantage point, as being confined or open. A confined space is defined as being confined by walls or columns, while an open space is defined as being spacious. In DSpace, enclosure is defined by localized spatial structures in terms of their proximity to a given point. Under this interpretation, a room, apartment, or building can be experienced as both confined and open based on the location of the vantage point within the space. Such a definition takes into account that enclosure is locally experience. For example, an alcove in an otherwise open room, feels confined when experienced from inside the alcove.
@@ -604,6 +608,8 @@ TBD: figure of stair landing
 Surveillance involves the placement of cameras within a building to provide security. A well functioning surveillance system has specific spatial properties with regard to the placement of the cameras to the structures they survey. For example, a surveillance system could monitor activity at doorways. In this situation the spatial relationships between the camera, it's range space (i.e. the camera's surveillance area) and the doorways are important. Such a requirement could be expressed as the functional space of every doorway should overlap with the range space of at least one camera. 
 
 \section{Using The DSpace Reasoner}
+
+This section will describe how to use the DSpace reasoner from a practical perspective....
 
 \chapter{Museum Case Study}
 This chapter is a case study that demonstrates the application of the DSpace reasoner to the design of an art museum. The purpose is twofold: first, to examine several design requirements of an art museum with regards to the spatial interpretation of the requirements; and second, to show how the museum design requirements can be represented and reasoned about in a computational framework, in order to detect design inconsistencies as per the design requirements.
