@@ -11,26 +11,22 @@
 % possitioning rules
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 opposing_side(Id1, Id2, Id_Space) :- 
-    perspective(Id_space, extended_region, GeoSpace),
+    perspective(Id_Space, extended_region, GeoSpace),
     perspective(Id1, point, Pt1),
     perspective(Id2, point, Pt2),
     centroid(GeoSpace, Centroid),
-    scc1(Pt1, Pt2, Centroid). 
-    % scc0(Pt1, Pt2, Centroid) ;
-    % scc1(Pt1, Pt2, Centroid) ;
-    % scc7(Pt1, Pt2, Centroid)).
+    (scc0(Pt1, Pt2, Centroid) ;
+     scc1(Pt1, Pt2, Centroid) ;
+     scc7(Pt1, Pt2, Centroid)).
 
 same_side(Id1, Id2, Id_Space) :- 
-    perspective(Id_space, extended_region, GeoSpace),
+    perspective(Id_Space, extended_region, GeoSpace),
     perspective(Id1, point, Pt1),
     perspective(Id2, point, Pt2),
     centroid(GeoSpace, Centroid),
-    print('1 '), print(Pt1), nl, print('2 '), print(Pt2), nl,
-    print('rm '), print(Centroid), nl,
-    scc3(Pt1, Pt2, Centroid).
-    %(scc3(Pt1, Pt2, Centroid) ;
-    % scc4(Pt1, Pt2, Centroid) ;
-    % scc5(Pt1, Pt2, Centroid)).
+    (scc3(Pt1, Pt2, Centroid) ;
+     scc4(Pt1, Pt2, Centroid) ;
+     scc5(Pt1, Pt2, Centroid)).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
