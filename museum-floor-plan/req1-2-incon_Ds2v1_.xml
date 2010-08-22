@@ -1,0 +1,778 @@
+<designFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <DsProject globalId="0iUfBiwZIgJgQvjrHOlDyu" name="Default Project" description="" />
+    <DsProduct globalId="3UcDt2E5uXJO4hM1dqbB7q" name="FU - 010" description="" xsi:type="NarrowDisplayCase">
+        <objectPlacement>
+            <relativePlacement x="4.3" y="11.59" />
+            <refDirection x="0" y="-1" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="0" y="0" />
+                <point x="0" y="1.11" />
+                <point x="1.11" y="0.555" />
+                <point x="1.08284" y="0.383496" />
+                <point x="0.641821" y="0.00683297" />
+                <point x="0" y="0" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="4.3" y="11.59" />
+                <point x="5.41" y="11.59" />
+                <point x="4.855" y="10.48" />
+                <point x="4.6835" y="10.5072" />
+                <point x="4.30683" y="10.9482" />
+                <point x="4.3" y="11.59" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="3OdD8VcD$iHwx6l5Wg9Fe1" name="FU - 024" description="" xsi:type="NarrowDisplayCase">
+        <objectPlacement>
+            <relativePlacement x="27.41" y="10.46" />
+            <refDirection x="0" y="-1" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="0" y="0" />
+                <point x="0" y="1.11" />
+                <point x="1.11" y="0.555" />
+                <point x="1.08284" y="0.383496" />
+                <point x="0.641821" y="0.00683297" />
+                <point x="0" y="0" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="27.41" y="10.46" />
+                <point x="28.52" y="10.46" />
+                <point x="27.965" y="9.35" />
+                <point x="27.7935" y="9.37716" />
+                <point x="27.4168" y="9.81818" />
+                <point x="27.41" y="10.46" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="18GwN7PhNfIeNaHYpFI1KU" name="FU - 016" description="" xsi:type="NarrowDisplayCase">
+        <objectPlacement>
+            <relativePlacement x="0.9" y="9.37" />
+            <refDirection x="1" y="0" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="0" y="0" />
+                <point x="0" y="1.11" />
+                <point x="1.11" y="0.555" />
+                <point x="1.08284" y="0.383496" />
+                <point x="0.641821" y="0.00683297" />
+                <point x="0" y="0" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="0.9" y="9.37" />
+                <point x="0.9" y="10.48" />
+                <point x="2.01" y="9.925" />
+                <point x="1.98284" y="9.7535" />
+                <point x="1.54182" y="9.37683" />
+                <point x="0.9" y="9.37" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="1UZzuOqde7IgkEFqeQ6u8H" name="FU - 023" description="" xsi:type="NarrowDisplayCase">
+        <objectPlacement>
+            <relativePlacement x="25.73" y="10.46" />
+            <refDirection x="0" y="-1" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="0" y="0" />
+                <point x="0" y="1.11" />
+                <point x="1.11" y="0.555" />
+                <point x="1.08284" y="0.383496" />
+                <point x="0.641821" y="0.00683297" />
+                <point x="0" y="0" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="25.73" y="10.46" />
+                <point x="26.84" y="10.46" />
+                <point x="26.285" y="9.35" />
+                <point x="26.1135" y="9.37716" />
+                <point x="25.7368" y="9.81818" />
+                <point x="25.73" y="10.46" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="1eBAw86pbSHQtVYZVmjLWl" name="FU - 022" description="" xsi:type="NarrowDisplayCase">
+        <objectPlacement>
+            <relativePlacement x="24.04" y="10.46" />
+            <refDirection x="0" y="-1" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="0" y="0" />
+                <point x="0" y="1.11" />
+                <point x="1.11" y="0.555" />
+                <point x="1.08284" y="0.383496" />
+                <point x="0.641821" y="0.00683297" />
+                <point x="0" y="0" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="24.04" y="10.46" />
+                <point x="25.15" y="10.46" />
+                <point x="24.595" y="9.35" />
+                <point x="24.4235" y="9.37716" />
+                <point x="24.0468" y="9.81818" />
+                <point x="24.04" y="10.46" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="3PBlC_RDTrHPIDimiQA6ao" name="FU - 019" description="" xsi:type="NarrowDisplayCase">
+        <objectPlacement>
+            <relativePlacement x="9.97" y="11.59" />
+            <refDirection x="0" y="-1" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="0" y="0" />
+                <point x="0" y="1.11" />
+                <point x="1.11" y="0.555" />
+                <point x="1.08284" y="0.383496" />
+                <point x="0.641821" y="0.00683297" />
+                <point x="0" y="0" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="9.97" y="11.59" />
+                <point x="11.08" y="11.59" />
+                <point x="10.525" y="10.48" />
+                <point x="10.3535" y="10.5072" />
+                <point x="9.97683" y="10.9482" />
+                <point x="9.97" y="11.59" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="1854Ap5AofIOX0cRMfLep1" name="FU - 020" description="" xsi:type="NarrowDisplayCase">
+        <objectPlacement>
+            <relativePlacement x="14.44" y="11.5831" />
+            <refDirection x="0.00621853" y="-0.999981" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="0" y="0" />
+                <point x="0" y="1.11" />
+                <point x="1.11" y="0.555" />
+                <point x="1.08284" y="0.383496" />
+                <point x="0.641821" y="0.00683297" />
+                <point x="0" y="0" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="14.44" y="11.5831" />
+                <point x="15.55" y="11.59" />
+                <point x="15.0019" y="10.4766" />
+                <point x="14.8302" y="10.5027" />
+                <point x="14.4508" y="10.9413" />
+                <point x="14.44" y="11.5831" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="0SgsfCd8F5GPEilwoWTeLp" name="FU - 021" description="" xsi:type="NarrowDisplayCase">
+        <objectPlacement>
+            <relativePlacement x="20.11" y="11.59" />
+            <refDirection x="0" y="-1" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="0" y="0" />
+                <point x="0" y="1.11" />
+                <point x="1.11" y="0.555" />
+                <point x="1.08284" y="0.383496" />
+                <point x="0.641821" y="0.00683297" />
+                <point x="0" y="0" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="20.11" y="11.59" />
+                <point x="21.22" y="11.59" />
+                <point x="20.665" y="10.48" />
+                <point x="20.4935" y="10.5072" />
+                <point x="20.1168" y="10.9482" />
+                <point x="20.11" y="11.59" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="1Hn3YtcUc5GAlEURyxazuz" name="FU - 025" description="" xsi:type="NarrowDisplayCase">
+        <objectPlacement>
+            <relativePlacement x="28.52" y="2.01" />
+            <refDirection x="0" y="1" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="0" y="0" />
+                <point x="0" y="1.11" />
+                <point x="1.11" y="0.555" />
+                <point x="1.08284" y="0.383496" />
+                <point x="0.641821" y="0.00683297" />
+                <point x="0" y="0" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="28.52" y="2.01" />
+                <point x="27.41" y="2.01" />
+                <point x="27.965" y="3.12" />
+                <point x="28.1365" y="3.09284" />
+                <point x="28.5132" y="2.65182" />
+                <point x="28.52" y="2.01" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="06Zz$3NaWLGB_F$AnpfGJ_" name="FU - 026" description="" xsi:type="NarrowDisplayCase">
+        <objectPlacement>
+            <relativePlacement x="26.84" y="2.01" />
+            <refDirection x="0" y="1" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="0" y="0" />
+                <point x="0" y="1.11" />
+                <point x="1.11" y="0.555" />
+                <point x="1.08284" y="0.383496" />
+                <point x="0.641821" y="0.00683297" />
+                <point x="0" y="0" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="26.84" y="2.01" />
+                <point x="25.73" y="2.01" />
+                <point x="26.285" y="3.12" />
+                <point x="26.4565" y="3.09284" />
+                <point x="26.8332" y="2.65182" />
+                <point x="26.84" y="2.01" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="0hy8dmBcDhIf5VfOU2ZBct" name="FU - 027" description="" xsi:type="NarrowDisplayCase">
+        <objectPlacement>
+            <relativePlacement x="25.15" y="2.01" />
+            <refDirection x="0" y="1" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="0" y="0" />
+                <point x="0" y="1.11" />
+                <point x="1.11" y="0.555" />
+                <point x="1.08284" y="0.383496" />
+                <point x="0.641821" y="0.00683297" />
+                <point x="0" y="0" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="25.15" y="2.01" />
+                <point x="24.04" y="2.01" />
+                <point x="24.595" y="3.12" />
+                <point x="24.7665" y="3.09284" />
+                <point x="25.1432" y="2.65182" />
+                <point x="25.15" y="2.01" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="2rHkAjtwEfIR$x3nWKYnSD" name="FU - 028" description="" xsi:type="NarrowDisplayCase">
+        <objectPlacement>
+            <relativePlacement x="21.22" y="0.87" />
+            <refDirection x="0" y="1" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="0" y="0" />
+                <point x="0" y="1.11" />
+                <point x="1.11" y="0.555" />
+                <point x="1.08284" y="0.383496" />
+                <point x="0.641821" y="0.00683297" />
+                <point x="0" y="0" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="21.22" y="0.87" />
+                <point x="20.11" y="0.87" />
+                <point x="20.665" y="1.98" />
+                <point x="20.8365" y="1.95284" />
+                <point x="21.2132" y="1.51182" />
+                <point x="21.22" y="0.87" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="0QtJrRsvT7JeZIZnTZdWqv" name="FU - 029" description="" xsi:type="NarrowDisplayCase">
+        <objectPlacement>
+            <relativePlacement x="15.55" y="0.87" />
+            <refDirection x="0" y="1" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="0" y="0" />
+                <point x="0" y="1.11" />
+                <point x="1.11" y="0.555" />
+                <point x="1.08284" y="0.383496" />
+                <point x="0.641821" y="0.00683297" />
+                <point x="0" y="0" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="15.55" y="0.87" />
+                <point x="14.44" y="0.87" />
+                <point x="14.995" y="1.98" />
+                <point x="15.1665" y="1.95284" />
+                <point x="15.5432" y="1.51182" />
+                <point x="15.55" y="0.87" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="2wpztzZIkbGQ82pmqS7bLg" name="FU - 011" description="" xsi:type="WideDisplayCase">
+        <objectPlacement>
+            <relativePlacement x="19.5418" y="11.7108" />
+            <refDirection x="-0.999996" y="0.00294072" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="-9.35262e-08" y="0.554313" />
+                <point x="0.675475" y="1.03639" />
+                <point x="3.20625" y="1.0022" />
+                <point x="3.35624" y="0.74567" />
+                <point x="3.39" y="0.549528" />
+                <point x="3.30262" y="0.215145" />
+                <point x="3.18682" y="0.0950178" />
+                <point x="1.02314" y="2.46977e-07" />
+                <point x="0.257845" y="0.313268" />
+                <point x="0.202366" y="0.563436" />
+                <point x="-9.35262e-08" y="0.554313" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="19.5402" y="11.1565" />
+                <point x="18.8633" y="10.6764" />
+                <point x="16.3326" y="10.718" />
+                <point x="16.1834" y="10.975" />
+                <point x="16.1502" y="11.1712" />
+                <point x="16.2386" y="11.5054" />
+                <point x="16.3547" y="11.6251" />
+                <point x="18.5187" y="11.7138" />
+                <point x="19.283" y="11.3983" />
+                <point x="19.3378" y="11.148" />
+                <point x="19.5402" y="11.1565" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="0uacZTA$s2HAt7KS_VGG_g" name="FU - 009" description="" xsi:type="WideDisplayCase">
+        <objectPlacement>
+            <relativePlacement x="16.15" y="0.87" />
+            <refDirection x="1" y="0" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="-9.35262e-08" y="0.554313" />
+                <point x="0.675475" y="1.03639" />
+                <point x="3.20625" y="1.0022" />
+                <point x="3.35624" y="0.74567" />
+                <point x="3.39" y="0.549528" />
+                <point x="3.30262" y="0.215145" />
+                <point x="3.18682" y="0.0950178" />
+                <point x="1.02314" y="2.46977e-07" />
+                <point x="0.257845" y="0.313268" />
+                <point x="0.202366" y="0.563436" />
+                <point x="-9.35262e-08" y="0.554313" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="16.15" y="1.42431" />
+                <point x="16.8255" y="1.90639" />
+                <point x="19.3563" y="1.8722" />
+                <point x="19.5062" y="1.61567" />
+                <point x="19.54" y="1.41953" />
+                <point x="19.4526" y="1.08514" />
+                <point x="19.3368" y="0.965018" />
+                <point x="17.1731" y="0.87" />
+                <point x="16.4078" y="1.18327" />
+                <point x="16.3524" y="1.43344" />
+                <point x="16.15" y="1.42431" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="25RTFpkf9sGQDWUN9TnhBe" name="FU - 008" description="" xsi:type="WideDisplayCase">
+        <objectPlacement>
+            <relativePlacement x="5.41" y="0.87" />
+            <refDirection x="1" y="0" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="-9.35262e-08" y="0.554313" />
+                <point x="0.675475" y="1.03639" />
+                <point x="3.20625" y="1.0022" />
+                <point x="3.35624" y="0.74567" />
+                <point x="3.39" y="0.549528" />
+                <point x="3.30262" y="0.215145" />
+                <point x="3.18682" y="0.0950178" />
+                <point x="1.02314" y="2.46977e-07" />
+                <point x="0.257845" y="0.313268" />
+                <point x="0.202366" y="0.563436" />
+                <point x="-9.35262e-08" y="0.554313" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="5.41" y="1.42431" />
+                <point x="6.08548" y="1.90639" />
+                <point x="8.61625" y="1.8722" />
+                <point x="8.76625" y="1.61567" />
+                <point x="8.8" y="1.41953" />
+                <point x="8.71262" y="1.08514" />
+                <point x="8.59682" y="0.965018" />
+                <point x="6.43314" y="0.87" />
+                <point x="5.66785" y="1.18327" />
+                <point x="5.61237" y="1.43344" />
+                <point x="5.41" y="1.42431" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="3EQx8p2MnDIh3Gym92LZDg" name="FU - 007" description="" xsi:type="WideDisplayCase">
+        <objectPlacement>
+            <relativePlacement x="1.47" y="0.87" />
+            <refDirection x="1" y="0" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="-9.35262e-08" y="0.554313" />
+                <point x="0.675475" y="1.03639" />
+                <point x="3.20625" y="1.0022" />
+                <point x="3.35624" y="0.74567" />
+                <point x="3.39" y="0.549528" />
+                <point x="3.30262" y="0.215145" />
+                <point x="3.18682" y="0.0950178" />
+                <point x="1.02314" y="2.46977e-07" />
+                <point x="0.257845" y="0.313268" />
+                <point x="0.202366" y="0.563436" />
+                <point x="-9.35262e-08" y="0.554313" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="1.47" y="1.42431" />
+                <point x="2.14548" y="1.90639" />
+                <point x="4.67625" y="1.8722" />
+                <point x="4.82625" y="1.61567" />
+                <point x="4.86" y="1.41953" />
+                <point x="4.77262" y="1.08514" />
+                <point x="4.65682" y="0.965018" />
+                <point x="2.49314" y="0.87" />
+                <point x="1.72785" y="1.18327" />
+                <point x="1.67237" y="1.43344" />
+                <point x="1.47" y="1.42431" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="11VGJR9D5jIOWt2WXRqO3B" name="FU - 011" description="" xsi:type="WideDisplayCase">
+        <objectPlacement>
+            <relativePlacement x="9.39999" y="11.58" />
+            <refDirection x="-0.999996" y="0.00294072" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="-9.35262e-08" y="0.554313" />
+                <point x="0.675475" y="1.03639" />
+                <point x="3.20625" y="1.0022" />
+                <point x="3.35624" y="0.74567" />
+                <point x="3.39" y="0.549528" />
+                <point x="3.30262" y="0.215145" />
+                <point x="3.18682" y="0.0950178" />
+                <point x="1.02314" y="2.46977e-07" />
+                <point x="0.257845" y="0.313268" />
+                <point x="0.202366" y="0.563436" />
+                <point x="-9.35262e-08" y="0.554313" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="9.39836" y="11.0257" />
+                <point x="8.72146" y="10.5456" />
+                <point x="6.1908" y="10.5873" />
+                <point x="6.04156" y="10.8442" />
+                <point x="6.00838" y="11.0405" />
+                <point x="6.09675" y="11.3746" />
+                <point x="6.2129" y="11.4944" />
+                <point x="8.37685" y="11.583" />
+                <point x="9.14122" y="11.2675" />
+                <point x="9.19596" y="11.0172" />
+                <point x="9.39836" y="11.0257" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="1Q_jqRYHHWHvDSkmuUxxDA" name="FU - 014" description="" xsi:type="WideDisplayCase">
+        <objectPlacement>
+            <relativePlacement x="0.9" y="8.79" />
+            <refDirection x="0" y="-1" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="-9.35262e-08" y="0.554313" />
+                <point x="0.675475" y="1.03639" />
+                <point x="3.20625" y="1.0022" />
+                <point x="3.35624" y="0.74567" />
+                <point x="3.39" y="0.549528" />
+                <point x="3.30262" y="0.215145" />
+                <point x="3.18682" y="0.0950178" />
+                <point x="1.02314" y="2.46977e-07" />
+                <point x="0.257845" y="0.313268" />
+                <point x="0.202366" y="0.563436" />
+                <point x="-9.35262e-08" y="0.554313" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="1.45431" y="8.79" />
+                <point x="1.93639" y="8.11452" />
+                <point x="1.9022" y="5.58375" />
+                <point x="1.64567" y="5.43376" />
+                <point x="1.44953" y="5.4" />
+                <point x="1.11514" y="5.48738" />
+                <point x="0.995018" y="5.60318" />
+                <point x="0.9" y="7.76686" />
+                <point x="1.21327" y="8.53216" />
+                <point x="1.46344" y="8.58763" />
+                <point x="1.45431" y="8.79" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="071EaaIFW_IxgwteYAWAy1" name="Default Building" description="" xsi:type="DsBuilding">
+        <objectPlacement>
+            <relativePlacement x="0" y="0" />
+            <refDirection x="1" y="0" />
+        </objectPlacement>
+    </DsProduct>
+    <DsProduct globalId="3uAVY0UXlCJvuv77V6f$m0" name="Ground Floor" description="" xsi:type="DsBuildingStorey">
+        <objectPlacement>
+            <relativePlacement x="0" y="0" />
+            <refDirection x="1" y="0" />
+        </objectPlacement>
+    </DsProduct>
+    <DsProduct globalId="0Vf1uq2k0GHQ8WwdmDsuwG" name="SW - 024" description="" xsi:type="DsWallStandardCase">
+        <objectPlacement>
+            <relativePlacement x="0.3" y="12.23" />
+            <refDirection x="0" y="-1" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="-0.3" y="-0.3" />
+                <point x="12.23" y="-0.3" />
+                <point x="11.93" y="0" />
+                <point x="0" y="0" />
+                <point x="-0.3" y="-0.3" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="5.55112e-17" y="12.53" />
+                <point x="-2.22045e-15" y="0" />
+                <point x="0.3" y="0.3" />
+                <point x="0.3" y="12.23" />
+                <point x="5.55112e-17" y="12.53" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="1WKfGu3HSyHgLxqdYwD9Ey" name="SW - 023" description="" xsi:type="DsWallStandardCase">
+        <objectPlacement>
+            <relativePlacement x="22.93" y="12.23" />
+            <refDirection x="-1" y="0" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="-0.3" y="-0.3" />
+                <point x="22.93" y="-0.3" />
+                <point x="22.63" y="0" />
+                <point x="0" y="0" />
+                <point x="-0.3" y="-0.3" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="23.23" y="12.53" />
+                <point x="0" y="12.53" />
+                <point x="0.3" y="12.23" />
+                <point x="22.93" y="12.23" />
+                <point x="23.23" y="12.53" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="1qwspUlrCxJwahCqJtjTFR" name="SW - 022" description="" xsi:type="DsWallStandardCase">
+        <objectPlacement>
+            <relativePlacement x="22.93" y="11.08" />
+            <refDirection x="0" y="1" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="0.3" y="-0.3" />
+                <point x="1.45" y="-0.3" />
+                <point x="1.15" y="0" />
+                <point x="0" y="0" />
+                <point x="0.3" y="-0.3" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="23.23" y="11.38" />
+                <point x="23.23" y="12.53" />
+                <point x="22.93" y="12.23" />
+                <point x="22.93" y="11.08" />
+                <point x="23.23" y="11.38" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="2HLLCjVckZGg2JlXxVRwKv" name="SW - 021" description="" xsi:type="DsWallStandardCase">
+        <objectPlacement>
+            <relativePlacement x="29.3" y="11.08" />
+            <refDirection x="-1" y="0" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="-0.3" y="-0.3" />
+                <point x="6.07" y="-0.3" />
+                <point x="6.37" y="0" />
+                <point x="0" y="0" />
+                <point x="-0.3" y="-0.3" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="29.6" y="11.38" />
+                <point x="23.23" y="11.38" />
+                <point x="22.93" y="11.08" />
+                <point x="29.3" y="11.08" />
+                <point x="29.6" y="11.38" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="1Y56rIxFa0HR66WrCyOuko" name="SW - 020" description="" xsi:type="DsWallStandardCase">
+        <objectPlacement>
+            <relativePlacement x="29.3" y="1.48" />
+            <refDirection x="0" y="1" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="-0.3" y="-0.3" />
+                <point x="9.9" y="-0.3" />
+                <point x="9.6" y="0" />
+                <point x="-2.22045e-16" y="0" />
+                <point x="-0.3" y="-0.3" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="29.6" y="1.18" />
+                <point x="29.6" y="11.38" />
+                <point x="29.3" y="11.08" />
+                <point x="29.3" y="1.48" />
+                <point x="29.6" y="1.18" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="1eLP10AUsZJxNyRDPvGGk5" name="SW - 019" description="" xsi:type="DsWallStandardCase">
+        <objectPlacement>
+            <relativePlacement x="22.93" y="1.48" />
+            <refDirection x="1" y="0" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="0.3" y="-0.3" />
+                <point x="6.67" y="-0.3" />
+                <point x="6.37" y="0" />
+                <point x="0" y="0" />
+                <point x="0.3" y="-0.3" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="23.23" y="1.18" />
+                <point x="29.6" y="1.18" />
+                <point x="29.3" y="1.48" />
+                <point x="22.93" y="1.48" />
+                <point x="23.23" y="1.18" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="3FkWqVVp0lGxW_ZM8pX2L7" name="SW - 018" description="" xsi:type="DsWallStandardCase">
+        <objectPlacement>
+            <relativePlacement x="22.93" y="0.3" />
+            <refDirection x="0" y="1" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="-0.3" y="-0.3" />
+                <point x="0.88" y="-0.3" />
+                <point x="1.18" y="0" />
+                <point x="0" y="0" />
+                <point x="-0.3" y="-0.3" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="23.23" y="0" />
+                <point x="23.23" y="1.18" />
+                <point x="22.93" y="1.48" />
+                <point x="22.93" y="0.3" />
+                <point x="23.23" y="0" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="2Fwq8QrPc$GPh9wA9tp41o" name="SW - 017" description="" xsi:type="DsWallStandardCase">
+        <objectPlacement>
+            <relativePlacement x="0.3" y="0.3" />
+            <refDirection x="1" y="0" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="-0.3" y="-0.3" />
+                <point x="22.93" y="-0.3" />
+                <point x="22.63" y="0" />
+                <point x="0" y="0" />
+                <point x="-0.3" y="-0.3" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="0" y="0" />
+                <point x="23.23" y="0" />
+                <point x="22.93" y="0.3" />
+                <point x="0.3" y="0.3" />
+                <point x="0" y="0" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="3yW0DIOSrbJQoPuB_rwg2_" name="DOO - 010" description="" xsi:type="DsDoor">
+        <objectPlacement>
+            <relativePlacement x="0.2" y="4.81" />
+            <refDirection x="0" y="-1" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="0" y="-1.97065e-15" />
+                <point x="0" y="0.1" />
+                <point x="1.5" y="0.1" />
+                <point x="1.5" y="-2.35922e-15" />
+                <point x="0" y="-1.97065e-15" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="0.2" y="4.81" />
+                <point x="0.3" y="4.81" />
+                <point x="0.3" y="3.31" />
+                <point x="0.2" y="3.31" />
+                <point x="0.2" y="4.81" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="2j7BUltnrgIffNBJQeRy3i" name="DOO - 010" description="" xsi:type="DsDoor">
+        <objectPlacement>
+            <relativePlacement x="10.51" y="0.2" />
+            <refDirection x="1" y="0" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="0" y="-1.97065e-15" />
+                <point x="0" y="0.1" />
+                <point x="1.5" y="0.1" />
+                <point x="1.5" y="-2.35922e-15" />
+                <point x="0" y="-1.97065e-15" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="10.51" y="0.2" />
+                <point x="10.51" y="0.3" />
+                <point x="12.01" y="0.3" />
+                <point x="12.01" y="0.2" />
+                <point x="10.51" y="0.2" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsRelationship globalId="3jfdLYF3DnIPt2bg3AQl1$" name="BuildingContainer" description="BuildingContainer for BuildingStories" xsi:type="DsRelAggregates">
+        <relatingObjectGUID>071EaaIFW_IxgwteYAWAy1</relatingObjectGUID>
+        <relatedObjectGUID>3uAVY0UXlCJvuv77V6f$m0</relatedObjectGUID>
+    </DsRelationship>
+    <DsRelationship globalId="3b63XZr68QJRRcqv1jI4jn" name="BuildingStoreyContainer" description="BuildingStoreyContainer for Building Elements" xsi:type="DsRelContainedInSpatialStructure">
+        <relatingStructureGUID>3uAVY0UXlCJvuv77V6f$m0</relatingStructureGUID>
+        <relatedElementGUID>0Vf1uq2k0GHQ8WwdmDsuwG</relatedElementGUID>
+        <relatedElementGUID>0uacZTA$s2HAt7KS_VGG_g</relatedElementGUID>
+        <relatedElementGUID>25RTFpkf9sGQDWUN9TnhBe</relatedElementGUID>
+        <relatedElementGUID>3EQx8p2MnDIh3Gym92LZDg</relatedElementGUID>
+        <relatedElementGUID>11VGJR9D5jIOWt2WXRqO3B</relatedElementGUID>
+        <relatedElementGUID>2wpztzZIkbGQ82pmqS7bLg</relatedElementGUID>
+        <relatedElementGUID>3yW0DIOSrbJQoPuB_rwg2_</relatedElementGUID>
+        <relatedElementGUID>2j7BUltnrgIffNBJQeRy3i</relatedElementGUID>
+        <relatedElementGUID>1WKfGu3HSyHgLxqdYwD9Ey</relatedElementGUID>
+        <relatedElementGUID>1qwspUlrCxJwahCqJtjTFR</relatedElementGUID>
+        <relatedElementGUID>2HLLCjVckZGg2JlXxVRwKv</relatedElementGUID>
+        <relatedElementGUID>1Y56rIxFa0HR66WrCyOuko</relatedElementGUID>
+        <relatedElementGUID>1eLP10AUsZJxNyRDPvGGk5</relatedElementGUID>
+        <relatedElementGUID>3FkWqVVp0lGxW_ZM8pX2L7</relatedElementGUID>
+        <relatedElementGUID>2Fwq8QrPc$GPh9wA9tp41o</relatedElementGUID>
+        <relatedElementGUID>1Q_jqRYHHWHvDSkmuUxxDA</relatedElementGUID>
+    </DsRelationship>
+    <DsRelationship globalId="x;d,uEh$cYgmTTPl=e|B" name="ProjectContainer" description="ProjectContainer for the building (created during IFC parsing)" xsi:type="DsRelAggregates">
+        <relatingObjectGUID>0iUfBiwZIgJgQvjrHOlDyu</relatingObjectGUID>
+        <relatedObjectGUID>071EaaIFW_IxgwteYAWAy1</relatedObjectGUID>
+    </DsRelationship>
+</designFile>
