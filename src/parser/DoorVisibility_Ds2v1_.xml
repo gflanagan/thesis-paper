@@ -1,0 +1,214 @@
+<designFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <DsProject globalId="2s_yuskjlXJeHNXwjBiZBy" name="Default Project" description="" />
+    <DsProduct globalId="06_h0R80tmJw7TMroEl0va" name="Default Building" description="" xsi:type="DsBuilding">
+        <objectPlacement>
+            <relativePlacement x="0" y="0" />
+            <refDirection x="1" y="0" />
+        </objectPlacement>
+    </DsProduct>
+    <DsProduct globalId="1fCiqbw8OpGRaSO3$tbyXU" name="Ground Floor" description="" xsi:type="DsBuildingStorey">
+        <objectPlacement>
+            <relativePlacement x="0" y="0" />
+            <refDirection x="1" y="0" />
+        </objectPlacement>
+    </DsProduct>
+    <DsProduct globalId="0ZbxEVJPUfIfsik4T2SNWV" name="SW - 001" description="" xsi:type="DsWallStandardCase">
+        <objectPlacement>
+            <relativePlacement x="0.3" y="0.3" />
+            <refDirection x="1" y="0" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="-0.3" y="-0.3" />
+                <point x="13.3" y="-0.3" />
+                <point x="13" y="0" />
+                <point x="6.66134e-16" y="0" />
+                <point x="-0.3" y="-0.3" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="0" y="0" />
+                <point x="13.6" y="0" />
+                <point x="13.3" y="0.3" />
+                <point x="0.3" y="0.3" />
+                <point x="0" y="0" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="3MiiSDGq2vIe7B_EDXK4fW" name="SW - 002" description="" xsi:type="DsWallStandardCase">
+        <objectPlacement>
+            <relativePlacement x="13.3" y="0.3" />
+            <refDirection x="0" y="1" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="-0.3" y="-0.3" />
+                <point x="6.3" y="-0.3" />
+                <point x="6" y="0" />
+                <point x="-2.22045e-16" y="0" />
+                <point x="-0.3" y="-0.3" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="13.6" y="0" />
+                <point x="13.6" y="6.6" />
+                <point x="13.3" y="6.3" />
+                <point x="13.3" y="0.3" />
+                <point x="13.6" y="0" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="2Y0ZSQLWNEIxQCel49guaX" name="SW - 003" description="" xsi:type="DsWallStandardCase">
+        <objectPlacement>
+            <relativePlacement x="13.3" y="6.3" />
+            <refDirection x="-1" y="0" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="-0.3" y="-0.3" />
+                <point x="6.7" y="-0.3" />
+                <point x="7" y="0" />
+                <point x="0" y="0" />
+                <point x="-0.3" y="-0.3" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="13.6" y="6.6" />
+                <point x="6.6" y="6.6" />
+                <point x="6.3" y="6.3" />
+                <point x="13.3" y="6.3" />
+                <point x="13.6" y="6.6" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="3ynJ1m1naWHRn15HKz45l3" name="SW - 004" description="" xsi:type="DsWallStandardCase">
+        <objectPlacement>
+            <relativePlacement x="6.3" y="6.3" />
+            <refDirection x="0" y="1" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="0.3" y="-0.3" />
+                <point x="7.3" y="-0.3" />
+                <point x="7" y="0" />
+                <point x="0" y="0" />
+                <point x="0.3" y="-0.3" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="6.6" y="6.6" />
+                <point x="6.6" y="13.6" />
+                <point x="6.3" y="13.3" />
+                <point x="6.3" y="6.3" />
+                <point x="6.6" y="6.6" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="2fwFdhKyeYJAcbA3UdcG_C" name="SW - 005" description="" xsi:type="DsWallStandardCase">
+        <objectPlacement>
+            <relativePlacement x="6.3" y="13.3" />
+            <refDirection x="-1" y="0" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="-0.3" y="-0.3" />
+                <point x="6.3" y="-0.3" />
+                <point x="6" y="0" />
+                <point x="0" y="0" />
+                <point x="-0.3" y="-0.3" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="6.6" y="13.6" />
+                <point x="0" y="13.6" />
+                <point x="0.3" y="13.3" />
+                <point x="6.3" y="13.3" />
+                <point x="6.6" y="13.6" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="2Tkz1XiH2_Jx468ptEDA6r" name="SW - 006" description="" xsi:type="DsWallStandardCase">
+        <objectPlacement>
+            <relativePlacement x="0.3" y="13.3" />
+            <refDirection x="0" y="-1" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="-0.3" y="-0.3" />
+                <point x="13.3" y="-0.3" />
+                <point x="13" y="0" />
+                <point x="0" y="0" />
+                <point x="-0.3" y="-0.3" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="5.55112e-17" y="13.6" />
+                <point x="-2.44249e-15" y="0" />
+                <point x="0.3" y="0.3" />
+                <point x="0.3" y="13.3" />
+                <point x="5.55112e-17" y="13.6" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="2FyqNujg9nHOxyJVdKl487" name="DOO - 006" description="" xsi:type="DsDoor">
+        <objectPlacement>
+            <relativePlacement x="10.3833" y="0.185" />
+            <refDirection x="1" y="0" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="-0.037" y="-0.204" />
+                <point x="-0.037" y="0.134" />
+                <point x="1.537" y="0.134" />
+                <point x="1.537" y="-0.204" />
+                <point x="-0.037" y="-0.204" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="10.3463" y="-0.019" />
+                <point x="10.3463" y="0.319" />
+                <point x="11.9203" y="0.319" />
+                <point x="11.9203" y="-0.019" />
+                <point x="10.3463" y="-0.019" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsProduct globalId="3NjtDZTasVG8zXOwwGrKsm" name="DOO - 004" description="" xsi:type="DsDoor">
+        <objectPlacement>
+            <relativePlacement x="4.05" y="13.415" />
+            <refDirection x="-1" y="0" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="-0.037" y="-0.204" />
+                <point x="-0.037" y="0.134" />
+                <point x="1.537" y="0.134" />
+                <point x="1.537" y="-0.204" />
+                <point x="-0.037" y="-0.204" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="4.087" y="13.619" />
+                <point x="4.087" y="13.281" />
+                <point x="2.513" y="13.281" />
+                <point x="2.513" y="13.619" />
+                <point x="4.087" y="13.619" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsRelationship globalId="3iMBRB_EywGu0dRVNNB0LH" name="BuildingContainer" description="BuildingContainer for BuildingStories" xsi:type="DsRelAggregates">
+        <relatingObjectGUID>06_h0R80tmJw7TMroEl0va</relatingObjectGUID>
+        <relatedObjectGUID>1fCiqbw8OpGRaSO3$tbyXU</relatedObjectGUID>
+    </DsRelationship>
+    <DsRelationship globalId="3CePL8EoIcHvURUUL1PgRa" name="BuildingStoreyContainer" description="BuildingStoreyContainer for Building Elements" xsi:type="DsRelContainedInSpatialStructure">
+        <relatingStructureGUID>1fCiqbw8OpGRaSO3$tbyXU</relatingStructureGUID>
+        <relatedElementGUID>0ZbxEVJPUfIfsik4T2SNWV</relatedElementGUID>
+        <relatedElementGUID>2FyqNujg9nHOxyJVdKl487</relatedElementGUID>
+        <relatedElementGUID>3NjtDZTasVG8zXOwwGrKsm</relatedElementGUID>
+        <relatedElementGUID>3MiiSDGq2vIe7B_EDXK4fW</relatedElementGUID>
+        <relatedElementGUID>2Y0ZSQLWNEIxQCel49guaX</relatedElementGUID>
+        <relatedElementGUID>3ynJ1m1naWHRn15HKz45l3</relatedElementGUID>
+        <relatedElementGUID>2fwFdhKyeYJAcbA3UdcG_C</relatedElementGUID>
+        <relatedElementGUID>2Tkz1XiH2_Jx468ptEDA6r</relatedElementGUID>
+    </DsRelationship>
+    <DsRelationship globalId="#+m%8Y8FQDvvUutS02&gt;j" name="ProjectContainer" description="ProjectContainer for the building (created during IFC parsing)" xsi:type="DsRelAggregates">
+        <relatingObjectGUID>2s_yuskjlXJeHNXwjBiZBy</relatingObjectGUID>
+        <relatedObjectGUID>06_h0R80tmJw7TMroEl0va</relatedObjectGUID>
+    </DsRelationship>
+</designFile>
+
+
+
+

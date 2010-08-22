@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    DSpace Release 1
+    Example XML 1
+
+    Purpose:
+        Test out the basic aggregation relationships that are mandatory
+        
+    Description:
+        1 Project
+        1 Building
+        1 Building storey
+        
+        The project decomposes to the building.
+        The building decomposes to the storey.
+        
+        The footprint of the building and storey is a 50x50 square,
+        translated by (10,10).
+-->
+
+<designFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="../DSpace_XMLSchema_Release1_v3.xsd">
+
+        <DsProject>
+            <globalId>hd83jdjsd82jjdjd</globalId>
+            <name>Cartesium</name>
+            <description>The building where DSpace is being developed.</description>
+        </DsProject>
+    
+        <DsProduct xsi:type="DsBuilding">
+        <globalId>9292929292929</globalId>
+        <name>Cartesium</name>
+        <description>The building where DSpace is being developed.</description>
+        <objectPlacement>
+            <relativePlacement x="10" y="10"/>
+        </objectPlacement>
+            <representation>
+                <item>
+                    <point x="0" y="0"/>
+                    <point x="0" y="50"/>
+                    <point x="50" y="50"/>
+                    <point x="50" y="0"/>
+                    <point x="0" y="0"/>
+                </item>
+            </representation>
+        </DsProduct>
+     
+    <DsProduct xsi:type="DsBuildingStorey">
+        <globalId>82hfjhkd38h3n3fk3</globalId>
+        <name>Floor 3</name>
+        <description>The storey where Mehul, Greg, Nikhil, and Carl are developing DSpace.</description>
+        
+        <objectPlacement>
+            <relativePlacement x="10" y="10"/>
+        </objectPlacement>
+        <representation>
+            <item>
+                <point x="0" y="0"/>
+                <point x="0" y="50"/>
+                <point x="50" y="50"/>
+                <point x="50" y="0"/>
+                <point x="0" y="0"/>
+            </item>
+        </representation>
+    </DsProduct>
+    
+    <DsRelationship xsi:type="DsRelAggregates">
+        <globalId>osn8nksjnohonwnc83sjkdbsd</globalId>
+        <relatingObjectGUID>hd83jdjsd82jjdjd</relatingObjectGUID>
+        <relatedObjectGUID>9292929292929</relatedObjectGUID>
+    </DsRelationship>
+    
+    <DsRelationship xsi:type="DsRelAggregates">
+        <globalId>jfujkhsfhui2riukbdajkadkj</globalId>
+        <relatingObjectGUID>9292929292929</relatingObjectGUID>
+        <relatedObjectGUID>82hfjhkd38h3n3fk3</relatedObjectGUID>
+    </DsRelationship>
+
+    
+</designFile>
+

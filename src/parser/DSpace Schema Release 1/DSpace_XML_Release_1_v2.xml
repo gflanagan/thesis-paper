@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    DSpace Release 1
+    Example XML 2
+
+    Purpose:
+        Introduce the wall building element.
+        
+    Description:
+        1 project
+        1 building
+        1 building storey
+        1 standard wall
+        
+        The project decomposes to the building.
+        The building decomposes to the storey.
+        The storey contains the wall.
+        
+        The footprint of the building and storey is a 50mx50m square,
+        translated by (10,10).
+        
+        The footprint of the wall is a 1mx50m rectangle, translated 
+        by (10,10).
+-->
+
+<designFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="../DSpace_XMLSchema_Release1_v3.xsd">
+
+        <DsProject>
+            <globalId>hd83jdjsd82jjdjd</globalId>
+            <name>Cartesium</name>
+            <description>The building where DSpace is being developed.</description>
+        </DsProject>
+    
+        <DsProduct xsi:type="DsBuilding">
+        <globalId>9292929292929</globalId>
+        <name>Cartesium</name>
+        <description>The building where DSpace is being developed.</description>
+        <objectPlacement>
+            <relativePlacement x="10" y="10"/>
+        </objectPlacement>
+            <representation>
+                <item>
+                    <point x="0" y="0"/>
+                    <point x="0" y="50"/>
+                    <point x="50" y="50"/>
+                    <point x="50" y="0"/>
+                    <point x="0" y="0"/>
+                </item>
+            </representation>
+        </DsProduct>
+     
+    <DsProduct xsi:type="DsBuildingStorey">
+        <globalId>82hfjhkd38h3n3fk3</globalId>
+        <name>Floor 3</name>
+        <description>The storey where Mehul, Greg, Nikhil, and Carl are developing DSpace.</description>
+        
+        <objectPlacement>
+            <relativePlacement x="10" y="10"/>
+        </objectPlacement>
+        <representation>
+            <item>
+                <point x="0" y="0"/>
+                <point x="0" y="50"/>
+                <point x="50" y="50"/>
+                <point x="50" y="0"/>
+                <point x="0" y="0"/>
+            </item>
+        </representation>
+    </DsProduct>
+    
+    <DsProduct xsi:type="DsWallStandardCase">
+        <globalId>3rh09u3nd038hohlsknd</globalId>
+        <name>Boundary wall A</name>
+        <description>A lonely wall marking one side of the Cartesium.</description>
+        
+        <objectPlacement>
+            <relativePlacement x="10" y="10"/>
+        </objectPlacement>
+        <representation>
+            <item>
+                <point x="0" y="0"/>
+                <point x="0" y="50"/>
+                <point x="1" y="50"/>
+                <point x="1" y="0"/>
+                <point x="0" y="0"/>
+            </item>
+        </representation>
+    </DsProduct>
+    
+    <DsRelationship xsi:type="DsRelAggregates">
+        <globalId>osn8nksjnohonwnc83sjkdbsd</globalId>
+        <relatingObjectGUID>hd83jdjsd82jjdjd</relatingObjectGUID>
+        <relatedObjectGUID>9292929292929</relatedObjectGUID>
+    </DsRelationship>
+    
+    <DsRelationship xsi:type="DsRelAggregates">
+        <globalId>jfujkhsfhui2riukbdajkadkj</globalId>
+        <relatingObjectGUID>9292929292929</relatingObjectGUID>
+        <relatedObjectGUID>82hfjhkd38h3n3fk3</relatedObjectGUID>
+    </DsRelationship>
+    
+    <DsRelationship xsi:type="DsRelContainedInSpatialStructure">
+        <globalId>09384i28y34kjhskjdfhku2y34</globalId>
+        <relatingStructureGUID>82hfjhkd38h3n3fk3</relatingStructureGUID>
+        <relatedElementGUID>3rh09u3nd038hohlsknd</relatedElementGUID>
+    </DsRelationship>
+
+    
+</designFile>
+

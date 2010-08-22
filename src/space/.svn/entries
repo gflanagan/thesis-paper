@@ -1,15 +1,15 @@
 10
 
 dir
-288
-http://carkowsky.informatik.uni-bremen.de/svn/designspace/students/greg/src/space
+0
+http://carkowsky.informatik.uni-bremen.de/svn/designspace/systems-dev/DSim-Reasoners/artefactual-reasoner/space
 http://carkowsky.informatik.uni-bremen.de/svn/designspace
+add
 
 
 
-2010-06-07T07:43:35.424446Z
-281
-greg
+
+
 
 
 
@@ -26,173 +26,59 @@ greg
 
 58e2a9fa-d2c0-43fa-a82e-44497ddf1781
 
-convexhull.pl
-file
+sindalog
+dir
 
 
 
-
-2010-06-15T08:44:40.273379Z
-ce662475f8f2768bdb7a2b84ccf40337
-2010-06-07T07:43:35.424446Z
-281
-greg
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-9341
+add
 
-scc.pl
+convex_hull.pl
 file
 
 
 
-
-2010-06-15T08:44:40.277379Z
-3c97e9f0fcc515a38b00e9347e9710bc
-2010-06-07T07:43:35.424446Z
-281
-greg
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2402
+add
 
-sccalt.pl
+scc_clpr.pl
 file
 
 
 
-
-2010-06-15T08:44:40.278379Z
-84e4fc0ba4be1503047e249c278b60e5
-2010-06-07T07:43:35.424446Z
-281
-greg
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1753
+add
 
-solver.pl
+scc_clpr_alt.pl
 file
 
 
 
-
-2010-06-15T08:44:40.279379Z
-37e79d1055d5aeab3d1a3047ddd33360
-2010-06-07T07:43:35.424446Z
-281
-greg
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-173247
+add
 
-opra.pl
+spatial_reasoner.pl
 file
 
 
 
-
-2010-06-15T08:44:40.280379Z
-cd20667eb0233cbfe300781c51e782f3
-2010-06-07T07:43:35.424446Z
-281
-greg
+add
+
+opra_chr.pl
+file
 
 
 
+add
+
+opra_clpr.pl
+file
 
 
 
+add
+
+rcc_chr.pl
+file
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-1606
+add
 

@@ -1,15 +1,15 @@
 10
 
 dir
-288
-http://carkowsky.informatik.uni-bremen.de/svn/designspace/students/greg/src/parser
+0
+http://carkowsky.informatik.uni-bremen.de/svn/designspace/systems-dev/DSim-Reasoners/artefactual-reasoner/parser
 http://carkowsky.informatik.uni-bremen.de/svn/designspace
+add
 
 
 
-2010-06-07T07:43:35.424446Z
-281
-greg
+
+
 
 
 
@@ -31,32 +31,40 @@ file
 
 
 
+add
 
-2010-06-15T08:44:40.295377Z
-0ce48400fb28a48fa777abebcb9f6571
-2010-06-07T07:43:35.424446Z
-281
-greg
+
+
+
+
 has-props
+has-prop-mods
+
+DSpace Schema Release 1
+dir
 
 
 
+add
+
+DSpace_XML_Release_1_v1.xml
+file
 
 
 
+add
+
+DoorVisibility_Ds2v1_.xml
+file
 
 
 
+add
+
+DoorVisibility_Ds2v1_greg_.xml
+file
 
 
 
-
-
-
-
-
-
-
-
-2453
+add
 

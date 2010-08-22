@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+ 
+ <xs:element name="designFile" abstract="false">
+  <xs:complexType>
+   <xs:sequence>
+ 
+    <xs:element name="DsProject" type="DsProject"/>
+    <xs:element name="DsProduct" type="DsProduct" maxOccurs="unbounded"/>
+    <xs:element name="DsRelationship" type="DsRelationship" maxOccurs="unbounded"/>
+
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+
+<xs:complexType name="DsRoot" abstract="true">
+ <xs:sequence>
+  <xs:element name="globalId" type="xs:string"/>
+  <xs:element name="name" type="xs:string" default="" minOccurs="0" maxOccurs="1"/>
+  <xs:element name="description" type="xs:string" default="" minOccurs="0" maxOccurs="1"/>
+ </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="DsObject" abstract="true">
+ <xs:complexContent>
+  <xs:extension base="DsRoot"></xs:extension>
+ </xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="DsProject" abstract="false">
+ <xs:complexContent>
+  <xs:extension base="DsObject"></xs:extension>
+ </xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="DsProduct" abstract="true">
+ <xs:complexContent>
+  <xs:extension base="DsObject">
+   <xs:sequence>
+    <xs:element name="objectPlacement" type="DsLocalPlacement"/>
+    <xs:element name="representation" type="DsShapeRepresentation"/> 
+   </xs:sequence>
+  </xs:extension>
+ </xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="DsSpatialStructureElement" abstract="true">
+ <xs:complexContent>
+  <xs:extension base="DsProduct"></xs:extension>
+ </xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="DsBuilding" abstract="false">
+ <xs:complexContent>
+  <xs:extension base="DsSpatialStructureElement"></xs:extension>
+ </xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="DsBuildingStorey" abstract="false">
+ <xs:complexContent>
+  <xs:extension base="DsSpatialStructureElement"></xs:extension>
+ </xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="DsBuildingElement" abstract="true">
+ <xs:complexContent>
+  <xs:extension base="DsProduct"></xs:extension>
+ </xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="DsWallStandardCase" abstract="false">
+ <xs:complexContent>
+  <xs:extension base="DsBuildingElement"></xs:extension>
+ </xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="DsRelationship" abstract="true">
+ <xs:complexContent>
+  <xs:extension base="DsRoot"></xs:extension>
+ </xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="DsRelAggregates" abstract="false">
+ <xs:complexContent>
+  <xs:extension base="DsRelationship">
+   <xs:sequence>
+    <xs:element name="relatingObjectGUID" type="xs:string"/>
+    <xs:element name="relatedObjectGUID" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+   </xs:sequence>
+  </xs:extension>
+ </xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="DsRelContainedInSpatialStructure" abstract="false">
+ <xs:complexContent>
+  <xs:extension base="DsRelationship">
+   <xs:sequence>
+    <xs:element name="relatingStructureGUID" type="xs:string"/>
+    <xs:element name="relatedElementGUID" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+   </xs:sequence>
+  </xs:extension>
+ </xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="DsLocalPlacement" abstract="false">
+ <xs:sequence>
+  <xs:element name="relativePlacement" type="DsCartesianPoint"/>
+ </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="DsShapeRepresentation" abstract="false">
+ <xs:sequence>
+  <xs:element name="item" type="DsPolyline" minOccurs="1" maxOccurs="unbounded"/>
+ </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="DsPolyline" abstract="false">
+ <xs:sequence>
+  <xs:element name="point" type="DsCartesianPoint" minOccurs="4" maxOccurs="unbounded"/>
+ </xs:sequence>
+</xs:complexType>
+
+
+ <xs:complexType name="DsCartesianPoint" abstract="false">
+   <xs:attribute name="x" type="xs:double"/>
+  <xs:attribute name="y" type="xs:double"/>
+ </xs:complexType>
+ 
+<!--
+ <xs:complexType name="DsCartesianPoint" abstract="false">
+ <xs:sequence>
+  <xs:element name="x" type="xs:double"/>
+ <xs:element name="y" type="xs:double"/>
+  </xs:sequence>
+</xs:complexType>
+-->
+ 
+
+
+</xs:schema>

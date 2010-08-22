@@ -24,24 +24,12 @@ perspective(ID, directed_point, (PT,DIR)) :-
     transform_to_point(G,PT),
     direction(ID, DIR).
 
-perspective(ID, fs_point, RmID, PT) :-
-    functional_space(ID, RmID, FS),
-    transform_to_point(FS, PT).
-
 transform_to_point(region(R), Centroid) :-
     centroid(R, Centroid).
 
 % calculates the centroid of a polygon. 
 % NOTE: doesn't work if all coordinates are negative
-centroid(region(R), C) :- !,
-    convex_hull(R, ConvexR),
-    polygon_area(ConvexR, A),
-    centroid_xy_sum(ConvexR, SumX, SumY),
-    my_abs(SumX, SumX_pos),
-    my_abs(SumY, SumY_pos),
-    mult_area(A, SumX_pos, SumY_pos, C).
-
-centroid(R, C) :- !,
+centroid(R, C) :-
     convex_hull(R, ConvexR),
     polygon_area(ConvexR, A),
     centroid_xy_sum(ConvexR, SumX, SumY),
@@ -66,7 +54,7 @@ polygon_xy_sum([(X1,Y1),(X2,Y2)|PR], SumXY, SumYX) :-
     SumXY is XY + SumXY_prev,
     SumYX is YX + SumYX_prev. 
 
-mult_area(A, SumX, SumY, (Y,X)) :-
+mult_area(A, SumX, SumY, (X,Y)) :-
     X is ((1/(6 * A)) * SumX),
     Y is ((1/(6 * A)) * SumY).
 
