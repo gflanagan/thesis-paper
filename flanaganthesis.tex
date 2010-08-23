@@ -216,26 +216,84 @@ to do this dspace need to:
 \section{DSpace: Design and Implementation}
 
 
-\chapter{Representation of Architectural Designs in DSpace}
-\section{Multiple Perspectives and Spatial Abstraction}
-\section{Artefacts}
-\section{IFC / ArchiCAD import}
+\chapter{Representation and Reasoning}
+multiple perspectives
+spatial abstractions
+declarative / clp framework
 
-\chapter{Spatial Reasoning in Constraint Logic Programming Framework}
+\section{Representation}
+
+
+\subsection{Multiple Perspectives}
+Designs are represented in DSpace in multiple perspectives. Unlike current CAAD systems that only represent the physical and structural elements of a design, DSpace also represents the artefactual extensions of architectural structures as them emerge in the design. Artefactual extensions include the functional, operational, and range space of the architectural and interior design entities.  
+
+\subsubsection{Artefact Geometry}
+TBD: explain functional/operational space in detail
+
+\begin{figure}[H]
+ \centering
+ \subfloat[functional space]{\label{fig:functional-space}\includegraphics[width=34mm]{functional-space}}
+ \hspace{1 mm}
+ \subfloat[operational space]{\label{fig:operational-space}\includegraphics[width=34mm]{operational-space}}
+  \hspace{1 mm}
+ \subfloat[range space]{\label{fig:range-space}\includegraphics[width=34mm]{functional-space}}
+ \hspace{1 mm}
+ \subfloat[physical space]{\label{fig:physical-space}\includegraphics[width=34mm]{operational-space}}
+ \caption{Multiple Perspectives}
+\label{multi-perspectives}
+\end{figure}
+
+\subsubsection{Representation in DSpace}
+The representation of a design starts with a factbase in Prolog that links architectural entities (via a unique identifier) to is't architectural type (wall, door, window, column). There is a single entry for each entity in the design. The following Prolog code shows one entry for the prototype of the predicate and two instantiated entries for a door and wall. 
+
+\begin{verbatim}
+   architectural_enity(ID, Type).
+   architectural_enity(door1, dSDoor).
+   architectural_enity(wall4, dsWallStandardCase).
+\end{verbatim}
+
+Prolog rules are used to link an entity's identifier to its' multiple perspective geometries. The form of each perspective rule is similar and built using the same spatial primitives (points, lines, polygons). This allows for a uniform way to access a particular geometry for a specific entity. Additionally, by using the same spatial primitives to define each geometry the spatial reasoning module does can work over all entities regardless of their type. 
+
+\begin{verbatim}
+   ifc_geometry(ID, Geometry) :-
+           spatial_primitive(G, region([(0,0),(5,2),(10,0)])).
+   functional_space(door1, Geometry) :-
+           spatial_primitive(Geometry, region(PtList)).
+   operational_space(door1, Geometry) :-
+           spatial_primitive(Geometry, region(PtList)).
+\end{verbatim}
+
+
+
+
+\subsection{Spatial Abstraction for Qualitative Spatial Reasoning}
+
+Qualitative Spatial Reasoning
+
+Abstractions
+  - point
+  - direct point
+  - extended region
+  - centroid
+  - line
+
+\subsection{IFC / ArchiCAD import}
+
+\section{Spatial Reasoning in a Constraint Logic Programming Framework}
 The spatial reasoning module in DSpace is built in a constraint logic programming framework. 
 
 Constraint Handling Rules
 
 Qualification
 
-\section{Topology}
+\subsection{Topology}
 Topological reasoning works over points, lines, and regions (convex hulls). The main form of spatial topological reasoning is qualification. The following are the topological relationships that can be qualified: partially overlapping, ntpp, ntppi, disconnected and equals. 
 
 Topological qualifications uses properties of line intersections and convex hulls to detect topological relationships. Constraint handling rules are used to simplify topological constraints until a simple constraint of line intersection checking and point / convex hull containment. The partially overlapping relationship is detected if and lines intersect between objects and 
 
-\section{Orientation}
+\subsection{Orientation}
 
-\subsection{Intrinsic Orientation}
+\subsubsection{Intrinsic Orientation}
 OPRA
 Relationships
   - i, j
@@ -244,7 +302,7 @@ Geometric Detection
   - partition of space in to half planes
   - linear inequalities
 
-\subsection{Extrinsic Orientation}
+\subsubsection{Extrinsic Orientation}
 SCC
 Relationships
   - SCC rel
@@ -253,11 +311,11 @@ Geometric Detection
   - partition of space into half planes
   - linear inequalities
 
-\section{Distance}
+\subsection{Distance}
 Uses Sindalog reasoner's distance constraints
 Variation of distance constraints
 
-\section{Sample Queries}
+\subsection{Sample Queries}
 Examples with shapes
 Examples with architectural elements in the DSpace reasoner
 
@@ -282,7 +340,7 @@ The design hierarchy developed in this section is built on the discretion of the
 Figure \ref{hierarchy} shows the design hierarchy used in the DSpace reasoner. Conceptual design requirements are built from the architectural concepts and QSA's of the hightest level of the hierarchy. Within the hierarchy, architectural concepts are built using qualitative spatial attributes found in architecture (QSA), but are not limited to only these, spatial relationships of orientation, topology, and distance can be used, as well as other geometric primitives such as area, angle, and length measurements. QSAs are defined by the qualitative spatial relationships of orientation, topology, and distance. These qualitative spatial relationships emerge from the quantitative, physical, and artefactual geometries of the the design. TBD: physical structures define the way the architecture is experiences and influences the functional / performance of the design from a conceptual design perspective.
 
 
-\section{Qualitative Spatial Attributes in Architecture}
+\section{Qualitative Spatial Attributes found in Architecture}
 This section presents a set of qualitative spatial attributes found in architecture (QSA) and shows how each QSA is spatially interpreted and represented in DSpace. QSAs are architectural qualities that emerge from the spatial structures that form from the physical elements of the building (doors, walls, columns, windows, etc.), artefactual extensions (functional space, operational space, range space, etc.) and interior design elements (furniture, lights, decorations, etc.). QSAs can be perceptual qualities that are described from a specific vantage point, or intrinsic qualities that are inherent in the build's spatial structure. 
 
 This section presents five QSAs: positioning, facing, visibility, proximity, and symmetry. The goal of this section is to develop a tool-kit of QSAs that qualitatively describe architectural designs in the spatial environments in which they emerge. Some boundary cases are identified and handled, but it is not the purpose here to explore all possible case scenarios.
