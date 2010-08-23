@@ -291,23 +291,25 @@ The physical and artefactual geometries in DSpace are generally represented as p
 
 For DSpace there are five spatial abstractions that are important: point, directed point, centroid, line, and polygon. The following section on qualitative spatial reasoning will explain why these abstractions are used, for now this section will focus on how the architectural entities in a design are transformed to the various spatial abstractions. 
 
-\subsubsection{Doorways and Windows}
-Doorways and windows have point and directed point spatial abstractions. The point abstraction is straightforward and is the centroid of the polygon that makes of the physical geometry of the doorway or window. The directed point abstraction for a door is the centroid of the door as the point origin and the direction is the direction that is perpendicular to the doorway's intrinsic x-axis. This will give two directions because there will be two perpendicular lines form the origin outwards. This is fine and will actually be useful when reasoning about the direction of a doorways / window in the context of a specific room or area. 
+\subsubsection{Doorways, Windows, and Walls}
+Doorways, windows, and walls have point and directed point spatial abstractions. The point abstraction is straightforward and is the centroid of the polygon that makes of the physical geometry of the doorway, window, or wall. The directed point abstraction is the centroid as the origin and the direction is the direction that is perpendicular to the doorway's, window's or wall's intrinsic x-axis. This will give two directions because there will be two perpendicular lines form the origin outwards. This is fine and will actually be useful when reasoning about the direction of a doorways / window in the context of a specific room or area. 
+
+Walls are a special case because the are generally much longer in one axis. TODO: explain this
 
 \subsubsection{Columns}
-Columns have only one spatial abstraction which is a point, which is the centroid of the column. Columns do not have any intrinsic qualities which or functional aspects in a design that require any additional abstractions.
-
-\subsubsection{Walls}
-Walls have three spatial abstractions: point, directed point, and line. 
-
+Columns have only one spatial abstraction which is a point, which is the centroid of the column. Columns do not have any intrinsic qualities which or functional aspects in a design that require any additional abstractions. 
 
 \subsubsection{Spaces: Rooms, Apartments, Buildings}
 Spaces such as rooms, apartments, and building can be abstracted as points. The point is the centroid of the space. In general the assumption in DSpace is that spaces are generally rectangular in shape.
 
 \subsubsection{Interior Design Elements}
-point - centroid
-directed point - user defined / else na
+Interior design elements have two spatial abstractions: point and directed point. The point is the centroid of the element. The directed point must be given by the user for an interior design element because the intrinsic properties of the object can not be known a-priori. If a direction is not provided then an interior design element can not be abstracted into a directed point.
 
+\subsubsection{Spatial Transformations}
+
+\begin{verbatim}
+   perspective(id, abstraction, A).
+\end{verbatim}
 
 \subsection{IFC / ArchiCAD import}
 
