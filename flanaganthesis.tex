@@ -225,46 +225,63 @@ declarative / clp framework
 
 
 \subsection{Multiple Perspectives}
-Designs are represented in DSpace in multiple perspectives. Unlike current CAAD systems that only represent the physical and structural elements of a design, DSpace also represents the artefactual extensions of architectural structures as them emerge in the design. Artefactual extensions include the functional, operational, and range space of the architectural and interior design entities.  
+Designs are represented in DSpace in multiple perspectives. Unlike current CAAD systems that only represent the physical and structural elements of a design, DSpace represents the artefactual aspects of the design, non-spatial extensions of an architectural entity that pertains to a specific functional quality of the entity.   
 
-\subsubsection{Artefact Geometry}
-TBD: explain functional/operational space in detail
+\subsubsection{Spatial Artefacts}
 
 \begin{figure}[H]
  \centering
- \subfloat[functional space]{\label{fig:functional-space}\includegraphics[width=34mm]{functional-space}}
- \hspace{1 mm}
- \subfloat[operational space]{\label{fig:operational-space}\includegraphics[width=34mm]{operational-space}}
-  \hspace{1 mm}
- \subfloat[range space]{\label{fig:range-space}\includegraphics[width=34mm]{functional-space}}
- \hspace{1 mm}
- \subfloat[physical space]{\label{fig:physical-space}\includegraphics[width=34mm]{operational-space}}
+ \subfloat[functional space]{\label{fig:functional-space}\includegraphics[width=40mm]{functional-space}}
+ \hspace{10 mm}
+ \subfloat[operational space]{\label{fig:operational-space}\includegraphics[width=40mm]{operational-space}}
+ \hspace{10 mm}
+ \subfloat[range space]{\label{fig:range-space}\includegraphics[width=40mm]{functional-space}}
  \caption{Multiple Perspectives}
 \label{multi-perspectives}
 \end{figure}
 
-\subsubsection{Representation in DSpace}
-The representation of a design starts with a factbase in Prolog that links architectural entities (via a unique identifier) to is't architectural type (wall, door, window, column). There is a single entry for each entity in the design. The following Prolog code shows one entry for the prototype of the predicate and two instantiated entries for a door and wall. 
+There are three types of spatial artefacts \cite{Bhatt}:
+\begin{enumerate}
+\item \emph{operational space}
+\item \emph{functional space}
+\item \emph{range space}
+\end{enumerate}
+
+
+
+\subsubsection{Representation A Design in DSpace}
+The representation of a design starts with a factbase in Prolog that links architectural entities (via a unique identifier) to is't architectural type (wall, door, window, column) or interior design type (display case, chair, desk). There is a single entry in the factbase for each entity in the design. The following Prolog code shows one entry for the prototype of the factbase predicate and three instantiated entries for a single door, wall, and desk. 
 
 \begin{verbatim}
-   architectural_enity(ID, Type).
-   architectural_enity(door1, dSDoor).
-   architectural_enity(wall4, dsWallStandardCase).
+   architectural_entity(ID, Type).
+   architectural_entity(door1, dSDoor).
+   architectural_entity(wall4, dsWallStandardCase).
+   architectural_entity(desk4, dsDesk).
 \end{verbatim}
 
-Prolog rules are used to link an entity's identifier to its' multiple perspective geometries. The form of each perspective rule is similar and built using the same spatial primitives (points, lines, polygons). This allows for a uniform way to access a particular geometry for a specific entity. Additionally, by using the same spatial primitives to define each geometry the spatial reasoning module does can work over all entities regardless of their type. 
+Prolog rules are used to link an entity's identifier to its' multiple perspective geometries. Each entity has a single rule for it's physical geometry, and one rule for each of it's artefactual extension: functional space, operational space, range space. Not all entities have all artefactual extension. For example, a door has a functional and operational space but does not have a range space. Likewise, a wall has no artefactual extensions. 
+
+The form of each rule is similar and built using the same spatial primitives (points, lines, and polygons). By using the same spatial primitives to define both the physical structures and aretactual extensions of architectural entities and interior design elements, it allows for a uniform and generalized way to spatial reason over the structures. This will become an important feature in the following section on qualitative spatial reasoning.   
 
 \begin{verbatim}
-   ifc_geometry(ID, Geometry) :-
-           spatial_primitive(G, region([(0,0),(5,2),(10,0)])).
+   physical_geometry(door1, Geometry) :-
+           spatial_primitive(Geometry, region(PtList)).
    functional_space(door1, Geometry) :-
            spatial_primitive(Geometry, region(PtList)).
    operational_space(door1, Geometry) :-
            spatial_primitive(Geometry, region(PtList)).
 \end{verbatim}
 
+Retrieving a geometry is accomplished in a uniform way across the different perspectives. To get a geometry all that is need is the unique identifier for the entity. For example, to get the physical geometry for a door with and identifier, door1, the following query is made:
 
-
+\begin{verbatim}
+   physical_geometry(door1, Geometry).
+\end{verbatim} 
+Door1's physical geometry will now by stored in the Geometry variable. Likewise, to get the functional space of door1 the following query is made:
+\begin{verbatim}
+   functional_geometry(door1, FunctionalGeometry).
+\end{verbatim}
+Door1's functional geometry will now be stored in the FunctionalGeometry variable. Similar queries are made to retrieve the operational and range space geometries.
 
 \subsection{Spatial Abstraction for Qualitative Spatial Reasoning}
 
@@ -278,6 +295,8 @@ Abstractions
   - line
 
 \subsection{IFC / ArchiCAD import}
+
+
 
 \section{Spatial Reasoning in a Constraint Logic Programming Framework}
 The spatial reasoning module in DSpace is built in a constraint logic programming framework. 
