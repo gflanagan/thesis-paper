@@ -222,38 +222,70 @@ spatial abstractions
 declarative / clp framework
 
 \section{Representation}
+Current state-of-the-art CAAD tools represent the physical and structural aspects of a design in a manner that is both accurate and precise. This type of representation captures the design, in terms of the precise spatial configurations as they are comprised of the architectural entities (i.e., walls, doors, windows), at a low-level of granularity that is needed in the actual construction of the building. Such a representation allows a designer to reason about the physical, structural and mechanical aspects of a design, such as the precise placement of a door in a wall or the mechanics of a window swinging open and closed. However, this type of representation scheme does not incorporation the semantic features of the design nor the design's qualitative architectural attributes. 
 
+For example, a structural design requirement that addresses air circulation stipulates that a doorway and window should face directly towards each other. From a traditional CAAD based system, reasoning about such a requirement is not possible because it pertains to spatial and design semantics that go beyond the geometric representation of the system, i.e., in this case the qualitative relationship between architectural element. In DSpace, this type of requirement is represented in a multiple perspective design structure that incorporates the design's artefactual extensions, qualitative somethings, and quantitative geometries and an architect to validate a work-in-progress design from a conceptual and qualitative perspective against the physical and precise real world geometrical representation of the design \cite{Bhatt}.
+
+TODO: fig:multiple perspective representation
+
+This remainder of this section is structured as follows. The first subsection looks at the multiple perspective design representation of the DSpace reasoner. The second subsection looks at how they are each perspective is modeled in DSpace. Section last section looks at how a design in imported into the DSpace reasoner from the DsSchema and IFC format.
 
 \subsection{Multiple Perspectives}
-Designs are represented in DSpace in multiple perspectives. Unlike current CAAD systems that only represent the physical and structural elements of a design, DSpace represents the artefactual aspects, non-spatial extensions of an architectural entity that pertains to a specific functional quality of the entity and the design.   
+Designs are represented in the DSpace reasoner in a multiple perspective manner that incorporates: (1) the artefactual extension of architectural entities, (2) the spatial abstractions of the design from a qualitative spatial perspective, and (3) the physical and structural quantitative geometries of the design. Representing the design in a multiple perspective manner allows the DSpace reasoner to go beyond purely geometric reasoning that is based on the physical and structural geometries of the design.
 
 \subsubsection{Spatial Artefacts}
-Spatial artefacts are non-spatial extensions of architectural entities that pertain to a specific functional quality of the entity in the context of the design. Because artefactual extensions do not have a physical manifestation, they are not represented in current CAAD tools. However, they become an important part of the design process because they effect the performance and functionality of a design. There are three types of spatial artefacts identified by Bhatt\cite{Bhatt}:
+Unlike current state-of-the-art CAAD systems that only represent the physical and structural elements of a design, DSpace represents spatial artefacts, non-spatial extensions of architectural elements that pertain to a specific functional quality of the element in the context of the design. Artefactual extensions do not have a physical manifestation, however, they become an important part of the design process because they effect the functionality and performance of a design. 
 
+There are three types of spatial artefacts identified by Bhatt\cite{Bhatt}:
 \begin{enumerate}
-\item the \emph{operational space} encompasses the region of space required by an object to preform it's function (i.e., doorway opening and closing)
-\item the \emph{functional space} encompasses the region of space that is required by a person to operate an object (i.e., space for operating a doorway)
-\item the \emph{range space} pertains to a region of space that encompass the range of a camera's view or the range of a motion sensor (i.e., range space of camera as defined by is depth of field and angle of view).
+\item \emph{operational space} 
+\item \emph{functional space} 
+\item \emph{range space} 
 \end{enumerate}
 
-%\begin{figure}[H]
-% \centering
-% \subfloat[functional space]{\label{fig:functional-space}\includegraphics[width=40mm]{functional-space}}
-% \hspace{10 mm}
-% \subfloat[operational space]{\label{fig:operational-space}\includegraphics[width=40mm]{operational-space}}
-% \hspace{10 mm}
-% \subfloat[range space]{\label{fig:range-space}\includegraphics[width=40mm]{functional-space}}
-% \caption{Multiple Perspectives}
-%\label{multi-perspectives}
-%\end{figure}
+The operational space encompasses the region of space required by an object to preform it's function (i.e., doorway opening and closing).
 
-Artefactual extensions can effect how a design preforms. For example, a sink in a bathroom has a functional space in-which a person uses the sink to wash his or her hands. If this space is interfered by the functional or physical space of a doorways into the bathroom, then there will be circulation problems when a person is washing their hands and another person enters the bathroom.
+The functional space encompasses the region of space that is required by a person to operate an object (i.e., space for operating a doorway)
+
+The range space pertains to a region of space that encompass the range of a camera's view or the range of a motion sensor (i.e., range space of camera as defined by is depth of field and angle of view).
+
+\begin{figure}[H]
+ \centering
+ \subfloat[functional space]{\label{fig:functional-space}\includegraphics[width=40mm]{functional-space}}
+ \hspace{10 mm}
+ \subfloat[operational space]{\label{fig:operational-space}\includegraphics[width=40mm]{operational-space}}
+ \hspace{10 mm}
+ \subfloat[range space]{\label{fig:range-space}\includegraphics[width=40mm]{functional-space}}
+ \caption{Multiple Perspectives}
+\label{multi-perspectives}
+\end{figure}
+
+Artefactual extensions effect how a design preforms. For example, a sink in a bathroom has a functional space, the space a person uses the sink to wash his or her hands. If this space is interfered with by the functional or physical space of a doorways, then this will cause a circulation problems when a person is washing their hands and another person enters the bathroom.
 
 TODO: fig:sink example.
 
+\subsubsection{Spatial Abstraction for Qualitative Spatial Reasoning}
+The physical and artefactual geometries in DSpace are generally represented as polygons or extended regions. However, to reason about these spatial structures in a more abstract computational framework, such as a framework for qualitative spatial reasoning, it is required that these architectural entities be spatially abstracted. This means taking into consideration what is meant by the direction of a door, or a wall as a point. How these entities are abstracted will depend on the qualitative spatial reasoning and design requirements that they are meant for. 
 
-\subsubsection{Representation A Design in DSpace}
-The representation of a design starts with a factbase in Prolog that links architectural entities (via a unique identifier) to is't architectural type (wall, door, window, column) or interior design type (display case, chair, desk). There is a single entry in the factbase for each entity in the design. The following Prolog code shows one entry for the prototype of the factbase predicate and three instantiated entries for a single door, wall, and desk. 
+For DSpace there are five spatial abstractions that are important: point, directed point, centroid, line, and polygon. The following section on qualitative spatial reasoning will explain why these abstractions are used, for now this section will focus on how the architectural entities in a design are transformed to the various spatial abstractions. 
+
+\subsubsection{Doorways, Windows, and Walls}
+Doorways, windows, and walls have point and directed point spatial abstractions. The point abstraction is straightforward and is the centroid of the polygon that makes of the physical geometry of the doorway, window, or wall. The directed point abstraction is the centroid as the origin and the direction is the direction that is perpendicular to the doorway's, window's or wall's intrinsic x-axis. This will give two directions because there will be two perpendicular lines form the origin outwards. This is fine and will actually be useful when reasoning about the direction of a doorways / window in the context of a specific room or area. 
+
+Walls are a special case because the are generally much longer in one axis. TODO: explain this
+
+\subsubsection{Columns}
+Columns have only one spatial abstraction which is a point, which is the centroid of the column. Columns do not have any intrinsic qualities which or functional aspects in a design that require any additional abstractions. 
+
+\subsubsection{Spaces: Rooms, Apartments, Buildings}
+Spaces such as rooms, apartments, and building can be abstracted as points. The point is the centroid of the space. In general the assumption in DSpace is that spaces are generally rectangular in shape.
+
+\subsubsection{Interior Design Elements}
+Interior design elements have two spatial abstractions: point and directed point. The point is the centroid of the element. The directed point must be given by the user for an interior design element because the intrinsic properties of the object can not be known a-priori. If a direction is not provided then an interior design element can not be abstracted into a directed point.
+
+
+\subsection{Representation A Design in DSpace}
+The representation of a design starts with a factbase in Prolog that links architectural entities (via a unique identifier) to is't architectural type (wall, door, window, column) or interior design type (display case, chair, desk). There is a single entry for each entity in the design in the factbase. The following Prolog code shows a single entry for the prototype of a factbase predicate and three instantiated entries for a doorway, wall, and desk. 
 
 \begin{verbatim}
    architectural_entity(ID, Type).
@@ -262,6 +294,7 @@ The representation of a design starts with a factbase in Prolog that links archi
    architectural_entity(desk4, dsDesk).
 \end{verbatim}
 
+\subsubsection{Representing Artefacts}
 Prolog rules are used to link an entity's identifier to its' multiple perspective geometries. Each entity has a single rule for it's physical geometry, and one rule for each of it's artefactual extension: functional space, operational space, range space. Not all entities have all artefactual extension. For example, a door has a functional and operational space but does not have a range space. Likewise, a wall has no artefactual extensions. 
 
 The form of each rule is similar and built using the same spatial primitives (points, lines, and polygons). By using the same spatial primitives to define both the physical structures and aretactual extensions of architectural entities and interior design elements, it allows for a uniform and generalized way to spatial reason over the structures. This will become an important feature in the following section on qualitative spatial reasoning.   
@@ -286,30 +319,8 @@ Door1's physical geometry will now by stored in the Geometry variable. Likewise,
 \end{verbatim}
 Door1's functional geometry will now be stored in the FunctionalGeometry variable. Similar queries are made to retrieve the operational and range space geometries.
 
-\subsection{Spatial Abstraction for Qualitative Spatial Reasoning}
-The physical and artefactual geometries in DSpace are generally represented as polygons or extended regions. However, to reason about these spatial structures in a more abstract computational framework, such as a framework for qualitative spatial reasoning, it is required that these architectural entities be spatially abstracted. This means taking into consideration what is meant by the direction of a door, or a wall as a point. How these entities are abstracted will depend on the qualitative spatial reasoning and design requirements that they are meant for. 
+\subsubsection{Representing Spatial Abstractions}
 
-For DSpace there are five spatial abstractions that are important: point, directed point, centroid, line, and polygon. The following section on qualitative spatial reasoning will explain why these abstractions are used, for now this section will focus on how the architectural entities in a design are transformed to the various spatial abstractions. 
-
-\subsubsection{Doorways, Windows, and Walls}
-Doorways, windows, and walls have point and directed point spatial abstractions. The point abstraction is straightforward and is the centroid of the polygon that makes of the physical geometry of the doorway, window, or wall. The directed point abstraction is the centroid as the origin and the direction is the direction that is perpendicular to the doorway's, window's or wall's intrinsic x-axis. This will give two directions because there will be two perpendicular lines form the origin outwards. This is fine and will actually be useful when reasoning about the direction of a doorways / window in the context of a specific room or area. 
-
-Walls are a special case because the are generally much longer in one axis. TODO: explain this
-
-\subsubsection{Columns}
-Columns have only one spatial abstraction which is a point, which is the centroid of the column. Columns do not have any intrinsic qualities which or functional aspects in a design that require any additional abstractions. 
-
-\subsubsection{Spaces: Rooms, Apartments, Buildings}
-Spaces such as rooms, apartments, and building can be abstracted as points. The point is the centroid of the space. In general the assumption in DSpace is that spaces are generally rectangular in shape.
-
-\subsubsection{Interior Design Elements}
-Interior design elements have two spatial abstractions: point and directed point. The point is the centroid of the element. The directed point must be given by the user for an interior design element because the intrinsic properties of the object can not be known a-priori. If a direction is not provided then an interior design element can not be abstracted into a directed point.
-
-\subsubsection{Spatial Transformations}
-
-\begin{verbatim}
-   perspective(id, abstraction, A).
-\end{verbatim}
 
 \subsection{IFC / ArchiCAD import}
 
