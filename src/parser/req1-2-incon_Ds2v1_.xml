@@ -748,6 +748,40 @@
             </itemAbsolute>
         </representation>
     </DsProduct>
+    <DsProduct globalId="03uEocq5$PH8W9buLbReRG" name="001" description="" xsi:type="DsSpace">
+        <objectPlacement>
+            <relativePlacement x="0.3" y="0.3" />
+            <refDirection x="1" y="0" />
+        </objectPlacement>
+        <representation>
+            <itemRelative>
+                <point x="0" y="0" />
+                <point x="22.63" y="0" />
+                <point x="22.63" y="1.18" />
+                <point x="29" y="1.18" />
+                <point x="29" y="10.78" />
+                <point x="22.63" y="10.78" />
+                <point x="22.63" y="11.93" />
+                <point x="0" y="11.93" />
+                <point x="0" y="0" />
+            </itemRelative>
+            <itemAbsolute>
+                <point x="0.3" y="0.3" />
+                <point x="22.93" y="0.3" />
+                <point x="22.93" y="1.48" />
+                <point x="29.3" y="1.48" />
+                <point x="29.3" y="11.08" />
+                <point x="22.93" y="11.08" />
+                <point x="22.93" y="12.23" />
+                <point x="0.3" y="12.23" />
+                <point x="0.3" y="0.3" />
+            </itemAbsolute>
+        </representation>
+    </DsProduct>
+    <DsRelationship globalId="1aU3CF0HhWIvMky64_OoRo" name="BuildingStoreyContainer" description="BuildingStoreyContainer for Spaces" xsi:type="DsRelAggregates">
+        <relatingObjectGUID>3uAVY0UXlCJvuv77V6f$m0</relatingObjectGUID>
+        <relatedObjectGUID>03uEocq5$PH8W9buLbReRG</relatedObjectGUID>
+    </DsRelationship>
     <DsRelationship globalId="3jfdLYF3DnIPt2bg3AQl1$" name="BuildingContainer" description="BuildingContainer for BuildingStories" xsi:type="DsRelAggregates">
         <relatingObjectGUID>071EaaIFW_IxgwteYAWAy1</relatingObjectGUID>
         <relatedObjectGUID>3uAVY0UXlCJvuv77V6f$m0</relatedObjectGUID>
@@ -771,7 +805,23 @@
         <relatedElementGUID>2Fwq8QrPc$GPh9wA9tp41o</relatedElementGUID>
         <relatedElementGUID>1Q_jqRYHHWHvDSkmuUxxDA</relatedElementGUID>
     </DsRelationship>
-    <DsRelationship globalId="x;d,uEh$cYgmTTPl=e|B" name="ProjectContainer" description="ProjectContainer for the building (created during IFC parsing)" xsi:type="DsRelAggregates">
+    <DsRelationship globalId="0B8KVMR80uI9BAbGW1ouDJ" name="SpaceContainer" description="SpaceContainer for Products" xsi:type="DsRelContainedInSpatialStructure">
+        <relatingStructureGUID>03uEocq5$PH8W9buLbReRG</relatingStructureGUID>
+        <relatedElementGUID>3UcDt2E5uXJO4hM1dqbB7q</relatedElementGUID>
+        <relatedElementGUID>3OdD8VcD$iHwx6l5Wg9Fe1</relatedElementGUID>
+        <relatedElementGUID>18GwN7PhNfIeNaHYpFI1KU</relatedElementGUID>
+        <relatedElementGUID>1UZzuOqde7IgkEFqeQ6u8H</relatedElementGUID>
+        <relatedElementGUID>1eBAw86pbSHQtVYZVmjLWl</relatedElementGUID>
+        <relatedElementGUID>3PBlC_RDTrHPIDimiQA6ao</relatedElementGUID>
+        <relatedElementGUID>1854Ap5AofIOX0cRMfLep1</relatedElementGUID>
+        <relatedElementGUID>0SgsfCd8F5GPEilwoWTeLp</relatedElementGUID>
+        <relatedElementGUID>1Hn3YtcUc5GAlEURyxazuz</relatedElementGUID>
+        <relatedElementGUID>06Zz$3NaWLGB_F$AnpfGJ_</relatedElementGUID>
+        <relatedElementGUID>0hy8dmBcDhIf5VfOU2ZBct</relatedElementGUID>
+        <relatedElementGUID>2rHkAjtwEfIR$x3nWKYnSD</relatedElementGUID>
+        <relatedElementGUID>0QtJrRsvT7JeZIZnTZdWqv</relatedElementGUID>
+    </DsRelationship>
+    <DsRelationship globalId="9dwrAwNFExzRz/8vkk/G" name="ProjectContainer" description="ProjectContainer for the building (created during IFC parsing)" xsi:type="DsRelAggregates">
         <relatingObjectGUID>0iUfBiwZIgJgQvjrHOlDyu</relatingObjectGUID>
         <relatedObjectGUID>071EaaIFW_IxgwteYAWAy1</relatedObjectGUID>
     </DsRelationship>

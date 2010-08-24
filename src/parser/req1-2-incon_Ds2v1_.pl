@@ -1,4 +1,3 @@
-arch_entity(rm1, dsRoom).
 arch_entity(a3UcDt2E5uXJO4hM1dqbB7q, NarrowdisplayCase).
 arch_entity(a3OdD8VcDiHwx6l5Wg9Fe1, NarrowdisplayCase).
 arch_entity(a18GwN7PhNfIeNaHYpFI1KU, NarrowdisplayCase).
@@ -28,8 +27,9 @@ arch_entity(a1Y56rIxFa0HR66WrCyOuko, dsWallStandardCase).
 arch_entity(a1eLP10AUsZJxNyRDPvGGk5, dsWallStandardCase).
 arch_entity(a3FkWqVVp0lGxW_ZM8pX2L7, dsWallStandardCase).
 arch_entity(a2Fwq8QrPcGPh9wA9tp41o, dsWallStandardCase).
-arch_entity(dr1, dsdoor).
-arch_entity(dr2, dsdoor).
+arch_entity(door1, dsdoor).
+arch_entity(door2, dsdoor).
+arch_entity(space1, dsSpace).
 ifc_geometry(a3UcDt2E5uXJO4hM1dqbB7q, G) :-
 	spatial_primitive(G, [(4.3,11.59),(5.41,11.59),(4.855,10.48),(4.6835,10.5072),(4.30683,10.9482),(4.3,11.59)]).
 
@@ -111,11 +111,12 @@ ifc_geometry(a3FkWqVVp0lGxW_ZM8pX2L7, G) :-
 ifc_geometry(a2Fwq8QrPcGPh9wA9tp41o, G) :-
 	spatial_primitive(G, [(0,0),(23.23,0),(22.93,0.3),(0.3,0.3),(0,0)]).
 
-ifc_geometry(dr1, G) :-
+ifc_geometry(door1, G) :-
 	spatial_primitive(G, [(0.2,4.81),(0.3,4.81),(0.3,3.31),(0.2,3.31),(0.2,4.81)]).
 
-ifc_geometry(dr2, G) :-
+ifc_geometry(door2, G) :-
 	spatial_primitive(G, [(10.51,0.2),(10.51,0.3),(12.01,0.3),(12.01,0.2),(10.51,0.2)]).
 
-ifc_geometry(rm1, G) :- 
-    spatial_primitive(G, [(0,0),(0,12.5),(30,0),(30,12.5)]).
+ifc_geometry(space1, G) :-
+	spatial_primitive(G, [(0.3,0.3),(22.93,0.3),(22.93,1.48),(29.3,1.48),(29.3,11.08),(22.93,11.08),(22.93,12.23),(0.3,12.23),(0.3,0.3)]).
+

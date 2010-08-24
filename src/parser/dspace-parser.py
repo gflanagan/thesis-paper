@@ -33,10 +33,17 @@ def parse_DsProduct(element):
     type = element.get(XSI+'type').replace('D','d')
     dsProductDict['type'] = type
     print dsProductDict['type']
-    dsProductDict['globalId'] = 'a'+element.get('globalId')
+    dsProductDict['globalId'] = extract_globalId(element.get('globalId'))
     if type != 'dsBuilding' and type != 'dsBuildingStorey':
         dsProductDict['representation'] = get_representation(element)    
     return dsProductDict
+
+def extract_globalId(id):
+    # extracts $ characters and appends a leading 'a' because Prolog does not allow
+    # $ chars in atoms and atoms must start with lower case letter    
+    new_id = id.replace('$', '')
+    new_id = 'a'+new_id
+    return new_id
 
 def get_representation(element):
     representation = element.find('representation')
