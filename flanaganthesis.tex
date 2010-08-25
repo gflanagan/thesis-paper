@@ -269,26 +269,44 @@ The quantitative geometries of the architectural structures and their artefactua
 
 In DSpace architectural entities have spatially abstracted representations that allows DSpace to reason about the design a higher levels of abstraction. For example, DSpace uses qualitative spatial reasoning for orientation, topology, and distance constraints over the qualified spatial geometries of the design. The crux of this is that is bridges the gap between the quantified geometries and the functional / qualitative requirements of the design, thus allowing the reasoner to validate a high level requirement against its precise geometric representation. 
 
-The quantified geometries in DSpace are generally represented as polygons. However, the qualitative spatial reasoning in DSpace requires spatial abstractions of: point, directed point, line, and convex hull. These abstract representations emerge from transformations make on the quantitative geometries. The process of abstracting an architectural entity depends on an interpretation of the intrinsic spatial nature of the entity in the context of the building. For example, the representation of a doorway as a directed point depends on the interpretation of the intrinsic direction of the doorway as well as its' abstraction as a point. 
+The quantified geometries in DSpace are generally represented as polygons. However, the qualitative spatial reasoning in DSpace requires spatial abstractions of: point, directed point, and convex hull. These abstract representations emerge from transformations make on the quantitative geometries. The process of abstracting an architectural entity depends on an interpretation of the intrinsic spatial nature of the entity in the context of the building. For example, the representation of a doorway as a directed point depends on the interpretation of the intrinsic direction of the doorway as well as its' abstraction as a point. 
 
 The remainder of this section focuses on the interpretation of the intrinsic spatial nature of specific architectural entities and how they are transformed from the quantitative geometries based on the interpretation. The following section on qualitative spatial reasoning will explain how these abstraction are used in the DSpace reasoner. 
 
-TODO: fig:spatial abstractions point dir point line polygon 
+TODO: fig:spatial abstractions point dir point polygon 
 
-\subsubsection{Doorways, Windows, and Walls}
-Doorways, windows, and walls have three spatial abstractions: point, directed point, and polygon. The point abstraction is straightforward and is the centroid of the polygon that makes of the physical geometry of the doorway, window, or wall. The directed point abstraction is the centroid as the origin and the direction is the direction that is perpendicular to the doorway's, window's or wall's intrinsic x-axis. This will give two directions because there will be two perpendicular lines form the origin outwards. This is fine and will actually be useful when reasoning about the direction of a doorways / window in the context of a specific room or area. 
+\begin{table}[H]
+  \begin{center}
+  \begin{tabular}{ | r | c | c | c |}
+    \hline
+    entity & point & directed point & convex hull\\ \hline
+    doorway & X & X & X \\ \hline
+    window & X & X & X \\ \hline
+    wall & X & X & X \\ \hline
+    column & X &  & X \\ \hline
+    space & X &  & X \\ \hline
+    interior design object & X & X* & X \\
+    \hline
+  \end{tabular}
+  \end{center}
+\caption{Spatial Abstractions for Architectural Entities}
+\end{table} 
 
-Walls are a special case because the are generally much longer in one axis. TODO: explain this
 
-\subsubsection{Columns}
-Columns have only one spatial abstraction which is a point, which is the centroid of the column. Columns do not have any intrinsic qualities which or functional aspects in a design that require any additional abstractions. 
+\noindent \emph{\large Point} \\
+\indent The point abstraction for all architectural entities is the centroid of the quantitative polygon representation. In general, the centroid is a good point approximation of the object in terms of it's location in the design. An assumption made here is that architectural objects are rectangular in shape placing the centroid in a reasonable location within the polygon.  
 
-\subsubsection{Spaces: Rooms, Apartments, Buildings}
-Spaces such as rooms, apartments, and building can be abstracted as points. The point is the centroid of the space. In general the assumption in DSpace is that spaces are generally rectangular in shape.
+TODO: figure for point abs
 
-\subsubsection{Interior Design Elements}
-Interior design elements have two spatial abstractions: point and directed point. The point is the centroid of the element. The directed point must be given by the user for an interior design element because the intrinsic properties of the object can not be known a-priori. If a direction is not provided then an interior design element can not be abstracted into a directed point.
+\noindent \emph{\large Directed Point} \\
+\indent Walls, doorways, windows, and some interior design object have a directed point abstractions, all other entities, (columns, rooms, slabs) do not. A directed point is comprised of a point and a direction. For all entities the point is calculated as the centroid, just as in the point abstraction. The direction is either user defined, as is the case for interior design objects, or is implicitly defined by the intrinsic nature of the entity, such as doorways, walls, and windows. In the case of these entities, their direction is defined as the perpendicular line to the intrinsic x-axis of the object. Based on this definition there will be two perpendicular lines that define the direction. In this situation, the context of the space in which the entity is located is need to decided which of the two directions to use.  
 
+TODO: figure for dir point abs
+
+\noindent \emph{\large Convex Hull} \\
+\indent All architectural entities have a convex hull abstraction. This convex hull is calculated over the quantitative polygon representation by using the divide and conquer convex hull algorithm \cite{tbd}. The result of the algorithm is a convex hull representation that is as a list of point sorted in counterclockwise order.
+
+TODO: figure for convex hull abs
 
 \subsection{Representation A Design in DSpace}
 The representation of a design starts with a factbase in Prolog that links architectural entities (via a unique identifier) to is't architectural type (wall, door, window, column) or interior design type (display case, chair, desk). A single entry in the factbase is a Prolog predicate that takes two atoms as arguments: an identifier and entity type. There is a single predicate entry for each architectural entity in the design within the factbase. The following Prolog code shows a single entry for the prototype of a factbase predicate and three instantiated entries for a doorway, wall, and desk. 
@@ -308,8 +326,10 @@ The form of each rule is similar and built using the same spatial primitives (po
 \begin{verbatim}
    physical_geometry(door1, Geometry) :-
            spatial_primitive(Geometry, region(PtList)).
+           
    functional_space(door1, Geometry) :-
            spatial_primitive(Geometry, region(PtList)).
+           
    operational_space(door1, Geometry) :-
            spatial_primitive(Geometry, region(PtList)).
 \end{verbatim}
@@ -326,7 +346,24 @@ Door1's physical geometry will now by stored in the Geometry variable. Likewise,
 Door1's functional geometry will now be stored in the FunctionalGeometry variable. Similar queries are made to retrieve the operational and range space geometries.
 
 \subsubsection{Transformation for Spatial Abstractions}
+Spatial abstractions are calculated by transformations from the quantitative geometries. In DSpace spatial transformations depends on the architectural entity type, the target spatial abstraction (point, directed point, or convex hull), and something the context of the space (direction of door into or out of a specific room). There is a single set of Prolog rules that match the transformation arguments. The following is code for the perspective rules which take in four arguments and return the geometry for a specific spatial abstraction. Note that the fourth argument is only used in special cases when I context space is need, such as for the direction of a doorway, window, or wall.
 
+\begin{verbatim}
+   perspective(ID, Abstraction, SpatialAbstraction, Context)
+         
+   perspective(door1, point, PointAbs, _) :- 
+           quantitative_geometry(door1, Quant),
+           centroid(Quant, PointAbs).
+            
+   perspective(door1, directed_point, (Point, Dir), room3) :-
+           quantitative_geometry(door1, Quant),
+           centroid(Quant, Point),
+           direction(Quant, Point, room3, Dir).   
+   
+   perspective(door1, convex, ConvexAbs, _).
+           quantitative_geometry(door1, Quant),
+           convex_hull(convex, ConvexAbs).
+\end{verbatim} 
 
 \subsection{IFC / ArchiCAD import}
 
