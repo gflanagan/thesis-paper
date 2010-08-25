@@ -234,9 +234,9 @@ This remainder of this section is structured as follows. The first subsection lo
 In DSpace designs are represented in multiple perspectives that incorporate: (1) the artefactual extension of architectural entities, (2) the spatial abstractions of the design from a qualitative spatial perspective, and (3) the physical geometries that pertain to the quantitative structures of the design. The multiple presepective representation of DSpace allows reasoning about design requirements that go beyond purely quantitative geometric reasoning.
 
 \subsubsection{Spatial Artefacts}
-Unlike current state-of-the-art CAAD systems that only represent the physical and structural elements of a design, DSpace represents spatial artefacts, non-spatial extensions of architectural elements that pertain to a specific functional quality of the element in the context of the design. Artefactual extensions do not have a physical manifestation, however, they become an important part of the design process because they effect the functionality and performance of a design. 
+Spatial artefacts are non-spatial extensions of architectural entities that pertain to a specific functional quality of the entity in the context of the design. Artefactual extensions do not have a physical manifestation, however, they become an important part of the design process because they effect the functionality and performance of a design. 
 
-There are three types of spatial artefacts identified by Bhatt\cite{Bhatt}:
+There are three types of spatial artefacts identified by Bhatt\cite{Bhatt} that are represented in DSpace:
 \begin{enumerate}
 \item \emph{operational space} 
 \item \emph{functional space} 
@@ -260,17 +260,19 @@ The functional space encompasses a region of space that is required for the obje
 
 The range space pertains to a region of space that encompass the range of a camera's view or the range of a motion sensor. For example, the range space of a camera is defined by its depth of field and angle of view. It represents the total space that is under surveillance of the camera (see figure \ref{range-space}).
 
-Artefactual extensions effect how a design preforms. For example, a sink in a bathroom has a functional space, the space a person uses the sink to wash his or her hands. If this space is interfered with by the functional or physical space of a doorways, then this will cause a circulation problems when a person is washing their hands and another person enters the bathroom.
+Artefactual extensions effect how well a design functions. For example, a sink in a bathroom has a functional space, the space in which a person occupies while washing his/her hands at the sink. If this space is interfered with by the functional or physical space of a doorway, then this will cause a circulation problems when a person is washing their hands and another person enters the bathroom.
 
 TODO: fig:sink example.
 
 \subsubsection{Spatial Abstraction for Qualitative Spatial Reasoning}
-The physical and artefactual geometries in DSpace are generally represented as polygons or extended regions. However, to reason about these spatial structures in a more abstract computational framework, such as a framework for qualitative spatial reasoning, it is required that these architectural entities be spatially abstracted. This means taking into consideration what is meant by the direction of a door, or a wall as a point. How these entities are abstracted will depend on the qualitative spatial reasoning and design requirements that they are meant for. 
+The physical and artefactual geometries in DSpace are generally represented as polygons. However, to reason about these spatial structures in a more abstract computational framework, such as a framework for qualitative spatial reasoning, it is required that these architectural entities be spatially abstracted. This means taking into consideration what is meant by the direction of a door, or a wall as a point. How these entities are abstracted will depend on the qualitative spatial reasoning and design requirements that they are meant for. 
 
-For DSpace there are five spatial abstractions that are important: point, directed point, centroid, line, and polygon. The following section on qualitative spatial reasoning will explain why these abstractions are used, for now this section will focus on how the architectural entities in a design are transformed to the various spatial abstractions. 
+For DSpace there are four spatial abstractions that are important: point, directed point, line, and polygon. The following section on qualitative spatial reasoning will explain how these abstractions are used in the DSpace reasoner, for now this section will focus on how specific architectural entities are transformed from their physical / structural quantitative geometries to the various spatial abstractions.
+
+TODO: fig:spatial abstractions point dir point line polygon 
 
 \subsubsection{Doorways, Windows, and Walls}
-Doorways, windows, and walls have point and directed point spatial abstractions. The point abstraction is straightforward and is the centroid of the polygon that makes of the physical geometry of the doorway, window, or wall. The directed point abstraction is the centroid as the origin and the direction is the direction that is perpendicular to the doorway's, window's or wall's intrinsic x-axis. This will give two directions because there will be two perpendicular lines form the origin outwards. This is fine and will actually be useful when reasoning about the direction of a doorways / window in the context of a specific room or area. 
+Doorways, windows, and walls have three spatial abstractions: point, directed point, and polygon. The point abstraction is straightforward and is the centroid of the polygon that makes of the physical geometry of the doorway, window, or wall. The directed point abstraction is the centroid as the origin and the direction is the direction that is perpendicular to the doorway's, window's or wall's intrinsic x-axis. This will give two directions because there will be two perpendicular lines form the origin outwards. This is fine and will actually be useful when reasoning about the direction of a doorways / window in the context of a specific room or area. 
 
 Walls are a special case because the are generally much longer in one axis. TODO: explain this
 
@@ -285,7 +287,7 @@ Interior design elements have two spatial abstractions: point and directed point
 
 
 \subsection{Representation A Design in DSpace}
-The representation of a design starts with a factbase in Prolog that links architectural entities (via a unique identifier) to is't architectural type (wall, door, window, column) or interior design type (display case, chair, desk). There is a single entry for each entity in the design in the factbase. The following Prolog code shows a single entry for the prototype of a factbase predicate and three instantiated entries for a doorway, wall, and desk. 
+The representation of a design starts with a factbase in Prolog that links architectural entities (via a unique identifier) to is't architectural type (wall, door, window, column) or interior design type (display case, chair, desk). A single entry in the factbase is a Prolog predicate that takes two atoms as arguments: an identifier and entity type. There is a single predicate entry for each architectural entity in the design within the factbase. The following Prolog code shows a single entry for the prototype of a factbase predicate and three instantiated entries for a doorway, wall, and desk. 
 
 \begin{verbatim}
    architectural_entity(ID, Type).
@@ -295,9 +297,9 @@ The representation of a design starts with a factbase in Prolog that links archi
 \end{verbatim}
 
 \subsubsection{Representing Artefacts}
-Prolog rules are used to link an entity's identifier to its' multiple perspective geometries. Each entity has a single rule for it's physical geometry, and one rule for each of it's artefactual extension: functional space, operational space, range space. Not all entities have all artefactual extension. For example, a door has a functional and operational space but does not have a range space. Likewise, a wall has no artefactual extensions. 
+Prolog rules link an entity, via its' identifier, to its' multiple perspective geometries. Each entity has a single rule for it's physical geometry, and its' artefactual extensions: functional space, operational space, range space. Entities can have zero, one, two, or three artefactual extension. For example, a door has a functional and operational space but does not have a range space. Likewise, a column has no artefactual extensions. 
 
-The form of each rule is similar and built using the same spatial primitives (points, lines, and polygons). By using the same spatial primitives to define both the physical structures and aretactual extensions of architectural entities and interior design elements, it allows for a uniform and generalized way to spatial reason over the structures. This will become an important feature in the following section on qualitative spatial reasoning.   
+The form of each rule is similar and built using the same spatial primitives (points, lines, and polygons). By using the same spatial primitives to define both the physical structures and aretactual extensions of architectural entities and interior design elements, it allows for a uniform and generalized way to transform the geometries into spatially abstracted objects. This will become an important feature in the following section on qualitative spatial reasoning.   
 
 \begin{verbatim}
    physical_geometry(door1, Geometry) :-
@@ -308,7 +310,7 @@ The form of each rule is similar and built using the same spatial primitives (po
            spatial_primitive(Geometry, region(PtList)).
 \end{verbatim}
 
-Retrieving a geometry is accomplished in a uniform way across the different perspectives. To get a geometry all that is need is the unique identifier for the entity. For example, to get the physical geometry for a door with and identifier, door1, the following query is made:
+Retrieving a geometry is accomplished in a uniform way across all perspectives. To get a geometry all that is need is the unique identifier for the entity. For example, to get the physical geometry for a door with and identifier, door1, the following query is made:
 
 \begin{verbatim}
    physical_geometry(door1, Geometry).
@@ -319,7 +321,7 @@ Door1's physical geometry will now by stored in the Geometry variable. Likewise,
 \end{verbatim}
 Door1's functional geometry will now be stored in the FunctionalGeometry variable. Similar queries are made to retrieve the operational and range space geometries.
 
-\subsubsection{Representing Spatial Abstractions}
+\subsubsection{Transformation for Spatial Abstractions}
 
 
 \subsection{IFC / ArchiCAD import}
@@ -331,6 +333,8 @@ The spatial reasoning module in DSpace is built in a constraint logic programmin
 Constraint Handling Rules
 
 Qualification
+
+\subsection{Qualification}
 
 \subsection{Topology}
 Topological reasoning works over points, lines, and regions (convex hulls). The main form of spatial topological reasoning is qualification. The following are the topological relationships that can be qualified: partially overlapping, ntpp, ntppi, disconnected and equals. 
