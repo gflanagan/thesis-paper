@@ -222,16 +222,18 @@ spatial reasoning (CLP)
 declarative Prolog / CLP framework
 
 \section{Representation}
-CAAD tools represent the physical and structural aspects of a design in a manner that is both accurate and precise. This type of representation captures the design, in terms of the spatial configurations as they are comprised of the architectural entities (i.e., walls, doors, windows), at a low-level of granularity that is needed in the actual construction of the building. Such a representation allows an architect to reason about the physical, structural and mechanical aspects of a design, such as the precise placement of a door in a wall or the mechanics of a window swinging open and closed. However, this type of representation scheme does not incorporation the qualitative and functional features of the design. For example, a structural design requirement that addresses air circulation stipulates that a doorway and window should face directly towards each other. For a traditional CAAD based system, reasoning about such a requirement is not possible because it pertains to qualitative spatial design features and functional attributes that go beyond the purely geometric representation of the design, i.e., in this case the qualitative spatial relationship between a window and doorway. 
+CAAD tools represent the physical and structural aspects of a design in a manner that is both accurate and precise. This type of representation captures the design, in terms of the spatial configurations as they are comprised of the architectural entities (i.e., walls, doors, windows), at a low-level of granularity that is needed in the actual construction of the building. This allows an architect to reason about the physical, structural and mechanical aspects of a design, such as the precise placement of a door in a wall or the mechanics of a window swinging open and closed. However, this type of representation scheme does not incorporation the qualitative and functional features of the design. For example, a structural design requirement that addresses air circulation stipulates that a doorway and window should face directly towards each other. For a traditional CAAD based system, reasoning about such a requirement is not possible because it pertains to qualitative spatial design features and functional attributes that go beyond the purely geometric representation of the design, i.e., in this case the qualitative spatial relationship between a window and doorway. 
 
 In DSpace this type of requirement can be reasoned about because the design is represented in a multiple perspective structure that incorporates the design's artefactual extensions, qualitative spatial relationships, and quantitative geometries. This representation allows an architect to validate a work-in-progress design from a conceptual and qualitative perspective against the physical and precise real world geometrical representation of the design \cite{Bhatt}.
 
 TODO: fig:multiple perspective representation
 
-This remainder of this section is structured as follows. The first subsection looks at the multiple perspective design representation of the DSpace reasoner. The second subsection looks at how each perspective is formally modeled (coded) in DSpace. The last section looks at how a real world design from a state-of-the-art architectural design tool is imported into the DSpace reasoner from the DsSchema and IFC format.
+This remainder of this section is structured as follows. The first subsection looks at the multiple perspective design representation of the DSpace reasoner. The second subsection looks at how each perspective is formally modeled (coded) in ins CLP framework of DSpace. The last section looks at how a real world design from a state-of-the-art architectural design tool is imported into the DSpace reasoner from the DsSchema and IFC format.
 
 \subsection{Multiple Perspectives}
 In DSpace designs are represented in multiple perspectives that incorporate: (1) the artefactual extension of architectural entities, (2) the spatial abstractions of the design from a qualitative spatial perspective, and (3) the physical geometries that pertain to the quantitative structures of the design. The multiple presepective representation of DSpace allows reasoning about design requirements that go beyond purely quantitative geometric reasoning.
+
+\subsubsection{Quantitative Model}
 
 \subsubsection{Spatial Artefacts}
 Spatial artefacts are non-spatial extensions of architectural entities that pertain to a specific functional quality of the entity in the context of the design. Artefactual extensions do not have a physical manifestation, however, they become an important part of the design process because they effect the functionality and performance of a design. 
@@ -245,18 +247,18 @@ There are three types of spatial artefacts identified by Bhatt\cite{Bhatt} that 
 
 \begin{figure}[H]
  \centering
- \subfloat[operational space]{\label{operational-space}\includegraphics[width=36mm]{operational-space}}
- \hspace{9 mm}
- \subfloat[functional space]{\label{functional-space}\includegraphics[width=35mm]{functional-space}}
-  \hspace{9 mm}
- \subfloat[range space]{\label{range-space}\includegraphics[width=36mm]{operational-space}}
+ \subfloat[operational space]{\label{operational-space}\includegraphics[width=43mm]{operational-space}}
+ \hspace{7 mm}
+ \subfloat[functional space]{\label{functional-space}\includegraphics[width=40mm]{functional-space}}
+  \hspace{7 mm}
+ \subfloat[range space]{\label{range-space}\includegraphics[width=43mm]{operational-space}}
  \caption{Artefactual Extensions}
 \label{artefactual-extensions}
 \end{figure}
 
-The operational space encompasses the region of space required by an object to preform it's function (i.e., doorway opening and closing). For example, the operational space of a door is the area in which a door can occupy during it's operation (see figure \ref{operational-space}). This space is dynamic in the sense that it represents the all possible location of the door. 
+The operational space encompasses the region of space required by an object to preform it's function. For example, the operational space of a door is the area in which a door can occupy during it's operation, opening and closing (see figure \ref{operational-space}). This space is dynamic in the sense that it represents the all possible location the physical door can occupy. 
 
-The functional space encompasses a region of space that is required for the object to function or for a person to operate (i.e., space for operating a doorway). For example, the functional space of a doorway is the total area needed for a person to operate, open and close, as well as any additional space need to navigate entirely through the door (see figure \ref{functional-space}). 
+The functional space encompasses a region of space that is required for the object to function or for a person to operate the object. For example, the functional space of a doorway is the total area needed for a person to operate, open and close, as well as any additional space need to navigate entirely through the door (see figure \ref{functional-space}). 
 
 The range space pertains to a region of space that encompass the range of a camera's view or the range of a motion sensor. For example, the range space of a camera is defined by its depth of field and angle of view. It represents the total space that is under surveillance of the camera (see figure \ref{range-space}).
 
@@ -267,9 +269,9 @@ TODO: fig:sink example.
 \subsubsection{Spatial Abstraction for Qualitative Spatial Reasoning}
 The quantitative geometries of the architectural structures and their artefactual extensions are directly imported into the DSpace reasoner, via the DsSchema (more on this later). These quantitative geometries are the foundation of the multiple perceptive design representation. However, to reason about the design on a conceptual and/or qualitative level, the design must be represented from a spatial perspective at a higher level of abstraction from the quantitative geometries. 
 
-In DSpace architectural entities have spatially abstracted representations that allows DSpace to reason about the design a higher levels of abstraction. For example, DSpace uses qualitative spatial reasoning for orientation, topology, and distance constraints over the qualified spatial geometries of the design. The crux of this is that is bridges the gap between the quantified geometries and the functional / qualitative requirements of the design, thus allowing the reasoner to validate a high level requirement against its precise geometric representation. 
+In DSpace architectural entities have spatially abstracted representations that allows DSpace to reason about the design a higher levels of abstraction. For example, DSpace uses qualitative spatial reasoning for orientation, topology, and distance constraints over the qualified spatial geometries of the design. The crux of this is that it bridges the gap between the quantified geometries and the functional / qualitative requirements of the design, thus allowing the reasoner to validate a high level requirement against its precise geometric representation. 
 
-The quantified geometries in DSpace are generally represented as polygons. However, the qualitative spatial reasoning in DSpace requires spatial abstractions of: point, directed point, and convex hull. These abstract representations emerge from transformations make on the quantitative geometries. The process of abstracting an architectural entity depends on an interpretation of the intrinsic spatial nature of the entity in the context of the building. For example, the representation of a doorway as a directed point depends on the interpretation of the intrinsic direction of the doorway as well as its' abstraction as a point. 
+The quantified geometries in DSpace are generally represented as polygons. However, the qualitative spatial reasoning in DSpace requires spatial abstractions of: point, directed point, and convex hull. These abstract representations emerge from spatial transformations on the quantitative geometries. The process of abstracting an architectural entity depends on an interpretation of the intrinsic spatial nature of the entity in the context of the building. For example, the representation of a doorway as a directed point depends on the interpretation of the intrinsic direction of the doorway as well as its' abstraction as a point. 
 
 The remainder of this section focuses on the interpretation of the intrinsic spatial nature of specific architectural entities and how they are transformed from the quantitative geometries based on the interpretation. The following section on qualitative spatial reasoning will explain how these abstraction are used in the DSpace reasoner. 
 
@@ -309,7 +311,7 @@ TODO: figure for dir point abs
 TODO: figure for convex hull abs
 
  \subsection{Representing a Design in a CLP Framework}
-The representation of a design starts with a factbase in Prolog that links architectural entities (via a unique identifier) to is't architectural type (wall, door, window, column) or interior design type (display case, chair, desk). A single entry in the factbase is a Prolog predicate that takes two atoms as arguments: an identifier and entity type. There is a single predicate entry for each architectural entity in the design within the factbase. The following Prolog code shows a single entry for the prototype of a factbase predicate and three instantiated entries for a doorway, wall, and desk. 
+The representation of a design starts with a factbase in Prolog that links architectural entities (via a unique identifier) to is't architectural type (wall, door, window, column) or interior design type (display case, chair, desk). A single entry in the factbase is a Prolog predicate that takes two atoms as arguments: an identifier and entity type. There is a single predicate entry for each architectural entity in the design within the factbase. (TODO: explain the factbase is instantiated during the import process). The following Prolog code shows a single entry for the prototype of a factbase predicate and three instantiated entries for a doorway, wall, and desk. 
 
 \begin{verbatim}
    architectural_entity(ID, Type).
@@ -319,7 +321,7 @@ The representation of a design starts with a factbase in Prolog that links archi
 \end{verbatim}
 
 \subsubsection{Representing Artefacts}
-Prolog rules link an entity, via its' identifier, to its' multiple perspective geometries. Each entity has a single rule for it's physical geometry, and its' artefactual extensions: functional space, operational space, range space. Entities can have zero, one, two, or three artefactual extension. For example, a door has a functional and operational space but does not have a range space. Likewise, a column has no artefactual extensions. 
+Prolog rules link an entity, via its' identifier, to its' multiple perspective geometries. Each entity has a single rule for its' physical geometry, and its' artefactual extensions: functional space, operational space, range space. Every entity has a physical geometry, but can have zero, one, two, or three artefactual extension. For example, a door has a functional and operational space but does not have a range space. Likewise, a column has no artefactual extensions. 
 
 The form of each rule is similar and built using the same spatial primitives (points, lines, and polygons). By using the same spatial primitives to define both the physical structures and aretactual extensions of architectural entities and interior design elements, it allows for a uniform and generalized way to transform the geometries into spatially abstracted objects. This will become an important feature in the following section on qualitative spatial reasoning.   
 
@@ -346,7 +348,7 @@ Door1's physical geometry will now by stored in the Geometry variable. Likewise,
 Door1's functional geometry will now be stored in the FunctionalGeometry variable. Similar queries are made to retrieve the operational and range space geometries.
 
 \subsubsection{Transformation for Spatial Abstractions}
-Spatial abstractions are calculated by transformations from the quantitative geometries. In DSpace spatial transformations depends on the architectural entity type, the target spatial abstraction (point, directed point, or convex hull), and something the context of the space (direction of door into or out of a specific room). There is a single set of Prolog rules that match the transformation arguments. The following is code for the perspective rules which take in four arguments and return the geometry for a specific spatial abstraction. Note that the fourth argument is only used in special cases when I context space is need, such as for the direction of a doorway, window, or wall.
+Spatial abstractions are calculated by transformations of the quantitative geometries. Spatial transformations depends on the architectural entity type, the target spatial abstraction (point, directed point, or convex hull), and something the context of the space (direction of door into or out of a specific room). There is a single set of Prolog rules that match the transformation arguments. The following is code for the perspective rules which take in four arguments and return the geometry for a specific spatial abstraction. Note that the fourth argument is only used in special cases when I context space is need, such as for the direction of a doorway, window, or wall.
 
 \begin{verbatim}
    perspective(ID, Abstraction, SpatialAbstraction, Context)
@@ -376,7 +378,7 @@ Constraint Handling Rules
 Qualification
 
 \subsection{Topology}
-The DSpace reasoner can qualify the following topological relationships for convex hulls: partially overlapping, ntpp (inside), ntppi (outside), and disconnected. The process of topological qualification uses the geometric properties of line segment intersections and convex hulls to detect these topological relationships. 
+The DSpace reasoner can qualify the following four topological relationships for convex hulls: partially overlapping, ntpp (inside), ntppi (outside), and disconnected. The process of topological qualification uses the geometric properties of line segment intersections and convex hulls to detect these topological relationships. 
 
 The qualification of the nttp relationship uses the property of convex hulls to check the polarity of each point in object B against the line segment of each part of the convex hull in A. Since the convex hull is always represented in a counterclockwise order the polarity of the determinant will always be negative. Similarly, the qualification of the nttpi relationship is simply the negation of the nttp relationship.
 
