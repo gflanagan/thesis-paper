@@ -378,17 +378,19 @@ Constraint Handling Rules
 Qualification
 
 \subsection{Topology}
-The DSpace reasoner can qualify the following four topological relationships for convex hulls: partially overlapping, ntpp (inside), ntppi (outside), and disconnected. The process of topological qualification uses the geometric properties of line segment intersections and convex hulls to detect these topological relationships. 
+The DSpace reasoner can qualify the following four topological relationships for convex hulls: partially overlapping, ntpp (inside), ntppi (outside), and disconnected. The process of topological qualification uses the geometric properties of convex hulls to detect topological relationships. 
 
-The qualification of the nttp relationship uses the property of convex hulls to check the polarity of each point in object B against the line segment of each part of the convex hull in A. Since the convex hull is always represented in a counterclockwise order the polarity of the determinant will always be negative. Similarly, the qualification of the nttpi relationship is simply the negation of the nttp relationship.
+An object \emph{A} has an ntpp relationship with an object \emph{B} if all \emph{A}'s points are inside the convex hull of \emph{B}. The ntpp relationship is qualified in DSpace by using the property of convex hull / point containment. A point is inside a convex hull if the polarity of the determinate between the point and each line segment in the convex hull is negative. Because the points in a convex hull are always ordered counterclockwise, in the DSpace representation, the polarity of the determinant between a point inside the convex hull will always be negative. 
+
+An object \emph{B} has an ntppi relationship with an object \emph{B} if all \emph{B}'s points are inside the convex hull of \emph{A}. Because the ntppi relationship is the inverse of ntpp it is easy to check for in DSpace be using the ntpp relationship. 
 
 TODO: figure for qualification of nttp, ntppi
 
-The qualification of the partially overlapping relationship check for line segment intersections between two convex hulls. If at least one intersection is found then the convex hulls are partially overlapping. 
+An object \emph{A} has a partially overlapping relationship with an object \emph{B} if one or more line segments in \emph{A} intersect with one or more line segments in \emph{B}. The partially overlapping relationship is qualified in DSpace by checking for line intersection between line segments. Two objects are partially intersecting if they intersect at at least one point.  
 
 TODO: figure for qualification of partially overlapping
 
-The qualification of the disconnected relationship check for line segment intersections between two convex hulls. If there are none it then check a single point to make sure it is not inside the other convex hull, this is checking for a ntpp relationship in which there would be no line intersections. 
+An object \emph{A} has a disconnected relationship with an object \emph{B} if \emph{A} does not intersect with \emph{B}, there are no points in \emph{A} that are inside \emph{B}, and there are no points in \emph{B} that are inside \emph{A}. The disconnected relationship is qualified by checking for line segment intersection and point / convex hull containment. If there are no line segment intersections and no point / convex hull containment then two objects are disconnected.  
 
 TODO: figure for qualification of disconnected
 
