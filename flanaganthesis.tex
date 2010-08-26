@@ -380,15 +380,40 @@ Qualification
 \subsection{Topology}
 The DSpace reasoner can qualify the following four topological relationships for convex hulls: partially overlapping, ntpp (inside), ntppi (outside), and disconnected. The process of topological qualification uses the geometric properties of convex hulls to detect topological relationships. 
 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=40mm]{ntpp}
+\caption{A Inside B}
+\label{inside}
+\end{figure}
+
 An object \emph{A} has an ntpp relationship with an object \emph{B} if all \emph{A}'s points are inside the convex hull of \emph{B}. The ntpp relationship is qualified in DSpace by using the property of convex hull / point containment. A point is inside a convex hull if the polarity of the determinate between the point and each line segment in the convex hull is negative. Because the points in a convex hull are always ordered counterclockwise, in the DSpace representation, the polarity of the determinant between a point inside the convex hull will always be negative. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=40mm]{ntppi}
+\caption{A Outside B}
+\label{outside}
+\end{figure}
 
 An object \emph{B} has an ntppi relationship with an object \emph{B} if all \emph{B}'s points are inside the convex hull of \emph{A}. Because the ntppi relationship is the inverse of ntpp it is easy to check for in DSpace be using the ntpp relationship. 
 
-TODO: figure for qualification of nttp, ntppi
+\begin{figure}[H]
+\centering
+\includegraphics[width=50mm]{overlapping}
+\caption{Paritally Overlapping}
+\label{overlapping}
+\end{figure}
 
 An object \emph{A} has a partially overlapping relationship with an object \emph{B} if one or more line segments in \emph{A} intersect with one or more line segments in \emph{B}. The partially overlapping relationship is qualified in DSpace by checking for line intersection between line segments. Two objects are partially intersecting if they intersect at at least one point.  
 
-TODO: figure for qualification of partially overlapping
+\begin{figure}[H]
+\centering
+\includegraphics[width=60mm]{disconnected}
+\caption{Disconnected}
+\label{disconnected}
+\end{figure}
 
 An object \emph{A} has a disconnected relationship with an object \emph{B} if \emph{A} does not intersect with \emph{B}, there are no points in \emph{A} that are inside \emph{B}, and there are no points in \emph{B} that are inside \emph{A}. The disconnected relationship is qualified by checking for line segment intersection and point / convex hull containment. If there are no line segment intersections and no point / convex hull containment then two objects are disconnected.  
 

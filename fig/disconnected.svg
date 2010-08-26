@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="744.09448"
+   height="1052.3622"
+   id="svg2954">
+  <defs
+     id="defs2956" />
+  <g
+     id="layer1">
+    <path
+       d="m 194.28571,329.75504 -80,80"
+       id="path2823"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       d="M 310,352.36218 194.28571,329.75504"
+       id="path2825"
+       style="fill:none;stroke:#000000;stroke-width:1.04402459px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       d="M 194.28571,489.75504 310,442.36218"
+       id="path2829"
+       style="fill:none;stroke:#000000;stroke-width:1.06888092px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       d="m 194.28571,489.75504 -80,-80"
+       id="path2833"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <text
+       x="235"
+       y="492.36218"
+       id="text2841"
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+         x="235"
+         y="492.36218"
+         id="tspan2843">A</tspan></text>
+    <text
+       x="345"
+       y="492.36218"
+       id="text2845"
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+         x="345"
+         y="492.36218"
+         id="tspan2847">B</tspan></text>
+    <path
+       d="m 340,412.36218 110,20.67497"
+       id="path3023"
+       style="fill:none;stroke:#000000;stroke-width:0.98335052px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
+    <path
+       d="m 430,492.36218 20,-60"
+       id="path3027"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       d="m 370,492.36218 60,0"
+       id="path3029"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       d="m 370,492.36218 -30,-80"
+       id="path3031"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       d="m 310,442.36218 0,-90"
+       id="path3079"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  </g>
+</svg>
