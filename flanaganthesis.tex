@@ -407,7 +407,10 @@ Figure \ref{facing-opra-base-rel} shows the OPRA$_{2}$ (two lines) partitioning 
 \label{facing-opra-base-rel}
 \end{figure}
 
-Geometric Detection - linear inequalities
+OPRA relationships are qualified using linear inequalities based on the lines that emanate from the point origin.    The linear inequalities are based on the following equations as defined by OPRA: 
+
+$(((\frac{i}{2} \, \in \, N \wedge i < 2) \wedge (2\pi - \frac{i-2}{4m} < \theta_{AB} - \theta_{A} < \frac{2\pi}{4m}))$ \\
+$\lor ((\frac{i+1}{2} \in N \wedge i \geq 1) \wedge (\theta_{AB} - \theta_{A} = 2\pi \frac{i-1}{4m})))$
 
 Extrinsic orientational reasoning is based on the Single Cross calculus (SCC). SCC defines the orientation of a point C (referent) with respect to a point B (relatum) from the viewpoint of a point A (origin).
 
@@ -418,14 +421,15 @@ Extrinsic orientational reasoning is based on the Single Cross calculus (SCC). S
 \label{scc}
 \end{figure}
 
-Geometric Detection - partition of space into half planes - linear inequalities
+SCC relationships are qualified using linear inequalities based on the lines that partition space into the SCC sectors. 
 
 \subsection{Distance}
-Uses Sindalog reasoner's distance constraints
-Variation of distance constraints
+The DSpace reasoner can calculate the minimum euclidean distance between points, lines, and polygons. 
 
 \subsection{Spatial Reasoning in a CLP Framework}
 Constraint handling rules are used to simplify topological constraints until a simple constraint of line intersection checking and point / convex hull containment. The partially overlapping relationship is detected if and lines intersect between objects and 
+
+Uses Sindalog reasoner's distance constraints
 
 
 \chapter{Conceptual Design Requirements}
