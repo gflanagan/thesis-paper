@@ -392,24 +392,29 @@ TODO: figure for qualification of disconnected
 
 
 \subsection{Orientation}
+The DSpace reasoner can qualify two types of orientational relationships, intrinsic and extrinsic. Intrinsic orientational reasoning is based on the Oriented Point Relation Algebra. OPRA partitions space into half planes, which are defined by lines emanating outwards from the reference point, and defines the qualitative orientational relationships by the half plane in which a second point is located. The granularity of an OPRA relationships is defined by the number of lines emanating from the point. 
 
-Intrinsic Orientation
-OPRA
-Relationships
-  - i, j
+Figure \ref{facing-opra-base-rel} shows the OPRA$_{2}$ (two lines) partitioning of space, with labels for the base relationships. Point \emph{A} is located in sector 7 of point \emph{B}'s partitioned space, and \emph{B} is located in sector 1 of \emph{A}'s partitioned space. Note that the arrow depicts the point's direction and the half-plane sectors are labelled starting at the point's direction, incrementing counter-clockwise. 
 
-Geometric Detection
-  - partition of space in to half planes
-  - linear inequalities
+\begin{figure}[H]
+\centering
+\includegraphics[width=60mm]{facing-opra-base-rel}
+\caption{OPRA$_{2}$ Space Partitioning}
+\label{facing-opra-base-rel}
+\end{figure}
 
-Extrinsic Orientation
-SCC
-Relationships
-  - SCC rel
-  
-Geometric Detection
-  - partition of space into half planes
-  - linear inequalities
+Geometric Detection - linear inequalities
+
+Extrinsic orientational reasoning is based on the Single Cross calculus (SCC). SCC defines the orientation of a point C (referent) with respect to a point B (relatum) from the viewpoint of a point A (origin).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=60mm]{scc}
+\caption{SCC Partitioning}
+\label{scc}
+\end{figure}
+
+Geometric Detection - partition of space into half planes - linear inequalities
 
 \subsection{Distance}
 Uses Sindalog reasoner's distance constraints
@@ -510,18 +515,7 @@ The facing attribute defines an intrinsic orientational relationship between two
 \label{display-arrangement}
 \end{figure}
 
-The facing attribute is spatially modelled in DSpace using the Oriented Point Relation Algebra \cite{Moratz} (OPRA). The advantage of using OPRA is that it models the intrinsic orientational relationships between a pair of directed points. OPRA partitions space into half planes, which are defined by lines emanating outwards from the reference point, and defines the qualitative orientational relationships by the half plane in which a second point is located. The granularity of an OPRA relationships is defined by the number of lines emanating from the point. 
-
-Figure \ref{facing-opra-base-rel} shows the OPRA$_{2}$ (two lines) partitioning of space, with labels for the base relationships. Point \emph{A} is located in sector 7 of point \emph{B}'s partitioned space, and \emph{B} is located in sector 1 of \emph{A}'s partitioned space. Note that the arrow depicts the point's direction and the half-plane sectors are labelled starting at the point's direction, incrementing counter-clockwise. 
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=60mm]{facing-opra-base-rel}
-\caption{OPRA$_{2}$ Space Partitioning}
-\label{facing-opra-base-rel}
-\end{figure}
-
-Using OPRA$_{8}$, the facing attribute can be defined in terms of the half plane sectors. Point \emph{A} is facing towards point \emph{B}, if \emph{B} is located in sectors 0, 1, or 32 of \emph{A}'s partitioned space. Similarly, if \emph{A} is located in sectors 0, 1, or 32 of \emph{B}'s partitioned space then \emph{B} is facing towards \emph{A}. In this case, both points are facing towards each other. Conversely, point \emph{A} is facing away from point \emph{B} if \emph{B} is located in sectors 2 - 31 of \emph{A's} partitioned space. An OPRA 8 granularity is used to define a narrow interpretation of the facing attribute. Within a room, doorways, windows, and walls are generally face towards each other. By narrowing the space that is considered facing towards, it allows DSpace to detect elements that are more directly facing towards each other.
+The facing attribute is spatially modelled in DSpace using the Oriented Point Relation Algebra \cite{Moratz} (OPRA). The advantage of using OPRA is that it models the intrinsic orientational relationships between a pair of directed points. TODO: mention something about the section that talks about OPRA. Using OPRA$_{8}$, the facing attribute can be defined in terms of the half plane sectors. Point \emph{A} is facing towards point \emph{B}, if \emph{B} is located in sectors 0, 1, or 32 of \emph{A}'s partitioned space. Similarly, if \emph{A} is located in sectors 0, 1, or 32 of \emph{B}'s partitioned space then \emph{B} is facing towards \emph{A}. In this case, both points are facing towards each other. Conversely, point \emph{A} is facing away from point \emph{B} if \emph{B} is located in sectors 2 - 31 of \emph{A's} partitioned space. An OPRA 8 granularity is used to define a narrow interpretation of the facing attribute. Within a room, doorways, windows, and walls are generally face towards each other. By narrowing the space that is considered facing towards, it allows DSpace to detect elements that are more directly facing towards each other.
 
 Figure \ref{fig:facing-opra-towards} shows an example of two points facing towards each other; note that each point is located in sector 32 of the other's partitioned space.  Figure \ref{fig:facing-opra-away} shows an example of two points that are facing away from each other and are not located in sectors 0, 1, 32 of the other's partitioned space. 
 
