@@ -216,10 +216,10 @@ to do this dspace need to:
 \section{DSpace: Design and Implementation}
 
 
-\chapter{Representation and Reasoning}
-multiple perspectives
-spatial abstractions
-declarative / clp framework
+\chapter{Spatial Computing in a Constraint Logic Programming Framework}
+representation (Declarative / Prolog)
+spatial reasoning (CLP)
+declarative Prolog / CLP framework
 
 \section{Representation}
 CAAD tools represent the physical and structural aspects of a design in a manner that is both accurate and precise. This type of representation captures the design, in terms of the spatial configurations as they are comprised of the architectural entities (i.e., walls, doors, windows), at a low-level of granularity that is needed in the actual construction of the building. Such a representation allows an architect to reason about the physical, structural and mechanical aspects of a design, such as the precise placement of a door in a wall or the mechanics of a window swinging open and closed. However, this type of representation scheme does not incorporation the qualitative and functional features of the design. For example, a structural design requirement that addresses air circulation stipulates that a doorway and window should face directly towards each other. For a traditional CAAD based system, reasoning about such a requirement is not possible because it pertains to qualitative spatial design features and functional attributes that go beyond the purely geometric representation of the design, i.e., in this case the qualitative spatial relationship between a window and doorway. 
@@ -308,7 +308,7 @@ TODO: figure for dir point abs
 
 TODO: figure for convex hull abs
 
-\subsection{Representation A Design in DSpace}
+ \subsection{Representing a Design in a CLP Framework}
 The representation of a design starts with a factbase in Prolog that links architectural entities (via a unique identifier) to is't architectural type (wall, door, window, column) or interior design type (display case, chair, desk). A single entry in the factbase is a Prolog predicate that takes two atoms as arguments: an identifier and entity type. There is a single predicate entry for each architectural entity in the design within the factbase. The following Prolog code shows a single entry for the prototype of a factbase predicate and three instantiated entries for a doorway, wall, and desk. 
 
 \begin{verbatim}
@@ -363,28 +363,37 @@ Spatial abstractions are calculated by transformations from the quantitative geo
    perspective(door1, convex, ConvexAbs, _).
            quantitative_geometry(door1, Quant),
            convex_hull(convex, ConvexAbs).
-\end{verbatim} 
+\end{verbatim}
 
 \subsection{IFC / ArchiCAD import}
 
 
-\section{Spatial Reasoning in a Constraint Logic Programming Framework}
+\section{Spatial Reasoning in DSpace}
 The spatial reasoning module in DSpace is built in a constraint logic programming framework. 
 
 Constraint Handling Rules
 
 Qualification
 
-\subsection{Qualification}
-
 \subsection{Topology}
-Topological reasoning works over points, lines, and regions (convex hulls). The main form of spatial topological reasoning is qualification. The following are the topological relationships that can be qualified: partially overlapping, ntpp, ntppi, disconnected and equals. 
+The DSpace reasoner can qualify the following topological relationships for convex hulls: partially overlapping, ntpp (inside), ntppi (outside), and disconnected. The process of topological qualification uses the geometric properties of line segment intersections and convex hulls to detect these topological relationships. 
 
-Topological qualifications uses properties of line intersections and convex hulls to detect topological relationships. Constraint handling rules are used to simplify topological constraints until a simple constraint of line intersection checking and point / convex hull containment. The partially overlapping relationship is detected if and lines intersect between objects and 
+The qualification of the nttp relationship uses the property of convex hulls to check the polarity of each point in object B against the line segment of each part of the convex hull in A. Since the convex hull is always represented in a counterclockwise order the polarity of the determinant will always be negative. Similarly, the qualification of the nttpi relationship is simply the negation of the nttp relationship.
+
+TODO: figure for qualification of nttp, ntppi
+
+The qualification of the partially overlapping relationship check for line segment intersections between two convex hulls. If at least one intersection is found then the convex hulls are partially overlapping. 
+
+TODO: figure for qualification of partially overlapping
+
+The qualification of the disconnected relationship check for line segment intersections between two convex hulls. If there are none it then check a single point to make sure it is not inside the other convex hull, this is checking for a ntpp relationship in which there would be no line intersections. 
+
+TODO: figure for qualification of disconnected
+
 
 \subsection{Orientation}
 
-\subsubsection{Intrinsic Orientation}
+Intrinsic Orientation
 OPRA
 Relationships
   - i, j
@@ -393,7 +402,7 @@ Geometric Detection
   - partition of space in to half planes
   - linear inequalities
 
-\subsubsection{Extrinsic Orientation}
+Extrinsic Orientation
 SCC
 Relationships
   - SCC rel
@@ -406,9 +415,8 @@ Geometric Detection
 Uses Sindalog reasoner's distance constraints
 Variation of distance constraints
 
-\subsection{Sample Queries}
-Examples with shapes
-Examples with architectural elements in the DSpace reasoner
+\subsection{Spatial Reasoning in a CLP Framework}
+Constraint handling rules are used to simplify topological constraints until a simple constraint of line intersection checking and point / convex hull containment. The partially overlapping relationship is detected if and lines intersect between objects and 
 
 
 \chapter{Conceptual Design Requirements}
