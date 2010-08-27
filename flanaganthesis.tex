@@ -272,9 +272,7 @@ In DSpace architectural entities have spatially abstracted representations. This
 
 Because the structural form of the design is represented as precise geometric quantities, it is impossible to reason qualitatively over them. Requires spatially abstracting the quantitative geometries into the qualitative spatial domain. The process of spatially abstracting the structural entities depends on not only the spatial characteristics of the structural form but also an interpretation of the intrinsic nature of an entity within an architectural / design context. For example, the abstraction of a doorway as a directed point is influenced by the interpretation of the intrinsic direction of the doorway. 
 
-The remainder of this section looks at the spatial abstraction of several architectural entities: walls, doorways, windows, columns, spaces, and interior design objects.  
-
-The on the interpretation of the intrinsic spatial nature of specific architectural entities and how they are transformed from the quantitative geometries based on the interpretation. The following section on qualitative spatial reasoning will explain how these abstraction are used in the DSpace reasoner. 
+The remainder of this section looks at the process of spatial abstracting several architectural entities: walls, doorways, windows, columns, spaces, and interior design objects. The process takes into account the intrinsic spatial nature of the architectural entities and how they are transformed from the quantitative geometries based on the spatial and design interpretations. 
 
 \begin{table}[H]
   \begin{center}
@@ -294,17 +292,17 @@ The on the interpretation of the intrinsic spatial nature of specific architectu
 \end{table} 
 
 \noindent \emph{\large Point} \\
-\indent The point abstraction for all architectural entities is the centroid of the quantitative polygon representation. In general, the centroid is a good point approximation of the object in terms of it's location in the design. An assumption made here is that architectural objects are rectangular in shape placing the centroid in a reasonable location within the polygon.  
+\indent All architectural entities have a point abstraction that is is defined as the centroid of the entity's quantitative polygon space. The point abstraction is used in orientational reasoning and is therefore an approximation of the objects location in the design. In general, the centroid is a good point approximation of location because it is a generalization of the polygon space into a single point. 
 
 TODO: figure for point abs
 
 \noindent \emph{\large Directed Point} \\
-\indent Walls, doorways, windows, and some interior design object have a directed point abstractions, all other entities, (columns, rooms, slabs) do not. A directed point is comprised of a point and a direction. For all entities the point is calculated as the centroid, just as in the point abstraction. The direction is either user defined, as is the case for interior design objects, or is implicitly defined by the intrinsic nature of the entity, such as doorways, walls, and windows. In the case of these entities, their direction is defined as the perpendicular line to the intrinsic x-axis of the object. Based on this definition there will be two perpendicular lines that define the direction. In this situation, the context of the space in which the entity is located is need to decided which of the two directions to use.  
+\indent Walls, doorways, windows, and some interior design object have a directed point abstractions. A directed point is tuple comprised of a point and a direction. The point is is the centroid of the quantitative polygon space. The direction is either user defined, as is the case for interior design objects, or is implicitly defined by the intrinsic nature of the entity, such as doorways, walls, and windows. In the case of these entities, their direction is defined as the perpendicular line to the intrinsic x-axis of the object. Based on this definition there will be two perpendicular lines that define the direction. In this situation, the context of the space in which the entity is located is need to decided which of the two directions to use.  
 
 TODO: figure for dir point abs
 
 \noindent \emph{\large Convex Hull} \\
-\indent All architectural entities have a convex hull abstraction. This convex hull is calculated over the quantitative polygon representation by using the divide and conquer convex hull algorithm \cite{tbd}. The result of the algorithm is a convex hull representation that is as a list of point sorted in counterclockwise order.
+\indent All architectural entities have a convex hull abstraction. The convex hull is calculated over the quantitative polygon space by using the divide and conquer convex hull algorithm \cite{tbd}. The result of the algorithm is a convex hull representation that is as a list of point sorted in counterclockwise order.
 
 TODO: figure for convex hull abs
 
