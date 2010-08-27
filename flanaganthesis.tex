@@ -199,6 +199,8 @@ State-of-the-art CAAD tools represent the physical and structural aspects of an 
 
 However, this type of representation scheme does not incorporation the qualitative and functional features of the design. For example, a structural design requirement that addresses air circulation stipulates that a doorway and window should face directly towards each other. For a traditional CAAD based system, reasoning about such a requirement is not possible because it pertains to qualitative spatial design features and functional attributes that go beyond the purely geometric representation of the design, i.e., in this case the qualitative spatial relationship between a window and doorway.
 
+This representation allows an architect to validate a work-in-progress design from a conceptual and qualitative perspective against the physical and precise real world geometrical representation of the design \cite{Bhatt}.
+
 to do this dspace need to:
  - representation of design
  	- spatial abstraction / multiple perspectives
@@ -225,19 +227,19 @@ spatial reasoning (CLP)
 declarative Prolog / CLP framework
 
 \section{Representation}
-In DSpace an architectural design is represented in a multiple perspective structure that incorporates the design's artefactual extensions, qualitative spatial relationships, and quantitative geometries. This representation allows an architect to validate a work-in-progress design from a conceptual and qualitative perspective against the physical and precise real world geometrical representation of the design \cite{Bhatt}.
+In DSpace an architectural design is modeled in a multiple perspective structure that incorporate aspects of the design that are quantitative (structural form), functional (artefactual function), and qualitative (spatial abstraction). The object of this representation structure is to provide the DSpace reasoner with mechanisms that connect an expert's design conceptualization to the precise geometric quantities of a CAAD based system.   
 
 TODO: fig:multiple perspective representation
 
-This remainder of this section is structured as follows. The first subsection looks at the multiple perspective design structure of the DSpace reasoner. The second subsection looks at how each perspective is formally modeled (coded) in ins CLP framework of DSpace. The last section looks at how a real world design from a state-of-the-art architectural design tool is imported into the DSpace reasoner from the DsSchema and IFC format.
+This section is structured as follows. The first subsection looks at the multiple perspective design structure of the DSpace reasoner. The second subsection looks at how each perspective is formally modeled (coded) in ins CLP framework of DSpace. The last section looks at how a real world design from a state-of-the-art architectural design tool is imported into the DSpace reasoner from the DsSchema and IFC format.
 
 \subsection{Multiple Perspectives}
-In DSpace designs are represented in a multiple perspective structure that incorporate: (1) the artefactual extension of architectural entities, (2) the spatial abstractions of the design from a qualitative spatial perspective, and (3) the physical geometries that pertain to the quantitative structures of the design. The multiple presepective representation of DSpace allows reasoning about design requirements that go beyond purely quantitative geometric reasoning.
+In DSpace designs are represented in a multiple perspective structure that incorporate: (1) the physical geometries that pertain to the quantitative structures of the design (2) the artefactual extension of design that pertain to the functional aspects of the design, (3) and qualitative aspects of the design from a spatial perspective. The multiple perspective representation of DSpace allows reasoning about design requirements that go beyond purely quantitative geometric reasoning.
 
 \subsubsection{Quantitative Model}
 
 \subsubsection{Spatial Artefacts}
-Spatial artefacts are non-spatial extensions of architectural entities that pertain to a specific functional quality of the entity in the context of the design. Artefactual extensions do not have a physical manifestation, however, they become an important part of the design process because they effect the functionality and performance of a design. 
+Spatial artefacts are non-physical extensions of architectural entities that pertain to a specific functional quality of the entity in the context of the design. Artefactual extensions do not have a physical manifestation, however, they become an important part of the design process because they effect the functionality and performance of a design. 
 
 There are three types of spatial artefacts identified by Bhatt\cite{Bhatt} that are represented in DSpace:
 \begin{enumerate}
