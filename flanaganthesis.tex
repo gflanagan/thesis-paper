@@ -238,13 +238,13 @@ TODO: talk about representation in CLP framework
 This section is structured as follows. The first subsection looks at the multiple perspective design structure of the DSpace reasoner. The second subsection looks at how each perspective is formally modeled (coded) in ins CLP framework of DSpace. The last section looks at how a real world design from a state-of-the-art architectural design tool is imported into the DSpace reasoner from the DsSchema and IFC format.
 
 \subsection{Multiple Perspectives}
-In DSpace designs are represented in a multiple perspective structure that incorporate: (1) the physical geometries that pertain to the quantitative structures of the design (2) the artefactual extensions that pertain to the functional aspects of the design, (3) and qualitative aspects of the design from a spatial perspective. The multiple perspective representation of DSpace allows reasoning about design requirements that go beyond purely quantitative geometric reasoning.
+In DSpace designs are represented in a multiple perspective structure that incorporate: (1) the physical geometries that pertain to the quantitative structures of the design, (2) the artefactual extensions that pertain to the functional aspects of the design, (3) and spatial abstractions that pertain to the design from a qualitative spatial perspective. The multiple perspective representation of DSpace allows reasoning about design requirements that go beyond purely quantitative geometric reasoning.
 
 \subsubsection{Quantitative Model}
-The quantitative representation models the structural form of the design it terms of its' precise geometric features (i.e., layout, shape, location). It represents architectural entities (i.e., walls, windows, doorways, columns, rooms, etc.) as spatial geometric primitives of polygons, lines and points that correspond to each entities physical dimensions. The quantitative representation is imported directly from the CAAD based model of the design.
+The quantitative representation models the structural form of the design in terms of its' precise geometric features (i.e., layout, shape, location). It represents architectural entities, such as walls, windows, doorways, columns, and rooms, as spatial geometric primitives of polygons, lines and points that correspond to the physical dimensions (length, width, shape) of the design structural form. The quantitative model represents aspects of the design that is similar to CAAD systems. The quantitative geometries are imported directly from a design built in a CAAD system.
 
-\subsubsection{Spatial Artefacts}
-Spatial artefacts are non-physical extensions of architectural entities that pertain to a specific functional quality of the entity in the context of the design. Artefactual extensions do not have a physical manifestation, however, they become an important part of the design process because they effect the functionality and performance of a design. There are three types of spatial artefacts identified by Bhatt\cite{Bhatt} that are represented in DSpace: \emph{operational space}, \emph{functional space}, and \emph{range space}.
+\subsubsection{Artefacts}
+Spatial artefacts are non-physical, spatial extensions of architectural entities that pertain to a specific functional quality of the entity in the context of the design. Artefactual extensions do not have a physical manifestation, however, they become an important part of the design process because they effect the functionality and performance of a design. There are three types of spatial artefacts identified by Bhatt\cite{Bhatt} that are represented in DSpace: \emph{operational space}, \emph{functional space}, and \emph{range space}.
 
 \begin{figure}[H]
  \centering
@@ -257,11 +257,11 @@ Spatial artefacts are non-physical extensions of architectural entities that per
 \label{artefactual-extensions}
 \end{figure}
 
-The operational space encompasses the region of space required by an object to preform it's function. For example, the operational space of a door is the area in which a door can occupy during it's operation, opening and closing (see figure \ref{operational-space}). This space is dynamic in the sense that it represents the configurable space the physical doorway can occupy. 
+The operational space encompasses the region of space required by an object to preform its' function. For example, the operational space of a door is the area in which a door can occupy during its' operation, opening and closing (see figure \ref{operational-space}). This space is dynamic in the sense that it represents the configurable space of the physical doorway. 
 
-The functional space encompasses the region of space that is required for the object to function or for a person to operate the object. For example, the functional space of a doorway is the total area needed for a person to operate, open and close, as well as any additional space need to navigate entirely through the doorway (see figure \ref{functional-space}). 
+The functional space encompasses the region of space that is required for an object to function or for a person to operate an object. For example, the functional space of a doorway is the total area needed for a person to operate, open and close, as well as any additional space need to navigate entirely through the doorway (see figure \ref{functional-space}). 
 
-The range space pertains to a region of space that encompass the range of a camera's view or the range of a motion sensor. For example, the range space of a camera is defined by its depth of field and angle of view. It represents the total space that is under surveillance of the camera (see figure \ref{range-space}).
+The range space pertains to a region of space that encompass the range of a sensor (i.e., camera, motion sensor). For example, the range space of a camera is defined by its depth of field and angle of view. It represents the total space that is under surveillance of the camera (see figure \ref{range-space}).
 
 TODO: fig:sink example.
 
@@ -270,9 +270,9 @@ Artefactual extensions directly effect how well a design functions. For example,
 \subsubsection{Spatial Abstraction for Qualitative Spatial Reasoning}
 In DSpace architectural entities have spatially abstracted representations. This allows DSpace to reason about the the design from a qualitative level of abstraction with regards to the its' spatial characteristics of topology, orientation and distance. This type of qualitative spatial reasoning, reasons over the abstract feature space of the design using abstract spatial structures of points, directed points, and convex hulls. 
 
-Because the structural form of the design is represented as precise geometric quantities, it is impossible to reason qualitatively over them. Requires spatially abstracting the quantitative geometries into the qualitative spatial domain. The process of spatially abstracting the structural entities depends on not only the spatial characteristics of the structural form but also an interpretation of the intrinsic nature of an entity within an architectural / design context. For example, the abstraction of a doorway as a directed point is influenced by the interpretation of the intrinsic direction of the doorway. 
+Architectural entities, however, are not directly modeled as abstract spatial objects. In DSpace their quantitative geometries are spatially abstracted, through spatial transformation rules, into qualitative spatial objects. The process of spatially abstracting an architectural entity depends on the spatial characteristics of the structural form, and an interpretation of the intrinsic nature of an entity within an architectural / design context. For example, the spatial abstraction of a doorway as a directed point is defined not only by its' physical form but also by the interpretation of the doorway's intrinsic direction. 
 
-The remainder of this section looks at the process of spatial abstracting several architectural entities: walls, doorways, windows, columns, spaces, and interior design objects. The process takes into account the intrinsic spatial nature of the architectural entities and how they are transformed from the quantitative geometries based on the spatial and design interpretations. 
+The remainder of this section shows how several architectural entities and interior designs objects are spatially abstracted into points, directed points, and convex hulls. Table \ref{spatial abstractions} shows which spatial abstractions each architectural entity can be transformed to. 
 
 \begin{table}[H]
   \begin{center}
@@ -289,25 +289,26 @@ The remainder of this section looks at the process of spatial abstracting severa
   \end{tabular}
   \end{center}
 \caption{Spatial Abstractions for Architectural Entities}
+\label{spatial abstractions}
 \end{table} 
 
 \noindent \emph{\large Point} \\
-\indent All architectural entities have a point abstraction that is is defined as the centroid of the entity's quantitative polygon space. The point abstraction is used in orientational reasoning and is therefore an approximation of the objects location in the design. In general, the centroid is a good point approximation of location because it is a generalization of the polygon space into a single point. 
+\indent All architectural entities have a point abstraction that is defined as the centroid of the entity's quantitative polygon space. The point abstraction is used in orientational reasoning and is therefore an approximation of the objects location in the design. In general, the centroid is a good point approximation of location because it is a generalization of polygon space into a single point. 
 
 TODO: figure for point abs
 
 \noindent \emph{\large Directed Point} \\
-\indent Walls, doorways, windows, and some interior design object have a directed point abstractions. A directed point is tuple comprised of a point and a direction. The point is is the centroid of the quantitative polygon space. The direction is either user defined, as is the case for interior design objects, or is implicitly defined by the intrinsic nature of the entity, such as doorways, walls, and windows. In the case of these entities, their direction is defined as the perpendicular line to the intrinsic x-axis of the object. Based on this definition there will be two perpendicular lines that define the direction. In this situation, the context of the space in which the entity is located is need to decided which of the two directions to use.  
+\indent Walls, doorways, windows, and some interior design object have a directed point abstractions. A directed point is represented as a tuple (\emph{point}, \emph{direction}). The point is defined as the centroid of the quantitative polygon space. The direction is defined by the user, as is the case for interior design objects, or  by the intrinsic spatial nature of the entity, such as doorways, walls, and windows. In the case of these entities, direction is defined as the perpendicular line to the intrinsic x-axis of the object. Based on this definition there will be two perpendicular lines that define the direction. In this situation, the context of the space in which the entity is located is need to decided which of the two directions to use.  
 
 TODO: figure for dir point abs
 
 \noindent \emph{\large Convex Hull} \\
-\indent All architectural entities have a convex hull abstraction. The convex hull is calculated over the quantitative polygon space by using the divide and conquer convex hull algorithm \cite{tbd}. The result of the algorithm is a convex hull representation that is as a list of point sorted in counterclockwise order.
+\indent All architectural entities have a convex hull abstraction. The convex hull is calculated over the quantitative polygon space by using the divide and conquer convex hull algorithm \cite{tbd}. The result of the algorithm is a convex hull representation that is as a list of point sorted in counterclockwise order. Convex hulls are used in topological reasoning.
 
 TODO: figure for convex hull abs
 
  \subsection{Representing a Design in a CLP Framework}
-The representation of a design starts with a factbase in Prolog that links architectural entities (via a unique identifier) to is't architectural type (wall, door, window, column) or interior design type (display case, chair, desk). A single entry in the factbase is a Prolog predicate that takes two atoms as arguments: an identifier and entity type. There is a single predicate entry for each architectural entity in the design within the factbase. (TODO: explain the factbase is instantiated during the import process). The following Prolog code shows a single entry for the prototype of a factbase predicate and three instantiated entries for a doorway, wall, and desk. 
+The representation of a design starts with a factbase in Prolog that links architectural entities (via a unique identifier) to architectural types (wall, door, window, column) or interior design types (display case, chair, desk). Each architectural entity in the design has a single entry in the factbase. An entry is a Prolog predicate that takes two atoms as arguments: an identifier and entity type. TODO: explain the factbase is instantiated during the import process). The following Prolog code shows a single entry for the prototype of a factbase predicate and three instantiated entries for a doorway, wall, and desk. 
 
 \begin{verbatim}
    architectural_entity(ID, Type).
