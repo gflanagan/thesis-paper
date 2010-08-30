@@ -298,7 +298,7 @@ The remainder of this section shows how several architectural entities and inter
 TODO: figure for point abs
 
 \noindent \emph{\large Directed Point} \\
-\indent Walls, doorways, windows, and some interior design object have a directed point abstractions. A directed point is represented as a tuple (\emph{point}, \emph{direction}). The point is defined as the centroid of the quantitative polygon space. The direction is defined by the user, as is the case for interior design objects, or  by the intrinsic spatial nature of the entity, such as doorways, walls, and windows. In the case of these entities, direction is defined as the perpendicular line to the intrinsic x-axis of the object. Based on this definition there will be two perpendicular lines that define the direction. In this situation, the context of the space in which the entity is located is need to decided which of the two directions to use.  
+\indent Walls, doorways, windows, and some interior design object have a directed point abstraction. A directed point is represented as a tuple (\emph{point}, \emph{direction}). The point is defined as the centroid of the quantitative polygon space. The direction is defined either by the user, as is the case for interior design objects, or by an intrinsic spatial property of the entity, such as doorways, walls, and windows. In the case of these entities, direction is defined based on the interpretation of the nature of a doorway, wall, or window within the context of a design. For these entities, direction is interpreted as a vector that emanates out from its' point abstraction towards the room / space it is contained in. Specifically, direction is defined as the perpendicular vector to the intrinsic x-axis of the object. Based on this definition there will be two perpendicular lines that define the direction. In this situation, the context of the space in which the entity is located is need to decided which of the two directions to use.  
 
 TODO: figure for dir point abs
 
@@ -308,60 +308,65 @@ TODO: figure for dir point abs
 TODO: figure for convex hull abs
 
  \subsection{Representing a Design in a CLP Framework}
-The representation of a design starts with a factbase in Prolog that links architectural entities (via a unique identifier) to architectural types (wall, door, window, column) or interior design types (display case, chair, desk). Each architectural entity in the design has a single entry in the factbase. An entry is a Prolog predicate that takes two atoms as arguments: an identifier and entity type. TODO: explain the factbase is instantiated during the import process). The following Prolog code shows a single entry for the prototype of a factbase predicate and three instantiated entries for a doorway, wall, and desk. 
+The multiple perspective design model is represented in the DSpace CLP framework as Prolog a facts and rules. The facts make up a factbase that stores a table of architectural entities and their types. This table has a single entry for every entity in the design and is the basis for accessing entities in the design. Rules are used to bind architectural entities (via ids) to their multiple geometries: physical and artefactual. Transformation rules are used to abstracted the quantitative geometries into abstract spatial objects. 
 
+\subsubsection{Factbase}
+The representation of a design starts with a factbase in Prolog that binds architectural entities (via a unique identifier) to architectural types (wall, door, window, column) or interior design types (display case, chair, desk). Each architectural entity in the design has a single entry in the factbase. An entry is a Prolog predicate that takes two atoms as arguments: an identifier and entity type. The factbase is instantiated automatically during the import process from the CAAD system. 
+
+The following Prolog code shows three instantiated facts (predicates) for a doorway, window, and desk. Note that the ds prefix refers to the DsScheme which will be discussed in a later section.  
 \begin{verbatim}
-   architectural_entity(ID, Type).
    architectural_entity(door1, dSDoor).
    architectural_entity(wall4, dsWallStandardCase).
    architectural_entity(desk4, dsDesk).
 \end{verbatim}
 
-\subsubsection{Representing Artefacts}
-Prolog rules link an entity, via its' identifier, to its' multiple perspective geometries. Each entity has a single rule for its' physical geometry, and its' artefactual extensions: functional space, operational space, range space. Every entity has a physical geometry, but can have zero, one, two, or three artefactual extension. For example, a door has a functional and operational space but does not have a range space. Likewise, a column has no artefactual extensions. 
+\subsubsection{Quantitative and Artefactual Geometries}
+Prolog rules link an entity, via its' id, to its' multiple perspective geometries. Each entity has a single rule for its' physical, and artefactual (functional, operational, and range) geometries. All architectural entities must have a physical geometry, but can have zero, one, two, or three artefactual geometries. For example, a door has a functional and operational space but does not have a range space. Likewise, a column has no artefactual extensions. 
 
-The form of each rule is similar and built using the same spatial primitives (points, lines, and polygons). By using the same spatial primitives to define both the physical structures and aretactual extensions of architectural entities and interior design elements, it allows for a uniform and generalized way to transform the geometries into spatially abstracted objects. This will become an important feature in the following section on qualitative spatial reasoning.   
-
+The structural and artefactual geometries are defined by spatial geometric primitives: polygons, lines, and points. These primitives are Prolog rules themselves that take the quantitative point data that defines the entity and return an instantiated spatial primitive that will be used by the DSpace reasoner. 
 \begin{verbatim}
-   physical_geometry(door1, Geometry) :-
-           spatial_primitive(Geometry, region(PtList)).
-           
-   functional_space(door1, Geometry) :-
-           spatial_primitive(Geometry, region(PtList)).
-           
-   operational_space(door1, Geometry) :-
-           spatial_primitive(Geometry, region(PtList)).
+   spatial_primitive(Geometry, polygon([(1,1),(4,2),(5,1)])).
 \end{verbatim}
 
-Retrieving a geometry is accomplished in a uniform way across all perspectives. To get a geometry all that is need is the unique identifier for the entity. For example, to get the physical geometry for a door with and identifier, door1, the following query is made:
+The following Prolog rules define the physical and artefactual geometries of a doorways with id \emph{door1}. Note that there is a single rule for each perspective, but each rule has an identical form; each rule takes two arguments (id and variable to store the geometry) and is defined by spatial primitives using the \emph{spatial\_primitive} rule. 
+\begin{verbatim}
+   physical_geometry(door1, Geometry) :-
+           spatial_primitive(Geometry, polygon([(1,1),(3,5),(4,5),(2,2)])).
+           
+   functional_space(door1, Geometry) :-
+           spatial_primitive(Geometry, polygon(PtList)).
+           
+   operational_space(door1, Geometry) :-
+           spatial_primitive(Geometry, polygon(PtList)).
+\end{verbatim}
 
+The rule base can be queried to retrieve a geometry. For example, to get the physical geometry for a \emph{door1} the following query is made:
 \begin{verbatim}
    physical_geometry(door1, Geometry).
 \end{verbatim} 
-Door1's physical geometry will now by stored in the Geometry variable. Likewise, to get the functional space of door1 the following query is made:
+\emph{Door1}'s physical geometry is now stored in the Geometry variable. Likewise, to get the functional space of \emph{door1} the following query is made:
 \begin{verbatim}
    functional_geometry(door1, FunctionalGeometry).
 \end{verbatim}
-Door1's functional geometry will now be stored in the FunctionalGeometry variable. Similar queries are made to retrieve the operational and range space geometries.
+\emph{Door1}'s functional geometry is now be stored in the FunctionalGeometry variable. Similar queries are made to retrieve the operational and range space geometries.
 
-\subsubsection{Transformation for Spatial Abstractions}
-Spatial abstractions are calculated by transformations of the quantitative geometries. Spatial transformations depends on the architectural entity type, the target spatial abstraction (point, directed point, or convex hull), and something the context of the space (direction of door into or out of a specific room). There is a single set of Prolog rules that match the transformation arguments. The following is code for the perspective rules which take in four arguments and return the geometry for a specific spatial abstraction. Note that the fourth argument is only used in special cases when I context space is need, such as for the direction of a doorway, window, or wall.
+\subsubsection{Transformations for Spatial Abstractions}
+Spatial abstractions are calculated by transformations of the quantitative geometries. Spatial transformations depends on the architectural entity type, the target spatial abstraction (point, directed point, or convex hull), and something the context of the space (direction of door into or out of a specific room). 
 
+The following is Prolog code for the transformation rules based on the interpretation of the spatial abstraction of architectural entities in the previous section.
 \begin{verbatim}
-   perspective(ID, Abstraction, SpatialAbstraction, Context)
-         
-   perspective(door1, point, PointAbs, _) :- 
+   point_abstraction(door1, Point) :-
            quantitative_geometry(door1, Quant),
-           centroid(Quant, PointAbs).
+           centroid(Quant, Point).
             
-   perspective(door1, directed_point, (Point, Dir), room3) :-
+   dir_point_abstraction(door1, (Point, Dir), room3) :-
            quantitative_geometry(door1, Quant),
            centroid(Quant, Point),
            direction(Quant, Point, room3, Dir).   
    
-   perspective(door1, convex, ConvexAbs, _).
+   convex_hull_abstraction(door1, ConvexHull).
            quantitative_geometry(door1, Quant),
-           convex_hull(convex, ConvexAbs).
+           convex_hull(convex, ConvexHull).
 \end{verbatim}
 
 \subsection{IFC / ArchiCAD import}
