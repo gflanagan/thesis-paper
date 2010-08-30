@@ -231,7 +231,12 @@ declarative Prolog / CLP framework
 \section{Representation}
 In DSpace an architectural design is modeled in a multiple perspective structure that incorporate aspects of the design that are quantitative (structural form), functional (artefactual function), and qualitative (spatial abstraction). The object of this representation structure is to provide the DSpace reasoner with mechanisms that connect an expert's design conceptualization to the precise geometric quantities of a CAAD based system.   
 
-TODO: fig:multiple perspective representation
+\begin{figure}[H]
+\centering
+\includegraphics[width=90mm]{multi-persepective}
+\caption{Multiple Perspective Structure}
+\label{mutli-perspective}
+\end{figure}
 
 Within the CLP framework of the DSpace reasoner, the multiple perspective model is represented as Prolog facts and rules. The representation structure is the basis for the spatial constraints of the DSpace reasoner.
 
@@ -263,7 +268,12 @@ The functional space encompasses the region of space that is required for an obj
 
 The range space pertains to a region of space that encompass the range of a sensor (i.e., camera, motion sensor). For example, the range space of a camera is defined by its depth of field and angle of view. It represents the total space that is under surveillance of the camera (see figure \ref{range-space}).
 
-TODO: fig:sink example.
+\begin{figure}[H]
+\centering
+\includegraphics[width=50mm]{door-sink}
+\caption{Operational Space Interference}
+\label{door-sink}
+\end{figure}
 
 Artefactual extensions directly effect how well a design functions. For example, a sink in a bathroom has a functional space, the space a person occupies while washing his/her hands at the sink. If this space is interfered by (i.e., topologically overlapping) the functional and/or physical space of a doorway, this will cause a circulation problem when both the doorway and sink are simultaneously being operated, i.e., a collision between the person washing his/her hands and the doorway being opened. In this example, the functional aspects of the bathrooms design with regard to the mitigation of circulation problems is directly influenced by the spatial configuration of the non-physical artefactual extensions of the design. 
 
@@ -293,14 +303,24 @@ The remainder of this section shows how several architectural entities and inter
 \end{table} 
 
 \noindent \emph{\large Point} \\
-\indent All architectural entities have a point abstraction that is defined as the centroid of the entity's quantitative polygon space. The point abstraction is used in orientational reasoning and is therefore an approximation of the objects location in the design. In general, the centroid is a good point approximation of location because it is a generalization of polygon space into a single point. 
+\indent All architectural entities have a point abstraction that is defined as the centroid of the entity's physical polygon space. Figure \ref{point-abs} shows the point abstraction for a doorway. The point abstraction is used in orientational reasoning and is therefore an approximation of the objects location in the design. In general, the centroid is a good point approximation of location because it is a generalization of polygon space into a single point. 
 
-TODO: figure for point abs
+\begin{figure}[H]
+\centering
+\includegraphics[width=70mm]{point-abs}
+\caption{Doorway Point Abstraction}
+\label{point-abs}
+\end{figure}
 
 \noindent \emph{\large Directed Point} \\
 \indent Walls, doorways, windows, and some interior design object have a directed point abstraction. A directed point is represented as a tuple (\emph{point}, \emph{direction}). The point is defined as the centroid of the quantitative polygon space. The direction is defined either by the user, as is the case for interior design objects, or by an intrinsic spatial property of the entity, such as doorways, walls, and windows. In the case of these entities, direction is defined based on the interpretation of the nature of a doorway, wall, or window within the context of a design. For these entities, direction is interpreted as a vector that emanates out from its' point abstraction towards the room / space it is contained in. Specifically, direction is defined as the perpendicular vector to the intrinsic x-axis of the object. Based on this definition there will be two perpendicular lines that define the direction. In this situation, the context of the space in which the entity is located is need to decided which of the two directions to use.  
 
-TODO: figure for dir point abs
+\begin{figure}[H]
+\centering
+\includegraphics[width=70mm]{dir-point-abs}
+\caption{Doorway Point Abstraction}
+\label{point-abs}
+\end{figure}
 
 \noindent \emph{\large Convex Hull} \\
 \indent All architectural entities have a convex hull abstraction. The convex hull is calculated over the quantitative polygon space by using the divide and conquer convex hull algorithm \cite{tbd}. The result of the algorithm is a convex hull representation that is as a list of point sorted in counterclockwise order. Convex hulls are used in topological reasoning.
@@ -309,6 +329,13 @@ TODO: figure for convex hull abs
 
  \subsection{Representing a Design in a CLP Framework}
 The multiple perspective design model is represented in the DSpace CLP framework as Prolog a facts and rules. The facts make up a factbase that stores a table of architectural entities and their types. This table has a single entry for every entity in the design and is the basis for accessing entities in the design. Rules are used to bind architectural entities (via ids) to their multiple geometries: physical and artefactual. Transformation rules are used to abstracted the quantitative geometries into abstract spatial objects. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=90mm]{clp-design}
+\caption{Representation in CLP}
+\label{clp-design}
+\end{figure}
 
 \subsubsection{Factbase}
 The representation of a design starts with a factbase in Prolog that binds architectural entities (via a unique identifier) to architectural types (wall, door, window, column) or interior design types (display case, chair, desk). Each architectural entity in the design has a single entry in the factbase. An entry is a Prolog predicate that takes two atoms as arguments: an identifier and entity type. The factbase is instantiated automatically during the import process from the CAAD system. 
@@ -351,9 +378,7 @@ The rule base can be queried to retrieve a geometry. For example, to get the phy
 \emph{Door1}'s functional geometry is now be stored in the FunctionalGeometry variable. Similar queries are made to retrieve the operational and range space geometries.
 
 \subsubsection{Transformations for Spatial Abstractions}
-Spatial abstractions are calculated by transformations of the quantitative geometries. Spatial transformations depends on the architectural entity type, the target spatial abstraction (point, directed point, or convex hull), and something the context of the space (direction of door into or out of a specific room). 
-
-The following is Prolog code for the transformation rules based on the interpretation of the spatial abstraction of architectural entities in the previous section.
+Spatial abstractions are calculated by transformations of the quantitative geometries. Spatial transformations depends on the architectural entity type, the target spatial abstraction (point, directed point, or convex hull), and something the context of the space (direction of door into or out of a specific room). The following is Prolog code for the transformation rules based on the interpretation of the spatial abstraction of architectural entities in the previous section.
 \begin{verbatim}
    point_abstraction(door1, Point) :-
            quantitative_geometry(door1, Quant),
