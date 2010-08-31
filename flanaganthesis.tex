@@ -405,7 +405,7 @@ Within the CLP framework of DSpace, the reasoning capabilities are built as a se
 TODO: figure for reasoner
 
 \subsection{Topology}
-The DSpace reasoner can qualify the following four topological relationships for convex hulls: partially overlapping, ntpp (inside), ntppi (outside), and disconnected. The process of topological qualification uses the geometric properties of convex hulls to detect topological relationships. 
+The DSpace reasoner can qualify the following four topological relationships for convex hulls: inside (\ref{inside}), outside (\ref{outside}), partially overlapping (\ref{overlapping}), and disconnected (\ref{disconnected}). The process of topological qualification uses the geometric properties of convex hulls to detect topological relationships. 
 
 \begin{figure}[t]
  \centering
@@ -460,7 +460,7 @@ SCC relationships are qualified using linear inequalities based on the lines tha
 The DSpace reasoner can calculate the minimum euclidean distance between points, lines, and polygons. 
 
 \subsection{Spatial Reasoning in a CLP Framework}
-Constraint handling rules are used to simplify topological constraints until a simple constraint of line intersection checking and point / convex hull containment. The partially overlapping relationship is detected if and lines intersect between objects and 
+The spatial reasoning module is built as a sequence of spatial constraint solvers for topological, orientational, and distance reasoning. 
 
 Uses Sindalog reasoner's distance constraints
 
