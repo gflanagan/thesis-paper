@@ -471,7 +471,9 @@ SCC relationships are qualified by solving a system of linear inequalities, whic
 \end{equation}
 
 \subsection{Distance}
-The DSpace reasoner can calculate the minimum euclidean distance between points, lines, and polygons. 
+The DSpace reasoner can calculate the minimum euclidean distance between points, lines, and polygons. Given two objects the minimum distance is calculated by finding the closet point in each object to the other object. Base on these two point the minimum euclidean distance is calculated. 
+
+TODO: fig of closest points 
 
 \subsection{Spatial Reasoning in a CLP Framework}
 The spatial reasoning module is built as a set of spatial constraint solvers for topological, orientational, and distance reasoning. The solvers use Constraint Logic Programming over the Reals (CLP(R)) and Constraint Handling Rules (CHR) to solve spatial qualification problems for topology and orientation and minimum distance constraints for distance. The distance constraint solver is different from topology and orientation because it does not solve qualification problems for distance, rather is solves minimum distance constraints against a pair of objects. The topological and distance constraint solvers extends work done in Sindalog spatial constraint solver \cite{}. 
@@ -508,7 +510,9 @@ The OPRA constraint solver solves OPRA constrains by solving a system of linear 
 The SCC constraint solver solves SCC constrains by solving a system of linear inequalities. The process of solving these constraints is very similar to the OPRA constraints.
 
 \subsubsection{Constraint Solver: Distance}
-The distance constraint solver solves minimum distance constraints. This solver uses the distance constraint services of the Sindalog \cite{} reasoner for distance reasoning. 
+The distance constraint solver solves minimum distance constraints. This solver uses the distance constraint services of the Sindalog \cite{sindalog} reasoner for distance reasoning. The distance solver is different from the other solvers because it returns a value to a query. For example, the query, $min_distance(obj1, obj2, D).$, will return the minimum distance between the two objects in D.
+
+The distance constraint solver is written using CHRs that break down the constraints until they can be solved for. This process involves finding the located on each object that is the closet to the other, so that the minimum distance can be calculated between the two.  
 
 
 \chapter{Conceptual Design Requirements}
