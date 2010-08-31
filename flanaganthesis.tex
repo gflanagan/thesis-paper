@@ -440,9 +440,9 @@ The DSpace reasoner can qualify two types of orientational relationships, intrin
 
 Figure \ref{facing-opra-base-rel} shows the OPRA$_{2}$ (two lines) partitioning of space, with labels for the base relationships. Point \emph{A} is located in sector 7 of point \emph{B}'s partitioned space, and \emph{B} is located in sector 1 of \emph{A}'s partitioned space. Note that the arrow depicts the point's direction and the half-plane sectors are labelled starting at the point's direction, incrementing counter-clockwise. 
 
-OPRA relationships are qualified by solving linear inequalities that are defined by lines emanating from the origin. Given a point \emph{A} and \emph{B}, the $\theta_{AB}$ symbol stands for $ \tan^{-1} \frac{B_{y} - A_{y}}{B_{x} - A_{X}} $, the $\phi_{A}$ symbol refers to the direction of point \emph{A}, and the \emph{m} symbol refers to the granularity of the OPRA relations. Equation \ref{opra} shows the linear inequalities for OPRA$_{M}$ relationships. Using this system of linear inequalities, the OPRA relationship can be solved for \emph{B} in terms of \emph{A} OPRA space.
+OPRA relationships are qualified by solving linear inequalities that are defined by lines emanating from the origin. Given a point \emph{A} and \emph{B}, the $\theta_{AB}$ symbol stands for $ \tan^{-1} \frac{B_{y} - A_{y}}{B_{x} - A_{X}} $, the $\phi_{A}$ symbol refers to the direction of point \emph{A}, and the \emph{m} symbol refers to the granularity of the OPRA relations. Equation \ref{opra-eq} shows the linear inequalities for OPRA$_{M}$ relationships. Using this system of linear inequalities, the OPRA relationship can be solved for \emph{B} in terms of \emph{A} OPRA space.
 
-\begin{equation}\label{opra}
+\begin{equation}\label{opra-eq}
 \begin{aligned}
 \Big(&\Big(\Big(\frac{i}{2} \, \in \, N \wedge i < 2\Big) \wedge \Big(2\pi - \frac{i-2}{4m} < \theta_{AB} - \phi_{A} < \frac{2\pi}{4m}\Big)\Big) \\
 \lor \;\; \Big(&\Big(\frac{i+1}{2} \in N \wedge i \geq 1\Big) \wedge \Big(\theta_{AB} - \phi_{A} = 2\pi \frac{i-1}{4m}\Big)\Big)\Big) \\ \\
@@ -458,14 +458,40 @@ Extrinsic orientational reasoning is based on the Single Cross Calculus (SCC). S
 \label{scc}
 \end{figure}
 
-SCC relationships are qualified using linear inequalities based on the lines that partition space into the SCC sectors. 
+Figure \ref{scc} shows an SCC relationship between three points. The partitioning scheme is based on the orientation of the origin and relatum points. The third point, the referent, is located in sector 5 of the SCC partitioned space. 
+
+SCC relationships are qualified by solving a system of linear inequalities, which are based on the lines that partition space into the SCC sectors. Labeling starts at the line that runs between the origin and relatum at zero and increments clockwise. Given a point \emph{C}, its' SCC 1 relationship with points \emph{A} and \emph{B} is given by solving the equations for \emph{C} in \ref{scc-eq}.  
+
+\begin{equation}\label{scc-eq}
+\begin{aligned}
+\Big(&\Big(\Big(A_{y} < B_{y}\Big) \wedge \Big(C_{y} > M_{2} \cdot C_{x} + B_{2}\Big)\Big) \; \lor \\
+\Big(&\Big(A_{y} > B_{y}\Big) \wedge \Big(C_{y} < M_{2} \cdot C_{x} + B_{2}\Big)\Big)\Big) \\
+\wedge \;\; \Big(&\Big(\Big(A_{x} < B_{x}\Big) \wedge \Big(C_{y} < M_{1} \cdot C_{x} + B_{1}\Big)\Big) \; \lor \\
+\Big(&\Big(A_{x} > B_{x}\Big) \wedge \Big(C_{y} > M_{1} \cdot C_{x} + B_{1}\Big)\Big)\Big) \\
+\end{aligned}
+\end{equation}
 
 \subsection{Distance}
 The DSpace reasoner can calculate the minimum euclidean distance between points, lines, and polygons. 
 
 \subsection{Spatial Reasoning in a CLP Framework}
-The spatial reasoning module is built as a sequence of spatial constraint solvers for topological, orientational, and distance reasoning. 
+The spatial reasoning module is built as a set of spatial constraint solvers for topological, orientational, and distance reasoning. The solvers use Constraint Logic Programming over the Reals (CLP(R)) and Constraint Handling Rules (CHR) to solve spatial qualification problems for topology and orientation and minimum distance constraints for distance. The distance constraint solver is different from topology and orientation because it does not solve qualification problems for distance, rather is solves minimum distance constraints against a pair of objects. 
 
+In the CLP framework of DSpace, the spatial constraint solvers work directly over the multiple perspective design structure so that the constraint solvers know directly about the semantics of architectural entities. For example, to solve a topological constraint (for example inside) for two doorways (\emph{door1, door2}) simply requires the ids for each architectural entity. 
+\begin{verbatim}
+   inside(door1, door2).
+\end{verbatim}
+A query such as this will return \emph{true} if the two entities have an inside topological relationship and fails if they do not. 
+
+TODO: figure of the design of spatial reasoner
+
+The remainder of this section will look at the structure and implementation of each constraint solver and how each solver can be used to solver spatial qualification and distance constraints.
+
+\subsubsection{Constraint Solver: Topology}
+
+\subsubsection{Constraint Solver: Orientation}
+
+\subsubsection{Constraint Solver: Distance}
 Uses Sindalog reasoner's distance constraints
 
 
