@@ -398,9 +398,9 @@ Spatial abstractions are calculated by transformations of the quantitative geome
 
 
 \section{Spatial Reasoning in DSpace}
-In DSpace qualitative spatial reasoning serves has a link between the high level conceptual design space and the low level quantitative geometric space. It uses formal qualitative spatial calculi for topological (RCC \cite{Freksa}), orientational (Single Cross \cite{Freksa}, Oriented Point Relation Algebra \cite{Moratz}) and distance reasoning over the spatial entities of the strucutural and artefactual design. 
+In DSpace qualitative spatial reasoning serves has a link between the high level conceptual design space and the low level quantitative geometric space. It uses formal qualitative spatial calculi for topological (Region Connected Calculus \cite{Freksa}), orientational (Single Cross \cite{Freksa}, Oriented Point Relation Algebra \cite{Moratz}) and distance reasoning over the spatial entities of the strucutural and artefactual design. 
 
-Within the CLP framework of DSpace, the reasoning capabilities are built as a series of spatial constraint solvers using  Constraint Logic Programming over Reals (CLP(R)) and Constrain Handling Rules (CHR). The spatial contraint solvers are designed to work directly over the multiple perspective representation structure via the spatial abstraction layer. The main service of the reasoner is qualification of sptail design configurations into topological, orientational, and distance networks, which can be used in the concetual design layer.
+Within the CLP framework of DSpace, the reasoning capabilities are built as a series of spatial constraint solvers using  Constraint Logic Programming over Reals (CLP(R)) and Constrain Handling Rules (CHR). The spatial contraint solvers are designed to work directly over the multiple perspective representation structure via the spatial abstraction layer. The main service of the reasoner is qualification of spatial design configurations into topological, orientational, and distance networks, which can be used to reason about conceptual design requirements.
 
 TODO: figure for reasoner
 
@@ -420,32 +420,36 @@ The DSpace reasoner can qualify the following four topological relationships for
 \label{topoloy}
 \end{figure}
 
-An object \emph{A} has an ntpp relationship with an object \emph{B} if all \emph{A}'s points are inside the convex hull of \emph{B}. The ntpp relationship is qualified in DSpace by using the property of convex hull / point containment. A point is inside a convex hull if the polarity of the determinate between the point and each line segment in the convex hull is negative. Because the points in a convex hull are always ordered counterclockwise, in the DSpace representation, the polarity of the determinant between a point inside the convex hull will always be negative. 
+An object \emph{A} has an inside relationship with an object \emph{B} if all \emph{A}'s points are inside the convex hull of \emph{B}. The inside relationship is qualified in DSpace by using the property of convex hull / point containment. A point is inside a convex hull if the polarity of the determinate between the point and each line segment in the convex hull is negative. Because the points in a convex hull are always ordered counterclockwise, in the DSpace representation, the polarity of the determinant between a point inside the convex hull will always be negative. 
 
-An object \emph{B} has an ntppi relationship with an object \emph{B} if all \emph{B}'s points are inside the convex hull of \emph{A}. Because the ntppi relationship is the inverse of ntpp it is easy to check for in DSpace be using the ntpp relationship. 
+An object \emph{B} has an outside relationship with an object \emph{B} if all \emph{B}'s points are inside the convex hull of \emph{A}. Because the outside relationship is the inverse of the inside relation it is easy to check for in DSpace be using the inside relationship. 
 
-An object \emph{A} has a partially overlapping relationship with an object \emph{B} if one or more line segments in \emph{A} intersect with one or more line segments in \emph{B}. The partially overlapping relationship is qualified in DSpace by checking for line intersection between line segments. Two objects are partially intersecting if they intersect at at least one point.  
+An object \emph{A} has a partially overlapping relationship with an object \emph{B} if one or more line segments in \emph{A} intersect with one or more line segments in \emph{B}. The partially overlapping relationship is qualified in DSpace by checking for line segment intersection between objects. Two objects are partially overlapping if they intersect at at least one point.  
 
-An object \emph{A} has a disconnected relationship with an object \emph{B} if \emph{A} does not intersect with \emph{B}, there are no points in \emph{A} that are inside \emph{B}, and there are no points in \emph{B} that are inside \emph{A}. The disconnected relationship is qualified by checking for line segment intersection and point / convex hull containment. If there are no line segment intersections and no point / convex hull containment then two objects are disconnected.  
+An object \emph{A} has a disconnected relationship with an object \emph{B} if \emph{A} does not intersect with \emph{B}, there are no points in \emph{A} that are inside \emph{B}, and there are no points in \emph{B} that are inside \emph{A}. The disconnected relationship is qualified by checking for line segment intersection and convex hull / point containment. If there are no line segment intersections and no convex hull / point containment then two objects are disconnected.  
 
 \subsection{Orientation}
-The DSpace reasoner can qualify two types of orientational relationships, intrinsic and extrinsic. Intrinsic orientational reasoning is based on the Oriented Point Relation Algebra. OPRA partitions space into half planes, which are defined by lines emanating outwards from the reference point, and defines the qualitative orientational relationships by the half plane in which a second point is located. The granularity of an OPRA relationships is defined by the number of lines emanating from the point. 
+The DSpace reasoner can qualify two types of orientational relationships, intrinsic and extrinsic. Intrinsic orientational reasoning is based on the Oriented Point Relation Algebra (OPRA). OPRA partitions space into half planes, which are defined by lines emanating outwards from the reference point, and defines the qualitative orientational relationships by the half plane in which a second point is located. The granularity of an OPRA relationships is defined by the number of lines emanating from the point. 
 
-Figure \ref{facing-opra-base-rel} shows the OPRA$_{2}$ (two lines) partitioning of space, with labels for the base relationships. Point \emph{A} is located in sector 7 of point \emph{B}'s partitioned space, and \emph{B} is located in sector 1 of \emph{A}'s partitioned space. Note that the arrow depicts the point's direction and the half-plane sectors are labelled starting at the point's direction, incrementing counter-clockwise. 
-
-\begin{figure}[H]
+\begin{figure}[b]
 \centering
 \includegraphics[width=60mm]{facing-opra-base-rel}
 \caption{OPRA$_{2}$ Space Partitioning}
 \label{facing-opra-base-rel}
 \end{figure}
 
-OPRA relationships are qualified using linear inequalities based on the lines that emanate from the point origin.    The linear inequalities are based on the following equations as defined by OPRA: 
+Figure \ref{facing-opra-base-rel} shows the OPRA$_{2}$ (two lines) partitioning of space, with labels for the base relationships. Point \emph{A} is located in sector 7 of point \emph{B}'s partitioned space, and \emph{B} is located in sector 1 of \emph{A}'s partitioned space. Note that the arrow depicts the point's direction and the half-plane sectors are labelled starting at the point's direction, incrementing counter-clockwise. 
 
-$(((\frac{i}{2} \, \in \, N \wedge i < 2) \wedge (2\pi - \frac{i-2}{4m} < \theta_{AB} - \theta_{A} < \frac{2\pi}{4m}))$ \\
-$\lor ((\frac{i+1}{2} \in N \wedge i \geq 1) \wedge (\theta_{AB} - \theta_{A} = 2\pi \frac{i-1}{4m})))$
+OPRA relationships are qualified by solving linear inequalities that are defined by lines emanating from the origin. Given a point \emph{A} and \emph{B}, the $\theta_{AB}$ symbol stands for $ \tan^{-1} \frac{B_{y} - A_{y}}{B_{x} - A_{X}} $, the $\phi_{A}$ symbol refers to the direction of point \emph{A}, and the \emph{m} symbol refers to the granularity of the OPRA relations. Equation \ref{opra} shows the linear inequalities for OPRA$_{M}$ relationships. Using this system of linear inequalities, the OPRA relationship can be solved for \emph{B} in terms of \emph{A} OPRA space.
 
-Extrinsic orientational reasoning is based on the Single Cross calculus (SCC). SCC defines the orientation of a point C (referent) with respect to a point B (relatum) from the viewpoint of a point A (origin).
+\begin{equation}\label{opra}
+\begin{aligned}
+\Big(&\Big(\Big(\frac{i}{2} \, \in \, N \wedge i < 2\Big) \wedge \Big(2\pi - \frac{i-2}{4m} < \theta_{AB} - \phi_{A} < \frac{2\pi}{4m}\Big)\Big) \\
+\lor \;\; \Big(&\Big(\frac{i+1}{2} \in N \wedge i \geq 1\Big) \wedge \Big(\theta_{AB} - \phi_{A} = 2\pi \frac{i-1}{4m}\Big)\Big)\Big) \\ \\
+\end{aligned}
+\end{equation}
+
+Extrinsic orientational reasoning is based on the Single Cross Calculus (SCC). SCC defines the orientation of a point C (referent) with respect to a point B (relatum) from the viewpoint of a point A (origin).
 
 \begin{figure}[H]
 \centering
