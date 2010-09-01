@@ -43,7 +43,7 @@
 \usepackage[overload]{textcase}
 \usepackage{subfig}
 \usepackage{float}
-
+\usepackage{amssymb}
 
 \bibliographystyle{abbrv}
 
@@ -399,9 +399,16 @@ Spatial abstractions are calculated by transformations of the quantitative geome
 \section{Spatial Reasoning in DSpace}
 In DSpace qualitative spatial reasoning serves has a link between the high level conceptual design space and the low level quantitative geometric space. It uses formal qualitative spatial calculi for topological (Region Connected Calculus \cite{Freksa}), orientational (Single Cross \cite{Freksa}, Oriented Point Relation Algebra \cite{Moratz}) and distance reasoning over the spatial entities of the strucutural and artefactual design. 
 
-Within the CLP framework of DSpace, the reasoning capabilities are built as a series of spatial constraint solvers using  Constraint Logic Programming over Reals (CLP(R)) and Constrain Handling Rules (CHR). The spatial contraint solvers are designed to work directly over the multiple perspective representation structure via the spatial abstraction layer. The main service of the reasoner is qualification of spatial design configurations into topological, orientational, and distance networks, which can be used to reason about conceptual design requirements.
+\begin{figure}[H]
+\centering
+\includegraphics[width=90mm]{reasoner-design}
+\caption{Constraint Solvers}
+\label{reasoner-design}
+\end{figure}
 
-TODO: figure for reasoner
+Within the CLP framework of DSpace, the reasoning capabilities are built as a series of spatial constraint solvers using  Constraint Logic Programming over Reals (CLP($\mathbb{R}$)) and Constrain Handling Rules (CHR). The spatial contraint solvers are designed to work directly over the multiple perspective representation structure via the spatial abstraction layer. The main service of the reasoner is qualification of spatial design configurations into topological, orientational, and distance networks, which can be used to reason about conceptual design requirements.
+
+
 
 \subsection{Topology}
 The DSpace reasoner can qualify the following four topological relationships for convex hulls: inside (\ref{inside}), outside (\ref{outside}), partially overlapping (\ref{overlapping}), and disconnected (\ref{disconnected}). The process of topological qualification uses the geometric properties of convex hulls to detect topological relationships. 
@@ -473,10 +480,15 @@ SCC relationships are qualified by solving a system of linear inequalities, whic
 \subsection{Distance}
 The DSpace reasoner can calculate the minimum euclidean distance between points, lines, and polygons. Given two objects the minimum distance is calculated by finding the closet point in each object to the other object. Base on these two point the minimum euclidean distance is calculated. 
 
-TODO: fig of closest points 
+\begin{figure}[H]
+\centering
+\includegraphics[width=80mm]{min-dist}
+\caption{Minimum Distance}
+\label{min-dist}
+\end{figure}
 
 \subsection{Spatial Reasoning in a CLP Framework}
-The spatial reasoning module is built as a set of spatial constraint solvers for topological, orientational, and distance reasoning. The solvers use Constraint Logic Programming over the Reals (CLP(R)) and Constraint Handling Rules (CHR) to solve spatial qualification problems for topology and orientation and minimum distance constraints for distance. The distance constraint solver is different from topology and orientation because it does not solve qualification problems for distance, rather is solves minimum distance constraints against a pair of objects. The topological and distance constraint solvers extends work done in Sindalog spatial constraint solver \cite{}. 
+The spatial reasoning module is built as a set of spatial constraint solvers for topological, orientational, and distance reasoning. The solvers use CLP($\mathbb{R}$) and CHR to solve spatial qualification problems for topology and orientation and minimum distance constraints for distance. The distance constraint solver is different from topology and orientation because it does not solve qualification problems for distance, rather is solves minimum distance constraints against a pair of objects. The topological and distance constraint solvers extends work done in Sindalog spatial constraint solver \cite{}. 
 
 In the CLP framework of DSpace, the spatial constraint solvers work directly over the multiple perspective design structure so that the constraint solvers know directly about the semantics of architectural entities. For example, to solve a topological constraint (for example inside) for two doorways (\emph{door1, door2}) simply requires the ids for each architectural entity. 
 \begin{verbatim}
@@ -503,9 +515,9 @@ The top level constraints recursively break down each convex hull into line segm
 
 
 \subsubsection{Constraint Solver: Orientation}
-The orientational solver qualifies intrinsic and extrinsic orientational relationships over points and directed points. The solvers is written using CLP(R) and constrains linear inequalities to solve orientational qualification problems. Within the orientational solver there are two modules, one for intrinsic relationships based on OPRA and one for extrinsic relationships based on SCC.
+The orientational solver qualifies intrinsic and extrinsic orientational relationships over points and directed points. The solvers is written using CLP($\mathbb{R}$) and constrains linear inequalities to solve orientational qualification problems. Within the orientational solver there are two modules, one for intrinsic relationships based on OPRA and one for extrinsic relationships based on SCC.
 
-The OPRA constraint solver solves OPRA constrains by solving a system of linear inequalities. The discussion of these equations can be found in \ref{orientation}. In CLP(R) the linear inequalities are built as constraints that are stored in the solvers constraint store until it is able to solve them. 
+The OPRA constraint solver solves OPRA constrains by solving a system of linear inequalities. The discussion of these equations can be found in \ref{orientation}. In CLP($\mathbb{R}$) the linear inequalities are built as constraints that are stored in the solvers constraint store until it is able to solve them. 
 
 The SCC constraint solver solves SCC constrains by solving a system of linear inequalities. The process of solving these constraints is very similar to the OPRA constraints.
 
