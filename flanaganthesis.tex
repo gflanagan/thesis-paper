@@ -224,9 +224,9 @@ to do this dspace need to:
 
 
 \chapter{Spatial Computing in a Constraint Logic Programming Framework}
-representation (Declarative / Prolog)
-spatial reasoning (CLP)
-declarative Prolog / CLP framework
+This chapter presents the computational framework of the DSpace reasoner, looks at how design are represented in a multiple perspective structure within the framework, and how designs are reasoned about using qualitative spatial reasoning and representation techniques. The framework is written in the declarative programming semantics of Constraint Logic Programming (CLP) using Prolog, CLP over the Reals (CLP($\mathbb{R}$)), and Constraint Handling Rules (CHR).  
+
+The chapter is organized into two sections. The first section looks at how design are represented from a multiple perspective structure and how they are formally implemented in the DSpace CLP framework. The second section looks at how the reasoner works directly over the representation structure to reason about designs from a qualitative spatial perspective to solve qualification constraints for topology, orientation and distance, and how the reasoner is implemented in the DSpace CLP framework.
 
 \section{Design Representation in DSpace}
 In DSpace an architectural design is modeled in a multiple perspective structure that incorporate aspects of the design that are quantitative (structural form), functional (artefactual function), and qualitative (spatial abstraction). The object of this representation structure is to provide the DSpace reasoner with mechanisms that connect an expert's design conceptualization to the precise geometric quantities of a CAAD based system.   
@@ -500,33 +500,34 @@ TODO: figure of the design of spatial reasoner
 The remainder of this section looks at the structure and implementation of each constraint solver and how each can be used to solve spatial constraints.
 
 \subsubsection{Constraint Solver: Topology}
-The topological constraint solver qualifies topological relationships over convex hull objects. The solver is written using CHRs that simplify and propagate topological constraints into geometric constraints of line segment intersection and convex hull / point containment. Once a constraint is in a simplified form, i.e., a line intersection of point containment constraint, it is solved and returns true or false based on the outcome of the solution.   
+The topological constraint solver qualifies topological relationships over convex hull objects and extends The Sindalog \ref{Sindalog} topological constraint solver by integrating topological constraints for convex hulls. It is written using CHR that simplify and propagate topological constraints into geometric constraints of line segment intersection and convex hull / point containment. Once a constraint is in a simplified form, i.e., a line intersection of point containment constraint, it is solved and returns true or false based on the outcome of the solution.   
 
 For example, qualification for the partially overlapping topological relationship requires simplifying the overlapping constraint into line segment intersection constraints between the line segments of the convex hulls. The overlapping constraint is solved when at least one line intersection constraint is solved to true or when there are no more line intersection constraints left in the constraint store. In the former case the constraint returns true and in the latter case returns a failure. 
 
-The top level constraints recursively break down each convex hull into line segments can builds new, simplified, constraints that check for line segment intersection. The following code shows a simplification rule for the overlapping topological relationship for line segment to convex hull intersection. Notice the first constraint check for segment to segment intersection and then recursively calls itself to check line segment intersection in the rest of the hull.  
+A top level constraint recursively breaks down a convex hull into its' line segments and propagates new constraints for line segment to convex hull intersection. The line segment to convex hull intersection constraint further propagates new constraints that check for line segment to line segment intersection. These constraints are the lowest level constraints and are solved when fully instantiated. The following code shows a propagation rules for the overlapping topological relationship for line segment to convex hull intersection. Line segments are represented as a tuple of point and convex hull are represented as a list of points. Note that these are only a few of many constraints needed to solve this constraint.  
 
 \begin{verbatim}
-   intersect_segment_hull(Pt1, Pt2, [Pt3, Pt4|PtS]) <=>
+   intersect_segment_hull((Pt1, Pt2), [Pt3, Pt4|PS]) <=>
            intersection_segment_segment((Pt1, Pt2), (Pt3, Pt4)),
-           intersection_segment_hull(Pt1, Pt2, [Pt4|Pts]).
+           intersection_segment_hull(Pt1, Pt2, [Pt4|PS]).
 \end{verbatim}
 
+The qualification for the other topological relationships are similar to the partially overlapping constraint presented here, but in addition to the line intersection constraint some use the geometric properties of convex hull / point containment.
 
 \subsubsection{Constraint Solver: Orientation}
 The orientational constraint solver qualifies intrinsic and extrinsic orientational relationships over points and directed points. It is written in CLP($\mathbb{R}$) and constrains linear inequalities to solve orientational qualification problems. Within the orientational solver there are two modules, one for intrinsic relationships based on OPRA$_{m}$ and one for extrinsic relationships based on SCC.
 
-The OPRA$_{m}$ constraint solver solves OPRA$_{m}$ constrains by solving a system of linear inequalities. The discussion of these equations can be found in \ref{orientation}. In CLP($\mathbb{R}$) the linear inequalities are built as constraints that are stored in the solvers constraint store until it is able to solve them. 
+The OPRA$_{m}$ and SCC constraint solvers, solve OPRA$_{m}$ and SCC constrains respectively by solving a system of linear inequality constraints. A presentation and discussion of these equations can be found in \ref{opra-eq} and \ref{scc-eq}. In CLP($\mathbb{R}$) the linear inequalities are built as constraints that are stored in the solvers constraint store until it is fully instantiated. 
 
-The SCC constraint solver solves SCC constrains by solving a system of linear inequalities. The process of solving these constraints is very similar to the OPRA constraints.
+TODO: code for opra and scc constraint solver
 
 \subsubsection{Constraint Solver: Distance}
-The distance constraint solver solves minimum distance constraints. This solver uses the distance constraint services of the Sindalog \cite{sindalog} reasoner for distance reasoning. The distance solver is different from the other solvers because it returns a value to a query. For example, the following query will return the minimum distance between the two objects in D.
+The distance constraint solver solves minimum distance constraints and uses the distance constraint services of the Sindalog \cite{sindalog} reasoner for its' reasoning. The distance solver is different from the other solvers because it returns a value to a query. For example, the following query will return the minimum distance between the two objects in D.
 \begin{verbatim}
    min_distance(obj1, obj2, D). 
 \end{verbatim}
 
-The distance constraint solver is written using CHRs that break down the constraints until they can be solved for. This process involves finding the located on each object that is the closet to the other, so that the minimum distance can be calculated between the two.  
+The distance constraint solver is written using CHR that break down the constraints until they can be solved for. This process involves finding the located on each object that is the closet to the other, so that the minimum distance can be calculated between the two.  
 
 
 \chapter{Conceptual Design Requirements}
