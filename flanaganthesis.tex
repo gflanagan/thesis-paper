@@ -490,11 +490,10 @@ The DSpace reasoner can calculate the minimum euclidean distance between points,
 \subsection{Spatial Reasoning in a CLP Framework}
 The spatial reasoning module is built as a set of spatial constraint solvers for topological, orientational, and distance reasoning. The solvers use CLP($\mathbb{R}$) and CHR to solve spatial qualification problems for topology and orientation and minimum distance constraints for distance. The distance constraint solver is different from topology and orientation because it does not qualify distance relationships, rather is solves minimum distance constraints against a pair of objects. The topological and distance constraint solvers extends work done in The Sindalog spatial constraint solver \cite{}. 
 
-In the CLP framework of DSpace, the spatial constraint solvers work directly over the multiple perspective design structure so that the constraint solvers know directly about the semantics of architectural entities. For example, to solve a topological constraint (for example inside) for two doorways (\emph{door1, door2}) simply requires the ids for each architectural entity. 
+In the CLP framework of DSpace, the spatial constraint solvers work directly  with the multiple perspective design structure, with regards to the semantics of the design. The topological, orientational, and distance constraints take architectural entity ids as arguments and directly solve spatial constraints using the entities abstracted spatial representations. For example, to qualify the topological inside relationships for two doorways the following query is made. This query will return \emph{true} if the two doorways have an inside topological relationship and fails if they do not.
 \begin{verbatim}
    inside(door1, door2).
 \end{verbatim}
-A query such as this will return \emph{true} if the two entities have an inside topological relationship and fails if they do not. 
 
 TODO: figure of the design of spatial reasoner
 
@@ -522,7 +521,10 @@ The OPRA$_{m}$ constraint solver solves OPRA$_{m}$ constrains by solving a syste
 The SCC constraint solver solves SCC constrains by solving a system of linear inequalities. The process of solving these constraints is very similar to the OPRA constraints.
 
 \subsubsection{Constraint Solver: Distance}
-The distance constraint solver solves minimum distance constraints. This solver uses the distance constraint services of the Sindalog \cite{sindalog} reasoner for distance reasoning. The distance solver is different from the other solvers because it returns a value to a query. For example, the query, $min_distance(obj1, obj2, D).$, will return the minimum distance between the two objects in D.
+The distance constraint solver solves minimum distance constraints. This solver uses the distance constraint services of the Sindalog \cite{sindalog} reasoner for distance reasoning. The distance solver is different from the other solvers because it returns a value to a query. For example, the following query will return the minimum distance between the two objects in D.
+\begin{verbatim}
+   min_distance(obj1, obj2, D). 
+\end{verbatim}
 
 The distance constraint solver is written using CHRs that break down the constraints until they can be solved for. This process involves finding the located on each object that is the closet to the other, so that the minimum distance can be calculated between the two.  
 
