@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="744.09448"
+   height="1052.3622"
+   id="svg2">
+  <defs
+     id="defs4" />
+  <g
+     id="layer1">
+    <rect
+       width="80"
+       height="100"
+       x="267.25763"
+       y="141.04951"
+       transform="matrix(0.77635041,0.63030155,-0.63030155,0.77635041,0,0)"
+       id="rect2818"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <rect
+       width="60"
+       height="80"
+       x="208.68947"
+       y="490.46811"
+       transform="matrix(0.91265699,-0.40872634,0.40872634,0.91265699,0,0)"
+       id="rect3592"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <path
+       d="m 180,328.07647 210,34.28571"
+       id="path3594"
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <text
+       x="248.04066"
+       y="291.31897"
+       transform="matrix(0.98772985,0.15617214,-0.15617214,0.98772985,0,0)"
+       id="text3596"
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+         x="248.04066"
+         y="291.31897"
+         id="tspan3598">minimum distance</tspan></text>
+  </g>
+</svg>
