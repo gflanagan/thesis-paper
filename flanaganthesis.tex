@@ -435,7 +435,7 @@ An object \emph{A} has a partially overlapping relationship with an object \emph
 An object \emph{A} has a disconnected relationship with an object \emph{B} if \emph{A} does not intersect with \emph{B}, there are no points in \emph{A} that are inside \emph{B}, and there are no points in \emph{B} that are inside \emph{A}. The disconnected relationship is qualified by checking for line segment intersection and convex hull / point containment. If there are no line segment intersections and no convex hull / point containment relationships, then two objects are disconnected.  
 
 \subsection{Orientation} \label{orientation}
-The DSpace reasoner can qualify two types of orientational relationships, intrinsic and extrinsic. Intrinsic orientational reasoning is based on the OPRA$_{m}$. OPRA$_{m}$ partitions space into half planes, which are defined by lines emanating outwards from the reference point, and defines the qualitative orientational relationships by the half plane in which a second point is located. The granularity of an OPRA$_{m}$ relationship defines the number of lines emanating from the reference point. 
+The DSpace reasoner can qualify two types of orientational relationships, intrinsic and extrinsic. Intrinsic orientational reasoning is based on OPRA$_{m}$. OPRA$_{m}$ partitions space into half planes, which are defined by lines emanating outwards from a reference point, and defines the qualitative orientational relationships by the half plane in which a second point is located in relation to the reference point. The granularity of an OPRA$_{m}$ relationship defines the number of lines emanating from the reference point. 
 
 \begin{figure}[b]
 \centering
@@ -466,14 +466,14 @@ Extrinsic orientational reasoning is based on the SCC. SCC defines the orientati
 
 Figure \ref{scc} shows an SCC relationship between three points. The partitioning scheme is based on the orientation of the origin and relatum points. In this example, the third point, the referent, is located in sector 5 of the SCC partitioned space. 
 
-SCC relationships are qualified by solving a system of linear inequalities, which are based on the lines that partition space into the SCC sectors. Labeling starts at the line that runs between the origin and relatum at zero and increments clockwise. Given a point \emph{C}, its' SCC$_{1}$ relationship with points \emph{A} and \emph{B} is given by solving the equations for \emph{C} in \ref{scc-eq}. There are similar systems of inequalities for each of the seven SCC relationships.  
+SCC relationships are qualified by solving a system of linear inequalities, which are based on the lines that partition space into the SCC sectors. Labeling starts at the line that runs between the origin and relatum at zero and increments clockwise. Given a point \emph{C}, its' SCC$_{1}$ relationship with points \emph{A} and \emph{B} is given by solving the equations for \emph{C} in \ref{scc-eq}. Given three points A, B, and C, $M_{AB}$ stands for the slope of line from A to B, $Y_{AB}$ refers to the y-intercept of the line from A to B, $M_{perp}$ refers to the slope of the line that is perpendicular to the line from A to B, and $Y_{perp}$ refers to the y-intercept of the line that is perpendicular to the line from A to B. There are similar systems of inequalities for each of the seven SCC relationships.  
 
 \begin{equation}\label{scc-eq}
 \begin{aligned}
-\Big(&\Big(\Big(A_{y} < B_{y}\Big) \wedge \Big(C_{y} > M_{2} \cdot C_{x} + B_{2}\Big)\Big) \; \lor \\
-\Big(&\Big(A_{y} > B_{y}\Big) \wedge \Big(C_{y} < M_{2} \cdot C_{x} + B_{2}\Big)\Big)\Big) \\
-\wedge \;\; \Big(&\Big(\Big(A_{x} < B_{x}\Big) \wedge \Big(C_{y} < M_{1} \cdot C_{x} + B_{1}\Big)\Big) \; \lor \\
-\Big(&\Big(A_{x} > B_{x}\Big) \wedge \Big(C_{y} > M_{1} \cdot C_{x} + B_{1}\Big)\Big)\Big) \\
+\Big(&\Big(\Big(A_{y} < B_{y}\Big) \wedge \Big(C_{y} > M_{perp} \cdot C_{x} + Y_{perp}\Big)\Big) \; \lor \\
+\Big(&\Big(A_{y} > B_{y}\Big) \wedge \Big(C_{y} < M_{perp} \cdot C_{x} + B_{perp}\Big)\Big)\Big) \\
+\wedge \;\; \Big(&\Big(\Big(A_{x} < B_{x}\Big) \wedge \Big(C_{y} < M_{AB} \cdot C_{x} + B_{AB}\Big)\Big) \; \lor \\
+\Big(&\Big(A_{x} > B_{x}\Big) \wedge \Big(C_{y} > M_{AB} \cdot C_{x} + B_{AB}\Big)\Big)\Big) \\
 \end{aligned}
 \end{equation}
 
