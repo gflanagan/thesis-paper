@@ -404,12 +404,12 @@ In DSpace qualitative spatial reasoning serves has a link between the high level
 \label{reasoner-design}
 \end{figure}
 
-Within the CLP framework of DSpace, the reasoning capabilities are built as a series of spatial constraint solvers using CLP($\mathbb{R}$) (Constraint Logic Programming over Reals) and CHR (Constrain Handling Rules). The spatial constraint solvers work directly over the multiple perspective representation structure via the spatial abstraction layer. The main service of the reasoner is qualification of the quantitative architectural structures into topological, orientational, and distance relationships. These qualitative spatial relationships are, in turn, used to reason about conceptual design requirements.
+Within the CLP framework of DSpace, the reasoning capabilities are built as a series of spatial constraint solvers using CLP($\mathbb{R}$) (Constraint Logic Programming over Reals) and CHR (Constrain Handling Rules). The spatial constraint solvers work directly over the multiple perspective representation structure via the spatial abstraction representation layer. The main service of the reasoner is qualification of the quantitative architectural structures into topological, orientational, and distance relationships. These qualitative spatial relationships are, in turn, used to reason about conceptual design requirements.
 
 
 
 \subsection{Topology}
-The DSpace reasoner can qualify the following four topological relationships for convex hulls: inside (\ref{inside}), outside (\ref{outside}), partially overlapping (\ref{overlapping}), and disconnected (\ref{disconnected}). The process of topological qualification uses geometric properties of convex hulls to detect topological relationships. 
+The DSpace reasoner can qualify the following four topological relationships for convex hulls: inside (\ref{inside}), outside (\ref{outside}), partially overlapping (\ref{overlapping}), and disconnected (\ref{disconnected}). In DSpace topological qualification uses geometric properties of convex hulls to detect topological relationships. 
 
 \begin{figure}[t]
  \centering
@@ -424,16 +424,16 @@ The DSpace reasoner can qualify the following four topological relationships for
 \label{topoloy}
 \end{figure}
 
-An object \emph{A} has an inside relationship with an object \emph{B} if all \emph{A}'s points are inside the convex hull of \emph{B}. The inside relationship is qualified in DSpace by checking the property of convex hull / point containment. A point is inside a convex hull if the polarity of the determinate between the point and each line segment in the convex hull is negative. Because the points in a convex hull are always ordered counterclockwise, in the DSpace representation, the polarity of the determinant between a point inside the convex hull will always be negative. 
+An object \emph{A} has an inside relationship with an object \emph{B} if all \emph{A}'s points are inside the convex hull of \emph{B}. The inside relationship is qualified in DSpace by checking the property of convex hull / point containment. A point in \emph{A} is inside the convex hull of \emph{B} if the polarity of the determinate between the point in \emph{A} and each line segment in \emph{B} is negative. Because points in a convex hull are always ordered counterclockwise, in the DSpace representation, the polarity of the determinant between a point inside the convex hull will always be negative. 
 
-An object \emph{A} has an outside relationship with an object \emph{B} if all \emph{B}'s points are inside the convex hull of \emph{A}. Because the outside relationship is the inverse of the inside relation it is easy to check for in DSpace be using the inside relationship ($inside(B,A)$). 
+An object \emph{A} has an outside relationship with an object \emph{B} if all \emph{B}'s points are inside the convex hull of \emph{A}. Because the outside relationship is the inverse of the inside relation it is easy to qualify in DSpace by using the inside relationship ($inside(B,A)$). 
 
 An object \emph{A} has a partially overlapping relationship with an object \emph{B} if one or more line segments in \emph{A} intersect with one or more line segments in \emph{B}. The partially overlapping relationship is qualified in DSpace by checking for line segment intersection between objects. Two objects are partially overlapping if they intersect in at least one point.  
 
 An object \emph{A} has a disconnected relationship with an object \emph{B} if \emph{A} does not intersect with \emph{B}, there are no points in \emph{A} that are inside \emph{B}, and there are no points in \emph{B} that are inside \emph{A}. The disconnected relationship is qualified by checking for line segment intersection and convex hull / point containment. If there are no line segment intersections and no convex hull / point containment relationships, then two objects are disconnected.  
 
 \subsection{Orientation} \label{orientation}
-The DSpace reasoner can qualify two types of orientational relationships, intrinsic and extrinsic. Intrinsic orientational reasoning is based on OPRA$_{m}$. OPRA$_{m}$ partitions space into half planes, which are defined by lines emanating outwards from a reference point, and defines the qualitative orientational relationships by the half plane in which a second point is located in relation to the reference point. The granularity of an OPRA$_{m}$ relationship defines the number of lines emanating from the reference point. 
+The DSpace reasoner can qualify two types of orientational relationships, intrinsic and extrinsic. Intrinsic orientational reasoning is based on OPRA$_{m}$. OPRA$_{m}$ partitions space into half planes, which are defined by lines emanating outwards from a reference point, and defines the qualitative orientational relationships by the half plane in which a second point is located in relation to the reference point. The granularity of an OPRA$_{m}$ relationship, specified by $m$, defines the number of lines emanating from the reference point. 
 
 \begin{figure}[b]
 \centering
@@ -444,7 +444,7 @@ The DSpace reasoner can qualify two types of orientational relationships, intrin
 
 Figure \ref{facing-opra-base-rel} shows the OPRA$_{2}$ (two lines) partitioning of space, with labels for the base OPRA$_{2}$ relationships. Point \emph{A} is located in sector 7 of point \emph{B}'s partitioned space, and \emph{B} is located in sector 1 of \emph{A}'s partitioned space. Note that the arrow depicts the point's direction and the half-plane sectors are labelled starting at the point's direction, incrementing counter-clockwise. 
 
-OPRA$_{m}$ relationships are qualified by solving linear inequalities that are defined by lines emanating from the reference point. Given a point \emph{A} and \emph{B}, the $\theta_{AB}$ symbol stands for $ \tan^{-1} \frac{B_{y} - A_{y}}{B_{x} - A_{X}} $, the $\phi_{A}$ symbol refers to the direction of point \emph{A}, and the \emph{m} symbol refers to the granularity of the OPRA$_{m}$ relations. Equation \ref{opra-eq} shows the linear inequalities for OPRA$_{m}$ relationships. Using this system of linear inequalities, the OPRA$_{2}$ relationship ($i$) can be solved for \emph{B} in terms of \emph{A} OPRA$){2}$ space.
+OPRA$_{m}$ relationships are qualified by solving linear inequalities that are defined by lines emanating from the reference point. Given a point \emph{A} and \emph{B}, the $\theta_{AB}$ symbol refers to $ \tan^{-1} \frac{B_{y} - A_{y}}{B_{x} - A_{X}} $, the $\phi_{A}$ symbol refers to the direction of point \emph{A}, and the \emph{m} symbol refers to the granularity of the OPRA$_{m}$ relations. Equation \ref{opra-eq} shows the linear inequalities for OPRA$_{m}$ relationships as referenced from point \emph{A}. Using this system of linear inequalities, the OPRA$_{m}$ relationship ($i$) can be solved for \emph{B} in terms of \emph{A} OPRA$){m}$ space.
 
 \begin{equation}\label{opra-eq}
 \begin{aligned}
@@ -462,9 +462,9 @@ Extrinsic orientational reasoning is based on the SCC. SCC defines the orientati
 \label{scc}
 \end{figure}
 
-Figure \ref{scc} shows an SCC relationship between three points. The partitioning scheme is based on the orientation of the origin and relatum points. In this example, the third point, the referent, is located in sector 5 of the SCC partitioned space. 
+Figure \ref{scc} shows an SCC relationship between three points. The partitioning scheme is based on the orientation of the origin and relatum points. In this example, the third point, the referent, is located in sector 5 of the SCC partitioned space, so it has an SCC$_{5}$ relationship with point \emph{A} as related by \emph{B}. 
 
-SCC relationships are qualified by solving a system of linear inequalities, which are based on the lines that partition space into the SCC sectors. Labeling starts at the line that runs between the origin and relatum at zero and increments clockwise. Given a point \emph{C}, its' SCC$_{1}$ relationship with points \emph{A} and \emph{B} is given by solving the equations for \emph{C} in \ref{scc-eq}. Given three points A, B, and C, $M_{AB}$ stands for the slope of line from A to B, $Y_{AB}$ refers to the y-intercept of the line from A to B, $M_{perp}$ refers to the slope of the line that is perpendicular to the line from A to B, and $Y_{perp}$ refers to the y-intercept of the line that is perpendicular to the line from A to B. There are similar systems of inequalities for each of the seven SCC relationships.  
+SCC relationships are qualified by solving a system of linear inequalities, which are based on the lines that partition space into the SCC sectors. Labeling starts at the line that runs between the origin and relatum, starting at zero and incrementing clockwise. Given a point \emph{C}, its' SCC$_{1}$ relationship with points \emph{A} and \emph{B} is given by solving the equations for \emph{C} in \ref{scc-eq}. Given three points A, B, and C, $M_{AB}$ refers to the slope of line from A to B, $Y_{AB}$ refers to the y-intercept of the line from A to B, $M_{perp}$ refers to the slope of the line that is perpendicular to the line from A to B, and $Y_{perp}$ refers to the y-intercept of the line that is perpendicular to the line from A to B. There are similar systems of inequalities for each of the seven SCC relationships.  
 
 \begin{equation}\label{scc-eq}
 \begin{aligned}
@@ -486,13 +486,13 @@ The DSpace reasoner can calculate the minimum euclidean distance between points,
 \end{figure}
 
 \subsection{Spatial Reasoning in a CLP Framework}
-The spatial reasoning module is built as a set of spatial constraint solvers for topological, orientational, and distance reasoning. The solvers use CLP($\mathbb{R}$) and CHR to solve spatial qualification problems for topology and orientation and minimum distance constraints for distance. The distance constraint solver is different from topology and orientation because it does not qualify distance relationships, rather is solves minimum distance constraints against a pair of objects. The topological and distance constraint solvers extends work done in The Sindalog spatial constraint solver \cite{}. 
+The spatial reasoning module is built as a set of spatial constraint solvers for topological, orientational, and distance reasoning. The solvers use CLP($\mathbb{R}$) and CHR to solve spatial qualification problems for topology and orientation and minimum distance constraints for distance. The distance constraint solver is different from topology and orientation because it does not qualify distance relationships, rather is solves minimum distance constraints for a pair of objects. The topological and distance constraint solvers extends work done in The Sindalog spatial constraint solver \cite{}. 
 
-In the CLP framework of DSpace, the spatial constraint solvers work directly  with the multiple perspective design structure, with regards to the semantics of the design. The topological, orientational, and distance constraints take architectural entity ids as arguments and directly solve spatial constraints using the entities abstracted spatial representations. For example, to qualify the topological inside relationships for two doorways the following query is made. This query will return \emph{true} if the two doorways have an inside topological relationship and fails if they do not.
+In the CLP framework of DSpace, the spatial constraint solvers work directly  with the multiple perspective design structure, with regards to the semantics of the design. The topological, orientational, and distance constraints take architectural entity ids as arguments and directly solve spatial constraints using the entities abstracted spatial representations. For example, to qualify the topological inside relationships for two doorways the following query is made. 
 \begin{verbatim}
    inside(door1, door2).
 \end{verbatim}
-
+This query will return \emph{true} if the two doorways have an inside topological relationship and fails if they do not.
 TODO: figure of the design of spatial reasoner
 
 The remainder of this section looks at the structure and implementation of each constraint solver and how each can be used to solve spatial constraints.
