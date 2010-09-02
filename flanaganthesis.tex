@@ -224,12 +224,12 @@ to do this dspace need to:
 
 
 \chapter{Design Computing in a Constraint Logic Programming Framework}
-This chapter presents the computational framework of the DSpace reasoner, looks at how design are represented in a multiple perspective structure within the framework, and how designs are reasoned about in the framework using qualitative spatial reasoning and representation techniques. The DSpace framework is written in the declarative programming semantics of Constraint Logic Programming (CLP) using Prolog, CLP over the Reals (CLP($\mathbb{R}$)), and Constraint Handling Rules (CHR).  
+This chapter presents the computational framework of the DSpace reasoner. It examines how designs are modeled in a multiple perspective representation structure, and reasoned about using qualitative spatial reasoning and representation techniques. The DSpace framework is written in the declarative programming semantics of Constraint Logic Programming (CLP) using Prolog, CLP over the Reals (CLP($\mathbb{R}$)), and Constraint Handling Rules (CHR).  
 
-The chapter is organized into two sections. The first section looks at how DSpace represents designs in a multiple perspective structure and how this structure is implemented in the DSpace CLP framework.The second section looks at how the spatial reasoner works directly over the representation structure to reason about designs from a qualitative spatial perspective to solve qualification constraints for topology, orientation and distance, and how the reasoner is implemented in the DSpace CLP framework.
+The chapter is organized into two sections. The first section looks at the multiple perspective representation structure and its implemented in the DSpace CLP framework. The second section looks at the spatial reasoner and how it works directly over the design representation to reason about designs from a qualitative spatial perspective.
 
 \section{Design Representation in DSpace}
-In DSpace an architectural design is modeled in a multiple perspective structure that incorporate aspects of the design that are quantitative (the physical geometries that pertain to the structural form of the design), functional (the artefactual extensions of the structural form), and qualitative (spatial abstractions that pertain to the design from a qualitative spatial perspective). The objective of this representation structure is to provide the DSpace reasoner with mechanisms that connect an expert's high level design conceptualizations to the low level geometric quantities of a CAAD based system.   
+In DSpace an architectural design is modeled in a multiple perspective representation structure that incorporate aspects of the design that are quantitative, functional, and qualitative. The objective of this representation structure is to provide the DSpace reasoner with mechanisms that connect an expert's high level design conceptualizations to the low level geometric quantities of a CAAD based system.   
 
 \begin{figure}[H]
 \centering
@@ -238,12 +238,14 @@ In DSpace an architectural design is modeled in a multiple perspective structure
 \label{mutli-perspective}
 \end{figure}
 
-Within the CLP framework of DSpace, the multiple perspective model is represented as Prolog facts and rules. Prolog facts make up a factbase that stores a table of architectural entities to their architectural types (i.e., wall, door, window, desk, etc.). There is a single entry for each entity in the design. Rules are used to bind architectural entities (via a unique identifier) to their multiple perspective representations. Transformation rules abstract quantitative geometries into abstract spatial objects. This representation structure is the basis for the spatial constraint solvers of the DSpace reasoner.
+Within the CLP framework of DSpace, the multiple perspective model is represented as Prolog facts and rules. Prolog facts make up a factbase that stores a table of architectural entities to their architectural types (i.e., wall, door, window, desk, etc.). Each architectural entity in the design has a single entry in the factbase. An entry is a Prolog predicate that takes two atoms as arguments: an identifier and an architectural type. The factbase is instantiated automatically during the import process from the CAAD system. The following Prolog code shows three instantiated facts (predicates) for a doorway, window, and desk. Note that the ds prefix refers to the DsScheme which will be discussed in a later section.  
+\begin{verbatim}
+   architectural_entity(door1, dSDoor).
+   architectural_entity(wall4, dsWallStandardCase).
+   architectural_entity(desk4, dsDesk).
+\end{verbatim}
 
-This section is structured as follows. The first subsection looks at the multiple perspective design structure of the DSpace reasoner. The second subsection looks at how each perspective is formally implemented in the DSpace CLP framework. The last section looks at how a real world design from a CAAD architectural design tool is imported into the DSpace reasoner using the DsSchema / IFC format.
-
-\subsection{Design Instantiation}
-The representation of a design starts with a factbase in Prolog that binds architectural entities (via a unique identifier) to architectural types (wall, door, window, column, display case, chair, desk, etc.). Each architectural entity in the design has a single entry in the factbase. An entry is a Prolog predicate that takes two atoms as arguments: an identifier and an architectural type. The factbase is instantiated automatically during the import process from the CAAD system. 
+Prolog rules are used to bind architectural entities (via a unique identifier) to their quantitative and functional representations. Transformation rules are used to abstract quantitative geometries into abstract spatial objects. TODO: explain figure. 
 
 \begin{figure}[H]
 \centering
@@ -252,17 +254,13 @@ The representation of a design starts with a factbase in Prolog that binds archi
 \label{clp-design}
 \end{figure}
 
-The following Prolog code shows three instantiated facts (predicates) for a doorway, window, and desk. Note that the ds prefix refers to the DsScheme which will be discussed in a later section.  
-\begin{verbatim}
-   architectural_entity(door1, dSDoor).
-   architectural_entity(wall4, dsWallStandardCase).
-   architectural_entity(desk4, dsDesk).
-\end{verbatim}
+This remainder of this section is structured as follows. The first subsection looks at the quantitative design representation. The second section looks at the functional design perspective. The final subsection looks at the qualitative design perspective.
+
 
 \subsection{Quantitative Perspective}
-The quantitative representation of the design models the structural form of the design in terms of its' precise geometric features (i.e., layout, shape, location). Architectural entities, such as walls, windows, doorways, columns, and rooms, are represented as spatial geometric primitives of polygons, lines and points that correspond to the physical dimensions (length, width, shape) of the entities. The quantitative model represents the design perspective that is similar to CAAD programs.
+The quantitative representation of the design models the structural form of the design in terms of its' precise physical geometric features (i.e., layout, shape, location). Architectural entities, such as walls, windows, doorways, columns, and rooms, are represented as geometric primitives of polygons, lines and points that correspond to the physical dimensions (length, width, shape) of the entities. The quantitative model represents the design perspective that is similar to CAAD programs.
 
-A Prolog rule binds an entity to its' quantitative geometric representation. The quantitative geometry is defined by spatial geometric primitives of polygons, lines, and points. The following Prolog rule defines the quantitative geometry for a doorway with id \emph{door1}. The first argument is an entity id and the second is a variable that will be instantiated with the quantitative geometric representation. The $spatial\_primitive$ predicate in the body of the rule takes the quantitative point data that defines the entity and return an instantiated spatial primitive object (polygon, line, point) in the Geometry variable.
+Within the DSpace CLP framework, a single Prolog rule binds an entity to its' quantitative geometric representation. The quantitative geometry is defined by geometric primitives of polygons, lines, and points. The following Prolog rule defines the quantitative geometry for a doorway with id \emph{door1}. The first argument is an entity id and the second is a variable that will be instantiated with the quantitative geometric representation. The $spatial\_primitive$ predicate in the body of the rule takes the quantitative point data that defines the entity and return an instantiated spatial primitive object (polygon, line, point) in the Geometry variable.
 \begin{verbatim}
     quantitative_geometry(door1, Geometry) :-
            spatial_primitive(Geometry, [(1,1),(3,5),(4,5),(2,2)]).
@@ -276,7 +274,7 @@ The quantitative rulebase can be queried to retrieve specific geometries. For ex
 
 
 \subsection{Functional Perspective}
-Spatial artefacts are non-physical, spatial extensions of architectural entities that pertain to a specific functional quality of the entity. Artefactual extensions do not have a physical manifestation, however, they are an important part of the design representation because they effect the functionality and performance of the design. There are three types of spatial artefacts identified by Bhatt\cite{Bhatt} that are represented in DSpace: \emph{operational space}, \emph{functional space}, and \emph{range space}.
+Spatial artefacts are non-physical, spatial extensions of architectural entities that pertain to a specific functional quality of an entity. Artefactual extensions do not have a physical manifestation, however, they are an important part of the design representation because they effect the functionality and performance of the design. There are three types of spatial artefacts identified by Bhatt\cite{Bhatt} that are represented in DSpace: \emph{operational space}, \emph{functional space}, and \emph{range space}.
 
 \begin{figure}[H]
  \centering
@@ -304,7 +302,9 @@ The range space pertains to a region of space that encompass the range of a sens
 
 Artefactual extensions directly effect how well a design functions. For example, a sink in a bathroom has a functional space, the space a person occupies while washing his/her hands at the sink. If this space is interfered by (i.e., topologically overlapping) the functional and/or physical space of a doorway, this will cause a circulation problem when both the doorway and sink are simultaneously being operated, i.e., a collision between the person washing his/her hands and the doorway being opened. In this example, the functional aspects of the bathrooms design with regard to the mitigation of circulation problems is directly influenced by the spatial configuration of the non-physical artefactual extensions of the design. 
 
-Prolog rules link an entity to its' artefactual geometries. There is a single Prolog rule for each artefactual extension: functional, operational, and range. Each entity may have zero or more artefactual geometries. For example, a doorway has a functional and operational space but does not have a range space. Likewise, a column has no artefactual extensions. The following Prolog rules define the artefactual geometries for a doorways with id \emph{door1}. There is a single rule for each perspective. Each rule takes two arguments, an id and variable that will be instantiated with the geometry. 
+Within the DSpace CLP framework, Prolog rules are used to bind an entity to its' artefactual geometries. There is a single Prolog rule for each artefactual type: functional, operational, and range. An entity may have zero or more artefactual geometries. For example, a doorway has a functional and operational space but does not have a range space. Likewise, a column has no artefactual extensions. 
+
+The following Prolog rules define the artefactual geometries for a doorways with id \emph{door1}. There is a single rule for each perspective. Each rule takes two arguments, an id and variable that will be instantiated with the geometry. 
 \begin{verbatim}      
    functional_space(door1, Geometry) :-
            spatial_primitive(Geometry, polygon(PtList)).
@@ -314,18 +314,19 @@ Prolog rules link an entity to its' artefactual geometries. There is a single Pr
 \end{verbatim}
 
 The artefactual rulebase can be queried to retrieve a artefactual geometry. For example, to get the functional geometry for a \emph{door1} the following query is made:
- Likewise, to get the functional space of \emph{door1} the following query is made:
 \begin{verbatim}
    functional_geometry(door1, FunctionalGeometry).
 \end{verbatim}
 \emph{Door1}'s functional geometry is now stored in the FunctionalGeometry variable. Similar queries are made to retrieve the operational and range space geometries.
 
 \subsection{Qualitative Perspective}
-In DSpace architectural entities have spatially abstracted representations. This allows DSpace to reason about the the design from a qualitative level of abstraction with regards to the its' spatial characteristics of topology, orientation and distance. This type of qualitative spatial reasoning, reasons over the abstract feature space of the design using abstract spatial structures of points, directed points, and convex hulls. 
+In DSpace architectural entities have spatially abstracted representations. This allows DSpace to reason about a design from a qualitative level of abstraction with regards to the its' spatial characteristics of topology, orientation and distance. This type of qualitative spatial reasoning, reasons over the abstract feature space of the design using abstract spatial objects of points, directed points, and convex hulls. 
 
 Architectural entities are not directly modeled, as they are in the quantitative representation, as abstract spatial objects. Abstract spatial objects are generated by transformation rules that abstract the quantitative geometries of the architectural entities. The process of spatially abstracting an architectural entity depends on the spatial characteristics of the entity's structural form, and an interpretation of the intrinsic nature of an entity within an architectural / design context. For example, the abstracted representation of a doorway as a directed point is defined not only by its' physical form but also by the interpretation of the doorway's intrinsic direction. 
 
-The remainder of this section shows how architectural entities and interior designs objects are spatially abstracted into points, directed points, and convex hulls. Table \ref{spatial abstractions} shows which spatial abstractions each architectural entity can be transformed into. 
+Within the DSpace CLP framework, Prolog rules transform the quantitative geometries into spatially abstracted objects. These transformations depends on the architectural entity type, the abstraction type (point, directed point, or convex hull), and sometimes a contextual identifier (direction of door into or out of a specific room). The following is transformation rules are based on the interpretation of the spatial abstraction of architectural entities in the previous section.
+
+The remainder of this section shows how architectural entities and interior designs objects are spatially abstracted into points, directed points, and convex hulls and how they are transformed in DSpace. Table \ref{spatial abstractions} shows which spatial abstractions each architectural entity can be transformed into. 
 
 \begin{table}[H]
   \begin{center}
@@ -347,6 +348,11 @@ The remainder of this section shows how architectural entities and interior desi
 
 \noindent \emph{\large Point} \\
 \indent All architectural entities and interior design objects have a point abstraction that is defined as the centroid of the entity's physical polygon space. Figure \ref{point-abs} shows the point abstraction for a doorway. Note that the point is the centroid of the doorways physical geometry. The point abstraction is used in orientational reasoning and is therefore used as an approximation of the objects location in the design. In general, the centroid is a good point approximation of location because it is a generalization of polygon space as a single point. 
+\begin{verbatim}
+   point_abstraction(door1, Point) :-
+           quantitative_geometry(door1, Quant),
+           centroid(Quant, Point).
+\end{verbatim}
 
 \begin{figure}[H]
 \centering
@@ -360,6 +366,13 @@ The remainder of this section shows how architectural entities and interior desi
 
 For these entities, direction is defined based on the interpretation of the nature of the entity within the context of a design. Formally, direction is interpreted as a vector that emanates out from an entity's point abstraction towards the room / space it is contained in. Specifically, direction is defined as the perpendicular vector to the intrinsic x-axis of the object. Figure \ref{dir-point-abs} shows the directed point abstraction for a doorway. Not that the direction is pointing perpendicular to the x-axis of the doorways physical geometry. Based on this definition there will be two perpendicular lines that define the direction. In this situation, the context of the space in which the entity is located is need to decided which of the two directions to use.  
 
+\begin{verbatim}
+   dir_point_abstraction(door1, (Point, Dir), room3) :-
+           quantitative_geometry(door1, Quant),
+           centroid(Quant, Point),
+           direction(Quant, Point, room3, Dir).
+\end{verbatim}
+
 \begin{figure}[H]\label{dir-point-abs}
 \centering
 \includegraphics[width=70mm]{dir-point-abs}
@@ -368,24 +381,14 @@ For these entities, direction is defined based on the interpretation of the natu
 
 \noindent \emph{\large Convex Hull} \\
 \indent All architectural entities have a convex hull abstraction. The convex hull is calculated over the quantitative polygon space by using the divide and conquer convex hull algorithm \cite{tbd}. The result of the algorithm is a convex hull representation that is as a list of point sorted in counterclockwise order. Convex hulls are used in topological reasoning.
-
-TODO: figure for convex hull abs
-
-Spatial abstracted objects are calculated by transformation rules of the quantitative geometries. Spatial transformations depends on the architectural entity type, the abstraction type (point, directed point, or convex hull), and sometimes a contextual identifier (direction of door into or out of a specific room). The following is transformation rules are based on the interpretation of the spatial abstraction of architectural entities in the previous section.
 \begin{verbatim}
-   point_abstraction(door1, Point) :-
-           quantitative_geometry(door1, Quant),
-           centroid(Quant, Point).
-            
-   dir_point_abstraction(door1, (Point, Dir), room3) :-
-           quantitative_geometry(door1, Quant),
-           centroid(Quant, Point),
-           direction(Quant, Point, room3, Dir).   
-   
    convex_hull_abstraction(door1, ConvexHull).
            quantitative_geometry(door1, Quant),
            convex_hull(convex, ConvexHull).
 \end{verbatim}
+
+
+TODO: figure for convex hull abs
 
 
 
