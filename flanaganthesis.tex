@@ -229,7 +229,7 @@ This chapter presents the computational framework of the DSpace reasoner. It exa
 The chapter is organized into two sections. The first section looks at the multiple perspective representation structure and its implemented in the DSpace CLP framework. The second section looks at the spatial reasoner and how it works directly over the design representation to reason about designs from a qualitative spatial perspective.
 
 \section{Design Representation in DSpace}
-In DSpace an architectural design is modeled in a multiple perspective representation structure that incorporate aspects of the design that are quantitative, functional, and qualitative. The objective of this representation structure is to provide the DSpace reasoner with mechanisms that connect an expert's high level design conceptualizations to the low level geometric quantities of a CAAD based system.   
+In DSpace an architectural design is modeled in a multiple perspective representation structure that incorporate aspects of the design that are quantitative, functional, and qualitative. This design representation goes beyond what is represented in CAAD programs by incorporating design features that are not based on the design's quantitative design representation. It includes functional aspects of the design that pertain to the performance and functional features of the design, as well as qualitative spatial aspects that pertain to experiential qualities of the design. The objective of this representation structure is to provide the DSpace reasoner with mechanisms that connect an expert's high level design conceptualizations to the low level geometric quantities of a CAAD based system.   
 
 \begin{figure}[H]
 \centering
@@ -238,11 +238,10 @@ In DSpace an architectural design is modeled in a multiple perspective represent
 \label{mutli-perspective}
 \end{figure}
 
-Within the CLP framework of DSpace, the multiple perspective model is represented as Prolog facts and rules. Prolog facts make up a factbase that stores a table of architectural entities to their architectural types (i.e., wall, door, window, desk, etc.). Each architectural entity in the design has a single entry in the factbase. An entry is a Prolog predicate that takes two atoms as arguments: an identifier and an architectural type. The factbase is instantiated automatically during the import process from the CAAD system. The following Prolog code shows three instantiated facts (predicates) for a doorway, window, and desk. Note that the ds prefix refers to the DsScheme which will be discussed in a later section.  
+Within the CLP framework of DSpace, the multiple perspective model is represented as Prolog facts and rules. Prolog facts make up a factbase that stores a table of architectural entities to their architectural types (i.e., wall, door, window, desk, etc.). Each architectural entity in the design has a single entry in the factbase. The factbase is instantiated automatically during the import process from the CAAD system. This factbase will be used throughout the DSpace reasoner to  verify an entity exists in the design and links it to its architectural type. The following Prolog code shows two instantiated facts (predicates) for a doorway, and a window. 
 \begin{verbatim}
    architectural_entity(door1, dSDoor).
-   architectural_entity(wall4, dsWallStandardCase).
-   architectural_entity(desk4, dsDesk).
+   architectural_entity(wall4, dsWindow).
 \end{verbatim}
 
 Prolog rules are used to bind architectural entities (via a unique identifier) to their quantitative and functional representations. Transformation rules are used to abstract quantitative geometries into abstract spatial objects. TODO: explain figure. 
@@ -387,9 +386,7 @@ For these entities, direction is defined based on the interpretation of the natu
            convex_hull(convex, ConvexHull).
 \end{verbatim}
 
-
 TODO: figure for convex hull abs
-
 
 
 \section{Spatial Reasoning in DSpace}
@@ -402,7 +399,7 @@ In DSpace qualitative spatial reasoning serves has a link between the high level
 \label{reasoner-design}
 \end{figure}
 
-Within the CLP framework of DSpace, the reasoning capabilities are built as a series of spatial constraint solvers using CLP($\mathbb{R}$) (Constraint Logic Programming over Reals) and CHR (Constrain Handling Rules). The spatial constraint solvers work directly over the multiple perspective representation structure via the spatial abstraction representation layer. The main service of the reasoner is qualification of the quantitative architectural structures into topological, orientational, and distance relationships. The distance constraint solver is different from topology and orientation because it does not qualify distance relationships, rather is solves minimum distance constraints for a pair of objects. The topological and distance constraint solvers extends work done in The Sindalog spatial constraint solver \cite{}. These qualitative spatial relationships are, in turn, used to reason about conceptual design requirements.
+Within the CLP framework of DSpace, the reasoning capabilities are built as a series of spatial constraint solvers using CLP($\mathbb{R}$) (Constraint Logic Programming over Reals) and CHR (Constrain Handling Rules). The spatial constraint solvers work directly over the multiple perspective representation structure via the spatial abstraction representation layer and the design factbase. The main service of the reasoner is qualification of the quantitative architectural space into the qualitative feature space of topology, orientation, and distance. It should be noted that the distance constraint solver is different from the topological and orientational constraint solvers because it does not qualify distance relationships, rather is solves minimum distance constraints over quantitative objects. The topological and distance constraint solvers extend The Sindalog spatial constraint solver \cite{Sindalong}, a spatial constraint solver written in CHR. These qualitative spatial relationships are, in turn, used to reason about conceptual design requirements.
 
 \subsection{Topology}
 The DSpace reasoner can qualify the following four topological relationships for convex hulls: inside (\ref{inside}), outside (\ref{outside}), partially overlapping (\ref{overlapping}), and disconnected (\ref{disconnected}). In DSpace topological qualification uses geometric properties of convex hulls to detect topological relationships. 
@@ -429,12 +426,11 @@ An object \emph{A} has a partially overlapping relationship with an object \emph
 An object \emph{A} has a disconnected relationship with an object \emph{B} if \emph{A} does not intersect with \emph{B}, there are no points in \emph{A} that are inside \emph{B}, and there are no points in \emph{B} that are inside \emph{A}. The disconnected relationship is qualified by checking for line segment intersection and convex hull / point containment. If there are no line segment intersections and no convex hull / point containment relationships, then two objects are disconnected.  
 
 \subsubsection{Constraint Solver: Topology}
-The topological constraint solver qualifies topological relationships over convex hull objects and extends The Sindalog \ref{Sindalog} topological constraint solver by integrating topological constraints for convex hulls. It is written using CHR that simplify and propagate topological constraints into geometric constraints of line segment intersection and convex hull / point containment. Once a constraint is in a simplified form, i.e., a line intersection or convex hull / point containment constraint, it is solved and returns true or false based on the outcome of the solution.   
+The topological constraint solver qualifies topological relationships over convex hull objects. Its implementation extends Sindalog's \ref{Sindalog} topological constraint solver by integrating topological constraints over convex hulls. It is written using CHR that simplify and propagate topological constraints into geometric constraints of line segment intersection and convex hull / point containment. Once a constraint is in a simplified form, i.e., a line intersection or convex hull / point containment constraint, it is solved and returns true or false based on the outcome of the solution.   
 
 For example, qualification for the partially overlapping topological relationship requires simplifying the overlapping constraint into line segment intersection constraints between the line segments of the convex hulls. The overlapping constraint is solved when at least one line intersection constraint is solved to true or when there are no more line intersection constraints left in the constraint store. In the former case the constraint returns true and in the latter case returns a failure. 
 
-A top level constraint recursively breaks down a convex hull into its' line segments and propagates new constraints for line segment to convex hull intersection. The line segment to convex hull intersection constraint further propagates new constraints that check for line segment to line segment intersection. These constraints are the lowest level constraints and are solved when fully instantiated. The following code shows a propagation rules for the overlapping topological relationship for line segment to convex hull intersection. Line segments are represented as a tuple of point and convex hull are represented as a list of points. Note that these are only a few of many constraints needed to solve this constraint.  
-
+A top level constraint recursively breaks down a convex hull into its' line segments and propagates new constraints for line segment to convex hull intersection. The line segment to convex hull intersection constraint further propagates new constraints that check for line segment to line segment intersection. These constraints are the lowest level constraints and are solved when fully instantiated. The following code shows a propagation rules for the overlapping topological relationship for line segment to convex hull intersection. Line segments are represented as a tuple of point and convex hull are represented as a list of points.   
 \begin{verbatim}
    intersect_segment_hull((Pt1, Pt2), [Pt3, Pt4|PS]) <=>
            intersection_segment_segment((Pt1, Pt2), (Pt3, Pt4)),
