@@ -510,19 +510,19 @@ This chapter presents a hierarchical structure for building conceptual design re
 
 Conceptual design requirements, and the elements used to build them (architectural concepts and qualitative spatial attributes found in architecture) were ascertained from literature on architectural design \cite{tbd}, museum research on visitor behavior \cite{tbd}, and building regulations and codes \cite{tbd}. Their definitions are explicit characterizations of architectural concepts and design qualities that are based on heuristic architectural knowledge and common sense notions of spatial relationships. The objective is not to be an exhaustive discussion of these requirements or a validation for their interpretation in terms of a spatial or design perspective; rather it is to demonstrate how each can be represented and reasoned with in a computational framework to validate conceptual design requirements against the quantitative structures and artifacts of a design. 
 
-The chapter is structured as follows: Section 1 describes the hierarchical structure of conceptual design requirements. Section 2 presents a set of qualitative spatial attributes found in architecture, shows how each can be interpreted using formal qualitative spatial calculi, and represented formally within DSpace reasoner. Section 3 presents a set of architectural concepts that are built using the spatial qualities presented in the section 2 and shows how they can be used to reason about design requirements within the DSpace reasoner. Section 4 demonstrates how a the DSpace reasoner can be used to validate a design per it's conceptual design requirements.
+The chapter is structured as follows: Section 1 describes the hierarchical structure of conceptual design requirements. Section 2 presents a set of qualitative spatial attributes found in architecture, shows how each can be interpreted using formal qualitative spatial calculi, and represented formally within DSpace reasoner. Section 3 presents a set of architectural concepts that are built using the spatial qualities presented in the Section 2 and shows how they can be used to reason about design requirements within the DSpace reasoner. Section 4 demonstrates how a the DSpace reasoner can be used to validate a design per its conceptual design requirements.
 
 \section{Hierarchy}
-The design hierarchy developed in this section is built on the discretion of the design problem into a design space, a quality space, and a quantity space. At the highest level, the design space involves the architectural design semantics (architectural concepts) and qualities (qualitative spatial attributes found in architecture) that emerge in architecture. At the lowest level, the quantitative space involves the precise geometries of the architectural structures found in the design. The qualitative space mediates between the abstractions of the design layer and the concreteness of the quantitative later using qualitative spatial representation and reasoning.
+The design multi-hierarchy developed in this section is built on the mapping of the design problem into a design space, a quality space, and a quantity space. At the highest level, the design space involves the architectural design semantics (architectural concepts) and qualities (qualitative spatial attributes found in architecture) that emerge in architecture. At the lowest level, the quantitative space involves the precise geometries of the architectural structures found in the design. The qualitative space mediates between the abstractions of the design layer and the concreteness of the quantitative later using qualitative spatial representation and reasoning.
  
 \begin{figure}[H]
 \centering
 \includegraphics[width=140mm]{hierarchy2}
-\caption{Design Space Hierarchy}
+\caption{Design Space Multi-Hierarchy}
 \label{hierarchy}
 \end{figure}
 
-Figure \ref{hierarchy} shows the design hierarchy used in the DSpace reasoner. Conceptual design requirements are built from the architectural concepts and QSA's of the hightest level of the hierarchy. Within the hierarchy, architectural concepts are built using qualitative spatial attributes found in architecture (QSA), but are not limited to only these, spatial relationships of orientation, topology, and distance can be used, as well as other geometric primitives such as area, angle, and length measurements. QSAs are defined by the qualitative spatial relationships of orientation, topology, and distance. These qualitative spatial relationships emerge from the quantitative, physical, and artefactual geometries of the the design. TBD: physical structures define the way the architecture is experiences and influences the functional / performance of the design from a conceptual design perspective.
+Figure \ref{hierarchy} shows the design multi-hierarchy used in the DSpace reasoner. Conceptual design requirements are built from the architectural concepts and qualitative spatial attributes found in architecture (QSA) of the hightest level of the multi-hierarchy. Within the multi-hierarchy, architectural concepts are built using QSA, but are not limited to only these, spatial relationships of orientation, topology, and distance can be used, as well as other geometric primitives such as area, angle, and length measurements. QSA are defined by the qualitative spatial relationships of orientation, topology, and distance. These qualitative spatial relationships emerge from the quantitative, physical, and artefactual geometries of the the design. TBD: physical structures define the way the architecture is experiences and influences the functional / performance of the design from a conceptual design perspective.
 
 
 \section{Qualitative Spatial Attributes found in Architecture}
@@ -540,7 +540,7 @@ The positioning attribute defines an orientational relationship between a pair o
 \label{position}
 \end{figure}
 
-The positioning attribute is interpreted spatially, in DSpace, using the Single Cross (SCC) orientation calculus \cite{Freksa92usingorientation}. SCC defines the orientation of a point C (referent) with respect to a point B (relatum) from the viewpoint of a point A (origin). The positioning attribute uses the SCC partitioning scheme to orientationally relate two points (origin, referent) in the context of an external frame of reference (relatum). In DSpace, the reference point is defined as the centroid of the context space. By partitioning space using the centroid, an approximation is made that divides the space into the positioning relationships. An assumption made in DSpace is that the space will generally be rectangular in shape.
+The positioning attribute is interpreted spatially, in DSpace, using the Single Cross Calculus (SCC) \cite{Freksa92usingorientation}. SCC defines the orientation of a point C (referent) with respect to a point B (relatum) from the viewpoint of a point A (origin). The positioning attribute uses the SCC partitioning scheme to orientationally relate two points (origin, referent) in the context of an external frame of reference (relatum). In DSpace, the reference point is defined as the centroid of the context space. By partitioning space using the centroid, an approximation is made that divides the space into the positioning relationships. An assumption made in DSpace is that the space will generally be rectangular in shape.
 
 \begin{figure}[H]
 \centering
@@ -549,7 +549,7 @@ The positioning attribute is interpreted spatially, in DSpace, using the Single 
 \label{scc}
 \end{figure}
 
-Under this scheme, two points are defined as being on opposing sides of a space if they have an SCC relationship of 0, 1 or 7, as related by the centroid of the space. Conversely, a pair of points are defined as being on the same side of a space if they have an SCC relationship of 3, 4 or 5, as related by the centroid of the  space. A point is defined as being on the left side of a space from another point if it has an SCC relationship of 1, 2, or 3, and is on the right side if it has an SCC relationship of 5, 6, or 7. Using the union set operation these relationships can be combined to form the opposing-left/right, and same-left/right relationships.
+Under this scheme, two points are defined as being on opposing sides of a space if they have an SCC relationship of 0, 1 or 7, as related by the centroid of the space. Conversely, a pair of points are defined as being on the same side of a space if they have an SCC relationship of 3, 4 or 5, as related by the centroid of the  space. A point is defined as being on the left side of a space from another point if it has an SCC relationship of 5, 6, or 7, and is on the right side if it has an SCC relationship of 1, 2, or 3. Using the union set operation these relationships can be combined to form the opposing-left/right, and same-left/right relationships.
 
 Th positioning relationships are represented in DSpace as Prolog rules. There is a single rule for each relationships: opposing side, same-side, left-side, and right-side. The head of each rule takes three arguments, the first two for the architectural objects being related and one for the context space. The body of the rule .... Given two objects and a context space, the rule returns true if the objects are on the same-side, opposing-side, left-side, right-side as defined by its' rule, and fails if they are not. The following is Prolog code for the positioning rules.
 
@@ -581,7 +581,7 @@ The positioning attribute can be used to check if architectural structures, arte
 
 
 \subsection{Facing}
-The facing attribute defines an intrinsic orientational relationship between two objects as each object relates to the other. The definition used here is based on a common sense interpretation of facing, in which an object \emph{A} is facing towards an object \emph{B}, if \emph{B} is in front of \emph{A} and \emph{A} is directionally oriented at \emph{B}. Under this definition, a pair of objects can be facing towards or away from each other. Given a pair of objects, \emph{A} and \emph{B}, there are four possible facing configurations between the pair: 
+The facing attribute defines an intrinsic orientational relationship between two objects as each object relates to the other. The definition used here is based on a common sense interpretation of facing, in which an object \emph{A} is facing towards an object \emph{B}, if \emph{A} is directionally oriented at \emph{B}. Under this definition, a pair of objects can be facing towards or away from each other. Given a pair of objects, \emph{A} and \emph{B}, there are four possible facing configurations between the pair: 
 
 \begin{figure}[H]
  \centering
@@ -596,7 +596,7 @@ The facing attribute defines an intrinsic orientational relationship between two
 \label{display-arrangement}
 \end{figure}
 
-The facing attribute is spatially modelled in DSpace using the Oriented Point Relation Algebra \cite{Moratz} (OPRA). The advantage of using OPRA is that it models the intrinsic orientational relationships between a pair of directed points. TODO: mention something about the section that talks about OPRA. Using OPRA$_{8}$, the facing attribute can be defined in terms of the half plane sectors. Point \emph{A} is facing towards point \emph{B}, if \emph{B} is located in sectors 0, 1, or 32 of \emph{A}'s partitioned space. Similarly, if \emph{A} is located in sectors 0, 1, or 32 of \emph{B}'s partitioned space then \emph{B} is facing towards \emph{A}. In this case, both points are facing towards each other. Conversely, point \emph{A} is facing away from point \emph{B} if \emph{B} is located in sectors 2 - 31 of \emph{A's} partitioned space. An OPRA 8 granularity is used to define a narrow interpretation of the facing attribute. Within a room, doorways, windows, and walls are generally face towards each other. By narrowing the space that is considered facing towards, it allows DSpace to detect elements that are more directly facing towards each other.
+The facing attribute is spatially modelled in DSpace using the Oriented Point Relation Algebra \cite{Moratz} (OPRA). The advantage of using OPRA is that it models the intrinsic orientational relationships between a pair of directed points. TODO: mention something about the section that talks about OPRA. Using OPRA$_{8}$, the facing attribute can be defined in terms of the half plane sectors. Point \emph{A} is facing towards point \emph{B}, if \emph{B} is located in sectors 0, 1, or 32 of \emph{A}'s partitioned space. Similarly, if \emph{A} is located in sectors 0, 1, or 32 of \emph{B}'s partitioned space then \emph{B} is facing towards \emph{A}. In this case, both points are facing towards each other. Conversely, point \emph{A} is facing away from point \emph{B} if \emph{B} is located in sectors 2 - 31 of \emph{A's} partitioned space. A granularity of 8 is used (i.e., OPRA$_{8}$) to define a narrow interpretation of the facing attribute. Within a room, doorways, windows, and walls are generally face towards each other. By narrowing the space that is considered facing towards, it allows DSpace to detect elements that are more directly facing towards each other.
 
 Figure \ref{fig:facing-opra-towards} shows an example of two points facing towards each other; note that each point is located in sector 32 of the other's partitioned space.  Figure \ref{fig:facing-opra-away} shows an example of two points that are facing away from each other and are not located in sectors 0, 1, 32 of the other's partitioned space. 
 
@@ -643,7 +643,8 @@ Within the context of architecture, care needs to be taken to account for archit
 fig: wall example
 
 \subsection{Proximity / Distance}
-The proximity attribute defines a qualitative distance relationship between two objects. In DSpace, there are three proximity relationships: near, near+, and far. The spatial interpretation of proximity depends on the context and scale which the objects inhibit. In the context and scale of architectural space, proximity is defined using heuristics based on the scale of building elements, i.e. rooms, apartments, buildings.
+The proximity attribute defines a qualitative distance relationship between two objects. In DSpace, there are three proximity relationships: near, near+, and far. The spatial interpretation of proximity is defined in the context of architecture, which is restricted here to be \emph{within a building}. Based on this interpretation, proximity is formally defined using heuristics based on what is consider near, near+, and far within a building.   
+
 
 \begin{figure}[H]
 \centering
@@ -679,7 +680,7 @@ The proximity attribute can be used to check whether two architectural structure
 \end{figure}
 
 \subsection{Visibility}
-The visibility attribute defines a boolean relationship between a viewpoint and an object with respect to the object being visible from the viewpoint. An objects is visible if the view-space (i.e., the space between the viewpoint and the object) is not obstructed. This definition of visibility does not take into account the effects of distance on visibility, i.e., an object that is very far away is not visible. However, within the context of architecture and buildings, the magnitude of distances is limited to a point that it is not a factor to visibility.
+The visibility attribute defines a boolean relationship between a viewpoint and an object with respect to the object being visible from the viewpoint. This interpretation of visibility is based on the topological characteristics of an object blocking (obstructing) a view. It does not take into account the material characteristics of the obstructing object, such as glass, which would allow visibility through the obstructing object. Additionally it does not take into account the effects of distance on visibility, i.e., an object that is very far away is not visible. However, within the context of architecture and buildings, the magnitude of distances is limited to a point that it is not a factor to visibility. Under this definition, an objects is visible if the view-space (i.e., the space between the viewpoint and the object) is not obstructed.
 
 The spatial interpretation of visibility is based on the topological characteristics of the space in-between the viewpoint and object. This space is referred to as the view-space. An object is visible if the view-space is not obstructed by surrounding structures or objects. An obstructing object is an object that has a partially overlapping or containing topological relationship with the view-space. Artefactual extension is not considered as an obstructing object because it does not have a physical form. This definition does not distinguish between visibility that is partially or totally obstructed.
 
@@ -692,8 +693,6 @@ The spatial interpretation of visibility is based on the topological characteris
 \label{Visibility}
 \end{figure}
 
-
-
 Visibility is represented in DSpace as a single Prolog rule. The head of the rule takes two arguments, the viewpoint and the object that is being check for visibility. The body of the clause calculates the view-space and checks the surrounding objects for a topological obstruction. Given a viewpoint and an object, the rule returns true if the object is visible, and fails if it is not. The following is the Prolog code for the visibility rule.
 
 \begin{verbatim}
@@ -702,7 +701,7 @@ Visibility is represented in DSpace as a single Prolog rule. The head of the rul
            topology(ViewSpace, SurroundingStructs).
 \end{verbatim}
 
-The visibility attribute can be used to check if an architectural structure or interior design element is visible from a given viewpoint. For example, an architect might want to ensure that a staircase is visible from the main entrance of a building, because she doesn't want the staircase to go unnoticed. Figure \ref{visibility-door-stair} shows and example floor plan where the stairway is not visible from the doorway. In this example both the wall in red and column are obstructing the view from the doorway. 
+The visibility attribute can be used to check if an architectural structure or interior design element is visible from a given viewpoint. For example, an architect might want to ensure that a staircase is visible from the main entrance of a building, because she doesn't want the staircase to go unnoticed. Figure \ref{visibility-door-stair} shows an example floor plan where the stairway is not visible from the doorway. In this example both the wall in red and column are obstructing the view from the doorway. 
 
 \begin{figure}[H]
 \centering
@@ -713,21 +712,18 @@ The visibility attribute can be used to check if an architectural structure or i
 
 \subsection{Alignment / Symmetry}
 
-TBD: I have a loose idea about this property but the idea needs more development
+{\bf TBD: I have a loose idea about this property but the idea needs more development}
 
-\subsection{Pathways / Turns}  right turn (hard) / left turn (hard) / straight 
-
-TBD: I have a loose idea about this property but the idea needs more development
 
 \section{Architectural Concepts}
-Architectural concepts, such as privacy, continuity, and enclosure, describe an experiential aspect of architecture as used by an architect to describe the functionality of a design \cite{Koile}. These terms are defined in DSpace in a hierarchical manner in which architectural concepts are built using QSAs and geometric primitives (orientation, topology, distance). 
+Architectural concepts, such as privacy, continuity, and enclosure, are experiential aspects of architecture that are used by architects to describe the functionality of a design \cite{Koile}. These terms are defined in DSpace in a hierarchical manner in which architectural concepts are built using QSAs and geometric primitives (orientation, topology, distance). 
 
 This section presents four architectural concepts and demonstrates how each is defined in DSpace. As in the previous section, the purpose is not to investigate the correctness of the concepts or an attempt to compile a complete list, rather it is to look at how these concepts can be defined logically using architectural qualities and spatial / geometric primitives.
 
 \subsection{Privacy}
 In architecture, the concept of privacy implies a notion of separation and obscurity (not being visible). In the case of a room, privacy can be defined as being separated from the main entrance of the building and having doorways that enhances the room's privacy. A doorway can be be defined as private with respect to its functionality of connecting two adjacent areas (rooms, hallways, etc.). Under this consideration, a doorway can enhance or hinder the privacy of a room. A doorway enhances privacy of a room if the doorway faces away from other local doorways (doorways in adjacent rooms) and if it is not visible from the main living space. 
 
-Within DSpace, the concepts of privacy has been formally defined for rooms and doorways. A door is private if it has the following attributes: (1) it is not visible from the main living space, (2) it does not mutually face towards another doorway and (3) it does not face towards the centroid of an adjacent room. A room is private if it has the following attributes: (1) it is positioned on the opposing side of the building with regard to the main entrance and (2) all doorways into the room are private, per the doorway privacy definition.
+Within DSpace, the concept of privacy has been formally defined for rooms and doorways. A door is private if it has the following attributes: (1) it is not visible from the main living space, (2) it does not mutually face towards another doorway and (3) it does not face towards the centroid of an adjacent room. A room is private if it has the following attributes: (1) it is positioned on the opposing side of the building with regard to the main entrance and (2) all doorways into the room are private, per the doorway privacy definition.
  
 Privacy is represented in DSpace as Prolog rules. The rules take a single argument, in the head, which indicates if the rule is for a room or doorway. The body of the rule defines the properties of the privacy using QSAs, as defined above. Note that there are two predicates, one for the definition of privacy for a room and one for privacy of a doorway.  
 
@@ -754,7 +750,7 @@ Figure \ref{room-privacy} shows two floor plans for a small single bedroom house
 \end{figure}
 
 \subsection{Continuity}
-In architecture, the concept of continuity describes a network of points that are mutually visible \cite{Key}. In DSpace, continuity is interpreted in the context of building navigation and wayfinding. Under this interpretation, a building, room or apartment is continuous if there is continuity between the doorways contained in a given space: room, building, or apartment. 
+In architecture, the concept of continuity describes a network of points that are mutually visible \cite{Key}. In DSpace, continuity is interpreted in the context of building navigation and wayfinding and is therefore dependent on continuity between doorways withing the design. Other interpretations of continuity can use an element of the design (beyond doorways), however for the purposes here, continuity only deals with doorways. Under this interpretation, a building, room or apartment is continuous if there is continuity between the doorways contained in a given space: room, building, or apartment. 
 
 Continuity is defined as a network of doorways that are mutually visible. The partitioning of doorways that should be mutually visible is based on a localized containment hierarchy between rooms and doorways, in which doorways that are contained in the same room should maintain continuity. It does not make sense for doorways that are located on opposite sides of a building to be visible to each other, but doorways that are in the same room should be. 
 
@@ -783,7 +779,7 @@ Figure \ref{continuity} shows a floor plan for a single room with three doors. F
 \end{figure}
 
 \subsection{Enclosure} 
-In architecture, the concept of enclosure defines a space, as experienced from a given vantage point, as being confined or open. A confined space is defined as being confined by walls or columns, while an open space is defined as being spacious. In DSpace, enclosure is defined by localized spatial structures in terms of their proximity to a given point. Under this interpretation, a room, apartment, or building can be experienced as both confined and open based on the location of the vantage point within the space. Such a definition takes into account that enclosure is locally experienced. For example, an alcove in an otherwise open room, feels confined when experienced from inside the alcove.
+In architecture, the concept of enclosure defines a space, as experienced from a given vantage point, as being confined or open. A tbdspace space is defined as being confined by walls or columns, while an open space is defined as being spacious. In DSpace, enclosure is defined by localized spatial structures in terms of their proximity to a given point. Under this interpretation, a room, apartment, or building can be experienced as both confined and open based on the location of the vantage point within the space. Such a definition takes into account that enclosure is locally experienced. For example, an alcove in an otherwise open room, feels confined when experienced from inside the alcove.
 
 In Dspace, a point is defined as open if less then three walls or columns are near-to the point. Conversely, a point is defined as confined if three or more walls or columns are near-to the point. While this interpretation of enclosure is naive, it maintains the notion that proximity defines the spatial structures of openness and confinement in a localized environment.   
 
