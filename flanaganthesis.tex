@@ -857,17 +857,37 @@ TBD: figure of stair landing
 Surveillance involves the placement of cameras within a building to provide security. A well functioning surveillance system has specific spatial properties with regard to the placement of the cameras to the structures they survey. For example, a surveillance system could monitor activity at doorways. In this situation the spatial relationships between the camera, its range space (i.e., the camera's surveillance area) and the doorways are important. Such a requirement could be expressed as the functional space of every doorway should overlap with the range space of at least one camera. 
 
 \section{Conceptual Design Requirements in The DSpace Reasoner}
-This section will look at how the DSpace reasoner can be used to validate a designers conceptual design requirements against the design's quantitative geometries, and shows how these high level design requirements are broken down into lower level constraints that can be solved by the DSpace reasoner.
+This section will look at how the DSpace reasoner can be used to validate a designer's conceptualizations against a design's quantitative representation, and shows how high level design requirements are broken down into lower level constraints that can be solved by the DSpace reasoner.
 
-DSpace is built in a CLP framework that allows a user to query an architectural design as represented in the multiple perspective design structure. Queries can be design requirements (i.e., a bedroom must be private), architectural concepts (i.e., continuity), QSAs (i.e., doorways facing towards the other), spatial relationships (i.e., functional space of doorway partially overlaps with the range space of camera), or a conjunction of several of these. Each query will respond with a true or fail based on the result of the query. 
+DSpace is built in a CLP framework that allows a user to query an architectural design as represented in the multiple perspective design structure. Queries can be design requirements (i.e., a bedroom must be private), architectural concepts (i.e., continuity), QSAs (i.e., doorways facing towards the other), spatial relationships (i.e., functional space of doorway partially overlaps with the range space of camera), or a conjunction of these. Each query will respond with a true or fail based on the result of the query. 
 
-The remainder of this section will look at three use case examples. Each use case will show how a user can use the DSpace reasoner to valid the use case requirement and will show how the requirement is broken down in DSPace into lower level constraints that can be solved by the spatial constraint solvers.
+The remainder of this section will look at two use case examples. Each use case will show how a user can use the DSpace reasoner to valid the use case requirement and will show how the requirement is broken down in DSpace into lower level constraints that can be solved by the spatial constraint solvers.
 
 \subsection{A Private Room}
+In a particular apartment, the designer wants the bedroom to be private. Given the definition of privacy in this chapter, privacy entails that the bedroom is on the opposing side of the apartment from the main entrance, the bedroom's doorway does not face towards any other doorways, and the doorway is not visible from the main entrance.
 
+Using DSpace, the designer can check for privacy of a bedroom by querying the DSpace representation. The query is a Prolog statement that calls the privacy predicate with the bedroom's unique DSpace identifier. The statement will return true if the bedroom meets the constraint defined by privacy and will return fail if it does not. The floor plans in Figure \ref{room-privacy} show two apartments with a private and un-private bedroom. Given these two floor plans DSpace will validate the floor plan that is private based on the spatial characteristics of the design that define privacy. For example, given Figure \ref{fig:private-room-con} has a unique DSpace identifier of \emph{bedroom1} and Figure \ref{fig:private-room-incon} has a unique DSpace identifier of \emph{bedroom2} the privacy query for bedroom1 will respond with \emph{true} while the query for bedroom2 will respond with \emph{fail}: 
+\begin{verbatim}
+   ?- privacy(bedroom1).
+   true.
+   
+   ?- privacy(bedroom2).
+   fail.
+\end{verbatim}
 
-\subsection{Doorways Facing}
-
+The constraints that define privacy for a room are broken down into three QSAs:
+\begin{verbatim}
+   opposing(main entrance, bedroom, apartment).
+   facing_away(doorway, doorways).
+   not_visible(main entrance, doorway).
+\end{verbatim}
+These three QSA constraints are in turn broken down into qualitative spatial relationships. For example, the opposing side relationship is broken down into SCC relationships for the architectural entities (main entrance, bedroom) point abstractions.
+\begin{verbatim}
+   SCC1(main entrance, apartment centroid, bedroom).
+   SCC2(main entrance, apartment centroid, bedroom).
+   SCC3(main entrance, apartment centroid, bedroom).
+\end{verbatim}
+These SCC relationships are grounded to the quantitative representation via qualification. The SCC constraints are solved for using the orientational constraint solver.
 
 \subsection{Sink Doorway Artefact Interaction}
 
