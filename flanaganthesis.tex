@@ -582,6 +582,13 @@ The positioning attribute can be used to check if architectural structures, arte
 \label{privacy}
 \end{figure}
 
+\subsection{Positioning for Sequence of Objects}
+The positioning for a sequence of objects defines a perceptual orientational relationship of a sequence of objects as each relates to a vantage point in an extrinsic context, i.e., a defined space such as a room, apartment, building, or user defined space. A sequence is a set of architectural entities (columns), or interior design objects (display cases) that are grouped together and comprised of the same entity or object type. In general sequences are grouped together based on the proximity of the objects (near to each other) but any relationship can define a sequence. There are four positioning for a sequence of objects relationships: horizontal perceived, vertical perceived, diagonal perceived, and confined.  
+
+The positioning for a sequence of objects can be spatially interpreted using SCC. The positioning for a sequence of objects attribute uses the SCC partitioning scheme to orientationally, similar to the positioning attribute above, relate a sequence of points (origin, referents) in the context of an external frame of reference (relatum). In DSpace, the reference point is defined as the centroid of the context space. By partitioning space using the centroid, an approximation is made that divides the space into the positioning relationships. As with the positioning attribute, an assumption made in DSpace is that the space will generally be rectangular in shape.
+
+Using the SCC partitioning of space, a sequence of objects is perceived horizontally from the vantage point if the points in the sequence have the following combination of SCC relationships: at least one object in the sequence has an SCC$_{5}$ relationship and at least one object has an SCC$_{3}$ relationship \emph{or} at least one object has SCC$_{7}$ relationship and at least one object has an SCC$_{1}$ relationship. Similarly, a sequence of objects is perceived vertically if they have the following combination of SCC relationships: at least one object in the sequence has an SCC$_{5}$ relationship and at least one object has an SCC$_{7}$ relationship \emph{or} at least one object has an SCC$_{3}$ and at least one object has an SCC$_{1}$ relationship. 
+ 
 
 \subsection{Facing}
 The facing attribute defines an intrinsic orientational relationship between two objects as each object relates to the other. The definition used here is based on a common sense interpretation of facing, in which an object \emph{A} is facing towards an object \emph{B}, if \emph{A} is directionally oriented at \emph{B}. Under this definition, a pair of objects can be facing towards or away from each other. Given a pair of objects, \emph{A} and \emph{B}, there are four possible facing configurations between the pair: 
@@ -713,9 +720,6 @@ The visibility attribute can be used to check if an architectural structure or i
 \label{visibility-door-stair}
 \end{figure}
 
-\subsection{Alignment / Symmetry}
-
-{\bf TBD: I have a loose idea about this property but the idea needs more development}
 
 
 \section{Architectural Concepts}
@@ -809,7 +813,12 @@ Building regulations and codes are a special case in this section because they a
 \subsubsection{Artefactual Interference}
 Artefactual interference deals with the unintentional interactions of the operational and functional spaces of a building's structural form. For example, the operational space of a bathroom doorway that overlaps with the functional space of the bathroom sink will cause circulation problems into and out of the bathroom. In DSpace, this type of interaction can be detected using topological reasoning over the artefactual extensions of the entities. 
 
-TBD: fig:sink example
+\begin{figure}[H]
+\centering
+\includegraphics[width=50mm]{door-sink}
+\caption{Sink Doorway Interference}
+\label{door-sink-example}
+\end{figure}
 
 This type of artefactual interaction can be checked for in DSpace using a single rule that takes two arguments in the head of the rule. The body of the rule retrieves the artefactual geometry of each element and checks their topological relationship. It fails if the artefacts have an overlapping relationship.
 
