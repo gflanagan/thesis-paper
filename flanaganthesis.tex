@@ -221,9 +221,9 @@ to do this dspace need to:
 
 
 \chapter{Design Computing in a Constraint Logic Programming Framework}
-This chapter presents the computational framework of the DSpace reasoner. It examines how designs are modeled in a multiple perspective representation structure, and reasoned about using qualitative spatial reasoning and representation techniques. The DSpace framework is written in the declarative programming semantics of Constraint Logic Programming (CLP) using Prolog, CLP over the Reals (CLP($\mathbb{R}$)), and Constraint Handling Rules (CHR).  
+This chapter presents the computational framework of the DSpace reasoner. It examines how designs are modeled in a multiple perspective representation structure, and reason about using qualitative spatial reasoning and representation techniques. The DSpace framework is written in the declarative programming semantics of Constraint Logic Programming (CLP) using Prolog, CLP over the Reals (CLP($\mathbb{R}$)), and Constraint Handling Rules (CHR).  
 
-The chapter is organized into two sections. The first section looks at the multiple perspective representation structure and its implemented in the DSpace CLP framework. The second section looks at the spatial reasoner and how it works directly over the design representation to reason about designs from a qualitative spatial perspective.
+The chapter is organized into two sections. The first section looks at the multiple perspective representation structure and how it's implemented in the DSpace CLP framework. The second section looks at the spatial reasoner and how it works directly over the design representation to reason about designs from a qualitative spatial perspective.
 
 \section{Design Representation in DSpace}
 In DSpace an architectural design is modeled in a multiple perspective representation structure that incorporate aspects of the design that are quantitative, functional, and qualitative. This design representation goes beyond what is represented in CAAD programs by incorporating design features that are not based on the design's quantitative design representation. It includes functional aspects of the design that pertain to the performance and functional features of the design, as well as qualitative spatial aspects that pertain to experiential qualities of the design. The objective of this representation structure is to provide the DSpace reasoner with mechanisms that connect an expert's high level design conceptualizations to the low level geometric quantities of a CAAD based system.   
@@ -235,7 +235,7 @@ In DSpace an architectural design is modeled in a multiple perspective represent
 \label{mutli-perspective}
 \end{figure}
 
-Within the CLP framework of DSpace, the multiple perspective model is represented as Prolog facts and rules. Prolog facts make up a factbase that stores a table of architectural entities to their architectural types (i.e., wall, door, window, desk, etc.). Each architectural entity in the design has a single entry in the factbase. The factbase is instantiated automatically during the import process from the CAAD system. This factbase will be used throughout the DSpace reasoner to  verify an entity exists in the design and links it to its architectural type. The following Prolog code shows two instantiated facts (predicates) for a doorway, and a window. 
+Within the CLP framework of DSpace, the multiple perspective model is represented as Prolog facts and rules. Prolog facts make up a factbase that stores a table of architectural entities to their architectural types (e.g., wall, door, window, desk, etc.). Each architectural entity in the design has a single entry in the factbase. The factbase is instantiated automatically during the import process from the CAAD system. This factbase will be used throughout the DSpace reasoner to  verify an entity exists in the design and links it to its architectural type. The following Prolog code shows two instantiated facts (predicates) for a doorway, and a window. 
 \begin{verbatim}
    architectural_entity(door1, dSDoor).
    architectural_entity(wall4, dsWindow).
@@ -250,27 +250,27 @@ Prolog rules are used to bind architectural entities (via a unique identifier) t
 \label{clp-design}
 \end{figure}
 
-This remainder of this section is structured as follows. The first subsection looks at the quantitative design representation. The second section looks at the functional design perspective. The final subsection looks at the qualitative design perspective.
+The remainder of this section is structured as follows. The first subsection looks at the quantitative design representation. The second section looks at the functional design perspective. The final subsection looks at the qualitative design perspective.
 
 
 \subsection{Quantitative Perspective}
-The quantitative representation of the design models the structural form of the design in terms of its' precise physical geometric features (i.e., layout, shape, location). Architectural entities, such as walls, windows, doorways, columns, and rooms, are represented as geometric primitives of polygons, lines and points that correspond to the physical dimensions (length, width, shape) of the entities. The quantitative model represents the design perspective that is similar to CAAD programs.
+The quantitative representation of the design models the structural form of the design in terms of its precise physical geometric features (i.e., layout, shape, location). Architectural entities, such as walls, windows, doorways, columns, and rooms, are represented as geometric primitives of polygons, lines and points that correspond to the physical dimensions (length, width, shape) of the entities. The quantitative model represents the design perspective that is similar to CAAD programs.
 
-Within the DSpace CLP framework, a single Prolog rule binds an entity to its' quantitative geometric representation. The quantitative geometry is defined by geometric primitives of polygons, lines, and points. The following Prolog rule defines the quantitative geometry for a doorway with id \emph{door1}. The first argument is an entity id and the second is a variable that will be instantiated with the quantitative geometric representation. The $spatial\_primitive$ predicate in the body of the rule takes the quantitative point data that defines the entity and return an instantiated spatial primitive object (polygon, line, point) in the Geometry variable.
+Within the DSpace CLP framework, a single Prolog rule binds an entity to its quantitative geometric representation. The quantitative geometry is defined by geometric primitives of polygons, lines, and points. The following Prolog rule defines the quantitative geometry for a doorway with id \emph{door1}. The first argument is an entity id and the second is a variable that will be instantiated with the quantitative geometric representation. The $spatial\_primitive$ predicate in the body of the rule takes the quantitative point data that defines the entity and returns an instantiated spatial primitive object (polygon, line, point) in the Geometry variable.
 \begin{verbatim}
     quantitative_geometry(door1, Geometry) :-
            spatial_primitive(Geometry, [(1,1),(3,5),(4,5),(2,2)]).
 \end{verbatim}
 
-The quantitative rulebase can be queried to retrieve specific geometries. For example, to get the quantitative geometry for a \emph{door1} the following query is made:
+The quantitative rulebase can be queried to retrieve specific geometries. For example, to get the quantitative geometry for \emph{door1} the following query is made:
 \begin{verbatim}
    quantitative_geometry(door1, Geometry).
 \end{verbatim} 
-\emph{Door1}'s quantitaive geometry is now stored in the Geometry variable.
+\emph{Door1}'s quantitative geometry is now stored in the Geometry variable.
 
 
 \subsection{Functional Perspective}
-Spatial artefacts are non-physical, spatial extensions of architectural entities that pertain to a specific functional quality of an entity. Artefactual extensions do not have a physical manifestation, however, they are an important part of the design representation because they effect the functionality and performance of the design. There are three types of spatial artefacts identified by Bhatt\cite{Bhatt} that are represented in DSpace: \emph{operational space}, \emph{functional space}, and \emph{range space}.
+Spatial artefacts are non-physical, spatial extensions of architectural entities that pertain to a specific functional quality of an entity. Artefactual extensions do not have a physical manifestation; however, they are an important part of the design representation because they affect the functionality and performance of the design. There are three types of spatial artefacts identified by Bhatt\cite{Bhatt} that are represented in DSpace: \emph{operational space}, \emph{functional space}, and \emph{range space}.
 
 \begin{figure}[H]
  \centering
@@ -283,7 +283,7 @@ Spatial artefacts are non-physical, spatial extensions of architectural entities
 \label{artefactual-extensions}
 \end{figure}
 
-The operational space encompasses the region of space required by an object to preform its' function. For example, the operational space of a door is the area in which a door can occupy during its' operation, opening and closing (see figure \ref{operational-space}). This space is dynamic in the sense that it represents the configurable space of the physical doorway. 
+The operational space encompasses the region of space required by an object to preform its function. For example, the operational space of a door is the area in which a door can occupy during its operation, opening and closing (see figure \ref{operational-space}). This space is dynamic in the sense that it represents the configurable space of the physical doorway. 
 
 The functional space encompasses the region of space that is required for an object to function itself or the space for a person to operate an object. For example, the functional space of a doorway is the total area needed for a person to operate, open and close, as well as any additional space need to navigate entirely through the doorway (see figure \ref{functional-space}). 
 
@@ -296,9 +296,9 @@ The range space pertains to a region of space that encompass the range of a sens
 \label{door-sink}
 \end{figure}
 
-Artefactual extensions directly effect how well a design functions. For example, a sink in a bathroom has a functional space, the space a person occupies while washing his/her hands at the sink. If this space is interfered by (i.e., topologically overlapping) the functional and/or physical space of a doorway, this will cause a circulation problem when both the doorway and sink are simultaneously being operated, i.e., a collision between the person washing his/her hands and the doorway being opened. In this example, the functional aspects of the bathrooms design with regard to the mitigation of circulation problems is directly influenced by the spatial configuration of the non-physical artefactual extensions of the design. 
+Artefactual extensions directly affect how well a design functions. For example, a sink in a bathroom has a functional space, the space a person occupies while washing his/her hands at the sink. If this space interferes with (i.e., topologically overlapping) the functional and/or physical space of a doorway, this will cause a circulation problem when both the doorway and sink are simultaneously being operated, i.e., a collision between the person washing his/her hands and the doorway itself or the person operating the doorway. In this example, the functional aspects of the bathrooms design with regard to the mitigation of circulation problems is directly influenced by the spatial configuration of the non-physical artefactual extensions of the design. 
 
-Within the DSpace CLP framework, Prolog rules are used to bind an entity to its' artefactual geometries. There is a single Prolog rule for each artefactual type: functional, operational, and range. An entity may have zero or more artefactual geometries. For example, a doorway has a functional and operational space but does not have a range space. Likewise, a column has no artefactual extensions. 
+Within the DSpace CLP framework, Prolog rules are used to bind an entity to its artefactual geometries. There is a single Prolog rule for each artefactual type: functional, operational, and range. An entity may have zero or more artefactual geometries. For example, a doorway has a functional and operational space but does not have a range space. Likewise, a column has no artefactual extensions. 
 
 The following Prolog rules define the artefactual geometries for a doorways with id \emph{door1}. There is a single rule for each perspective. Each rule takes two arguments, an id and variable that will be instantiated with the geometry. 
 \begin{verbatim}      
@@ -316,11 +316,11 @@ The artefactual rulebase can be queried to retrieve a artefactual geometry. For 
 \emph{Door1}'s functional geometry is now stored in the FunctionalGeometry variable. Similar queries are made to retrieve the operational and range space geometries.
 
 \subsection{Qualitative Perspective}
-In DSpace architectural entities have spatially abstracted representations. This allows DSpace to reason about a design from a qualitative level of abstraction with regards to the its' spatial characteristics of topology, orientation and distance. This type of qualitative spatial reasoning, reasons over the abstract feature space of the design using abstract spatial objects of points, directed points, and convex hulls. 
+In DSpace architectural entities have spatially abstracted representations. This allows DSpace to reason about a design from a qualitative level of abstraction with regards to its spatial characteristics of topology, orientation and distance. This type of qualitative spatial reasoning reasons over the abstract feature space of the design using abstract spatial objects of points, directed points, and convex hulls. 
 
-Architectural entities are not directly modeled, as they are in the quantitative representation, as abstract spatial objects. Abstract spatial objects are generated by transformation rules that abstract the quantitative geometries of the architectural entities. The process of spatially abstracting an architectural entity depends on the spatial characteristics of the entity's structural form, and an interpretation of the intrinsic nature of an entity within an architectural / design context. For example, the abstracted representation of a doorway as a directed point is defined not only by its' physical form but also by the interpretation of the doorway's intrinsic direction. 
+Architectural entities are not directly modeled, as they are in the quantitative representation, as abstract spatial objects. Abstract spatial objects are generated by transformation rules that abstract the quantitative geometries of the architectural entities. The process of spatially abstracting an architectural entity depends on the spatial characteristics of the entity's structural form, and an interpretation of the intrinsic nature of an entity within an architectural / design context. For example, the abstracted representation of a doorway as a directed point is defined not only by its physical form but also by the interpretation of the doorway's intrinsic direction. 
 
-Within the DSpace CLP framework, Prolog rules transform the quantitative geometries into spatially abstracted objects. These transformations depends on the architectural entity type, the abstraction type (point, directed point, or convex hull), and sometimes a contextual identifier (direction of door into or out of a specific room). The following is transformation rules are based on the interpretation of the spatial abstraction of architectural entities in the previous section.
+Within the DSpace CLP framework, Prolog rules transform the quantitative geometries into spatially abstracted objects. These transformations depend on the architectural entity type, the abstraction type (point, directed point, or convex hull), and sometimes a contextual identifier (direction of door into or out of a specific room). The following transformation rules are based on the interpretation of the spatial abstraction of architectural entities in the previous section.
 
 The remainder of this section shows how architectural entities and interior designs objects are spatially abstracted into points, directed points, and convex hulls and how they are transformed in DSpace. Table \ref{spatial abstractions} shows which spatial abstractions each architectural entity can be transformed into. 
 
@@ -343,7 +343,7 @@ The remainder of this section shows how architectural entities and interior desi
 \end{table} 
 
 \noindent \emph{\large Point} \\
-\indent All architectural entities and interior design objects have a point abstraction that is defined as the centroid of the entity's physical polygon space. Figure \ref{point-abs} shows the point abstraction for a doorway. Note that the point is the centroid of the doorways physical geometry. The point abstraction is used in orientational reasoning and is therefore used as an approximation of the objects location in the design. In general, the centroid is a good point approximation of location because it is a generalization of polygon space as a single point. 
+\indent All architectural entities and interior design objects have a point abstraction that is defined as the centroid of the entity's physical polygon space. Figure \ref{point-abs} shows the point abstraction for a doorway. Note that the point is the centroid of the doorway's physical geometry. The point abstraction is used in orientational reasoning and is therefore used as an approximation of the object's location in the design. In general, the centroid is a good point approximation of location because it is a generalization of polygon space as a single point. 
 \begin{verbatim}
    point_abstraction(door1, Point) :-
            quantitative_geometry(door1, Quant),
@@ -358,9 +358,9 @@ The remainder of this section shows how architectural entities and interior desi
 \end{figure}
 
 \noindent \emph{\large Directed Point} \\
-\indent Walls, doorways, windows, and some interior design object have a directed point abstraction. A directed point is represented as a tuple (\emph{Cartesian point}, \emph{direction}). The point is defined as the centroid of the quantitative polygon space, as it is in the point abstraction. The direction is defined either by the user, as is the case for interior design objects, or by an intrinsic spatial property of the entity, as is the case for doorways, walls, and windows.
+\indent Walls, doorways, windows, and some interior design objects have a directed point abstraction. A directed point is represented as a tuple (\emph{Cartesian point}, \emph{direction}). The point is defined as the centroid of the quantitative polygon space, as it is in the point abstraction. The direction is defined either by the user, as is the case for interior design objects, or by an intrinsic spatial property of the entity, as is the case for doorways, walls, and windows.
 
-For these entities, direction is defined based on the interpretation of the nature of the entity within the context of a design. Formally, direction is interpreted as a vector that emanates out from an entity's point abstraction towards the room / space it is contained in. Specifically, direction is defined as the perpendicular vector to the intrinsic x-axis of the object. Figure \ref{dir-point-abs} shows the directed point abstraction for a doorway. Not that the direction is pointing perpendicular to the x-axis of the doorways physical geometry. Based on this definition there will be two perpendicular lines that define the direction. In this situation, the context of the space in which the entity is located is need to decided which of the two directions to use.  
+For these entities, direction is based on the interpretation of the nature of the entity within the context of a design. Formally, direction is interpreted as a vector that emanates from an entity's point abstraction towards the room / space it is contained in. Specifically, direction is defined as the perpendicular vector to the intrinsic x-axis of the object. Figure \ref{dir-point-abs} shows the directed point abstraction for a doorway. Not that the direction is perpendicular to the x-axis of the doorway's physical geometry. Based on this definition there will be two perpendicular lines that define the direction. In this situation, the context of the space in which the entity is located is need to decided which of the two directions to use.  
 
 \begin{verbatim}
    dir_point_abstraction(door1, (Point, Dir), room3) :-
@@ -376,7 +376,7 @@ For these entities, direction is defined based on the interpretation of the natu
 \end{figure}
 
 \noindent \emph{\large Convex Hull} \\
-\indent All architectural entities have a convex hull abstraction. The convex hull is calculated over the quantitative polygon space by using the divide and conquer convex hull algorithm \cite{tbd}. The result of the algorithm is a convex hull representation that is as a list of point sorted in counterclockwise order. Convex hulls are used in topological reasoning.
+\indent All architectural entities have a convex hull abstraction. The convex hull is calculated over the quantitative polygon space by using the divide and conquer convex hull algorithm \cite{tbd}. The result of the algorithm is a convex hull representation that is a list of points sorted in counterclockwise order. Convex hulls are used in topological reasoning.
 \begin{verbatim}
    convex_hull_abstraction(door1, ConvexHull).
            quantitative_geometry(door1, Quant),
@@ -387,7 +387,7 @@ TODO: figure for convex hull abs
 
 
 \section{Spatial Reasoning in DSpace}
-In DSpace qualitative spatial reasoning serves has a link between the high level conceptual design space and the low level quantitative geometric space. It uses formal qualitative spatial calculi for topological (Region Connected Calculus \cite{Freksa}), orientational (Single Cross \cite{Freksa}, Oriented Point Relation Algebra \cite{Moratz}) and distance reasoning over the spatial entities of the structural and artefactual design (refer to figure \ref{reasoner-design}). 
+In DSpace qualitative spatial reasoning serves as a link between the high level conceptual design space and the low level quantitative geometric space. It uses formal qualitative spatial calculi for topological (Region Connected Calculus \cite{Freksa}), orientational (Single Cross \cite{Freksa}, Oriented Point Relation Algebra \cite{Moratz}) and distance reasoning over the spatial entities of the structural and artefactual design (refer to figure \ref{reasoner-design}). 
 
 \begin{figure}[H]
 \centering
@@ -396,7 +396,7 @@ In DSpace qualitative spatial reasoning serves has a link between the high level
 \label{reasoner-design}
 \end{figure}
 
-Within the CLP framework of DSpace, the reasoning capabilities are built as a series of spatial constraint solvers using CLP($\mathbb{R}$) (Constraint Logic Programming over Reals) and CHR (Constrain Handling Rules). The spatial constraint solvers work directly over the multiple perspective representation structure via the spatial abstraction representation layer and the design factbase. The main service of the reasoner is qualification of the quantitative architectural space into the qualitative feature space of topology, orientation, and distance. It should be noted that the distance constraint solver is different from the topological and orientational constraint solvers because it does not qualify distance relationships, rather is solves minimum distance constraints over quantitative objects. The topological and distance constraint solvers extend The Sindalog spatial constraint solver \cite{Sindalong}, a spatial constraint solver written in CHR. These qualitative spatial relationships are, in turn, used to reason about conceptual design requirements.
+Within the CLP framework of DSpace, the reasoning capabilities are built as a series of spatial constraint solvers using CLP($\mathbb{R}$) (Constraint Logic Programming over Reals) and CHR (Constrain Handling Rules). The spatial constraint solvers work directly over the multiple perspective representation structure via the spatial abstraction representation layer and the design factbase. The main service of the reasoner is qualification of the quantitative architectural space into the qualitative feature space of topology, orientation, and distance. It should be noted that the distance constraint solver is different from the topological and orientational constraint solvers because it does not qualify distance relationships, rather it solves minimum distance constraints over quantitative objects. The topological and distance constraint solvers extend The Sindalog spatial constraint solver \cite{Sindalong}, a spatial constraint solver written in CHR. These qualitative spatial relationships are, in turn, used to reason about conceptual design requirements.
 
 \subsection{Topology}
 The DSpace reasoner can qualify the following four topological relationships for convex hulls: inside (\ref{inside}), outside (\ref{outside}), partially overlapping (\ref{overlapping}), and disconnected (\ref{disconnected}). In DSpace topological qualification uses geometric properties of convex hulls to detect topological relationships. 
@@ -427,7 +427,7 @@ The topological constraint solver qualifies topological relationships over conve
 
 For example, qualification for the partially overlapping topological relationship requires simplifying the overlapping constraint into line segment intersection constraints between the line segments of the convex hulls. The overlapping constraint is solved when at least one line intersection constraint is solved to true or when there are no more line intersection constraints left in the constraint store. In the former case the constraint returns true and in the latter case returns a failure. 
 
-A top level constraint recursively breaks down a convex hull into its' line segments and propagates new constraints for line segment to convex hull intersection. The line segment to convex hull intersection constraint further propagates new constraints that check for line segment to line segment intersection. These constraints are the lowest level constraints and are solved when fully instantiated. The following code shows a propagation rules for the overlapping topological relationship for line segment to convex hull intersection. Line segments are represented as a tuple of point and convex hull are represented as a list of points.   
+A top level constraint recursively breaks down a convex hull into its line segments and propagates new constraints for line segment to convex hull intersection. The line segment to convex hull intersection constraint further propagates new constraints that check for line segment to line segment intersection. These constraints are the lowest level constraints and are solved when fully instantiated. The following code shows a propagation rule for the overlapping topological relationship for line segment to convex hull intersection. Line segments are represented as a tuple of point, and convex hull are represented as a list of points.   
 \begin{verbatim}
    intersect_segment_hull((Pt1, Pt2), [Pt3, Pt4|PS]) <=>
            intersection_segment_segment((Pt1, Pt2), (Pt3, Pt4)),
@@ -437,7 +437,7 @@ A top level constraint recursively breaks down a convex hull into its' line segm
 The qualification for the other topological relationships are similar to the partially overlapping constraint presented here, but in addition to the line intersection constraint some use the geometric properties of convex hull / point containment.
 
 \subsection{Orientation} \label{orientation}
-The DSpace reasoner can qualify two types of orientational relationships, intrinsic and extrinsic. Intrinsic orientational reasoning is based on OPRA$_{m}$. OPRA$_{m}$ partitions space into half planes, which are defined by lines emanating outwards from a reference point, and defines the qualitative orientational relationships by the half plane in which a second point is located in relation to the reference point. The granularity of an OPRA$_{m}$ relationship, specified by $m$, defines the number of lines emanating from the reference point. 
+The DSpace reasoner can qualify two types of orientational relationships, intrinsic and extrinsic. Intrinsic orientational reasoning is based on OPRA$_{m}$. OPRA$_{m}$ partitions space into half planes, which are defined by lines emanating from a reference point, and defines the qualitative orientational relationships by the half plane in which a second point is located in relation to the reference point. The granularity of an OPRA$_{m}$ relationship, specified by $m$, defines the number of lines emanating from the reference point. 
 
 \begin{figure}[b]
 \centering
@@ -468,7 +468,7 @@ Extrinsic orientational reasoning is based on the SCC. SCC defines the orientati
 
 Figure \ref{scc} shows an SCC relationship between three points. The partitioning scheme is based on the orientation of the origin and relatum points. In this example, the third point, the referent, is located in sector 5 of the SCC partitioned space, so it has an SCC$_{5}$ relationship with point \emph{A} as related by \emph{B}. 
 
-SCC relationships are qualified by solving a system of linear inequalities, which are based on the lines that partition space into the SCC sectors. Labeling starts at the line that runs between the origin and relatum, starting at zero and incrementing clockwise. Given a point \emph{C}, its' SCC$_{1}$ relationship with points \emph{A} and \emph{B} is given by solving the equations for \emph{C} in \ref{scc-eq}. Given three points A, B, and C, $M_{AB}$ refers to the slope of line from A to B, $Y_{AB}$ refers to the y-intercept of the line from A to B, $M_{perp}$ refers to the slope of the line that is perpendicular to the line from A to B, and $Y_{perp}$ refers to the y-intercept of the line that is perpendicular to the line from A to B. There are similar systems of inequalities for each of the seven SCC relationships.  
+SCC relationships are qualified by solving a system of linear inequalities, which are based on the lines that partition space into the SCC sectors. Labeling starts at the line that runs between the origin and relatum, starting at zero and incrementing clockwise. Given a point \emph{C}, its SCC$_{1}$ relationship with points \emph{A} and \emph{B} is given by solving the equations for \emph{C} in \ref{scc-eq}. Given three points A, B, and C, $M_{AB}$ refers to the slope of line from A to B, $Y_{AB}$ refers to the y-intercept of the line from A to B, $M_{perp}$ refers to the slope of the line that is perpendicular to the line from A to B, and $Y_{perp}$ refers to the y-intercept of the line that is perpendicular to the line from A to B. There are similar systems of inequalities for each of the seven SCC relationships.  
 
 \begin{equation}\label{scc-eq}
 \begin{aligned}
@@ -487,7 +487,7 @@ The OPRA$_{m}$ and SCC constraint solvers, solve OPRA$_{m}$ and SCC constrains r
 TODO: code for opra and scc constraint solver
 
 \subsection{Distance}
-The DSpace reasoner can calculate the minimum euclidean distance between points, lines, and polygons. Given two objects the minimum distance is calculated by finding the closet point in each object to the other object. Base on these two point the minimum euclidean distance is calculated. 
+The DSpace reasoner can calculate the minimum euclidean distance between points, lines, and polygons. Given two objects the minimum distance is calculated by finding the closest point in each object to the other object. Base on these two point the minimum euclidean distance is calculated. 
 
 \begin{figure}[H]
 \centering
@@ -497,12 +497,12 @@ The DSpace reasoner can calculate the minimum euclidean distance between points,
 \end{figure}
 
 \subsubsection{Constraint Solver: Distance}
-The distance constraint solver solves minimum distance constraints and uses the distance constraint services of the Sindalog \cite{sindalog} reasoner for its' reasoning. The distance solver is different from the other solvers because it returns a value to a query. For example, the following query will return the minimum distance between the two objects in D.
+The distance constraint solver solves minimum distance constraints and uses the distance constraint services of the Sindalog \cite{sindalog} reasoner for its reasoning. The distance solver is different from the other solvers because it returns a value to a query. For example, the following query will return the minimum distance between the two objects in D.
 \begin{verbatim}
    min_distance(obj1, obj2, D). 
 \end{verbatim}
 
-The distance constraint solver is written using CHR that break down the constraints until they can be solved for. This process involves finding the located on each object that is the closet to the other, so that the minimum distance can be calculated between the two. 
+The distance constraint solver is written using CHR that break down the constraints until they can be solved for. This process involves finding the located on each object that is the closest to the other, so that the minimum distance can be calculated between the two. 
 
 
 \chapter{Conceptual Design Requirements}
@@ -813,10 +813,9 @@ Figure \ref{enclosure} shows a floor plan for a single room with various enclosu
 \end{figure}
 
 
-\subsection{Building Regulations and Codes}
-Building regulations and codes are a special case in this section because they are not strictly architectural concepts. However, they provide a unique set of architectural requirements that incorporate a breadth of design aspects. This section will take a look at two such requirements: building surveillance and artefactual interference. These requirements were picked specifically because each incorporate artefactual aspects of the design problem. 
+\subsection{Artefactual Requirements}
+Artefactual requirements are a special case in this section because they are not strictly architectural concepts. However, they provide a unique set of architectural requirements that incorporate a breadth of design aspects. This section will take a look at two examples of artefactual interference. 
 
-\subsubsection{Artefactual Interference}
 Artefactual interference deals with the unintentional interactions of the operational and functional spaces of a building's structural form. For example, the operational space of a bathroom doorway that overlaps with the functional space of the bathroom sink will cause circulation problems into and out of the bathroom. In DSpace, this type of interaction can be detected using topological reasoning over the artefactual extensions of the entities. 
 
 \begin{figure}[H]
@@ -849,9 +848,6 @@ TBD: figure of stair landing
             not_overlapping(Artefact_stair, Artefact_obj),
             not_overlapping(Artefact_stair, Physical)
 \end{verbatim}  
-
-\subsubsection{Surveillance}
-Surveillance involves the placement of cameras within a building to provide security. A well functioning surveillance system has specific spatial properties with regard to the placement of the cameras to the structures they survey. For example, a surveillance system could monitor activity at doorways. In this situation the spatial relationships between the camera, its range space (i.e., the camera's surveillance area) and the doorways are important. Such a requirement could be expressed as the functional space of every doorway should overlap with the range space of at least one camera. 
 
 \section{Conceptual Design Requirements in The DSpace Reasoner}
 This section will look at how the DSpace reasoner can be used to validate a designer's conceptualizations against a design's quantitative representation, and shows how high level design requirements are broken down into lower level constraints that can be solved by the DSpace reasoner.
@@ -908,7 +904,7 @@ Using DSpace a designer can check that there are no artefactual interactions by 
 \end{verbatim}
 The query will return \emph{true} for Figure \ref{?} and will fail for Figure \ref{?}.
 
-The artefactual_interaction predicate is broken down into topological constraints that check for partially overlapping topological relationships between the artefactual extensions of the bathroom doorway and sink. The topological constraints are solved in the topological constraint solver. 
+The $artefactual\_interaction$ predicate is broken down into topological constraints that check for partially overlapping topological relationships between the artefactual extensions of the bathroom doorway and sink. The topological constraints are solved in the topological constraint solver. 
 
 
 
