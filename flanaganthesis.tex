@@ -233,6 +233,13 @@ Figure \ref{hierarchy} shows the design multi-hierarchy used in the DSpace reaso
 
 \section{DSpace: Design and Implementation}
 
+\subsection{Factbase}
+Prolog facts make up a factbase that stores a table of architectural entities to their architectural types (e.g., wall, door, window, desk, etc.). Each architectural entity in the design has a single entry in the factbase. The factbase is instantiated automatically during the import process from the CAAD system. This factbase will be used throughout the DSpace reasoner to  verify an entity exists in the design and links it to its architectural type. The following Prolog code shows two instantiated facts (predicates) for a doorway, and a window. 
+\begin{verbatim}
+   architectural_entity(door1, dSDoor).
+   architectural_entity(wall4, dsWindow).
+\end{verbatim}
+
 
 \chapter{Design Computing in a Constraint Logic Programming Framework}
 This chapter presents the computational framework of the DSpace reasoner. It examines how designs are modeled in a multiple perspective representation structure, and reason about using qualitative spatial reasoning and representation techniques. The DSpace framework is written in the declarative programming semantics of Constraint Logic Programming (CLP) using Prolog, CLP over the Reals (CLP($\mathbb{R}$)), and Constraint Handling Rules (CHR).  
@@ -249,13 +256,7 @@ In DSpace an architectural design is modeled in a multiple perspective represent
 \label{mutli-perspective}
 \end{figure}
 
-Within the CLP framework of DSpace, the multiple perspective model is represented as Prolog facts and rules. Prolog facts make up a factbase that stores a table of architectural entities to their architectural types (e.g., wall, door, window, desk, etc.). Each architectural entity in the design has a single entry in the factbase. The factbase is instantiated automatically during the import process from the CAAD system. This factbase will be used throughout the DSpace reasoner to  verify an entity exists in the design and links it to its architectural type. The following Prolog code shows two instantiated facts (predicates) for a doorway, and a window. 
-\begin{verbatim}
-   architectural_entity(door1, dSDoor).
-   architectural_entity(wall4, dsWindow).
-\end{verbatim}
-
-Prolog rules are used to bind architectural entities (via a unique identifier) to their quantitative and functional representations. Transformation rules are used to abstract quantitative geometries into abstract spatial objects. TODO: explain figure. 
+Within the CLP framework of DSpace, the multiple perspective model is represented as Prolog rules. Prolog rules are used to bind architectural entities (via a unique identifier) to their quantitative and functional representations. Transformation rules are used to abstract quantitative geometries into abstract spatial objects. TODO: explain figure. 
 
 \begin{figure}[H]
 \centering
