@@ -219,6 +219,17 @@ to do this dspace need to:
  		- intrinsic vs extrinsic
  	- distance
 
+\section{Multi-Hierarchy}
+The design multi-hierarchy developed in this section is built on the mapping of the design problem into a design space, a quality space, and a quantity space. At the highest level, the design space involves the architectural design semantics (architectural concepts) and qualities (qualitative spatial attributes found in architecture) that emerge in architecture. At the lowest level, the quantitative space involves the precise geometries of the architectural structures found in the design. The qualitative space mediates between the abstractions of the design layer and the concreteness of the quantitative later using qualitative spatial representation and reasoning.
+ 
+\begin{figure}[H]
+\centering
+\includegraphics[width=140mm]{hierarchy2}
+\caption{Design Space Multi-Hierarchy}
+\label{hierarchy}
+\end{figure}
+
+Figure \ref{hierarchy} shows the design multi-hierarchy used in the DSpace reasoner. Conceptual design requirements are built from the architectural concepts and qualitative spatial attributes found in architecture (QSA) of the hightest level of the multi-hierarchy. Within the multi-hierarchy, architectural concepts are built using QSA, but are not limited to only these, spatial relationships of orientation, topology, and distance can be used, as well as other geometric primitives such as area, angle, and length measurements. QSA are defined by the qualitative spatial relationships of orientation, topology, and distance. These qualitative spatial relationships emerge from the quantitative, physical, and artefactual geometries of the the design. TBD: physical structures define the way the architecture is experiences and influences the functional / performance of the design from a conceptual design perspective.
 
 \section{DSpace: Design and Implementation}
 
@@ -325,68 +336,6 @@ Architectural entities are not directly modeled, as they are in the quantitative
 
 Within the DSpace CLP framework, Prolog rules transform the quantitative geometries into spatially abstracted objects. These transformations depend on the architectural entity type, the abstraction type (point, directed point, or convex hull), and sometimes a contextual identifier (direction of door into or out of a specific room). The following transformation rules are based on the interpretation of the spatial abstraction of architectural entities in the previous section.
 
-The remainder of this section shows how architectural entities and interior designs objects are spatially abstracted into points, directed points, and convex hulls and how they are transformed in DSpace. Table \ref{spatial abstractions} shows which spatial abstractions each architectural entity can be transformed into. 
-
-\begin{table}[H]
-  \begin{center}
-  \begin{tabular}{ | r | c | c | c |}
-    \hline
-    entity & point & directed point & convex hull\\ \hline
-    doorway & X & X & X \\ \hline
-    window & X & X & X \\ \hline
-    wall & X & X & X \\ \hline
-    column & X &  & X \\ \hline
-    space & X &  & X \\ \hline
-    interior design object & X & X* & X \\
-    \hline
-  \end{tabular}
-  \end{center}
-\caption{Spatial Abstractions for Architectural Entities}
-\label{spatial abstractions}
-\end{table} 
-
-\noindent \emph{\large Point} \\
-\indent All architectural entities and interior design objects have a point abstraction that is defined as the centroid of the entity's physical polygon space. Figure \ref{point-abs} shows the point abstraction for a doorway. Note that the point is the centroid of the doorway's physical geometry. The point abstraction is used in orientational reasoning and is therefore used as an approximation of the object's location in the design. In general, the centroid is a good point approximation of location because it is a generalization of polygon space as a single point. 
-\begin{verbatim}
-   point_abstraction(door1, Point) :-
-           quantitative_geometry(door1, Quant),
-           centroid(Quant, Point).
-\end{verbatim}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=70mm]{point-abs}
-\caption{Doorway Point Abstraction}
-\label{point-abs}
-\end{figure}
-
-\noindent \emph{\large Directed Point} \\
-\indent Walls, doorways, windows, and some interior design objects have a directed point abstraction. A directed point is represented as a tuple (\emph{Cartesian point}, \emph{direction}). The point is defined as the centroid of the quantitative polygon space, as it is in the point abstraction. The direction is defined either by the user, as is the case for interior design objects, or by an intrinsic spatial property of the entity, as is the case for doorways, walls, and windows.
-
-For these entities, direction is based on the interpretation of the nature of the entity within the context of a design. Formally, direction is interpreted as a vector that emanates from an entity's point abstraction towards the room / space it is contained in. Specifically, direction is defined as the perpendicular vector to the intrinsic x-axis of the object. Figure \ref{dir-point-abs} shows the directed point abstraction for a doorway. Not that the direction is perpendicular to the x-axis of the doorway's physical geometry. Based on this definition there will be two perpendicular lines that define the direction. In this situation, the context of the space in which the entity is located is need to decided which of the two directions to use.  
-
-\begin{verbatim}
-   dir_point_abstraction(door1, (Point, Dir), room3) :-
-           quantitative_geometry(door1, Quant),
-           centroid(Quant, Point),
-           direction(Quant, Point, room3, Dir).
-\end{verbatim}
-
-\begin{figure}[H]\label{dir-point-abs}
-\centering
-\includegraphics[width=70mm]{dir-point-abs}
-\caption{Doorway Point Abstraction}
-\end{figure}
-
-\noindent \emph{\large Convex Hull} \\
-\indent All architectural entities have a convex hull abstraction. The convex hull is calculated over the quantitative polygon space by using the divide and conquer convex hull algorithm \cite{tbd}. The result of the algorithm is a convex hull representation that is a list of points sorted in counterclockwise order. Convex hulls are used in topological reasoning.
-\begin{verbatim}
-   convex_hull_abstraction(door1, ConvexHull).
-           quantitative_geometry(door1, Quant),
-           convex_hull(convex, ConvexHull).
-\end{verbatim}
-
-TODO: figure for convex hull abs
 
 
 \section{Spatial Reasoning in DSpace}
@@ -509,23 +458,13 @@ The distance constraint solver is written using CHR that break down the constrai
 
 
 \chapter{Conceptual Design Requirements}
-This chapter presents a hierarchical structure for building conceptual design requirements, demonstrates how the elements that build conceptual design requirements can be spatially interpreted in the context of formal qualitative spatial calculi, and used to validate design requirements in the computational framework of the DSpace reasoner. 
+This chapter presents the conceptual design reasoning framework of the DSpace reasoner. It shows how architectural concepts and qualities can be spatially interpreted using formal qualitative spatial calculi and shows how they can be represented and reasoned with to validate conceptual design requirements in the CLP framework of DSpace. 
 
-Conceptual design requirements, and the elements used to build them (architectural concepts and qualitative spatial attributes found in architecture) were ascertained from literature on architectural design \cite{tbd}, museum research on visitor behavior \cite{tbd}, and building regulations and codes \cite{tbd}. Their definitions are explicit characterizations of architectural concepts and design qualities that are based on heuristic architectural knowledge and common sense notions of spatial relationships. The objective is not to be an exhaustive discussion of these requirements or a validation for their interpretation in terms of a spatial or design perspective; rather it is to demonstrate how each can be represented and reasoned with in a computational framework to validate conceptual design requirements against the quantitative structures and artifacts of a design. 
+TODO: into into how this level of reasoning is positioned in the DSpace framework....
 
-The chapter is structured as follows: Section 1 describes the hierarchical structure of conceptual design requirements. Section 2 presents a set of qualitative spatial attributes found in architecture, shows how each can be interpreted using formal qualitative spatial calculi, and represented formally within DSpace reasoner. Section 3 presents a set of architectural concepts that are built using the spatial qualities presented in the Section 2 and shows how they can be used to reason about design requirements within the DSpace reasoner. Section 4 demonstrates how a the DSpace reasoner can be used to validate a design per its conceptual design requirements.
+Conceptual design requirements were ascertained from literature on architectural design \cite{tbd}, museum research on visitor behavior \cite{tbd}, and building regulations and codes \cite{tbd}. Their definitions are explicit characterizations of architectural concepts and spatial design qualities that are based on heuristic architectural knowledge and common sense notions of spatial relationships. The objective is not to be an exhaustive discussion of these requirements or a validation for their interpretation in terms of a spatial or design perspective; rather it is to demonstrate how each can be represented and reasoned with in a computational framework to validate conceptual design requirements against the quantitative structures and artifacts of a design. 
 
-\section{Multi-Hierarchy}
-The design multi-hierarchy developed in this section is built on the mapping of the design problem into a design space, a quality space, and a quantity space. At the highest level, the design space involves the architectural design semantics (architectural concepts) and qualities (qualitative spatial attributes found in architecture) that emerge in architecture. At the lowest level, the quantitative space involves the precise geometries of the architectural structures found in the design. The qualitative space mediates between the abstractions of the design layer and the concreteness of the quantitative later using qualitative spatial representation and reasoning.
- 
-\begin{figure}[H]
-\centering
-\includegraphics[width=140mm]{hierarchy2}
-\caption{Design Space Multi-Hierarchy}
-\label{hierarchy}
-\end{figure}
-
-Figure \ref{hierarchy} shows the design multi-hierarchy used in the DSpace reasoner. Conceptual design requirements are built from the architectural concepts and qualitative spatial attributes found in architecture (QSA) of the hightest level of the multi-hierarchy. Within the multi-hierarchy, architectural concepts are built using QSA, but are not limited to only these, spatial relationships of orientation, topology, and distance can be used, as well as other geometric primitives such as area, angle, and length measurements. QSA are defined by the qualitative spatial relationships of orientation, topology, and distance. These qualitative spatial relationships emerge from the quantitative, physical, and artefactual geometries of the the design. TBD: physical structures define the way the architecture is experiences and influences the functional / performance of the design from a conceptual design perspective.
+The chapter is structured as follows: Section 1 presents a set of qualitative spatial attributes found in architecture, shows how each can be interpreted using formal qualitative spatial calculi, and represented formally within DSpace reasoner. Section 2 presents a set of architectural concepts that are built using the spatial qualities presented in the Section 1 and shows how they can be used to reason about design requirements within the DSpace reasoner. Section 3 demonstrates how a the DSpace reasoner can be used to validate a design per its conceptual design requirements.
 
 
 \section{Qualitative Spatial Attributes found in Architecture}
@@ -1107,7 +1046,71 @@ Museums should be secure.
 
 \chapter{Future Work / Conclusion}
 
+\appendix
+\chapter{Appendix}
+\section{Spatial Abstraction of Architectural Entities}
+The remainder of this section shows how architectural entities and interior designs objects are spatially abstracted into points, directed points, and convex hulls and how they are transformed in DSpace. Table \ref{spatial abstractions} shows which spatial abstractions each architectural entity can be transformed into. 
 
+\begin{table}[H]
+  \begin{center}
+  \begin{tabular}{ | r | c | c | c |}
+    \hline
+    entity & point & directed point & convex hull\\ \hline
+    doorway & X & X & X \\ \hline
+    window & X & X & X \\ \hline
+    wall & X & X & X \\ \hline
+    column & X &  & X \\ \hline
+    space & X &  & X \\ \hline
+    interior design object & X & X* & X \\
+    \hline
+  \end{tabular}
+  \end{center}
+\caption{Spatial Abstractions for Architectural Entities}
+\label{spatial abstractions}
+\end{table} 
+
+\noindent \emph{\large Point} \\
+\indent All architectural entities and interior design objects have a point abstraction that is defined as the centroid of the entity's physical polygon space. Figure \ref{point-abs} shows the point abstraction for a doorway. Note that the point is the centroid of the doorway's physical geometry. The point abstraction is used in orientational reasoning and is therefore used as an approximation of the object's location in the design. In general, the centroid is a good point approximation of location because it is a generalization of polygon space as a single point. 
+\begin{verbatim}
+   point_abstraction(door1, Point) :-
+           quantitative_geometry(door1, Quant),
+           centroid(Quant, Point).
+\end{verbatim}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=70mm]{point-abs}
+\caption{Doorway Point Abstraction}
+\label{point-abs}
+\end{figure}
+
+\noindent \emph{\large Directed Point} \\
+\indent Walls, doorways, windows, and some interior design objects have a directed point abstraction. A directed point is represented as a tuple (\emph{Cartesian point}, \emph{direction}). The point is defined as the centroid of the quantitative polygon space, as it is in the point abstraction. The direction is defined either by the user, as is the case for interior design objects, or by an intrinsic spatial property of the entity, as is the case for doorways, walls, and windows.
+
+For these entities, direction is based on the interpretation of the nature of the entity within the context of a design. Formally, direction is interpreted as a vector that emanates from an entity's point abstraction towards the room / space it is contained in. Specifically, direction is defined as the perpendicular vector to the intrinsic x-axis of the object. Figure \ref{dir-point-abs} shows the directed point abstraction for a doorway. Not that the direction is perpendicular to the x-axis of the doorway's physical geometry. Based on this definition there will be two perpendicular lines that define the direction. In this situation, the context of the space in which the entity is located is need to decided which of the two directions to use.  
+
+\begin{verbatim}
+   dir_point_abstraction(door1, (Point, Dir), room3) :-
+           quantitative_geometry(door1, Quant),
+           centroid(Quant, Point),
+           direction(Quant, Point, room3, Dir).
+\end{verbatim}
+
+\begin{figure}[H]\label{dir-point-abs}
+\centering
+\includegraphics[width=70mm]{dir-point-abs}
+\caption{Doorway Point Abstraction}
+\end{figure}
+
+\noindent \emph{\large Convex Hull} \\
+\indent All architectural entities have a convex hull abstraction. The convex hull is calculated over the quantitative polygon space by using the divide and conquer convex hull algorithm \cite{tbd}. The result of the algorithm is a convex hull representation that is a list of points sorted in counterclockwise order. Convex hulls are used in topological reasoning.
+\begin{verbatim}
+   convex_hull_abstraction(door1, ConvexHull).
+           quantitative_geometry(door1, Quant),
+           convex_hull(convex, ConvexHull).
+\end{verbatim}
+
+TODO: figure for convex hull abs
 
 % ------------- End main chapters ----------------------
 
