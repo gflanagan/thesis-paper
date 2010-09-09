@@ -380,8 +380,8 @@ An object \emph{A} has a partially overlapping relationship with an object \emph
 
 An object \emph{A} has a disconnected relationship with an object \emph{B} if \emph{A} does not intersect with \emph{B}, there are no points in \emph{A} that are inside \emph{B}, and there are no points in \emph{B} that are inside \emph{A}. The disconnected relationship is qualified by checking for line segment intersection and convex hull / point containment. If there are no line segment intersections and no convex hull / point containment relationships, then two objects are disconnected.  
 
-\subsubsection{Constraint Solver: Topology}
-The topological constraint solver qualifies topological relationships over convex hull objects. Its implementation extends Sindalog's \ref{Sindalog} topological constraint solver by integrating topological constraints over convex hulls. It is written using CHR that simplify and propagate topological constraints into geometric constraints of line segment intersection and convex hull / point containment. Once a constraint is in a simplified form, i.e., a line intersection or convex hull / point containment constraint, it is solved and returns true or false based on the outcome of the solution.   
+\subsubsection{Spatial Constraint Solver: Topology}
+The topological constraint solver qualifies topological relationships over convex hull objects. Its implementation extends Sindalog's \ref{Sindalog} topological constraint solver by integrating topological constraints over convex hulls. It is written using CHR that simplify and propagate topological constraints into solvable geometric constraints of line segment intersection and convex hull / point containment. Once a constraint is in a solvable form, in this case a line intersection or convex hull / point containment constraint, it is solved and returns true or false based on the outcome of the solution. The topological constraint solver is based on successively breaking down a spatial object (convex hull) or spatial primitive (line, point) until solvable geometric constraints can be checked.
 
 For example, qualification for the partially overlapping topological relationship requires simplifying the overlapping constraint into line segment intersection constraints between the line segments of the convex hulls. The overlapping constraint is solved when at least one line intersection constraint is solved to true or when there are no more line intersection constraints left in the constraint store. In the former case the constraint returns true and in the latter case returns a failure. 
 
@@ -391,11 +391,25 @@ A top level constraint recursively breaks down a convex hull into its line segme
            intersection_segment_segment((Pt1, Pt2), (Pt3, Pt4)),
            intersection_segment_hull(Pt1, Pt2, [Pt4|PS]).
 \end{verbatim}
+The first constraint \emph{intersection\_segement\_segmenet} is propagated into the constraint store and will be solved when all points in its arguments are fully instantiated. The second constraint is a recursive call that will propagate the \emph{intersection\_segement\_segmenet} constraint for the entire convex hull. 
 
-The qualification for the other topological relationships are similar to the partially overlapping constraint presented here, but in addition to the line intersection constraint some use the geometric properties of convex hull / point containment.
+The qualification for the other topological relationships are similar to the partially overlapping constraint presented here, but in addition to the line intersection constraint some constraints use the geometric properties of convex hull / point containment.
+
+The DSpace design representation structure can be queried for topological relationships using the topological constraint solver. Prolog rules query the abstract representation layer to retrieve the spatial abstractions need for topological qualification. In this case objects will be spatially abstracted into convex hulls. The following rule shows the rule for the inside topological relationship. Note that the rule takes two \emph{dsID} as arguements, queries the abstract representation layer to retrieve the entities convex hull abstract representations, and then makes a finally call to the \emph{inside\_convexhull} constraint.
+\begin{verbatim}
+    inside(door45, room53) :-
+            convexhull_abs(door45, ConvexDoor),
+            convexhull_abs(room53, ConvexRoom),
+            insdie_convexhull(ConvexDoor, ConvexRoom).
+\end{verbatim}
+Given two entities with \emph{dsID}'s \emph{door45} and \emph{room53}, the following query will return true if the entities have an inside topological realtionship and will fail if they do not.
+\begin{verbatim}
+    ?- inside(door45, room53).
+    true.
+\end{verbatim}
 
 \subsection{Orientation} \label{orientation}
-The DSpace reasoner can qualify two types of orientational relationships, intrinsic and extrinsic. Intrinsic orientational reasoning is based on OPRA$_{m}$. OPRA$_{m}$ partitions space into half planes, which are defined by lines emanating from a reference point, and defines the qualitative orientational relationships by the half plane in which a second point is located in relation to the reference point. The granularity of an OPRA$_{m}$ relationship, specified by $m$, defines the number of lines emanating from the reference point. 
+The DSpace reasoner can qualify two types of orientational relationships, intrinsic and extrinsic. Intrinsic orientational reasoning is based on OPRA$_{m}$. OPRA$_{m}$ partitions space into half-planes, which are defined by lines emanating from a reference point, and defines the qualitative orientational relationships by the half plane in which a second point is located in relation to the reference point. The granularity of an OPRA$_{m}$ relationship, specified by $m$, defines the number of lines emanating from the reference point. 
 
 \begin{figure}[H]
 \centering
@@ -404,7 +418,7 @@ The DSpace reasoner can qualify two types of orientational relationships, intrin
 \label{facing-opra-base-rel}
 \end{figure}
 
-Figure \ref{facing-opra-base-rel} shows the OPRA$_{2}$ (two lines) partitioning of space, with labels for the base OPRA$_{2}$ relationships. Point \emph{A} is located in sector 7 of point \emph{B}'s partitioned space, and \emph{B} is located in sector 1 of \emph{A}'s partitioned space. Note that the arrow depicts the point's direction and the half-plane sectors are labelled starting at the point's direction, incrementing counter-clockwise. 
+Figure \ref{facing-opra-base-rel} shows the OPRA$_{2}$ (two lines) partitioning of space, with labels for the base OPRA$_{2}$ relationships. Point \emph{A} is located in half-plane 7 of point \emph{B}'s partitioned space, and \emph{B} is located in half-plane 1 of \emph{A}'s partitioned space. Note that the arrow depicts the point's direction and the half-planes are labeled starting at the point's direction, incrementing counter-clockwise. 
 
 OPRA$_{m}$ relationships are qualified by solving linear inequalities that are defined by lines emanating from the reference point. Given a point \emph{A} and \emph{B}, the $\theta_{AB}$ symbol refers to $ \tan^{-1} \frac{B_{y} - A_{y}}{B_{x} - A_{X}} $, the $\phi_{A}$ symbol refers to the direction of point \emph{A}, and the \emph{m} symbol refers to the granularity of the OPRA$_{m}$ relations. Equation \ref{opra-eq} shows the linear inequalities that qualify OPRA$_{m}$ relationships as referenced from point \emph{A} to point \emph{B}. Using this system of linear inequalities, the OPRA$_{m}$ relationship ($i$) can be solved for \emph{B} in terms of \emph{A}'s OPRA$_{m}$ space.
 
@@ -424,9 +438,9 @@ Extrinsic orientational reasoning is based on the SCC. SCC defines the orientati
 \label{scc}
 \end{figure}
 
-Figure \ref{scc} shows an SCC relationship between three points. The partitioning scheme is based on the orientation of the origin and relatum points. In this example, the third point, the referent, is located in sector 5 of the SCC partitioned space, so it has an SCC$_{5}$ relationship with point \emph{A} as related by \emph{B}. 
+Figure \ref{scc} shows an SCC relationship between three points. The partitioning scheme is based on the orientation of the origin and relatum points. In this example, the third point, the referent, is located in half-plane 5 of the SCC partitioned space, so it has an SCC$_{5}$ relationship with point \emph{A} as related by \emph{B}. 
 
-\begin{equation}\label{scc-eq}
+\begin{equation}\label{scc-eq} 
 \begin{aligned}
 \Big(&\Big(\Big(A_{y} < B_{y}\Big) \wedge \Big(C_{y} > M_{perp} \cdot C_{x} + Y_{perp}\Big)\Big) \; \lor \\
 \Big(&\Big(A_{y} > B_{y}\Big) \wedge \Big(C_{y} < M_{perp} \cdot C_{x} + B_{perp}\Big)\Big)\Big) \\
@@ -435,13 +449,17 @@ Figure \ref{scc} shows an SCC relationship between three points. The partitionin
 \end{aligned}
 \end{equation}
 
-SCC relationships are qualified by solving a system of linear inequalities, which are based on the lines that partition space into the SCC sectors. Labeling starts at the line that runs between the origin and relatum, starting at zero and incrementing clockwise. Given a point \emph{C}, its SCC$_{1}$ relationship with points \emph{A} and \emph{B} is given by solving the equations for \emph{C} in \ref{scc-eq}. Given three points A, B, and C, $M_{AB}$ refers to the slope of line from A to B, $Y_{AB}$ refers to the y-intercept of the line from A to B, $M_{perp}$ refers to the slope of the line that is perpendicular to the line from A to B, and $Y_{perp}$ refers to the y-intercept of the line that is perpendicular to the line from A to B. There are similar systems of inequalities for each of the seven SCC relationships.  
+
+SCC relationships are qualified by solving a system of linear inequalities, which are based on the lines that partition space into the SCC half-planes. Labeling starts at the line that runs between the origin and relatum, starting at zero and incrementing clockwise. Given three points A, B, and C, $M_{AB}$ refers to the slope of line from A to B, $Y_{AB}$ refers to the y-intercept of the line from A to B, $M_{perp}$ refers to the slope of the line that is perpendicular to the line from A to B, and $Y_{perp}$ refers to the y-intercept of the line that is perpendicular to the line from A to B. Given a point \emph{C}, it has an SCC$_{1}$ relationship with points \emph{A} and \emph{B} if the equations in \ref{scc-eq} can be solved. If the equations are not solvable then \emph{C} does not have an SCC$_{1}$ relationship with \emph{A} related to \emph{B}. There are similar systems of inequalities for each of the seven SCC relationships.  
 
 
-\subsubsection{Constraint Solver: Orientation}
-The orientational constraint solver qualifies OPRA$_{m}$ and SCC relationships over points and directed points. It is written in CLP($\mathbb{R}$) and uses constraints over linear inequalities (as presented above) to solve orientational qualification problems. Within the orientational solver there are two modules, one for intrinsic relationships based on OPRA$_{m}$ and one for extrinsic relationships based on SCC.
+\subsubsection{Spatial Constraint Solver: Orientation}
+The orientational constraint solver qualifies OPRA$_{m}$ and SCC relationships over points and directed points. It is written in CLP($\mathbb{R}$) and uses constraints over linear inequalities (Equations \ref{opra-eq}, \ref{scc-eq}) to solve orientational qualification problems. Within the orientational solver there are two modules, one for intrinsic relationships based on OPRA$_{m}$ and one for extrinsic relationships based on SCC.
 
-The OPRA$_{m}$ and SCC constraint solvers, solve OPRA$_{m}$ and SCC constrains respectively by solving a system of linear inequality constraints. In CLP($\mathbb{R}$) the linear inequalities are built as constraints that are stored in the solvers constraint store until it is fully instantiated. 
+The OPRA$_{m}$ constraint solver 
+
+
+and SCC constraint solvers, solve OPRA$_{m}$ and SCC constrains respectively by solving a system of linear inequality constraints. In CLP($\mathbb{R}$) the linear inequalities are built as constraints that are stored in the solvers constraint store until it is fully instantiated. 
 
 TODO: code for opra and scc constraint solver
 
@@ -455,7 +473,7 @@ The DSpace reasoner can calculate the minimum euclidean distance between points,
 \label{min-dist}
 \end{figure}
 
-\subsubsection{Constraint Solver: Distance}
+\subsubsection{Spatial Constraint Solver: Distance}
 The distance constraint solver solves minimum distance constraints and uses the distance constraint services of the Sindalog \cite{sindalog} reasoner for its reasoning. The distance solver is different from the other solvers because it returns a value to a query. For example, the following query will return the minimum distance between the two objects in D.
 \begin{verbatim}
    min_distance(obj1, obj2, D). 
