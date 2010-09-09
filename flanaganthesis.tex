@@ -397,15 +397,15 @@ The qualification for the other topological relationships are similar to the par
 
 The DSpace design representation structure can be queried for topological relationships using the topological constraint solver. Prolog rules query the abstract representation layer to retrieve the spatial abstractions need for topological qualification. In this case objects will be spatially abstracted into convex hulls. The following rule shows the rule for the inside topological relationship. Note that the rule takes two \emph{dsID} as arguements, queries the abstract representation layer to retrieve the entities convex hull abstract representations, and then makes a finally call to the \emph{inside\_convexhull} constraint.
 \begin{verbatim}
-    inside(door45, room53) :-
-            convexhull_abs(door45, ConvexDoor),
-            convexhull_abs(room53, ConvexRoom),
-            insdie_convexhull(ConvexDoor, ConvexRoom).
+    inside(Id1, Id2) :-
+            convexhull_abs(Id1, Convex1),
+            convexhull_abs(Id2, Convex2),
+            insdie_convexhull(Convex1, Convex2).
 \end{verbatim}
-Given two entities with \emph{dsID}'s \emph{door45} and \emph{room53}, the following query will return true if the entities have an inside topological realtionship and will fail if they do not.
+Given two entities with \emph{dsID}'s \emph{door45} and \emph{room53}, the following query will return true if the entities have an inside topological realtionship and will fail if they do not. In this case they do not have an inside relationship so the query returns fail.
 \begin{verbatim}
     ?- inside(door45, room53).
-    true.
+    fail.
 \end{verbatim}
 
 \subsection{Orientation} \label{orientation}
@@ -456,12 +456,25 @@ SCC relationships are qualified by solving a system of linear inequalities, whic
 \subsubsection{Spatial Constraint Solver: Orientation}
 The orientational constraint solver qualifies OPRA$_{m}$ and SCC relationships over points and directed points. It is written in CLP($\mathbb{R}$) and uses constraints over linear inequalities (Equations \ref{opra-eq}, \ref{scc-eq}) to solve orientational qualification problems. Within the orientational solver there are two modules, one for intrinsic relationships based on OPRA$_{m}$ and one for extrinsic relationships based on SCC.
 
-The OPRA$_{m}$ constraint solver 
+The OPRA$_{m}$ constraint solver solves extrinsic orientation qualification problems by constraining the linear inequalities in Equation \ref{opra-eq}. Given an origin point \emph{A}, a reference point \emph{B}, and a granularity $m$, the constraint solver will return the OPRA$_{m}$ relationship ($i$) between \emph{A} and \emph{B}. The linear inequalities are constrained as CLP($\mathbb{R}$) constraints and return once all variables in the linear inequalities are instantiated. 
+
+The SCC constraint solver solves intrinsic orientation qualification problems by constraining the linear inequalities in Equation \ref{scc-eq}. Given an origin, a relatum and a referent, the SCC constraint solver will return true or fail based on the resolvability of the linear inequalities. The linear inequalities are constrained as CLP($\mathbb{R}$) constraints and will return true if the linear equalities are solvable and fail if they are not.
+
+The DSpace design representation structure can be queried for orientational relationships using the orientational constraint solver. Prolog rules query the abstract representation layer and retrieve the spatial abstractions need for orientational qualification: point and directed point. The following rule shows the rule for the SCC$)_{1}$ relationship.
+\begin{verbatim}
+    SCC1(Id1, Id2, Id3) :-
+            point_abstraction(Id1, PtAbs1),
+            point_abstraction(Id2, PtAbs2),
+            point_abstraction(Id3, PtAbs3),
+            SCC(PtAbs1, PtAbs2, PtAbs3, 1).
+\end{verbatim}
+Given three entities with \emph{dsID}’s \emph{door45}, \emph{room53}, and \emph{desk2} the following query will return true if the entities have an SCC$_{1}$ relationship and will fail if they do not. In this specific case they do have an SCC$_{1}$ relationship so the query returns true.
+\begin{verbatim}
+    ?- SCC1(door45, room53, desk2).
+    true.
+\end{verbatim}
 
 
-and SCC constraint solvers, solve OPRA$_{m}$ and SCC constrains respectively by solving a system of linear inequality constraints. In CLP($\mathbb{R}$) the linear inequalities are built as constraints that are stored in the solvers constraint store until it is fully instantiated. 
-
-TODO: code for opra and scc constraint solver
 
 \subsection{Distance}
 The DSpace reasoner can calculate the minimum euclidean distance between points, lines, and polygons. Given two objects the minimum distance is calculated by finding the closest point in each object to the other object. Base on these two point the minimum euclidean distance is calculated. 
@@ -485,11 +498,11 @@ The distance constraint solver is written using CHR that break down the constrai
 \chapter{Conceptual Design Requirements}
 This chapter presents the conceptual design reasoning framework of the DSpace reasoner. It shows how architectural concepts and qualities can be spatially interpreted using formal qualitative spatial calculi and shows how they can be represented and reasoned with to validate conceptual design requirements in the CLP framework of DSpace. 
 
-TODO: into into how this level of reasoning is positioned in the DSpace framework....
-
 Conceptual design requirements were ascertained from literature on architectural design \cite{tbd}, museum research on visitor behavior \cite{tbd}, and building regulations and codes \cite{tbd}. Their definitions are explicit characterizations of architectural concepts and spatial design qualities that are based on heuristic architectural knowledge and common sense notions of spatial relationships. The objective is not to be an exhaustive discussion of these requirements or a validation for their interpretation in terms of a spatial or design perspective; rather it is to demonstrate how each can be represented and reasoned with in a computational framework to validate conceptual design requirements against the quantitative structures and artifacts of a design. 
 
-The chapter is structured as follows: Section 1 presents a set of qualitative spatial attributes found in architecture, shows how each can be interpreted using formal qualitative spatial calculi, and represented formally within DSpace reasoner. Section 2 presents a set of architectural concepts that are built using the spatial qualities presented in the Section 1 and shows how they can be used to reason about design requirements within the DSpace reasoner. Section 3 demonstrates how a the DSpace reasoner can be used to validate a design per its conceptual design requirements.
+Within the DSpace CLP framework, the conceptual design reasoner works over the design representation structure and spatial reasoners to validate conceptual design requirements. talk about how to build architectural concepts and qualitites in DSpace.... 
+
+The chapter is structured as follows: Section 1 presents a set of qualitative spatial attributes found in architecture, shows how each can be interpreted using formal qualitative spatial calculi, and represented formally within DSpace reasoner. Section 2 presents a set of architectural concepts that are built using the spatial qualities presented in the Section 1 and shows how they can be used to reason about design requirements within the DSpace reasoner.
 
 
 \section{Qualitative Spatial Attributes found in Architecture}
@@ -518,8 +531,10 @@ The positioning attribute is interpreted spatially, in DSpace, using the Single 
 
 Under this scheme, two points are defined as being on opposing sides of a space if they have an SCC relationship of 0, 1 or 7, as related by the centroid of the space. Conversely, a pair of points are defined as being on the same side of a space if they have an SCC relationship of 3, 4 or 5, as related by the centroid of the  space. A point is defined as being on the left side of a space from another point if it has an SCC relationship of 5, 6, or 7, and is on the right side if it has an SCC relationship of 1, 2, or 3. Using the union set operation these relationships can be combined to form the opposing-left/right, and same-left/right relationships.
 
-Th positioning relationships are represented in DSpace as Prolog rules. There is a single rule for each relationships: opposing side, same-side, left-side, and right-side. The head of each rule takes three arguments, the first two for the architectural objects being related and one for the context space. The body of the rule .... Given two objects and a context space, the rule returns true if the objects are on the same-side, opposing-side, left-side, right-side as defined by its' rule, and fails if they are not. The following is Prolog code for the positioning rules.
+Th positioning relationships are represented in the DSpace CLP framework as Prolog rules. There is a single rule for each relationships: opposing side, same-side, left-side, and right-side. 
 
+
+The head of each rule takes three arguments, the first two for the architectural objects being related and one for the context space. The body of the rule ....  The following is Prolog code for the positioning rules.
 \begin{verbatim}
    opposing_side(Obj1, Obj2, Context) :- 
            centroid(Context, Centroid),
@@ -537,14 +552,21 @@ Th positioning relationships are represented in DSpace as Prolog rules. There is
 
 \end{verbatim}
 
-The positioning attribute can be used to check if architectural structures, artefactual extensions, or interior design elements are on the opposing or same side of a space to the other. For example, a requirement might state that a bedroom should be positioned to the back of a house from the main entrance. The reason for this requirement is that rooms that are in the back of a house are more private than rooms in the front of the house. In this requirement, the origin is the entrance, the referent is the bedroom, and the relatum is the centroid of the house (context space).
-
+The positioning attribute can be used to check if architectural structures, artefactual extensions, or interior design elements are on the opposing or same side of a space to the other. For example, a requirement might state that a bedroom should be positioned to the back of a house from the main entrance. The reason for this requirement is that rooms that are in the back of a house are more private than rooms in the front of the house. In this requirement, the origin is the entrance, the referent is the bedroom, and the relatum is the centroid of the house (context space). 
 \begin{figure}[H]
  \centering
  \includegraphics[width=95mm]{bedroom-back-house}
  \caption{Bedroom Privacy}
 \label{privacy}
 \end{figure}
+
+Given the scenario above the opposing-side relationship can be validated in the DSpace reasoner. For this example, the main entrance has a \emph{dsId} of \emph{door3}, the bedroom has a \emph{dsID} of \emph{room3} and the building has a \emph{dsID} of \emph{building1}. The opposing-side relationship can be validated using the following query. The query will return true if the entities are on the opposing-side and fails if they are not. In this case they are on opposing sides so the reasoner responds with a true.
+\begin{verbatim}
+    ?- opposing_side(door3, room3, building1).
+    true.
+\end{verbatim}
+
+
 
 \subsection{Positioning for Sequences}
 The positioning for a sequences attribute defines a perceptual orientational relationship of a sequence of objects as each relates to a vantage point in an extrinsic context, i.e., a defined space such as a room, apartment, building, or user defined space. A sequence is a set of architectural entities (columns), or interior design objects (display cases) that are grouped together and comprised of the same entity or object type. In general sequences are grouped together based on the proximity of the objects (near to each other) but any relationship can define a sequence. There are three positioning relationships for a sequence of objects: horizontal perceived, vertical perceived, and neither.  
