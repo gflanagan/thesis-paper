@@ -247,7 +247,7 @@ This chapter presents the architectural design representation and spatial reason
 The chapter is organized into two sections. The first section looks at how architectural design are represented in DSpace and how this representation model is implemented in the DSpace CLP framework. The second section looks at the DSpace spatial reasoner and how it is implemented as a series of spatial constraint solvers in the DSpace CLP framework.
 
 \section{Design Representation in DSpace}
-In DSpace an architectural design is modeled in a multiple perspective representation structure that incorporate aspects of the design that are quantitative, functional, and qualitative. This design representation goes beyond what is represented in CAAD programs by incorporating design features that are not based on the design's quantitative design representation. It includes functional aspects of the design that pertain to the performance and functional features of the design, as well as qualitative spatial features that pertain to experiential qualities of the design. The objective of this representation structure is to provide the DSpace reasoner with mechanisms that connect an expert's high level design conceptualizations to the low level geometric quantities of a CAAD based system.   
+In DSpace an architectural design is modeled in a multiple perspective representation structure that incorporate aspects of the design that are quantitative, functional, and abstract. This design representation goes beyond what is represented in CAAD programs by incorporating design features that are not based on the design's quantitative design representation. It includes functional aspects of the design that pertain to the performance and functional features of the design, as well as abstract spatial aspects that pertain to the qualitative feature space of the design. The objective of this representation structure is to provide the DSpace reasoner with mechanisms that connect an expert's high level design conceptualizations to the low level geometric quantities of a CAAD based system.   
 
 \begin{figure}[H]
 \centering
@@ -256,7 +256,7 @@ In DSpace an architectural design is modeled in a multiple perspective represent
 \label{mutli-perspective}
 \end{figure}
 
-Within the CLP framework of DSpace, the multiple perspective model is implemented as Prolog rules. Prolog rules are used to bind architectural entities, via their DSpace identifier (\emph{dsID}) to their quantitative and functional representations. Transformation rules are used to abstract quantitative geometries into abstract spatial objects. TODO: explain figure. 
+Within the CLP framework of DSpace, the multiple perspective model is implemented as a set of Prolog rules. These rules bind architectural entities, via their DSpace identifier (\emph{dsID}), to their multiple perspective representations. Combining these rules for each entity creates a rulebase that stores the multiple perspective representation in the DSpace CLP framework. This rulebase can be queried to retrieve a specific geometry given a \emph{dsID}. Figure \ref{clp-design} shows the implementation design for the multiple representation structure in the DSpace CLP framework. Notice that all rules are accessed via the factbase, which stores \emph{dsID}'s and ensures that an entity exists before the rulebase is queried. Additionally, all representations are defined over the same set of spatial primitives. This uniformity will be an important aspect of the spatial reasoner in the next section. 
 
 \begin{figure}[H]
 \centering
@@ -265,23 +265,21 @@ Within the CLP framework of DSpace, the multiple perspective model is implemente
 \label{clp-design}
 \end{figure}
 
-The remainder of this section looks at the three design representation perspective individually.
-
+The remainder of this section looks at the three design representation perspective individually: quantitative, functional, abstract.
 
 \subsection{Quantitative Perspective}
 The quantitative representation of the design models the structural form of the design in terms of its precise physical geometric features (i.e., layout, shape, location). Architectural entities, such as walls, windows, doorways, columns, and rooms, are represented as geometric primitives of polygons, lines and points that correspond to the physical dimensions (length, width, shape) of the entities. The quantitative model of DSpace represents the design perspective that is similar to CAAD programs.
 
-Within the DSpace CLP framework, a single Prolog rule binds an entity to its quantitative geometric representation. The quantitative geometry is defined by geometric primitives of polygons, lines, and points. The following Prolog rule defines the quantitative geometry for a doorway with id \emph{door1}. The first argument is an entity id and the second is a variable that will be instantiated with the quantitative geometric representation. The $spatial\_primitive$ predicate in the body of the rule takes the quantitative point data that defines the entity and returns an instantiated spatial primitive object (polygon, line, point) in the Geometry variable.
+Within the DSpace CLP framework, the quantitative geometry is defined by geometric primitives of polygons, lines, and points. These primitives are defined by Prolog rules that consume quantitative point data and return an instantiated spatial primitive. The following Prolog rules shows an example of a quantitative rule definition for an entity with \emph{dsID window445}. This rule will be stored in the DSpace rulebase. 
 \begin{verbatim}
-    quantitative_geometry(door1, Geometry) :-
-           spatial_primitive(Geometry, [(1,1),(3,5),(4,5),(2,2)]).
+    quantitative_geometry(window445, Geometry) :-
+            spatial_primitive(Geometry, [(1,1),(3,5),(4,5),(2,2)]).
 \end{verbatim}
-
-The quantitative rulebase can be queried to retrieve specific entity geometries. For example, to get the quantitative geometry for \emph{door1} the following query is made:
+Given an entity and its \emph{dsID}, a query to the DSpace rulebase will return an instantiated variable with the entity's quantitative geometry.  
+If the following query is made, the quantitative geometry of \emph{window445} will be instantiated in the \emph{Geometry} variable.
 \begin{verbatim}
-   quantitative_geometry(door1, Geometry).
+    quantitative_geometry(window445, Geometry).
 \end{verbatim} 
-\emph{Door1}'s quantitative geometry is now stored in the Geometry variable.
 
 
 \subsection{Functional Perspective}
@@ -313,24 +311,21 @@ The range space pertains to a region of space that encompass the range of a sens
 
 Artefactual extensions directly affect how well a design functions. For example, a sink in a bathroom has a functional space, the space a person occupies while washing his/her hands at the sink. If this space interferes with (i.e., topologically overlapping) the functional and/or physical space of a doorway, this will cause a circulation problem when both the doorway and sink are simultaneously being operated, i.e., a collision between the person washing his/her hands and the doorway itself or the person operating the doorway. In this example, the functional aspects of the bathrooms design with regard to the mitigation of circulation problems is directly influenced by the spatial configuration of the non-physical artefactual extensions of the design. 
 
-Within the DSpace CLP framework, Prolog rules are used to bind an entity to its artefactual geometries. There is a single Prolog rule for each artefactual type: functional, operational, and range. An entity may have zero or more artefactual geometries. For example, a doorway has a functional and operational space but does not have a range space. Likewise, a column has no artefactual extensions. 
-
-The following Prolog rules define the artefactual geometries for a doorways with id \emph{door1}. There is a single rule for each perspective. Each rule takes two arguments, an id and variable that will be instantiated with the geometry. 
+Within the DSpace CLP framework, artefactual geometries are defined using the same spatial primitives as the quantitative geometries. The main difference between the two is that there are multiple rules, one for each artefactual type: functional, operational, and range. An entity may have zero or more artefactual geometries. For example, a doorway in general has a functional and operational representation but does not have one for range representation, while a column has no artefactual representations. The following Prolog rules show and example of a rule definition for the functional and operational representations for a doorway with \emph{dsID} of \emph{door55}. 
 \begin{verbatim}      
-   functional_space(door1, Geometry) :-
-           spatial_primitive(Geometry, polygon(PtList)).
+    functional_geometry(door55, Geometry) :-
+            spatial_primitive(Geometry, polygon(PtList)).
            
-   operational_space(door1, Geometry) :-
-           spatial_primitive(Geometry, polygon(PtList)).
+    operational_geometry(door55, Geometry) :-
+            spatial_primitive(Geometry, polygon(PtList)).
 \end{verbatim}
-
-The artefactual rulebase can be queried to retrieve a artefactual geometry. For example, to get the functional geometry for a \emph{door1} the following query is made:
+Given an entity and its dsID, a query to the DSpace rulebase will return an instantiated variable with the entity’s artefactual geometry. Which geometry is returned is based on the rule that is queried. If the following functional representation query is made, the functional geometry of \emph{door55} will be instantiated in the FuncGeometry variable.
 \begin{verbatim}
-   functional_geometry(door1, FunctionalGeometry).
+   functional_geometry(door55, FuncGeometry).
 \end{verbatim}
-\emph{Door1}'s functional geometry is now stored in the FunctionalGeometry variable. Similar queries are made to retrieve the operational and range space geometries.
 
-\subsection{Qualitative Perspective}
+
+\subsection{Abstract Perspective}
 In DSpace architectural entities have spatially abstracted representations. This allows DSpace to reason about a design from a qualitative level of abstraction with regards to its spatial characteristics of topology, orientation and distance. This type of qualitative spatial reasoning reasons over the abstract feature space of the design using abstract spatial objects of points, directed points, and convex hulls. 
 
 Architectural entities are not directly modeled, as they are in the quantitative representation, as abstract spatial objects. Abstract spatial objects are generated by transformation rules that abstract the quantitative geometries of the architectural entities. The process of spatially abstracting an architectural entity depends on the spatial characteristics of the entity's structural form, and an interpretation of the intrinsic nature of an entity within an architectural / design context. For example, the abstracted representation of a doorway as a directed point is defined not only by its physical form but also by the interpretation of the doorway's intrinsic direction. 
@@ -823,7 +818,7 @@ TBD: explain how these high level requirements can be interpreted into concrete 
 This portion of the case study will look into four factors that influence visitors' movement patters: positioning of doorways, spatial arrangement of display cases, positioning of furniture and statues, and congestion. These properties inform museum architects, during the design process, about the spatial characteristics that can maximize the utilization of the museum by increasing the frequency and duration with which visitors view exhibition objects. 
 
 \subsubsection{Positioning of doorways}
-In an important study, Melton \cite{Melton} discovered that the most influential factor to determine  the amount of attention an object receives is the object's position relative to doorways in a gallery room. Prior to this, museum researchers believed that the object's intrinsic properties of 'interestingness', color, and size were the real factors that determined the amount of attention an object received. Melton explained why this happens; he demonstrated that the amount of attention an object receives is directly related to the visitor circulation patterns within the museum and these circulation patterns emerge from the spatial characteristics of the museum's architecture.
+In an important study, Melton \cite{Melton} discovered that the most influential factor to determine  the amount of attention an exhibition piece receives is the pieces's position relative to doorways in a gallery room. Prior to this, museum researchers believed that the pieces's intrinsic properties of 'interestingness', color, and size were the real factors that determined the amount of attention a piece received. Melton explained why this happens; he demonstrated that the amount of attention a piece receives is directly related to the visitor circulation patterns within the museum and these circulation patterns emerge from the spatial characteristics of the museum's architecture.
 
 \begin{figure}[H]
  \centering
@@ -837,10 +832,12 @@ In an important study, Melton \cite{Melton} discovered that the most influential
 
 The crux of Melton's experiments suggested that visitors exit through the first door they encounter, which he referred to as the exit gradient. Figure \ref{Melton-studies} shows the results of an extensive study of visitors circulation patterns and stopping frequencies in an art museum. The studies reported that almost 80 percent of visitors exited through the first exit they encountered before viewing the entire exhibition. Additionally, the studied showed that the most frequently visited objects where those located along the shortest path from the entrance to the exit. 
 
-The results of Melton's studies inform architects of spatial characteristics that influence movement patterns in exhibitions. Specifically, doorways that are positioned on the same side of the room cause visitors to pay attention to fewer exhibits than doorways that are positioned on opposing sides of the room.
+Furthermore, Bitgood suggests that visitors tend to follow along the wall that is closest to the door they entered \cite{Bitgood95}. Given that visitors also tend to exit through the first doorway they encounter, doorways should not be positioned in a wall that is adjacent to an entrance. 
+
+The results of Melton's and Bitgood's studies inform architects of spatial characteristics that influence movement patterns in exhibitions. Specifically, doorways that are positioned on the same side of the room and doorways that are position in a wall adjacent to an entrance cause visitors to pay attention to fewer exhibits than doorways that are positioned on opposing sides of the room and in walls that are not adjacent to entrances.
 
 \begin{description}
-\item[Requirement 1:] Exhibition doorways should be positioned on opposing sides of gallery rooms. 
+\item[Requirement 1:] \emph{Exhibition doorways should be positioned on opposing sides of a gallery room and should not be positioned on a wall that is adjacent to another doorway.} 
 \end{description}
 
 Figure \ref{door-position} shows a possible exhibition design where the red door is positioned on the same side of the room as the entrance, while the black door is positioned on the opposing side.
@@ -849,13 +846,7 @@ Figure \ref{door-position} shows a possible exhibition design where the red door
 \subfloat[consistent design]{\label{fig:door-opposite}\includegraphics[width=85mm]{door-possitioning}}
 \caption{Schematization of the opposing door requirement.}
 \label{door-position}
-\end{figure}
-
-Bitgood suggests that visitors tend to follow along the wall that is closest to the door they entered \cite{Bitgood95}. Given that visitors also tend to exit through the first doorway they encounter, doorways should not be positioned in a wall that is adjacent to another doorway.  
- 
-\begin{description}
-\item[Requirement 2:] Exhibition doorways should not be positioned on a wall that is adjacent to another doorway.
-\end{description}
+\end{figure} 
 
 
 \subsubsection{Spatial arrangement of display cases}
@@ -873,13 +864,13 @@ The spatial arrangement of display cases in galleries has been shown to influenc
 \end{figure}
  
 \begin{description}
-\item[Requirement 3:] Display case arrangements should not form an island near the center of the room.
+\item[Requirement 2:] \emph{Display case arrangements should not form an island near the center of the room.}
 \end{description} 
 
 Circulation patterns can be disrupted when a peninsula arrangement cuts horizontally across the view of a visitor as they are entering the room. This type of display pattern will cut off part of the room from the visitor and will make it less likely to be visited.
 
 \begin{description}
-\item[Requirement 4:] Display cases arrangements that form a peninsula should not cut horizontally across the view of a visitor located at an entrance.
+\item[Requirement 3:] \emph{Display cases arrangements that form a peninsula should not cut horizontally across the view of a visitor located at an entrance.}
 \end{description} 
 
 \begin{figure}[H]
@@ -894,56 +885,38 @@ Circulation patterns can be disrupted when a peninsula arrangement cuts horizont
 Congestion in museums can be caused by interference of displayed objects and their viewing spaces with movement pathways of visitors. In order to reduce congestion in museums, designers should be aware of the placement of display cases, statues, furniture (seating benches), and information kiosks within the gallery. The following are requirements that should be followed to reduce congestion in museums:
 
 \begin{description}
-\item[Requirement 5:] The viewing area of display cases, functional space of doors, function space of seating areas, and operation space of information kiosks should not interfere with each other.
+\item[Requirement 4:] \emph{There should be no artefactual interference between architectural entities, museum display cases, museum seating, and information kiosks.}
 \end{description}
 
 \subsubsection{Positioning of benches, statues, and information kiosks}
 The positioning and orientation of benches and statues can increase the amount of attention an exhibition receives and change circulation patterns within a gallery \cite{Stavroulaki} \cite{Museum}. Studies have shown that seating directly facing an object will increase the attention the object receives, even if no one uses the seating. 
 
 \begin{description}
-\item[Requirement 6:] Seating should directly face a gallery wall or display case.
+\item[Requirement 5:] \emph{Seating should directly face a gallery wall or display case.}
 \end{description}
 
 The orientation of a statue to doorways can increase the attention the statue receives as well as the object close to it. Statues that face away from doorways encourage visitors to move around the statues in order to get a better view.  
 \begin{description}
-\item[Requirement 7:] Statues should face away from doorways.
+\item[Requirement 6:] \emph{Statues should face away from doorways.}
 \end{description}
 
 \subsubsection{Visitor Orientation in the lobby}
 The lobby is the first place visitors encounter when they enter a museum. The design of the lobby is important because it not only provides a first glimpse of the museum's exhibits but it is the place where the museum provides services to its visitors, including: a ticketing desk, bathrooms, an information desk, and entrances to exhibitions \cite{Bitgood02}. The aim of the requirements for the lobby focus on making it easy for visitors to locate services and orient themselves to the new environment. 
 
-Upon entering the lobby most visitors need to find the ticket area and/or an information desk. It is important, therefore, that the ticketing area and information desk are visible from the entrance. If there is more then one entrance, then it is important that the ticket area and information desk are visible from all entrances. 
-
+Upon entering the lobby most visitors need to find the ticket area and/or an information desk. It is important, therefore, that the ticketing area and information desk are visible from the entrance. Additionally, studies have shown that people first look to their right hand side when entering a building. By placing the ticket and information desks on the right hand side of the lobby, visitors are more likely to notice them immediately when they enter the lobby. Finally, the ticketing area should be close to visitors when they enter because it is likely one of the first places they will need to visit.
 \begin{description}
-\item[Requirement 8:] The ticketing and information desks should be visible from the main entrance(s).
+\item[Requirement 7:] \emph{The ticketing and information desks should be visible from the main entrance, they should be on the right hand side of the lobby from the main entrance, and they should be on the same side fo the lobby as the  entrance.}
 \end{description}
 
-Additionally, studies have shown that people first look to their right hand side when entering a building. By placing the ticket and information desks on the right hand side of the lobby, visitors are more likely to notice them immediately when they enter the lobby. 
-
+After obtaining a ticket most visitors will be trying to locate the entrance to the exhibitions. Therefore, exhibition entrances should be clearly visible from several parts of the lobby, including the ticketing desk, information desk, and a central lobby location, to make it easy for visitors to find where they need to go. 
 \begin{description}
-\item[Requirement 9:] The ticketing area should be on the right side of the lobby from the main entrance(s).
+\item[Requirement 8:] \emph{Exhibit entrances should be visible from the ticketing desk, information desk, and a central lobby location.}
 \end{description}
 
-The ticketing area should be close to visitors when they enter because it is likely one of the first places they will need to visit.
-\begin{description}
-\item[Requirement 10:] The ticketing are should be on the same side of the lobby as the entrance(s).
-\end{description}
-
-Bathrooms are an important services for museum visitors. Surprisingly, the place of the bathroom can have an impact on how long visitors stay in the museum. Studies \cite{tbd} have found that bathrooms that are located on the same side of the lobby as the entrance / exit encourage visitors to leave earlier compared to museums with bathrooms on the opposing side of the lobby from the entrance / exit. 
+Bathrooms are an important services for museum visitors. Surprisingly, the place of the bathroom can have an impact on how long visitors stay in the museum. Studies \cite{tbd} have found that bathrooms that are located on the same side of the lobby as the entrance / exit encourage visitors to leave earlier compared to museums with bathrooms on the opposing side of the lobby from the entrance / exit. Additionally, the doorways to the bathroom should be private to maintain as much privacy in the bathroom as possible.
 
 \begin{description}
-\item[Requirement 11:] The bathroom should be on the opposing side of the lobby from the entrance / exit.
-\end{description}
-
-The doors should be private to maintain as much privacy in the bathrooms as possible.
-
-\begin{description}
-\item[Requirement 12:] Bathroom doors should be private.  
-\end{description}
-
-The main exhibition entrance should be clearly visible from several parts of the lobby to make it easy for visitors to find where they need to go. 
-\begin{description}
-\item[Requirement 13:] Exhibit entrance should be visible from the ticketing area and central lobby location
+\item[Requirement 9:] \emph{The bathroom should be on the opposing side of the lobby from the entrance / exit and the bathroom doorways should be private.}
 \end{description}
 
 
@@ -951,13 +924,14 @@ The main exhibition entrance should be clearly visible from several parts of the
 The way visitors explore an exhibition is influenced by the spatial characteristics of the layout, as well as the characteristics of each gallery room. Layouts that are sequential, i.e. one way in / one way out, promote a controlled and orderly flow of movement. Museums of history and science are well served by this type of design because they have a narrative to tell that is chronological. On the other hand, layouts that present the visitor with path choices, i.e. multiple doorways, promote free-flowing exploration. In this type of layout it is important that visitors are aware of the path choices that are available. This means that doorways are visible between each other throughout the layout. This concept of visibility between a network of points is referred to as continuity and is an important characteristic of layouts that present visitors with multiple path choices.  
 
 \begin{description}
-\item[Requirement 14:] The layout of the museum should maintain continuity between doorways within each exhibition and gallery room.
+\item[Requirement 10:] The layout of the museum should maintain continuity between doorways within each exhibition and gallery room.
 \end{description}
 
 Within a Gallery, rooms that are open promote more free-flowing exploration than rooms that are narrow. Narrow rooms inhibit exploration because of space limitations and confinement. Rooms that are open provide more space for visitors to explore the room in a free-flowing manner.
 \begin{description}
-\item[Requirement 15:] Gallery rooms should be open, rather than narrow, in order to promote free-flowing exploration.
+\item[Requirement 11:] Gallery rooms should be open, rather than confined, in order to promote free-flowing exploration.
 \end{description}
+
 
 
 \section{Case Study: Ranch Style House}
