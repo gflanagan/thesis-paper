@@ -234,7 +234,7 @@ Figure \ref{hierarchy} shows the design multi-hierarchy used in the DSpace reaso
 \section{DSpace: Design and Implementation}
 
 \subsection{Factbase}
-Prolog facts make up a factbase that stores a table of architectural entities to their architectural types (e.g., wall, door, window, desk, etc.). Each architectural entity in the design has a single entry in the factbase. The factbase is instantiated automatically during the import process from the CAAD system. This factbase will be used throughout the DSpace reasoner to  verify an entity exists in the design and links it to its architectural type. The following Prolog code shows two instantiated facts (predicates) for a doorway, and a window. 
+Prolog facts make up a factbase that stores a table of architectural entities with their architectural types (e.g., wall, door, window, desk, etc.). Each architectural entity in the design has a single entry in the factbase. The factbase is instantiated automatically during the import process from a CAAD based representation. This factbase will be used throughout the DSpace reasoner to  verify an entity exists in the design and links it to its architectural type. The following Prolog code shows two instantiated facts (predicates) for a doorway, and a window. 
 \begin{verbatim}
    architectural_entity(door1, dSDoor).
    architectural_entity(wall4, dsWindow).
@@ -242,12 +242,12 @@ Prolog facts make up a factbase that stores a table of architectural entities to
 
 
 \chapter{Design Computing in a Constraint Logic Programming Framework}
-This chapter presents the computational framework of the DSpace reasoner. It examines how designs are modeled in a multiple perspective representation structure, and reason about using qualitative spatial reasoning and representation techniques. The DSpace framework is written in the declarative programming semantics of Constraint Logic Programming (CLP) using Prolog, CLP over the Reals (CLP($\mathbb{R}$)), and Constraint Handling Rules (CHR).  
+This chapter presents the architectural design representation and spatial reasoning framework of the DSpace reasoner. It examines how architectural designs are modeled in a multiple perspective representation structure, and how architectural designs are reasoned about using qualitative spatial representation and reasoning techniques. The DSpace framework is written in the declarative programming semantics of Constraint Logic Programming (CLP) using Prolog, CLP over the Reals (CLP($\mathbb{R}$)), and Constraint Handling Rules (CHR).  
 
-The chapter is organized into two sections. The first section looks at the multiple perspective representation structure and how it's implemented in the DSpace CLP framework. The second section looks at the spatial reasoner and how it works directly over the design representation to reason about designs from a qualitative spatial perspective.
+The chapter is organized into two sections. The first section looks at how architectural design are represented in DSpace and how this representation model is implemented in the DSpace CLP framework. The second section looks at the DSpace spatial reasoner and how it is implemented as a series of spatial constraint solvers in the DSpace CLP framework.
 
 \section{Design Representation in DSpace}
-In DSpace an architectural design is modeled in a multiple perspective representation structure that incorporate aspects of the design that are quantitative, functional, and qualitative. This design representation goes beyond what is represented in CAAD programs by incorporating design features that are not based on the design's quantitative design representation. It includes functional aspects of the design that pertain to the performance and functional features of the design, as well as qualitative spatial aspects that pertain to experiential qualities of the design. The objective of this representation structure is to provide the DSpace reasoner with mechanisms that connect an expert's high level design conceptualizations to the low level geometric quantities of a CAAD based system.   
+In DSpace an architectural design is modeled in a multiple perspective representation structure that incorporate aspects of the design that are quantitative, functional, and qualitative. This design representation goes beyond what is represented in CAAD programs by incorporating design features that are not based on the design's quantitative design representation. It includes functional aspects of the design that pertain to the performance and functional features of the design, as well as qualitative spatial features that pertain to experiential qualities of the design. The objective of this representation structure is to provide the DSpace reasoner with mechanisms that connect an expert's high level design conceptualizations to the low level geometric quantities of a CAAD based system.   
 
 \begin{figure}[H]
 \centering
@@ -256,7 +256,7 @@ In DSpace an architectural design is modeled in a multiple perspective represent
 \label{mutli-perspective}
 \end{figure}
 
-Within the CLP framework of DSpace, the multiple perspective model is represented as Prolog rules. Prolog rules are used to bind architectural entities (via a unique identifier) to their quantitative and functional representations. Transformation rules are used to abstract quantitative geometries into abstract spatial objects. TODO: explain figure. 
+Within the CLP framework of DSpace, the multiple perspective model is implemented as Prolog rules. Prolog rules are used to bind architectural entities, via their DSpace identifier (\emph{dsID}) to their quantitative and functional representations. Transformation rules are used to abstract quantitative geometries into abstract spatial objects. TODO: explain figure. 
 
 \begin{figure}[H]
 \centering
@@ -265,11 +265,11 @@ Within the CLP framework of DSpace, the multiple perspective model is represente
 \label{clp-design}
 \end{figure}
 
-The remainder of this section is structured as follows. The first subsection looks at the quantitative design representation. The second section looks at the functional design perspective. The final subsection looks at the qualitative design perspective.
+The remainder of this section looks at the three design representation perspective individually.
 
 
 \subsection{Quantitative Perspective}
-The quantitative representation of the design models the structural form of the design in terms of its precise physical geometric features (i.e., layout, shape, location). Architectural entities, such as walls, windows, doorways, columns, and rooms, are represented as geometric primitives of polygons, lines and points that correspond to the physical dimensions (length, width, shape) of the entities. The quantitative model represents the design perspective that is similar to CAAD programs.
+The quantitative representation of the design models the structural form of the design in terms of its precise physical geometric features (i.e., layout, shape, location). Architectural entities, such as walls, windows, doorways, columns, and rooms, are represented as geometric primitives of polygons, lines and points that correspond to the physical dimensions (length, width, shape) of the entities. The quantitative model of DSpace represents the design perspective that is similar to CAAD programs.
 
 Within the DSpace CLP framework, a single Prolog rule binds an entity to its quantitative geometric representation. The quantitative geometry is defined by geometric primitives of polygons, lines, and points. The following Prolog rule defines the quantitative geometry for a doorway with id \emph{door1}. The first argument is an entity id and the second is a variable that will be instantiated with the quantitative geometric representation. The $spatial\_primitive$ predicate in the body of the rule takes the quantitative point data that defines the entity and returns an instantiated spatial primitive object (polygon, line, point) in the Geometry variable.
 \begin{verbatim}
@@ -277,7 +277,7 @@ Within the DSpace CLP framework, a single Prolog rule binds an entity to its qua
            spatial_primitive(Geometry, [(1,1),(3,5),(4,5),(2,2)]).
 \end{verbatim}
 
-The quantitative rulebase can be queried to retrieve specific geometries. For example, to get the quantitative geometry for \emph{door1} the following query is made:
+The quantitative rulebase can be queried to retrieve specific entity geometries. For example, to get the quantitative geometry for \emph{door1} the following query is made:
 \begin{verbatim}
    quantitative_geometry(door1, Geometry).
 \end{verbatim} 
@@ -392,7 +392,7 @@ The qualification for the other topological relationships are similar to the par
 \subsection{Orientation} \label{orientation}
 The DSpace reasoner can qualify two types of orientational relationships, intrinsic and extrinsic. Intrinsic orientational reasoning is based on OPRA$_{m}$. OPRA$_{m}$ partitions space into half planes, which are defined by lines emanating from a reference point, and defines the qualitative orientational relationships by the half plane in which a second point is located in relation to the reference point. The granularity of an OPRA$_{m}$ relationship, specified by $m$, defines the number of lines emanating from the reference point. 
 
-\begin{figure}[b]
+\begin{figure}[H]
 \centering
 \includegraphics[width=60mm]{facing-opra-base-rel}
 \caption{OPRA$_{2}$ Space Partitioning}
@@ -401,7 +401,7 @@ The DSpace reasoner can qualify two types of orientational relationships, intrin
 
 Figure \ref{facing-opra-base-rel} shows the OPRA$_{2}$ (two lines) partitioning of space, with labels for the base OPRA$_{2}$ relationships. Point \emph{A} is located in sector 7 of point \emph{B}'s partitioned space, and \emph{B} is located in sector 1 of \emph{A}'s partitioned space. Note that the arrow depicts the point's direction and the half-plane sectors are labelled starting at the point's direction, incrementing counter-clockwise. 
 
-OPRA$_{m}$ relationships are qualified by solving linear inequalities that are defined by lines emanating from the reference point. Given a point \emph{A} and \emph{B}, the $\theta_{AB}$ symbol refers to $ \tan^{-1} \frac{B_{y} - A_{y}}{B_{x} - A_{X}} $, the $\phi_{A}$ symbol refers to the direction of point \emph{A}, and the \emph{m} symbol refers to the granularity of the OPRA$_{m}$ relations. Equation \ref{opra-eq} shows the linear inequalities for OPRA$_{m}$ relationships as referenced from point \emph{A}. Using this system of linear inequalities, the OPRA$_{m}$ relationship ($i$) can be solved for \emph{B} in terms of \emph{A} OPRA$){m}$ space.
+OPRA$_{m}$ relationships are qualified by solving linear inequalities that are defined by lines emanating from the reference point. Given a point \emph{A} and \emph{B}, the $\theta_{AB}$ symbol refers to $ \tan^{-1} \frac{B_{y} - A_{y}}{B_{x} - A_{X}} $, the $\phi_{A}$ symbol refers to the direction of point \emph{A}, and the \emph{m} symbol refers to the granularity of the OPRA$_{m}$ relations. Equation \ref{opra-eq} shows the linear inequalities that qualify OPRA$_{m}$ relationships as referenced from point \emph{A} to point \emph{B}. Using this system of linear inequalities, the OPRA$_{m}$ relationship ($i$) can be solved for \emph{B} in terms of \emph{A}'s OPRA$_{m}$ space.
 
 \begin{equation}\label{opra-eq}
 \begin{aligned}
@@ -421,8 +421,6 @@ Extrinsic orientational reasoning is based on the SCC. SCC defines the orientati
 
 Figure \ref{scc} shows an SCC relationship between three points. The partitioning scheme is based on the orientation of the origin and relatum points. In this example, the third point, the referent, is located in sector 5 of the SCC partitioned space, so it has an SCC$_{5}$ relationship with point \emph{A} as related by \emph{B}. 
 
-SCC relationships are qualified by solving a system of linear inequalities, which are based on the lines that partition space into the SCC sectors. Labeling starts at the line that runs between the origin and relatum, starting at zero and incrementing clockwise. Given a point \emph{C}, its SCC$_{1}$ relationship with points \emph{A} and \emph{B} is given by solving the equations for \emph{C} in \ref{scc-eq}. Given three points A, B, and C, $M_{AB}$ refers to the slope of line from A to B, $Y_{AB}$ refers to the y-intercept of the line from A to B, $M_{perp}$ refers to the slope of the line that is perpendicular to the line from A to B, and $Y_{perp}$ refers to the y-intercept of the line that is perpendicular to the line from A to B. There are similar systems of inequalities for each of the seven SCC relationships.  
-
 \begin{equation}\label{scc-eq}
 \begin{aligned}
 \Big(&\Big(\Big(A_{y} < B_{y}\Big) \wedge \Big(C_{y} > M_{perp} \cdot C_{x} + Y_{perp}\Big)\Big) \; \lor \\
@@ -432,10 +430,13 @@ SCC relationships are qualified by solving a system of linear inequalities, whic
 \end{aligned}
 \end{equation}
 
-\subsubsection{Constraint Solver: Orientation}
-The orientational constraint solver qualifies intrinsic and extrinsic orientational relationships over points and directed points. It is written in CLP($\mathbb{R}$) and constrains linear inequalities to solve orientational qualification problems. Within the orientational solver there are two modules, one for intrinsic relationships based on OPRA$_{m}$ and one for extrinsic relationships based on SCC.
+SCC relationships are qualified by solving a system of linear inequalities, which are based on the lines that partition space into the SCC sectors. Labeling starts at the line that runs between the origin and relatum, starting at zero and incrementing clockwise. Given a point \emph{C}, its SCC$_{1}$ relationship with points \emph{A} and \emph{B} is given by solving the equations for \emph{C} in \ref{scc-eq}. Given three points A, B, and C, $M_{AB}$ refers to the slope of line from A to B, $Y_{AB}$ refers to the y-intercept of the line from A to B, $M_{perp}$ refers to the slope of the line that is perpendicular to the line from A to B, and $Y_{perp}$ refers to the y-intercept of the line that is perpendicular to the line from A to B. There are similar systems of inequalities for each of the seven SCC relationships.  
 
-The OPRA$_{m}$ and SCC constraint solvers, solve OPRA$_{m}$ and SCC constrains respectively by solving a system of linear inequality constraints. A presentation and discussion of these equations can be found in \ref{opra-eq} and \ref{scc-eq}. In CLP($\mathbb{R}$) the linear inequalities are built as constraints that are stored in the solvers constraint store until it is fully instantiated. 
+
+\subsubsection{Constraint Solver: Orientation}
+The orientational constraint solver qualifies OPRA$_{m}$ and SCC relationships over points and directed points. It is written in CLP($\mathbb{R}$) and uses constraints over linear inequalities (as presented above) to solve orientational qualification problems. Within the orientational solver there are two modules, one for intrinsic relationships based on OPRA$_{m}$ and one for extrinsic relationships based on SCC.
+
+The OPRA$_{m}$ and SCC constraint solvers, solve OPRA$_{m}$ and SCC constrains respectively by solving a system of linear inequality constraints. In CLP($\mathbb{R}$) the linear inequalities are built as constraints that are stored in the solvers constraint store until it is fully instantiated. 
 
 TODO: code for opra and scc constraint solver
 
@@ -471,7 +472,7 @@ The chapter is structured as follows: Section 1 presents a set of qualitative sp
 \section{Qualitative Spatial Attributes found in Architecture}
 This section presents a set of qualitative spatial attributes found in architecture (QSA) and shows how each QSA is spatially interpreted and represented in DSpace. QSAs are architectural qualities that emerge from the spatial structures that form from the physical elements of the building (doors, walls, columns, windows, etc.), artefactual extensions (functional space, operational space, range space, etc.) and interior design elements (furniture, lights, decorations, etc.). QSAs can be perceptual qualities that are described from a specific vantage point, or intrinsic qualities that are inherent in the build's spatial structure. 
 
-This section presents five QSAs: positioning, facing, visibility, proximity, and symmetry. The goal of this section is to develop a tool-kit of QSAs that qualitatively describe architectural designs in the spatial environments in which they emerge. Some boundary cases are identified and handled, but it is not the purpose here to explore all possible case scenarios.
+This section presents five QSAs: positioning, positioning for sequences, facing, visibility, and proximity. The goal of this section is to develop a tool-kit of QSAs that qualitatively describe architectural designs in the spatial environments in which they emerge. Some boundary cases are identified and handled, but it is not the purpose here to explore all possible case scenarios.
 
 \subsection{Positioning}
 The positioning attribute defines an orientational relationship between a pair of objects as each object relates to the other within an extrinsic context, i.e., a defined space such as a room, apartment, building, or user defined space. There are four positioning relationships using this scheme: opposing-side of space, same-side of space, left-side of space, and right-side of space. The opposing-side and same-side relationships can be combined, via conjunction, with the left-side or right-side relationships to form the following compound relationships: opposing-left-side, opposing-right-side, same-left-side, same-right-side.
@@ -522,8 +523,8 @@ The positioning attribute can be used to check if architectural structures, arte
 \label{privacy}
 \end{figure}
 
-\subsection{Positioning for Sequence of Objects}
-The positioning for a sequence of objects defines a perceptual orientational relationship of a sequence of objects as each relates to a vantage point in an extrinsic context, i.e., a defined space such as a room, apartment, building, or user defined space. A sequence is a set of architectural entities (columns), or interior design objects (display cases) that are grouped together and comprised of the same entity or object type. In general sequences are grouped together based on the proximity of the objects (near to each other) but any relationship can define a sequence. There are three positioning relationships for a sequence of objects: horizontal perceived, vertical perceived, and neither.  
+\subsection{Positioning for Sequences}
+The positioning for a sequences attribute defines a perceptual orientational relationship of a sequence of objects as each relates to a vantage point in an extrinsic context, i.e., a defined space such as a room, apartment, building, or user defined space. A sequence is a set of architectural entities (columns), or interior design objects (display cases) that are grouped together and comprised of the same entity or object type. In general sequences are grouped together based on the proximity of the objects (near to each other) but any relationship can define a sequence. There are three positioning relationships for a sequence of objects: horizontal perceived, vertical perceived, and neither.  
 
 The positioning for a sequence of objects attribute can be spatially interpreted using SCC, similar to the positioning attribute above. The positioning for a sequence of objects attribute uses the SCC partitioning scheme to orientationally relate a sequence of points (origin, referents) in the context of an external frame of reference (relatum). In DSpace, the reference point is defined as the centroid of the context space. By partitioning space using the centroid, an approximation is made that divides the space into the positioning relationships. As with the positioning attribute, an assumption made in DSpace is that the space will generally be rectangular in shape.
 
@@ -792,77 +793,20 @@ TBD: figure of stair landing
             not_overlapping(Artefact_stair, Physical)
 \end{verbatim}  
 
-\section{Conceptual Design Requirements in The DSpace Reasoner}
-This section will look at how the DSpace reasoner can be used to validate a designer's conceptualizations against a design's quantitative representation, and shows how high level design requirements are broken down into lower level constraints that can be solved by the DSpace reasoner.
-
-DSpace is built in a CLP framework that allows a user to query an architectural design as represented in the multiple perspective design structure. Queries can be design requirements (i.e., a bedroom must be private), architectural concepts (i.e., continuity), QSAs (i.e., doorways facing towards the other), spatial relationships (i.e., functional space of doorway partially overlaps with the range space of camera), or a conjunction of these. Queries take DSpace identifiers as arguments and respond with a true or fail based on the result of the query. 
-
-For example, a query to check if a desk, with an id \emph{desk12}, is facing towards a window, with id \emph{window15}, the following query is made:
-\begin{verbatim}
-   ?- facing(desk12, window15).
-\end{verbatim} 
-DSpace will respond with \emph{true} if the desk if facing towards the window and \emph{fail} if it is not facing towards the window. Additionally, queries can be combined via conjunction to build more complex queries. For example, an addition query can be added to the one above to also check that the desk is near the window as well. The following query is made:
-\begin{verbatim}
-   ?- facing(desk12, window15),
-      near(desk12, window15.
-\end{verbatim}
-DSpace will respond with \emph{true} is both are true and \emph{fail} if one or both fail.
-
-The remainder of this section will look at two use case examples. Each use case will show how a user can use the DSpace reasoner to valid the use case requirement and will show how the requirement is broken down in DSpace into lower level constraints that can be solved by the spatial constraint solvers.
-
-\subsection{A Private Room}
-In a particular apartment, the designer wants the bedroom to be private. Given the definition of privacy in this chapter, privacy entails that the bedroom is on the opposing side of the apartment from the main entrance, the bedroom's doorway does not face towards any other doorways, and the doorway is not visible from the main entrance.
-
-Using DSpace, the designer can check for privacy of a bedroom by querying the DSpace representation. The query is a Prolog statement that calls the privacy predicate with the bedroom's unique DSpace identifier. The statement will return true if the bedroom meets the constraint defined by privacy and will return fail if it does not. The floor plans in Figure \ref{room-privacy} show two apartments with a private and un-private bedroom. Given these two floor plans DSpace will validate the floor plan that is private based on the spatial characteristics of the design that define privacy. For example, given Figure \ref{fig:private-room-con} has a unique DSpace identifier of \emph{bedroom1} and Figure \ref{fig:private-room-incon} has a unique DSpace identifier of \emph{bedroom2} the privacy query for bedroom1 will respond with \emph{true} while the query for bedroom2 will respond with \emph{fail}: 
-\begin{verbatim}
-   ?- privacy(bedroom1).
-   true.
-   
-   ?- privacy(bedroom2).
-   fail.
-\end{verbatim}
-
-The constraints that define privacy for a room are broken down into three QSAs:
-\begin{verbatim}
-   opposing(main entrance, bedroom, apartment).
-   facing_away(doorway, doorways).
-   not_visible(main entrance, doorway).
-\end{verbatim}
-These three QSA constraints are in turn broken down into qualitative spatial relationships. For example, the opposing side relationship is broken down into SCC relationships for the architectural entities (main entrance, bedroom) point abstractions.
-\begin{verbatim}
-   SCC1(main entrance, apartment centroid, bedroom).
-   SCC2(main entrance, apartment centroid, bedroom).
-   SCC3(main entrance, apartment centroid, bedroom).
-\end{verbatim}
-These SCC relationships are grounded to the quantitative representation via qualification. The SCC constraints are solved for using the orientational constraint solver.
-
-\subsection{Sink / Doorway Artefact Interaction}
-In a particular bathroom there is a design requirement that there should be no artefactual interactions between bathroom entities to ensure proper circulation throughout the bathroom. This includes the requirement that the functional space of all sinks should not interfere with the functional space of a doorway. 
-
-TODO: figure for two bathrooms
-
-Using DSpace a designer can check that there are no artefactual interactions by querying the design representation. The query is a Prolog statement that check for the topological structures of the bathrooms artefactual extension. For example, Figure \ref{?} shows two example bathroom floor plans. Figure \ref{?} shows a bathroom design that is consisted per the requirement and Figure \ref{?} shows a bathroom design that is inconsistent per the requirement. Given these two designs and ids for the sink (\emph{sink55}), and door (\emph{door104}), the following query can be made to check for artefactual interaction:
-\begin{verbatim}
-   artefactual_interaction(sink55, door104).
-\end{verbatim}
-The query will return \emph{true} for Figure \ref{?} and will fail for Figure \ref{?}.
-
-The $artefactual\_interaction$ predicate is broken down into topological constraints that check for partially overlapping topological relationships between the artefactual extensions of the bathroom doorway and sink. The topological constraints are solved in the topological constraint solver. 
 
 
 
-\chapter{Museum Case Study}
+
+\chapter{Case Studies}
 This chapter is a case study that demonstrates the application of the DSpace reasoner to the design of an art museum. The purpose is twofold: first, to examine several design requirements of an art museum with regards to the spatial interpretation of the requirements; and second, to show how the museum design requirements can be represented and reasoned about in a computational framework, in order to detect design inconsistencies as per the design requirements.
 
 The remainder of the chapter is divided into three sections. The first section examines design requirements in art museums in three parts: the first part looks at requirements that influence museum visitors' behaviour. The second part looks at requirements for promoting exploration in the museum. The third part looks at the requirements of accessibility and security within the museum. The second section, looks at how these requirements can be interpreted spatially and represented in the DSpace reasoner. The third section tests the DSpace reasoner using sample museum floor plans that are both consistent and inconsistent per the design requirements for several art museums. The objective of this demonstration is to show that the DSpace reasoner can validate a design against its design requirements.
 
 
-\section{Case Study Scenario: an art museum}
+\section{Case Study: Museum}
 Museums are a place of public education, in which art, historical artefacts, and scientific exhibits are put on display for the public to view \cite{Falk}. While museums in general have many common threads in terms of their design requirements, this case study takes the approach of narrowing the study to that of an art museum. This focuses the discussion to specific real world examples and maintains the perspective that this is not an exhaustive study of museum design requirements, rather it's an investigation into the nature and interpretation, with respect to spatial properties / characteristics, of a set of design requirements. Additionally, the point is not to prove the validity of these requirements in an empirical sense; rather it is to show the process of representing and reasoning about design requirements in a formal computational framework.
 
 The art museum is a unique and fruitful choice for this case study because it provides a rich set of design properties that have been formally studied and reported \cite{Melton} \cite{Bitgood02} \cite{Falk}. Within museum studies, visitor behaviour has been one of the primary focuses, starting with experiments dating back to the 1930's. 
-
-
 
 \subsection{Museum Design Requirements}
 Pretend for a moment that you are an architect working on the initial design for a new modern art museum. During your first visit with the museum's curator you discuss several design requirements that are important for the new museum. Your discussion reveals that the curator wants the new art museum to adhere to the following requirements:
@@ -1016,31 +960,65 @@ Within a Gallery, rooms that are open promote more free-flowing exploration than
 \end{description}
 
 
-\subsection{Accessibility and Security}
-Museums should be accessible and easy to navigate. TBD - I have some ideas here but nothing concrete. Maybe you have some ideas that you can share with me. 
-\begin{description}
-\item[Requirement 16:] Museums should be accessible.
-\end{description}
-Museums should be secure.
-\begin{description}
-\item[Requirement 17:] The functional space of every gallery doorway should overlap with the range space of at least one security camera.
-\end{description}
+\section{Case Study: Ranch Style House}
+This section will look at how the DSpace reasoner can be used to validate a designer's conceptualizations against a design's quantitative representation, and shows how high level design requirements are broken down into lower level constraints that can be solved by the DSpace reasoner.
+
+DSpace is built in a CLP framework that allows a user to query an architectural design as represented in the multiple perspective design structure. Queries can be design requirements (i.e., a bedroom must be private), architectural concepts (i.e., continuity), QSAs (i.e., doorways facing towards the other), spatial relationships (i.e., functional space of doorway partially overlaps with the range space of camera), or a conjunction of these. Queries take DSpace identifiers as arguments and respond with a true or fail based on the result of the query. 
+
+For example, a query to check if a desk, with an id \emph{desk12}, is facing towards a window, with id \emph{window15}, the following query is made:
+\begin{verbatim}
+   ?- facing(desk12, window15).
+\end{verbatim} 
+DSpace will respond with \emph{true} if the desk if facing towards the window and \emph{fail} if it is not facing towards the window. Additionally, queries can be combined via conjunction to build more complex queries. For example, an addition query can be added to the one above to also check that the desk is near the window as well. The following query is made:
+\begin{verbatim}
+   ?- facing(desk12, window15),
+      near(desk12, window15.
+\end{verbatim}
+DSpace will respond with \emph{true} is both are true and \emph{fail} if one or both fail.
+
+The remainder of this section will look at two use case examples. Each use case will show how a user can use the DSpace reasoner to valid the use case requirement and will show how the requirement is broken down in DSpace into lower level constraints that can be solved by the spatial constraint solvers.
+
+\subsection{A Private Room}
+In a particular apartment, the designer wants the bedroom to be private. Given the definition of privacy in this chapter, privacy entails that the bedroom is on the opposing side of the apartment from the main entrance, the bedroom's doorway does not face towards any other doorways, and the doorway is not visible from the main entrance.
+
+Using DSpace, the designer can check for privacy of a bedroom by querying the DSpace representation. The query is a Prolog statement that calls the privacy predicate with the bedroom's unique DSpace identifier. The statement will return true if the bedroom meets the constraint defined by privacy and will return fail if it does not. The floor plans in Figure \ref{room-privacy} show two apartments with a private and un-private bedroom. Given these two floor plans DSpace will validate the floor plan that is private based on the spatial characteristics of the design that define privacy. For example, given Figure \ref{fig:private-room-con} has a unique DSpace identifier of \emph{bedroom1} and Figure \ref{fig:private-room-incon} has a unique DSpace identifier of \emph{bedroom2} the privacy query for bedroom1 will respond with \emph{true} while the query for bedroom2 will respond with \emph{fail}: 
+\begin{verbatim}
+   ?- privacy(bedroom1).
+   true.
+   
+   ?- privacy(bedroom2).
+   fail.
+\end{verbatim}
+
+The constraints that define privacy for a room are broken down into three QSAs:
+\begin{verbatim}
+   opposing(main entrance, bedroom, apartment).
+   facing_away(doorway, doorways).
+   not_visible(main entrance, doorway).
+\end{verbatim}
+These three QSA constraints are in turn broken down into qualitative spatial relationships. For example, the opposing side relationship is broken down into SCC relationships for the architectural entities (main entrance, bedroom) point abstractions.
+\begin{verbatim}
+   SCC1(main entrance, apartment centroid, bedroom).
+   SCC2(main entrance, apartment centroid, bedroom).
+   SCC3(main entrance, apartment centroid, bedroom).
+\end{verbatim}
+These SCC relationships are grounded to the quantitative representation via qualification. The SCC constraints are solved for using the orientational constraint solver.
+
+\subsection{Sink / Doorway Artefact Interaction}
+In a particular bathroom there is a design requirement that there should be no artefactual interactions between bathroom entities to ensure proper circulation throughout the bathroom. This includes the requirement that the functional space of all sinks should not interfere with the functional space of a doorway. 
+
+TODO: figure for two bathrooms
+
+Using DSpace a designer can check that there are no artefactual interactions by querying the design representation. The query is a Prolog statement that check for the topological structures of the bathrooms artefactual extension. For example, Figure \ref{?} shows two example bathroom floor plans. Figure \ref{?} shows a bathroom design that is consisted per the requirement and Figure \ref{?} shows a bathroom design that is inconsistent per the requirement. Given these two designs and ids for the sink (\emph{sink55}), and door (\emph{door104}), the following query can be made to check for artefactual interaction:
+\begin{verbatim}
+   artefactual_interaction(sink55, door104).
+\end{verbatim}
+The query will return \emph{true} for Figure \ref{?} and will fail for Figure \ref{?}.
+
+The $artefactual\_interaction$ predicate is broken down into topological constraints that check for partially overlapping topological relationships between the artefactual extensions of the bathroom doorway and sink. The topological constraints are solved in the topological constraint solver. 
 
 
-\section{Representation and Reasoning for Museums of Art in DSpace} 
 
-
-\subsection{Representation}
-
-\subsubsection{Spatial Interpretation of a Design Requirement}
-
-\subsubsection{Using the Building Blocks from DSpace}
-
-\subsection{Case Study Tests}
-
-\subsubsection{ArchiCAD / IFC}
-
-\subsubsection{Detecting Inconsistent and Consistent Designs}
 
 \chapter{Evaluation}
 
