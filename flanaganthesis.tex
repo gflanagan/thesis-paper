@@ -232,6 +232,13 @@ The design multi-hierarchy developed in this section is built on the mapping of 
 Figure \ref{hierarchy} shows the design multi-hierarchy used in the DSpace reasoner. Conceptual design requirements are built from the architectural concepts and qualitative spatial attributes found in architecture (QSA) of the hightest level of the multi-hierarchy. Within the multi-hierarchy, architectural concepts are built using QSA, but are not limited to only these, spatial relationships of orientation, topology, and distance can be used, as well as other geometric primitives such as area, angle, and length measurements. QSA are defined by the qualitative spatial relationships of orientation, topology, and distance. These qualitative spatial relationships emerge from the quantitative, physical, and artefactual geometries of the the design. TBD: physical structures define the way the architecture is experiences and influences the functional / performance of the design from a conceptual design perspective.
 
 \section{DSpace: Design and Implementation}
+\begin{figure}[H]
+\centering
+\includegraphics[width=130mm]{design}
+\caption{DSpace Design}
+\label{dspace design}
+\end{figure}
+
 
 \subsection{Factbase}
 Prolog facts make up a factbase that stores a table of architectural entities with their architectural types (e.g., wall, door, window, desk, etc.). Each architectural entity in the design has a single entry in the factbase. The factbase is instantiated automatically during the import process from a CAAD based representation. This factbase will be used throughout the DSpace reasoner to  verify an entity exists in the design and links it to its architectural type. The following Prolog code shows two instantiated facts (predicates) for a doorway, and a window. 
@@ -495,12 +502,12 @@ The distance constraint solver solves minimum distance constraints and uses the 
 The distance constraint solver is written using CHR that break down the constraints until they can be solved for. This process involves finding the located on each object that is the closest to the other, so that the minimum distance can be calculated between the two. 
 
 
-\chapter{Conceptual Design Requirements}
-This chapter presents the conceptual design reasoning framework of the DSpace reasoner. It shows how architectural concepts and qualities can be spatially interpreted using formal qualitative spatial calculi and shows how they can be represented and reasoned with to validate conceptual design requirements in the CLP framework of DSpace. 
+\chapter{Conceptual Requirements Reasoner}
+This chapter presents the conceptual requirements reasoning framework of the DSpace reasoner. It shows how architectural concepts and qualitative spatial attributes found in architecture (QSA) can be spatially interpreted using formal qualitative spatial calculi and shows how they can be represented and reasoned with to validate conceptual design requirements in the CLP framework of DSpace. 
 
-Conceptual design requirements were ascertained from literature on architectural design \cite{tbd}, museum research on visitor behavior \cite{tbd}, and building regulations and codes \cite{tbd}. Their definitions are explicit characterizations of architectural concepts and spatial design qualities that are based on heuristic architectural knowledge and common sense notions of spatial relationships. The objective is not to be an exhaustive discussion of these requirements or a validation for their interpretation in terms of a spatial or design perspective; rather it is to demonstrate how each can be represented and reasoned with in a computational framework to validate conceptual design requirements against the quantitative structures and artifacts of a design. 
+Conceptual design requirements, architectural concepts, and QSA were ascertained from literature on architectural design \cite{tbd}, museum research on visitor behavior \cite{tbd}, and building regulations and codes \cite{tbd}. Their definitions are explicit characterizations of architectural concepts and spatial design qualities that are based on heuristic architectural knowledge and common sense notions of spatial relationships. The objective is not to be an exhaustive discussion of these requirements or a validation for their interpretation in terms of a spatial or design perspective; rather it is to demonstrate how each can be represented and reasoned with in the DSpace CLP framework to validate conceptual design requirements against the quantitative form of a design. 
 
-Within the DSpace CLP framework, the conceptual design reasoner works over the design representation structure and spatial reasoners to validate conceptual design requirements. talk about how to build architectural concepts and qualitites in DSpace.... 
+In the DSpace CLP framework, QSA and architectural concepts utilize the design representation structure, via the spatial abstraction layer, and the spatial reasoner to validate conceptual design requirements. QSA and architectural concepts are implemented as Prolog rules. Each rule is implemented a conjunction of predicates that spatially define the architectural concept or QSA from a qualitative perspective. Conceptual design requirements can be specified using architectural concepts, QSA, and qualitative spatial relationships. Validating a design requirement happens by making a Prolog query to the conceptual requirement reasoner that will return \emph{true} if the design is consistent per the requirement or \emph{fail} if the design is inconsistent per the requirement. 
 
 The chapter is structured as follows: Section 1 presents a set of qualitative spatial attributes found in architecture, shows how each can be interpreted using formal qualitative spatial calculi, and represented formally within DSpace reasoner. Section 2 presents a set of architectural concepts that are built using the spatial qualities presented in the Section 1 and shows how they can be used to reason about design requirements within the DSpace reasoner.
 
