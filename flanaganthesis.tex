@@ -837,25 +837,33 @@ TBD: figure of stair landing
 \end{verbatim}  
 
 \section{Conceptual Requirement Validation}
-The conceptual requirement reasoner (CCR) validates design requirements by querying an architectural design using predicate calls to architectural concepts and QSA. Requirement queries will return \emph{true} if the architectural design is consistent, or \emph{fail} if the design is inconsistent per the design requirement. A design is considered consistent if the design's spatial characteristics, as represented in its physical and functional geometries, matches the definition of the designs requirement specification. For example, a design is consistent per a design requirement of a window and doorway facing towards each other, if the spatial characteristic of the design, with regards to the window and doorway, match the spatial specification of a doorway and window the facing towards each other.    
+The conceptual requirement reasoner (CCR) validates design requirements by querying an architectural design using predicate calls to architectural concepts and QSA. Requirement queries will return \emph{true} if the architectural design is consistent, or \emph{fail} if the design is inconsistent per the design requirement. A design is considered consistent if the design's spatial characteristics, as represented in its physical and functional geometries, matches the definition of the designs requirement specification. For example, a design is consistent per a design requirement of a window and doorway facing towards each other, if the spatial characteristic of the design, with regards to the window and doorway, match the spatial specification of facing towards each other.    
 
-Given the example scenario above, a doorway is dsID \emph{door543}, and a window with dsID \emph{window15}, the following query would be made to the CRR to validate the requirement.
+Given the example scenario above, a doorway with dsID \emph{door543}, and a window with dsID \emph{window15}, the following query is made to the CRR to validate the requirement.
 \begin{verbatim}
    ?- facing(door543, window15).
-\end{verbatim} 
-Queries can be combined via conjunction to build more complex queries. For example, an addition query can be added to the one above to also check that the desk is near the window as well. The following query is made:
+\end{verbatim}
+Queries to architectural concepts and QSA can be combined to build requirements. For example, a design requirement for a doorway and window being near each other can be combined with the previous requirement to build a new requirement. This requirement can be queried directly or implemented as a new Prolog rule. 
 \begin{verbatim}
-   ?- facing(desk12, window15),
-      near(desk12, window15.
+   ?- facing(door543, window15),
+      near(door15, window15).
+      
+    facing_and_near(Id1, Id1) :-
+            near(Id1, Id2),
+            facing(Id1, Id2).
+\end{verbatim}
+Note that the direct query is specific to \emph{door543} and \emph{window15}, while the rule allows the user to input any \emph{dsID}'s into the query.
+\begin{verbatim}
+    ?- facing_and_near(desk52, door6).
 \end{verbatim}
 
-
-Practical example of privacy .....
-Given the scenario above the opposing-side relationship can be validated in the DSpace requirements reasoner. For this example, the main entrance has a dsId of \emph{door3}, the bedroom has a dsID of \emph{room3} and the building has a dsID of \emph{building1}. The opposing-side relationship can be validated using the following query to the requirement reasoner. The query will return true if the entities are on the opposing-side and fails if they are not. In this case they are on opposing sides so the reasoner responds with a true.
+Consider the design requirement for a bedroom being private. This requirement can be validated for a design by querying the privacy predicate, as demonstrated above. However, this definition of privacy might not be enough for a particular user. In DSpace, the user can easily extend the definition of privacy by building new Prolog rules that join additional architectural concepts, QSA, and spatial qualities to the existing definition. If the user wants the definition of privacy to include an additional requirement that the bedroom is far away from the living room, the user can construct a new rule using joining the privacy predicate with the proximity predicate. The following is the new predicate for privacy:
 \begin{verbatim}
-    ?- opposing_side(door3, room3, building1).
-    true.
+    privacy_new(IdRoom, IdLivingRoom) :-
+            privacy(IdRoom),
+            far(IdRoom, IdLivingRoom).
 \end{verbatim}
+
 
 
 \chapter{Case Studies}
