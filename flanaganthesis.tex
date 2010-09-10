@@ -505,11 +505,11 @@ The distance constraint solver is written using CHR that break down the constrai
 \chapter{Conceptual Requirements Reasoner}
 This chapter presents the conceptual requirements reasoning framework of the DSpace reasoner. It shows how architectural concepts and qualitative spatial attributes found in architecture (QSA) can be spatially interpreted using formal qualitative spatial calculi and shows how they can be represented and reasoned with to validate conceptual design requirements in the CLP framework of DSpace. 
 
-Conceptual design requirements, architectural concepts, and QSA were ascertained from literature on architectural design \cite{tbd}, museum research on visitor behavior \cite{tbd}, and building regulations and codes \cite{tbd}. Their definitions are explicit characterizations of architectural concepts and spatial design qualities that are based on heuristic architectural knowledge and common sense notions of spatial relationships. The objective is not to be an exhaustive discussion of these requirements or a validation for their interpretation in terms of a spatial or design perspective; rather it is to demonstrate how each can be represented and reasoned with in the DSpace CLP framework to validate conceptual design requirements against the quantitative form of a design. 
+Conceptual design requirements were ascertained from literature on architectural design \cite{tbd}, museum research on visitor behavior \cite{tbd}, and building regulations and codes \cite{tbd}. Their definitions are explicit characterizations of architectural concepts and spatial design qualities that are based on heuristic architectural knowledge and common sense notions of spatial relationships. The objective is not to be an exhaustive discussion of these requirements or a validation for their interpretation in terms of a spatial or design perspective; rather it is to demonstrate how each can be represented and reasoned with in the DSpace CLP framework to validate conceptual design requirements against the quantitative form of a design. 
 
-In the DSpace CLP framework, QSA and architectural concepts utilize the design representation structure, via the spatial abstraction layer, and the spatial reasoner to validate conceptual design requirements. QSA and architectural concepts are implemented as Prolog rules. Each rule is implemented a conjunction of predicates that spatially define the architectural concept or QSA from a qualitative perspective. Conceptual design requirements can be specified using architectural concepts, QSA, and qualitative spatial relationships. Validating a design requirement happens by making a Prolog query to the conceptual requirement reasoner that will return \emph{true} if the design is consistent per the requirement or \emph{fail} if the design is inconsistent per the requirement. 
+In the DSpace CLP framework, QSA and architectural concepts utilize the DSpace design representation structure, via the spatial abstraction layer, and the DSpace spatial reasoner to validate conceptual design requirements. QSA and architectural concepts are implemented as Prolog rules. Each rule is implemented a conjunction of predicates that spatially define the architectural concept or QSA from a qualitative perspective. Conceptual design requirements can be specified using architectural concepts, QSA, and qualitative spatial relationships. Validating a design requirement happens by making a Prolog query to the conceptual requirement reasoner that will return \emph{true} if the design is consistent per the requirement or \emph{fail} if the design is inconsistent per the requirement. 
 
-The chapter is structured as follows: Section 1 presents a set of qualitative spatial attributes found in architecture, shows how each can be interpreted using formal qualitative spatial calculi, and represented formally within DSpace reasoner. Section 2 presents a set of architectural concepts that are built using the spatial qualities presented in the Section 1 and shows how they can be used to reason about design requirements within the DSpace reasoner.
+The chapter is structured as follows: Section 1 presents a set of qualitative spatial attributes found in architecture, shows how each can be interpreted using formal qualitative spatial calculi, and represented formally within DSpace reasoner. Section 2 presents a set of architectural concepts that are built using the spatial qualities presented in the Section 1 and shows how they can be used to reason about design requirements within the DSpace reasoner. Section 3 shows how conceptual design requirements can be validated in using the requirement reasoner.
 
 
 \section{Qualitative Spatial Attributes found in Architecture}
@@ -538,10 +538,7 @@ The positioning attribute is interpreted spatially, in DSpace, using the Single 
 
 Under this scheme, two points are defined as being on opposing sides of a space if they have an SCC relationship of 0, 1 or 7, as related by the centroid of the space. Conversely, a pair of points are defined as being on the same side of a space if they have an SCC relationship of 3, 4 or 5, as related by the centroid of the  space. A point is defined as being on the left side of a space from another point if it has an SCC relationship of 5, 6, or 7, and is on the right side if it has an SCC relationship of 1, 2, or 3. Using the union set operation these relationships can be combined to form the opposing-left/right, and same-left/right relationships.
 
-Th positioning relationships are represented in the DSpace CLP framework as Prolog rules. There is a single rule for each relationships: opposing side, same-side, left-side, and right-side. 
-
-
-The head of each rule takes three arguments, the first two for the architectural objects being related and one for the context space. The body of the rule ....  The following is Prolog code for the positioning rules.
+Th positioning relationships are represented in the DSpace CLP framework as Prolog rules. There is a single rule for each relationships: opposing side, same-side, left-side, and right-side. The head of each rule takes three arguments, the first two for the architectural objects being related and one for the context space. The body of the rule ....  The following is Prolog code for the positioning rules.
 \begin{verbatim}
    opposing_side(Obj1, Obj2, Context) :- 
            centroid(Context, Centroid),
@@ -566,12 +563,6 @@ The positioning attribute can be used to check if architectural structures, arte
  \caption{Bedroom Privacy}
 \label{privacy}
 \end{figure}
-
-Given the scenario above the opposing-side relationship can be validated in the DSpace reasoner. For this example, the main entrance has a \emph{dsId} of \emph{door3}, the bedroom has a \emph{dsID} of \emph{room3} and the building has a \emph{dsID} of \emph{building1}. The opposing-side relationship can be validated using the following query. The query will return true if the entities are on the opposing-side and fails if they are not. In this case they are on opposing sides so the reasoner responds with a true.
-\begin{verbatim}
-    ?- opposing_side(door3, room3, building1).
-    true.
-\end{verbatim}
 
 
 
@@ -845,8 +836,26 @@ TBD: figure of stair landing
             not_overlapping(Artefact_stair, Physical)
 \end{verbatim}  
 
+\section{Conceptual Requirement Validation}
+The conceptual requirement reasoner (CCR) validates design requirements by querying an architectural design using predicate calls to architectural concepts and QSA. Requirement queries will return \emph{true} if the architectural design is consistent, or \emph{fail} if the design is inconsistent per the design requirement. A design is considered consistent if the design's spatial characteristics, as represented in its physical and functional geometries, matches the definition of the designs requirement specification. For example, a design is consistent per a design requirement of a window and doorway facing towards each other, if the spatial characteristic of the design, with regards to the window and doorway, match the spatial specification of a doorway and window the facing towards each other.    
+
+Given the example scenario above, a doorway is dsID \emph{door543}, and a window with dsID \emph{window15}, the following query would be made to the CRR to validate the requirement.
+\begin{verbatim}
+   ?- facing(door543, window15).
+\end{verbatim} 
+Queries can be combined via conjunction to build more complex queries. For example, an addition query can be added to the one above to also check that the desk is near the window as well. The following query is made:
+\begin{verbatim}
+   ?- facing(desk12, window15),
+      near(desk12, window15.
+\end{verbatim}
 
 
+Practical example of privacy .....
+Given the scenario above the opposing-side relationship can be validated in the DSpace requirements reasoner. For this example, the main entrance has a dsId of \emph{door3}, the bedroom has a dsID of \emph{room3} and the building has a dsID of \emph{building1}. The opposing-side relationship can be validated using the following query to the requirement reasoner. The query will return true if the entities are on the opposing-side and fails if they are not. In this case they are on opposing sides so the reasoner responds with a true.
+\begin{verbatim}
+    ?- opposing_side(door3, room3, building1).
+    true.
+\end{verbatim}
 
 
 \chapter{Case Studies}
@@ -992,22 +1001,7 @@ Within a Gallery, rooms that are open promote more free-flowing exploration than
 
 
 \section{Case Study: Ranch Style House}
-This section will look at how the DSpace reasoner can be used to validate a designer's conceptualizations against a design's quantitative representation, and shows how high level design requirements are broken down into lower level constraints that can be solved by the DSpace reasoner.
 
-DSpace is built in a CLP framework that allows a user to query an architectural design as represented in the multiple perspective design structure. Queries can be design requirements (i.e., a bedroom must be private), architectural concepts (i.e., continuity), QSAs (i.e., doorways facing towards the other), spatial relationships (i.e., functional space of doorway partially overlaps with the range space of camera), or a conjunction of these. Queries take DSpace identifiers as arguments and respond with a true or fail based on the result of the query. 
-
-For example, a query to check if a desk, with an id \emph{desk12}, is facing towards a window, with id \emph{window15}, the following query is made:
-\begin{verbatim}
-   ?- facing(desk12, window15).
-\end{verbatim} 
-DSpace will respond with \emph{true} if the desk if facing towards the window and \emph{fail} if it is not facing towards the window. Additionally, queries can be combined via conjunction to build more complex queries. For example, an addition query can be added to the one above to also check that the desk is near the window as well. The following query is made:
-\begin{verbatim}
-   ?- facing(desk12, window15),
-      near(desk12, window15.
-\end{verbatim}
-DSpace will respond with \emph{true} is both are true and \emph{fail} if one or both fail.
-
-The remainder of this section will look at two use case examples. Each use case will show how a user can use the DSpace reasoner to valid the use case requirement and will show how the requirement is broken down in DSpace into lower level constraints that can be solved by the spatial constraint solvers.
 
 \subsection{A Private Room}
 In a particular apartment, the designer wants the bedroom to be private. Given the definition of privacy in this chapter, privacy entails that the bedroom is on the opposing side of the apartment from the main entrance, the bedroom's doorway does not face towards any other doorways, and the doorway is not visible from the main entrance.
