@@ -229,22 +229,29 @@ The design multi-hierarchy developed in this section is built on the mapping of 
 Figure \ref{hierarchy} shows the design multi-hierarchy used in the DSpace reasoner. Conceptual design requirements are built from the architectural concepts and qualitative spatial attributes found in architecture (QSA) of the hightest level of the multi-hierarchy. Within the multi-hierarchy, architectural concepts are built using QSA, but are not limited to only these, spatial relationships of orientation, topology, and distance can be used, as well as other geometric primitives such as area, angle, and length measurements. QSA are defined by the qualitative spatial relationships of orientation, topology, and distance. These qualitative spatial relationships emerge from the quantitative, physical, and artefactual geometries of the the design. TBD: physical structures define the way the architecture is experiences and influences the functional / performance of the design from a conceptual design perspective.
 
 \section{DSpace: Design and Implementation}
+\begin{figure}[H]
+\centering
+\includegraphics[width=130mm]{design}
+\caption{DSpace Design}
+\label{dspace design}
+\end{figure}
+
 
 \subsection{Factbase}
-Prolog facts make up a factbase that stores a table of architectural entities to their architectural types (e.g., wall, door, window, desk, etc.). Each architectural entity in the design has a single entry in the factbase. The factbase is instantiated automatically during the import process from the CAAD system. This factbase will be used throughout the DSpace reasoner to  verify an entity exists in the design and links it to its architectural type. The following Prolog code shows two instantiated facts (predicates) for a doorway, and a window. 
+Prolog facts make up a factbase that stores a table of architectural entities with their architectural types (e.g., wall, door, window, desk, etc.). Each architectural entity in the design has a single entry in the factbase. The factbase is instantiated automatically during the import process from a CAAD based representation. This factbase will be used throughout the DSpace reasoner to  verify an entity exists in the design and links it to its architectural type. The following Prolog code shows two instantiated facts (predicates) for a doorway, and a window. 
 \begin{verbatim}
    architectural_entity(door1, dSDoor).
    architectural_entity(wall4, dsWindow).
 \end{verbatim}
 
 
-\chapter{Design Computing in a Constraint Logic Programming Framework}
-This chapter presents the computational framework of the DSpace reasoner. It examines how designs are modeled in a multiple perspective representation structure, and reason about using qualitative spatial reasoning and representation techniques. The DSpace framework is written in the declarative programming semantics of Constraint Logic Programming (CLP) using Prolog, CLP over the Reals (CLP($\mathbb{R}$)), and Constraint Handling Rules (CHR).  
+\chapter{Design Representation and Spatial Reasoning}
+This chapter presents the architectural design representation and spatial reasoning framework of the DSpace reasoner. It examines how architectural designs are modeled in a multiple perspective representation structure, and how architectural designs are reasoned about using qualitative spatial representation and reasoning techniques. The DSpace framework is written in the declarative programming semantics of Constraint Logic Programming (CLP) using Prolog, CLP over the Reals (CLP($\mathbb{R}$)), and Constraint Handling Rules (CHR).  
 
-The chapter is organized into two sections. The first section looks at the multiple perspective representation structure and how it's implemented in the DSpace CLP framework. The second section looks at the spatial reasoner and how it works directly over the design representation to reason about designs from a qualitative spatial perspective.
+The chapter is organized into two sections. The first section looks at how architectural design are represented in DSpace and how this representation model is implemented in the DSpace CLP framework. The second section looks at the DSpace spatial reasoner and how it is implemented as a series of spatial constraint solvers in the DSpace CLP framework.
 
 \section{Design Representation in DSpace}
-In DSpace an architectural design is modeled in a multiple perspective representation structure that incorporate aspects of the design that are quantitative, functional, and qualitative. This design representation goes beyond what is represented in CAAD programs by incorporating design features that are not based on the design's quantitative design representation. It includes functional aspects of the design that pertain to the performance and functional features of the design, as well as qualitative spatial aspects that pertain to experiential qualities of the design. The objective of this representation structure is to provide the DSpace reasoner with mechanisms that connect an expert's high level design conceptualizations to the low level geometric quantities of a CAAD based system.   
+In DSpace an architectural design is modeled in a multiple perspective representation structure that incorporate aspects of the design that are quantitative, functional, and abstract. This design representation goes beyond what is represented in CAAD programs by incorporating design features that are not based on the design's quantitative design representation. It includes functional aspects of the design that pertain to the performance and functional features of the design, as well as abstract spatial aspects that pertain to the qualitative feature space of the design. The objective of this representation structure is to provide the DSpace reasoner with mechanisms that connect an expert's high level design conceptualizations to the low level geometric quantities of a CAAD based system.   
 
 \begin{figure}[H]
 \centering
@@ -253,7 +260,7 @@ In DSpace an architectural design is modeled in a multiple perspective represent
 \label{mutli-perspective}
 \end{figure}
 
-Within the CLP framework of DSpace, the multiple perspective model is represented as Prolog rules. Prolog rules are used to bind architectural entities (via a unique identifier) to their quantitative and functional representations. Transformation rules are used to abstract quantitative geometries into abstract spatial objects. TODO: explain figure. 
+Within the CLP framework of DSpace, the multiple perspective model is implemented as a set of Prolog rules. These rules bind architectural entities, via their DSpace identifier (\emph{dsID}), to their multiple perspective representations. Combining these rules for each entity creates a rulebase that stores the multiple perspective representation in the DSpace CLP framework. This rulebase can be queried to retrieve a specific geometry given a \emph{dsID}. Figure \ref{clp-design} shows the implementation design for the multiple representation structure in the DSpace CLP framework. Notice that all rules are accessed via the factbase, which stores \emph{dsID}'s and ensures that an entity exists before the rulebase is queried. Additionally, all representations are defined over the same set of spatial primitives. This uniformity will be an important aspect of the spatial reasoner in the next section. 
 
 \begin{figure}[H]
 \centering
@@ -262,23 +269,21 @@ Within the CLP framework of DSpace, the multiple perspective model is represente
 \label{clp-design}
 \end{figure}
 
-The remainder of this section is structured as follows. The first subsection looks at the quantitative design representation. The second section looks at the functional design perspective. The final subsection looks at the qualitative design perspective.
-
+The remainder of this section looks at the three design representation perspective individually: quantitative, functional, abstract.
 
 \subsection{Quantitative Perspective}
-The quantitative representation of the design models the structural form of the design in terms of its precise physical geometric features (i.e., layout, shape, location). Architectural entities, such as walls, windows, doorways, columns, and rooms, are represented as geometric primitives of polygons, lines and points that correspond to the physical dimensions (length, width, shape) of the entities. The quantitative model represents the design perspective that is similar to CAAD programs.
+The quantitative representation of the design models the structural form of the design in terms of its precise physical geometric features (i.e., layout, shape, location). Architectural entities, such as walls, windows, doorways, columns, and rooms, are represented as geometric primitives of polygons, lines and points that correspond to the physical dimensions (length, width, shape) of the entities. The quantitative model of DSpace represents the design perspective that is similar to CAAD programs.
 
-Within the DSpace CLP framework, a single Prolog rule binds an entity to its quantitative geometric representation. The quantitative geometry is defined by geometric primitives of polygons, lines, and points. The following Prolog rule defines the quantitative geometry for a doorway with id \emph{door1}. The first argument is an entity id and the second is a variable that will be instantiated with the quantitative geometric representation. The $spatial\_primitive$ predicate in the body of the rule takes the quantitative point data that defines the entity and returns an instantiated spatial primitive object (polygon, line, point) in the Geometry variable.
+Within the DSpace CLP framework, the quantitative geometry is defined by geometric primitives of polygons, lines, and points. These primitives are defined by Prolog rules that consume quantitative point data and return an instantiated spatial primitive. The following Prolog rules shows an example of a quantitative rule definition for an entity with \emph{dsID window445}. This rule will be stored in the DSpace rulebase. 
 \begin{verbatim}
-    quantitative_geometry(door1, Geometry) :-
-           spatial_primitive(Geometry, [(1,1),(3,5),(4,5),(2,2)]).
+    quantitative_geometry(window445, Geometry) :-
+            spatial_primitive(Geometry, [(1,1),(3,5),(4,5),(2,2)]).
 \end{verbatim}
-
-The quantitative rulebase can be queried to retrieve specific geometries. For example, to get the quantitative geometry for \emph{door1} the following query is made:
+Given an entity and its \emph{dsID}, a query to the DSpace rulebase will return an instantiated variable with the entity's quantitative geometry.  
+If the following query is made, the quantitative geometry of \emph{window445} will be instantiated in the \emph{Geometry} variable.
 \begin{verbatim}
-   quantitative_geometry(door1, Geometry).
+    quantitative_geometry(window445, Geometry).
 \end{verbatim} 
-\emph{Door1}'s quantitative geometry is now stored in the Geometry variable.
 
 
 \subsection{Functional Perspective}
@@ -310,30 +315,37 @@ The range space pertains to a region of space that encompass the range of a sens
 
 Artefactual extensions directly affect how well a design functions. For example, a sink in a bathroom has a functional space, the space a person occupies while washing his/her hands at the sink. If this space interferes with (i.e., topologically overlapping) the functional and/or physical space of a doorway, this will cause a circulation problem when both the doorway and sink are simultaneously being operated, i.e., a collision between the person washing his/her hands and the doorway itself or the person operating the doorway. In this example, the functional aspects of the bathrooms design with regard to the mitigation of circulation problems is directly influenced by the spatial configuration of the non-physical artefactual extensions of the design. 
 
-Within the DSpace CLP framework, Prolog rules are used to bind an entity to its artefactual geometries. There is a single Prolog rule for each artefactual type: functional, operational, and range. An entity may have zero or more artefactual geometries. For example, a doorway has a functional and operational space but does not have a range space. Likewise, a column has no artefactual extensions. 
-
-The following Prolog rules define the artefactual geometries for a doorways with id \emph{door1}. There is a single rule for each perspective. Each rule takes two arguments, an id and variable that will be instantiated with the geometry. 
+Within the DSpace CLP framework, artefactual geometries are defined using the same spatial primitives as the quantitative geometries. The main difference between the two is that there are multiple rules, one for each artefactual type: functional, operational, and range. An entity may have zero or more artefactual geometries. For example, a doorway in general has a functional and operational representation but does not have one for range representation, while a column has no artefactual representations. The following Prolog rules show and example of a rule definition for the functional and operational representations for a doorway with \emph{dsID} of \emph{door55}. 
 \begin{verbatim}      
-   functional_space(door1, Geometry) :-
-           spatial_primitive(Geometry, polygon(PtList)).
+    functional_geometry(door55, Geometry) :-
+            spatial_primitive(Geometry, polygon(PtList)).
            
-   operational_space(door1, Geometry) :-
-           spatial_primitive(Geometry, polygon(PtList)).
+    operational_geometry(door55, Geometry) :-
+            spatial_primitive(Geometry, polygon(PtList)).
 \end{verbatim}
-
-The artefactual rulebase can be queried to retrieve a artefactual geometry. For example, to get the functional geometry for a \emph{door1} the following query is made:
+Given an entity and its dsID, a query to the DSpace rulebase will return an instantiated variable with the entity’s artefactual geometry. Which geometry is returned is based on the rule that is queried. If the following functional representation query is made, the functional geometry of \emph{door55} will be instantiated in the FuncGeometry variable.
 \begin{verbatim}
-   functional_geometry(door1, FunctionalGeometry).
+   functional_geometry(door55, FuncGeometry).
 \end{verbatim}
-\emph{Door1}'s functional geometry is now stored in the FunctionalGeometry variable. Similar queries are made to retrieve the operational and range space geometries.
 
-\subsection{Qualitative Perspective}
+
+\subsection{Abstract Perspective}
 In DSpace architectural entities have spatially abstracted representations. This allows DSpace to reason about a design from a qualitative level of abstraction with regards to its spatial characteristics of topology, orientation and distance. This type of qualitative spatial reasoning reasons over the abstract feature space of the design using abstract spatial objects of points, directed points, and convex hulls. 
 
-Architectural entities are not directly modeled, as they are in the quantitative representation, as abstract spatial objects. Abstract spatial objects are generated by transformation rules that abstract the quantitative geometries of the architectural entities. The process of spatially abstracting an architectural entity depends on the spatial characteristics of the entity's structural form, and an interpretation of the intrinsic nature of an entity within an architectural / design context. For example, the abstracted representation of a doorway as a directed point is defined not only by its physical form but also by the interpretation of the doorway's intrinsic direction. 
+Architectural entities are not directly modeled as abstract spatial objects, as they are in the other representations. Abstract spatial objects are generated by transformation rules that abstract the quantitative geometries of the architectural entities. The process of spatially abstracting an architectural entity depends on the spatial characteristics of the entity's structural form, and an interpretation of the intrinsic nature of an entity within an architectural / design context. For example, the abstracted representation of a doorway as a directed point is defined not only by its physical form but also by the interpretation of the doorway's intrinsic direction. 
 
-Within the DSpace CLP framework, Prolog rules transform the quantitative geometries into spatially abstracted objects. These transformations depend on the architectural entity type, the abstraction type (point, directed point, or convex hull), and sometimes a contextual identifier (direction of door into or out of a specific room). The following transformation rules are based on the interpretation of the spatial abstraction of architectural entities in the previous section.
+Within the DSpace CLP framework, Prolog rules transform quantitative geometries into spatially abstracted objects (i.e., spatial abstraction). Spatially abstracting an architectural entity depends on the entity type, the spatial abstraction type (point, directed point, or convex hull) and sometimes a contextual identifier (direction of a doorway into or out of a specific room). Given these dependencies, spatially abstraction rules geometrically transform the quantitative geometries into abstract spatial objects. 
 
+Unlike the quantitative and functional representations, the abstract representation is not stored in the rulebase. Rather, spatial abstraction rules function over the quantitative and functional rulebase. For example, the spatial abstraction rule for a doorway into a point abstraction requires the point abstraction rule to query the quantitative rulebase to retrieve the doorways quantitative geometry. The following spatial abstraction rule is for a doorway point abstraction. Note that the rule is based on the interpretation of a doorway point abstraction as the centroid of its quantitative geometry (see Appendix A.1).   
+\begin{verbatim}
+    point_abstraction(door55, PtAbs) :-
+            quantitative_geometry(door55, Quant),
+            centroid(Quant, PtAbs).
+\end{verbatim}
+Given an entity and its dsID, a query to the DSpace spatial abstraction rule will return an instantiated variable with the entity's spatially abstracted geometry. If the following query to the point abstraction rule is made for a doorway with \emph{dsID} of \emph{door55}, then the point abstraction geometry of \emph{door55} will be instantiated in the PtAbs variable.
+\begin{verbatim}
+    point_abstraction(door55, PtAbs).
+\end{verbatim}
 
 
 \section{Spatial Reasoning in DSpace}
@@ -372,8 +384,8 @@ An object \emph{A} has a partially overlapping relationship with an object \emph
 
 An object \emph{A} has a disconnected relationship with an object \emph{B} if \emph{A} does not intersect with \emph{B}, there are no points in \emph{A} that are inside \emph{B}, and there are no points in \emph{B} that are inside \emph{A}. The disconnected relationship is qualified by checking for line segment intersection and convex hull / point containment. If there are no line segment intersections and no convex hull / point containment relationships, then two objects are disconnected.  
 
-\subsubsection{Constraint Solver: Topology}
-The topological constraint solver qualifies topological relationships over convex hull objects. Its implementation extends Sindalog's \ref{Sindalog} topological constraint solver by integrating topological constraints over convex hulls. It is written using CHR that simplify and propagate topological constraints into geometric constraints of line segment intersection and convex hull / point containment. Once a constraint is in a simplified form, i.e., a line intersection or convex hull / point containment constraint, it is solved and returns true or false based on the outcome of the solution.   
+\subsubsection{Spatial Constraint Solver: Topology}
+The topological constraint solver qualifies topological relationships over convex hull objects. Its implementation extends Sindalog's \ref{Sindalog} topological constraint solver by integrating topological constraints over convex hulls. It is written using CHR that simplify and propagate topological constraints into solvable geometric constraints of line segment intersection and convex hull / point containment. Once a constraint is in a solvable form, in this case a line intersection or convex hull / point containment constraint, it is solved and returns true or false based on the outcome of the solution. The topological constraint solver is based on successively breaking down a spatial object (convex hull) or spatial primitive (line, point) until solvable geometric constraints can be checked.
 
 For example, qualification for the partially overlapping topological relationship requires simplifying the overlapping constraint into line segment intersection constraints between the line segments of the convex hulls. The overlapping constraint is solved when at least one line intersection constraint is solved to true or when there are no more line intersection constraints left in the constraint store. In the former case the constraint returns true and in the latter case returns a failure. 
 
@@ -383,22 +395,36 @@ A top level constraint recursively breaks down a convex hull into its line segme
            intersection_segment_segment((Pt1, Pt2), (Pt3, Pt4)),
            intersection_segment_hull(Pt1, Pt2, [Pt4|PS]).
 \end{verbatim}
+The first constraint \emph{intersection\_segement\_segmenet} is propagated into the constraint store and will be solved when all points in its arguments are fully instantiated. The second constraint is a recursive call that will propagate the \emph{intersection\_segement\_segmenet} constraint for the entire convex hull. 
 
-The qualification for the other topological relationships are similar to the partially overlapping constraint presented here, but in addition to the line intersection constraint some use the geometric properties of convex hull / point containment.
+The qualification for the other topological relationships are similar to the partially overlapping constraint presented here, but in addition to the line intersection constraint some constraints use the geometric properties of convex hull / point containment.
+
+The DSpace design representation structure can be queried for topological relationships using the topological constraint solver. Prolog rules query the abstract representation layer to retrieve the spatial abstractions need for topological qualification. In this case objects will be spatially abstracted into convex hulls. The following rule shows the rule for the inside topological relationship. Note that the rule takes two \emph{dsID} as arguements, queries the abstract representation layer to retrieve the entities convex hull abstract representations, and then makes a finally call to the \emph{inside\_convexhull} constraint.
+\begin{verbatim}
+    inside(Id1, Id2) :-
+            convexhull_abs(Id1, Convex1),
+            convexhull_abs(Id2, Convex2),
+            insdie_convexhull(Convex1, Convex2).
+\end{verbatim}
+Given two entities with \emph{dsID}'s \emph{door45} and \emph{room53}, the following query will return true if the entities have an inside topological realtionship and will fail if they do not. In this case they do not have an inside relationship so the query returns fail.
+\begin{verbatim}
+    ?- inside(door45, room53).
+    fail.
+\end{verbatim}
 
 \subsection{Orientation} \label{orientation}
-The DSpace reasoner can qualify two types of orientational relationships, intrinsic and extrinsic. Intrinsic orientational reasoning is based on OPRA$_{m}$. OPRA$_{m}$ partitions space into half planes, which are defined by lines emanating from a reference point, and defines the qualitative orientational relationships by the half plane in which a second point is located in relation to the reference point. The granularity of an OPRA$_{m}$ relationship, specified by $m$, defines the number of lines emanating from the reference point. 
+The DSpace reasoner can qualify two types of orientational relationships, intrinsic and extrinsic. Intrinsic orientational reasoning is based on OPRA$_{m}$. OPRA$_{m}$ partitions space into half-planes, which are defined by lines emanating from a reference point, and defines the qualitative orientational relationships by the half plane in which a second point is located in relation to the reference point. The granularity of an OPRA$_{m}$ relationship, specified by $m$, defines the number of lines emanating from the reference point. 
 
-\begin{figure}[b]
+\begin{figure}[H]
 \centering
 \includegraphics[width=60mm]{facing-opra-base-rel}
 \caption{OPRA$_{2}$ Space Partitioning}
 \label{facing-opra-base-rel}
 \end{figure}
 
-Figure \ref{facing-opra-base-rel} shows the OPRA$_{2}$ (two lines) partitioning of space, with labels for the base OPRA$_{2}$ relationships. Point \emph{A} is located in sector 7 of point \emph{B}'s partitioned space, and \emph{B} is located in sector 1 of \emph{A}'s partitioned space. Note that the arrow depicts the point's direction and the half-plane sectors are labelled starting at the point's direction, incrementing counter-clockwise. 
+Figure \ref{facing-opra-base-rel} shows the OPRA$_{2}$ (two lines) partitioning of space, with labels for the base OPRA$_{2}$ relationships. Point \emph{A} is located in half-plane 7 of point \emph{B}'s partitioned space, and \emph{B} is located in half-plane 1 of \emph{A}'s partitioned space. Note that the arrow depicts the point's direction and the half-planes are labeled starting at the point's direction, incrementing counter-clockwise. 
 
-OPRA$_{m}$ relationships are qualified by solving linear inequalities that are defined by lines emanating from the reference point. Given a point \emph{A} and \emph{B}, the $\theta_{AB}$ symbol refers to $ \tan^{-1} \frac{B_{y} - A_{y}}{B_{x} - A_{X}} $, the $\phi_{A}$ symbol refers to the direction of point \emph{A}, and the \emph{m} symbol refers to the granularity of the OPRA$_{m}$ relations. Equation \ref{opra-eq} shows the linear inequalities for OPRA$_{m}$ relationships as referenced from point \emph{A}. Using this system of linear inequalities, the OPRA$_{m}$ relationship ($i$) can be solved for \emph{B} in terms of \emph{A} OPRA$){m}$ space.
+OPRA$_{m}$ relationships are qualified by solving linear inequalities that are defined by lines emanating from the reference point. Given a point \emph{A} and \emph{B}, the $\theta_{AB}$ symbol refers to $ \tan^{-1} \frac{B_{y} - A_{y}}{B_{x} - A_{X}} $, the $\phi_{A}$ symbol refers to the direction of point \emph{A}, and the \emph{m} symbol refers to the granularity of the OPRA$_{m}$ relations. Equation \ref{opra-eq} shows the linear inequalities that qualify OPRA$_{m}$ relationships as referenced from point \emph{A} to point \emph{B}. Using this system of linear inequalities, the OPRA$_{m}$ relationship ($i$) can be solved for \emph{B} in terms of \emph{A}'s OPRA$_{m}$ space.
 
 \begin{equation}\label{opra-eq}
 \begin{aligned}
@@ -416,11 +442,9 @@ Extrinsic orientational reasoning is based on the SCC. SCC defines the orientati
 \label{scc}
 \end{figure}
 
-Figure \ref{scc} shows an SCC relationship between three points. The partitioning scheme is based on the orientation of the origin and relatum points. In this example, the third point, the referent, is located in sector 5 of the SCC partitioned space, so it has an SCC$_{5}$ relationship with point \emph{A} as related by \emph{B}. 
+Figure \ref{scc} shows an SCC relationship between three points. The partitioning scheme is based on the orientation of the origin and relatum points. In this example, the third point, the referent, is located in half-plane 5 of the SCC partitioned space, so it has an SCC$_{5}$ relationship with point \emph{A} as related by \emph{B}. 
 
-SCC relationships are qualified by solving a system of linear inequalities, which are based on the lines that partition space into the SCC sectors. Labeling starts at the line that runs between the origin and relatum, starting at zero and incrementing clockwise. Given a point \emph{C}, its SCC$_{1}$ relationship with points \emph{A} and \emph{B} is given by solving the equations for \emph{C} in \ref{scc-eq}. Given three points A, B, and C, $M_{AB}$ refers to the slope of line from A to B, $Y_{AB}$ refers to the y-intercept of the line from A to B, $M_{perp}$ refers to the slope of the line that is perpendicular to the line from A to B, and $Y_{perp}$ refers to the y-intercept of the line that is perpendicular to the line from A to B. There are similar systems of inequalities for each of the seven SCC relationships.  
-
-\begin{equation}\label{scc-eq}
+\begin{equation}\label{scc-eq} 
 \begin{aligned}
 \Big(&\Big(\Big(A_{y} < B_{y}\Big) \wedge \Big(C_{y} > M_{perp} \cdot C_{x} + Y_{perp}\Big)\Big) \; \lor \\
 \Big(&\Big(A_{y} > B_{y}\Big) \wedge \Big(C_{y} < M_{perp} \cdot C_{x} + B_{perp}\Big)\Big)\Big) \\
@@ -429,12 +453,32 @@ SCC relationships are qualified by solving a system of linear inequalities, whic
 \end{aligned}
 \end{equation}
 
-\subsubsection{Constraint Solver: Orientation}
-The orientational constraint solver qualifies intrinsic and extrinsic orientational relationships over points and directed points. It is written in CLP($\mathbb{R}$) and constrains linear inequalities to solve orientational qualification problems. Within the orientational solver there are two modules, one for intrinsic relationships based on OPRA$_{m}$ and one for extrinsic relationships based on SCC.
 
-The OPRA$_{m}$ and SCC constraint solvers, solve OPRA$_{m}$ and SCC constrains respectively by solving a system of linear inequality constraints. A presentation and discussion of these equations can be found in \ref{opra-eq} and \ref{scc-eq}. In CLP($\mathbb{R}$) the linear inequalities are built as constraints that are stored in the solvers constraint store until it is fully instantiated. 
+SCC relationships are qualified by solving a system of linear inequalities, which are based on the lines that partition space into the SCC half-planes. Labeling starts at the line that runs between the origin and relatum, starting at zero and incrementing clockwise. Given three points A, B, and C, $M_{AB}$ refers to the slope of line from A to B, $Y_{AB}$ refers to the y-intercept of the line from A to B, $M_{perp}$ refers to the slope of the line that is perpendicular to the line from A to B, and $Y_{perp}$ refers to the y-intercept of the line that is perpendicular to the line from A to B. Given a point \emph{C}, it has an SCC$_{1}$ relationship with points \emph{A} and \emph{B} if the equations in \ref{scc-eq} can be solved. If the equations are not solvable then \emph{C} does not have an SCC$_{1}$ relationship with \emph{A} related to \emph{B}. There are similar systems of inequalities for each of the seven SCC relationships.  
 
-TODO: code for opra and scc constraint solver
+
+\subsubsection{Spatial Constraint Solver: Orientation}
+The orientational constraint solver qualifies OPRA$_{m}$ and SCC relationships over points and directed points. It is written in CLP($\mathbb{R}$) and uses constraints over linear inequalities (Equations \ref{opra-eq}, \ref{scc-eq}) to solve orientational qualification problems. Within the orientational solver there are two modules, one for intrinsic relationships based on OPRA$_{m}$ and one for extrinsic relationships based on SCC.
+
+The OPRA$_{m}$ constraint solver solves extrinsic orientation qualification problems by constraining the linear inequalities in Equation \ref{opra-eq}. Given an origin point \emph{A}, a reference point \emph{B}, and a granularity $m$, the constraint solver will return the OPRA$_{m}$ relationship ($i$) between \emph{A} and \emph{B}. The linear inequalities are constrained as CLP($\mathbb{R}$) constraints and return once all variables in the linear inequalities are instantiated. 
+
+The SCC constraint solver solves intrinsic orientation qualification problems by constraining the linear inequalities in Equation \ref{scc-eq}. Given an origin, a relatum and a referent, the SCC constraint solver will return true or fail based on the resolvability of the linear inequalities. The linear inequalities are constrained as CLP($\mathbb{R}$) constraints and will return true if the linear equalities are solvable and fail if they are not.
+
+The DSpace design representation structure can be queried for orientational relationships using the orientational constraint solver. Prolog rules query the abstract representation layer and retrieve the spatial abstractions need for orientational qualification: point and directed point. The following rule shows the rule for the SCC$)_{1}$ relationship.
+\begin{verbatim}
+    SCC1(Id1, Id2, Id3) :-
+            point_abstraction(Id1, PtAbs1),
+            point_abstraction(Id2, PtAbs2),
+            point_abstraction(Id3, PtAbs3),
+            SCC(PtAbs1, PtAbs2, PtAbs3, 1).
+\end{verbatim}
+Given three entities with \emph{dsID}’s \emph{door45}, \emph{room53}, and \emph{desk2} the following query will return true if the entities have an SCC$_{1}$ relationship and will fail if they do not. In this specific case they do have an SCC$_{1}$ relationship so the query returns true.
+\begin{verbatim}
+    ?- SCC1(door45, room53, desk2).
+    true.
+\end{verbatim}
+
+
 
 \subsection{Distance}
 The DSpace reasoner can calculate the minimum euclidean distance between points, lines, and polygons. Given two objects the minimum distance is calculated by finding the closest point in each object to the other object. Base on these two point the minimum euclidean distance is calculated. 
@@ -446,7 +490,7 @@ The DSpace reasoner can calculate the minimum euclidean distance between points,
 \label{min-dist}
 \end{figure}
 
-\subsubsection{Constraint Solver: Distance}
+\subsubsection{Spatial Constraint Solver: Distance}
 The distance constraint solver solves minimum distance constraints and uses the distance constraint services of the Sindalog \cite{sindalog} reasoner for its reasoning. The distance solver is different from the other solvers because it returns a value to a query. For example, the following query will return the minimum distance between the two objects in D.
 \begin{verbatim}
    min_distance(obj1, obj2, D). 
@@ -455,20 +499,20 @@ The distance constraint solver solves minimum distance constraints and uses the 
 The distance constraint solver is written using CHR that break down the constraints until they can be solved for. This process involves finding the located on each object that is the closest to the other, so that the minimum distance can be calculated between the two. 
 
 
-\chapter{Conceptual Design Requirements}
-This chapter presents the conceptual design reasoning framework of the DSpace reasoner. It shows how architectural concepts and qualities can be spatially interpreted using formal qualitative spatial calculi and shows how they can be represented and reasoned with to validate conceptual design requirements in the CLP framework of DSpace. 
+\chapter{Conceptual Requirements Reasoner}
+This chapter presents the conceptual requirements reasoning framework of the DSpace reasoner. It shows how architectural concepts and qualitative spatial attributes found in architecture (QSA) can be spatially interpreted using formal qualitative spatial calculi and shows how they can be represented and reasoned with to validate conceptual design requirements in the CLP framework of DSpace. 
 
-TODO: into into how this level of reasoning is positioned in the DSpace framework....
+Conceptual design requirements were ascertained from literature on architectural design \cite{tbd}, museum research on visitor behavior \cite{tbd}, and building regulations and codes \cite{tbd}. Their definitions are explicit characterizations of architectural concepts and spatial design qualities that are based on heuristic architectural knowledge and common sense notions of spatial relationships. The objective is not to be an exhaustive discussion of these requirements or a validation for their interpretation in terms of a spatial or design perspective; rather it is to demonstrate how each can be represented and reasoned with in the DSpace CLP framework to validate conceptual design requirements against the quantitative form of a design. 
 
-Conceptual design requirements were ascertained from literature on architectural design \cite{tbd}, museum research on visitor behavior \cite{tbd}, and building regulations and codes \cite{tbd}. Their definitions are explicit characterizations of architectural concepts and spatial design qualities that are based on heuristic architectural knowledge and common sense notions of spatial relationships. The objective is not to be an exhaustive discussion of these requirements or a validation for their interpretation in terms of a spatial or design perspective; rather it is to demonstrate how each can be represented and reasoned with in a computational framework to validate conceptual design requirements against the quantitative structures and artifacts of a design. 
+In the DSpace CLP framework, QSA and architectural concepts utilize the DSpace design representation structure, via the spatial abstraction layer, and the DSpace spatial reasoner to validate conceptual design requirements. QSA and architectural concepts are implemented as Prolog rules. Each rule is implemented a conjunction of predicates that spatially define the architectural concept or QSA from a qualitative perspective. Conceptual design requirements can be specified using architectural concepts, QSA, and qualitative spatial relationships. Validating a design requirement happens by making a Prolog query to the conceptual requirement reasoner that will return \emph{true} if the design is consistent per the requirement or \emph{fail} if the design is inconsistent per the requirement. 
 
-The chapter is structured as follows: Section 1 presents a set of qualitative spatial attributes found in architecture, shows how each can be interpreted using formal qualitative spatial calculi, and represented formally within DSpace reasoner. Section 2 presents a set of architectural concepts that are built using the spatial qualities presented in the Section 1 and shows how they can be used to reason about design requirements within the DSpace reasoner. Section 3 demonstrates how a the DSpace reasoner can be used to validate a design per its conceptual design requirements.
+The chapter is structured as follows: Section 1 presents a set of qualitative spatial attributes found in architecture, shows how each can be interpreted using formal qualitative spatial calculi, and represented formally within DSpace reasoner. Section 2 presents a set of architectural concepts that are built using the spatial qualities presented in the Section 1 and shows how they can be used to reason about design requirements within the DSpace reasoner. Section 3 shows how conceptual design requirements can be validated in using the requirement reasoner.
 
 
 \section{Qualitative Spatial Attributes found in Architecture}
 This section presents a set of qualitative spatial attributes found in architecture (QSA) and shows how each QSA is spatially interpreted and represented in DSpace. QSAs are architectural qualities that emerge from the spatial structures that form from the physical elements of the building (doors, walls, columns, windows, etc.), artefactual extensions (functional space, operational space, range space, etc.) and interior design elements (furniture, lights, decorations, etc.). QSAs can be perceptual qualities that are described from a specific vantage point, or intrinsic qualities that are inherent in the build's spatial structure. 
 
-This section presents five QSAs: positioning, facing, visibility, proximity, and symmetry. The goal of this section is to develop a tool-kit of QSAs that qualitatively describe architectural designs in the spatial environments in which they emerge. Some boundary cases are identified and handled, but it is not the purpose here to explore all possible case scenarios.
+This section presents five QSAs: positioning, positioning for sequences, facing, visibility, and proximity. The goal of this section is to develop a tool-kit of QSAs that qualitatively describe architectural designs in the spatial environments in which they emerge. Some boundary cases are identified and handled, but it is not the purpose here to explore all possible case scenarios.
 
 \subsection{Positioning}
 The positioning attribute defines an orientational relationship between a pair of objects as each object relates to the other within an extrinsic context, i.e., a defined space such as a room, apartment, building, or user defined space. There are four positioning relationships using this scheme: opposing-side of space, same-side of space, left-side of space, and right-side of space. The opposing-side and same-side relationships can be combined, via conjunction, with the left-side or right-side relationships to form the following compound relationships: opposing-left-side, opposing-right-side, same-left-side, same-right-side.
@@ -491,8 +535,7 @@ The positioning attribute is interpreted spatially, in DSpace, using the Single 
 
 Under this scheme, two points are defined as being on opposing sides of a space if they have an SCC relationship of 0, 1 or 7, as related by the centroid of the space. Conversely, a pair of points are defined as being on the same side of a space if they have an SCC relationship of 3, 4 or 5, as related by the centroid of the  space. A point is defined as being on the left side of a space from another point if it has an SCC relationship of 5, 6, or 7, and is on the right side if it has an SCC relationship of 1, 2, or 3. Using the union set operation these relationships can be combined to form the opposing-left/right, and same-left/right relationships.
 
-Th positioning relationships are represented in DSpace as Prolog rules. There is a single rule for each relationships: opposing side, same-side, left-side, and right-side. The head of each rule takes three arguments, the first two for the architectural objects being related and one for the context space. The body of the rule .... Given two objects and a context space, the rule returns true if the objects are on the same-side, opposing-side, left-side, right-side as defined by its' rule, and fails if they are not. The following is Prolog code for the positioning rules.
-
+Th positioning relationships are represented in the DSpace CLP framework as Prolog rules. There is a single rule for each relationships: opposing side, same-side, left-side, and right-side. The head of each rule takes three arguments, the first two for the architectural objects being related and one for the context space. The body of the rule ....  The following is Prolog code for the positioning rules.
 \begin{verbatim}
    opposing_side(Obj1, Obj2, Context) :- 
            centroid(Context, Centroid),
@@ -510,8 +553,7 @@ Th positioning relationships are represented in DSpace as Prolog rules. There is
 
 \end{verbatim}
 
-The positioning attribute can be used to check if architectural structures, artefactual extensions, or interior design elements are on the opposing or same side of a space to the other. For example, a requirement might state that a bedroom should be positioned to the back of a house from the main entrance. The reason for this requirement is that rooms that are in the back of a house are more private than rooms in the front of the house. In this requirement, the origin is the entrance, the referent is the bedroom, and the relatum is the centroid of the house (context space).
-
+The positioning attribute can be used to check if architectural structures, artefactual extensions, or interior design elements are on the opposing or same side of a space to the other. For example, a requirement might state that a bedroom should be positioned to the back of a house from the main entrance. The reason for this requirement is that rooms that are in the back of a house are more private than rooms in the front of the house. In this requirement, the origin is the entrance, the referent is the bedroom, and the relatum is the centroid of the house (context space). 
 \begin{figure}[H]
  \centering
  \includegraphics[width=95mm]{bedroom-back-house}
@@ -519,8 +561,10 @@ The positioning attribute can be used to check if architectural structures, arte
 \label{privacy}
 \end{figure}
 
-\subsection{Positioning for Sequence of Objects}
-The positioning for a sequence of objects defines a perceptual orientational relationship of a sequence of objects as each relates to a vantage point in an extrinsic context, i.e., a defined space such as a room, apartment, building, or user defined space. A sequence is a set of architectural entities (columns), or interior design objects (display cases) that are grouped together and comprised of the same entity or object type. In general sequences are grouped together based on the proximity of the objects (near to each other) but any relationship can define a sequence. There are three positioning relationships for a sequence of objects: horizontal perceived, vertical perceived, and neither.  
+
+
+\subsection{Positioning for Sequences}
+The positioning for a sequences attribute defines a perceptual orientational relationship of a sequence of objects as each relates to a vantage point in an extrinsic context, i.e., a defined space such as a room, apartment, building, or user defined space. A sequence is a set of architectural entities (columns), or interior design objects (display cases) that are grouped together and comprised of the same entity or object type. In general sequences are grouped together based on the proximity of the objects (near to each other) but any relationship can define a sequence. There are three positioning relationships for a sequence of objects: horizontal perceived, vertical perceived, and neither.  
 
 The positioning for a sequence of objects attribute can be spatially interpreted using SCC, similar to the positioning attribute above. The positioning for a sequence of objects attribute uses the SCC partitioning scheme to orientationally relate a sequence of points (origin, referents) in the context of an external frame of reference (relatum). In DSpace, the reference point is defined as the centroid of the context space. By partitioning space using the centroid, an approximation is made that divides the space into the positioning relationships. As with the positioning attribute, an assumption made in DSpace is that the space will generally be rectangular in shape.
 
@@ -789,23 +833,180 @@ TBD: figure of stair landing
             not_overlapping(Artefact_stair, Physical)
 \end{verbatim}  
 
-\section{Conceptual Design Requirements in The DSpace Reasoner}
-This section will look at how the DSpace reasoner can be used to validate a designer's conceptualizations against a design's quantitative representation, and shows how high level design requirements are broken down into lower level constraints that can be solved by the DSpace reasoner.
+\section{Conceptual Requirement Validation}
+The conceptual requirement reasoner (CCR) validates design requirements by querying an architectural design using predicate calls to architectural concepts and QSA. Requirement queries will return \emph{true} if the architectural design is consistent, or \emph{fail} if the design is inconsistent per the design requirement. A design is considered consistent if the design's spatial characteristics, as represented in its physical and functional geometries, matches the definition of the designs requirement specification. For example, a design is consistent per a design requirement of a window and doorway facing towards each other, if the spatial characteristic of the design, with regards to the window and doorway, match the spatial specification of facing towards each other.    
 
-DSpace is built in a CLP framework that allows a user to query an architectural design as represented in the multiple perspective design structure. Queries can be design requirements (i.e., a bedroom must be private), architectural concepts (i.e., continuity), QSAs (i.e., doorways facing towards the other), spatial relationships (i.e., functional space of doorway partially overlaps with the range space of camera), or a conjunction of these. Queries take DSpace identifiers as arguments and respond with a true or fail based on the result of the query. 
-
-For example, a query to check if a desk, with an id \emph{desk12}, is facing towards a window, with id \emph{window15}, the following query is made:
+Given the example scenario above, a doorway with dsID \emph{door543}, and a window with dsID \emph{window15}, the following query is made to the CRR to validate the requirement.
 \begin{verbatim}
-   ?- facing(desk12, window15).
-\end{verbatim} 
-DSpace will respond with \emph{true} if the desk if facing towards the window and \emph{fail} if it is not facing towards the window. Additionally, queries can be combined via conjunction to build more complex queries. For example, an addition query can be added to the one above to also check that the desk is near the window as well. The following query is made:
-\begin{verbatim}
-   ?- facing(desk12, window15),
-      near(desk12, window15.
+   ?- facing(door543, window15).
 \end{verbatim}
-DSpace will respond with \emph{true} is both are true and \emph{fail} if one or both fail.
+Queries to architectural concepts and QSA can be combined to build requirements. For example, a design requirement for a doorway and window being near each other can be combined with the previous requirement to build a new requirement. This requirement can be queried directly or implemented as a new Prolog rule. 
+\begin{verbatim}
+   ?- facing(door543, window15),
+      near(door15, window15).
+      
+    facing_and_near(Id1, Id1) :-
+            near(Id1, Id2),
+            facing(Id1, Id2).
+\end{verbatim}
+Note that the direct query is specific to \emph{door543} and \emph{window15}, while the rule allows the user to input any \emph{dsID}'s into the query.
+\begin{verbatim}
+    ?- facing_and_near(desk52, door6).
+\end{verbatim}
 
-The remainder of this section will look at two use case examples. Each use case will show how a user can use the DSpace reasoner to valid the use case requirement and will show how the requirement is broken down in DSpace into lower level constraints that can be solved by the spatial constraint solvers.
+Consider the design requirement for a bedroom being private. This requirement can be validated for a design by querying the privacy predicate, as demonstrated above. However, this definition of privacy might not be enough for a particular user. In DSpace, the user can easily extend the definition of privacy by building new Prolog rules that join additional architectural concepts, QSA, and spatial qualities to the existing definition. If the user wants the definition of privacy to include an additional requirement that the bedroom is far away from the living room, the user can construct a new rule using joining the privacy predicate with the proximity predicate. The following is the new predicate for privacy:
+\begin{verbatim}
+    privacy_new(IdRoom, IdLivingRoom) :-
+            privacy(IdRoom),
+            far(IdRoom, IdLivingRoom).
+\end{verbatim}
+
+
+
+\chapter{Case Studies}
+This chapter is a case study that demonstrates the application of the DSpace reasoner to the design of an art museum. The purpose is twofold: first, to examine several design requirements of an art museum with regards to the spatial interpretation of the requirements; and second, to show how the museum design requirements can be represented and reasoned about in a computational framework, in order to detect design inconsistencies as per the design requirements.
+
+The remainder of the chapter is divided into three sections. The first section examines design requirements in art museums in three parts: the first part looks at requirements that influence museum visitors' behaviour. The second part looks at requirements for promoting exploration in the museum. The third part looks at the requirements of accessibility and security within the museum. The second section, looks at how these requirements can be interpreted spatially and represented in the DSpace reasoner. The third section tests the DSpace reasoner using sample museum floor plans that are both consistent and inconsistent per the design requirements for several art museums. The objective of this demonstration is to show that the DSpace reasoner can validate a design against its design requirements.
+
+
+\section{Case Study: Museum}
+Museums are a place of public education, in which art, historical artefacts, and scientific exhibits are put on display for the public to view \cite{Falk}. While museums in general have many common threads in terms of their design requirements, this case study takes the approach of narrowing the study to that of an art museum. This focuses the discussion to specific real world examples and maintains the perspective that this is not an exhaustive study of museum design requirements, rather it's an investigation into the nature and interpretation, with respect to spatial properties / characteristics, of a set of design requirements. Additionally, the point is not to prove the validity of these requirements in an empirical sense; rather it is to show the process of representing and reasoning about design requirements in a formal computational framework.
+
+The art museum is a unique and fruitful choice for this case study because it provides a rich set of design properties that have been formally studied and reported \cite{Melton} \cite{Bitgood02} \cite{Falk}. Within museum studies, visitor behaviour has been one of the primary focuses, starting with experiments dating back to the 1930's. 
+
+\subsection{Museum Design Requirements}
+Pretend for a moment that you are an architect working on the initial design for a new modern art museum. During your first visit with the museum's curator you discuss several design requirements that are important for the new museum. Your discussion reveals that the curator wants the new art museum to adhere to the following requirements:
+
+\begin{enumerate}
+\item Maximize visitor utilization of exhibitions
+\item Encourage free-flowing exploration throughout the museum
+\item Adhere to museum requirements of accessibility and security
+\end{enumerate}
+
+TBD: explain how these high level requirements can be interpreted into concrete properties of the museums design. from here the requirements can be spatially interpreted and represented in the DSpace reasoner.
+
+\subsection{Maximizing Visitor Utilization of Exhibitions}
+This portion of the case study will look into four factors that influence visitors' movement patters: positioning of doorways, spatial arrangement of display cases, positioning of furniture and statues, and congestion. These properties inform museum architects, during the design process, about the spatial characteristics that can maximize the utilization of the museum by increasing the frequency and duration with which visitors view exhibition objects. 
+
+\subsubsection{Positioning of doorways}
+In an important study, Melton \cite{Melton} discovered that the most influential factor to determine  the amount of attention an exhibition piece receives is the pieces's position relative to doorways in a gallery room. Prior to this, museum researchers believed that the pieces's intrinsic properties of 'interestingness', color, and size were the real factors that determined the amount of attention a piece received. Melton explained why this happens; he demonstrated that the amount of attention a piece receives is directly related to the visitor circulation patterns within the museum and these circulation patterns emerge from the spatial characteristics of the museum's architecture.
+
+\begin{figure}[H]
+ \centering
+ \subfloat[circulation pattern]{\label{fig:door-opposite}\includegraphics[width=35mm, angle=90]{melton-circulation}}
+ \hspace{10 mm}
+ \subfloat[frequency of visits]{\label{fig:door-opposite}\includegraphics[width=35mm, angle=90]{melton-frequency}}
+ \label{melton}
+ \caption{Results from Melton's experiments on the effects of door positioning in an Art Museum}
+\label{Melton-studies}
+\end{figure}
+
+The crux of Melton's experiments suggested that visitors exit through the first door they encounter, which he referred to as the exit gradient. Figure \ref{Melton-studies} shows the results of an extensive study of visitors circulation patterns and stopping frequencies in an art museum. The studies reported that almost 80 percent of visitors exited through the first exit they encountered before viewing the entire exhibition. Additionally, the studied showed that the most frequently visited objects where those located along the shortest path from the entrance to the exit. 
+
+Furthermore, Bitgood suggests that visitors tend to follow along the wall that is closest to the door they entered \cite{Bitgood95}. Given that visitors also tend to exit through the first doorway they encounter, doorways should not be positioned in a wall that is adjacent to an entrance. 
+
+The results of Melton's and Bitgood's studies inform architects of spatial characteristics that influence movement patterns in exhibitions. Specifically, doorways that are positioned on the same side of the room and doorways that are position in a wall adjacent to an entrance cause visitors to pay attention to fewer exhibits than doorways that are positioned on opposing sides of the room and in walls that are not adjacent to entrances.
+
+\begin{description}
+\item[Requirement 1:] \emph{Exhibition doorways should be positioned on opposing sides of a gallery room and should not be positioned on a wall that is adjacent to another doorway.} 
+\end{description}
+
+Figure \ref{door-position} shows a possible exhibition design where the red door is positioned on the same side of the room as the entrance, while the black door is positioned on the opposing side.
+\begin{figure}[H]
+\centering
+\subfloat[consistent design]{\label{fig:door-opposite}\includegraphics[width=85mm]{door-possitioning}}
+\caption{Schematization of the opposing door requirement.}
+\label{door-position}
+\end{figure} 
+
+
+\subsubsection{Spatial arrangement of display cases}
+The spatial arrangement of display cases in galleries has been shown to influence visitors' movement patterns. \cite{Bitgood92} showed that display case arrangements that form a perimeter or a peninsula generate the most amount of attention, while display case arrangements that form an island in the middle of the room received the lowest amount of attention.
+
+   \begin{figure}[H]
+ \centering
+ \subfloat[island]{\label{fig:door-opposite}\includegraphics[width=35mm]{island}}
+ \hspace{10 mm}
+ \subfloat[perimeter]{\label{fig:door-opposite}\includegraphics[width=35mm]{perimeter}}
+  \hspace{10 mm}
+ \subfloat[peninsula]{\label{fig:door-opposite}\includegraphics[width=35mm]{peninsula}}
+ \caption{Display case arrangements}
+\label{display-arrangement}
+\end{figure}
+ 
+\begin{description}
+\item[Requirement 2:] \emph{Display case arrangements should not form an island near the center of the room.}
+\end{description} 
+
+Circulation patterns can be disrupted when a peninsula arrangement cuts horizontally across the view of a visitor as they are entering the room. This type of display pattern will cut off part of the room from the visitor and will make it less likely to be visited.
+
+\begin{description}
+\item[Requirement 3:] \emph{Display cases arrangements that form a peninsula should not cut horizontally across the view of a visitor located at an entrance.}
+\end{description} 
+
+\begin{figure}[H]
+\centering
+\subfloat[consistent design]{\label{fig:door-opposite}\includegraphics[width=65mm]{display-not-cut}}
+\hspace{10 mm}
+\subfloat[inconsistent design]{\label{fig:door-opposite}\includegraphics[width=65mm]{door-cut-room}}
+\end{figure}
+
+
+\subsubsection{Congestion}
+Congestion in museums can be caused by interference of displayed objects and their viewing spaces with movement pathways of visitors. In order to reduce congestion in museums, designers should be aware of the placement of display cases, statues, furniture (seating benches), and information kiosks within the gallery. The following are requirements that should be followed to reduce congestion in museums:
+
+\begin{description}
+\item[Requirement 4:] \emph{There should be no artefactual interference between architectural entities, museum display cases, museum seating, and information kiosks.}
+\end{description}
+
+\subsubsection{Positioning of benches, statues, and information kiosks}
+The positioning and orientation of benches and statues can increase the amount of attention an exhibition receives and change circulation patterns within a gallery \cite{Stavroulaki} \cite{Museum}. Studies have shown that seating directly facing an object will increase the attention the object receives, even if no one uses the seating. 
+
+\begin{description}
+\item[Requirement 5:] \emph{Seating should directly face a gallery wall or display case.}
+\end{description}
+
+The orientation of a statue to doorways can increase the attention the statue receives as well as the object close to it. Statues that face away from doorways encourage visitors to move around the statues in order to get a better view.  
+\begin{description}
+\item[Requirement 6:] \emph{Statues should face away from doorways.}
+\end{description}
+
+\subsubsection{Visitor Orientation in the lobby}
+The lobby is the first place visitors encounter when they enter a museum. The design of the lobby is important because it not only provides a first glimpse of the museum's exhibits but it is the place where the museum provides services to its visitors, including: a ticketing desk, bathrooms, an information desk, and entrances to exhibitions \cite{Bitgood02}. The aim of the requirements for the lobby focus on making it easy for visitors to locate services and orient themselves to the new environment. 
+
+Upon entering the lobby most visitors need to find the ticket area and/or an information desk. It is important, therefore, that the ticketing area and information desk are visible from the entrance. Additionally, studies have shown that people first look to their right hand side when entering a building. By placing the ticket and information desks on the right hand side of the lobby, visitors are more likely to notice them immediately when they enter the lobby. Finally, the ticketing area should be close to visitors when they enter because it is likely one of the first places they will need to visit.
+\begin{description}
+\item[Requirement 7:] \emph{The ticketing and information desks should be visible from the main entrance, they should be on the right hand side of the lobby from the main entrance, and they should be on the same side fo the lobby as the  entrance.}
+\end{description}
+
+After obtaining a ticket most visitors will be trying to locate the entrance to the exhibitions. Therefore, exhibition entrances should be clearly visible from several parts of the lobby, including the ticketing desk, information desk, and a central lobby location, to make it easy for visitors to find where they need to go. 
+\begin{description}
+\item[Requirement 8:] \emph{Exhibit entrances should be visible from the ticketing desk, information desk, and a central lobby location.}
+\end{description}
+
+Bathrooms are an important services for museum visitors. Surprisingly, the place of the bathroom can have an impact on how long visitors stay in the museum. Studies \cite{tbd} have found that bathrooms that are located on the same side of the lobby as the entrance / exit encourage visitors to leave earlier compared to museums with bathrooms on the opposing side of the lobby from the entrance / exit. Additionally, the doorways to the bathroom should be private to maintain as much privacy in the bathroom as possible.
+
+\begin{description}
+\item[Requirement 9:] \emph{The bathroom should be on the opposing side of the lobby from the entrance / exit and the bathroom doorways should be private.}
+\end{description}
+
+
+\subsection{Exploration}
+The way visitors explore an exhibition is influenced by the spatial characteristics of the layout, as well as the characteristics of each gallery room. Layouts that are sequential, i.e. one way in / one way out, promote a controlled and orderly flow of movement. Museums of history and science are well served by this type of design because they have a narrative to tell that is chronological. On the other hand, layouts that present the visitor with path choices, i.e. multiple doorways, promote free-flowing exploration. In this type of layout it is important that visitors are aware of the path choices that are available. This means that doorways are visible between each other throughout the layout. This concept of visibility between a network of points is referred to as continuity and is an important characteristic of layouts that present visitors with multiple path choices.  
+
+\begin{description}
+\item[Requirement 10:] The layout of the museum should maintain continuity between doorways within each exhibition and gallery room.
+\end{description}
+
+Within a Gallery, rooms that are open promote more free-flowing exploration than rooms that are narrow. Narrow rooms inhibit exploration because of space limitations and confinement. Rooms that are open provide more space for visitors to explore the room in a free-flowing manner.
+\begin{description}
+\item[Requirement 11:] Gallery rooms should be open, rather than confined, in order to promote free-flowing exploration.
+\end{description}
+
+
+
+\section{Case Study: Ranch Style House}
+
 
 \subsection{A Private Room}
 In a particular apartment, the designer wants the bedroom to be private. Given the definition of privacy in this chapter, privacy entails that the bedroom is on the opposing side of the apartment from the main entrance, the bedroom's doorway does not face towards any other doorways, and the doorway is not visible from the main entrance.
@@ -848,196 +1049,6 @@ The $artefactual\_interaction$ predicate is broken down into topological constra
 
 
 
-\chapter{Museum Case Study}
-This chapter is a case study that demonstrates the application of the DSpace reasoner to the design of an art museum. The purpose is twofold: first, to examine several design requirements of an art museum with regards to the spatial interpretation of the requirements; and second, to show how the museum design requirements can be represented and reasoned about in a computational framework, in order to detect design inconsistencies as per the design requirements.
-
-The remainder of the chapter is divided into three sections. The first section examines design requirements in art museums in three parts: the first part looks at requirements that influence museum visitors' behaviour. The second part looks at requirements for promoting exploration in the museum. The third part looks at the requirements of accessibility and security within the museum. The second section, looks at how these requirements can be interpreted spatially and represented in the DSpace reasoner. The third section tests the DSpace reasoner using sample museum floor plans that are both consistent and inconsistent per the design requirements for several art museums. The objective of this demonstration is to show that the DSpace reasoner can validate a design against its design requirements.
-
-
-\section{Case Study Scenario: an art museum}
-Museums are a place of public education, in which art, historical artefacts, and scientific exhibits are put on display for the public to view \cite{Falk}. While museums in general have many common threads in terms of their design requirements, this case study takes the approach of narrowing the study to that of an art museum. This focuses the discussion to specific real world examples and maintains the perspective that this is not an exhaustive study of museum design requirements, rather it's an investigation into the nature and interpretation, with respect to spatial properties / characteristics, of a set of design requirements. Additionally, the point is not to prove the validity of these requirements in an empirical sense; rather it is to show the process of representing and reasoning about design requirements in a formal computational framework.
-
-The art museum is a unique and fruitful choice for this case study because it provides a rich set of design properties that have been formally studied and reported \cite{Melton} \cite{Bitgood02} \cite{Falk}. Within museum studies, visitor behaviour has been one of the primary focuses, starting with experiments dating back to the 1930's. 
-
-
-
-\subsection{Museum Design Requirements}
-Pretend for a moment that you are an architect working on the initial design for a new modern art museum. During your first visit with the museum's curator you discuss several design requirements that are important for the new museum. Your discussion reveals that the curator wants the new art museum to adhere to the following requirements:
-
-\begin{enumerate}
-\item Maximize visitor utilization of exhibitions
-\item Encourage free-flowing exploration throughout the museum
-\item Adhere to museum requirements of accessibility and security
-\end{enumerate}
-
-TBD: explain how these high level requirements can be interpreted into concrete properties of the museums design. from here the requirements can be spatially interpreted and represented in the DSpace reasoner.
-
-\subsection{Maximizing Visitor Utilization of Exhibitions}
-This portion of the case study will look into four factors that influence visitors' movement patters: positioning of doorways, spatial arrangement of display cases, positioning of furniture and statues, and congestion. These properties inform museum architects, during the design process, about the spatial characteristics that can maximize the utilization of the museum by increasing the frequency and duration with which visitors view exhibition objects. 
-
-\subsubsection{Positioning of doorways}
-In an important study, Melton \cite{Melton} discovered that the most influential factor to determine  the amount of attention an object receives is the object's position relative to doorways in a gallery room. Prior to this, museum researchers believed that the object's intrinsic properties of 'interestingness', color, and size were the real factors that determined the amount of attention an object received. Melton explained why this happens; he demonstrated that the amount of attention an object receives is directly related to the visitor circulation patterns within the museum and these circulation patterns emerge from the spatial characteristics of the museum's architecture.
-
-\begin{figure}[H]
- \centering
- \subfloat[circulation pattern]{\label{fig:door-opposite}\includegraphics[width=35mm, angle=90]{melton-circulation}}
- \hspace{10 mm}
- \subfloat[frequency of visits]{\label{fig:door-opposite}\includegraphics[width=35mm, angle=90]{melton-frequency}}
- \label{melton}
- \caption{Results from Melton's experiments on the effects of door positioning in an Art Museum}
-\label{Melton-studies}
-\end{figure}
-
-The crux of Melton's experiments suggested that visitors exit through the first door they encounter, which he referred to as the exit gradient. Figure \ref{Melton-studies} shows the results of an extensive study of visitors circulation patterns and stopping frequencies in an art museum. The studies reported that almost 80 percent of visitors exited through the first exit they encountered before viewing the entire exhibition. Additionally, the studied showed that the most frequently visited objects where those located along the shortest path from the entrance to the exit. 
-
-The results of Melton's studies inform architects of spatial characteristics that influence movement patterns in exhibitions. Specifically, doorways that are positioned on the same side of the room cause visitors to pay attention to fewer exhibits than doorways that are positioned on opposing sides of the room.
-
-\begin{description}
-\item[Requirement 1:] Exhibition doorways should be positioned on opposing sides of gallery rooms. 
-\end{description}
-
-Figure \ref{door-position} shows a possible exhibition design where the red door is positioned on the same side of the room as the entrance, while the black door is positioned on the opposing side.
-\begin{figure}[H]
-\centering
-\subfloat[consistent design]{\label{fig:door-opposite}\includegraphics[width=85mm]{door-possitioning}}
-\caption{Schematization of the opposing door requirement.}
-\label{door-position}
-\end{figure}
-
-Bitgood suggests that visitors tend to follow along the wall that is closest to the door they entered \cite{Bitgood95}. Given that visitors also tend to exit through the first doorway they encounter, doorways should not be positioned in a wall that is adjacent to another doorway.  
- 
-\begin{description}
-\item[Requirement 2:] Exhibition doorways should not be positioned on a wall that is adjacent to another doorway.
-\end{description}
-
-
-\subsubsection{Spatial arrangement of display cases}
-The spatial arrangement of display cases in galleries has been shown to influence visitors' movement patterns. \cite{Bitgood92} showed that display case arrangements that form a perimeter or a peninsula generate the most amount of attention, while display case arrangements that form an island in the middle of the room received the lowest amount of attention.
-
-   \begin{figure}[H]
- \centering
- \subfloat[island]{\label{fig:door-opposite}\includegraphics[width=35mm]{island}}
- \hspace{10 mm}
- \subfloat[perimeter]{\label{fig:door-opposite}\includegraphics[width=35mm]{perimeter}}
-  \hspace{10 mm}
- \subfloat[peninsula]{\label{fig:door-opposite}\includegraphics[width=35mm]{peninsula}}
- \caption{Display case arrangements}
-\label{display-arrangement}
-\end{figure}
- 
-\begin{description}
-\item[Requirement 3:] Display case arrangements should not form an island near the center of the room.
-\end{description} 
-
-Circulation patterns can be disrupted when a peninsula arrangement cuts horizontally across the view of a visitor as they are entering the room. This type of display pattern will cut off part of the room from the visitor and will make it less likely to be visited.
-
-\begin{description}
-\item[Requirement 4:] Display cases arrangements that form a peninsula should not cut horizontally across the view of a visitor located at an entrance.
-\end{description} 
-
-\begin{figure}[H]
-\centering
-\subfloat[consistent design]{\label{fig:door-opposite}\includegraphics[width=65mm]{display-not-cut}}
-\hspace{10 mm}
-\subfloat[inconsistent design]{\label{fig:door-opposite}\includegraphics[width=65mm]{door-cut-room}}
-\end{figure}
-
-
-\subsubsection{Congestion}
-Congestion in museums can be caused by interference of displayed objects and their viewing spaces with movement pathways of visitors. In order to reduce congestion in museums, designers should be aware of the placement of display cases, statues, furniture (seating benches), and information kiosks within the gallery. The following are requirements that should be followed to reduce congestion in museums:
-
-\begin{description}
-\item[Requirement 5:] The viewing area of display cases, functional space of doors, function space of seating areas, and operation space of information kiosks should not interfere with each other.
-\end{description}
-
-\subsubsection{Positioning of benches, statues, and information kiosks}
-The positioning and orientation of benches and statues can increase the amount of attention an exhibition receives and change circulation patterns within a gallery \cite{Stavroulaki} \cite{Museum}. Studies have shown that seating directly facing an object will increase the attention the object receives, even if no one uses the seating. 
-
-\begin{description}
-\item[Requirement 6:] Seating should directly face a gallery wall or display case.
-\end{description}
-
-The orientation of a statue to doorways can increase the attention the statue receives as well as the object close to it. Statues that face away from doorways encourage visitors to move around the statues in order to get a better view.  
-\begin{description}
-\item[Requirement 7:] Statues should face away from doorways.
-\end{description}
-
-\subsubsection{Visitor Orientation in the lobby}
-The lobby is the first place visitors encounter when they enter a museum. The design of the lobby is important because it not only provides a first glimpse of the museum's exhibits but it is the place where the museum provides services to its visitors, including: a ticketing desk, bathrooms, an information desk, and entrances to exhibitions \cite{Bitgood02}. The aim of the requirements for the lobby focus on making it easy for visitors to locate services and orient themselves to the new environment. 
-
-Upon entering the lobby most visitors need to find the ticket area and/or an information desk. It is important, therefore, that the ticketing area and information desk are visible from the entrance. If there is more then one entrance, then it is important that the ticket area and information desk are visible from all entrances. 
-
-\begin{description}
-\item[Requirement 8:] The ticketing and information desks should be visible from the main entrance(s).
-\end{description}
-
-Additionally, studies have shown that people first look to their right hand side when entering a building. By placing the ticket and information desks on the right hand side of the lobby, visitors are more likely to notice them immediately when they enter the lobby. 
-
-\begin{description}
-\item[Requirement 9:] The ticketing area should be on the right side of the lobby from the main entrance(s).
-\end{description}
-
-The ticketing area should be close to visitors when they enter because it is likely one of the first places they will need to visit.
-\begin{description}
-\item[Requirement 10:] The ticketing are should be on the same side of the lobby as the entrance(s).
-\end{description}
-
-Bathrooms are an important services for museum visitors. Surprisingly, the place of the bathroom can have an impact on how long visitors stay in the museum. Studies \cite{tbd} have found that bathrooms that are located on the same side of the lobby as the entrance / exit encourage visitors to leave earlier compared to museums with bathrooms on the opposing side of the lobby from the entrance / exit. 
-
-\begin{description}
-\item[Requirement 11:] The bathroom should be on the opposing side of the lobby from the entrance / exit.
-\end{description}
-
-The doors should be private to maintain as much privacy in the bathrooms as possible.
-
-\begin{description}
-\item[Requirement 12:] Bathroom doors should be private.  
-\end{description}
-
-The main exhibition entrance should be clearly visible from several parts of the lobby to make it easy for visitors to find where they need to go. 
-\begin{description}
-\item[Requirement 13:] Exhibit entrance should be visible from the ticketing area and central lobby location
-\end{description}
-
-
-\subsection{Exploration}
-The way visitors explore an exhibition is influenced by the spatial characteristics of the layout, as well as the characteristics of each gallery room. Layouts that are sequential, i.e. one way in / one way out, promote a controlled and orderly flow of movement. Museums of history and science are well served by this type of design because they have a narrative to tell that is chronological. On the other hand, layouts that present the visitor with path choices, i.e. multiple doorways, promote free-flowing exploration. In this type of layout it is important that visitors are aware of the path choices that are available. This means that doorways are visible between each other throughout the layout. This concept of visibility between a network of points is referred to as continuity and is an important characteristic of layouts that present visitors with multiple path choices.  
-
-\begin{description}
-\item[Requirement 14:] The layout of the museum should maintain continuity between doorways within each exhibition and gallery room.
-\end{description}
-
-Within a Gallery, rooms that are open promote more free-flowing exploration than rooms that are narrow. Narrow rooms inhibit exploration because of space limitations and confinement. Rooms that are open provide more space for visitors to explore the room in a free-flowing manner.
-\begin{description}
-\item[Requirement 15:] Gallery rooms should be open, rather than narrow, in order to promote free-flowing exploration.
-\end{description}
-
-
-\subsection{Accessibility and Security}
-Museums should be accessible and easy to navigate. TBD - I have some ideas here but nothing concrete. Maybe you have some ideas that you can share with me. 
-\begin{description}
-\item[Requirement 16:] Museums should be accessible.
-\end{description}
-Museums should be secure.
-\begin{description}
-\item[Requirement 17:] The functional space of every gallery doorway should overlap with the range space of at least one security camera.
-\end{description}
-
-
-\section{Representation and Reasoning for Museums of Art in DSpace} 
-
-
-\subsection{Representation}
-
-\subsubsection{Spatial Interpretation of a Design Requirement}
-
-\subsubsection{Using the Building Blocks from DSpace}
-
-\subsection{Case Study Tests}
-
-\subsubsection{ArchiCAD / IFC}
-
-\subsubsection{Detecting Inconsistent and Consistent Designs}
 
 \chapter{Evaluation}
 
