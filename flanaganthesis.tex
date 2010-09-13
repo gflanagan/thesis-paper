@@ -99,10 +99,7 @@
 \committeemembershippage
 
 \begin{abstract}
-CAD systems lack the technology to capture and represent underlying building design
-knowledge beyond purely geometrical information. The common thread of the work
- discussed here, are ways to capture, represent, and reason about building design
-knowledge for use in creating intelligent building design systems.  
+ 
 
 
 
@@ -251,6 +248,8 @@ This chapter presents the architectural design representation and spatial reason
 The chapter is organized into two sections. The first section looks at how architectural design are represented in DSpace and how this representation model is implemented in the DSpace CLP framework. The second section looks at the DSpace spatial reasoner and how it is implemented as a series of spatial constraint solvers in the DSpace CLP framework.
 
 \section{Design Representation in DSpace}
+DSpace represents multiple aspects of a design. It represents the physical features as they pertain to the design's geometric structures, and the functional features as they pertain to the design's non-physical artefactual extensions. This design representation goes beyond what is represented in CAAD programs and allows for reasoning over the design
+
 In DSpace an architectural design is modeled in a multiple perspective representation structure that incorporate aspects of the design that are quantitative, functional, and abstract. This design representation goes beyond what is represented in CAAD programs by incorporating design features that are not based on the design's quantitative design representation. It includes functional aspects of the design that pertain to the performance and functional features of the design, as well as abstract spatial aspects that pertain to the qualitative feature space of the design. The objective of this representation structure is to provide the DSpace reasoner with mechanisms that connect an expert's high level design conceptualizations to the low level geometric quantities of a CAAD based system.   
 
 \begin{figure}[H]
@@ -500,13 +499,13 @@ The distance constraint solver is written using CHR that break down the constrai
 
 
 \chapter{Conceptual Requirements Reasoner}
-This chapter presents the conceptual requirements reasoning framework of the DSpace reasoner. It shows how architectural concepts and qualitative spatial attributes found in architecture (QSA) can be spatially interpreted using formal qualitative spatial calculi and shows how they can be represented and reasoned with to validate conceptual design requirements in the CLP framework of DSpace. 
+This chapter presents the conceptual requirements reasoning framework of the DSpace reasoner. It shows how architectural concepts and qualitative spatial attributes found in architecture (QSA) can be spatially interpreted using formal qualitative spatial calculi and shows how they can be represented and reasoned with to validate conceptual design requirements in the conceptual requirements reasoner (CCR). 
 
 Conceptual design requirements were ascertained from literature on architectural design \cite{tbd}, museum research on visitor behavior \cite{tbd}, and building regulations and codes \cite{tbd}. Their definitions are explicit characterizations of architectural concepts and spatial design qualities that are based on heuristic architectural knowledge and common sense notions of spatial relationships. The objective is not to be an exhaustive discussion of these requirements or a validation for their interpretation in terms of a spatial or design perspective; rather it is to demonstrate how each can be represented and reasoned with in the DSpace CLP framework to validate conceptual design requirements against the quantitative form of a design. 
 
-In the DSpace CLP framework, QSA and architectural concepts utilize the DSpace design representation structure, via the spatial abstraction layer, and the DSpace spatial reasoner to validate conceptual design requirements. QSA and architectural concepts are implemented as Prolog rules. Each rule is implemented a conjunction of predicates that spatially define the architectural concept or QSA from a qualitative perspective. Conceptual design requirements can be specified using architectural concepts, QSA, and qualitative spatial relationships. Validating a design requirement happens by making a Prolog query to the conceptual requirement reasoner that will return \emph{true} if the design is consistent per the requirement or \emph{fail} if the design is inconsistent per the requirement. 
+In the DSpace CLP framework, QSA and architectural concepts utilize the DSpace design representation structure, via the spatial abstraction layer, and the DSpace spatial reasoner to validate conceptual design requirements. QSA and architectural concepts are implemented as Prolog rules. Each rule is implemented as a conjunction of predicates that spatially define the QSA and architectural concepts from a qualitative perspective. Conceptual design requirements can be specified using QSA, architectural concepts, and qualitative spatial relationships. Validating a design requirement happens by making a Prolog query to the CCR that will return \emph{true} if the design is consistent per the requirement or \emph{fail} if the design is inconsistent per the requirement. 
 
-The chapter is structured as follows: Section 1 presents a set of qualitative spatial attributes found in architecture, shows how each can be interpreted using formal qualitative spatial calculi, and represented formally within DSpace reasoner. Section 2 presents a set of architectural concepts that are built using the spatial qualities presented in the Section 1 and shows how they can be used to reason about design requirements within the DSpace reasoner. Section 3 shows how conceptual design requirements can be validated in using the requirement reasoner.
+The chapter is structured as follows: Section 1 presents a set of qualitative spatial attributes found in architecture, shows how each can be interpreted using formal qualitative spatial calculi, and represented formally within DSpace CRR. Section 2 presents a set of architectural concepts that are built using the spatial qualities presented in the Section 1 and shows how they can be used to reason about design requirements within the DSpace CRR. Section 3 shows how conceptual design requirements can be validated in using the CRR.
 
 
 \section{Qualitative Spatial Attributes found in Architecture}
@@ -636,13 +635,11 @@ In DSpace, the facing attribute can be used to check if two architectural struct
 \label{door-window-facing}
 \end{figure}
 
-TBD: example, operational space of information kiosk should face towards the entrance.
-
 Within the context of architecture, care needs to be taken to account for architectural structures that are long in one axis, such as walls, because the spatial abstraction for OPRA is a directed point. This means that an object is defined as facing towards a wall if it is facing towards the wall's directed point abstraction (usually the centroid of the wall). Under this definition, there are configurations where an object should be considered to be facing a wall but it is not. DSpace handles this special case by modifying the OPRA$_{8}$ relationships that correspond to facing towards and away from a wall. 
 
 fig: wall example
 
-\subsection{Proximity / Distance}
+\subsection{Proximity}
 The proximity attribute defines a qualitative distance relationship between two objects. In DSpace, there are three proximity relationships: near, near+, and far. The spatial interpretation of proximity is defined in the context of architecture, which is restricted here to be \emph{within a building}. Based on this interpretation, proximity is formally defined using heuristics based on what is consider near, near+, and far within a building.   
 
 
@@ -747,7 +744,7 @@ Figure \ref{room-privacy} shows two floor plans for a small single bedroom house
 \end{figure}
 
 \subsection{Continuity}
-In architecture, the concept of continuity describes a network of points that are mutually visible \cite{Key}. In DSpace, continuity is interpreted in the context of building navigation and wayfinding and is therefore dependent on continuity between doorways withing the design. Other interpretations of continuity can use an element of the design (beyond doorways), however for the purposes here, continuity only deals with doorways. Under this interpretation, a building, room or apartment is continuous if there is continuity between the doorways contained in a given space: room, building, or apartment. 
+In architecture, the concept of continuity describes a network of points that are mutually visible \cite{Key}. In DSpace, continuity is interpreted in the context of building navigation and wayfinding and is therefore dependent on continuity between doorways withing the design. Other interpretations of continuity can use any element of the design (beyond doorways), however for the purposes here, continuity only deals with doorways. Under this interpretation, a building, room or apartment is continuous if there is continuity between the doorways contained in a given space: room, building, or apartment. 
 
 Continuity is defined as a network of doorways that are mutually visible. The partitioning of doorways that should be mutually visible is based on a localized containment hierarchy between rooms and doorways, in which doorways that are contained in the same room should maintain continuity. It does not make sense for doorways that are located on opposite sides of a building to be visible to each other, but doorways that are in the same room should be. 
 
@@ -834,7 +831,7 @@ TBD: figure of stair landing
 \end{verbatim}  
 
 \section{Conceptual Requirement Validation}
-The conceptual requirement reasoner (CCR) validates design requirements by querying an architectural design using predicate calls to architectural concepts and QSA. Requirement queries will return \emph{true} if the architectural design is consistent, or \emph{fail} if the design is inconsistent per the design requirement. A design is considered consistent if the design's spatial characteristics, as represented in its physical and functional geometries, matches the definition of the designs requirement specification. For example, a design is consistent per a design requirement of a window and doorway facing towards each other, if the spatial characteristic of the design, with regards to the window and doorway, match the spatial specification of facing towards each other.    
+The conceptual requirement reasoner (CCR) validates design requirements by querying an architectural design using predicate calls to architectural concepts and QSA. Requirement queries will return \emph{true} if the architectural design is consistent, or \emph{fail} if the design is inconsistent per the design requirement. A design is considered consistent if the design's spatial characteristics, as represented in its physical and functional geometries, matches with the definition of the designs requirement specification. For example, a design is consistent per a design requirement of a window and doorway facing towards each other, if the spatial characteristic of the design, with regards to the window and doorway, match the spatial specification of facing towards each other.    
 
 Given the example scenario above, a doorway with dsID \emph{door543}, and a window with dsID \emph{window15}, the following query is made to the CRR to validate the requirement.
 \begin{verbatim}
@@ -854,7 +851,7 @@ Note that the direct query is specific to \emph{door543} and \emph{window15}, wh
     ?- facing_and_near(desk52, door6).
 \end{verbatim}
 
-Consider the design requirement for a bedroom being private. This requirement can be validated for a design by querying the privacy predicate, as demonstrated above. However, this definition of privacy might not be enough for a particular user. In DSpace, the user can easily extend the definition of privacy by building new Prolog rules that join additional architectural concepts, QSA, and spatial qualities to the existing definition. If the user wants the definition of privacy to include an additional requirement that the bedroom is far away from the living room, the user can construct a new rule using joining the privacy predicate with the proximity predicate. The following is the new predicate for privacy:
+Consider the design requirement for a bedroom being private. This requirement can be validated for a design by querying the privacy predicate, as demonstrated above. However, this definition of privacy might not be enough for a particular user. In DSpace, the user can easily extend the definition of privacy by building new Prolog rules that join additional architectural concepts, QSA, and spatial qualities to the existing definition. If the user wants the definition of privacy to include an additional requirement that the bedroom is far away from the living room, the user can construct a new rule by joining the privacy predicate with the proximity predicate. The following is the new predicate for privacy:
 \begin{verbatim}
     privacy_new(IdRoom, IdLivingRoom) :-
             privacy(IdRoom),
@@ -1005,7 +1002,7 @@ Within a Gallery, rooms that are open promote more free-flowing exploration than
 
 
 
-\section{Case Study: Ranch Style House}
+\chapter{Case Study: Ranch Style House}
 
 
 \subsection{A Private Room}
