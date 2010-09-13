@@ -154,34 +154,37 @@ This is the introduction.
 \section{Constraint Logic Programming}
 
 
-\chapter{Previous Work}
-\label{previous-work}
+\chapter{Related Work} \label{related work}
 \section{Design Support Systems}
 \subsection{SEEDS}
 The SEEDS project, described in \cite{FlemmingIKM94}, proposed a architectural design platform for capturing and representing functional (i.e. spatial requirements) and structural (geometric) design knowledge. The aim of which is to support the architectural design process by providing design knowledge during the initial design phase of a building. Within the SEEDS project, design knowledge is partitioned into two categories: design units, and functional units. Design units represent spatial and physical elements of a building, while functional units represent requirement that constrain design units
 based on shape, size, placement, etc.. Additionally, SEEDS pioneered the idea that architectural design knowledge, specifically design requirements, could be represented as constraints to automatically generate layouts.
 
+\subsection{Intelligence for Ambient Design}
+Bhatt proposed a system in \cite{BhattDH09} that provides validation for the satisfiability of functional requirements, which are grounded to a qualitative spatial calculi, within the Ambient Environment domain. The system accomplishes this by modeling the functional requirements as constrains in an ontology and uses an ontology reasoner to discover if a model is realizable for a design, i.e. no models will be found if on or more functional constraints are not satisfied.
+
+\subsection{The Architect Critic}
+
+\subsection{Intelligent Critic System}
+
+\subsection{ICADS}
+
+\subsection{Spatial Qualities for Architecture}
 
 
-\section{AI in Design}
-\subsection{Intelligence Virtual Environments}
+\section{Design Support Systems for Virtual Environments}
+\subsection{Constraint Logic Programming for Virtual Environments}
 Caldern \cite{CalderónCLP06} built upon the ideas in \cite{FlemmingIKM94} for representing design knowledge, to develop an Intelligent Virtual Environment that solves spatial configuration problems based on spatial design knowledge. Additionally, the tool added non-geometric semantics (i.e. environmental, lighting) for functional units to demonstrate that their approach could be extended to non-geometric design knowledge.
 
-Caldern argued that spatial knowledge By representing design knowledge as constraints, the tool was able to use constraint logic programming to solve spatial configuration problems. In general, constraint are classified as: topological, local, and global. Topological constraints describe the topological characteristics of the environment, such as a regions where a lighting is less then 300 lux. Local constraints describe the attributes of a
-single object and how it interacts with topological characteristics. In general these characteristics are in the form of, a desk should be at least 4 meters from a ventilation duct, or an object should be within an area that has more then 300 lux of light. Global constraints express design requirements for a group of objects.  
-
-Axling \cite{AxlingEURO96} and Codognet \cite{CodognetDMS99} proposed the use constraint  logic programming in Virtual Environments for intelligent object behavior. Their approaches focuses on the behavior of single objects without taking into consideration behavior of a set of object or how objects constrained by the specific environment. 
+Caldern argued that spatial knowledge By representing design knowledge as constraints, the tool was able to use constraint logic programming to solve spatial configuration problems. In general, constraint are classified as: topological, local, and global. Topological constraints describe the topological characteristics of the environment, such as a regions where a lighting is less then 300 lux. Local constraints describe the attributes of a single object and how it interacts with topological characteristics. In general these characteristics are in the form of, a desk should be at least 4 meters from a ventilation duct, or an object should be within an area that has more then 300 lux of light. Global constraints express design requirements for a group of objects.  
 
 \subsection{V-SIMSPLACE}
 \cite{LertlakkhanakulIBPSA06} describes a platform that 'embodies spatial context-aware information' so that users can visualize an architectural design before it is deployed. The aim of the tool is to simulate a users experience in a Smart Home environment, in order to study the interactions of the user within his/her environment. The crux of the system is that behavioral semantics of a Smart Home are integrated into the building design knowledge so that the interactions a user has within the Virtual Environment will closely mimic the real world.
 
 Unlike \cite{CalderónCLP06}, V-PLACESIMS does not attempt to capture design requirements or reason about the consistency of an environment. Rather, it's focus is providing a platform for users to interact with a Smart Home environment to discover the behaviors and interactions that take place.
 
-\subsection{Intelligence for Ambient Design}
-Bhatt proposed a system in \cite{BhattDH09} that provides validation for the satisfiability of functional requirements, which are grounded to a qualitative spatial calculi, within the Ambient Environment domain. The system accomplishes this by modeling the functional requirements as constrains in an ontology and uses an ontology reasoner to discover if a model is realizable for a design, i.e. no models will be found if on or more functional constraints are not satisfied. 
+ 
 
-\subsection{Decision Support for Virtual Environment}
-\cite{Nomura92} used a Decision Support System to validate the design configuration. The system was used more as a diagnostic system, rather then providing feedback on how to reconfigure the environment. Note: I have not read \cite{Nomura92} because I haven't been able to track it down. Therefore my description here is based on the related works section of \cite{CalderónCLP06}.
 
 
 
@@ -246,14 +249,18 @@ Prolog facts make up a factbase that stores a table of architectural entities wi
 
 
 \chapter{Design Representation and Spatial Reasoning}
-This chapter presents the architectural design representation and spatial reasoning framework of the DSpace reasoner. It examines how architectural designs are modeled in a multiple perspective representation structure, and how architectural designs are reasoned about using qualitative spatial representation and reasoning techniques. The DSpace framework is written in the declarative programming semantics of Constraint Logic Programming (CLP) using Prolog, CLP over the Reals (CLP($\mathbb{R}$)), and Constraint Handling Rules (CHR).  
+This chapter presents the architectural design representation and spatial reasoning framework of the DSpace reasoner. It examines how architectural designs are modeled in a multi-perspective representation structure, and how architectural designs are reasoned about using qualitative spatial representation and reasoning techniques. The DSpace framework is written in the declarative programming semantics of Constraint Logic Programming (CLP) using Prolog, CLP over the Reals (CLP($\mathbb{R}$)), and Constraint Handling Rules (CHR).  
 
 The chapter is organized into two sections. The first section looks at how architectural design are represented in DSpace and how this representation model is implemented in the DSpace CLP framework. The second section looks at the DSpace spatial reasoner and how it is implemented as a series of spatial constraint solvers in the DSpace CLP framework.
 
 \section{Design Representation in DSpace}
+In DSpace architectural designs are formally modeled from multi-perspectives that incorporate the design's physical and functional features 
+
+
+This design representation goes beyond what is represented in CAAD programs by incorporating design features that are not based on the design's physical form. It includes functional aspects of the design that pertain to the performance and functional features of the design, as well as abstract spatial aspects that pertain to the qualitative feature space of the design. The objective of this representation structure is to provide the DSpace reasoner with mechanisms that connect an expert's high level design conceptualizations to the low level geometric quantities of a CAAD based system.   
+
 DSpace represents multiple aspects of a design. It represents the physical features as they pertain to the design's geometric structures, and the functional features as they pertain to the design's non-physical artefactual extensions. This design representation goes beyond what is represented in CAAD programs and allows for reasoning over the design
 
-In DSpace an architectural design is modeled in a multiple perspective representation structure that incorporate aspects of the design that are quantitative, functional, and abstract. This design representation goes beyond what is represented in CAAD programs by incorporating design features that are not based on the design's quantitative design representation. It includes functional aspects of the design that pertain to the performance and functional features of the design, as well as abstract spatial aspects that pertain to the qualitative feature space of the design. The objective of this representation structure is to provide the DSpace reasoner with mechanisms that connect an expert's high level design conceptualizations to the low level geometric quantities of a CAAD based system.   
 
 \begin{figure}[H]
 \centering
