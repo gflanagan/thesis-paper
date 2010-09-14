@@ -119,30 +119,14 @@
          y="617.36218"
          id="tspan6305">geometry</tspan></text>
     <text
-       x="370"
-       y="372.36218"
+       x="368.79099"
+       y="479.35867"
        id="text6307"
        xml:space="preserve"
        style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
-         x="370"
-         y="372.36218"
-         id="tspan6309">factbase</tspan></text>
-    <text
-       x="120"
-       y="302.36218"
-       id="text6311"
-       xml:space="preserve"
-       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
-         x="120"
-         y="302.36218"
-         id="tspan6313">spatial abstractions</tspan></text>
-    <rect
-       width="120"
-       height="140"
-       x="350"
-       y="342.36218"
-       id="rect6358"
-       style="fill:none;stroke:#0a0000;stroke-width:1.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+         x="368.79099"
+         y="479.35867"
+         id="tspan6309">query ?</tspan></text>
     <path
        d="m 410,482.36218 -220,80"
        id="path6360"
@@ -151,10 +135,6 @@
        d="m 640,562.36218 -230,-80"
        id="path6366"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-    <path
-       d="m 180,312.36218 c 21.63131,42.55313 61.36129,74.97101 150,80"
-       id="path6372"
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)" />
     <text
        x="351.08398"
        y="530.6759"
