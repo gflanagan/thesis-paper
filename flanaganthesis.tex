@@ -254,13 +254,8 @@ This chapter presents the architectural design representation and spatial reason
 The chapter is organized into two sections. The first section looks at how architectural design are represented in DSpace and how this representation model is implemented in the DSpace CLP framework. The second section looks at the DSpace spatial reasoner and how it is implemented as a series of spatial constraint solvers in the DSpace CLP framework.
 
 \section{Design Representation in DSpace}
-In DSpace architectural designs are formally modeled from multi-perspectives that incorporate the design's physical and functional features 
-
-
-This design representation goes beyond what is represented in CAAD programs by incorporating design features that are not based on the design's physical form. It includes functional aspects of the design that pertain to the performance and functional features of the design, as well as abstract spatial aspects that pertain to the qualitative feature space of the design. The objective of this representation structure is to provide the DSpace reasoner with mechanisms that connect an expert's high level design conceptualizations to the low level geometric quantities of a CAAD based system.   
-
-DSpace represents multiple aspects of a design. It represents the physical features as they pertain to the design's geometric structures, and the functional features as they pertain to the design's non-physical artefactual extensions. This design representation goes beyond what is represented in CAAD programs and allows for reasoning over the design
-
+Architectural designs are modeled in DSpace in a multi-perspective structure. This structure captures the design's physical features as they pertain to the design's geometric structure, and functional features as they pertain to the design's non-physical artefactual function. The physical representation of the design is imported from a a CAAD based file (TODO: introduce the DsSchema). This representation stores the the quantitative geometric data that defines the design's physical form. The functional representation of the design is derived by geometrically extending the physical structures of the design to incorporate the design's  
+...
 
 \begin{figure}[H]
 \centering
@@ -269,7 +264,7 @@ DSpace represents multiple aspects of a design. It represents the physical featu
 \label{mutli-perspective}
 \end{figure}
 
-Within the CLP framework of DSpace, the multiple perspective model is implemented as a set of Prolog rules. These rules bind architectural entities, via their DSpace identifier (\emph{dsID}), to their multiple perspective representations. Combining these rules for each entity creates a rulebase that stores the multiple perspective representation in the DSpace CLP framework. This rulebase can be queried to retrieve a specific geometry given a \emph{dsID}. Figure \ref{clp-design} shows the implementation design for the multiple representation structure in the DSpace CLP framework. Notice that all rules are accessed via the factbase, which stores \emph{dsID}'s and ensures that an entity exists before the rulebase is queried. Additionally, all representations are defined over the same set of spatial primitives. This uniformity will be an important aspect of the spatial reasoner in the next section. 
+Within the CLP framework of DSpace, the multiple perspective model is implemented as a set of Prolog rules. These rules bind architectural entities, via their DSpace identifier (\emph{dsID}), to their physical and functional representations. Combining these rules for each entity creates a rulebase that stores each representation in the DSpace CLP framework. This rulebase can be queried to retrieve a specific geometric representation given a \emph{dsID}. Figure \ref{clp-design} shows the implementation design for the multiple representation structure in the DSpace CLP framework. Notice that all rules are accessed via the factbase, which stores \emph{dsID}'s and ensures that an entity exists before the rulebase is queried. Additionally, all representations are defined over the same set of spatial primitives. This uniformity will be an important aspect of the spatial reasoner in the next section. 
 
 \begin{figure}[H]
 \centering
@@ -278,9 +273,9 @@ Within the CLP framework of DSpace, the multiple perspective model is implemente
 \label{clp-design}
 \end{figure}
 
-The remainder of this section looks at the three design representation perspective individually: quantitative, functional, abstract.
+The remainder of this section looks at the physical and functional design representations.
 
-\subsection{Quantitative Perspective}
+\subsection{Physical Design Representation}
 The quantitative representation of the design models the structural form of the design in terms of its precise physical geometric features (i.e., layout, shape, location). Architectural entities, such as walls, windows, doorways, columns, and rooms, are represented as geometric primitives of polygons, lines and points that correspond to the physical dimensions (length, width, shape) of the entities. The quantitative model of DSpace represents the design perspective that is similar to CAAD programs.
 
 Within the DSpace CLP framework, the quantitative geometry is defined by geometric primitives of polygons, lines, and points. These primitives are defined by Prolog rules that consume quantitative point data and return an instantiated spatial primitive. The following Prolog rules shows an example of a quantitative rule definition for an entity with \emph{dsID window445}. This rule will be stored in the DSpace rulebase. 
@@ -295,8 +290,8 @@ If the following query is made, the quantitative geometry of \emph{window445} wi
 \end{verbatim} 
 
 
-\subsection{Functional Perspective}
-Spatial artefacts are non-physical, spatial extensions of architectural entities that pertain to a specific functional quality of an entity. Artefactual extensions do not have a physical manifestation; however, they are an important part of the design representation because they affect the functionality and performance of the design. There are three types of spatial artefacts identified by Bhatt\cite{Bhatt} that are represented in DSpace: \emph{operational space}, \emph{functional space}, and \emph{range space}.
+\subsection{Functional Design Representation}
+Functional artefacts are non-physical, spatial extensions of architectural entities that pertain to a specific functional quality of an entity. Artefactual extensions do not have a physical manifestation; however, they are an important part of the design representation because they affect the functionality and performance of the design. There are three types of spatial artefacts identified by Bhatt\cite{Bhatt} that are represented in DSpace: \emph{operational space}, \emph{functional space}, and \emph{range space}.
 
 \begin{figure}[H]
  \centering
@@ -338,7 +333,19 @@ Given an entity and its dsID, a query to the DSpace rulebase will return an inst
 \end{verbatim}
 
 
-\subsection{Abstract Perspective}
+\section{Spatial Reasoning in DSpace}
+In DSpace qualitative spatial reasoning serves as a link between the high level conceptual design space and the low level quantitative geometric space. It uses formal qualitative spatial calculi for topological (Region Connected Calculus \cite{Freksa}), orientational (Single Cross \cite{Freksa}, Oriented Point Relation Algebra \cite{Moratz}) and distance reasoning over the spatial entities of the structural and artefactual design (refer to figure \ref{reasoner-design}). 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=90mm]{reasoner-design}
+\caption{Constraint Solvers}
+\label{reasoner-design}
+\end{figure}
+
+Within the CLP framework of DSpace, the reasoning capabilities are built as a series of spatial constraint solvers using CLP($\mathbb{R}$) (Constraint Logic Programming over Reals) and CHR (Constrain Handling Rules). The spatial constraint solvers work directly over the multiple perspective representation structure via the spatial abstraction representation layer and the design factbase. The main service of the reasoner is qualification of the quantitative architectural space into the qualitative feature space of topology, orientation, and distance. It should be noted that the distance constraint solver is different from the topological and orientational constraint solvers because it does not qualify distance relationships, rather it solves minimum distance constraints over quantitative objects. The topological and distance constraint solvers extend The Sindalog spatial constraint solver \cite{Sindalong}, a spatial constraint solver written in CHR. These qualitative spatial relationships are, in turn, used to reason about conceptual design requirements.
+
+\subsection{Spatial Abstraction}
 In DSpace architectural entities have spatially abstracted representations. This allows DSpace to reason about a design from a qualitative level of abstraction with regards to its spatial characteristics of topology, orientation and distance. This type of qualitative spatial reasoning reasons over the abstract feature space of the design using abstract spatial objects of points, directed points, and convex hulls. 
 
 Architectural entities are not directly modeled as abstract spatial objects, as they are in the other representations. Abstract spatial objects are generated by transformation rules that abstract the quantitative geometries of the architectural entities. The process of spatially abstracting an architectural entity depends on the spatial characteristics of the entity's structural form, and an interpretation of the intrinsic nature of an entity within an architectural / design context. For example, the abstracted representation of a doorway as a directed point is defined not only by its physical form but also by the interpretation of the doorway's intrinsic direction. 
@@ -356,18 +363,6 @@ Given an entity and its dsID, a query to the DSpace spatial abstraction rule wil
     point_abstraction(door55, PtAbs).
 \end{verbatim}
 
-
-\section{Spatial Reasoning in DSpace}
-In DSpace qualitative spatial reasoning serves as a link between the high level conceptual design space and the low level quantitative geometric space. It uses formal qualitative spatial calculi for topological (Region Connected Calculus \cite{Freksa}), orientational (Single Cross \cite{Freksa}, Oriented Point Relation Algebra \cite{Moratz}) and distance reasoning over the spatial entities of the structural and artefactual design (refer to figure \ref{reasoner-design}). 
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=90mm]{reasoner-design}
-\caption{Constraint Solvers}
-\label{reasoner-design}
-\end{figure}
-
-Within the CLP framework of DSpace, the reasoning capabilities are built as a series of spatial constraint solvers using CLP($\mathbb{R}$) (Constraint Logic Programming over Reals) and CHR (Constrain Handling Rules). The spatial constraint solvers work directly over the multiple perspective representation structure via the spatial abstraction representation layer and the design factbase. The main service of the reasoner is qualification of the quantitative architectural space into the qualitative feature space of topology, orientation, and distance. It should be noted that the distance constraint solver is different from the topological and orientational constraint solvers because it does not qualify distance relationships, rather it solves minimum distance constraints over quantitative objects. The topological and distance constraint solvers extend The Sindalog spatial constraint solver \cite{Sindalong}, a spatial constraint solver written in CHR. These qualitative spatial relationships are, in turn, used to reason about conceptual design requirements.
 
 \subsection{Topology}
 The DSpace reasoner can qualify the following four topological relationships for convex hulls: inside (\ref{inside}), outside (\ref{outside}), partially overlapping (\ref{overlapping}), and disconnected (\ref{disconnected}). In DSpace topological qualification uses geometric properties of convex hulls to detect topological relationships. 
