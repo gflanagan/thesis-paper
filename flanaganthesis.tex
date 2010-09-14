@@ -254,15 +254,7 @@ This chapter presents the architectural design representation and spatial reason
 The chapter is organized into two sections. The first section looks at how architectural design are represented in DSpace and how this representation model is implemented in the DSpace CLP framework. The second section looks at the DSpace spatial reasoner and how it is implemented as a series of spatial constraint solvers in the DSpace CLP framework.
 
 \section{Design Representation in DSpace}
-Architectural designs are modeled in DSpace in a multi-perspective structure. This structure captures the design's physical features as they pertain to the design's geometric structure, and functional features as they pertain to the design's non-physical artefactual function. The physical representation of the design is imported from a a CAAD based file (TODO: introduce the DsSchema). This representation stores the the quantitative geometric data that defines the design's physical form. The functional representation of the design is derived by geometrically extending the physical structures of the design to incorporate the design's  
-...
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=90mm]{multi-persepective}
-\caption{Multiple Perspective Structure}
-\label{mutli-perspective}
-\end{figure}
+Architectural designs are modeled in DSpace in a multi-perspective structure. This structure captures the design's physical features as they pertain to the design's geometric structure, and functional features as they pertain to the design's non-physical artefactual function. The physical representation of the design is imported from a a CAAD based file (TODO: introduce the DsSchema). This representation stores the the quantitative geometric data that defines the design's physical form. The functional representation is derived by geometrically extending the physical structures of the design. 
 
 Within the CLP framework of DSpace, the multiple perspective model is implemented as a set of Prolog rules. These rules bind architectural entities, via their DSpace identifier (\emph{dsID}), to their physical and functional representations. Combining these rules for each entity creates a rulebase that stores each representation in the DSpace CLP framework. This rulebase can be queried to retrieve a specific geometric representation given a \emph{dsID}. Figure \ref{clp-design} shows the implementation design for the multiple representation structure in the DSpace CLP framework. Notice that all rules are accessed via the factbase, which stores \emph{dsID}'s and ensures that an entity exists before the rulebase is queried. Additionally, all representations are defined over the same set of spatial primitives. This uniformity will be an important aspect of the spatial reasoner in the next section. 
 
@@ -273,7 +265,7 @@ Within the CLP framework of DSpace, the multiple perspective model is implemente
 \label{clp-design}
 \end{figure}
 
-The remainder of this section looks at the physical and functional design representations.
+The remainder of this section looks at the physical and functional design representations and how they are imported from the DsSchema.
 
 \subsection{Physical Design Representation}
 The quantitative representation of the design models the structural form of the design in terms of its precise physical geometric features (i.e., layout, shape, location). Architectural entities, such as walls, windows, doorways, columns, and rooms, are represented as geometric primitives of polygons, lines and points that correspond to the physical dimensions (length, width, shape) of the entities. The quantitative model of DSpace represents the design perspective that is similar to CAAD programs.
@@ -332,9 +324,10 @@ Given an entity and its dsID, a query to the DSpace rulebase will return an inst
    functional_geometry(door55, FuncGeometry).
 \end{verbatim}
 
+\subsection{Import}
 
 \section{Spatial Reasoning in DSpace}
-In DSpace qualitative spatial reasoning serves as a link between the high level conceptual design space and the low level quantitative geometric space. It uses formal qualitative spatial calculi for topological (Region Connected Calculus \cite{Freksa}), orientational (Single Cross \cite{Freksa}, Oriented Point Relation Algebra \cite{Moratz}) and distance reasoning over the spatial entities of the structural and artefactual design (refer to figure \ref{reasoner-design}). 
+In DSpace qualitative spatial reasoning serves as a link between the high level conceptual design space and the low level quantitative geometric space. It uses formal qualitative spatial calculi for topological (Region Connected Calculus \cite{Freksa}), orientational (Single Cross \cite{Freksa}, Oriented Point Relation Algebra \cite{Moratz}) and distance reasoning over the spatial entities of the structural and artefactual design (refer to figure \ref{reasoner-design}). The quantitative geometric representation of the design are spatially abstracted so that the design can be spatially reasoned about from a qualitative perspective.
 
 \begin{figure}[H]
 \centering
@@ -345,10 +338,12 @@ In DSpace qualitative spatial reasoning serves as a link between the high level 
 
 Within the CLP framework of DSpace, the reasoning capabilities are built as a series of spatial constraint solvers using CLP($\mathbb{R}$) (Constraint Logic Programming over Reals) and CHR (Constrain Handling Rules). The spatial constraint solvers work directly over the multiple perspective representation structure via the spatial abstraction representation layer and the design factbase. The main service of the reasoner is qualification of the quantitative architectural space into the qualitative feature space of topology, orientation, and distance. It should be noted that the distance constraint solver is different from the topological and orientational constraint solvers because it does not qualify distance relationships, rather it solves minimum distance constraints over quantitative objects. The topological and distance constraint solvers extend The Sindalog spatial constraint solver \cite{Sindalong}, a spatial constraint solver written in CHR. These qualitative spatial relationships are, in turn, used to reason about conceptual design requirements.
 
-\subsection{Spatial Abstraction}
-In DSpace architectural entities have spatially abstracted representations. This allows DSpace to reason about a design from a qualitative level of abstraction with regards to its spatial characteristics of topology, orientation and distance. This type of qualitative spatial reasoning reasons over the abstract feature space of the design using abstract spatial objects of points, directed points, and convex hulls. 
+The remainder of this section is structured as follow. The first subsection looks at how designs are abstracted into abstract spatial objects. The second, third and forth subsections look at topological, orientational and distance based reasoning respectively.
 
-Architectural entities are not directly modeled as abstract spatial objects, as they are in the other representations. Abstract spatial objects are generated by transformation rules that abstract the quantitative geometries of the architectural entities. The process of spatially abstracting an architectural entity depends on the spatial characteristics of the entity's structural form, and an interpretation of the intrinsic nature of an entity within an architectural / design context. For example, the abstracted representation of a doorway as a directed point is defined not only by its physical form but also by the interpretation of the doorway's intrinsic direction. 
+\subsection{Spatial Abstraction}
+In DSpace architectural entities can be spatially abstracted. This allows DSpace to reason about a design from a qualitative level of abstraction with regards to its spatial characteristics of topology, orientation and distance. This type of qualitative spatial reasoning reasons over the abstract feature space of the design using abstract spatial objects of points, directed points, and convex hulls. 
+
+Architectural entities are not directly modeled as abstract spatial objects. These objects are generated by transformation rules that abstract the quantitative geometries of the architectural entities. The process of spatially abstracting an architectural entity depends on the spatial characteristics of the entity's structural form, and an interpretation of the intrinsic nature of an entity within an architectural / design context. For example, the abstracted representation of a doorway as a directed point is defined not only by its physical form but also by the interpretation of the doorway's intrinsic direction. 
 
 Within the DSpace CLP framework, Prolog rules transform quantitative geometries into spatially abstracted objects (i.e., spatial abstraction). Spatially abstracting an architectural entity depends on the entity type, the spatial abstraction type (point, directed point, or convex hull) and sometimes a contextual identifier (direction of a doorway into or out of a specific room). Given these dependencies, spatially abstraction rules geometrically transform the quantitative geometries into abstract spatial objects. 
 
