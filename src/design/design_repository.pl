@@ -8,39 +8,78 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% possitioning rules
+% positioning rules
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-opposing_side(Id1, Id2, Id_Space) :- 
-    perspective(Id_Space, extended_region, GeoSpace),
-    perspective(Id1, point, Pt1),
-    perspective(Id2, point, Pt2),
-    centroid(GeoSpace, Centroid),
-    (scc0(Pt1, Pt2, Centroid) ;
-     scc1(Pt1, Pt2, Centroid) ;
-     scc7(Pt1, Pt2, Centroid)).
+opposing_side(Id1, Id2, ContextId) :- 
+    point_transformation(Id1, Pt1),
+    point_transformation(Id2, Pt2),
+    point_transformation(ContextId, Pt3),
+    ( scc0(Pt1, Pt2, Pt3) ;
+      scc1(Pt1, Pt2, Pt3) ;
+      scc7(Pt1, Pt2, Pt3) ).
 
-same_side(Id1, Id2, Id_Space) :- 
-    perspective(Id_Space, extended_region, GeoSpace),
-    perspective(Id1, point, Pt1),
-    perspective(Id2, point, Pt2),
-    centroid(GeoSpace, Centroid),
-    (scc3(Pt1, Pt2, Centroid) ;
-     scc4(Pt1, Pt2, Centroid) ;
-     scc5(Pt1, Pt2, Centroid)).
+same_side(Id1, Id2, ContextId) :-
+    point_transformation(Id1, Pt1),
+    point_transformation(Id2, Pt2),
+    point_transformation(ContextId, Pt3),
+    ( scc3(Pt1, Pt2, Pt3) ;
+      scc4(Pt1, Pt2, Pt3) ;
+      scc5(Pt1, Pt2, Pt3) ).
+
+left_side(Id1, Id2, ContextId) :-
+    point_transformation(Id1, Pt1),
+    point_transformation(Id2, Pt2),
+    point_transformation(ContextId, Pt3),
+    ( scc5(Pt1, Pt2, Pt3) ;
+      scc6(Pt1, Pt2, Pt3) ;
+      scc7(Pt1, Pt2, Pt3) ).
+
+right_side(Id1, Id2, ContextId) :-
+    point_transformation(Id1, Pt1),
+    point_transformation(Id2, Pt2),
+    point_transformation(ContextId, Pt3),
+    ( scc1(Pt1, Pt2, Pt3) ;
+      scc2(Pt1, Pt2, Pt3) ;
+      scc3(Pt1, Pt2, Pt3) ).
+
+same_left(Id1, Id2, ContextId) :-
+    same_side(Id1, Id2, ContextId), 
+    left_side(Id1, Id2, ContextId).
+
+same_right(Id1, Id2, ContextId) :-
+    same_side(Id1, Id2, ContextId),
+    right_side(Id1, Id2, ContextId).
+
+opposing_left(Id1, Id2, ContextId) :-
+    opposing_side(Id1, Id2, ContextId),
+    left_side(Id1, Id2, ContextId).
+
+opposing_right(Id1, Id2, ContextId) :-
+    opposing_side(Id1, Id2, ContextId),
+    right_side(Id1, Id2, ContextId).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % facing rules
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 facing_towards(Id1, Id2) :-
-    perspective(Id1, directed_point, Dr1),
-    perspective(Id2, directed_point, Dr2),
-    (opra(Dr1, Dr2, 8, 0, _);
-     opra(Dr1, Dr2, 8, 1, _);
-     opra(Dr1, Dr2, 8, 32, _)).
+    directed_point_transformation(Id1, Pt, Dir),
+    point_transformation(Id2, Pt2),
+    print(Pt2),nl,nl,
+    ( opra(Pt, Dir, Pt2, 8, 0) ;
+      opra(Pt, Dir, Pt2, 8, 1) ;
+      opra(Pt, Dir, Pt2, 8, 31) ).
 
 facing_away(Id1, Id2) :-
-    (facing_towards(Id1, Id2) -> fail, true). 
+    (facing_towards(Id1, Id2) -> fail; true). 
+
+facing_towards_each_other(Id1, Id2) :-
+    facing_towards(Id1, Id2),
+    facing_towards(Id2, Id1).
+
+facing_away_from_each_other(Id1, Id2) :-
+    facing_away(Id1, Id2),
+    facing_away(Id2, Id1).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -52,12 +91,19 @@ facing_away(Id1, Id2) :-
 % visibility rules
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% checks for obstruction between Id1, Id2, given list of objects 
+is_visible(_, _, []).
+
+is_visible(Id1, Id2, [Id_obstruct|OX]) :-
+    viewspace_not_obstructed(Id1, Id2, Id_obstruct),
+    is_visible(Id1, Id2, OX).
+
+% check that no object obstructs the visibility between Id1, Id2. collects
+% all objects that are in that same room as Id1 and Id2 to check for 
+% obstruction.
 is_visible(Id1, Id2) :-
     viewspace_not_obstructed(Id1, Id2).
 
-% check that no object ubstruct the visibility between Id1, Id2. collects
-% all objects that are in that same room as Id1 and Id2 to check for 
-% obstruction.
 viewspace_not_obstructed(Id1, Id2) :-
     containment(Id1, RM1),
     containment(Id2, RM2),
@@ -124,6 +170,7 @@ visible_points_h(PT1, [PT2,PT3|PR], S1, PTS) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % privacy
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

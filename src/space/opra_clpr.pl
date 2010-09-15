@@ -1,13 +1,14 @@
 :-use_module(library(clpr)).
 
-opra(PTA, PTB, M, I) :-
-    compute_opra(PTA, PTB, M, I).
+opra(PtA, Dir, PtB, M, I) :-
+    %print(PtA),nl,print(Dir),nl,print(PtB),nl,nl,
+    compute_opra(PtA,Dir, PtB, M, I).
 
-opra((PtA, OA), (PtB, OB), M, I, J) :-
-    compute_opra((PtA, OA), PtB, M, I),
-    compute_opra((PtB, OB), PtA, M, J).
+%opra((PtA, OA), (PtB, OB), M, I, J) :-
+%    compute_opra((PtA, OA), PtB, M, I),
+%    compute_opra((PtB, OB), PtA, M, J).
 
-compute_opra((PtA,OrA),PtB,M,I) :-
+compute_opra(PtA,OrA,PtB,M,I) :-
     angle(PtA,PtB,AB),
     angle(PtA,OrA,OA),
     (AB < OA ->
@@ -17,7 +18,7 @@ compute_opra((PtA,OrA),PtB,M,I) :-
     {X > ((2*3.14) * ((I - 1)/(M*4))),
      X < ((2*3.14) * ((I + 1)/(M*4)))}.
 
-compute_opra((PtA,OrA),PtB,M,I) :-
+compute_opra(PtA,OrA,PtB,M,I) :-
     angle(PtA,PtB,AB),
     angle(PtA,OrA,OA),
     (AB < OA ->
@@ -70,6 +71,15 @@ odd(9).
 odd(11).
 odd(13).
 odd(15).
+odd(17).
+odd(19).
+odd(21).
+odd(23).
+odd(25).
+odd(27).
+odd(29).
+odd(31).
+odd(33).
 even(0).
 even(2).
 even(4).
@@ -78,6 +88,18 @@ even(8).
 even(10).
 even(12).
 even(14).
+even(16).
+even(18).
+even(20).
+even(22).
+even(24).
+even(26).
+even(28).
+even(30).
+even(32).
+even(34).
+even(36).
+
 
 atan(X, V) :-
     V is atan(X).

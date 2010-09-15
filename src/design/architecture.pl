@@ -2,39 +2,45 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % architectual entities are represented in a multi
 % perspective manner. eg. a door can be represented 
-% geometrically as an extended region, point, or 
 % directed point. The perspective/3 predicate transforms
 % the physical geometry to the various spatial 
 % abstraction based on the architectual type.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% extended region and pt predicates are same for all arch entity types
-perspective(ID, point, P) :-
-    ifc_geometry(ID, G), 
-    transform_to_point(G, P).
+point_transformation(Id,  Pt) :-
+    ifc_geometry(Id, Geom), 
+    abstract_to_point(Geom, Pt).
 
-perspective(ID, extended_region, E) :-
-    ifc_geometry(ID, E).
+convex_hull_transformation(Id, Convex) :-
+    ifc_geometry(Id, Geom),
+    abstract_to_convex_hull(Geom, Convex).
 
 % currently works for all types of arch entities
 % direction must be hard coded
-perspective(ID, directed_point, (PT,DIR)) :-
-    %arch_entity(ID, dsDoor),
-    ifc_geometry(ID, G),
-    transform_to_point(G,PT),
-    direction(ID, DIR).
+directed_point_transformation(Id, Pt, Dir) :-
+    %( arch_entity(Id, dsDoor) ;
+    %  arch_entity(Id, dsWindow) ;
+    %  arch_entity(Id, dsWall) ),
+    % ifc_geometry(Id, Geom),
+    % abstract_to_point(Geom, Pt),
+    direction_hard_code(Id, dir_pt(Pt, Dir)).
 
 perspective(ID, fs_point, RmID, PT) :-
     functional_space(ID, RmID, FS),
-    transform_to_point(FS, PT).
+    abstract_to_point(FS, PT).
 
-transform_to_point(region(R), Centroid) :-
+abstract_to_point(region(R), Centroid) :-
     centroid(R, Centroid).
+
+abstract_to_convex_hull(Geom, Convex) :-
+    convex_hull(Geom, Convex).
+
+% geometry utility functions
 
 % calculates the centroid of a polygon. 
 % NOTE: doesn't work if all coordinates are negative
 centroid(region(R), C) :- !,
-    convex_hull(R, ConvexR),
+    abstract_to_convex_hull(R, ConvexR),
     polygon_area(ConvexR, A),
     centroid_xy_sum(ConvexR, SumX, SumY),
     my_abs(SumX, SumX_pos),
@@ -42,7 +48,7 @@ centroid(region(R), C) :- !,
     mult_area(A, SumX_pos, SumY_pos, C).
 
 centroid(R, C) :- !,
-    convex_hull(R, ConvexR),
+    abstract_to_convex_hull(R, ConvexR),
     polygon_area(ConvexR, A),
     centroid_xy_sum(ConvexR, SumX, SumY),
     my_abs(SumX, SumX_pos),
@@ -66,7 +72,7 @@ polygon_xy_sum([(X1,Y1),(X2,Y2)|PR], SumXY, SumYX) :-
     SumXY is XY + SumXY_prev,
     SumYX is YX + SumYX_prev. 
 
-mult_area(A, SumX, SumY, (Y,X)) :-
+mult_area(A, SumX, SumY, (X,Y)) :-
     X is ((1/(6 * A)) * SumX),
     Y is ((1/(6 * A)) * SumY).
 

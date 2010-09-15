@@ -30,6 +30,8 @@ arch_entity(a2Fwq8QrPcGPh9wA9tp41o, dsWallStandardCase).
 arch_entity(door1, dsdoor).
 arch_entity(door2, dsdoor).
 arch_entity(space1, dsSpace).
+
+
 ifc_geometry(a3UcDt2E5uXJO4hM1dqbB7q, G) :-
 	spatial_primitive(G, [(4.3,11.59),(5.41,11.59),(4.855,10.48),(4.6835,10.5072),(4.30683,10.9482),(4.3,11.59)]).
 
@@ -110,6 +112,13 @@ ifc_geometry(a3FkWqVVp0lGxW_ZM8pX2L7, G) :-
 
 ifc_geometry(a2Fwq8QrPcGPh9wA9tp41o, G) :-
 	spatial_primitive(G, [(0,0),(23.23,0),(22.93,0.3),(0.3,0.3),(0,0)]).
+
+direction_hard_code(door1, dir_pt((0.25, 4.06), (0.3, 4.06))).
+direction_hard_code(door2, dir_pt((11.26 ,0.25),(11.26,0.3))).
+direction_hard_code(door3, dir_pt((6.05, 4.06), (6, 4.06))).
+
+ifc_geometry(door3, G) :-
+    spatial_primitive(G, [(6, 4.81), (6.1, 4.81), (6.1,3.31), (6,3.31)]).
 
 ifc_geometry(door1, G) :-
 	spatial_primitive(G, [(0.2,4.81),(0.3,4.81),(0.3,3.31),(0.2,3.31),(0.2,4.81)]).
