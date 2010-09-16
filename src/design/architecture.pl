@@ -23,7 +23,8 @@ directed_point_transformation(Id, Pt, Dir) :-
     %  arch_entity(Id, dsWall) ),
     % ifc_geometry(Id, Geom),
     % abstract_to_point(Geom, Pt),
-    direction_hard_code(Id, dir_pt(Pt, Dir)).
+    point_transformation(Id, Pt),
+    direction_hard_code(Id, Dir).
 
 perspective(ID, fs_point, RmID, PT) :-
     functional_space(ID, RmID, FS),
@@ -36,55 +37,24 @@ abstract_to_convex_hull(Geom, Convex) :-
     convex_hull(Geom, Convex).
 
 % geometry utility functions
+centroid(R, (X,Y)) :-
+    convex_hull(R, Convex),
+    x_y_average(Convex, X, Y).
 
-% calculates the centroid of a polygon. 
-% NOTE: doesn't work if all coordinates are negative
-centroid(region(R), C) :- !,
-    abstract_to_convex_hull(R, ConvexR),
-    polygon_area(ConvexR, A),
-    centroid_xy_sum(ConvexR, SumX, SumY),
-    my_abs(SumX, SumX_pos),
-    my_abs(SumY, SumY_pos),
-    mult_area(A, SumX_pos, SumY_pos, C).
+x_y_average(Convex, X, Y) :-
+    sum_x_y(Convex, Sum_x, Sum_y),
+    length(Convex, L),
+    X is Sum_x / (L-1),  %sub 1 because convex has extra pt at end
+    Y is Sum_y / (L-1).
 
-centroid(R, C) :- !,
-    abstract_to_convex_hull(R, ConvexR),
-    polygon_area(ConvexR, A),
-    centroid_xy_sum(ConvexR, SumX, SumY),
-    my_abs(SumX, SumX_pos),
-    my_abs(SumY, SumY_pos),
-    mult_area(A, SumX_pos, SumY_pos, C).
+% don't process last element because it's a dup because of convex
+% hull representation.
+sum_x_y([_|[]], 0, 0).
 
-my_abs(Neg, Pos) :-
-    (Neg < 0 -> Pos is -Neg; Pos is Neg).
-
-polygon_area(R, A) :-
-    polygon_xy_sum(R, SumXY, SumYX),
-    Sum is SumYX - SumXY,
-    A is Sum / 2.
-
-polygon_xy_sum([_|[]], 0, 0).
-
-polygon_xy_sum([(X1,Y1),(X2,Y2)|PR], SumXY, SumYX) :-
-    polygon_xy_sum([(X2,Y2)|PR], SumXY_prev, SumYX_prev),
-    XY is X1 * Y2,
-    YX is Y1 * X2,
-    SumXY is XY + SumXY_prev,
-    SumYX is YX + SumYX_prev. 
-
-mult_area(A, SumX, SumY, (X,Y)) :-
-    X is ((1/(6 * A)) * SumX),
-    Y is ((1/(6 * A)) * SumY).
-
-centroid_xy_sum([_|[]], 0, 0).
-
-centroid_xy_sum([(X1,Y1),(X2,Y2)|PR], SumX, SumY) :-
-    centroid_xy_sum([(X2,Y2)|PR], SumX_prev, SumY_prev),
-    Dx is ((X1 * Y2) - (X2 * Y1)),
-    Ux is (X1 + X2) * Dx,
-    Uy is (Y1 + Y2) * Dx,
-    SumX is Ux + SumX_prev,
-    SumY is Uy + SumY_prev.
+sum_x_y([(X,Y)|Xs], Sum_x, Sum_y) :-
+    sum_x_y(Xs, New_x_sum, New_y_sum),
+    Sum_x is X + New_x_sum,
+    Sum_y is Y + New_y_sum.
 
 
 

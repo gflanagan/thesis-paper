@@ -1,14 +1,13 @@
 :-use_module(library(clpr)).
 
-opra(PtA, Dir, PtB, M, I) :-
-    %print(PtA),nl,print(Dir),nl,print(PtB),nl,nl,
-    compute_opra(PtA,Dir, PtB, M, I).
+opra((X1,Y1), (Dx,Dy), (X2,Y2), M, I) :-
+    compute_opra((X1,Y1), (Dx,Dy), (X2,Y2), M, I).
 
 %opra((PtA, OA), (PtB, OB), M, I, J) :-
 %    compute_opra((PtA, OA), PtB, M, I),
 %    compute_opra((PtB, OB), PtA, M, J).
 
-compute_opra(PtA,OrA,PtB,M,I) :-
+compute_opra(PtA, OrA, PtB, M, I) :-
     angle(PtA,PtB,AB),
     angle(PtA,OrA,OA),
     (AB < OA ->

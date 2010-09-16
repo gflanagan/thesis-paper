@@ -1,22 +1,22 @@
-arch_entity(a3UcDt2E5uXJO4hM1dqbB7q, NarrowdisplayCase).
-arch_entity(a3OdD8VcDiHwx6l5Wg9Fe1, NarrowdisplayCase).
-arch_entity(a18GwN7PhNfIeNaHYpFI1KU, NarrowdisplayCase).
-arch_entity(a1UZzuOqde7IgkEFqeQ6u8H, NarrowdisplayCase).
-arch_entity(a1eBAw86pbSHQtVYZVmjLWl, NarrowdisplayCase).
-arch_entity(a3PBlC_RDTrHPIDimiQA6ao, NarrowdisplayCase).
-arch_entity(a1854Ap5AofIOX0cRMfLep1, NarrowdisplayCase).
-arch_entity(a0SgsfCd8F5GPEilwoWTeLp, NarrowdisplayCase).
-arch_entity(a1Hn3YtcUc5GAlEURyxazuz, NarrowdisplayCase).
-arch_entity(a06Zz3NaWLGB_FAnpfGJ_, NarrowdisplayCase).
-arch_entity(a0hy8dmBcDhIf5VfOU2ZBct, NarrowdisplayCase).
-arch_entity(a2rHkAjtwEfIRx3nWKYnSD, NarrowdisplayCase).
-arch_entity(a0QtJrRsvT7JeZIZnTZdWqv, NarrowdisplayCase).
-arch_entity(a2wpztzZIkbGQ82pmqS7bLg, WidedisplayCase).
-arch_entity(a0uacZTAs2HAt7KS_VGG_g, WidedisplayCase).
-arch_entity(a25RTFpkf9sGQDWUN9TnhBe, WidedisplayCase).
-arch_entity(a3EQx8p2MnDIh3Gym92LZDg, WidedisplayCase).
-arch_entity(a11VGJR9D5jIOWt2WXRqO3B, WidedisplayCase).
-arch_entity(a1Q_jqRYHHWHvDSkmuUxxDA, WidedisplayCase).
+arch_entity(a3UcDt2E5uXJO4hM1dqbB7q, dsNarrowdisplayCase).
+arch_entity(a3OdD8VcDiHwx6l5Wg9Fe1, dsNarrowdisplayCase).
+arch_entity(a18GwN7PhNfIeNaHYpFI1KU, dsNarrowdisplayCase).
+arch_entity(a1UZzuOqde7IgkEFqeQ6u8H, dsNarrowdisplayCase).
+arch_entity(a1eBAw86pbSHQtVYZVmjLWl, dsNarrowdisplayCase).
+arch_entity(a3PBlC_RDTrHPIDimiQA6ao, dsNarrowdisplayCase).
+arch_entity(a1854Ap5AofIOX0cRMfLep1, dsNarrowdisplayCase).
+arch_entity(a0SgsfCd8F5GPEilwoWTeLp, dsNarrowdisplayCase).
+arch_entity(a1Hn3YtcUc5GAlEURyxazuz, dsNarrowdisplayCase).
+arch_entity(a06Zz3NaWLGB_FAnpfGJ_, dsNarrowdisplayCase).
+arch_entity(a0hy8dmBcDhIf5VfOU2ZBct, dsNarrowdisplayCase).
+arch_entity(a2rHkAjtwEfIRx3nWKYnSD, dsNarrowdisplayCase).
+arch_entity(a0QtJrRsvT7JeZIZnTZdWqv, dsNarrowdisplayCase).
+arch_entity(a2wpztzZIkbGQ82pmqS7bLg, dsWidedisplayCase).
+arch_entity(a0uacZTAs2HAt7KS_VGG_g, dsWidedisplayCase).
+arch_entity(a25RTFpkf9sGQDWUN9TnhBe, dsWidedisplayCase).
+arch_entity(a3EQx8p2MnDIh3Gym92LZDg, dsWidedisplayCase).
+arch_entity(a11VGJR9D5jIOWt2WXRqO3B, dsWidedisplayCase).
+arch_entity(a1Q_jqRYHHWHvDSkmuUxxDA, dsWidedisplayCase).
 arch_entity(a071EaaIFW_IxgwteYAWAy1, dsBuilding).
 arch_entity(a3uAVY0UXlCJvuv77V6fm0, dsBuildingStorey).
 arch_entity(a0Vf1uq2k0GHQ8WwdmDsuwG, dsWallStandardCase).
@@ -29,6 +29,7 @@ arch_entity(a3FkWqVVp0lGxW_ZM8pX2L7, dsWallStandardCase).
 arch_entity(a2Fwq8QrPcGPh9wA9tp41o, dsWallStandardCase).
 arch_entity(door1, dsdoor).
 arch_entity(door2, dsdoor).
+arch_entity(door3, dsdoor).
 arch_entity(space1, dsSpace).
 
 
@@ -113,15 +114,15 @@ ifc_geometry(a3FkWqVVp0lGxW_ZM8pX2L7, G) :-
 ifc_geometry(a2Fwq8QrPcGPh9wA9tp41o, G) :-
 	spatial_primitive(G, [(0,0),(23.23,0),(22.93,0.3),(0.3,0.3),(0,0)]).
 
-direction_hard_code(door1, dir_pt((0.25, 4.06), (0.3, 4.06))).
-direction_hard_code(door2, dir_pt((11.26 ,0.25),(11.26,0.3))).
-direction_hard_code(door3, dir_pt((6.05, 4.06), (6, 4.06))).
+direction_hard_code(door1, (0.3,4.06)).
+direction_hard_code(door2, (11.26,0.3)).
+direction_hard_code(door3, (6,4.06)).
 
 ifc_geometry(door3, G) :-
     spatial_primitive(G, [(6, 4.81), (6.1, 4.81), (6.1,3.31), (6,3.31)]).
 
 ifc_geometry(door1, G) :-
-	spatial_primitive(G, [(0.2,4.81),(0.3,4.81),(0.3,3.31),(0.2,3.31),(0.2,4.81)]).
+	spatial_primitive(G, [(0.2,4.81),(0.3,4.81),(0.3,3.31),(0.2,3.31)]).
 
 ifc_geometry(door2, G) :-
 	spatial_primitive(G, [(10.51,0.2),(10.51,0.3),(12.01,0.3),(12.01,0.2),(10.51,0.2)]).

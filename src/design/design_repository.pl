@@ -14,33 +14,34 @@ opposing_side(Id1, Id2, ContextId) :-
     point_transformation(Id1, Pt1),
     point_transformation(Id2, Pt2),
     point_transformation(ContextId, Pt3),
-    ( scc0(Pt1, Pt2, Pt3) ;
-      scc1(Pt1, Pt2, Pt3) ;
-      scc7(Pt1, Pt2, Pt3) ).
+    ( scc0(Pt1, Pt3, Pt2) ;
+      scc1(Pt1, Pt3, Pt2) ;
+      scc7(Pt1, Pt3, Pt2) ).
 
 same_side(Id1, Id2, ContextId) :-
     point_transformation(Id1, Pt1),
     point_transformation(Id2, Pt2),
     point_transformation(ContextId, Pt3),
-    ( scc3(Pt1, Pt2, Pt3) ;
-      scc4(Pt1, Pt2, Pt3) ;
-      scc5(Pt1, Pt2, Pt3) ).
+    ( scc3(Pt1, Pt3, Pt2) ;
+      scc4(Pt1, Pt3, Pt2) ;
+      scc5(Pt1, Pt3, Pt2) ).
 
 left_side(Id1, Id2, ContextId) :-
     point_transformation(Id1, Pt1),
     point_transformation(Id2, Pt2),
     point_transformation(ContextId, Pt3),
-    ( scc5(Pt1, Pt2, Pt3) ;
-      scc6(Pt1, Pt2, Pt3) ;
-      scc7(Pt1, Pt2, Pt3) ).
+    ( scc5(Pt1, Pt3, Pt2) ;
+      scc6(Pt1, Pt3, Pt2) ;
+      scc7(Pt1, Pt3, Pt2) ).
 
 right_side(Id1, Id2, ContextId) :-
     point_transformation(Id1, Pt1),
     point_transformation(Id2, Pt2),
+    print(Pt2),nl,
     point_transformation(ContextId, Pt3),
-    ( scc1(Pt1, Pt2, Pt3) ;
-      scc2(Pt1, Pt2, Pt3) ;
-      scc3(Pt1, Pt2, Pt3) ).
+    ( scc1(Pt1, Pt3, Pt2) ;
+      scc2(Pt1, Pt3, Pt2) ;
+      scc3(Pt1, Pt3, Pt2) ).
 
 same_left(Id1, Id2, ContextId) :-
     same_side(Id1, Id2, ContextId), 
@@ -60,12 +61,27 @@ opposing_right(Id1, Id2, ContextId) :-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% positioning for sequence rules
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+horizontally_perceived(Pt, Context, List) :-
+    point_transformation(Context, PtC),
+    horizontally_perceived_hlpr(Pt, PtC, List).
+
+horizontally_perceived_hlpr(Pt, PtC, []).
+
+horizontally_perveived_hlpr(Pt, PtC, [Obj|Os]) :-
+    point_transformation(Obj, Pt2),
+    
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % facing rules
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 facing_towards(Id1, Id2) :-
     directed_point_transformation(Id1, Pt, Dir),
     point_transformation(Id2, Pt2),
-    print(Pt2),nl,nl,
     ( opra(Pt, Dir, Pt2, 8, 0) ;
       opra(Pt, Dir, Pt2, 8, 1) ;
       opra(Pt, Dir, Pt2, 8, 31) ).
