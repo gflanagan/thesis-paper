@@ -12,7 +12,7 @@ point_transformation(Id,  Pt) :-
     abstract_to_point(Geom, Pt).
 
 convex_hull_transformation(Id, Convex) :-
-    ifc_geometry(Id, Geom),
+    ifc_geometry(Id, region(Geom)),
     abstract_to_convex_hull(Geom, Convex).
 
 % currently works for all types of arch entities

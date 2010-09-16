@@ -1,5 +1,4 @@
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  qualitative spatial attributes found in architecture (QSA) 
@@ -10,6 +9,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % positioning rules
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 opposing_side(Id1, Id2, ContextId) :- 
     point_transformation(Id1, Pt1),
     point_transformation(Id2, Pt2),
@@ -37,7 +37,6 @@ left_side(Id1, Id2, ContextId) :-
 right_side(Id1, Id2, ContextId) :-
     point_transformation(Id1, Pt1),
     point_transformation(Id2, Pt2),
-    print(Pt2),nl,
     point_transformation(ContextId, Pt3),
     ( scc1(Pt1, Pt3, Pt2) ;
       scc2(Pt1, Pt3, Pt2) ;
@@ -71,7 +70,7 @@ horizontally_perceived(Pt, Context, List) :-
 horizontally_perceived_hlpr(Pt, PtC, []).
 
 horizontally_perveived_hlpr(Pt, PtC, [Obj|Os]) :-
-    point_transformation(Obj, Pt2),
+    point_transformation(Obj, Pt2).
     
 
 
@@ -79,6 +78,7 @@ horizontally_perveived_hlpr(Pt, PtC, [Obj|Os]) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % facing rules
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 facing_towards(Id1, Id2) :-
     directed_point_transformation(Id1, Pt, Dir),
     point_transformation(Id2, Pt2),
@@ -102,57 +102,93 @@ facing_away_from_each_other(Id1, Id2) :-
 % proximity rules
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+near(Id1, Id2) :-
+    ifc_geometry(Id1, G1),
+    ifc_geometry(Id2, G2),
+    mindist(G1, G2, Dist),
+    Dist < 3.
+
+near_plus(Id1, Id2) :-
+    ifc_geometry(Id1, G1),
+    ifc_geometry(Id2, G2),
+    mindist(G1, G2, Dist),
+    Dist < 6,
+    Dist > 3.
+
+far(Id1, Id2) :-
+    ifc_geometry(Id1, G1),
+    ifc_geometry(Id2, G2),
+    mindist(G1, G2, Dist),
+    Dist > 6.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % visibility rules
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% checks for obstruction between Id1, Id2, given list of objects 
+% checks for obstruction between Id1 / Id2, given list of objects 
 is_visible(_, _, []).
 
 is_visible(Id1, Id2, [Id_obstruct|OX]) :-
     viewspace_not_obstructed(Id1, Id2, Id_obstruct),
     is_visible(Id1, Id2, OX).
 
+viewspace_not_obstructed(Id1, Id2, Id3) :-
+    point_transformation(Id1, Pt),
+    convex_hull_transformation(Id2, Convex1),
+    convex_hull_transformation(Id3, Convex2),
+    print(Convex1),nl,print(Convex2),nl,print(Pt),nl,
+    generate_viewspace(Pt, Convex1, Viewspace),
+    print(Viewspace),nl,
+    disconnect(Convex2, Viewspace).
+
+generate_viewspace(Pt, Convex, Viewspace) :-
+    visible_points(Pt, Convex, VisiblePts),
+    print(VisiblePts),nl, 
+    append([Pt], VisiblePts, Pts),
+    convex_hull(Pts, Viewspace). 
+
+
+
 % check that no object obstructs the visibility between Id1, Id2. collects
 % all objects that are in that same room as Id1 and Id2 to check for 
 % obstruction.
-is_visible(Id1, Id2) :-
-    viewspace_not_obstructed(Id1, Id2).
+%is_visible(Id1, Id2) :-
+%    viewspace_not_obstructed(Id1, Id2).
 
-viewspace_not_obstructed(Id1, Id2) :-
-    containment(Id1, RM1),
-    containment(Id2, RM2),
-    match(RM1, RM2),
-    get_objects_in_room(RM1, OBJL), 
-    remove(Id1, OBJL, OBJL2), remove(Id2, OBJL2, OBJL3),
-    viewspace_not_obstructed_set(Id1, Id2, OBJL3, RM1).
+%viewspace_not_obstructed(Id1, Id2) :-
+%    containment(Id1, RM1),
+%    containment(Id2, RM2),
+%    match(RM1, RM2),
+%    get_objects_in_room(RM1, OBJL), 
+%    remove(Id1, OBJL, OBJL2), remove(Id2, OBJL2, OBJL3),
+%    viewspace_not_obstructed_set(Id1, Id2, OBJL3, RM1).
 
-viewspace_not_obstructed_set(_,_,[],_).
+%viewspace_not_obstructed_set(_,_,[],_).
 
-viewspace_not_obstructed_set(Id1, Id2, [Id3|IdR], RM) :-
-    viewspace_not_obstructed(Id1, Id2, Id3, RM),
-    viewspace_not_obstructed_set(Id1, Id2, IdR, RM).
+%viewspace_not_obstructed_set(Id1, Id2, [Id3|IdR], RM) :-
+%    viewspace_not_obstructed(Id1, Id2, Id3, RM),
+%    viewspace_not_obstructed_set(Id1, Id2, IdR, RM).
 
-viewspace_not_obstructed(Id1, Id2, Id3, RM) :-
-   (arch_entity(Id1, dsDoor) ; arch_entity(Id1, dsWindow)),
-   (arch_entity(Id2, dsDoor) ; arch_entity(Id2, dswindow)),
-   perspective(Id1, fs_point, RM, PT1),
-   perspective(Id2, fs_point, RM, PT2),
-   perspective(Id3, extended_region, R),
-   disconnect(line([PT1,PT2]), R).
+%viewspace_not_obstructed(Id1, Id2, Id3, RM) :-
+%   (arch_entity(Id1, dsDoor) ; arch_entity(Id1, dsWindow)),
+%   (arch_entity(Id2, dsDoor) ; arch_entity(Id2, dswindow)),
+%   perspective(Id1, fs_point, RM, PT1),
+%   perspective(Id2, fs_point, RM, PT2),
+%   perspective(Id3, extended_region, R),
+%   disconnect(line([PT1,PT2]), R).
 
-viewspace_not_obstructed(Id1, Id2, Id3) :-
-    perspective(Id1, point, PT),
-    perspective(Id2, extended_region, R2),
-    perspective(Id3, extended_region, R3),
-    visibility_obstruction_region(PT, R2, OR),
-    disconnect(R3,OR).
+%viewspace_not_obstructed(Id1, Id2, Id3) :-
+%    perspective(Id1, point, PT),
+%    perspective(Id2, extended_region, R2),
+%    perspective(Id3, extended_region, R3),
+%    visibility_obstruction_region(PT, R2, OR),
+%    disconnect(R3,OR).
     
-visibility_obstruction_region(PT, region(R), region(PTS)) :-
-    convex_hull(R, ConvexR),
-    visible_points(PT, ConvexR, Visible_PTS), 
-    append([PT], Visible_PTS, PTS). 
+%visibility_obstruction_region(PT, region(R), region(PTS)) :-
+%    convex_hull(R, ConvexR),
+%    visible_points(PT, ConvexR, Visible_PTS), 
+%    append([PT], Visible_PTS, PTS). 
  
 normalize_sign(S_old, S_normal) :-
     (S_old < 0 -> S_normal = -1 ; S_normal = 1).
@@ -228,8 +264,6 @@ determinant2((X1, Y1),(X2, Y2), (X3, Y3), D) :-
     Cross2 is Matrix_0_1 * Matrix_1_0,
     D is Cross1 - Cross2.
 
-normalize_sign(S_old, S_normal) :-
-    (S_old < 0 -> S_normal = -1 ; S_normal = 1).
 
 change_point(S1, S2, C, [C]) :-
     S1 \= S2.
