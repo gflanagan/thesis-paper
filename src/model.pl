@@ -17,6 +17,8 @@ arch_entity(sensor1, ifcSensor).
 arch_entity(stair1, ifcStair).
 
 
+
+
 ifc_geometry(room1, G) :-
     geometry(G, [(0,0),(0,18),(18,0),(18,18)]).
 

@@ -7,6 +7,12 @@
 % abstraction based on the architectual type.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+point_transformation_list([], []).
+
+point_transformation_list([Id|IdRest], [Pt|PtList]) :-
+    point_transformation(Id, Pt),
+    point_transformation_list(IdRest, PtList).
+
 point_transformation(Id,  Pt) :-
     ifc_geometry(Id, Geom), 
     abstract_to_point(Geom, Pt).

@@ -64,14 +64,16 @@ opposing_right(Id1, Id2, ContextId) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 horizontally_perceived(Pt, Context, List) :-
-    point_transformation(Context, PtC),
-    horizontally_perceived_hlpr(Pt, PtC, List).
+    point_transformation(Context, PtContext),
+    point_transformation_list(List, PtList),
+    horizontally_perceived_hlpr(Pt, PtContext, PtList, SCC),
+    check_scc_567(SCC),
+    check_scc_107(SCC).
 
-horizontally_perceived_hlpr(Pt, PtC, []).
+horizontally_perceived_hlpr(_, _, [], []).
 
-horizontally_perveived_hlpr(Pt, PtC, [Obj|Os]) :-
-    point_transformation(Obj, Pt2).
-    
+horizontally_perveived_hlpr(Pt, PtC, [Obj|Os], SCC) :-
+    print('todo').
 
 
 
@@ -127,71 +129,46 @@ far(Id1, Id2) :-
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % checks for obstruction between Id1 / Id2, given list of objects 
-is_visible(_, _, []).
-
-is_visible(Id1, Id2, [Id_obstruct|OX]) :-
-    viewspace_not_obstructed(Id1, Id2, Id_obstruct),
-    is_visible(Id1, Id2, OX).
-
-viewspace_not_obstructed(Id1, Id2, Id3) :-
+is_visible(Id1, Id2, ObstructList) :-
     point_transformation(Id1, Pt),
-    convex_hull_transformation(Id2, Convex1),
-    convex_hull_transformation(Id3, Convex2),
-    print(Convex1),nl,print(Convex2),nl,print(Pt),nl,
-    generate_viewspace(Pt, Convex1, Viewspace),
-    print(Viewspace),nl,
-    disconnect(Convex2, Viewspace).
+    convex_hull_transformation(Id2, Convex),
+    generate_viewspace(Pt, Convex, Viewspace),
+    is_visible_hlpr(Viewspace, ObstructList).
+
+is_visible_hlpr(_,[]).
+
+is_visible_hlpr(Viewspace, [Id|Rest]) :-
+    convex_hull_transformation(Id, Convex),
+    disconnect(Viewspace, Convex),
+    is_visible_hlpr(Viewspace, Rest).
 
 generate_viewspace(Pt, Convex, Viewspace) :-
     visible_points(Pt, Convex, VisiblePts),
-    print(VisiblePts),nl, 
     append([Pt], VisiblePts, Pts),
     convex_hull(Pts, Viewspace). 
 
 
+% - checks for visibility between two objects located in the same room
+% - if objects are not in the same room then predicate will fail
+% - walls that contain doors / windows being checked for visibility are
+%   removed from obstruction list.
 
-% check that no object obstructs the visibility between Id1, Id2. collects
-% all objects that are in that same room as Id1 and Id2 to check for 
-% obstruction.
-%is_visible(Id1, Id2) :-
-%    viewspace_not_obstructed(Id1, Id2).
+is_visible(Id1, Id2) :-
+    shared_room(Id1, Id2, Rm),
+    get_objects_in_room(Rm, ObjList),
+    remove_list([Id1,Id2], ObjList, ObjList2),
+    ((arch_entity(Id1, dsDoor) ; arch_entity(Id1, dsWindow)) -> 
+        wall_containment(Id1, W1), remove(W1, ObjList2, ObjList3) ;
+        ObjList2 = ObjList3),
+    ((arch_entity(Id2, dsDoor) ; arch_entity(Id2, dsWindow)) -> 
+        wall_containment(Id2, W2), remove(W2, ObjList3, ObjList4) ;
+        ObjList3 = ObjList4),
+    print(ObjList4),nl,
+    is_visible(Id1, Id2, ObjList4), !. 
 
-%viewspace_not_obstructed(Id1, Id2) :-
-%    containment(Id1, RM1),
-%    containment(Id2, RM2),
-%    match(RM1, RM2),
-%    get_objects_in_room(RM1, OBJL), 
-%    remove(Id1, OBJL, OBJL2), remove(Id2, OBJL2, OBJL3),
-%    viewspace_not_obstructed_set(Id1, Id2, OBJL3, RM1).
-
-%viewspace_not_obstructed_set(_,_,[],_).
-
-%viewspace_not_obstructed_set(Id1, Id2, [Id3|IdR], RM) :-
-%    viewspace_not_obstructed(Id1, Id2, Id3, RM),
-%    viewspace_not_obstructed_set(Id1, Id2, IdR, RM).
-
-%viewspace_not_obstructed(Id1, Id2, Id3, RM) :-
-%   (arch_entity(Id1, dsDoor) ; arch_entity(Id1, dsWindow)),
-%   (arch_entity(Id2, dsDoor) ; arch_entity(Id2, dswindow)),
-%   perspective(Id1, fs_point, RM, PT1),
-%   perspective(Id2, fs_point, RM, PT2),
-%   perspective(Id3, extended_region, R),
-%   disconnect(line([PT1,PT2]), R).
-
-%viewspace_not_obstructed(Id1, Id2, Id3) :-
-%    perspective(Id1, point, PT),
-%    perspective(Id2, extended_region, R2),
-%    perspective(Id3, extended_region, R3),
-%    visibility_obstruction_region(PT, R2, OR),
-%    disconnect(R3,OR).
-    
-%visibility_obstruction_region(PT, region(R), region(PTS)) :-
-%    convex_hull(R, ConvexR),
-%    visible_points(PT, ConvexR, Visible_PTS), 
-%    append([PT], Visible_PTS, PTS). 
- 
-normalize_sign(S_old, S_normal) :-
-    (S_old < 0 -> S_normal = -1 ; S_normal = 1).
+shared_room(Id1, Id2, Rm) :-
+    room_containment(Id1, Rm),
+    room_containment(Id2, Rm).
 
 visible_points(PT1, [PT2,PT3|PR], PTS) :- 
     determinant2(PT1, PT2, PT3, Det),
@@ -222,7 +199,7 @@ visible_points_h(PT1, [PT2,PT3|PR], S1, PTS) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % privacy
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+    
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -254,6 +231,9 @@ surveillance(Door, Sensor, RM) :-
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  
+normalize_sign(S_old, S_normal) :-
+    (S_old < 0 -> S_normal = -1 ; S_normal = 1).
+
 determinant2((X1, Y1),(X2, Y2), (X3, Y3), D) :-
     %D is ((Y1-Y2)*(X3-X2)) - ((X1-X2)*(Y3-Y2)).
     Matrix_0_0 is X1 - X3,
@@ -271,10 +251,15 @@ change_point(S1, S2, C, [C]) :-
 change_point(S1, S2, _, []) :-
     S1 =:= S2. 
 
-get_objects_in_room(RM, RetL):-
-    findall(Id, containment(Id, RM), RetL).    
 
-match(A,A).
+get_objects_in_room(Rm, RetList):-
+    findall(Id, room_containment(Id, Rm), RetList).    
+
+remove_list([], A, A).
+
+remove_list([A|AX], Old, New) :-
+    remove(A, Old, Old2),
+    remove_list(AX, Old2, New).  
 
 remove(_,[],[]).
 

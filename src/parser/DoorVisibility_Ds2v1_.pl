@@ -6,8 +6,20 @@ arch_entity(w3, dsWallStandardCase).
 arch_entity(w4, dsWallStandardCase).
 arch_entity(w5, dsWallStandardCase).
 arch_entity(w6, dsWallStandardCase).
-arch_entity(doo1, dsdoor).
-arch_entity(door2, dsdoor).
+arch_entity(door1, dsDoor).
+arch_entity(door2, dsDoor).
+
+room_containment(door1, rm1).
+room_containment(door2, rm1).
+room_containment(w1, rm1).
+room_containment(w2, rm1).
+room_containment(w3, rm1).
+room_containment(w4, rm1).
+room_containment(w5, rm1).
+room_containment(w6, rm1).
+
+wall_containment(door1, w1).
+wall_containment(door2, w5).
 
 ifc_geometry(w1, G) :-
 	spatial_primitive(G, [(0,0),(13.6,0),(13.3,0.3),(0.3,0.3),(0,0)]).

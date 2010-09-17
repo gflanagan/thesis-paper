@@ -1,12 +1,12 @@
-arch_entity(a3UcDt2E5uXJO4hM1dqbB7q, dsNarrowdisplayCase).
-arch_entity(a3OdD8VcDiHwx6l5Wg9Fe1, dsNarrowdisplayCase).
-arch_entity(a18GwN7PhNfIeNaHYpFI1KU, dsNarrowdisplayCase).
-arch_entity(a1UZzuOqde7IgkEFqeQ6u8H, dsNarrowdisplayCase).
-arch_entity(a1eBAw86pbSHQtVYZVmjLWl, dsNarrowdisplayCase).
-arch_entity(a3PBlC_RDTrHPIDimiQA6ao, dsNarrowdisplayCase).
-arch_entity(a1854Ap5AofIOX0cRMfLep1, dsNarrowdisplayCase).
-arch_entity(a0SgsfCd8F5GPEilwoWTeLp, dsNarrowdisplayCase).
-arch_entity(a1Hn3YtcUc5GAlEURyxazuz, dsNarrowdisplayCase).
+arch_entity(n1, dsNarrowdisplayCase).
+arch_entity(n2, dsNarrowdisplayCase).
+arch_entity(n3, dsNarrowdisplayCase).
+arch_entity(n4, dsNarrowdisplayCase).
+arch_entity(n5, dsNarrowdisplayCase).
+arch_entity(n6, dsNarrowdisplayCase).
+arch_entity(n7, dsNarrowdisplayCase).
+arch_entity(n8, dsNarrowdisplayCase).
+arch_entity(n9, dsNarrowdisplayCase).
 arch_entity(a06Zz3NaWLGB_FAnpfGJ_, dsNarrowdisplayCase).
 arch_entity(a0hy8dmBcDhIf5VfOU2ZBct, dsNarrowdisplayCase).
 arch_entity(a2rHkAjtwEfIRx3nWKYnSD, dsNarrowdisplayCase).
@@ -33,28 +33,30 @@ arch_entity(door3, dsdoor).
 arch_entity(space1, dsSpace).
 
 
-ifc_geometry(a3UcDt2E5uXJO4hM1dqbB7q, G) :-
+
+
+ifc_geometry(n1, G) :-
 	spatial_primitive(G, [(4.3,11.59),(5.41,11.59),(4.855,10.48),(4.6835,10.5072),(4.30683,10.9482),(4.3,11.59)]).
 
-ifc_geometry(a3OdD8VcDiHwx6l5Wg9Fe1, G) :-
+ifc_geometry(n2, G) :-
 	spatial_primitive(G, [(27.41,10.46),(28.52,10.46),(27.965,9.35),(27.7935,9.37716),(27.4168,9.81818),(27.41,10.46)]).
 
-ifc_geometry(a18GwN7PhNfIeNaHYpFI1KU, G) :-
+ifc_geometry(n3, G) :-
 	spatial_primitive(G, [(0.9,9.37),(0.9,10.48),(2.01,9.925),(1.98284,9.7535),(1.54182,9.37683),(0.9,9.37)]).
 
-ifc_geometry(a1UZzuOqde7IgkEFqeQ6u8H, G) :-
+ifc_geometry(n4, G) :-
 	spatial_primitive(G, [(25.73,10.46),(26.84,10.46),(26.285,9.35),(26.1135,9.37716),(25.7368,9.81818),(25.73,10.46)]).
 
-ifc_geometry(a1eBAw86pbSHQtVYZVmjLWl, G) :-
+ifc_geometry(n5, G) :-
 	spatial_primitive(G, [(24.04,10.46),(25.15,10.46),(24.595,9.35),(24.4235,9.37716),(24.0468,9.81818),(24.04,10.46)]).
 
-ifc_geometry(a3PBlC_RDTrHPIDimiQA6ao, G) :-
+ifc_geometry(n6, G) :-
 	spatial_primitive(G, [(9.97,11.59),(11.08,11.59),(10.525,10.48),(10.3535,10.5072),(9.97683,10.9482),(9.97,11.59)]).
 
-ifc_geometry(a1854Ap5AofIOX0cRMfLep1, G) :-
+ifc_geometry(n7, G) :-
 	spatial_primitive(G, [(14.44,11.5831),(15.55,11.59),(15.0019,10.4766),(14.8302,10.5027),(14.4508,10.9413),(14.44,11.5831)]).
 
-ifc_geometry(a0SgsfCd8F5GPEilwoWTeLp, G) :-
+ifc_geometry(n8, G) :-
 	spatial_primitive(G, [(20.11,11.59),(21.22,11.59),(20.665,10.48),(20.4935,10.5072),(20.1168,10.9482),(20.11,11.59)]).
 
 ifc_geometry(a1Hn3YtcUc5GAlEURyxazuz, G) :-
