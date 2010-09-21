@@ -1,0 +1,62 @@
+\title{Using The DSpace Requirements Reasoner}
+\author{
+        Gregory Flanagan \\
+}
+\date{\today}
+
+
+\documentclass[12pt]{article}
+
+\usepackage{underscore}
+
+
+\begin{document}
+\maketitle
+
+\section{Parser}
+First run the parser over the DsSchema.xml file. This will parse the schema file, and generate a Prolog (.pl) file that will be basis for importing everything in the reasoner. To run the the parser navigate the parser folder in the command line and type:
+\begin{verbatim}
+    python dspace_parser.py file_to_parse.xml
+\end{verbatim}
+The parser will generate two Prolog files. One file is \emph{file_to_parse.pl} which has the design representation predicates and rules for the reasoner. You do not need to do anything with this file. The second file is \emph{dspace_inlude.pl}. This file contains all the \emph{glue} to pull the reasoner together.
+
+
+\section{Starting The Requirements Reasoner}
+Navigate to the reasoner's source code root folder (src/). There should be a file named \emph{dspace_include.pl} if you have already run the parser. Fire up SWI-Prolog with the command 
+\begin{verbatim} 
+   pl
+or 
+   swipl
+\end{verbatim} depending on your OS. Once in Prolog type 
+\begin{verbatim} 
+  ? [dspace_include].
+\end{verbatim} to load the requirements reasoner. This also loads the design file from the parser. Note that only one design can be loaded in the reasoner at a time. There will be some warnings because I am loading several CHR files and I haven't yet found a way to do this cleanly. Now you are ready to use the reasoner.
+
+\section{Using The Requirements Reasoner}
+The reasoner is used as a query engine.
+
+\subsection{Positioning}
+
+
+\subsection{Positioning for Sequences}
+
+\subsection{Facing}
+
+\subsection{Proximity}
+
+\subsection{Visibility}
+
+\subsection{Privacy}
+
+\subsection{Continuity}
+
+\subsection{Enclosure}
+
+\subsection{Artefactual Interference}
+
+\subsection{Spatial Queries}
+\bibliographystyle{abbrv}
+\bibliography{main}
+
+\end{document}
+This is never printed

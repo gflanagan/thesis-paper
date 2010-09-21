@@ -83,8 +83,9 @@ horizontally_perveived_hlpr(Pt, PtC, [Obj|Os], SCC) :-
 
 facing_towards(Id1, Id2) :-
     point_transformation(Id2, Pt2),
-    (arch_entity(Id1, dsDoor) ; arch_entity(Id1, dsWindow)), 
-    directed_point_transformation_dw(Id1, Pt2, Pt, Dir),
+    ( (arch_entity(Id1, dsDoor) ; arch_entity(Id1, dsWindow)) -> 
+    directed_point_transformation_dw(Id1, Pt2, Pt, Dir) ;
+    directed_point_transformation(Id1, Pt, Dir)),
     print(Pt),nl,print(Dir),nl,print(Pt2),nl,
     ( opra(Pt, Dir, Pt2, 8, 0) ;
       opra(Pt, Dir, Pt2, 8, 1) ;

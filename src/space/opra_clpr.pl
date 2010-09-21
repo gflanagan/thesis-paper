@@ -11,59 +11,58 @@ compute_opra(PtA, OrA, PtB, M, I) :-
     angle(PtA,PtB,AB),
     angle(PtA,OrA,OA),
     (AB < OA ->
-	X is AB - OA + (2 * 3.14) ;
+	X is AB - OA + (2 * 3.1415) ;
 	X is AB - OA),
     odd(I),
-    {X > ((2*3.14) * ((I - 1)/(M*4))),
-     X < ((2*3.14) * ((I + 1)/(M*4)))}.
+    {X > ((2*3.1415) * ((I - 1)/(M*4))),
+     X < ((2*3.1415) * ((I + 1)/(M*4)))}.
 
-compute_opra(PtA,OrA,PtB,M,I) :-
+compute_opra(PtA, OrA, PtB, M, I) :-
     angle(PtA,PtB,AB),
     angle(PtA,OrA,OA),
     (AB < OA ->
-	X is AB - OA + (2 * 3.14) ;
+	X is AB - OA + (2 * 3.1415) ;
 	X is AB - OA),
     even(I),
-    {X = ((2*3.14) * (I/(M*4)))}.
+    {X = ((2*3.1415) * (I/(M*4)))}.
 
 angle((Ax,Ay),(Bx,By),AB) :-
-    map_twopi(Ax,Ay,Bx,By, 
-    atan((By-Ay)/(Bx-Ax)),AB).
+    map_twopi(Ax, Ay, Bx, By, atan((By-Ay)/(Bx-Ax)), AB).
 
 map_twopi(Ax,Ay,Bx,By,X,X2) :-
     By > Ay, Bx < Ax,
-    X2 is pi + X, !.
+    X2 is 3.1415 + X, !.
 
 map_twopi(Ax,Ay,Bx,By,_,X2) :-
     By = Ay, Bx < Ax,
-    X2 is pi.
+    X2 is 3.1415.
 
 map_twopi(Ax,Ay,Bx,By,_,X2) :-
     By > Ay, Ax = Bx,
-    X2 is pi/2.
+    X2 is 3.1415/2.
 
 map_twopi(Ax,Ay,Bx,By,_,X2) :-
     By = Ay, Bx > Ax,
-    X2 = pi.
+    X2 = 3.1415.
 
 map_twopi(Ax,Ay,Bx,By,_,X2) :-
     By < Ay, Ax = Bx,
-    X2 = (3*pi)/2.
+    X2 = (3*3.1415)/2.
 
 map_twopi(Ax,Ay,Bx,By,X,X2) :-
     By < Ay, Bx < Ax,
-    X2 is pi + abs(X), !.
+    X2 is 3.1415 + abs(X), !.
 
 map_twopi(Ax,Ay,Bx,By,X,X2) :-
     By < Ay, Bx > Ax,
-    X2 is 2*pi + X, !.
+    X2 is 2*3.1415 + X, !.
 
 map_twopi(Ax,Ay,Bx,By,X,X2) :-
     By > Ay, Bx > Ax,
     X2 is X, !.
 
-odd(3).
 odd(1).
+odd(3).
 odd(5).
 odd(7).
 odd(9).
