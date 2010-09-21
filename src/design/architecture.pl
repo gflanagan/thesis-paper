@@ -21,16 +21,46 @@ convex_hull_transformation(Id, Convex) :-
     ifc_geometry(Id, region(Geom)),
     abstract_to_convex_hull(Geom, Convex).
 
-% currently works for all types of arch entities
-% direction must be hard coded
+% Direction is generated automatically for doors and windows. Two direction
+% vectors will be extracted and returned in a list.
+% All other entity types must have direction hard coded.
+directed_point_transformation_dw(Id, PtRel, Pt, Dir) :-
+    convex_hull_transformation(Id, G),
+    calc_direction(G, Pt, DirList),
+    closest_point(PtRel, DirList, Dir).
+
 directed_point_transformation(Id, Pt, Dir) :-
-    %( arch_entity(Id, dsDoor) ;
-    %  arch_entity(Id, dsWindow) ;
-    %  arch_entity(Id, dsWall) ),
-    % ifc_geometry(Id, Geom),
-    % abstract_to_point(Geom, Pt),
-    point_transformation(Id, Pt),
-    direction_hard_code(Id, Dir).
+    direction_hard_code(Id, Pt, Dir).
+
+calc_direction(G, Pt, DirList) :-
+    centroid(G, Pt),
+    calc_direction_hlpr(G, DirList).
+
+calc_direction_hlpr([Pt1,Pt2,Pt3,Pt4|_], [Dir1,Dir2]) :-
+    longest_length((Pt1, Pt2), (Pt2, Pt3), Seg1),
+    longest_length((Pt3, Pt4), (Pt4, Pt1), Seg2),
+    midpoint(Seg1, Dir1),
+    midpoint(Seg2, Dir2).
+
+%calc_direction_hlpr2((X,Y), ((X1, Y1),(X2,Y2)), (Xd, Yd)) :-
+%    Slope is ((Y2-Y1)/(X2-Y1)),
+%    Perp_slope is (-(1/Slope)),
+%    Y_intercept is (Y-(Perp_slope*X)),
+ 
+midpoint(((X1,Y1),(X2,Y2)), (Xd,Yd)) :-
+    Xd is ((X1 + X2) / 2),
+    Yd is ((Y1 + Y2) / 2).    
+
+closest_point(PtRel, [Dir1,Dir2], Dir) :-
+    mindist(PtRel, Dir1, D1),
+    mindist(PtRel, Dir2, D2),
+    (D1 >= D2 -> Dir = Dir2 ; Dir = Dir1).
+
+longest_length((Pt1, Pt2), (Pt3, Pt4), ((P1, P2))) :-
+    mindist(Pt1, Pt2, D1),        % call to distance contraint solver
+    mindist(Pt3, Pt4, D2),
+    (D1 >= D2 -> P1 = Pt1, P2 = Pt2 ;
+                 P1 = Pt3, P2 = Pt4).
 
 perspective(ID, fs_point, RmID, PT) :-
     functional_space(ID, RmID, FS),
