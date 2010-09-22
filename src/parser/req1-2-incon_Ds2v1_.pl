@@ -29,20 +29,24 @@ arch_entity(a3FkWqVVp0lGxW_ZM8pX2L7, dsWallStandardCase).
 arch_entity(a2Fwq8QrPcGPh9wA9tp41o, dsWallStandardCase).
 arch_entity(door1, dsDoor).
 arch_entity(door2, dsDoor).
-arch_entity(a03uEocq5PH8W9buLbReRG, dsSpace).
-room_containment(a3UcDt2E5uXJO4hM1dqbB7q, a03uEocq5PH8W9buLbReRG).
-room_containment(a3OdD8VcDiHwx6l5Wg9Fe1, a03uEocq5PH8W9buLbReRG).
-room_containment(a18GwN7PhNfIeNaHYpFI1KU, a03uEocq5PH8W9buLbReRG).
-room_containment(a1UZzuOqde7IgkEFqeQ6u8H, a03uEocq5PH8W9buLbReRG).
-room_containment(a1eBAw86pbSHQtVYZVmjLWl, a03uEocq5PH8W9buLbReRG).
-room_containment(a3PBlC_RDTrHPIDimiQA6ao, a03uEocq5PH8W9buLbReRG).
-room_containment(a1854Ap5AofIOX0cRMfLep1, a03uEocq5PH8W9buLbReRG).
-room_containment(a0SgsfCd8F5GPEilwoWTeLp, a03uEocq5PH8W9buLbReRG).
-room_containment(a1Hn3YtcUc5GAlEURyxazuz, a03uEocq5PH8W9buLbReRG).
-room_containment(a06Zz3NaWLGB_FAnpfGJ_, a03uEocq5PH8W9buLbReRG).
-room_containment(a0hy8dmBcDhIf5VfOU2ZBct, a03uEocq5PH8W9buLbReRG).
-room_containment(a2rHkAjtwEfIRx3nWKYnSD, a03uEocq5PH8W9buLbReRG).
-room_containment(a0QtJrRsvT7JeZIZnTZdWqv, a03uEocq5PH8W9buLbReRG).
+arch_entity(rm1, dsSpace).
+room_containment(a3UcDt2E5uXJO4hM1dqbB7q, rm1).
+room_containment(a3OdD8VcDiHwx6l5Wg9Fe1, rm1).
+room_containment(a18GwN7PhNfIeNaHYpFI1KU, rm1).
+room_containment(a1UZzuOqde7IgkEFqeQ6u8H, rm1).
+room_containment(a1eBAw86pbSHQtVYZVmjLWl, rm1).
+room_containment(a3PBlC_RDTrHPIDimiQA6ao, rm1).
+room_containment(a1854Ap5AofIOX0cRMfLep1, rm1).
+room_containment(a0SgsfCd8F5GPEilwoWTeLp, rm1).
+room_containment(a1Hn3YtcUc5GAlEURyxazuz, rm1).
+room_containment(a06Zz3NaWLGB_FAnpfGJ_, rm1).
+room_containment(a0hy8dmBcDhIf5VfOU2ZBct, rm1).
+room_containment(a2rHkAjtwEfIRx3nWKYnSD, rm1).
+room_containment(a0QtJrRsvT7JeZIZnTZdWqv, rm1).
+room_containment(door1, rm1).
+room_containment(door2, rm1).
+wall_containment(door1, wall1).
+wall_containment(door2, wall1).
 ifc_geometry(a3UcDt2E5uXJO4hM1dqbB7q, G) :-
 	spatial_primitive(G, [(4.3,11.59),(5.41,11.59),(4.855,10.48),(4.6835,10.5072),(4.30683,10.9482),(4.3,11.59)]).
 
@@ -130,6 +134,6 @@ ifc_geometry(door1, G) :-
 ifc_geometry(door2, G) :-
 	spatial_primitive(G, [(10.51,4.81),(10.51,4.0),(12.01,4.81),(12.01,4),(10.51,4.81)]).
 
-ifc_geometry(a03uEocq5PH8W9buLbReRG, G) :-
+ifc_geometry(rm1, G) :-
 	spatial_primitive(G, [(0.3,0.3),(22.93,0.3),(22.93,1.48),(29.3,1.48),(29.3,11.08),(22.93,11.08),(22.93,12.23),(0.3,12.23),(0.3,0.3)]).
 

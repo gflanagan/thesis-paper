@@ -8,22 +8,22 @@ opra((X1,Y1), (Dx,Dy), (X2,Y2), M, I) :-
 %    compute_opra((PtB, OB), PtA, M, J).
 
 compute_opra(PtA, OrA, PtB, M, I) :-
-    angle(PtA,PtB,AB),
-    angle(PtA,OrA,OA),
-    (AB < OA ->
-	X is AB - OA + (2 * 3.1415) ;
-	X is AB - OA),
     odd(I),
+    angle(PtA, PtB, AB),
+    angle(PtA, OrA, OA),
+    (AB < OA ->
+	X is AB - OA + (2*3.1415) ;
+	X is AB - OA),
     {X > ((2*3.1415) * ((I - 1)/(M*4))),
      X < ((2*3.1415) * ((I + 1)/(M*4)))}.
 
 compute_opra(PtA, OrA, PtB, M, I) :-
+    even(I),
     angle(PtA,PtB,AB),
     angle(PtA,OrA,OA),
     (AB < OA ->
 	X is AB - OA + (2 * 3.1415) ;
 	X is AB - OA),
-    even(I),
     {X = ((2*3.1415) * (I/(M*4)))}.
 
 angle((Ax,Ay),(Bx,By),AB) :-
@@ -43,11 +43,11 @@ map_twopi(Ax,Ay,Bx,By,_,X2) :-
 
 map_twopi(Ax,Ay,Bx,By,_,X2) :-
     By = Ay, Bx > Ax,
-    X2 = 3.1415.
+    X2 is 2*3.1415.
 
 map_twopi(Ax,Ay,Bx,By,_,X2) :-
     By < Ay, Ax = Bx,
-    X2 = (3*3.1415)/2.
+    X2 is (3*3.1415)/2.
 
 map_twopi(Ax,Ay,Bx,By,X,X2) :-
     By < Ay, Bx < Ax,
