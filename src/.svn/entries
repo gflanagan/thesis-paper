@@ -1,0 +1,70 @@
+10
+
+dir
+500
+http://carkowsky.informatik.uni-bremen.de/svn/designspace/systems-dev/DSim-Reasoners/artefactual-reasoner
+http://carkowsky.informatik.uni-bremen.de/svn/designspace
+
+
+
+2010-07-12T09:07:46.901258Z
+499
+bhatt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+58e2a9fa-d2c0-43fa-a82e-44497ddf1781
+
+tests
+dir
+
+
+
+add
+
+design
+dir
+
+
+
+add
+
+model.pl
+file
+0
+
+
+add
+
+space
+dir
+
+
+
+add
+
+parser
+dir
+
+
+
+add
+
+dspace_include.pl
+file
+0
+
+
+add
+

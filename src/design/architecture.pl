@@ -114,12 +114,6 @@ is_point((X,Y)) :-
     number(X),number(Y).
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% topology function wrapper 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-topology(Geom1, Geom2, Rel) :-
-    F =..[Rel, Geom1, Geom2],call(F). 
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % distance for architectual entities

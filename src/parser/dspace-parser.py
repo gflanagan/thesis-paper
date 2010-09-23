@@ -16,21 +16,40 @@ def create_filename(name):
     file_name = name.split('.')
     return file_name[0]+'.pl'
  
-# parse the dspace schema 
 def import_dspace_schema(dspace_schema):
     tree = ElementTree.parse(dspace_schema)
     ds_product_list = []
     relationship_list = []
-    # method is currently broken
-    #  extract_namespace(tree)
+    #  extract_namespace(tree)  # ! method is currently broken !!
     ds_product_iterator = tree.findall('DsProduct')
     relationship_iterator = tree.findall('DsRelationship')
     for element in ds_product_iterator:
         ds_product_list.append(parse_dsproduct(element))
     for element in relationship_iterator:
-        relationship_list.append(parse_relationship(element)) 
+        relationship_list.append(parse_relationship(element))
+    generate_map_dsId(ds_product_list)
     pl_file_name = create_filename(dspace_schema)
     generate_pl_file(pl_file_name, ds_product_list, relationship_list)
+
+def generate_map_dsId(ds_product_list):
+    num_doors, num_walls, num_wins, num_other, num_spaces = 1,1,1,1,1
+    for product in ds_product_list:
+        type = product['type']
+        if type == 'dsDoor':
+            product['user_id'] = 'door'+str(num_doors)
+            num_doors = num_doors + 1
+        elif type == 'dsWallStandardCase':
+            product['user_id'] = 'wall'+str(num_walls)
+            num_walls = num_walls + 1
+        elif type == 'dsWindow':
+            product['user_id'] = 'win'+str(num_wins)
+            num_wins = num_wins + 1
+        elif type == 'dsSpace':
+            product['user_id'] = 'room'+str(num_spaces)
+            num_spaces = num_spaces + 1
+        else:
+            product['user_id'] = 'id'+str(num_other)
+            num_other = num_other + 1
 
 def parse_relationship(element):
     list = []
@@ -71,11 +90,9 @@ def extract_dstype(element):
     return type
 
 def clean_id(id):
-    # extracts $ characters and appends a leading 'a' because Prolog does not allow
-    # $ chars in atoms and atoms must start with lower case letter
-    new_id = id.replace('$', '')
-    new_id = 'a'+new_id
-    return new_id
+    # deletes the $ char and appends a leading 'a'. Prolog does not
+    # allow the $ char or title case for atoms.
+    return 'a'+id.replace('$', '')
 
 def get_representation(element):
     representation = element.find('representation')
@@ -97,7 +114,9 @@ def generate_pl_file(file, ds_product_list, rel_list):
     with open(file, 'w') as pl_file:
 	#write_header(pl_file)
 	write_type(pl_file, ds_product_list)
+        write_map_user_to_ds_id(pl_file, ds_product_list)
         write_ifc_geometry(pl_file, ds_product_list)
+        write_relationships(pl_file, rel_list, ds_product_list)
     with open('../dspace_include.pl', 'w') as include_file:
         write_include(include_file, file)
     include_file.close()
@@ -105,25 +124,35 @@ def generate_pl_file(file, ds_product_list, rel_list):
 
 def write_relationships(pl_file, rel_list, ds_product_list):
     for element in rel_list:
-        relating_structure_id = element[0]
-        relating_elements = element[1]
-        type = get_dstype(relating_structure_id, ds_product_list) 
+        (type, relating_id, related_ids) = get_type_id(element, ds_product_list)
         if type == 'dsSpace':
-            write_room_containment(pl_file, relating_structure_id, relating_elements)
+            write_room_containment(pl_file, relating_id, \
+                                   related_ids)
         elif type == 'dsWallStandardCase':
-            write_wall_containment(pl_file, relating_structure_id, relating_elements)
+            write_wall_containment(pl_file, relating_id, \
+                                   related_ids)
 
-def write_room_containment(pl_file, relating_structure_id, relating_elements):
-    for element in relating_elements:
-        pl_file.write(''.join(('room_containment(', element, ', ', relating_structure_id,').\n')))
+def write_room_containment(pl_file, relating_id, related_ids):
+    for id in related_ids:
+        pl_file.write(''.join(('room_containment(', id, ', ', relating_id,').\n')))
 
-def get_dstype(id, list):
+def get_type_id(element, list):
     type = ''
+    relating_id = ''
+    related_ids = []
+    id = element[0]
+    related_list = element[1]
     for product in list:
         curr_id = product['globalId']
         if curr_id == id:
-            type = product['type']    
-    return type
+            type = product['type']
+            relating_id = product['user_id']
+    for e in related_list:
+        for p in list:
+            if e == p['globalId']:
+                user_id = p['user_id']
+                related_ids.append(user_id)
+    return (type, relating_id, related_ids)
 
 def write_include(include_file, pl_name):
     include_file.write(':-consult(\'./space/spatial_reasoner\').\n')
@@ -133,9 +162,10 @@ def write_include(include_file, pl_name):
 
 def write_ifc_geometry(pl_file, ds_product_list):
     for dsProduct in ds_product_list:
-        if dsProduct['type'] != 'dsBuilding' and dsProduct['type'] != 'dsBuildingStorey':
+        type = dsProduct['type']
+        if type != 'dsBuilding' and type != 'dsBuildingStorey':
 	        points = output_points(dsProduct['representation'])
-	        pl_file.write(''.join(('ifc_geometry(', dsProduct['globalId'], ', G) :-\n')))
+	        pl_file.write(''.join(('ifc_geometry(', dsProduct['user_id'], ', G) :-\n')))
 	        pl_file.write(''.join(('\tspatial_primitive(G, [', points, ']).\n\n')))
 
 def output_points(points):
@@ -146,7 +176,24 @@ def output_points(points):
 
 def write_type(pl_file, ds_product_list):
     for ds in ds_product_list:
-	    pl_file.write(''.join(('arch_entity(', ds['globalId'], ', ',ds['type'],').\n'))) 
+        type = ds['type']
+        if any ([type == 'dsWallStandardCase', \
+                 type == 'dsDoor', type == 'dsWindow']) :
+	        predicate_type =  'arch_entity'
+        elif type == 'dsSpace':
+            predicate_type = 'space'
+        elif type == 'dsBuilding' or type == 'dsBuildingStorey':
+            predicate_type = 'building_entity'
+        else:
+            predicate_type = 'interior_entity'
+        pl_file.write(''.join((predicate_type,'(',ds['user_id'], ', ', type,').\n')))
+
+def write_map_user_to_ds_id(pl_file, ds_product_list):
+    for ds in ds_product_list:
+        user_id = ds['user_id']
+        globalId = ds['globalId']
+        pl_file.write(''.join(('map_user_to_dsschema(',user_id, ', ', globalId,').\n')))
+
 
 def write_header(pl_file):
     pl_file.write(':-consult(design).\n')

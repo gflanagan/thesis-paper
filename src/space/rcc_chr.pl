@@ -125,6 +125,9 @@ inside_convexhull([PT|PR], Convexhull) <=>
         inside_point_hull(PT, Convexhull),
         inside_convexhull(PR, Convexhull).
 
+inside_convexhull((X,Y), Convexhull) <=>
+        inside_point_hull((X,Y), Convexhull).
+
 % assumes the convex hull is ordered clockwise. A point is inside the hull
 % if each point has a negative determinant with every segment in hull
 inside_point_hull(PT1,[PT2,PT3|[]]) <=> 
