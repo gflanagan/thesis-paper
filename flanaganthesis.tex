@@ -155,43 +155,61 @@ This is the introduction.
 
 
 \chapter{Related Work} \label{related work}
-\section{Design Support Systems}
-\subsection{SEEDS}
-The SEEDS project, described in \cite{FlemmingIKM94}, proposed a architectural design platform for capturing and representing functional (i.e. spatial requirements) and structural (geometric) design knowledge. The aim of which is to support the architectural design process by providing design knowledge during the initial design phase of a building. Within the SEEDS project, design knowledge is partitioned into two categories: design units, and functional units. Design units represent spatial and physical elements of a building, while functional units represent requirement that constrain design units
-based on shape, size, placement, etc.. Additionally, SEEDS pioneered the idea that architectural design knowledge, specifically design requirements, could be represented as constraints to automatically generate layouts.
+
+
+\section{Architectural Design Support Systems}
+
+\subsection{Intelligent Critic System}
+The intelligent computer-aided architectural design system (ICAAD) \cite{IntelligentCritic} is a tool that evaluates architectural design floor plans based on government regulation requirements and interior design guidelines and reports requirements / guidelines that have not been met. The focus of the research is on the representation of spatial information for architectural design requirement reasoning.
+
+ICAADs represents designs in an object oriented hierarchical structure based on the containment relationships of a building, i.e. windows are contained by rooms, rooms are contained by apartments, apartments are contained by buildings, etc. Architectural components, such as rooms, windows, furniture, are represented as ICAAD objects in the hierarchical structure. Geometric attribute, such the center of the object, length and width, shape, and direction, are stored in the instantiated ICAAD objects. Spatial relationships, such as proximity, visibility, relative location are extracted from the geometric data. ICAADs stores these spatial relationships in a network that connects the relating objects with their relationship. 
+
+The ICAADs inference engine match design requirements rules (government regulations and interior deigns guidelines) against the ICAADs spatial representation structure. Violations are detected when the spatial relationships between elements are matched against a design requirement.  
+
+The concept between CRR and ICAADS is quite similar, both systems aim to reason about design requirements from a spatial perspective. However, CRR goes beyond the work done in ICAADs in terms of the sophistication of spatial reasoning and formalization of design requirements. CRR uses formal qualitative spatial calculi for topological, orienational, and distance reasoning, while ICAADs uses ad-hoc definition for spatial relationships. Additionally, CRR proposes formally spatial interpretation of the design requirements used for requirements reasoning, while ICAADs provides no such discussion. 
+
+
+\subsection{The Architect's Collaborator}
+The Architect's Collaborator (TAC) \cite{KoileTAC} is a prototype design support system that supports an expert by evaluating a design based on abstract and experiential goals. These goals are abstract qualities that describe a design such as 'openness', and 'privacy'. The crux of TAC is that it maps abstract terms to measurable design features in order to rank designs based on adherence to the abstract term. For example, TAC defines 'openness' of a design by measuring 
+
 
 \subsection{Intelligence for Ambient Design}
 Bhatt proposed a system in \cite{BhattDH09} that provides validation for the satisfiability of functional requirements, which are grounded to a qualitative spatial calculi, within the Ambient Environment domain. The system accomplishes this by modeling the functional requirements as constrains in an ontology and uses an ontology reasoner to discover if a model is realizable for a design, i.e. no models will be found if on or more functional constraints are not satisfied.
 
-\subsection{The Architect Critic}
-
-\subsection{Intelligent Critic System}
-
 \subsection{ICADS}
+\cite{ICADS}
 
-\subsection{Spatial Qualities for Architecture}
+\subsection{SEEDS}
+The SEEDS project, described in \cite{SEEDS}, proposed a architectural design platform for capturing and representing functional (i.e. spatial requirements) and structural (geometric) design knowledge. The aim of which is to support the architectural design process by providing design knowledge during the initial design phase of a building. Within the SEEDS project, design knowledge is partitioned into two categories: design units, and functional units. Design units represent spatial and physical elements of a building, while functional units represent requirement that constrain design units based on shape, size, placement, etc.. Additionally, SEEDS pioneered the idea that architectural design knowledge, specifically design requirements, could be represented as constraints to automatically generate layouts.
 
+
+\subsection{A Computable Language of Architecture}
+\cite{Key}
+
+\subsection{Automatic Spatial Layout Planning}
+\cite{Pfefferkorn}
+
+
+\subsection{IFC Based Requirements Reasoning}
+\cite{Borrmann}
 
 \section{Design Support Systems for Virtual Environments}
 \subsection{Constraint Logic Programming for Virtual Environments}
-Caldern \cite{CalderónCLP06} built upon the ideas in \cite{FlemmingIKM94} for representing design knowledge, to develop an Intelligent Virtual Environment that solves spatial configuration problems based on spatial design knowledge. Additionally, the tool added non-geometric semantics (i.e. environmental, lighting) for functional units to demonstrate that their approach could be extended to non-geometric design knowledge.
+Calderon \cite{Calderon06} built upon the ideas in \cite{SEEDS} for representing design knowledge, to develop an Intelligent Virtual Environment that solves spatial configuration problems based on spatial design knowledge. Additionally, the tool added non-geometric semantics (i.e. environmental, lighting) for functional units to demonstrate that their approach could be extended to non-geometric design knowledge.
 
-Caldern argued that spatial knowledge By representing design knowledge as constraints, the tool was able to use constraint logic programming to solve spatial configuration problems. In general, constraint are classified as: topological, local, and global. Topological constraints describe the topological characteristics of the environment, such as a regions where a lighting is less then 300 lux. Local constraints describe the attributes of a single object and how it interacts with topological characteristics. In general these characteristics are in the form of, a desk should be at least 4 meters from a ventilation duct, or an object should be within an area that has more then 300 lux of light. Global constraints express design requirements for a group of objects.  
+Calderon argued that spatial knowledge By representing design knowledge as constraints, the tool was able to use constraint logic programming to solve spatial configuration problems. In general, constraint are classified as: topological, local, and global. Topological constraints describe the topological characteristics of the environment, such as a regions where a lighting is less then 300 lux. Local constraints describe the attributes of a single object and how it interacts with topological characteristics. In general these characteristics are in the form of, a desk should be at least 4 meters from a ventilation duct, or an object should be within an area that has more then 300 lux of light. Global constraints express design requirements for a group of objects.  
+
 
 \subsection{V-SIMSPLACE}
-\cite{LertlakkhanakulIBPSA06} describes a platform that 'embodies spatial context-aware information' so that users can visualize an architectural design before it is deployed. The aim of the tool is to simulate a users experience in a Smart Home environment, in order to study the interactions of the user within his/her environment. The crux of the system is that behavioral semantics of a Smart Home are integrated into the building design knowledge so that the interactions a user has within the Virtual Environment will closely mimic the real world.
+\cite{V-SIMS} describes a platform that 'embodies spatial context-aware information' so that users can visualize an architectural design before it is deployed. The aim of the tool is to simulate a users experience in a Smart Home environment, in order to study the interactions of the user within his/her environment. The crux of the system is that behavioral semantics of a Smart Home are integrated into the building design knowledge so that the interactions a user has within the Virtual Environment will closely mimic the real world.
 
-Unlike \cite{CalderónCLP06}, V-PLACESIMS does not attempt to capture design requirements or reason about the consistency of an environment. Rather, it's focus is providing a platform for users to interact with a Smart Home environment to discover the behaviors and interactions that take place.
-
- 
+Unlike \cite{Calderon06}, V-PLACESIMS does not attempt to capture design requirements or reason about the consistency of an environment. Rather, it's focus is providing a platform for users to interact with a Smart Home environment to discover the behaviors and interactions that take place.
 
 
+\chapter{Conceptual Requirements Reasoner}
+The Conceptual Requirements Reasoner (CRR) is a framework for validating conceptual design requirements against CAAD based architectural design plans. Conceptual design requirements here refer to requirements as they pertain to the functional and experiential aspects of the design from a semantic and qualitative perspective. For example, architects commonly describe aspects of a design in a qualitative fashion, such as a design being private, accessible, or continuous. These architectural aspects emerge from the spatial structures / arrangements of the building form and are experienced in the building. 
 
-
-\chapter{DSpace Reasoner}
-The DSpace Reasoner is a prototype tool for validating conceptual design requirements against CAAD based architectural design plans. Conceptual design requirements here refer to requirements as they pertain to the functional and experiential aspects of the design from a semantic and qualitative perspective. For example, architects commonly describe aspects of a design in a qualitative fashion, such as a design being private, accessible, or continuous. These architectural aspects emerge from the spatial structures / arrangements of the building form and are experienced in the building. 
-
-The goal of the DSpace reasoner is to build a computational framework to represent and reason about conceptual design requirements to validate conceptual design requirement to the real world, CAAD based architectural plans.     
+The goal of the CRR is to build a computational framework to represent and reason about conceptual design requirements to validate conceptual design requirement to the real world, CAAD based architectural plans.     
 
 
 \section{Design Problem}
@@ -1122,11 +1140,12 @@ TODO: figure for convex hull abs
 
 \clearpage
 \bibliographystyle{abbrv}
-\bibliography{museum}
+\bibliography{relatedworks}
+%\bibliography{museum}
 %\bibliography{architecture}
-\bibliography{qsr}
+%\bibliography{qsr}
 %\bibliography{clp}
-%\bibliography{relatedworks}
+
 
 %\addcontentsline{toc}{chapter}{Bibliography}
 

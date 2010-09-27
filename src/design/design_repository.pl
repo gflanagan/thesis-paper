@@ -106,7 +106,6 @@ check_scc_017(Origin, Relatum, [Referent|Rest]) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % facing 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
     
 facing_towards(Id1, Id2) :-
     ( opra(Id1, Id2, 8, 0) ;
@@ -351,9 +350,7 @@ topology(BR, Id1, Id2) :-
     spatial_query([BR, CH1, CH2]).
 
 topology2(BR, CH1, Id2) :-
-    print('in'),nl,
     convex_hull_transformation(Id2, CH2),
-    print(CH2),nl,
     spatial_query([BR, CH1, CH2]).
 
 spatial_query(Query) :-
