@@ -157,7 +157,7 @@ This is the introduction.
 \chapter{Related Work} \label{related work}
 
 
-\section{Architectural Design Support Systems}
+\section{Architectural Design Support}
 
 \subsection{Intelligent Critic System}
 The intelligent computer-aided architectural design system (ICAAD) \cite{IntelligentCritic} is a tool that evaluates architectural design floor plans based on government regulation requirements and interior design guidelines and reports requirements / guidelines that have not been met. The focus of the research is on the representation of spatial information for architectural design requirement reasoning.
@@ -170,24 +170,29 @@ The concept between CRR and ICAADS is quite similar, both systems aim to reason 
 
 
 \subsection{The Architect's Collaborator}
-The Architect's Collaborator (TAC) \cite{KoileTAC} is a prototype design support system that supports an expert by evaluating a design based on abstract and experiential goals. These goals are abstract qualities that describe a design such as 'openness', and 'privacy'. The crux of TAC is that it maps abstract terms to measurable design features in order to rank designs based on adherence to the abstract term. For example, TAC defines 'openness' of a design by measuring 
+The Architect's Collaborator (TAC) \cite{KoileTAC} is a prototype design support system that evaluates a design based on abstract qualities and provides recommendations to improve the design w.r.t. these qualities. Abstract qualities describe a design in terms such as 'openness' or 'privacy'. The crux of TAC is that it maps abstract qualities to measurable design features in order to rank designs based on adherence to a design quality and provide recommendations for improving the design. 
+
+For example, a designer uses TAC by specifying a goal for a specific design, such as the kitchen should be 'visibly open'. If the kitchen does not meet the goal of being visibly open, then TAC provides recommendations for improving the design. Recommendations are derived from a knowledge base that contains explanations for a goals failure, such as visual obstructions cause a decrease in visual openness between rooms. 
+
+The main drawback to TAC is its use of 'black box' geometric and spatial reasoning. For example, TAC measures the visible-openness of a room as the percentage of the room that is visible from another room. This definition of visible-openness uses a direct mapping between the high level conceptual requirement to the low level geometric properties of the design. The approach used in CRR is to use an intermediate qualitative spatial layer between the high level design conceptualization and the low level geometric representation.
 
 
 \subsection{Intelligence for Ambient Design}
-Bhatt proposed a system in \cite{BhattDH09} that provides validation for the satisfiability of functional requirements, which are grounded to a qualitative spatial calculi, within the Ambient Environment domain. The system accomplishes this by modeling the functional requirements as constrains in an ontology and uses an ontology reasoner to discover if a model is realizable for a design, i.e. no models will be found if on or more functional constraints are not satisfied.
+Bhatt, et al. proposed a system in \cite{BhattDH09} that validates a designer's conceptual requirements against an architectural design in the context of Smart Homes. The system reasons about design from a structural and functional perspective. 
+
 
 \subsection{ICADS}
 \cite{ICADS}
 
 \subsection{SEEDS}
-The SEEDS project, described in \cite{SEEDS}, proposed a architectural design platform for capturing and representing functional (i.e. spatial requirements) and structural (geometric) design knowledge. The aim of which is to support the architectural design process by providing design knowledge during the initial design phase of a building. Within the SEEDS project, design knowledge is partitioned into two categories: design units, and functional units. Design units represent spatial and physical elements of a building, while functional units represent requirement that constrain design units based on shape, size, placement, etc.. Additionally, SEEDS pioneered the idea that architectural design knowledge, specifically design requirements, could be represented as constraints to automatically generate layouts.
+The Software Environment for Supporting the Early Phases in Building Design (SEED) project \cite{SEEDS} is a framework that supports an architect during the entire architectural design process. Specific to the work in this thesis, the SEED framework introduced the idea of using constraints to represent design knowledge in order to automatically generate floor layouts, referred to as SEED-layout. 
 
+Within SEED-layout, design knowledge is partitioned into two categories: design units and functional units. Design units represent the spatial and physical elements of a building. Functional units represent design requirement and constrain the design units based on shape, size, placement, and non spatial attributes such as material make-up. SEED-layout tries to generates a floor plan given a specific set of design units that adheres to all the the design requirements. The crux of this work is that the system utilizes the constraint solving abilities in a CLP framework to autonomously find design layouts that meet the design's requirement specifications.
+
+While similar in spirit to the CRR, SEED-layout focuses heavily on the specific task of automatically generating of floor plans, while CRR focuses of the validation of requirements in an work-in-progress design. Additionally, SEED-layout only supports quantitative spatial reasoning while CRR supports both quantitative and qualitative spatial reasoning.
 
 \subsection{A Computable Language of Architecture}
 \cite{Key}
-
-\subsection{Automatic Spatial Layout Planning}
-\cite{Pfefferkorn}
 
 
 \subsection{IFC Based Requirements Reasoning}
