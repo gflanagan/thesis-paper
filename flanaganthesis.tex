@@ -143,73 +143,140 @@ This is the introduction.
 
 
 
-\chapter{Preliminaries}
-\label{preliminaries}
 
-\section{Qualitative Spatial Representation and Reasoning}
-\subsection{Applications of Spatial Reasoning}
-\subsubsection{Architectural Design}
-\subsubsection{Geographic Information Systems}
-\subsubsection{Robotics}
-\section{Constraint Logic Programming}
+\chapter{Background and Related Work} 
+
+\section{Background}
+\label{background}
+
+\subsection{Qualitative Spatial Representation and Reasoning}
+\cite{freksa1991qsr} \cite{bhattSpatialComputing}
+
+\subsubsection{Applications of Spatial Reasoning}
+Architectural Design
+
+\subsection{Constraint Logic Programming}
 
 
-\chapter{Related Work} \label{related work}
+\section{Related Works}
+\label{related works}
+There is a large body of research on tools for conceptual design. The works that will be discussed in this section has been narrowed to approaches that either reason about qualitative (i.e. experiential, spatial) or functional (i.e. noise insulation, energy conservation, smart home security) design aspects / requirements or evaluate a design utilizing spatial reasoning techniques. The last part of this section will discuss and summarize the different approaches in the context of the work that is being done in this thesis.
 
-
-\section{Architectural Design Support}
 
 \subsection{Intelligent Critic System}
-The intelligent computer-aided architectural design system (ICAAD) \cite{IntelligentCritic} is a tool that evaluates architectural design floor plans based on government regulation requirements and interior design guidelines and reports requirements / guidelines that have not been met. The focus of the research is on the representation of spatial information for architectural design requirement reasoning.
+The intelligent computer-aided architectural design system (ICAAD) \cite{IntelligentCritic} is a tool that evaluates architectural design floor plans based on government regulations and interior design guidelines and checks for any that are not satisfied in the design. The focus of this research is on how to representation spatial information in the context of architectural design requirement checking.
 
-ICAADs represents designs in an object oriented hierarchical structure based on the containment relationships of a building, i.e. windows are contained by rooms, rooms are contained by apartments, apartments are contained by buildings, etc. Architectural components, such as rooms, windows, furniture, are represented as ICAAD objects in the hierarchical structure. Geometric attribute, such the center of the object, length and width, shape, and direction, are stored in the instantiated ICAAD objects. Spatial relationships, such as proximity, visibility, relative location are extracted from the geometric data. ICAADs stores these spatial relationships in a network that connects the relating objects with their relationship. 
+ICAADs represents designs in an object oriented hierarchical model, which is based on architectural containment relationships, i.e. windows are contained by rooms, rooms are contained by apartments, apartments are contained by buildings, etc. Architectural components, such as rooms, windows, furniture, are represented individually as ICAAD objects in the hierarchical structure. Each object stores geometric data, such the center of the object, length and width, shape, and direction. Spatial relationships, such as proximity, visibility, relative location are extracted from the geometric data and stored in a network that connects relating objects together with their spatial relationship. 
 
-The ICAADs inference engine match design requirements rules (government regulations and interior deigns guidelines) against the ICAADs spatial representation structure. Violations are detected when the spatial relationships between elements are matched against a design requirement.  
-
-The concept between CRR and ICAADS is quite similar, both systems aim to reason about design requirements from a spatial perspective. However, CRR goes beyond the work done in ICAADs in terms of the sophistication of spatial reasoning and formalization of design requirements. CRR uses formal qualitative spatial calculi for topological, orienational, and distance reasoning, while ICAADs uses ad-hoc definition for spatial relationships. Additionally, CRR proposes formally spatial interpretation of the design requirements used for requirements reasoning, while ICAADs provides no such discussion. 
+The ICAADs inference engine matches design requirement rules (i.e. government regulations and interior deigns guidelines) against the ICAADs spatial representation structure (i.e. the hierarchical object model and the spatial networks). Violations are detected when a spatial relationship between elements are matched to a design requirement violation rule.  
 
 
 \subsection{The Architect's Collaborator}
-The Architect's Collaborator (TAC) \cite{KoileTAC} is a prototype design support system that evaluates a design based on abstract qualities and provides recommendations to improve the design w.r.t. these qualities. Abstract qualities describe a design in terms such as 'openness' or 'privacy'. The crux of TAC is that it maps abstract qualities to measurable design features in order to rank designs based on adherence to a design quality and provide recommendations for improving the design. 
+The Architect's Collaborator (TAC) \cite{KoileTAC} is a prototype design support system that evaluates a design based on abstract qualities and provides recommendations to improve the design w.r.t. these qualities. Within TAC, abstract qualities describe experiential aspects of a design in terms such as 'openness' and 'privacy'. The main contribution of TAC is that it maps abstract qualities to measurable design features in order to rank designs based on adherence to a design quality and provide recommendations for improving the design. 
 
-For example, a designer uses TAC by specifying a goal for a specific design, such as the kitchen should be 'visibly open'. If the kitchen does not meet the goal of being visibly open, then TAC provides recommendations for improving the design. Recommendations are derived from a knowledge base that contains explanations for a goals failure, such as visual obstructions cause a decrease in visual openness between rooms. 
+For example, a designer uses TAC by specifying a goal for a specific design, such as the kitchen should be 'visibly open'. If the kitchen does not meet the goal of being visibly open, then TAC provides recommendations for improving the design. Recommendations are derived from a knowledge base that contains explanations for a goals failure, such as walls cause visual obstructions and decrease the visual openness between rooms. 
 
-The main drawback to TAC is its use of 'black box' geometric and spatial reasoning. For example, TAC measures the visible-openness of a room as the percentage of the room that is visible from another room. This definition of visible-openness uses a direct mapping between the high level conceptual requirement to the low level geometric properties of the design. The approach used in CRR is to use an intermediate qualitative spatial layer between the high level design conceptualization and the low level geometric representation.
+The main drawback to TAC is its use of 'black box' geometric and spatial reasoning. For example, TAC measures the visible-openness of a room as the percentage of the room that is visible from another room. This definition of visible-openness uses a direct mapping between the high level conceptual requirement to the low level geometric properties of the design. 
 
 
 \subsection{Intelligence for Ambient Design}
-Bhatt, et al. proposed a system in \cite{BhattDH09} that validates a designer's conceptual requirements against an architectural design in the context of Smart Homes. The system reasons about design from a structural and functional perspective. 
-
+Bhatt, et al. proposed a system in \cite{BhattDH09} that validates a designer's conceptual requirements against an architectural design in the context of Smart Homes. The system reasons about design from a structural and functional perspective.   
 
 \subsection{ICADS}
-\cite{ICADS}
+The Intelligent Computer-Aided Design System (ICADS) \cite{ICADS} is a collaborative design support tool that assists a designer by providing analysis based on numerous functional aspects of the design. The aspects include analysis based on the structural system selection, lighting, noise insulation, climate control and energy conservation, space layout, and construction costs. The focus of this research is on developing a series of knowledge based software agents that collaborate within ICADS to make recommendations to the user. 
 
 \subsection{SEEDS}
-The Software Environment for Supporting the Early Phases in Building Design (SEED) project \cite{SEEDS} is a framework that supports an architect during the entire architectural design process. Specific to the work in this thesis, the SEED framework introduced the idea of using constraints to represent design knowledge in order to automatically generate floor layouts, referred to as SEED-layout. 
+The Software Environment for Supporting the Early Phases in Building Design (SEED) project \cite{SEEDS} is a framework that supports an architect during the entire architectural design process. Specific to the work done in this thesis, SEED introduced the idea of using constraints to represent design knowledge in order to automatically generate floor layouts, in a tool referred to as SEED-layout. 
 
-Within SEED-layout, design knowledge is partitioned into two categories: design units and functional units. Design units represent the spatial and physical elements of a building. Functional units represent design requirement and constrain the design units based on shape, size, placement, and non spatial attributes such as material make-up. SEED-layout tries to generates a floor plan given a specific set of design units that adheres to all the the design requirements. The crux of this work is that the system utilizes the constraint solving abilities in a CLP framework to autonomously find design layouts that meet the design's requirement specifications.
+Within SEED-layout, design knowledge is partitioned into two categories: design units and functional units. Design units represent the spatial and physical elements of a building. Functional units represent design requirements and constrain design units based on shape, size, placement, and non spatial attributes such as material make-up. Given a design represented in SEED-layout as design units and a set of design requirements represented as functional units, SEED-layout tries to automatically generates possible floor plans that adhere to all of the design requirements. The main contribution of this work is that the system utilizes the constraint solving abilities in a CLP framework to autonomously find design layouts that meet the design's requirement specifications.
+
+
+\subsection{Interior Design Configuration for a Virtual Environment}
+Calderon \emph{et. al} proposes a system that automatically configures an indoor virtual environment, with respect to placing interior design elements, by solving spatial constraint problems. The system works by solving a constraint satisfaction problem as specified, given a virtual environment represented as a discrete Cartesian grid, a set of interior design objects (desks, chairs, lamps, etc.), and a set of spatial constraints over the design objects (i.e. a desk should be at least 4 meters from a power outlet), the system searches for possible spatial configurations (i.e. placement of objects) within the virtual environment such that all of the spatial constraints are satisfied. 
+
+The main contribution of this work is the use of spatial constraints in the area of virtual environment design. However, the work done here is only preliminary and has several shortcomings. The domain of the virtual environment is limited to rectangular areas and is represented as a discrete Cartesian grid. This limitation means that all spatial reasoning is over the discrete finite integer domain. Additionally, the expressiveness of the spatial constraints is limited. For example, topological relationships only define two relationships, inside and outside. 
+
+\subsection{Others}
+The following research presents ideas that are similar to the work in this thesis, but differ from the primary works already discussed in this section because they preliminary research on the subject at hand.
+
+Key proposes a descriptor language that defines architectural qualities from a computational perspective \cite{Key}. The work here is quite similar to the work in this thesis with regards to the approach that architectural qualities emerge from the precise geometric configurations of design elements and that these qualities can be discovered by spatial interpretation. The language defines architectural descriptor for concepts such as enclosure, continuity, and spaciousness and does so by interpreting the descriptor in terms of spatial properties. However, the approach here lacks the integration of qualitative spatial representation and reasoning as an intermediate layer between the high level concepts and low level geometries and instead uses a more direct approach to geometric and spatial reasoning.
+
+Borrmann introduces the idea of including predefined spatial constraints directly into a standard building production model, i.e. Industry Foundation Classes (IFC), to detect constraint violations \cite{Borrmann}. This proposal primarily focuses on the definition and integration of spatial constraints into the IFC model but it does provide some discussion on how these spatial constraints might be checked for in such an environment. While similar to CRR, this proposals approach is focused on the integration of spatial constraints into a specific building model (IFC) format and does not go into the process of generating the spatial constraints from the geometric configurations of a design. 
+
+\section{Discussion}
+Table \ref{related works table} shows the various high level objectives of the tools that were discussed in the related works section, which includes requirements checking, design evaluation, and automatic floor plan configuration. Despite the differences here, the systems are all bound by a higher objective to provide computational assistance to an architect during the design process and specifically, in the context of conceptual design formalization and reasoning.
+
+\begin{table}[H]
+  \begin{center}
+   \scalebox{0.87}{
+  \begin{tabular}{ | r | c | c | c | c | c | c | c |}
+    \hline
+    & CRR & ICAAD & TAC & Bhatt & ICAD & SEED & CLP \\ \hline
+    requirement checking & X & X &  & X &  &  & \\ \hline
+    design evaluation &  &  & X &  & X &  & \\ \hline
+    automatic floor plan configuration &  &  &  &  &  & X & X \\ \hline
+   \end{tabular}
+   }
+  \end{center}
+\caption{System Objectives}
+\label{related works table}
+\end{table}   
+
+Out of this group ICAADS is the most similar to CRR. Both systems provide a framework for checking design requirement violations using qualitative spatial reasoning. Despite the similarities, there are many differences and advantages to both. ICAADS focuses on the representation model for architectural designs in the context of requirement reasoning and gives little attention or discussion to the underlying techniques for spatial reasoning and spatial abstraction for CAAD based models. While this approach allows the system to reason automatically over the entire design, however it does so by relying on the underlying spatial reasoning system which is described like a 'black box'. Extending 'black box' reasoning can be quite difficult when spatial functions are built only to solve a specific problem. On the other hand, CRR focuses on the qualitative spatial reasoning aspects of the problem as well as the characterization and spatial interpretation of design requirements. 
+
+
+Both systems ensure that design requirements are met in a design based on prescribed requirements. 
+
+
+The overall concept and approach between CRR and ICAADS is quite similar, . However, there are many differences to between the to in terms of spatial reasoning and design representation. CRR goes beyond the work done in ICAADs in terms of the sophistication of spatial reasoning and formalization of design requirements. CRR uses formal qualitative spatial calculi for topological, orienational, and distance reasoning, while ICAADs uses ad-hoc definition for spatial relationships. Additionally, CRR proposes formally spatial interpretation of the design requirements used for requirements reasoning, while ICAADs provides no such discussion.
+
+\begin{table}[H]
+  \begin{center}
+  \scalebox{0.9}{
+  \begin{tabular}{ | r | c | c | c | c | c | c | c |}  
+      \hline
+      & CRR & ICAAD & TAC & Bhatt & ICAD & SEED & CLP \\ \hline
+    experiential qualities & X & X & X &  &  &  & \\ \hline
+    functional design aspects  & X &  &  & X & X &  & \\ \hline
+    artifactual extension & X &  &  & X &  &  &  \\ \hline
+    spatial representation and reasoning & X & X & X & X & X & X & X \\
+    formal qualitative spatial calculi & X &  &  & X &  &  & \\ \hline    
+    feedback / recommendation &  &  & X &  & X &  &  \\ \hline
+    constraint based reasoning & X &  &  &  &  & X & X \\ \hline
+  \end{tabular}
+  }
+  \end{center}
+\caption{Functionality and Approach}
+\label{functionality table}
+\end{table} 
+
+\begin{table}[H]
+  \begin{center}
+  \scalebox{0.9}{
+    \begin{tabular}{ | r | c | c | c | c | c | c | c |}
+     \hline
+     & CRR & ICAAD & TAC & Bhatt & ICAD & SEED & CLP \\ \hline
+     topology & X &  & X & X & & X & X  \\ \hline
+     intrinsic orientation  & X & X &  &  &  &  &  \\ \hline
+     extrinsic orientation & X &  &  &  &  &  &   \\ \hline
+     distance  & X & X & X &  &  & X & X  \\ \hline
+     metric & X & X & X &  & X & X & X  \\ \hline
+   \end{tabular}
+  }
+  \end{center}
+\caption{Types of Spatial Reasoning}
+\label{spatial table}
+\end{table}
+
+
+
+
+
+ICADS and CRR are similar with respect to the goal of supporting the design process based on high level conceptual knowledge. However, ICADS focuses more on the collaborative and knowledge based aspects of the tool, while CRR is focused on the integration of (qualitative) spatial representation and reasoning within a design reasoning context.
 
 While similar in spirit to the CRR, SEED-layout focuses heavily on the specific task of automatically generating of floor plans, while CRR focuses of the validation of requirements in an work-in-progress design. Additionally, SEED-layout only supports quantitative spatial reasoning while CRR supports both quantitative and qualitative spatial reasoning.
 
-\subsection{A Computable Language of Architecture}
-\cite{Key}
-
-
-\subsection{IFC Based Requirements Reasoning}
-\cite{Borrmann}
-
-\section{Design Support Systems for Virtual Environments}
-\subsection{Constraint Logic Programming for Virtual Environments}
-Calderon \cite{Calderon06} built upon the ideas in \cite{SEEDS} for representing design knowledge, to develop an Intelligent Virtual Environment that solves spatial configuration problems based on spatial design knowledge. Additionally, the tool added non-geometric semantics (i.e. environmental, lighting) for functional units to demonstrate that their approach could be extended to non-geometric design knowledge.
-
-Calderon argued that spatial knowledge By representing design knowledge as constraints, the tool was able to use constraint logic programming to solve spatial configuration problems. In general, constraint are classified as: topological, local, and global. Topological constraints describe the topological characteristics of the environment, such as a regions where a lighting is less then 300 lux. Local constraints describe the attributes of a single object and how it interacts with topological characteristics. In general these characteristics are in the form of, a desk should be at least 4 meters from a ventilation duct, or an object should be within an area that has more then 300 lux of light. Global constraints express design requirements for a group of objects.  
-
-
-\subsection{V-SIMSPLACE}
-\cite{V-SIMS} describes a platform that 'embodies spatial context-aware information' so that users can visualize an architectural design before it is deployed. The aim of the tool is to simulate a users experience in a Smart Home environment, in order to study the interactions of the user within his/her environment. The crux of the system is that behavioral semantics of a Smart Home are integrated into the building design knowledge so that the interactions a user has within the Virtual Environment will closely mimic the real world.
-
-Unlike \cite{Calderon06}, V-PLACESIMS does not attempt to capture design requirements or reason about the consistency of an environment. Rather, it's focus is providing a platform for users to interact with a Smart Home environment to discover the behaviors and interactions that take place.
-
+The approach used in CRR is to use an intermediate qualitative spatial layer between the high level design conceptualization and the low level geometric representation
 
 \chapter{Conceptual Requirements Reasoner}
 The Conceptual Requirements Reasoner (CRR) is a framework for validating conceptual design requirements against CAAD based architectural design plans. Conceptual design requirements here refer to requirements as they pertain to the functional and experiential aspects of the design from a semantic and qualitative perspective. For example, architects commonly describe aspects of a design in a qualitative fashion, such as a design being private, accessible, or continuous. These architectural aspects emerge from the spatial structures / arrangements of the building form and are experienced in the building. 
@@ -1145,11 +1212,7 @@ TODO: figure for convex hull abs
 
 \clearpage
 \bibliographystyle{abbrv}
-\bibliography{relatedworks}
-%\bibliography{museum}
-%\bibliography{architecture}
-%\bibliography{qsr}
-%\bibliography{clp}
+\bibliography{thesis}
 
 
 %\addcontentsline{toc}{chapter}{Bibliography}
