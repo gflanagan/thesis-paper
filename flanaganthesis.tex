@@ -146,14 +146,16 @@ This is the introduction.
 
 \chapter{Background and Related Work} 
 
+
 \section{Background}
 \label{background}
+For this thesis there are two areas of background that need to be discussed: qualitative spatial reasoning and constraint logic programming. Qualitative spatial reasoning plays a mediating role in the CRR between the high level semantics of the design space to the low level geometric space of a CAAD based design representation. Constraint logic programming is used to solve spatial constraint problems.
 
 \subsection{Qualitative Spatial Representation and Reasoning}
-\cite{freksa1991qsr} \cite{bhattSpatialComputing}
+The field of Qualitative Spatial Reasoning (QSR) investigates techniques for representing and reasoning about abstract features of space in a computational framework while preserving the fundamental properties of space \cite{freksa1991qsr} \cite{bhattSpatialComputing}.
 
 \subsubsection{Applications of Spatial Reasoning}
-Architectural Design
+Architectural Design \cite{bhattSpatialComputing}
 
 \subsection{Constraint Logic Programming}
 
@@ -206,6 +208,7 @@ Borrmann introduces the idea of including predefined spatial constraints directl
 \section{Discussion}
 Table \ref{related works table} shows the various high level objectives of the tools that were discussed in the related works section, which includes requirements checking, design evaluation, and automatic floor plan configuration. Despite the differences here, the systems are all bound by a higher objective to provide computational assistance to an architect during the design process and specifically, in the context of conceptual design formalization and reasoning.
 
+
 \begin{table}[H]
   \begin{center}
    \scalebox{0.87}{
@@ -222,17 +225,13 @@ Table \ref{related works table} shows the various high level objectives of the t
 \label{related works table}
 \end{table}   
 
-Out of this group ICAADS is the most similar to CRR. Both systems provide a framework for checking design requirement violations using qualitative spatial reasoning. Despite the similarities, there are many differences and advantages to both. ICAADS focuses on the representation model for architectural designs in the context of requirement reasoning and gives little attention or discussion to the underlying techniques for spatial reasoning and spatial abstraction for CAAD based models. While this approach allows the system to reason automatically over the entire design, however it does so by relying on the underlying spatial reasoning system which is described like a 'black box'. Extending 'black box' reasoning can be quite difficult when spatial functions are built only to solve a specific problem. On the other hand, CRR focuses on the qualitative spatial reasoning aspects of the problem as well as the characterization and spatial interpretation of design requirements. 
+Out of this group ICAADS is the most similar to CRR. Both systems provide a framework for checking design requirement violations using qualitative spatial reasoning. Despite the similarities, there are many differences and advantages to both. ICAADS focuses on the representation model for architectural designs in the context of requirement reasoning and gives little attention or discussion to the underlying techniques for spatial reasoning and spatial abstraction for CAAD based models. While this approach allows the system to reason automatically over the entire design, however it does so by relying on the underlying spatial reasoning system which is described like a 'black box'. Extending 'black box' reasoning can be quite difficult when spatial functions are built only to solve a specific problem. On the other hand, CRR focuses on building spatial reasoning modules based on formal qualitative spatial calculi (\cite{scc} \cite{opra} \cite{topolog}), formalization and spatial interpretation of architectural concepts (i.e. experiential and spatial qualities found in architecture), and the abstraction of CAAD based geometric representations into the qualitative spatial domain. The advantages to this approach is that the reasoner is extensible, i.e. it is easy to build new design requirements by using the existing services of the spatial reasoners.  
 
-
-Both systems ensure that design requirements are met in a design based on prescribed requirements. 
-
-
-The overall concept and approach between CRR and ICAADS is quite similar, . However, there are many differences to between the to in terms of spatial reasoning and design representation. CRR goes beyond the work done in ICAADs in terms of the sophistication of spatial reasoning and formalization of design requirements. CRR uses formal qualitative spatial calculi for topological, orienational, and distance reasoning, while ICAADs uses ad-hoc definition for spatial relationships. Additionally, CRR proposes formally spatial interpretation of the design requirements used for requirements reasoning, while ICAADs provides no such discussion.
+Table \ref{functionality table} shows the different functionality between the related works discussed above. This includes whether of not the tool supports reasoning about experiential qualities (i.e. openness, privacy), functional aspects (i.e. cost, noise insulation, security), or artifactual extension (i.e. functional space), if the tool incorporates spatial representation and reasoning techniques and formal qualitative spatial calculi, if the system provide the user with feedback or recommendations based on design analysis, and if the system uses constraint based reasoning.
 
 \begin{table}[H]
   \begin{center}
-  \scalebox{0.9}{
+  \scalebox{0.87}{
   \begin{tabular}{ | r | c | c | c | c | c | c | c |}  
       \hline
       & CRR & ICAAD & TAC & Bhatt & ICAD & SEED & CLP \\ \hline
@@ -242,13 +241,18 @@ The overall concept and approach between CRR and ICAADS is quite similar, . Howe
     spatial representation and reasoning & X & X & X & X & X & X & X \\
     formal qualitative spatial calculi & X &  &  & X &  &  & \\ \hline    
     feedback / recommendation &  &  & X &  & X &  &  \\ \hline
+    design evaluation &  &  & X &  & X &  &  \\ \hline
     constraint based reasoning & X &  &  &  &  & X & X \\ \hline
   \end{tabular}
   }
   \end{center}
-\caption{Functionality and Approach}
+\caption{Functionality}
 \label{functionality table}
 \end{table} 
+
+CRR provides most of the functionality of the other systems expect it does not provide feedback to the user and it does not evaluate a design based on some metric. The indention for this version of CRR is to provide a solid framework for spatial reasoning over architectural designs and requirement reasoning. Future version of the tool might incorporate these aspects. 
+
+Table \ref{spatial table} shows the spatial reasoning capabilities for each system. It includes spatial reasoning for topological relationships, orientation (intrinsic and extrinsic), distance, and metric. Metric relationships refer to quantitative geometric functions such as the calculation of length or area.  
 
 \begin{table}[H]
   \begin{center}
@@ -268,21 +272,13 @@ The overall concept and approach between CRR and ICAADS is quite similar, . Howe
 \label{spatial table}
 \end{table}
 
+CRR is the only tool in the group which provides support for every type of spatial reasoning. Additionally, it is the only system that does so using formal qualitative spatial reasoning and representation techniques. This is one of the main advantages of CRR and is one of the main contribution in the thesis. Using a broad variety of of spatial relationships (topological, orientational, distance, metric) CRR provides flexibility and a rich set of spatial relationships to build design requirements. This is important because the spatial configurations that make up a building are complex and need flexibility in terms of the way they are characterized and reasoned over. 
 
-
-
-
-ICADS and CRR are similar with respect to the goal of supporting the design process based on high level conceptual knowledge. However, ICADS focuses more on the collaborative and knowledge based aspects of the tool, while CRR is focused on the integration of (qualitative) spatial representation and reasoning within a design reasoning context.
-
-While similar in spirit to the CRR, SEED-layout focuses heavily on the specific task of automatically generating of floor plans, while CRR focuses of the validation of requirements in an work-in-progress design. Additionally, SEED-layout only supports quantitative spatial reasoning while CRR supports both quantitative and qualitative spatial reasoning.
-
-The approach used in CRR is to use an intermediate qualitative spatial layer between the high level design conceptualization and the low level geometric representation
 
 \chapter{Conceptual Requirements Reasoner}
 The Conceptual Requirements Reasoner (CRR) is a framework for validating conceptual design requirements against CAAD based architectural design plans. Conceptual design requirements here refer to requirements as they pertain to the functional and experiential aspects of the design from a semantic and qualitative perspective. For example, architects commonly describe aspects of a design in a qualitative fashion, such as a design being private, accessible, or continuous. These architectural aspects emerge from the spatial structures / arrangements of the building form and are experienced in the building. 
 
-The goal of the CRR is to build a computational framework to represent and reason about conceptual design requirements to validate conceptual design requirement to the real world, CAAD based architectural plans.     
-
+The goal of the CRR is to build a computational framework that represents and reasons about design requirements in the context of conceptual design requirement validation.     
 
 \section{Design Problem}
 State-of-the-art CAAD tools represent the physical and structural aspects of an architectural design in a manner that is both accurate and precise. This type of representation captures the design, in terms of the spatial features, spatial dimensions of architectural entities, placement of entities within the building, at a low-level of granularity that is needed in the actual construction of the building, and allows for reasoning about the physical, structural and mechanical aspects of a design with regard to the precise geometric representation; such as the placement of a door in a wall or the mechanics of a window swinging open and closed. TODO: talk about x,y,z coordinates of real space, quantitative representation.
