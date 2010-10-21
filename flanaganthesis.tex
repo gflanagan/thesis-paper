@@ -453,7 +453,7 @@ The factbases and rulebases can be queried using a Prolog interpretor. A call to
 
 
 \section{Spatial Reasoning}
-Qualitative spatial representation and reasoning is used in the CRR to bridge the gap between a design's high level conceptual requirements and its' low level geometric representation. This process begins by spatially abstracting the design's (quantitative) geometric representation into spatial abstract (qualitative) objects. These spatially abstract objects are used by the constraint solvers to qualify topological, orientational, and distance relationship over the design, as is illustrated in Figure \ref{reasoner-design}. 
+Qualitative spatial representation and reasoning is used in the CRR to bridge the gap between a design's high level conceptual requirements and its' low level geometric representation. This process begins by spatially abstracting the design's (quantitative) geometric representation into spatial abstract (qualitative) objects. These spatially abstracted objects are used by the constraint solvers to qualify topological, orientational, and distance relationship over the design, as is illustrated in Figure \ref{reasoner-design}. 
 
 \begin{figure}[H]
 \centering
@@ -463,19 +463,40 @@ Qualitative spatial representation and reasoning is used in the CRR to bridge th
 \end{figure}
 % house image from http://www.tinyhomes.com/TH2163_SimpleElegance.html
 
-The spatial constraint solvers uses formal qualitative spatial calculi for topological (Region Connected Calculus \cite{Freksa}), orientational (Single Cross \cite{Freksa}, Oriented Point Relation Algebra \cite{Moratz}) and distance to represent and reason over the design. Within the CLP framework of the CRR, the spatial constraint solvers are implemented using CLP($\mathbb{R}$) (Constraint Logic Programming over Reals) and CHR (Constrain Handling Rules). 
+The spatial constraint solvers uses formal qualitative spatial calculi for topological (Region Connected Calculus \cite{Freksa}), orientational (Single Cross \cite{Freksa}, Oriented Point Relation Algebra \cite{Moratz}) and distance to qualitatively represent and reason over the design. Within the CLP framework of the CRR, the spatial constraint solvers are implemented in CLP($\mathbb{R}$) (Constraint Logic Programming over Reals) and CHR (Constrain Handling Rules). 
 
+Each spatial constraint solver is used as a query engine that qualifies spatial relationships to answer spatial queries.  A spatial query involves three step:
+\begin{enumerate}
+\item retrieval of quantitative representation 
+\item spatial abstraction of quantitative representation
+\item qualification of abstract spatial objects via constraint solving
+\end{enumerate}  
+As an example, the following query involves the inside topological relationship between a desk and a room. 
+\begin{verbatim}
+   inside(desk3, room1).
+\end{verbatim} In the first step, the quantitative geometries of the desk and room are retrieved from the physical representation rulebase. The second step uses transformation rules (as discussed in the next section) to spatially abstract these geometries into abstract spatial representations. Finally, the spatially abstracted objects are used by the topological constraint solver to qualify the inside relationship. The constraint solver will respond \emph{true} if the desk has an inside spatial relationship with the room, and \emph{fail} if it does not.   
 
-The spatial constraint solvers work directly over the design representation structure via the spatial abstraction representation layer and the design factbase. The main service of the reasoner is qualification of the quantitative architectural space into the qualitative feature space of topology, orientation, and distance. It should be noted that the distance constraint solver is different from the topological and orientational constraint solvers because it does not qualify distance relationships, rather it solves minimum distance constraints over quantitative objects. The topological and distance constraint solvers extend The Sindalog spatial constraint solver \cite{Sindalong}, a spatial constraint solver written in CHR. These qualitative spatial relationships are, in turn, used to reason about conceptual design requirements.
+%The spatial constraint solvers work directly over the design representation structure via the spatial abstraction representation layer and the design factbase. The main service of the reasoner is qualification of the quantitative architectural space into the qualitative feature space of topology, orientation, and distance. It should be noted that the distance constraint solver is different from the topological and orientational constraint solvers because it does not qualify distance relationships, rather it solves minimum distance constraints over quantitative objects. The topological and distance constraint solvers extend The Sindalog spatial constraint solver \cite{Sindalong}, a spatial constraint solver written in CHR. These qualitative spatial relationships are, in turn, used to reason about conceptual design requirements.
 
-The remainder of this section is structured as follow. The first subsection looks at how designs are abstracted into abstract spatial objects. The second, third and forth subsections look at topological, orientational and distance based reasoning respectively.
+The remainder of this section is structured as follow. The first subsection looks at how the quantitative representation of a design is spatially abstracted. The second, third and forth subsections look at topological, orientational and distance based reasoning respectively.
 
 \subsection{Spatial Abstraction}
-In DSpace architectural entities can be spatially abstracted. This allows DSpace to reason about a design from a qualitative level of abstraction with regards to its spatial characteristics of topology, orientation and distance. This type of qualitative spatial reasoning reasons over the abstract feature space of the design using abstract spatial objects of points, directed points, and convex hulls. 
+Spatial abstraction is the process of generalizing a precise spatial representation so as to represent only those features that are necessary for qualitative spatial reasoning. Within the context of the CRR, quantitative representations of a architectural entities are abstracted as points, directed points, lines and convex hulls in order to reason over the qualitative spatial features of topological, orientation and distance. For example, one approach to reasoning about the qualitative orientational relationship between two doors requires both doors to be spatially represented as directed points. Because doors are naturally represented as polygons, spatial abstraction is needed to transform their quantitative polygonal representation into a qualitative directed point representation.
 
-Architectural entities are not directly modeled as abstract spatial objects. These objects are generated by transformation rules that abstract the quantitative geometries of the architectural entities. The process of spatially abstracting an architectural entity depends on the spatial characteristics of the entity's structural form, and an interpretation of the intrinsic nature of an entity within an architectural / design context. For example, the abstracted representation of a doorway as a directed point is defined not only by its physical form but also by the interpretation of the doorway's intrinsic direction. 
+%In DSpace architectural entities can be spatially abstracted. This allows DSpace to reason about a design from a qualitative level of abstraction with regards to its spatial characteristics of topology, orientation and distance. This type of qualitative spatial reasoning reasons over the abstract feature space of the design using abstract spatial objects of points, directed points, and convex hulls. 
 
-Within the DSpace CLP framework, Prolog rules transform quantitative geometries into spatially abstracted objects (i.e., spatial abstraction). Spatially abstracting an architectural entity depends on the entity type, the spatial abstraction type (point, directed point, or convex hull) and sometimes a contextual identifier (direction of a doorway into or out of a specific room). Given these dependencies, spatially abstraction rules geometrically transform the quantitative geometries into abstract spatial objects. 
+%Architectural entities are not directly modeled as abstract spatial objects. These objects are generated by transformation rules that abstract the quantitative geometries of the architectural entities. 
+
+The process of spatially abstracting an architectural entity depends on the following:
+\begin{enumerate}
+\item type of spatial abstraction, eg. line to point, polygon to convex hull
+\item an interpretation of the intrinsic nature of an entity within an architectural and design context
+\end{enumerate}
+For example, the abstracted representation of a doorway as a directed point is not only defined by its physical form (a polygon) but also by the interpretation of the doorway's intrinsic direction in the context of its' situation in the design. Further discussion on this topic can be found in \ref{spatial abstraction}.
+
+Within the CLP framework of the CRR, spatial abstraction is implemented as Prolog rules. These rules transform the physical and artefactual representations into abstract spatial objects of points, directed points and convex hulls.
+
+ Spatially abstracting an architectural entity depends on the entity type, the spatial abstraction type (point, directed point, or convex hull) and sometimes a contextual identifier (direction of a doorway into or out of a specific room). Given these dependencies, spatially abstraction rules geometrically transform the quantitative geometries into abstract spatial objects. 
 
 Unlike the quantitative and functional representations, the abstract representation is not stored in the rulebase. Rather, spatial abstraction rules function over the quantitative and functional rulebase. For example, the spatial abstraction rule for a doorway into a point abstraction requires the point abstraction rule to query the quantitative rulebase to retrieve the doorways quantitative geometry. The following spatial abstraction rule is for a doorway point abstraction. Note that the rule is based on the interpretation of a doorway point abstraction as the centroid of its quantitative geometry (see Appendix A.1).   
 \begin{verbatim}
@@ -1185,7 +1206,7 @@ Bathrooms are an important services for museum visitors. Surprisingly, the place
 
 \appendix
 \chapter{Appendix}
-\section{Spatial Abstraction of Architectural Entities}
+\section{Spatial Abstraction of Architectural Entities} \label{spatial abstraction}
 The remainder of this section shows how architectural entities and interior designs objects are spatially abstracted into points, directed points, and convex hulls and how they are transformed in DSpace. Table \ref{spatial abstractions} shows which spatial abstractions each architectural entity can be transformed into. 
 
 \begin{table}[H]
