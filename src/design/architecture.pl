@@ -2,83 +2,95 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % architectual entities are represented in a multi
 % perspective manner. eg. a door can be represented 
-% geometrically as an extended region, point, or 
 % directed point. The perspective/3 predicate transforms
 % the physical geometry to the various spatial 
 % abstraction based on the architectual type.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% extended region and pt predicates are same for all arch entity types
-perspective(ID, point, P) :-
-    ifc_geometry(ID, G), 
-    transform_to_point(G, P).
+point_transformation_list([], []).
 
-perspective(ID, extended_region, E) :-
-    ifc_geometry(ID, E).
+point_transformation_list([Id|IdRest], [Pt|PtList]) :-
+    point_transformation(Id, Pt),
+    point_transformation_list(IdRest, PtList).
 
-% currently works for all types of arch entities
-% direction must be hard coded
-perspective(ID, directed_point, (PT,DIR)) :-
-    %arch_entity(ID, dsDoor),
-    ifc_geometry(ID, G),
-    transform_to_point(G,PT),
-    direction(ID, DIR).
+point_transformation(Id,  Pt) :-
+    ifc_geometry(Id, Geom), 
+    abstract_to_point(Geom, Pt).
+
+convex_hull_transformation(Id, Convex) :-
+    ifc_geometry(Id, region(Geom)),
+    abstract_to_convex_hull(Geom, Convex).
+
+% Direction is generated automatically for doors and windows. Two direction
+% vectors will be extracted and returned in a list.
+% All other entity types must have direction hard coded.
+directed_point_transformation_dw(Id, PtRel, Pt, Dir) :-
+    convex_hull_transformation(Id, G),
+    calc_direction(G, Pt, DirList),
+    closest_point(PtRel, DirList, Dir).
+
+directed_point_transformation(Id, Pt, Dir) :-
+    direction_hard_code(Id, Pt, Dir).
+
+calc_direction(G, Pt, DirList) :-
+    centroid(G, Pt),
+    calc_direction_hlpr(G, DirList).
+
+calc_direction_hlpr([Pt1,Pt2,Pt3,Pt4|_], [Dir1,Dir2]) :-
+    longest_length((Pt1, Pt2), (Pt2, Pt3), Seg1),
+    longest_length((Pt3, Pt4), (Pt4, Pt1), Seg2),
+    midpoint(Seg1, Dir1),
+    midpoint(Seg2, Dir2).
+
+%calc_direction_hlpr2((X,Y), ((X1, Y1),(X2,Y2)), (Xd, Yd)) :-
+%    Slope is ((Y2-Y1)/(X2-Y1)),
+%    Perp_slope is (-(1/Slope)),
+%    Y_intercept is (Y-(Perp_slope*X)),
+ 
+midpoint(((X1,Y1),(X2,Y2)), (Xd,Yd)) :-
+    Xd is ((X1 + X2) / 2),
+    Yd is ((Y1 + Y2) / 2).    
+
+closest_point(PtRel, [Dir1,Dir2], Dir) :-
+    mindist(PtRel, Dir1, D1),
+    mindist(PtRel, Dir2, D2),
+    (D1 >= D2 -> Dir = Dir2 ; Dir = Dir1).
+
+longest_length((Pt1, Pt2), (Pt3, Pt4), ((P1, P2))) :-
+    mindist(Pt1, Pt2, D1),        % call to distance contraint solver
+    mindist(Pt3, Pt4, D2),
+    (D1 >= D2 -> P1 = Pt1, P2 = Pt2 ;
+                 P1 = Pt3, P2 = Pt4).
 
 perspective(ID, fs_point, RmID, PT) :-
     functional_space(ID, RmID, FS),
-    transform_to_point(FS, PT).
+    abstract_to_point(FS, PT).
 
-transform_to_point(region(R), Centroid) :-
+abstract_to_point(region(R), Centroid) :-
     centroid(R, Centroid).
 
-% calculates the centroid of a polygon. 
-% NOTE: doesn't work if all coordinates are negative
-centroid(region(R), C) :- !,
-    convex_hull(R, ConvexR),
-    polygon_area(ConvexR, A),
-    centroid_xy_sum(ConvexR, SumX, SumY),
-    my_abs(SumX, SumX_pos),
-    my_abs(SumY, SumY_pos),
-    mult_area(A, SumX_pos, SumY_pos, C).
+abstract_to_convex_hull(Geom, Convex) :-
+    convex_hull(Geom, Convex).
 
-centroid(R, C) :- !,
-    convex_hull(R, ConvexR),
-    polygon_area(ConvexR, A),
-    centroid_xy_sum(ConvexR, SumX, SumY),
-    my_abs(SumX, SumX_pos),
-    my_abs(SumY, SumY_pos),
-    mult_area(A, SumX_pos, SumY_pos, C).
+% geometry utility functions
+centroid(R, (X,Y)) :-
+    convex_hull(R, Convex),
+    x_y_average(Convex, X, Y).
 
-my_abs(Neg, Pos) :-
-    (Neg < 0 -> Pos is -Neg; Pos is Neg).
+x_y_average(Convex, X, Y) :-
+    sum_x_y(Convex, Sum_x, Sum_y),
+    length(Convex, L),
+    X is Sum_x / (L-1),  %sub 1 because convex has extra pt at end
+    Y is Sum_y / (L-1).
 
-polygon_area(R, A) :-
-    polygon_xy_sum(R, SumXY, SumYX),
-    Sum is SumYX - SumXY,
-    A is Sum / 2.
+% don't process last element because it's a dup because of convex
+% hull representation.
+sum_x_y([_|[]], 0, 0).
 
-polygon_xy_sum([_|[]], 0, 0).
-
-polygon_xy_sum([(X1,Y1),(X2,Y2)|PR], SumXY, SumYX) :-
-    polygon_xy_sum([(X2,Y2)|PR], SumXY_prev, SumYX_prev),
-    XY is X1 * Y2,
-    YX is Y1 * X2,
-    SumXY is XY + SumXY_prev,
-    SumYX is YX + SumYX_prev. 
-
-mult_area(A, SumX, SumY, (Y,X)) :-
-    X is ((1/(6 * A)) * SumX),
-    Y is ((1/(6 * A)) * SumY).
-
-centroid_xy_sum([_|[]], 0, 0).
-
-centroid_xy_sum([(X1,Y1),(X2,Y2)|PR], SumX, SumY) :-
-    centroid_xy_sum([(X2,Y2)|PR], SumX_prev, SumY_prev),
-    Dx is ((X1 * Y2) - (X2 * Y1)),
-    Ux is (X1 + X2) * Dx,
-    Uy is (Y1 + Y2) * Dx,
-    SumX is Ux + SumX_prev,
-    SumY is Uy + SumY_prev.
+sum_x_y([(X,Y)|Xs], Sum_x, Sum_y) :-
+    sum_x_y(Xs, New_x_sum, New_y_sum),
+    Sum_x is X + New_x_sum,
+    Sum_y is Y + New_y_sum.
 
 
 
@@ -101,12 +113,6 @@ spatial_primitive(Geometry, Pt) :-
 is_point((X,Y)) :- 
     number(X),number(Y).
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% topology function wrapper 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-topology(Geom1, Geom2, Rel) :-
-    F =..[Rel, Geom1, Geom2],call(F). 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

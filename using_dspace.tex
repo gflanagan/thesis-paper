@@ -1,0 +1,138 @@
+\title{Using The DSpace Requirements Reasoner}
+\author{
+        Gregory Flanagan \\
+}
+\date{\today}
+
+
+\documentclass[12pt]{article}
+
+\usepackage{underscore}
+
+
+\begin{document}
+\maketitle
+
+\section{Parser}\label{parser}
+First run the parser over the DsSchema.xml file. The parser is dependent on the elementTree xml python package. This can be installed on any OS. Get it here: http://effbot.org/zone/element-index.htm. \\
+
+\noindent To run the the parser, open up a terminal, navigate to the folder name \emph{parser} and type:
+\begin{verbatim}
+    python dspace_parser.py file_to_parse.xml
+\end{verbatim} Make sure that the file_to_parse.xml is located in the parser folder. The parser will generate two Prolog files. The first file is called \emph{file_to_parse.pl}, which contains the design representation predicates and rules for the reasoner. You do not need to do anything with this file. The second file is called \emph{dspace_include.pl}, this file contains included statements for all the modules in the reasoners; in essence it's the glue that pulls together the reasoner.\\
+
+\noindent For usability, the parser creates new id's for architectural entities and interior design elements. These id's are mapped to the DSpace ids (which are extracted from IFC) with the predicate \emph{map_user_to_dsschema(id, dsschema_id)} so that the link between the requirement reasoner and the DsSchema is not broken. The new ids are simply used because it becomes difficult to keep track of entity ids (such as \emph{a3UcDt2E5uXJO4hM1dqbB7q}) that are long and obscure. \\
+
+\noindent Ids are broken down based on architectural type; doors get ids \emph{door1, door2, etc}, windows get ids \emph{win1, win2, etc}, and on for the rest. Interior design elements get generic ids \emph{id1, id2, id2, etc.}. Spaces get ids \emph{room1, room2, etc}. 
+
+
+\section{Starting The Requirements Reasoner}
+To run the requirements reasoner, open up a terminal and navigate to the reasoner's source code root folder (src/). There will be a file named \emph{dspace_include.pl} if you have already run the parser; If not, you need to first finish Section \ref{parser}. 
+
+\noindent Fire up SWI-Prolog with the command: 
+\begin{verbatim} 
+   pl
+or 
+   swipl
+\end{verbatim} depending on your OS. Once in Prolog type the following command to load the requirements reasoner:
+\begin{verbatim} 
+ ?- [dspace_include].
+\end{verbatim} This will load everything into Prolog: spatial constraint solvers, architectural concept rules, design instantiation. Note, this will load the most recent design that has been parsed. Also, there will be some warnings because I am loading several CHR files and I haven't yet found a way to do this cleanly. \\
+
+\noindent Now you are ready to use the reasoner.
+
+\section{Using The Requirements Reasoner}
+The reasoner is used as a query engine. In general, all queries take ids (i.e. door1, win1) as arguments and return true or false based on the result of the query. \\
+
+\noindent Direct queries to the spatial constraint solvers can be made by calling a higher order function, with the ids, that resolves the abstract geometries needed for the constraint solvers. For SCC the following query can be made:
+\begin{verbatim}
+ ?- scc(scc0, door1, room1, door2).
+\end{verbatim} This query will check the SCC$_{0}$ relationship between door1, room1, and door2. For opra the following query can be made:
+\begin{verbatim}
+ ?- opra(door1, door2, 4, 1).
+\end{verbatim} Opra queries take two ids, the granularity, and a base relationship. The following topological queries can made:
+\begin{verbatim}
+ ?- topology(disconnect, door1, door2).
+\end{verbatim}
+
+\subsection{Positioning}
+There are eight positing queries: same_side, opposing_side, same_left, same_right, opposing_left, opposing_right. Each positioning query has three arguments, the first is the id for the origin, the second is the id for the referent, and the third for the relatum. The relatum is usually a room or space. To check if two doors are on the opposing side of a room the following query is made:
+\begin{verbatim}
+ ?- opposing_side(door1, door2, room1).
+\end{verbatim} Similar queries are made for the other seven positioning relationships.
+
+
+\subsection{Positioning for Sequences}
+There are two positioning for sequences queries: horizontally_perceived, vertically_perceived. Each query has three arguments, the first is the id / point (X,Y) of the vantage point, the second in the sequence of object represented as a list of ids, and the third id of the context space. To check if a sequence of display cases is horizontally perceived from a door the following query is made:
+\begin{verbatim}
+ ?- horizontally_perceived(door1, [display1,display2,display3], room1).
+\end{verbatim} From a specific vantage point the following query can be made:
+\begin{verbatim}
+ ?- horizontally_perceived((5,77), [display1,display2,display3], room1).
+\end{verbatim}
+
+
+\subsection{Facing}
+There are four facing queries: facing_towards, facing_away, facing_towards_mutual, facing_away_mutual. Each query has two arguments, this first is the id of the relating entity, the second is the id of the related id. The direction of doorways and windows are automatically calculated. All other entities, including interior objects must have a direction hard coded. If the entity is not a door / window or does not have a direction hard coded it will fail. \\
+
+\noindent To check if door1 is facing towards door2 the following query is made:
+\begin{verbatim}
+ ?- facing_towards(door1, door2).
+\end{verbatim} Similarly, to check if both door1 and door2 are mutually facing towards the other, the following query is made:
+\begin{verbatim}
+ ?- facing_towards_mutual(door1, door2).
+\end{verbatim}
+
+\subsection{Proximity}
+There are three proximity queries: near, near_plus, and far. To check if two entities are near to each other the following query is made:
+\begin{verbatim}
+ ?- near(win34, door2).
+\end{verbatim}
+
+\subsection{Visibility}
+There is one visibility query: is_visible. The query takes two arguments, the first is the vantage point and the second is the object that is being checked for visibility. For this version of the reasoner two objects are assumed to be not visible if they are in different rooms (this is done for efficiency). Additionally, interior design objects are not included as objects that can obstruct a view. \\
+
+\noindent Note: Walls that contain doors or windows being check for visibility are removed from obstruction list. This is done because the geometries for doors and windows are set inside the walls and therefore will inevitably not be visible. Carl - can we include a containment relationship for walls, doors, and windows in the DsSchema? \\
+
+\noindent To check if an stairway is visible from a doorway the following query can be made:
+\begin{verbatim}
+ ?- is_visible(door5, stair6).
+\end{verbatim} Similarly, to check if a stair is visible from a given vantage point the following query is made:
+\begin{verbatim}
+ ?- is_visible((5,4), stair6).
+\end{verbatim}
+
+\subsection{Privacy}
+Privacy has not been implemented yet.
+
+\subsection{Continuity}
+There is one query for continuity: continuity. The query takes a list of rooms to check continuity for. It can also take a single argument that is a room id. To check continuity for a sequence of rooms the following query is made:
+\begin{verbatim}
+ ?- continuity([room1, room2, room3]).
+\end{verbatim} Or for just a single room the following query is made:
+\begin{verbatim}
+ ?- continuity([room2]).
+\end{verbatim}
+
+\subsection{Enclosure}
+There are two queries for enclosure: open, confined. Each query takes a single argument which is a vantage point to check for enclosure. The argument can either be a point (X,Y) or an architectural id. To check is a point is open the following query is made:
+\begin{verbatim}
+ ?- open((5,6)).
+\end{verbatim} If the id for a room is used the the centroid of the room is checked.
+\begin{verbatim}
+ ?- confined(room2).
+\end{verbatim}
+
+\subsection{Artefactual Reasoning}
+The artefactual space of entities can be reasoned with from a topological perspective. Note that artefactual space is not automatically generated, it must be hard coded. Artefactual interference can be check for, such as the functional space of a door does not overlap with the operational space of an information kiosk using the following queries:
+\begin{verbatim}
+ ?- functional_space(door1, FS),
+    operational_space(info_kiosk4, OP),
+    disconnected(FS, OP).
+\end{verbatim}
+
+\bibliographystyle{abbrv}
+\bibliography{main}
+
+\end{document}
+This is never printed

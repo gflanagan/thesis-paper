@@ -143,50 +143,151 @@ This is the introduction.
 
 
 
+<<<<<<< HEAD
 \section{Preliminaries}
 \label{preliminaries}
 
 \subsection{Qualitative Spatial Representation and Reasoning}
 \subsubsection{Applications of Spatial Reasoning}
 \subsection{Constraint Logic Programming}
+=======
+
+\chapter{Background and Related Work} 
+>>>>>>> 1890cd3592168dd9a040f22d3fc0d7a945f9e0aa
 
 
-\chapter{Previous Work}
-\label{previous-work}
-\section{Design Support Systems}
-\subsection{SEEDS}
-The SEEDS project, described in \cite{FlemmingIKM94}, proposed a architectural design platform for capturing and representing functional (i.e. spatial requirements) and structural (geometric) design knowledge. The aim of which is to support the architectural design process by providing design knowledge during the initial design phase of a building. Within the SEEDS project, design knowledge is partitioned into two categories: design units, and functional units. Design units represent spatial and physical elements of a building, while functional units represent requirement that constrain design units
-based on shape, size, placement, etc.. Additionally, SEEDS pioneered the idea that architectural design knowledge, specifically design requirements, could be represented as constraints to automatically generate layouts.
+\section{Background}
+\label{background}
+For this thesis there are two areas of background that need to be discussed: qualitative spatial reasoning and constraint logic programming. Qualitative spatial reasoning plays a mediating role in the CRR between the high level semantics of the design space to the low level geometric space of a CAAD based design representation. Constraint logic programming is used to solve spatial constraint problems.
+
+\subsection{Qualitative Spatial Representation and Reasoning}
+The field of Qualitative Spatial Reasoning (QSR) investigates techniques for representing and reasoning about abstract features of space in a computational framework while preserving the fundamental properties of space \cite{freksa1991qsr} \cite{bhattSpatialComputing}.
+
+\subsubsection{Applications of Spatial Reasoning}
+Architectural Design \cite{bhattSpatialComputing}
+
+\subsection{Constraint Logic Programming}
 
 
+\section{Related Works}
+\label{related works}
+There is a large body of research on tools for conceptual design. The works that will be discussed in this section has been narrowed to approaches that either reason about qualitative (i.e. experiential, spatial) or functional (i.e. noise insulation, energy conservation, smart home security) design aspects / requirements or evaluate a design utilizing spatial reasoning techniques. The last part of this section will discuss and summarize the different approaches in the context of the work that is being done in this thesis.
 
-\section{AI in Design}
-\subsection{Intelligence Virtual Environments}
-Caldern \cite{CalderónCLP06} built upon the ideas in \cite{FlemmingIKM94} for representing design knowledge, to develop an Intelligent Virtual Environment that solves spatial configuration problems based on spatial design knowledge. Additionally, the tool added non-geometric semantics (i.e. environmental, lighting) for functional units to demonstrate that their approach could be extended to non-geometric design knowledge.
 
-Caldern argued that spatial knowledge By representing design knowledge as constraints, the tool was able to use constraint logic programming to solve spatial configuration problems. In general, constraint are classified as: topological, local, and global. Topological constraints describe the topological characteristics of the environment, such as a regions where a lighting is less then 300 lux. Local constraints describe the attributes of a
-single object and how it interacts with topological characteristics. In general these characteristics are in the form of, a desk should be at least 4 meters from a ventilation duct, or an object should be within an area that has more then 300 lux of light. Global constraints express design requirements for a group of objects.  
+\subsection{Intelligent Critic System}
+The intelligent computer-aided architectural design system (ICAAD) \cite{IntelligentCritic} is a tool that evaluates architectural design floor plans based on government regulations and interior design guidelines and checks for any that are not satisfied in the design. The focus of this research is on how to representation spatial information in the context of architectural design requirement checking.
 
-Axling \cite{AxlingEURO96} and Codognet \cite{CodognetDMS99} proposed the use constraint  logic programming in Virtual Environments for intelligent object behavior. Their approaches focuses on the behavior of single objects without taking into consideration behavior of a set of object or how objects constrained by the specific environment. 
+ICAADs represents designs in an object oriented hierarchical model, which is based on architectural containment relationships, i.e. windows are contained by rooms, rooms are contained by apartments, apartments are contained by buildings, etc. Architectural components, such as rooms, windows, furniture, are represented individually as ICAAD objects in the hierarchical structure. Each object stores geometric data, such the center of the object, length and width, shape, and direction. Spatial relationships, such as proximity, visibility, relative location are extracted from the geometric data and stored in a network that connects relating objects together with their spatial relationship. 
 
-\subsection{V-SIMSPLACE}
-\cite{LertlakkhanakulIBPSA06} describes a platform that 'embodies spatial context-aware information' so that users can visualize an architectural design before it is deployed. The aim of the tool is to simulate a users experience in a Smart Home environment, in order to study the interactions of the user within his/her environment. The crux of the system is that behavioral semantics of a Smart Home are integrated into the building design knowledge so that the interactions a user has within the Virtual Environment will closely mimic the real world.
+The ICAADs inference engine matches design requirement rules (i.e. government regulations and interior deigns guidelines) against the ICAADs spatial representation structure (i.e. the hierarchical object model and the spatial networks). Violations are detected when a spatial relationship between elements are matched to a design requirement violation rule.  
 
-Unlike \cite{CalderónCLP06}, V-PLACESIMS does not attempt to capture design requirements or reason about the consistency of an environment. Rather, it's focus is providing a platform for users to interact with a Smart Home environment to discover the behaviors and interactions that take place.
+
+\subsection{The Architect's Collaborator}
+The Architect's Collaborator (TAC) \cite{KoileTAC} is a prototype design support system that evaluates a design based on abstract qualities and provides recommendations to improve the design w.r.t. these qualities. Within TAC, abstract qualities describe experiential aspects of a design in terms such as 'openness' and 'privacy'. The main contribution of TAC is that it maps abstract qualities to measurable design features in order to rank designs based on adherence to a design quality and provide recommendations for improving the design. 
+
+For example, a designer uses TAC by specifying a goal for a specific design, such as the kitchen should be 'visibly open'. If the kitchen does not meet the goal of being visibly open, then TAC provides recommendations for improving the design. Recommendations are derived from a knowledge base that contains explanations for a goals failure, such as walls cause visual obstructions and decrease the visual openness between rooms. 
+
+The main drawback to TAC is its use of 'black box' geometric and spatial reasoning. For example, TAC measures the visible-openness of a room as the percentage of the room that is visible from another room. This definition of visible-openness uses a direct mapping between the high level conceptual requirement to the low level geometric properties of the design. 
+
 
 \subsection{Intelligence for Ambient Design}
-Bhatt proposed a system in \cite{BhattDH09} that provides validation for the satisfiability of functional requirements, which are grounded to a qualitative spatial calculi, within the Ambient Environment domain. The system accomplishes this by modeling the functional requirements as constrains in an ontology and uses an ontology reasoner to discover if a model is realizable for a design, i.e. no models will be found if on or more functional constraints are not satisfied. 
+Bhatt, et al. proposed a system in \cite{BhattDH09} that validates a designer's conceptual requirements against an architectural design in the context of Smart Homes. The system reasons about design from a structural and functional perspective.   
 
-\subsection{Decision Support for Virtual Environment}
-\cite{Nomura92} used a Decision Support System to validate the design configuration. The system was used more as a diagnostic system, rather then providing feedback on how to reconfigure the environment. Note: I have not read \cite{Nomura92} because I haven't been able to track it down. Therefore my description here is based on the related works section of \cite{CalderónCLP06}.
+\subsection{ICADS}
+The Intelligent Computer-Aided Design System (ICADS) \cite{ICADS} is a collaborative design support tool that assists a designer by providing analysis based on numerous functional aspects of the design. The aspects include analysis based on the structural system selection, lighting, noise insulation, climate control and energy conservation, space layout, and construction costs. The focus of this research is on developing a series of knowledge based software agents that collaborate within ICADS to make recommendations to the user. 
+
+\subsection{SEEDS}
+The Software Environment for Supporting the Early Phases in Building Design (SEED) project \cite{SEEDS} is a framework that supports an architect during the entire architectural design process. Specific to the work done in this thesis, SEED introduced the idea of using constraints to represent design knowledge in order to automatically generate floor layouts, in a tool referred to as SEED-layout. 
+
+Within SEED-layout, design knowledge is partitioned into two categories: design units and functional units. Design units represent the spatial and physical elements of a building. Functional units represent design requirements and constrain design units based on shape, size, placement, and non spatial attributes such as material make-up. Given a design represented in SEED-layout as design units and a set of design requirements represented as functional units, SEED-layout tries to automatically generates possible floor plans that adhere to all of the design requirements. The main contribution of this work is that the system utilizes the constraint solving abilities in a CLP framework to autonomously find design layouts that meet the design's requirement specifications.
 
 
+\subsection{Interior Design Configuration for a Virtual Environment}
+Calderon \emph{et. al} proposes a system that automatically configures an indoor virtual environment, with respect to placing interior design elements, by solving spatial constraint problems. The system works by solving a constraint satisfaction problem as specified, given a virtual environment represented as a discrete Cartesian grid, a set of interior design objects (desks, chairs, lamps, etc.), and a set of spatial constraints over the design objects (i.e. a desk should be at least 4 meters from a power outlet), the system searches for possible spatial configurations (i.e. placement of objects) within the virtual environment such that all of the spatial constraints are satisfied. 
 
-\chapter{DSpace Reasoner}
-The DSpace Reasoner is a prototype tool for validating conceptual design requirements against CAAD based architectural design plans. Conceptual design requirements here refer to requirements as they pertain to the functional and experiential aspects of the design from a semantic and qualitative perspective. For example, architects commonly describe aspects of a design in a qualitative fashion, such as a design being private, accessible, or continuous. These architectural aspects emerge from the spatial structures / arrangements of the building form and are experienced in the building. 
+The main contribution of this work is the use of spatial constraints in the area of virtual environment design. However, the work done here is only preliminary and has several shortcomings. The domain of the virtual environment is limited to rectangular areas and is represented as a discrete Cartesian grid. This limitation means that all spatial reasoning is over the discrete finite integer domain. Additionally, the expressiveness of the spatial constraints is limited. For example, topological relationships only define two relationships, inside and outside. 
 
-The goal of the DSpace reasoner is to build a computational framework to represent and reason about conceptual design requirements to validate conceptual design requirement to the real world, CAAD based architectural plans.     
+\subsection{Others}
+The following research presents ideas that are similar to the work in this thesis, but differ from the primary works already discussed in this section because they preliminary research on the subject at hand.
 
+Key proposes a descriptor language that defines architectural qualities from a computational perspective \cite{Key}. The work here is quite similar to the work in this thesis with regards to the approach that architectural qualities emerge from the precise geometric configurations of design elements and that these qualities can be discovered by spatial interpretation. The language defines architectural descriptor for concepts such as enclosure, continuity, and spaciousness and does so by interpreting the descriptor in terms of spatial properties. However, the approach here lacks the integration of qualitative spatial representation and reasoning as an intermediate layer between the high level concepts and low level geometries and instead uses a more direct approach to geometric and spatial reasoning.
+
+Borrmann introduces the idea of including predefined spatial constraints directly into a standard building production model, i.e. Industry Foundation Classes (IFC), to detect constraint violations \cite{Borrmann}. This proposal primarily focuses on the definition and integration of spatial constraints into the IFC model but it does provide some discussion on how these spatial constraints might be checked for in such an environment. While similar to CRR, this proposals approach is focused on the integration of spatial constraints into a specific building model (IFC) format and does not go into the process of generating the spatial constraints from the geometric configurations of a design. 
+
+\section{Discussion}
+Table \ref{related works table} shows the various high level objectives of the tools that were discussed in the related works section, which includes requirements checking, design evaluation, and automatic floor plan configuration. Despite the differences here, the systems are all bound by a higher objective to provide computational assistance to an architect during the design process and specifically, in the context of conceptual design formalization and reasoning.
+
+
+\begin{table}[H]
+  \begin{center}
+   \scalebox{0.87}{
+  \begin{tabular}{ | r | c | c | c | c | c | c | c |}
+    \hline
+    & CRR & ICAAD & TAC & Bhatt & ICAD & SEED & CLP \\ \hline
+    requirement checking & X & X &  & X &  &  & \\ \hline
+    design evaluation &  &  & X &  & X &  & \\ \hline
+    automatic floor plan configuration &  &  &  &  &  & X & X \\ \hline
+   \end{tabular}
+   }
+  \end{center}
+\caption{System Objectives}
+\label{related works table}
+\end{table}   
+
+Out of this group ICAADS is the most similar to CRR. Both systems provide a framework for checking design requirement violations using qualitative spatial reasoning. Despite the similarities, there are many differences and advantages to both. ICAADS focuses on the representation model for architectural designs in the context of requirement reasoning and gives little attention or discussion to the underlying techniques for spatial reasoning and spatial abstraction for CAAD based models. While this approach allows the system to reason automatically over the entire design, however it does so by relying on the underlying spatial reasoning system which is described like a 'black box'. Extending 'black box' reasoning can be quite difficult when spatial functions are built only to solve a specific problem. On the other hand, CRR focuses on building spatial reasoning modules based on formal qualitative spatial calculi (\cite{scc} \cite{opra} \cite{topolog}), formalization and spatial interpretation of architectural concepts (i.e. experiential and spatial qualities found in architecture), and the abstraction of CAAD based geometric representations into the qualitative spatial domain. The advantages to this approach is that the reasoner is extensible, i.e. it is easy to build new design requirements by using the existing services of the spatial reasoners.  
+
+Table \ref{functionality table} shows the different functionality between the related works discussed above. This includes whether of not the tool supports reasoning about experiential qualities (i.e. openness, privacy), functional aspects (i.e. cost, noise insulation, security), or artifactual extension (i.e. functional space), if the tool incorporates spatial representation and reasoning techniques and formal qualitative spatial calculi, if the system provide the user with feedback or recommendations based on design analysis, and if the system uses constraint based reasoning.
+
+\begin{table}[H]
+  \begin{center}
+  \scalebox{0.87}{
+  \begin{tabular}{ | r | c | c | c | c | c | c | c |}  
+      \hline
+      & CRR & ICAAD & TAC & Bhatt & ICAD & SEED & CLP \\ \hline
+    experiential qualities & X & X & X &  &  &  & \\ \hline
+    functional design aspects  & X &  &  & X & X &  & \\ \hline
+    artifactual extension & X &  &  & X &  &  &  \\ \hline
+    spatial representation and reasoning & X & X & X & X & X & X & X \\
+    formal qualitative spatial calculi & X &  &  & X &  &  & \\ \hline    
+    feedback / recommendation &  &  & X &  & X &  &  \\ \hline
+    design evaluation &  &  & X &  & X &  &  \\ \hline
+    constraint based reasoning & X &  &  &  &  & X & X \\ \hline
+  \end{tabular}
+  }
+  \end{center}
+\caption{Functionality}
+\label{functionality table}
+\end{table} 
+
+CRR provides most of the functionality of the other systems expect it does not provide feedback to the user and it does not evaluate a design based on some metric. The indention for this version of CRR is to provide a solid framework for spatial reasoning over architectural designs and requirement reasoning. Future version of the tool might incorporate these aspects. 
+
+Table \ref{spatial table} shows the spatial reasoning capabilities for each system. It includes spatial reasoning for topological relationships, orientation (intrinsic and extrinsic), distance, and metric. Metric relationships refer to quantitative geometric functions such as the calculation of length or area.  
+
+\begin{table}[H]
+  \begin{center}
+  \scalebox{0.9}{
+    \begin{tabular}{ | r | c | c | c | c | c | c | c |}
+     \hline
+     & CRR & ICAAD & TAC & Bhatt & ICAD & SEED & CLP \\ \hline
+     topology & X &  & X & X & & X & X  \\ \hline
+     intrinsic orientation  & X & X &  &  &  &  &  \\ \hline
+     extrinsic orientation & X &  &  &  &  &  &   \\ \hline
+     distance  & X & X & X &  &  & X & X  \\ \hline
+     metric & X & X & X &  & X & X & X  \\ \hline
+   \end{tabular}
+  }
+  \end{center}
+\caption{Types of Spatial Reasoning}
+\label{spatial table}
+\end{table}
+
+CRR is the only tool in the group which provides support for every type of spatial reasoning. Additionally, it is the only system that does so using formal qualitative spatial reasoning and representation techniques. This is one of the main advantages of CRR and is one of the main contribution in the thesis. Using a broad variety of of spatial relationships (topological, orientational, distance, metric) CRR provides flexibility and a rich set of spatial relationships to build design requirements. This is important because the spatial configurations that make up a building are complex and need flexibility in terms of the way they are characterized and reasoned over. 
+
+
+\chapter{Conceptual Requirements Reasoner}
+The Conceptual Requirements Reasoner (CRR) is a framework for validating conceptual design requirements against CAAD based architectural design plans. Conceptual design requirements here refer to requirements as they pertain to the functional and experiential aspects of the design from a semantic and qualitative perspective. For example, architects commonly describe aspects of a design in a qualitative fashion, such as a design being private, accessible, or continuous. These architectural aspects emerge from the spatial structures / arrangements of the building form and are experienced in the building. 
+
+The goal of the CRR is to build a computational framework that represents and reasons about design requirements in the context of conceptual design requirement validation.     
 
 \section{Design Problem}
 State-of-the-art CAAD tools represent the physical and structural aspects of an architectural design in a manner that is both accurate and precise. This type of representation captures the design, in terms of the spatial features, spatial dimensions of architectural entities, placement of entities within the building, at a low-level of granularity that is needed in the actual construction of the building, and allows for reasoning about the physical, structural and mechanical aspects of a design with regard to the precise geometric representation; such as the placement of a door in a wall or the mechanics of a window swinging open and closed. TODO: talk about x,y,z coordinates of real space, quantitative representation.
@@ -223,7 +324,7 @@ The design multi-hierarchy developed in this section is built on the mapping of 
 \label{hierarchy}
 \end{figure}
 
-Figure \ref{hierarchy} shows the design multi-hierarchy used in the DSpace reasoner. Conceptual design requirements are built from the architectural concepts and qualitative spatial attributes found in architecture (QSA) of the hightest level of the multi-hierarchy. Within the multi-hierarchy, architectural concepts are built using QSA, but are not limited to only these, spatial relationships of orientation, topology, and distance can be used, as well as other geometric primitives such as area, angle, and length measurements. QSA are defined by the qualitative spatial relationships of orientation, topology, and distance. These qualitative spatial relationships emerge from the quantitative, physical, and artefactual geometries of the the design. TBD: physical structures define the way the architecture is experiences and influences the functional / performance of the design from a conceptual design perspective.
+Figure \ref{hierarchy} shows the design multi-hierarchy used in the DSpace reasoner. Conceptual design requirements are built from the architectural concepts and qualitative spatial attributes found in architecture (QSA) of the highest level of the multi-hierarchy. Within the multi-hierarchy, architectural concepts are built using QSA, but are not limited to only these, spatial relationships of orientation, topology, and distance can be used, as well as other geometric primitives such as area, angle, and length measurements. QSA are defined by the qualitative spatial relationships of orientation, topology, and distance. These qualitative spatial relationships emerge from the quantitative, physical, and artefactual geometries of the the design. TBD: physical structures define the way the architecture is experiences and influences the functional / performance of the design from a conceptual design perspective.
 
 \section{DSpace: Design and Implementation}
 \begin{figure}[H]
@@ -236,57 +337,30 @@ Figure \ref{hierarchy} shows the design multi-hierarchy used in the DSpace reaso
 
 \subsection{Factbase}
 Prolog facts make up a factbase that stores a table of architectural entities with their architectural types (e.g., wall, door, window, desk, etc.). Each architectural entity in the design has a single entry in the factbase. The factbase is instantiated automatically during the import process from a CAAD based representation. This factbase will be used throughout the DSpace reasoner to  verify an entity exists in the design and links it to its architectural type. The following Prolog code shows two instantiated facts (predicates) for a doorway, and a window. 
-\begin{verbatim}
-   architectural_entity(door1, dSDoor).
-   architectural_entity(wall4, dsWindow).
-\end{verbatim}
+
 
 
 \chapter{Design Representation and Spatial Reasoning}
-This chapter presents the architectural design representation and spatial reasoning framework of the DSpace reasoner. It examines how architectural designs are modeled in a multiple perspective representation structure, and how architectural designs are reasoned about using qualitative spatial representation and reasoning techniques. The DSpace framework is written in the declarative programming semantics of Constraint Logic Programming (CLP) using Prolog, CLP over the Reals (CLP($\mathbb{R}$)), and Constraint Handling Rules (CHR).  
+This chapter introduces the computational framework of the CRR. It presents two components of the framework: 1) the internal architectural design representation structure and 2) the spatial constraint solvers. Additionally, this chapter presents each component in the context of the declarative programming paradigm used for the implementation of the CRR, namely Prolog and Constraint Logic Programming (CLP). The third component  of the CRR, the conceptual requirements component, will be presented in the following Chapter.
 
-The chapter is organized into two sections. The first section looks at how architectural design are represented in DSpace and how this representation model is implemented in the DSpace CLP framework. The second section looks at the DSpace spatial reasoner and how it is implemented as a series of spatial constraint solvers in the DSpace CLP framework.
+This chapter is organized into two sections. The first section looks at the internal architectural design representation structure and how it is implemented in Prolog. The second section looks at the spatial constraint solvers and how each is implemented in CLP.
 
-\section{Design Representation in DSpace}
-DSpace represents multiple aspects of a design. It represents the physical features as they pertain to the design's geometric structures, and the functional features as they pertain to the design's non-physical artefactual extensions. This design representation goes beyond what is represented in CAAD programs and allows for reasoning over the design
+\section{Design Representation}
+The CRR internally represents two distinct aspects of an architectural design. It represents the design's physical form and non-physical artefactual extensions. The physical form pertains to the precise geometric data that defines the design's structural elements (walls, doors, windows, etc.) with regard to layout, location and shape. Artefactual extension pertains to the non-physical but geometric data that defines the functional characteristics of structural elements, such as the space required for a person to operate a doorway or window.
 
-In DSpace an architectural design is modeled in a multiple perspective representation structure that incorporate aspects of the design that are quantitative, functional, and abstract. This design representation goes beyond what is represented in CAAD programs by incorporating design features that are not based on the design's quantitative design representation. It includes functional aspects of the design that pertain to the performance and functional features of the design, as well as abstract spatial aspects that pertain to the qualitative feature space of the design. The objective of this representation structure is to provide the DSpace reasoner with mechanisms that connect an expert's high level design conceptualizations to the low level geometric quantities of a CAAD based system.   
+The physical representation of the design is automatically imported into the CRR from a multi-modal spatial data access framework \cite{MultiModal} built by the DesignSpace project \cite{DesignSpace}. For each architectural entity, the CRR imports the structural geometric coordinate data and a unique identifier, referred to in the CRR as the \emph{crr\_id}. Currently artefactual extension are manually imported in the CRR but the intent for future versions is to automate this directly from the multi-modal spatial data access framework.  
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=90mm]{multi-persepective}
-\caption{Multiple Perspective Structure}
-\label{mutli-perspective}
-\end{figure}
+The remainder of this section is broken up into three subsections. The first subsection looks at the physical representation structure. The second subsection looks at the artefactual representation structure. The final subsection looks at how each are implemented in the CRR.
 
-Within the CLP framework of DSpace, the multiple perspective model is implemented as a set of Prolog rules. These rules bind architectural entities, via their DSpace identifier (\emph{dsID}), to their multiple perspective representations. Combining these rules for each entity creates a rulebase that stores the multiple perspective representation in the DSpace CLP framework. This rulebase can be queried to retrieve a specific geometry given a \emph{dsID}. Figure \ref{clp-design} shows the implementation design for the multiple representation structure in the DSpace CLP framework. Notice that all rules are accessed via the factbase, which stores \emph{dsID}'s and ensures that an entity exists before the rulebase is queried. Additionally, all representations are defined over the same set of spatial primitives. This uniformity will be an important aspect of the spatial reasoner in the next section. 
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=90mm]{clp-design}
-\caption{Representation in CLP}
-\label{clp-design}
-\end{figure}
-
-The remainder of this section looks at the three design representation perspective individually: quantitative, functional, abstract.
-
-\subsection{Quantitative Perspective}
-The quantitative representation of the design models the structural form of the design in terms of its precise physical geometric features (i.e., layout, shape, location). Architectural entities, such as walls, windows, doorways, columns, and rooms, are represented as geometric primitives of polygons, lines and points that correspond to the physical dimensions (length, width, shape) of the entities. The quantitative model of DSpace represents the design perspective that is similar to CAAD programs.
-
-Within the DSpace CLP framework, the quantitative geometry is defined by geometric primitives of polygons, lines, and points. These primitives are defined by Prolog rules that consume quantitative point data and return an instantiated spatial primitive. The following Prolog rules shows an example of a quantitative rule definition for an entity with \emph{dsID window445}. This rule will be stored in the DSpace rulebase. 
-\begin{verbatim}
-    quantitative_geometry(window445, Geometry) :-
-            spatial_primitive(Geometry, [(1,1),(3,5),(4,5),(2,2)]).
-\end{verbatim}
-Given an entity and its \emph{dsID}, a query to the DSpace rulebase will return an instantiated variable with the entity's quantitative geometry.  
-If the following query is made, the quantitative geometry of \emph{window445} will be instantiated in the \emph{Geometry} variable.
-\begin{verbatim}
-    quantitative_geometry(window445, Geometry).
-\end{verbatim} 
+\subsection{Physical Design Representation}
+The physical representation models the design's structural form in terms of its precise physical geometric features (i.e., layout, shape, location). Architectural entities, such as walls, windows, doorways, columns, and rooms, are represented as geometric primitives of polygons, lines and points that correspond to the physical dimensions (length, width, shape) of the entities as they occur in the real world. The physical model of the design is analogous to the design perspective that is represented by CAAD programs. 
 
 
-\subsection{Functional Perspective}
-Spatial artefacts are non-physical, spatial extensions of architectural entities that pertain to a specific functional quality of an entity. Artefactual extensions do not have a physical manifestation; however, they are an important part of the design representation because they affect the functionality and performance of the design. There are three types of spatial artefacts identified by Bhatt\cite{Bhatt} that are represented in DSpace: \emph{operational space}, \emph{functional space}, and \emph{range space}.
+
+\subsection{Artefactual Design Representation}
+Functional artifact are non-physical, spatial extensions of architectural entities that pertain to a specific functional quality of an entity. Artefactual extensions do not have a physical manifestation; however, they are an important part of the design representation because they affect the functionality and performance of the design from an experiential perspective. 
+
+There are three types of spatial artefacts identified by Bhatt\cite{Bhatt} that are represented in the CRR: \emph{operational space}, \emph{functional space}, and \emph{range space}.
 
 \begin{figure}[H]
  \centering
@@ -312,26 +386,92 @@ The range space pertains to a region of space that encompass the range of a sens
 \label{door-sink}
 \end{figure}
 
-Artefactual extensions directly affect how well a design functions. For example, a sink in a bathroom has a functional space, the space a person occupies while washing his/her hands at the sink. If this space interferes with (i.e., topologically overlapping) the functional and/or physical space of a doorway, this will cause a circulation problem when both the doorway and sink are simultaneously being operated, i.e., a collision between the person washing his/her hands and the doorway itself or the person operating the doorway. In this example, the functional aspects of the bathrooms design with regard to the mitigation of circulation problems is directly influenced by the spatial configuration of the non-physical artefactual extensions of the design. 
+Artefactual extensions directly affect how well a design functions. For example, a sink in a bathroom has a functional space, the space a person occupies while washing his/her hands at the sink. If this space interferes with (i.e., topologically overlapping) the functional and/or physical space of a doorway, this will cause a circulation problem when both the doorway and sink are simultaneously being operated, i.e., a collision between the person washing his/her hands and the doorway itself or the person operating the doorway. In this example, the functional aspects of the bathrooms design with regard to the mitigation of circulation problems is directly influenced by the spatial configuration of the non-physical artefactual extensions of the design. It should be noted that this type of occurrence can not be modeled in a traditional CAAD program because they do not represent artefactual extension of architectural entities.
 
-Within the DSpace CLP framework, artefactual geometries are defined using the same spatial primitives as the quantitative geometries. The main difference between the two is that there are multiple rules, one for each artefactual type: functional, operational, and range. An entity may have zero or more artefactual geometries. For example, a doorway in general has a functional and operational representation but does not have one for range representation, while a column has no artefactual representations. The following Prolog rules show and example of a rule definition for the functional and operational representations for a doorway with \emph{dsID} of \emph{door55}. 
-\begin{verbatim}      
-    functional_geometry(door55, Geometry) :-
-            spatial_primitive(Geometry, polygon(PtList)).
-           
-    operational_geometry(door55, Geometry) :-
-            spatial_primitive(Geometry, polygon(PtList)).
-\end{verbatim}
-Given an entity and its dsID, a query to the DSpace rulebase will return an instantiated variable with the entity’s artefactual geometry. Which geometry is returned is based on the rule that is queried. If the following functional representation query is made, the functional geometry of \emph{door55} will be instantiated in the FuncGeometry variable.
+
+\subsection{Implementation}
+Within the CLP framework of the CRR, the design representation is implemented as several factbases and rulebases. There are two factbases that can be described as in memory database-like structures. The first factbase is used like a catalog that relates each architectural entity to it's architectural type (wall, window, door, room, interior design object, etc.) via its \emph{crr\_id}. Each entry in the factbase is a Prolog predicate of the form $architectural \mathunderscore type(crr \mathunderscore id, type)$.
 \begin{verbatim}
-   functional_geometry(door55, FuncGeometry).
-\end{verbatim}
+   architectural_type(door42, door).
+   architectural_type(wall49, wall).
+\end{verbatim} The second factbase is used like a linking table that relates two architectural entities based on structural containment relationships, i.e. door42 is contained in wall5, wall5 in contained in room6, etc. Each containment relationship is a Prolog predicate of the form $contained(contained \mathunderscore crr \mathunderscore id, containing \mathunderscore crr \mathunderscore id)$.
+\begin{verbatim}
+   contained(door42, wall5).
+   contained(wall5, room3).
+\end{verbatim} 
+
+There are multiple rulebases used to link architectural entities to geometric representations. Each representation, physical, functional, operational, and range, has a separate rulebase, but they are all implemented using a similar form. In each rulebase, the head of the rule links an architectural entity via is \emph{crr\_id} to a variable binding that links to its' internal geometric representation. The body of each rule is responsible for transforming coordinate point data into internal spatial primitives of points, lines, and polygons. The following rules show the physical, functional and operational rules for a door with a \emph{crr\_id} of door42. Note the similarities and differences between the rules.
+\begin{verbatim}
+    physical_representation(door42, Geometry) :-
+            spatial_primitive(Geometry, [(1,3),(1,4),(4,4),(4,3)]).
+            
+    functional_representation(door42, FuncGeometry) :-
+            spatial_primitive(FuncGeometry, [(1,7),(4,7),(1,1),(4,1)]).
+            
+    operational_representation(door42, OpGeometry) :-
+            spatial_primitive(OpGeometry, [(1,4),(4,6),(4,3)]).
+\end{verbatim} 
+
+The transformation of coordinate data to spatial primitives and the binding of the variable is accomplished by the $spatial \mathunderscore primitive$ rule, which is in the body of each rule. Each $spatial \mathunderscore primitive$ rule works by matching arguments when it is called. For example, the following call to the $spatial \mathunderscore primitive$ rule with a single point in the second argument instantiates the the variable, \emph{SpatialPrimitive}, as a point object primitive.
+\begin{verbatim}
+   spatial_primitive(SpatialPrimitive, (5,7)).
+\end{verbatim} Similarly, a call to $spatial \mathunderscore primitive$ with a list of points instantiates the variable as a polygon object primitive.
+\begin{verbatim}
+   spatial_primitive(SpatialPrimitive, [(5,7), (5,9), (7,7)]).
+\end{verbatim} 
+
+Every architectural entity has a physical representation but may or may not have a functional, operational, or range representation. For example, a doorway usually has a functional and operational representation but does not a range representation. Some entities, such as columns, have no artefactual representation. However, there is no limitation to which entities can or can not have certain artefactual extensions.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=120mm]{clp-design}
+\caption{Representation in CLP}
+\label{clp-design}
+\end{figure}
+
+The factbases and rulebases can be queried using a Prolog interpretor. A call to the $architectural \mathunderscore type$ factbase can be used to get an entity's type given its' \emph{crr\_id}, such as the following query.
+\begin{verbatim}
+    architectural_type(door42, Type).
+\end{verbatim} Similarly, a query to a rulebase will return and instantiated variable with the respective spatial representations. Figure \ref{clp-design} shows the implementation design for the rulebases. For example, the following query to the \emph{physical\_representation} rule with \emph{crr\_id} of door42 will instantiate the $Geometry$ variable with door42's physical representation. \begin{verbatim}
+    physical_representation(door42, Geometry).
+\end{verbatim} Calls to the functional, operational, and range representation rules work in the exact same fashion.
 
 
-\subsection{Abstract Perspective}
-In DSpace architectural entities have spatially abstracted representations. This allows DSpace to reason about a design from a qualitative level of abstraction with regards to its spatial characteristics of topology, orientation and distance. This type of qualitative spatial reasoning reasons over the abstract feature space of the design using abstract spatial objects of points, directed points, and convex hulls. 
+%Given an entity and its \emph{crr\_id}, a query to the DSpace rulebase will return an instantiated variable with the entity's quantitative geometry.  
+%If the following query is made, the quantitative geometry of \emph{window445} will be instantiated in the \emph{Geometry} variable.
 
-Architectural entities are not directly modeled as abstract spatial objects, as they are in the other representations. Abstract spatial objects are generated by transformation rules that abstract the quantitative geometries of the architectural entities. The process of spatially abstracting an architectural entity depends on the spatial characteristics of the entity's structural form, and an interpretation of the intrinsic nature of an entity within an architectural / design context. For example, the abstracted representation of a doorway as a directed point is defined not only by its physical form but also by the interpretation of the doorway's intrinsic direction. 
+%Within the DSpace CLP framework, the quantitative geometry is defined by geometric primitives of polygons, lines, and points. These primitives are defined by Prolog rules that consume quantitative point data and return an instantiated spatial primitive. The following Prolog rules shows an example of a quantitative rule definition for an entity with \emph{crr\_id window445}. This rule will be stored in the DSpace rulebase. 
+
+%Within the DSpace CLP framework, artefactual geometries are defined using the same spatial primitives as the quantitative geometries. The main difference between the two is that there are multiple rules, one for each artefactual type: functional, operational, and range. An entity may have zero or more artefactual geometries. For example, a doorway in general has a functional and operational representation but does not have one for range representation, while a column has no artefactual representations. The following Prolog rules show and example of a rule definition for the functional and operational representations for a doorway with \emph{crr\_id} of \emph{door55}. 
+
+%Given an entity and its crr\_id, a query to the DSpace rulebase will return an instantiated variable with the entity’s artefactual geometry. Which geometry is returned is based on the rule that is queried. If the following functional representation query is made, the functional geometry of \emph{door55} will be instantiated in the FuncGeometry variable.
+%\begin{verbatim}
+ %  functional_geometry(door55, FuncGeometry).
+%\end{verbatim}
+
+%the multiple perspective model is implemented as a set of Prolog rules. These rules bind architectural entities, via their DSpace identifier (\emph{crr\_id}), to their physical and functional representations. Combining these rules for each entity creates a rulebase that stores each representation in the DSpace CLP framework. This rulebase can be queried to retrieve a specific geometric representation given a \emph{crr\_id}. Figure \ref{clp-design} shows the implementation design for the multiple representation structure in the DSpace CLP framework. Notice that all rules are accessed via the factbase, which stores \emph{crr\_id}'s and ensures that an entity exists before the rulebase is queried. Additionally, all representations are defined over the same set of spatial primitives. This uniformity will be an important aspect of the spatial reasoner in the next section. 
+
+
+\section{Spatial Reasoning}
+In the CRR qualitative spatial representation and reasoning techniques bridge the gap between the high level conceptual design requirements and the low level geometric design representation. 
+
+It uses formal qualitative spatial calculi for topological (Region Connected Calculus \cite{Freksa}), orientational (Single Cross \cite{Freksa}, Oriented Point Relation Algebra \cite{Moratz}) and distance reasoning over the spatial entities of the structural and artefactual design (refer to figure \ref{reasoner-design}). The quantitative geometric representation of the design are spatially abstracted so that the design can be spatially reasoned about from a qualitative perspective.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=90mm]{reasoner-design}
+\caption{Constraint Solvers}
+\label{reasoner-design}
+\end{figure}
+
+Within the CLP framework of the CRR, the reasoning capabilities are built as a series of spatial constraint solvers using CLP($\mathbb{R}$) (Constraint Logic Programming over Reals) and CHR (Constrain Handling Rules). The spatial constraint solvers work directly over the design representation structure via the spatial abstraction representation layer and the design factbase. The main service of the reasoner is qualification of the quantitative architectural space into the qualitative feature space of topology, orientation, and distance. It should be noted that the distance constraint solver is different from the topological and orientational constraint solvers because it does not qualify distance relationships, rather it solves minimum distance constraints over quantitative objects. The topological and distance constraint solvers extend The Sindalog spatial constraint solver \cite{Sindalong}, a spatial constraint solver written in CHR. These qualitative spatial relationships are, in turn, used to reason about conceptual design requirements.
+
+The remainder of this section is structured as follow. The first subsection looks at how designs are abstracted into abstract spatial objects. The second, third and forth subsections look at topological, orientational and distance based reasoning respectively.
+
+\subsection{Spatial Abstraction}
+In DSpace architectural entities can be spatially abstracted. This allows DSpace to reason about a design from a qualitative level of abstraction with regards to its spatial characteristics of topology, orientation and distance. This type of qualitative spatial reasoning reasons over the abstract feature space of the design using abstract spatial objects of points, directed points, and convex hulls. 
+
+Architectural entities are not directly modeled as abstract spatial objects. These objects are generated by transformation rules that abstract the quantitative geometries of the architectural entities. The process of spatially abstracting an architectural entity depends on the spatial characteristics of the entity's structural form, and an interpretation of the intrinsic nature of an entity within an architectural / design context. For example, the abstracted representation of a doorway as a directed point is defined not only by its physical form but also by the interpretation of the doorway's intrinsic direction. 
 
 Within the DSpace CLP framework, Prolog rules transform quantitative geometries into spatially abstracted objects (i.e., spatial abstraction). Spatially abstracting an architectural entity depends on the entity type, the spatial abstraction type (point, directed point, or convex hull) and sometimes a contextual identifier (direction of a doorway into or out of a specific room). Given these dependencies, spatially abstraction rules geometrically transform the quantitative geometries into abstract spatial objects. 
 
@@ -341,26 +481,14 @@ Unlike the quantitative and functional representations, the abstract representat
             quantitative_geometry(door55, Quant),
             centroid(Quant, PtAbs).
 \end{verbatim}
-Given an entity and its dsID, a query to the DSpace spatial abstraction rule will return an instantiated variable with the entity's spatially abstracted geometry. If the following query to the point abstraction rule is made for a doorway with \emph{dsID} of \emph{door55}, then the point abstraction geometry of \emph{door55} will be instantiated in the PtAbs variable.
+Given an entity and its crr\_id, a query to the DSpace spatial abstraction rule will return an instantiated variable with the entity's spatially abstracted geometry. If the following query to the point abstraction rule is made for a doorway with \emph{crr\_id} of \emph{door55}, then the point abstraction geometry of \emph{door55} will be instantiated in the PtAbs variable.
 \begin{verbatim}
     point_abstraction(door55, PtAbs).
 \end{verbatim}
 
 
-\section{Spatial Reasoning in DSpace}
-In DSpace qualitative spatial reasoning serves as a link between the high level conceptual design space and the low level quantitative geometric space. It uses formal qualitative spatial calculi for topological (Region Connected Calculus \cite{Freksa}), orientational (Single Cross \cite{Freksa}, Oriented Point Relation Algebra \cite{Moratz}) and distance reasoning over the spatial entities of the structural and artefactual design (refer to figure \ref{reasoner-design}). 
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=90mm]{reasoner-design}
-\caption{Constraint Solvers}
-\label{reasoner-design}
-\end{figure}
-
-Within the CLP framework of DSpace, the reasoning capabilities are built as a series of spatial constraint solvers using CLP($\mathbb{R}$) (Constraint Logic Programming over Reals) and CHR (Constrain Handling Rules). The spatial constraint solvers work directly over the multiple perspective representation structure via the spatial abstraction representation layer and the design factbase. The main service of the reasoner is qualification of the quantitative architectural space into the qualitative feature space of topology, orientation, and distance. It should be noted that the distance constraint solver is different from the topological and orientational constraint solvers because it does not qualify distance relationships, rather it solves minimum distance constraints over quantitative objects. The topological and distance constraint solvers extend The Sindalog spatial constraint solver \cite{Sindalong}, a spatial constraint solver written in CHR. These qualitative spatial relationships are, in turn, used to reason about conceptual design requirements.
-
 \subsection{Topology}
-The DSpace reasoner can qualify the following four topological relationships for convex hulls: inside (\ref{inside}), outside (\ref{outside}), partially overlapping (\ref{overlapping}), and disconnected (\ref{disconnected}). In DSpace topological qualification uses geometric properties of convex hulls to detect topological relationships. 
+The CRR can qualify the following four topological relationships for convex hulls: inside (\ref{inside}), outside (\ref{outside}), partially overlapping (\ref{overlapping}), and disconnected (\ref{disconnected}). In DSpace topological qualification uses geometric properties of convex hulls to detect topological relationships. 
 
 \begin{figure}[t]
  \centering
@@ -398,14 +526,14 @@ The first constraint \emph{intersection\_segement\_segmenet} is propagated into 
 
 The qualification for the other topological relationships are similar to the partially overlapping constraint presented here, but in addition to the line intersection constraint some constraints use the geometric properties of convex hull / point containment.
 
-The DSpace design representation structure can be queried for topological relationships using the topological constraint solver. Prolog rules query the abstract representation layer to retrieve the spatial abstractions need for topological qualification. In this case objects will be spatially abstracted into convex hulls. The following rule shows the rule for the inside topological relationship. Note that the rule takes two \emph{dsID} as arguements, queries the abstract representation layer to retrieve the entities convex hull abstract representations, and then makes a finally call to the \emph{inside\_convexhull} constraint.
+The DSpace design representation structure can be queried for topological relationships using the topological constraint solver. Prolog rules query the abstract representation layer to retrieve the spatial abstractions need for topological qualification. In this case objects will be spatially abstracted into convex hulls. The following rule shows the rule for the inside topological relationship. Note that the rule takes two \emph{crr\_id} as arguements, queries the abstract representation layer to retrieve the entities convex hull abstract representations, and then makes a finally call to the \emph{inside\_convexhull} constraint.
 \begin{verbatim}
     inside(Id1, Id2) :-
             convexhull_abs(Id1, Convex1),
             convexhull_abs(Id2, Convex2),
             insdie_convexhull(Convex1, Convex2).
 \end{verbatim}
-Given two entities with \emph{dsID}'s \emph{door45} and \emph{room53}, the following query will return true if the entities have an inside topological realtionship and will fail if they do not. In this case they do not have an inside relationship so the query returns fail.
+Given two entities with \emph{crr\_id}'s \emph{door45} and \emph{room53}, the following query will return true if the entities have an inside topological realtionship and will fail if they do not. In this case they do not have an inside relationship so the query returns fail.
 \begin{verbatim}
     ?- inside(door45, room53).
     fail.
@@ -471,7 +599,7 @@ The DSpace design representation structure can be queried for orientational rela
             point_abstraction(Id3, PtAbs3),
             SCC(PtAbs1, PtAbs2, PtAbs3, 1).
 \end{verbatim}
-Given three entities with \emph{dsID}’s \emph{door45}, \emph{room53}, and \emph{desk2} the following query will return true if the entities have an SCC$_{1}$ relationship and will fail if they do not. In this specific case they do have an SCC$_{1}$ relationship so the query returns true.
+Given three entities with \emph{crr\_id}’s \emph{door45}, \emph{room53}, and \emph{desk2} the following query will return true if the entities have an SCC$_{1}$ relationship and will fail if they do not. In this specific case they do have an SCC$_{1}$ relationship so the query returns true.
 \begin{verbatim}
     ?- SCC1(door45, room53, desk2).
     true.
@@ -833,7 +961,7 @@ TBD: figure of stair landing
 \section{Conceptual Requirement Validation}
 The conceptual requirement reasoner (CCR) validates design requirements by querying an architectural design using predicate calls to architectural concepts and QSA. Requirement queries will return \emph{true} if the architectural design is consistent, or \emph{fail} if the design is inconsistent per the design requirement. A design is considered consistent if the design's spatial characteristics, as represented in its physical and functional geometries, matches with the definition of the designs requirement specification. For example, a design is consistent per a design requirement of a window and doorway facing towards each other, if the spatial characteristic of the design, with regards to the window and doorway, match the spatial specification of facing towards each other.    
 
-Given the example scenario above, a doorway with dsID \emph{door543}, and a window with dsID \emph{window15}, the following query is made to the CRR to validate the requirement.
+Given the example scenario above, a doorway with crr\_id \emph{door543}, and a window with crr\_id \emph{window15}, the following query is made to the CRR to validate the requirement.
 \begin{verbatim}
    ?- facing(door543, window15).
 \end{verbatim}
@@ -846,7 +974,7 @@ Queries to architectural concepts and QSA can be combined to build requirements.
             near(Id1, Id2),
             facing(Id1, Id2).
 \end{verbatim}
-Note that the direct query is specific to \emph{door543} and \emph{window15}, while the rule allows the user to input any \emph{dsID}'s into the query.
+Note that the direct query is specific to \emph{door543} and \emph{window15}, while the rule allows the user to input any \emph{crr\_id}'s into the query.
 \begin{verbatim}
     ?- facing_and_near(desk52, door6).
 \end{verbatim}
@@ -860,13 +988,13 @@ Consider the design requirement for a bedroom being private. This requirement ca
 
 
 
-\chapter{Case Studies}
+\chapter{Museum Case Study}
 This chapter is a case study that demonstrates the application of the DSpace reasoner to the design of an art museum. The purpose is twofold: first, to examine several design requirements of an art museum with regards to the spatial interpretation of the requirements; and second, to show how the museum design requirements can be represented and reasoned about in a computational framework, in order to detect design inconsistencies as per the design requirements.
 
 The remainder of the chapter is divided into three sections. The first section examines design requirements in art museums in three parts: the first part looks at requirements that influence museum visitors' behaviour. The second part looks at requirements for promoting exploration in the museum. The third part looks at the requirements of accessibility and security within the museum. The second section, looks at how these requirements can be interpreted spatially and represented in the DSpace reasoner. The third section tests the DSpace reasoner using sample museum floor plans that are both consistent and inconsistent per the design requirements for several art museums. The objective of this demonstration is to show that the DSpace reasoner can validate a design against its design requirements.
 
 
-\section{Case Study: Museum}
+\section{Museums}
 Museums are a place of public education, in which art, historical artefacts, and scientific exhibits are put on display for the public to view \cite{Falk}. While museums in general have many common threads in terms of their design requirements, this case study takes the approach of narrowing the study to that of an art museum. This focuses the discussion to specific real world examples and maintains the perspective that this is not an exhaustive study of museum design requirements, rather it's an investigation into the nature and interpretation, with respect to spatial properties / characteristics, of a set of design requirements. Additionally, the point is not to prove the validity of these requirements in an empirical sense; rather it is to show the process of representing and reasoning about design requirements in a formal computational framework.
 
 The art museum is a unique and fruitful choice for this case study because it provides a rich set of design properties that have been formally studied and reported \cite{Melton} \cite{Bitgood02} \cite{Falk}. Within museum studies, visitor behaviour has been one of the primary focuses, starting with experiments dating back to the 1930's. 
@@ -876,14 +1004,14 @@ Pretend for a moment that you are an architect working on the initial design for
 
 \begin{enumerate}
 \item Maximize visitor utilization of exhibitions
-\item Encourage free-flowing exploration throughout the museum
-\item Adhere to museum requirements of accessibility and security
+\item Visitor Orientation in Lobby
 \end{enumerate}
 
 TBD: explain how these high level requirements can be interpreted into concrete properties of the museums design. from here the requirements can be spatially interpreted and represented in the DSpace reasoner.
 
 \subsection{Maximizing Visitor Utilization of Exhibitions}
-This portion of the case study will look into four factors that influence visitors' movement patters: positioning of doorways, spatial arrangement of display cases, positioning of furniture and statues, and congestion. These properties inform museum architects, during the design process, about the spatial characteristics that can maximize the utilization of the museum by increasing the frequency and duration with which visitors view exhibition objects. 
+This portion of the case study will look into four factors that influence visitors' movement patters: positioning of doorways, spatial arrangement of display cases, positioning of furniture and statues, congestion, and exploration. These properties inform museum architects, during the design process, about the spatial characteristics that can maximize the utilization of the museum by increasing the frequency and duration with which visitors view exhibition objects. 
+
 
 \subsubsection{Positioning of doorways}
 In an important study, Melton \cite{Melton} discovered that the most influential factor to determine  the amount of attention an exhibition piece receives is the pieces's position relative to doorways in a gallery room. Prior to this, museum researchers believed that the pieces's intrinsic properties of 'interestingness', color, and size were the real factors that determined the amount of attention a piece received. Melton explained why this happens; he demonstrated that the amount of attention a piece receives is directly related to the visitor circulation patterns within the museum and these circulation patterns emerge from the spatial characteristics of the museum's architecture.
@@ -956,6 +1084,7 @@ Congestion in museums can be caused by interference of displayed objects and the
 \item[Requirement 4:] \emph{There should be no artefactual interference between architectural entities, museum display cases, museum seating, and information kiosks.}
 \end{description}
 
+
 \subsubsection{Positioning of benches, statues, and information kiosks}
 The positioning and orientation of benches and statues can increase the amount of attention an exhibition receives and change circulation patterns within a gallery \cite{Stavroulaki} \cite{Museum}. Studies have shown that seating directly facing an object will increase the attention the object receives, even if no one uses the seating. 
 
@@ -968,7 +1097,21 @@ The orientation of a statue to doorways can increase the attention the statue re
 \item[Requirement 6:] \emph{Statues should face away from doorways.}
 \end{description}
 
-\subsubsection{Visitor Orientation in the lobby}
+
+\subsubsection{Exploration}
+The way visitors explore an exhibition is influenced by the spatial characteristics of the layout, as well as the characteristics of each gallery room. Layouts that are sequential, i.e. one way in / one way out, promote a controlled and orderly flow of movement. Museums of history and science are well served by this type of design because they have a narrative to tell that is chronological. On the other hand, layouts that present the visitor with path choices, i.e. multiple doorways, promote free-flowing exploration. In this type of layout it is important that visitors are aware of the path choices that are available. This means that doorways are visible between each other throughout the layout. This concept of visibility between a network of points is referred to as continuity and is an important characteristic of layouts that present visitors with multiple path choices.  
+
+\begin{description}
+\item[Requirement 10:] The layout of the museum should maintain continuity between doorways within each exhibition and gallery room.
+\end{description}
+
+%Within a Gallery, rooms that are open promote more free-flowing exploration than rooms that are narrow. Narrow rooms inhibit exploration because of space limitations and confinement. Rooms that are open provide more space for visitors to explore the room in a free-flowing manner.
+%\begin{description}
+%\item[Requirement 11:] Gallery rooms should be open, rather than confined, in order to promote free-flowing exploration.
+%\end{description}
+
+
+\subsection{Visitor Orientation in the lobby}
 The lobby is the first place visitors encounter when they enter a museum. The design of the lobby is important because it not only provides a first glimpse of the museum's exhibits but it is the place where the museum provides services to its visitors, including: a ticketing desk, bathrooms, an information desk, and entrances to exhibitions \cite{Bitgood02}. The aim of the requirements for the lobby focus on making it easy for visitors to locate services and orient themselves to the new environment. 
 
 Upon entering the lobby most visitors need to find the ticket area and/or an information desk. It is important, therefore, that the ticketing area and information desk are visible from the entrance. Additionally, studies have shown that people first look to their right hand side when entering a building. By placing the ticket and information desks on the right hand side of the lobby, visitors are more likely to notice them immediately when they enter the lobby. Finally, the ticketing area should be close to visitors when they enter because it is likely one of the first places they will need to visit.
@@ -988,61 +1131,47 @@ Bathrooms are an important services for museum visitors. Surprisingly, the place
 \end{description}
 
 
-\subsection{Exploration}
-The way visitors explore an exhibition is influenced by the spatial characteristics of the layout, as well as the characteristics of each gallery room. Layouts that are sequential, i.e. one way in / one way out, promote a controlled and orderly flow of movement. Museums of history and science are well served by this type of design because they have a narrative to tell that is chronological. On the other hand, layouts that present the visitor with path choices, i.e. multiple doorways, promote free-flowing exploration. In this type of layout it is important that visitors are aware of the path choices that are available. This means that doorways are visible between each other throughout the layout. This concept of visibility between a network of points is referred to as continuity and is an important characteristic of layouts that present visitors with multiple path choices.  
 
-\begin{description}
-\item[Requirement 10:] The layout of the museum should maintain continuity between doorways within each exhibition and gallery room.
-\end{description}
+%\chapter{Case Study: Ranch Style House}
 
-Within a Gallery, rooms that are open promote more free-flowing exploration than rooms that are narrow. Narrow rooms inhibit exploration because of space limitations and confinement. Rooms that are open provide more space for visitors to explore the room in a free-flowing manner.
-\begin{description}
-\item[Requirement 11:] Gallery rooms should be open, rather than confined, in order to promote free-flowing exploration.
-\end{description}
+%\subsection{A Private Room}
+%In a particular apartment, the designer wants the bedroom to be private. Given the definition of privacy in this chapter, privacy entails that the bedroom is on the opposing side of the apartment from the main entrance, the bedroom's doorway does not face towards any other doorways, and the doorway is not visible from the main entrance.
 
-
-
-\chapter{Case Study: Ranch Style House}
-
-
-\subsection{A Private Room}
-In a particular apartment, the designer wants the bedroom to be private. Given the definition of privacy in this chapter, privacy entails that the bedroom is on the opposing side of the apartment from the main entrance, the bedroom's doorway does not face towards any other doorways, and the doorway is not visible from the main entrance.
-
-Using DSpace, the designer can check for privacy of a bedroom by querying the DSpace representation. The query is a Prolog statement that calls the privacy predicate with the bedroom's unique DSpace identifier. The statement will return true if the bedroom meets the constraint defined by privacy and will return fail if it does not. The floor plans in Figure \ref{room-privacy} show two apartments with a private and un-private bedroom. Given these two floor plans DSpace will validate the floor plan that is private based on the spatial characteristics of the design that define privacy. For example, given Figure \ref{fig:private-room-con} has a unique DSpace identifier of \emph{bedroom1} and Figure \ref{fig:private-room-incon} has a unique DSpace identifier of \emph{bedroom2} the privacy query for bedroom1 will respond with \emph{true} while the query for bedroom2 will respond with \emph{fail}: 
-\begin{verbatim}
-   ?- privacy(bedroom1).
-   true.
+%Using DSpace, the designer can check for privacy of a bedroom by querying the DSpace representation. The query is a Prolog statement that calls the privacy predicate with the bedroom's unique DSpace identifier. The statement will return true if the bedroom meets the constraint defined by privacy and will return fail if it does not. The floor plans in Figure \ref{room-privacy} show two apartments with a private and un-private bedroom. Given these two floor plans DSpace will validate the floor plan that is private based on the spatial characteristics of the design that define privacy. For example, given Figure \ref{fig:private-room-con} has a unique DSpace identifier of \emph{bedroom1} and Figure \ref{fig:private-room-incon} has a unique DSpace identifier of \emph{bedroom2} the privacy query for bedroom1 will respond with \emph{true} while the query for bedroom2 will respond with \emph{fail}: 
+%\begin{verbatim}
+%   ?- privacy(bedroom1).
+%   true.
    
-   ?- privacy(bedroom2).
-   fail.
-\end{verbatim}
+%   ?- privacy(bedroom2).
+%   fail.
+%\end{verbatim}
 
-The constraints that define privacy for a room are broken down into three QSAs:
-\begin{verbatim}
-   opposing(main entrance, bedroom, apartment).
-   facing_away(doorway, doorways).
-   not_visible(main entrance, doorway).
-\end{verbatim}
-These three QSA constraints are in turn broken down into qualitative spatial relationships. For example, the opposing side relationship is broken down into SCC relationships for the architectural entities (main entrance, bedroom) point abstractions.
-\begin{verbatim}
-   SCC1(main entrance, apartment centroid, bedroom).
-   SCC2(main entrance, apartment centroid, bedroom).
-   SCC3(main entrance, apartment centroid, bedroom).
-\end{verbatim}
-These SCC relationships are grounded to the quantitative representation via qualification. The SCC constraints are solved for using the orientational constraint solver.
+%The constraints that define privacy for a room are broken down into three QSAs:
+%\begin{verbatim}
+%   opposing(main entrance, bedroom, apartment).
+%   facing_away(doorway, doorways).
+%   not_visible(main entrance, doorway).
+%\end{verbatim}
+%These three QSA constraints are in turn broken down into qualitative spatial relationships. For example, the opposing side relationship is broken down into SCC relationships for the architectural entities (main entrance, bedroom) point abstractions.
+%\begin{verbatim}
+%   SCC1(main entrance, apartment centroid, bedroom).
+%   SCC2(main entrance, apartment centroid, bedroom).
+%   SCC3(main entrance, apartment centroid, bedroom).
+%\end{verbatim}
+%These SCC relationships are grounded to the quantitative representation via qualification. The SCC constraints are solved for using the orientational constraint solver.
 
-\subsection{Sink / Doorway Artefact Interaction}
-In a particular bathroom there is a design requirement that there should be no artefactual interactions between bathroom entities to ensure proper circulation throughout the bathroom. This includes the requirement that the functional space of all sinks should not interfere with the functional space of a doorway. 
+%\subsection{Sink / Doorway Artefact Interaction}
+%In a particular bathroom there is a design requirement that there should be no artefactual interactions between bathroom entities to ensure proper circulation throughout the bathroom. This includes the requirement that the functional space of all sinks should not interfere with the functional space of a doorway. 
 
-TODO: figure for two bathrooms
+%TODO: figure for two bathrooms
 
-Using DSpace a designer can check that there are no artefactual interactions by querying the design representation. The query is a Prolog statement that check for the topological structures of the bathrooms artefactual extension. For example, Figure \ref{?} shows two example bathroom floor plans. Figure \ref{?} shows a bathroom design that is consisted per the requirement and Figure \ref{?} shows a bathroom design that is inconsistent per the requirement. Given these two designs and ids for the sink (\emph{sink55}), and door (\emph{door104}), the following query can be made to check for artefactual interaction:
-\begin{verbatim}
-   artefactual_interaction(sink55, door104).
-\end{verbatim}
-The query will return \emph{true} for Figure \ref{?} and will fail for Figure \ref{?}.
+%Using DSpace a designer can check that there are no artefactual interactions by querying the design representation. The query is a Prolog statement that check for the topological structures of the bathrooms artefactual extension. For example, Figure \ref{?} shows two example bathroom floor plans. Figure \ref{?} shows a bathroom design that is consisted per the requirement and Figure \ref{?} shows a bathroom design that is inconsistent per the requirement. Given these two designs and ids for the sink (\emph{sink55}), and door (\emph{door104}), the following query can be made to check for artefactual interaction:
+%\begin{verbatim}
+%   artefactual_interaction(sink55, door104).
+%\end{verbatim}
+%The query will return \emph{true} for Figure \ref{?} and will fail for Figure \ref{?}.
 
-The $artefactual\_interaction$ predicate is broken down into topological constraints that check for partially overlapping topological relationships between the artefactual extensions of the bathroom doorway and sink. The topological constraints are solved in the topological constraint solver. 
+%The $artefactual\_interaction$ predicate is broken down into topological constraints that check for partially overlapping topological relationships between the artefactual extensions of the bathroom doorway and sink. The topological constraints are solved in the topological constraint solver. 
 
 
 
@@ -1122,11 +1251,8 @@ TODO: figure for convex hull abs
 
 \clearpage
 \bibliographystyle{abbrv}
-\bibliography{museum}
-%\bibliography{architecture}
-\bibliography{qsr}
-%\bibliography{clp}
-%\bibliography{relatedworks}
+\bibliography{thesis}
+
 
 %\addcontentsline{toc}{chapter}{Bibliography}
 

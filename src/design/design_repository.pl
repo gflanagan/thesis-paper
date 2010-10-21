@@ -1,99 +1,218 @@
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  qualitative spatial attributes found in architecture (QSA) 
+% qualitative spatial attributes found in architecture (QSA) 
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% possitioning rules
+% positioning
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-opposing_side(Id1, Id2, Id_Space) :- 
-    perspective(Id_Space, extended_region, GeoSpace),
-    perspective(Id1, point, Pt1),
-    perspective(Id2, point, Pt2),
-    centroid(GeoSpace, Centroid),
-    (scc0(Pt1, Pt2, Centroid) ;
-     scc1(Pt1, Pt2, Centroid) ;
-     scc7(Pt1, Pt2, Centroid)).
 
-same_side(Id1, Id2, Id_Space) :- 
-    perspective(Id_Space, extended_region, GeoSpace),
-    perspective(Id1, point, Pt1),
-    perspective(Id2, point, Pt2),
-    centroid(GeoSpace, Centroid),
-    (scc3(Pt1, Pt2, Centroid) ;
-     scc4(Pt1, Pt2, Centroid) ;
-     scc5(Pt1, Pt2, Centroid)).
+opposing_side(Id1, Id2, ContextId) :- 
+    ( scc(scc0, Id1, ContextId, Id2) ;
+      scc(scc1, Id1, ContextId, Id2) ;
+      scc(scc7, Id1, ContextId, Id2) ).
+
+same_side(Id1, Id2, ContextId) :- 
+    ( scc(scc3, Id1, ContextId, Id2) ;
+      scc(scc4, Id1, ContextId, Id2) ;
+      scc(scc5, Id1, ContextId, Id2) ).
+
+left_side(Id1, Id2, ContextId) :- 
+    ( scc(scc5, Id1, ContextId, Id2) ;
+      scc(scc6, Id1, ContextId, Id2) ;
+      scc(scc7, Id1, ContextId, Id2) ).
+
+right_side(Id1, Id2, ContextId) :- 
+    ( scc(scc1, Id1, ContextId, Id2) ;
+      scc(scc2, Id1, ContextId, Id2) ;
+      scc(scc3, Id1, ContextId, Id2) ).
+
+same_left(Id1, Id2, ContextId) :-
+    same_side(Id1, Id2, ContextId), 
+    left_side(Id1, Id2, ContextId).
+
+same_right(Id1, Id2, ContextId) :-
+    same_side(Id1, Id2, ContextId),
+    right_side(Id1, Id2, ContextId).
+
+opposing_left(Id1, Id2, ContextId) :-
+    opposing_side(Id1, Id2, ContextId),
+    left_side(Id1, Id2, ContextId).
+
+opposing_right(Id1, Id2, ContextId) :-
+    opposing_side(Id1, Id2, ContextId),
+    right_side(Id1, Id2, ContextId).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% facing rules
+% positioning for sequence
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+horizontally_perceived(Id, Sequence, Context) :-
+    point_transformation(Id, Pt),
+    horizontally_perceived(Pt, Sequence, Context).
+
+horizontally_perceived((X,Y), Sequence, Context) :-
+    point_transformation(Context, PtContext),
+    point_transformation_list(List, PtList),
+    check_scc_567((X,Y), PtContext, PtList),
+    check_scc_123((X,Y), PtContext, PtList).
+
+check_scc_567(_,_,[]) :- fail, !.
+
+check_scc_567(Origin, Relatum, [Referent|Rest]) :-
+    ( (scc(scc5, Origin, Relatum, Referent) ;
+       scc(scc6, Origin, Relatum, Referent) ;
+       scc(scc7, Origin, Relatum, Referent)) -> true, ! ;
+       check_scc_567(Origin, Relatum, Rest)).
+
+check_scc_123(_,_,[]) :- fail, !.
+
+check_scc_123(Origin, Relatum, [Referent|Rest]) :-
+    ( (scc(scc1, Origin, Relatum, Referent) ;
+       scc(scc2, Origin, Relatum, Referent) ;
+       scc(scc3, Origin, Relatum, Referent)) -> true, ! ;
+       check_scc_123(Origin, Relatum, Rest)).
+
+vertically_perceived(Id, Context, List) :-
+    point_transformation(Id, Pt),
+    vertically_perceived(Pt, Context, List).
+
+vertically_perceived((X,Y), Context, List) :-
+    point_transformation(Context, PtContext),
+    point_transformation_list(List, PtList),
+    check_scc_35((X,Y), PtContext, PtList),
+    check_scc_017((X,Y), PtContext, PtList).
+
+check_scc_35(_,_,[]) :- fail, !.
+
+check_scc_35(Origin, Relatum, [Referent|Rest]) :-
+    ( (scc(scc3, Origin, Relatum, Referent) ;
+       scc(scc5, Origin, Relatum, Referent) ) -> true, ! ;
+       check_scc_35(Origin, Relatum, Rest)).
+
+check_scc_017(_,_,[]) :- fail, !.
+
+check_scc_017(Origin, Relatum, [Referent|Rest]) :-
+    ( (scc(scc0, Origin, Relatum, Referent) ;
+       scc(scc1, Origin, Relatum, Referent) ;
+       scc(scc7, Origin, Relatum, Referent)) -> true, ! ;
+       check_scc_017(Origin, Relatum, Rest)).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% facing 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
 facing_towards(Id1, Id2) :-
-    perspective(Id1, directed_point, Dr1),
-    perspective(Id2, directed_point, Dr2),
-    (opra(Dr1, Dr2, 8, 0, _);
-     opra(Dr1, Dr2, 8, 1, _);
-     opra(Dr1, Dr2, 8, 32, _)).
+    ( opra(Id1, Id2, 8, 0) ;
+      opra(Id1, Id2, 8, 1) ;
+      opra(Id1, Id2, 8, 31) ).
 
 facing_away(Id1, Id2) :-
-    (facing_towards(Id1, Id2) -> fail, true). 
+    (facing_towards(Id1, Id2) -> fail; true). 
+
+facing_towards_mutual(Id1, Id2) :-
+    facing_towards(Id1, Id2),
+    facing_towards(Id2, Id1).
+
+facing_away_mutual(Id1, Id2) :-
+    facing_away(Id1, Id2),
+    facing_away(Id2, Id1).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% proximity rules
+% proximity
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+near((X,Y), Id2) :-
+    ifc_geometry(Id2, G2),
+    mindist((X,Y), G2, Dist),
+    Dist < 3.
+
+near(Id1, Id2) :-
+    ifc_geometry(Id1, G1),
+    ifc_geometry(Id2, G2),
+    mindist(G1, G2, Dist),
+    Dist < 3.
+
+near_plus(Id1, Id2) :-
+    ifc_geometry(Id1, G1),
+    ifc_geometry(Id2, G2),
+    mindist(G1, G2, Dist),
+    Dist < 6,
+    Dist > 3.
+
+far(Id1, Id2) :-
+    ifc_geometry(Id1, G1),
+    ifc_geometry(Id2, G2),
+    mindist(G1, G2, Dist),
+    Dist > 6.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% visibility rules
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% visibility
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+point_in_room((X,Y), Rm) :-
+    convex_hull_transformation(Rm, CH),
+    ntpp((X,Y), CH).
 
+% check visibility between Id1 / Id2, given list of objects 
+is_visible(Id1, Id2, ObstructList) :-
+    generate_viewspace(Id1, Id2, Viewspace),
+    is_visible_hlpr(Viewspace, ObstructList).
+
+is_visible((X,Y), Id2) :-
+    same_room((X,Y), Id2, Rm),
+    get_arch_in_room(Rm, ObjList),
+    remove(Id2, ObjList, ObjList2),
+    remove_containment_walls_from_list(Id2, ObjList2, ObjList3),
+    is_visible((X,Y), Id2, ObjList3), !.
+
+% - checks for visibility between two objects located in the same room
+% - if objects are not in the same room then predicate will fail
+% - walls that contain doors / windows being checked for visibility are
+%   removed from obstruction list.
+% - only checks objstrcution from architectural entities; interior design
+%   objects are not included.
 is_visible(Id1, Id2) :-
-    viewspace_not_obstructed(Id1, Id2).
+    same_room(Id1, Id2, Rm),
+    get_arch_in_room(Rm, ObjList),
+    remove_from_list([Id1,Id2], ObjList, ObjList2),
+    remove_containment_walls_from_list(Id1, ObjList2, ObjList3),
+    remove_containment_walls_from_list(Id2, ObjList3, ObjList4),
+    is_visible(Id1, Id2, ObjList4), !. 
 
-% check that no object ubstruct the visibility between Id1, Id2. collects
-% all objects that are in that same room as Id1 and Id2 to check for 
-% obstruction.
-viewspace_not_obstructed(Id1, Id2) :-
-    containment(Id1, RM1),
-    containment(Id2, RM2),
-    match(RM1, RM2),
-    get_objects_in_room(RM1, OBJL), 
-    remove(Id1, OBJL, OBJL2), remove(Id2, OBJL2, OBJL3),
-    viewspace_not_obstructed_set(Id1, Id2, OBJL3, RM1).
+is_visible_hlpr(_,[]).
 
-viewspace_not_obstructed_set(_,_,[],_).
+is_visible_hlpr(Viewspace, [Id|Rest]) :-
+    topology2(disconnect, Viewspace, Id),
+    is_visible_hlpr(Viewspace, Rest).
 
-viewspace_not_obstructed_set(Id1, Id2, [Id3|IdR], RM) :-
-    viewspace_not_obstructed(Id1, Id2, Id3, RM),
-    viewspace_not_obstructed_set(Id1, Id2, IdR, RM).
+generate_viewspace((X,Y), Id2, Viewspace) :-
+    convex_hull_transformation(Id2, CH),
+    generate_viewspace_hlpr((X,Y), CH, Viewspace).
 
-viewspace_not_obstructed(Id1, Id2, Id3, RM) :-
-   (arch_entity(Id1, dsDoor) ; arch_entity(Id1, dsWindow)),
-   (arch_entity(Id2, dsDoor) ; arch_entity(Id2, dswindow)),
-   perspective(Id1, fs_point, RM, PT1),
-   perspective(Id2, fs_point, RM, PT2),
-   perspective(Id3, extended_region, R),
-   disconnect(line([PT1,PT2]), R).
+generate_viewspace(Id1, Id2, Viewspace) :-
+    convex_hull_transformation(Id2, CH),
+    point_transformation(Id1, Pt),
+    generate_viewspace_hlpr(Pt, CH, Viewspace).
 
-viewspace_not_obstructed(Id1, Id2, Id3) :-
-    perspective(Id1, point, PT),
-    perspective(Id2, extended_region, R2),
-    perspective(Id3, extended_region, R3),
-    visibility_obstruction_region(PT, R2, OR),
-    disconnect(R3,OR).
-    
-visibility_obstruction_region(PT, region(R), region(PTS)) :-
-    convex_hull(R, ConvexR),
-    visible_points(PT, ConvexR, Visible_PTS), 
-    append([PT], Visible_PTS, PTS). 
- 
-normalize_sign(S_old, S_normal) :-
-    (S_old < 0 -> S_normal = -1 ; S_normal = 1).
+generate_viewspace_hlpr(Pt, CH, Viewspace):-
+    visible_points(Pt, CH, VisiblePts),
+    append([Pt], VisiblePts, Pts),
+    convex_hull(Pts, Viewspace). 
+
+same_room((X,Y), Id2, Rm) :-
+    room_containment(Id2, Rm),
+    point_in_room((X,Y), Rm). 
+
+same_room(Id1, Id2, Rm) :-
+    room_containment(Id1, Rm),
+    room_containment(Id2, Rm).
 
 visible_points(PT1, [PT2,PT3|PR], PTS) :- 
     determinant2(PT1, PT2, PT3, Det),
@@ -120,21 +239,77 @@ visible_points_h(PT1, [PT2,PT3|PR], S1, PTS) :-
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % privacy
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%privacy(RmId, BldgId, EntranceId, LivingId) :-
+    %get_doors_in_room(RmId, Doors),
+    % get_doors_in_adjacent_room(RmId, Doors2),
+    %opposing_side(EntranceId, BldgId, RmId),
+    %not_visible(LivingId, Doors).
+    % facing_away(LivingId, Doors).
+     
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % continuity
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%continuity(RmId) :-
+%    continuity([RmId]).
+
+continuity([]).
+
+continuity([RmId|Rest]) :-
+    get_doors_in_room(RmId, Doors),
+    %mutually_visible(Doors),
+    print(Doors), nl.
+    %continuity(Rest).
+
+mutually_visible([Dr1, Dr2|[]]) :-
+    mutually_visible_hlpr(Dr1, [Dr2]).
+
+mutually_visible([Dr1, Dr2|Rest]) :-
+    mutually_visible_hlpr(Dr1, Rest),
+    mutually_visible([Dr2|Rest]).
+
+mutually_visible_hlpr(_,[]).
+
+mutually_visible_hlpr(Dr1, [Dr2|Rest]) :-
+    is_visible(Dr1, Dr2),
+    is_visible(Dr2, Dr2),
+    mutually_visible_hlpr(Dr1, Rest).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % enclosure
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+confined_space(Id) :-
+    point_transformation(Id, Pt),
+    room_containment(Id, Rm),
+    confined_space(Pt, Rm).
 
+confined_space(Pt, RmId) :-
+    get_arch_in_room(RmId, Objs),
+    num_near_objs(Pt, Objs, N), 
+    N >= 3.
+ 
+open_space(Id) :-
+    point_transformation(Id, Pt),
+    room_containment(Id, Rm),
+    open_space(Pt, Rm).
+
+open_space(Pt, RmId) :-
+    get_arch_in_room(RmId, Objs),
+    num_near_objs(Pt, Objs, N),
+    N < 3.
+
+num_near_objs(_,[],0).
+
+num_near_objs(Pt, [O|Os], N) :-
+    num_near_objs(Pt, Os, NRest),
+    ( near(Pt, O) -> N is NRest + 1 ; N is NRest + 0 ).
+   
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % building codes
@@ -148,13 +323,48 @@ surveillance(Door, Sensor, RM) :-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 
+%
+% spatial query predicates. links the spatial contraint solvers
+%  with the architectural layer 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+opra(Id1, Id2, M, I) :-
+    % direction for doors/windows are automatically calculated,
+    % all other objects must have a hard coded direction.
+    point_transformation(Id2, Pt2),
+    ( (arch_entity(Id1, dsDoor) ; arch_entity(Id1, dsWindow)) -> 
+       directed_point_transformation_dw(Id1, Pt2, Pt, Dir) ;
+       directed_point_transformation(Id1, Pt, Dir) ),
+    spatial_query([compute_opra,Pt,Dir,Pt2,M,I]).
+
+scc(BR, Id1, Id2, Id3) :-
+    point_transformation(Id1, Pt1),
+    point_transformation(Id2, Pt2),
+    point_transformation(Id3, Pt3),
+    spatial_query([BR,Pt1,Pt2,Pt3]).
+
+topology(BR, Id1, Id2) :-
+    convex_hull_transformation(Id1, CH1),
+    convex_hull_transformation(Id2, CH2),
+    spatial_query([BR, CH1, CH2]).
+
+topology2(BR, CH1, Id2) :-
+    convex_hull_transformation(Id2, CH2),
+    spatial_query([BR, CH1, CH2]).
+
+spatial_query(Query) :-
+    F=..Query, call(F).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % utility functions
 %
-%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  
+normalize_sign(S_old, S_normal) :-
+    (S_old < 0 -> S_normal = -1 ; S_normal = 1).
+
 determinant2((X1, Y1),(X2, Y2), (X3, Y3), D) :-
     %D is ((Y1-Y2)*(X3-X2)) - ((X1-X2)*(Y3-Y2)).
     Matrix_0_0 is X1 - X3,
@@ -165,19 +375,39 @@ determinant2((X1, Y1),(X2, Y2), (X3, Y3), D) :-
     Cross2 is Matrix_0_1 * Matrix_1_0,
     D is Cross1 - Cross2.
 
-normalize_sign(S_old, S_normal) :-
-    (S_old < 0 -> S_normal = -1 ; S_normal = 1).
-
 change_point(S1, S2, C, [C]) :-
     S1 \= S2.
 
 change_point(S1, S2, _, []) :-
     S1 =:= S2. 
 
-get_objects_in_room(RM, RetL):-
-    findall(Id, containment(Id, RM), RetL).    
+doors_in_room(Id, Rm) :-
+    arch_entity(Id, dsDoor),
+    room_containment(Id, Rm).
 
-match(A,A).
+get_doors_in_room(Rm, Drs) :-
+    findall(Id, doors_in_room(Id, Rm), Drs).
+
+arch_entity_in_room(Id, Rm) :-
+    arch_entity(Id, _),
+    room_containment(Id, Rm).
+
+get_arch_in_room(Rm, RetList) :-
+    findall(Id, arch_entity_in_room(Id, Rm), RetList).
+
+get_all_in_room(Rm, RetList):-
+    findall(Id, room_containment(Id, Rm), RetList).    
+
+remove_containment_walls_from_list(Id, List1, List2) :-
+    ( (arch_entity(Id, dsDoor) ; arch_entity(Id, dsWindow)) -> 
+       wall_containment(Id, WallId), remove(WallId, List1, List2) ;
+       List2 = List1).
+
+remove_from_list([], A, A).
+
+remove_from_list([A|AX], Old, New) :-
+    remove(A, Old, Old2),
+    remove_from_list(AX, Old2, New).  
 
 remove(_,[],[]).
 
@@ -187,8 +417,6 @@ remove(A, [A|AX], PREV) :-
 remove(A, [B|BX], [B|PREV]) :-
     A \= B,
     remove(A, BX, PREV).
-
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
