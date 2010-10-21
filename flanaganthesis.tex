@@ -334,7 +334,7 @@ Figure \ref{hierarchy} shows the design multi-hierarchy used in the DSpace reaso
 \label{dspace design}
 \end{figure}
 
-ddd
+
 \subsection{Factbase}
 Prolog facts make up a factbase that stores a table of architectural entities with their architectural types (e.g., wall, door, window, desk, etc.). Each architectural entity in the design has a single entry in the factbase. The factbase is instantiated automatically during the import process from a CAAD based representation. This factbase will be used throughout the DSpace reasoner to  verify an entity exists in the design and links it to its architectural type. The following Prolog code shows two instantiated facts (predicates) for a doorway, and a window. 
 
@@ -453,18 +453,20 @@ The factbases and rulebases can be queried using a Prolog interpretor. A call to
 
 
 \section{Spatial Reasoning}
-In the CRR qualitative spatial representation and reasoning techniques bridge the gap between the high level conceptual design requirements and the low level geometric design representation. 
-
-It uses formal qualitative spatial calculi for topological (Region Connected Calculus \cite{Freksa}), orientational (Single Cross \cite{Freksa}, Oriented Point Relation Algebra \cite{Moratz}) and distance reasoning over the spatial entities of the structural and artefactual design (refer to figure \ref{reasoner-design}). The quantitative geometric representation of the design are spatially abstracted so that the design can be spatially reasoned about from a qualitative perspective.
+Qualitative spatial representation and reasoning is used in the CRR to bridge the gap between a design's high level conceptual requirements and its' low level geometric representation. This process begins by spatially abstracting the design's (quantitative) geometric representation into spatial abstract (qualitative) objects. These spatially abstract objects are used by the constraint solvers to qualify topological, orientational, and distance relationship over the design, as is illustrated in Figure \ref{reasoner-design}. 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=90mm]{reasoner-design}
-\caption{Constraint Solvers}
+\includegraphics[width=110mm]{reasoner-design}
+\caption{Quality Space}
 \label{reasoner-design}
 \end{figure}
+% house image from http://www.tinyhomes.com/TH2163_SimpleElegance.html
 
-Within the CLP framework of the CRR, the reasoning capabilities are built as a series of spatial constraint solvers using CLP($\mathbb{R}$) (Constraint Logic Programming over Reals) and CHR (Constrain Handling Rules). The spatial constraint solvers work directly over the design representation structure via the spatial abstraction representation layer and the design factbase. The main service of the reasoner is qualification of the quantitative architectural space into the qualitative feature space of topology, orientation, and distance. It should be noted that the distance constraint solver is different from the topological and orientational constraint solvers because it does not qualify distance relationships, rather it solves minimum distance constraints over quantitative objects. The topological and distance constraint solvers extend The Sindalog spatial constraint solver \cite{Sindalong}, a spatial constraint solver written in CHR. These qualitative spatial relationships are, in turn, used to reason about conceptual design requirements.
+The spatial constraint solvers uses formal qualitative spatial calculi for topological (Region Connected Calculus \cite{Freksa}), orientational (Single Cross \cite{Freksa}, Oriented Point Relation Algebra \cite{Moratz}) and distance to represent and reason over the design. Within the CLP framework of the CRR, the spatial constraint solvers are implemented using CLP($\mathbb{R}$) (Constraint Logic Programming over Reals) and CHR (Constrain Handling Rules). 
+
+
+The spatial constraint solvers work directly over the design representation structure via the spatial abstraction representation layer and the design factbase. The main service of the reasoner is qualification of the quantitative architectural space into the qualitative feature space of topology, orientation, and distance. It should be noted that the distance constraint solver is different from the topological and orientational constraint solvers because it does not qualify distance relationships, rather it solves minimum distance constraints over quantitative objects. The topological and distance constraint solvers extend The Sindalog spatial constraint solver \cite{Sindalong}, a spatial constraint solver written in CHR. These qualitative spatial relationships are, in turn, used to reason about conceptual design requirements.
 
 The remainder of this section is structured as follow. The first subsection looks at how designs are abstracted into abstract spatial objects. The second, third and forth subsections look at topological, orientational and distance based reasoning respectively.
 
@@ -503,7 +505,7 @@ The CRR can qualify the following four topological relationships for convex hull
 \label{topoloy}
 \end{figure}
 
-An object \emph{A} has an inside relationship with an object \emph{B} if all \emph{A}'s points are inside the convex hull of \emph{B}. The inside relationship is qualified in DSpace by checking the property of convex hull / point containment. A point in \emph{A} is inside the convex hull of \emph{B} if the polarity of the determinate between the point in \emph{A} and each line segment in \emph{B} is negative. Because points in a convex hull are always ordered counterclockwise, in the DSpace representation, the polarity of the determinant between a point inside the convex hull will always be negative. 
+An object \emph{A} has an inside relationship with an object \emph{B} if all \emph{A}'s points are inside the convex hull of \emph{B}. The inside relationship is qualified by checking the property of convex hull to point containment. A point in \emph{A} is contained inside the convex hull of \emph{B} if the polarity of the determinate between a point in \emph{A} and each line segment in \emph{B} is negative [need citation]. In the CRR, points in a convex hull are always ordered counterclockwise, therefore the polarity of the determinant between a point inside the convex hull will always be negative. 
 
 An object \emph{A} has an outside relationship with an object \emph{B} if all \emph{B}'s points are inside the convex hull of \emph{A}. Because the outside relationship is the inverse of the inside relation it is easy to qualify in DSpace by using the inside relationship ($inside(B,A)$). 
 
