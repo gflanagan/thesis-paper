@@ -532,7 +532,7 @@ An object \emph{A} has an outside relationship with an object \emph{B} if all \e
 
 An object \emph{A} has a partially overlapping relationship with an object \emph{B} if one or more line segments in \emph{A} intersect with one or more line segments in \emph{B}. The partially overlapping relationship is qualified in DSpace by checking for line segment intersection between objects. Two objects are partially overlapping if they intersect in at least one point.  
 
-An object \emph{A} has a disconnected relationship with an object \emph{B} if \emph{A} does not intersect with \emph{B}, there are no points in \emph{A} that are inside \emph{B}, and there are no points in \emph{B} that are inside \emph{A}. The disconnected relationship is qualified by checking for line segment intersection and convex hull / point containment. If there are no line segment intersections and no convex hull / point containment relationships, then two objects are disconnected.  
+An object \emph{A} has a disconnected relationship with an object \emph{B} if \emph{A} does not intersect with \emph{B}, there are no points in \emph{A} that are inside \emph{B}, and there are no points in \emph{B} that are inside \emph{A}. The disconnected relationship is qualified by checking for line segment intersection and convex hull to point containment. If there are no line segment intersections and no convex hull to point containment relationships, then two objects are disconnected.  
 
 \subsubsection{Spatial Constraint Solver: Topology}
 The topological constraint solver qualifies topological relationships over convex hull objects. Its implementation extends the Sindalog \ref{Sindalog} spatial constraint solver by integrating topological constraints over convex hulls. It is written using CHR that simplify and propagate topological constraints into less complex geometric constraints of line segment intersection and convex hull to point containment. For example, qualification for the partially overlapping topological relationship involves solving line segment intersection constraints between two convex hulls. The partially overlapping relationship is solved to true when there is at least one line intersection between the convex hulls and it fails when there are none. 
@@ -546,26 +546,29 @@ The implementation of the partially overlapping relationship begins with a top l
    intersect_segment_hull((Pt1, Pt2), [Pt3, Pt4|PS]) <=>
            intersection_segment_segment((Pt1, Pt2), (Pt3, Pt4)),
            intersection_segment_hull(Pt1, Pt2, [Pt4|PS]).
-\end{verbatim} The \emph{intersection\_segement\_segmenet} constraint represents the intersection between two line segments and is in a solvable form. The \emph{intersect\_segment\_hull} constraint is a recursive call that will propagate the \emph{intersection\_segement\_segmenet} constraint for the rest of the convex hull. 
+\end{verbatim} The \emph{intersection\_segement\_segmenet} constraint represents the intersection between two line segments and is in a solvable form. The \emph{intersect\_segment\_hull} constraint is a recursive call that will propagate the \emph{intersection\_segement\_segmenet} constraint for the rest of the convex hull. The qualification for the other topological relationships is similar to the partially overlapping constraint presented here, but in addition to the line intersection constraint some relationships use the geometric properties of convex hull to point containment.
 
 %into the constraint store and will be solved when all points in its arguments are fully instantiated. 
 
 %breaks down a convex hull into its line segments and propagates new constraints for line segment to convex hull intersection. The line segment to convex hull intersection constraint further propagates new constraints that check for line segment to line segment intersection. These constraints are the lowest level constraints and are solved when fully instantiated. The following code shows a propagation rule for the overlapping topological relationship for line segment to convex hull intersection. Line segments are represented as a tuple of point, and convex hull are represented as a list of points.   
 
-The qualification for the other topological relationships is similar to the partially overlapping constraint presented here, but in addition to the line intersection constraint some relationships use the geometric properties of convex hull to point containment.
-
-The CRR design representation structure can be queried for topological relationships using the topological constraint solver. Prolog rules query the abstract representation layer to retrieve the spatial abstractions need for topological qualification. In this case objects will be spatially abstracted into convex hulls. The following rule shows the rule for the inside topological relationship. Note that the rule takes two \emph{crr\_id} as arguements, queries the abstract representation layer to retrieve the entities convex hull abstract representations, and then makes a finally call to the \emph{inside\_convexhull} constraint.
+The topological constraint solver is used in the CRR to query topological relationships over a design. Given two \emph{crr\_id}'s any of the four topological queries can be made: 
+\begin{verbatim}
+    ?- inside(crr_id1, crr_id2).
+    ?- outside(crr_id1, crr_id2).
+    ?- partially_overlapping(crr_id1, crr_id2).
+    ?- disconnected(crr_id1, crr_id2).
+\end{verbatim}Because the topological constraint solver
+does not know anything about designs there is an intermediate layer between a topological spatial query (above) and the topological constraint solver that is responsible for retrieving quantitative geometries and transforming them into convex hull abstractions. The following rule handles queries for the inside topological relationship.
 \begin{verbatim}
     inside(Id1, Id2) :-
             convexhull_abstraction(Id1, Convex1),
             convexhull_abstraction(Id2, Convex2),
             insdie_convexhull(Convex1, Convex2).
 \end{verbatim}
-Given two entities with \emph{crr\_id}'s \emph{door45} and \emph{room53}, the following query will return true if the entities have an inside topological realtionship and will fail if they do not. In this case they do not have an inside relationship so the query returns fail.
-\begin{verbatim}
-    ?- inside(door45, room53).
-    fail.
-\end{verbatim}
+
+%The CRR design representation structure can be queried for topological relationships using the topological constraint solver. Prolog rules query the abstract representation layer to retrieve the spatial abstractions need for topological qualification. In this case objects will be spatially abstracted into convex hulls. The following rule shows the rule for the inside topological relationship. Note that the rule takes two \emph{crr\_id} as arguements, queries the abstract representation layer to retrieve the entities convex hull abstract representations, and then makes a finally call to the \emph{inside\_convexhull} constraint.
+
 
 \subsection{Orientation} \label{orientation}
 The CRR can qualify two types of orientational relationships, intrinsic and extrinsic. Intrinsic orientational reasoning is based on OPRA$_{m}$. OPRA$_{m}$ partitions space into half-planes, which are defined by lines emanating from a reference point, and defines the qualitative orientational relationships by the half plane in which a second point is located in relation to the reference point. The granularity of an OPRA$_{m}$ relationship, specified by $m$, defines the number of lines emanating from the reference point. 
@@ -618,19 +621,32 @@ The OPRA$_{m}$ constraint solver solves extrinsic orientation qualification prob
 
 The SCC constraint solver solves intrinsic orientation qualification problems by constraining the linear inequalities in Equation \ref{scc-eq}. Given an origin, a relatum and a referent, the SCC constraint solver will return true or fail based on the resolvability of the linear inequalities. The linear inequalities are constrained as CLP($\mathbb{R}$) constraints and will return true if the linear equalities are solvable and fail if they are not.
 
-The CRR design representation structure can be queried for orientational relationships using the orientational constraint solver. Prolog rules query the abstract representation layer and retrieve the spatial abstractions need for orientational qualification: point and directed point. The following rule shows the rule for the SCC$)_{1}$ relationship.
+The orientational constraint solver is used in the CRR to query orientational relationships over a design. Given two or three \emph{crr\_id}'s the following orientational queries can be made: 
 \begin{verbatim}
-    SCC1(Id1, Id2, Id3) :-
-            point_abstraction(Id1, PtAbs1),
-            point_abstraction(Id2, PtAbs2),
-            point_abstraction(Id3, PtAbs3),
-            SCC(PtAbs1, PtAbs2, PtAbs3, 1).
-\end{verbatim}
-Given three entities with \emph{crr\_id}’s \emph{door45}, \emph{room53}, and \emph{desk2} the following query will return true if the entities have an SCC$_{1}$ relationship and will fail if they do not. In this specific case they do have an SCC$_{1}$ relationship so the query returns true.
+    ?- scc(crr_id1, crr_id2, crr_id3, base_relation).
+    ?- opra(crr_id1, crr_id2, m, i).
+\end{verbatim} Because the orientational constraint solver does not know anything about designs there is an intermediate layer between an orientational spatial query (above) and the orientational constraint solver that is responsible for retrieving quantitative geometries and transforming them into point and directed point abstractions. The following rule handles queries for the scc and opra relationships.
 \begin{verbatim}
-    ?- SCC1(door45, room53, desk2).
-    true.
+    scc(Id1, Id2, Id3, BR) :-
+            point_abstraction(Id1, Pt1),
+            point_abstraction(Id2, Pt2),
+            point_abstraction(Id3, Pt3),
+            scc(Pt1, Pt2, Pt3, BR).
+
+    opra(Id1, Id2, m, i) :-
+            directed_point_abstraction(Id1, DPt1),
+            directed_point_abstraction(Id2, DPt2),
+            opra(DPt1, DPt2, m, i).
 \end{verbatim}
+
+
+%The CRR design representation structure can be queried for orientational relationships using the orientational constraint solver. Prolog rules query the abstract representation layer and retrieve the spatial abstractions need for orientational qualification: point and directed point. The following rule shows the rule for the SCC$)_{1}$ relationship.
+
+%Given three entities with \emph{crr\_id}’s \emph{door45}, \emph{room53}, and \emph{desk2} the following query will return true if the entities have an SCC$_{1}$ relationship and will fail if they do not. In this specific case they do have an SCC$_{1}$ relationship so the query returns true.
+%\begin{verbatim}
+%    ?- SCC1(door45, room53, desk2).
+%    true.
+%\end{verbatim}
 
 
 \subsection{Distance}
@@ -644,7 +660,7 @@ The CRR can calculate the minimum euclidean distance between points, lines, and 
 \end{figure}
 
 \subsubsection{Spatial Constraint Solver: Distance}
-The distance constraint solver calculates minimum distance constraints. It uses the distance constraint services of the Sindalog \cite{sindalog} reasoner for its reasoning. The distance solver is different from the other solvers because it returns a value to a query. For example, the following query will return the minimum distance between the two objects in D.
+The distance constraint solver calculates minimum distance queries and uses the distance constraint services of the Sindalog \cite{sindalog} spatial constraint solver for all distance calculations. The distance constraint solver is different from the other two because it returns a specific value, instead of returning \emph{true} or \emph{fail} based on a query. For example, the following query will return the minimum distance between the two objects in D.
 \begin{verbatim}
    min_distance(obj1, obj2, D). 
 \end{verbatim}
