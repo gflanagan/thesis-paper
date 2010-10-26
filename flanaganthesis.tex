@@ -151,10 +151,24 @@ This chapter is broken down into two sections. The first section presents an int
 For this thesis there are two areas of background that need to be discussed: qualitative spatial reasoning and constraint logic programming. Qualitative spatial reasoning plays a mediating role in the CRR between the high level semantics of the design space to the low level geometric space of a CAAD based design representation. Constraint logic programming is used to solve spatial constraint problems.
 
 \subsection{Qualitative Spatial Representation and Reasoning}
-The field of Qualitative Spatial Reasoning (QSR) investigates techniques for representing and reasoning about abstract features of space in a computational framework while preserving the fundamental properties of space \cite{freksa1991qsr} \cite{bhattSpatialComputing}.
+The field of Qualitative Spatial Reasoning (QSR) investigates techniques for representing and reasoning about abstract features of space in a computational framework while preserving its fundamental properties. The aim of which is to represent space at a level of abstraction that hides unnecessary details while preserving important domain specific aspects \cite{freksa1991qsr} \cite{bhattSpatialComputing}. 
 
+Take for example the task of describing the relative location of a chair within a room. To solve this task it is unnecessary to have knowledge about the precise spatial characteristics of the room -- such as the size, shape, and weight of objects, metric measurements such as distance, etc. -- because the solution does not require a precise and absolute location of the chair. Rather, a qualitative description of the room in terms of the orientational relationships between objects and the observer (\emph{left-of, righ-of, behind}) within the room should suffice. A specific qualitative description for this problem could be, the chair is \emph{left-of} the doorway and \emph{behind} the desk. This problem was solved from a qualitative spatial perspective by abstracting away the insignificant details and focusing on the aspects of space that are necessary for the problem and the domain. 
+
+The qualitative description used in the example above is informal. Formal qualitative representations of space preserve universal aspects of space such as uniqueness (objects exist exactly once each location can have at most one object), and spatial conceptual structures (properties that related to transitions between spatial relationships) while providing a computational apparatus to reason about space from an abstract level \cite{freska1991qsr}. The following subsection will introduce several formal qualitative spatial representation calculi with respect to topology and orientation. 
+
+%The advantages to QSR include reducing the search space of the spatial environment, using a higher level of abstraction that is closer to the conceptual representation of space that humans use...
+
+\subsubsection{Qualitative Spatial Calculi}
+Formal qualitative calculi for topological representations such as the Region Connection Calculus \cite{Randell}, and orientational representations such as the Single Cross Calculus \cite{FreksaSC} and Oriented Point Relation Algebra \cite{Moratz}
+Topology
+   RCC5
+Orientation
+   Opra
+   SCC
 \subsubsection{Applications of Spatial Reasoning}
 Architectural Design \cite{bhattSpatialComputing}
+Robotics
 
 \subsection{Constraint Logic Programming}
 
@@ -452,7 +466,7 @@ Qualitative spatial representation and reasoning is used in the CRR to bridge th
 \end{figure}
 % house image from http://www.tinyhomes.com/TH2163_SimpleElegance.html
 
-The spatial constraint solvers uses formal qualitative spatial calculi for topological (Region Connected Calculus \cite{Freksa}), orientational (Single Cross \cite{Freksa}, Oriented Point Relation Algebra \cite{Moratz}) and distance to qualitatively represent and reason over the design. Within the CLP framework of the CRR, the spatial constraint solvers are implemented in CLP($\mathbb{R}$) (Constraint Logic Programming over Reals) and CHR (Constrain Handling Rules). The topological and distance constraint solvers extend Sindalog \cite{Sindalog}, a spatial constraint solver written in CHR.
+The spatial constraint solvers uses formal qualitative spatial calculi for topological (Region Connected Calculus \cite{Freksa}), orientational (Single Cross \cite{Freksa}, Oriented Point Relation Algebra \cite{Moratz}) and distance to qualitatively represent and reason over the design. Within the CLP framework of the CRR, the spatial constraint solvers are implemented in CLP($\mathbb{R}$) (CLP over Reals) and Constrain Handling Rules (CHR). The topological and distance constraint solvers extend Sindalog \cite{Sindalog}, a spatial constraint solver written in CHR.
 
 Within the CRR, each spatial constraint solver can be used as a query engine that qualifies spatial relationships to answer spatial queries.  A spatial query involves three step:
 \begin{enumerate}
