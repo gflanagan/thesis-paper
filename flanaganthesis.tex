@@ -155,17 +155,28 @@ The field of Qualitative Spatial Reasoning (QSR) investigates techniques for rep
 
 Take for example the task of describing the relative location of a chair within a room. To solve this task it is unnecessary to have knowledge about the precise spatial characteristics of the room -- such as the size, shape, and weight of objects, metric measurements such as distance, etc. -- because the solution does not require a precise and absolute location of the chair. Rather, a qualitative description of the room in terms of the orientational relationships between objects and the observer (\emph{left-of, righ-of, behind}) within the room should suffice. A specific qualitative description for this problem could be, the chair is \emph{left-of} the doorway and \emph{behind} the desk. This problem was solved from a qualitative spatial perspective by abstracting away the insignificant details and focusing on the aspects of space that are necessary for the problem and the domain. 
 
-The qualitative description used in the example above is informal. Formal qualitative representations of space preserve universal aspects of space such as uniqueness (objects exist exactly once each location can have at most one object), and spatial conceptual structures (properties that related to transitions between spatial relationships) while providing a computational apparatus to reason about space from an abstract level \cite{freska1991qsr}. The following subsection will introduce several formal qualitative spatial representation calculi with respect to topology and orientation. 
+The qualitative description used in the example above is informal. Formal qualitative representations of space preserve universal aspects of space such as uniqueness (objects exist exactly once each location can have at most one object), and spatial conceptual structures (properties that related to transitions between spatial relationships) while providing a computational apparatus to reason about space from an abstract level \cite{freksa1991qsr}. The following subsection will introduce several formal qualitative spatial representation calculi with respect to topology and orientation. 
 
 %The advantages to QSR include reducing the search space of the spatial environment, using a higher level of abstraction that is closer to the conceptual representation of space that humans use...
 
 \subsubsection{Qualitative Spatial Calculi}
-Formal qualitative calculi for topological representations such as the Region Connection Calculus \cite{Randell}, and orientational representations such as the Single Cross Calculus \cite{FreksaSC} and Oriented Point Relation Algebra \cite{Moratz}
-Topology
-   RCC5
-Orientation
-   Opra
-   SCC
+\begin{figure}[t]
+ \centering
+ \subfloat[RCC]{\label{RCC}\includegraphics[width=43mm]{rcc8-primitives}}
+ \hspace{7 mm}
+ \subfloat[SCC]{\label{SCC}\includegraphics[width=40mm]{scc-dcc-xfig}}
+  \hspace{7 mm}
+ \subfloat[OPRA$_{2}$]{\label{OPRA}\includegraphics[width=43mm]{OPRA2_Example}}
+ \caption{Artefactual Extensions}
+\label{Qualitative Spatial Calculi}
+\end{figure}
+
+Formal qualitative spatial calculi are explicit characterizations of qualitative spatial relationships from a given perspective, i.e. topology, orientation, distance, etc., that logically define intrinsic spatial properties such as spatial uniqueness and spatial composition. Examples of qualitative spatial calculi include the Region Connection Calculus (RCC) \cite{Randell92aspatial} for topological relationships, and the Single Cross Calculus (SCC) \cite{Freksa92usingorientation} and Oriented Point Relation Algebra (OPRA) \cite{Moratz} for orientational relationships.
+
+RCC defines eight topological relationships over regions: disconnected, partial overlap, externally connected, equals, non-tangential proper part, inverse non-tangential proper part, tangential proper part, and inverse tangential proper part. Refer to figure \ref{RCC} for an illustration of the relationships. Axiomatic rules of jointly exhaustive, mutually disjoint and pairwise disjoint (JEPD) enforce the spatial uniques of each relationship. For example, two regions may not be partially overlapping and disconnected with each other at the same time. Additionally, composition tables define the realizable spatial arrangements of a set of regions. For example, if region \emph{A} is inside region \emph{B} and region \emph{B} is inside region \emph{C}, then region \emph{A} must also be in region \emph{C}.
+
+Orientational spatial relationships can be broken down into intrinsic and extrinsic relationships. Extrinsic orientational relationship define a relationship based on an external reference point. This type of relationship is characterized in SCC, in which external reference point is used to related two objects together. Figure \ref{SCC} illustrates SCC partitioning of space. Intrinsic orientational relationships define a spatial relationship based on an observers internal perspective. This type of relationship is characterized in OPRA, in which the relationship of an external object is defined by the internal direction of the observing object. Figure \ref{OPRA} shows the relationship between two points, \emph{A} and \emph{B}. This example shows the OPRA$_{2}$ relationship from the intrinsic perspective of both points in which point \emph{B} has an OPRA relationship with \emph{A} of \emph{7} and point \emph{A} has an OPRA relationship with \emph{B} of \emph{1}. As with RCC, axiomatic rules of JEPD and composition tables enforce spatial properties of uniqueness and composition.
+
 \subsubsection{Applications of Spatial Reasoning}
 Architectural Design \cite{bhattSpatialComputing}
 Robotics
