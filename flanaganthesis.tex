@@ -177,11 +177,11 @@ RCC defines eight topological relationships over regions: disconnected, partial 
 
 Orientational spatial relationships can be broken down into intrinsic and extrinsic relationships. Extrinsic orientational relationship define a relationship based on an external reference point. This type of relationship is characterized in SCC, in which external reference point is used to related two objects together. Figure \ref{SCC} illustrates SCC partitioning of space. Intrinsic orientational relationships define a spatial relationship based on an observers internal perspective. This type of relationship is characterized in OPRA, in which the relationship of an external object is defined by the internal direction of the observing object. Figure \ref{OPRA} shows the relationship between two points, \emph{A} and \emph{B}. This example shows the OPRA$_{2}$ relationship from the intrinsic perspective of both points in which point \emph{B} has an OPRA relationship with \emph{A} of \emph{7} and point \emph{A} has an OPRA relationship with \emph{B} of \emph{1}. As with RCC, axiomatic rules of JEPD and composition tables enforce spatial properties of uniqueness and composition.
 
-\subsubsection{Applications of Spatial Reasoning}
-Architectural Design \cite{bhattSpatialComputing}
-Robotics
-
 \subsection{Constraint Logic Programming}
+Constraint Logic Programming (CLP) combines logic programing (LP) with constraint solving \cite{GavanelliCLP} \cite{WallaceCLP}. Logic programming is based on declarative semantics in which a program is defined in terms of \emph{what} should be computed instead of \emph{how} the programing should compute something (i.e. procedural style). In this regard logic programing languages rely on built-in search and unification algorithms to automatically solve logic based formula and can be viewed as a form of constraint solving. 
+
+For example, Prolog \cite{prolog} is one of the most well known and used logic programming languages and is based on predicate logic, unification, logic conjunction, and depth-first search. From a constraint perspective, Prolog solves constraints over the set of uninterpreted structures (trees), i.e. Prolog's unification algorithm works entirely on a syntactic level. What this means is that Prolog does not internally 'know' about any of the semantics of internal data, and only unifies terms based on their syntax. Take for example arithmetic expression 5 + 1 = 6. In (pure) Prolog this expression will be evaluated to false because equality holds only when two terms are syntactically identical. 
+
 
 
 \section{Related Works}
@@ -229,7 +229,7 @@ Key proposes a descriptor language that defines architectural qualities from a c
 
 Borrmann introduces the idea of including predefined spatial constraints directly into a standard building production model, i.e. Industry Foundation Classes (IFC), to detect constraint violations \cite{Borrmann}. This proposal primarily focuses on the definition and integration of spatial constraints into the IFC model but it does provide some discussion on how these spatial constraints might be checked for in such an environment. While similar to CRR, this proposals approach is focused on the integration of spatial constraints into a specific building model (IFC) format and does not go into the process of generating the spatial constraints from the geometric configurations of a design. 
 
-\section{Discussion}
+\subsection{Discussion}
 Table \ref{related works table} shows the various high level objectives of the tools that were discussed in the related works section, which includes requirements checking, design evaluation, and automatic floor plan configuration. Despite the differences here, the systems are all bound by a higher objective to provide computational assistance to an architect during the design process and specifically, in the context of conceptual design formalization and reasoning.
 
 
