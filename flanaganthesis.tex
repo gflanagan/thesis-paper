@@ -178,7 +178,7 @@ RCC defines eight topological relationships over regions: disconnected, partial 
 Orientational spatial relationships can be broken down into intrinsic and extrinsic relationships. Extrinsic orientational relationship define a relationship based on an external reference point. This type of relationship is characterized in SCC, in which an external reference point is used to related two point based objects together. Figure \ref{SCC} illustrates SCC partitioning of space. Intrinsic orientational relationships define a spatial relationship based on an observers internal perspective. This type of relationship is characterized in OPRA, in which the relationship of an external object is defined by the internal direction of the observing object. Figure \ref{OPRA} shows the relationship between two points, \emph{A} and \emph{B}. In this example point \emph{B} has an OPRA$_{2}$ relationship with \emph{A} of \emph{7} and point \emph{A} has an OPRA$_{2}$ relationship with \emph{B} of \emph{1}. As with RCC, axiomatic rules of JEPD and composition tables enforce spatial properties of uniqueness and composition.
 
 \subsection{Constraint Logic Programming}
-Constraint Logic Programming (CLP) combines logic programing with constraint solving \cite{GavanelliCLP} \cite{WallaceCLP}. Logic programming is based on declarative semantics in which a program is defined in terms of \emph{what} should be computed instead of \emph{how} the program should compute something (i.e. procedural style). In this regard a logic programing language relies on built-in search and unification algorithms to automatically solve logic based formula. This type of computation can be viewed as a form of constraint solving \cite{GavanelliCLP}. 
+Constraint Logic Programming (CLP) combines logic programing with constraint solving \cite{GavanelliCLP} \cite{WallaceCLP} \cite{Jaffar:1987:CLP}. Logic programming is based on declarative semantics in which a program is defined in terms of \emph{what} should be computed instead of \emph{how} the program should compute something (i.e. procedural style). In this regard a logic programing language relies on built-in search and unification algorithms to automatically solve logic based formula. This type of computation can be viewed as a form of constraint solving \cite{GavanelliCLP}. 
 
 For example, Prolog, one of the most well known and used logic programming languages, is based on predicate logic, unification, logic conjunction, and depth-first search \cite{Sterling:1986}. From a constraint perspective, Prolog solves constraints over the set of uninterpreted structures, i.e. Prolog's unification algorithm works entirely on a syntactic level. What this means is that Prolog does not internally know about any of the semantics of internal data, and can only unify terms based on their syntax. Take for example the arithmetic expression 5 + 1 = 6. In Prolog this expression will fail because equality holds only when two terms are syntactically identical (6 = 6).  
 
@@ -299,40 +299,70 @@ Table \ref{spatial table} shows the spatial reasoning capabilities for each syst
 \label{spatial table}
 \end{table}
 
-CRR is the only tool in the group which provides support for every type of spatial reasoning. Additionally, it is the only system that does so using formal qualitative spatial reasoning and representation techniques. This is one of the main advantages of CRR and is one of the main contribution in the thesis. Using a broad variety of of spatial relationships (topological, orientational, distance, metric) CRR provides flexibility and a rich set of spatial relationships to build design requirements. This is important because the spatial configurations that make up a building are complex and need flexibility in terms of the way they are characterized and reasoned over. 
+The CRR is the only tool in the group which provides support for every type of spatial reasoning. Additionally, it is the only system that does so using formal qualitative spatial reasoning and representation techniques. This is one of the main advantages of the CRR and is one of the main contribution in the thesis. Using a broad variety of of spatial relationships (topological, orientational, distance, metric) CRR provides flexibility and a rich set of spatial relationships to build design requirements. This is important because the spatial configurations that make up a building are complex and need flexibility in terms of the way they are characterized and reasoned over. 
 
 
 \chapter{Conceptual Requirements Reasoner}
-The Conceptual Requirements Reasoner (CRR) is a framework for validating conceptual design requirements against CAAD based architectural design plans. Conceptual design requirements here refer to requirements as they pertain to the functional and experiential aspects of the design from a semantic and qualitative perspective. For example, architects commonly describe aspects of a design in a qualitative fashion, such as a design being private, accessible, or continuous. These architectural aspects emerge from the spatial structures / arrangements of the building form and are experienced in the building. 
+The CRR is a framework for validating conceptual design requirements against CAAD based architectural design plans. Conceptual design requirements here refer to requirements as they pertain to the functional and experiential aspects of the design from a semantic and qualitative perspective. For example, architects commonly describe aspects of a design in a qualitative fashion, such as a design being private, accessible, or continuous. These architectural aspects emerge from the spatial structures / arrangements of the building form and are experienced in the building. 
 
 The goal of the CRR is to build a computational framework that represents and reasons about design requirements in the context of conceptual design requirement validation.     
 
 \section{Design Problem}
-State-of-the-art CAAD tools represent the physical and structural aspects of an architectural design in a manner that is both accurate and precise. This type of representation captures the design, in terms of the spatial features, spatial dimensions of architectural entities, placement of entities within the building, at a low-level of granularity that is needed in the actual construction of the building, and allows for reasoning about the physical, structural and mechanical aspects of a design with regard to the precise geometric representation; such as the placement of a door in a wall or the mechanics of a window swinging open and closed. TODO: talk about x,y,z coordinates of real space, quantitative representation.
+Humans reason about space from a qualitative level, this means we think about our environment in (qualitative) terms such as, "the elm tree is next to the house", instead of (quantitative) terms like, "the center of the elm tree is 4.54 meters away from exterior of the house". Our natural cognitive intuition for qualitative instead of quantitative is the crux of how humans efficiently and effectively represent and reason about our spatial environments and is the topic of much research \cite{freksa1991qsr} \cite{Cohn:2001:QSR}.
+
+
+%While the process of qualitatively reasoning about space might seem trivial from a human perspective, it is quite another story for computers. In general, space is represented numerically in computers
+
+  
+CAAD systems do not allow architects to reason about designs from a conceptual / spatial level
+  - architectural plans are represented precisely 
+      - so that they can be used as blueprints in the building process
+  - does not support the mapping between high level conceptual space and low level quantity space
+
+State-of-the-art CAAD tools represent the physical and structural aspects of an architectural design in a manner that is precise so that the computer based plan can be used as a blueprint in the building process. This type of representation captures the design, in terms of the spatial features, spatial dimensions of architectural entities, placement of entities within the building, at a low-level of granularity that is needed in the actual construction of the building, and allows for reasoning about the physical, structural and mechanical aspects of a design with regard to the precise geometric representation; such as the placement of a door in a wall or the mechanics of a window swinging open and closed. TODO: talk about x,y,z coordinates of real space, quantitative representation.
 
 However, this type of representation scheme does not incorporation the qualitative and functional features of the design. For example, a structural design requirement that addresses air circulation stipulates that a doorway and window should face directly towards each other. For a traditional CAAD based system, reasoning about such a requirement is not possible because it pertains to qualitative spatial design features and functional attributes that go beyond the purely geometric representation of the design, i.e., in this case the qualitative spatial relationship between a window and doorway.
 
+
+\section{Approach}
+  - main problem: how to go from high level conceptualization of a design to low level quantitative level
+  - solution: use intermediate spatial level: i.e. qualitative space
+  	  - Break down design / architectural domain into spatial / design hierarchy
+         - design space
+         - quality space
+         - quantity space
+         + each level of hierarchy is responsible for a level of abstraction
+         + mapping between each level bridges gap between concept and quantity
+         	- design to quality downward connected via spatial definition (interpretation) of design concept into qualitative spatial relationships
+         	- quality to quantity upward connection via qualification
+         + complexity of spatial reasoning / representation of design is hidden from architect
+      
+      
 This representation allows an architect to validate a work-in-progress design from a conceptual and qualitative perspective against the physical and precise real world geometrical representation of the design \cite{Bhatt}.
 
  The crux of this is that it bridges the gap between the quantified geometries and the functional / qualitative requirements of the design, thus allowing the reasoner to validate a high level requirement against its precise geometric representation. 
 
-to do this dspace need to:
- - representation of design
- 	- spatial abstraction / multiple perspectives
- 	- artefacts
- - design requirements - define / identify
- 	- define architectural qualities
- 		- perceptual
- 		- intrinsic / geometric
- 	- define architectural concepts
-	- spatial interpretation / explicit characterization
- - qualitative spatial reasoning
- 	- topological 
- 	- orientation
- 		- intrinsic vs extrinsic
- 	- distance
 
-\section{Multi-Hierarchy}
+
+
+\section{High Level Design of the CRR}
+  - Design
+      - based on multi-hierarchy
+      - design space
+      		- concepts / qualities explicit characterization
+      		- downward connection via spatial interpretation 
+      - quality space: 
+       		- qualitative spatial constraint solvers
+ 				- orientation, topology, distance
+ 			- upward connection via spatial abstraction 
+      - quantity space
+      		- physical, artefactual
+      
+  - implementation
+      - declarative framework
+      -  
+
+\subsection{Multi-Hierarchy}
 The design multi-hierarchy developed in this section is built on the mapping of the design problem into a design space, a quality space, and a quantity space. At the highest level, the design space involves the architectural design semantics (architectural concepts) and qualities (qualitative spatial attributes found in architecture) that emerge in architecture. At the lowest level, the quantitative space involves the precise geometries of the architectural structures found in the design. The qualitative space mediates between the abstractions of the design layer and the concreteness of the quantitative later using qualitative spatial representation and reasoning.
  
 \begin{figure}[H]
@@ -342,9 +372,9 @@ The design multi-hierarchy developed in this section is built on the mapping of 
 \label{hierarchy}
 \end{figure}
 
-Figure \ref{hierarchy} shows the design multi-hierarchy used in the DSpace reasoner. Conceptual design requirements are built from the architectural concepts and qualitative spatial attributes found in architecture (QSA) of the highest level of the multi-hierarchy. Within the multi-hierarchy, architectural concepts are built using QSA, but are not limited to only these, spatial relationships of orientation, topology, and distance can be used, as well as other geometric primitives such as area, angle, and length measurements. QSA are defined by the qualitative spatial relationships of orientation, topology, and distance. These qualitative spatial relationships emerge from the quantitative, physical, and artefactual geometries of the the design. TBD: physical structures define the way the architecture is experiences and influences the functional / performance of the design from a conceptual design perspective.
+Figure \ref{hierarchy} shows the design multi-hierarchy used in the DSpace reasoner. Conceptual design requirements are built from the architectural concepts and qualitative spatial attributes found in architecture (QSA) of the highest level of the multi-hierarchy. Within the multi-hierarchy, architectural concepts are built using QSA, but are not limited to only these, spatial relationships of orientation, topology, and distance can be used, as well as other geometric primitives such as area, angle, and length measurements. QSA are defined by the qualitative spatial relationships of orientation, topology, and distance. These qualitative spatial relationships emerge from the quantitative, physical, and artefactual geometries of the the design. TBD: physical structures define the way the architecture is experiences and influences the functional / performance of the design from a conceptual design perspective. 
 
-\section{DSpace: Design and Implementation}
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=130mm]{design}
@@ -353,18 +383,16 @@ Figure \ref{hierarchy} shows the design multi-hierarchy used in the DSpace reaso
 \end{figure}
 
 
-\subsection{Factbase}
-Prolog facts make up a factbase that stores a table of architectural entities with their architectural types (e.g., wall, door, window, desk, etc.). Each architectural entity in the design has a single entry in the factbase. The factbase is instantiated automatically during the import process from a CAAD based representation. This factbase will be used throughout the DSpace reasoner to  verify an entity exists in the design and links it to its architectural type. The following Prolog code shows two instantiated facts (predicates) for a doorway, and a window. 
-
+%Prolog facts make up a factbase that stores a table of architectural entities with their architectural types (e.g., wall, door, window, desk, etc.). Each architectural entity in the design has a single entry in the factbase. The factbase is instantiated automatically during the import process from a CAAD based representation. This factbase will be used throughout the DSpace reasoner to  verify an entity exists in the design and links it to its architectural type. The following Prolog code shows two instantiated facts (predicates) for a doorway, and a window. 
 
 
 \chapter{Design Representation and Spatial Reasoning}
-This chapter introduces the computational framework of the CRR. It presents two components of the framework: 1) the internal architectural design representation structure and 2) the spatial constraint solvers. Additionally, this chapter presents each component in the context of the declarative programming paradigm used for the implementation of the CRR, namely Prolog and Constraint Logic Programming (CLP). The third component  of the CRR, the conceptual requirements component, will be presented in the following Chapter.
+This chapter introduces the computational framework of the CRR. It presents two of the three components of the framework: 1) the internal architectural design representation structure and 2) the spatial constraint solvers. The third component  of the CRR, the conceptual requirements component, will be presented in the following Chapter. Additionally, this chapter presents each component in the context of the declarative programming paradigm used for the implementation of the CRR, namely Prolog and Constraint Logic Programming (CLP). 
 
 This chapter is organized into two sections. The first section looks at the internal architectural design representation structure and how it is implemented in Prolog. The second section looks at the spatial constraint solvers and how each is implemented in CLP.
 
 \section{Design Representation}
-The CRR internally represents two distinct aspects of an architectural design. It represents the design's physical form and non-physical artefactual extensions. The physical form pertains to the precise geometric data that defines the design's structural elements (walls, doors, windows, etc.) with regard to layout, location and shape. Artefactual extension pertains to the non-physical but geometric data that defines the functional characteristics of structural elements, such as the space used by a person to operate a doorway.
+The CRR internally represents two distinct aspects of an architectural design. It represents the design's physical form and non-physical artefactual extensions. The physical form pertains to the precise geometric data that defines the design's structural elements (walls, doors, windows, slabs, stairs, columns, etc.) with regard to layout, location and shape. Artefactual extension pertains to the non-physical but geometric data that defines the functional characteristics of structural elements, such as the space used by a person to operate a doorway.
 
 The physical representation of the design is automatically imported into the CRR from a multi-modal spatial data access framework \cite{MultiModal} built by the DesignSpace project \cite{DesignSpace}. For each architectural entity, the CRR imports the structural geometric coordinate data and a unique identifier, referred to in the CRR as the \emph{crr\_id}. Currently, artefactual extensions are manually imported in the CRR, but the intent for future versions is to automate this directly from the multi-modal spatial data access framework.  
 
