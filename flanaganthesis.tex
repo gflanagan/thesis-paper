@@ -310,8 +310,8 @@ The goal of the CRR is to build a computational framework that represents and re
 \section{Design Problem}
 Humans reason about space from a qualitative level, this means we think about our environment in (qualitative) terms such as, "the elm tree is next to the house", instead of (quantitative) terms like, "the center of the elm tree is 4.54 meters away from exterior of the house". Our natural cognitive intuition for qualitative instead of quantitative is the crux of how humans efficiently and effectively represent and reason about our spatial environments and is the topic of much research \cite{freksa1991qsr} \cite{Cohn:2001:QSR}.
 
+The domain of architectural design is quite interesting in this respect because it depends on both aspects of space: qualitative and quantitative. In architectural design literature this distinction is commonly reffed to as \emph{form} and \emph{function}, in which the common phrase goes "\emph{form follows function}" \cite{formfunction}. In general, the context of the phrase supports the idea that the form (structure) should be determines based on its function or purpose. Now the focus here is not on the philosophy of design or an argument about the validity of such claims, but is to point out that it has been argued that these two spatial perspective are both inherent in and crucial to the success of an architectural design.
 
-%While the process of qualitatively reasoning about space might seem trivial from a human perspective, it is quite another story for computers. In general, space is represented numerically in computers
 
   
 CAAD systems do not allow architects to reason about designs from a conceptual / spatial level
@@ -358,9 +358,9 @@ This representation allows an architect to validate a work-in-progress design fr
       - quantity space
       		- physical, artefactual
       
-  - implementation
-      - declarative framework
-      -  
+  - introduction to implementation
+      - declarative framework / clp
+      - details will be discussed in subsequent chapters
 
 \subsection{Multi-Hierarchy}
 The design multi-hierarchy developed in this section is built on the mapping of the design problem into a design space, a quality space, and a quantity space. At the highest level, the design space involves the architectural design semantics (architectural concepts) and qualities (qualitative spatial attributes found in architecture) that emerge in architecture. At the lowest level, the quantitative space involves the precise geometries of the architectural structures found in the design. The qualitative space mediates between the abstractions of the design layer and the concreteness of the quantitative later using qualitative spatial representation and reasoning.
