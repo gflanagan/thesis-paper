@@ -327,9 +327,7 @@ The field of Spatial Computing for Architectural Design \cite{bhatt-spatial-comp
 
 Take for example the architectural concept of spaciousness. At the conceptual level, spaciousness conveys an experiential quality of the design such as the feeling of openness. Such experiential qualities emerge from of the specific spatial patterns of the architectural elements that make up the building's physical form. In other words, the location of architectural entities such as walls, ceilings, windows, and doors, and the size and shape of rooms directly affect the experiential quality of openness. In general, changes in the spatial patterns at the quantitative level affect the experiential qualities of the design at the conceptual level.  
 
-Unfortunately, current state-of-the-art CAAD programs \cite{ArchiCAD} \cite{AutoCAD} are incapable of reasoning at a conceptual level. This happens because the CAAD-based design representation is primarily encapsulated on the quantitative level of the design hierarchy, which lacks the semantics necessary for reasoning at higher levels of abstraction. While CAAD-based design representation is well suited for certain design phases, such as designing a schematization that will be used as a blueprint for the realization of the design, it does not support other architectural design processes that require reasoning at a higher level of abstraction, such as design conceptualization, requirements reasoning and functional specification to name a few \cite{bhatt-spatial-computing}. 
-
-Take for example, the tasks an architect might face during the design conceptualization phase of a museum include, among other things, defining high level functional and aesthetic requirements of the museum's design, such as the following descriptions of the \emph{Museu Calouste Gulbenkian} in Lisbon, Portugal exemplify:
+Unfortunately, current state-of-the-art CAAD programs \cite{ArchiCAD} \cite{AutoCAD} are incapable of reasoning at a conceptual level. This happens because the CAAD-based design representation is primarily encapsulated on the quantitative level of the design hierarchy, which lacks the semantics necessary for reasoning at higher levels of abstraction. While CAAD-based design representation is well suited for certain design phases, such as designing a schematization that will be used as a blueprint for the realization of the design, it does not support other architectural design processes that require reasoning at a higher level of abstraction, such as design conceptualization, requirements reasoning and functional specification to name a few \cite{bhatt-spatial-computing}. Take for example, the tasks an architect might face during the design conceptualization phase of a museum include, among other things, defining high level functional and aesthetic requirements of the museum's design, such as the following descriptions of the \emph{Museu Calouste Gulbenkian} in Lisbon, Portugal exemplify:
 \begin{quote}
 \emph{``The current topographic conditions of the site, where the larger trees are located in an area that is more elevated than the whole northern rim of the plot, made it possible to install a huge underground floor in the already existing depression, whose covering creates a gentle artificial elevation that perspectively accentuates and enhances the whole architectural composition. The distribution of the construction volumes fundamentally followed a desire for horizontality, allowing one to read the continuity of the green space beyond the construction and in all directions.''}
 \end{quote}
@@ -338,11 +336,11 @@ Take for example, the tasks an architect might face during the design conceptual
 \end{quote}
 Environmental aspects of the museums design, such as these, encompass high level spatial design patterns that are grounded to the structural form of the building at the quantitative level \cite{carl}. Figure \ref{multi-perspective-reps} illustrates this concept in which the features of the design at the conceptual level emerges from its spatial environment at the quantitative level via spatial patterns on the qualitative level.
 
-Design reasoning at a high level of abstraction requires the underlying representational semantics at the same level of abstraction. In this regard, the design semantics at the conceptual level involve abstractions such as \emph{room}, \emph{floor}, \emph{building}, \emph{door}, and \emph{wall}, along with the relationships they share between each other, both spatially, \emph{facing}, \emph{near-to}, \emph{across-from}, \emph{connected-to}, and non-spatially, \emph{material composition}, \emph{lighting attributes}, and \emph{load bearing qualities}. Conversely, the underlying representational semantics of current CAAD-based system are based on the semantics of more general and lower level geometric primitives such as points, lines, and polygons. 
+Design reasoning at a high level of abstraction requires the underlying representational semantics at the same level of abstraction. In this regard, the design semantics at the conceptual level involve abstractions such as \emph{room}, \emph{floor}, \emph{building}, \emph{door}, and \emph{wall}, along with the relationships they share between each other, both spatially, \emph{facing}, \emph{near-to}, \emph{across-from}, \emph{connected-to}, and non-spatially, \emph{material composition}, \emph{lighting attributes}, and \emph{load bearing qualities}. Conversely, the underlying representational semantics of current CAAD-based system are based on the semantics of more general and lower level geometric primitives such as points, lines, and polygons. Where as an architect might conceptualize the design of a museum in terms such as \emph{galleries} and the relative placement of objects within each gallery, e.g., ``the statue is on the \emph{left-hand-side} of the gallery as one enters from the main doors'', the process of building the museum in a CAAD-based tool is restricted to the representation of the design in terms of it's geometric characteristics. 
 
-The design semantics at the quantitative level do not represent the design at a level of abstraction that is need to reason at a conceptual level. Where as an architect might conceptualize the design of a museum in terms such as \emph{galleries} and the relative placement of objects with each gallery, e.g., ``the statue is on the \emph{left-hand-side} of the gallery as one enters from the main doors'', the process of building the museum in a CAAD-based tool is restricted to the representation of the design in terms of it's geometric characteristics. The \emph{semantic gap} exemplified here, is the crux of the issues being addressed in this thesis. 
+The \emph{spatial gap} exemplified here, is the crux of the issues being addressed in this thesis. The following section introduces the scope of this thesis by narrowing it to focus on conceptual requirements reasoning, it outlines the approaches taken towards this goal, and presents the thesis's main contributions. 
 
-The following section introduces the scope of this thesis by narrowing it to focus on conceptual requirements reasoning, it outlines the approaches taken towards this goal, and presents the thesis's main contributions. 
+%The design semantics at the quantitative level do not represent the design at a level of abstraction that is need to reason at a conceptual level.
 
 %For example, it is possible to reason about the geometric properties of a design in terms of the size, shape, and location of architectural entities given the CAAD-based representation semantics of space. At this level of reasoning, the reasoner and the underlying representational model are both ground to the same level of abstraction, namely the quantitative semantics of polygon, lines and points. 
 
@@ -350,36 +348,31 @@ The following section introduces the scope of this thesis by narrowing it to foc
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=90mm]{multi-perspective-reps}
+\includegraphics[width=100mm]{multi-perspective-reps}
 \caption{Architectural Levels of Abstraction - Source \cite{bhatt-spatial-computing}}
 \label{multi-perspective-reps}
 \end{figure}
 
 
-\section{Thesis Approach and Main Contributions}
-%The main problem being addressed in this thesis is how to validate conceptual design requirements in a practical design workflow involving a CAAD based design representation. As discussed in the previous section, designs are represented quantitatively in CAAD based systems using spatial primitives of point, lines, and polygons that do not incorporate the semantics needed for reasoning at higher levels of abstraction, such as conceptual requirements validation.   
-
-The objective of this thesis is an initial step at building a framework which bridges the gap between the quantitative representation of a design (i.e., CAAD-based representation model) to the design's conceptual requirements. Specifically, the framework focuses on supporting a designer by validating conceptual requirements against a work-in-progress design from a CAAD-based system. The framework built for this thesis is referred to as the Conceptual Requirements Reasoner or CRR.
-
-Given the need to bridge the gap between the conceptual and the quantitative levels of the design hierarchy in this context the following issues have been identified as crucial:
+\section{Approach and Contributions}
+The objective of this thesis is an initial step towards building a framework that bridges the gap between a design's conceptual features to its quantitative representation (i.e., CAAD-based model). Specifically, the framework, developed in this thesis and referred to as the Conceptual Requirements Reasoner or CRR, does this in the context of conceptual requirements validation. Conceptual requirements validation involves checking that the underlying spatial structures of a design (quantitative space), is consistent with its conceptual design features as they are characterized spatially. Towards this objective the following issues have been identified as crucial:
 \begin{itemize}
 \item the identification, formal modeling, and spatial interpretation of architectural concepts and spatial qualities 
-\item the spatial abstraction of CAAD-based geometric primitives, and
-\item the mapping of conceptual requirement to qualitative spatial design patterns 
+\item the spatial abstraction of the CAAD-based design representation, and
+\item the defining of conceptual requirement to qualitative spatial design patterns 
 \end{itemize}
 
-To address these issues, this thesis follows the approaches introduced by Bhatt and Freksa \cite{bhatt-spatial-computing}, with regards to Spatial Computing for Architectural Design, by following the design space hierarchy as illustrated in Figure \ref{multi-perspective-reps}, to implement a framework for validating conceptual requirements against a work-in-progress design. The main contributions in this respect are:
+To address these issues, this thesis follows the approaches introduced by Bhatt and Freksa \cite{bhatt-spatial-computing}, with regards to Spatial Computing for Architectural Design. This thesis does so by following the design space hierarchy as illustrated in Figure \ref{multi-perspective-reps}, in implementing a framework for validating conceptual requirements against a work-in-progress design. The main contributions in this respect are identified here:
 \begin{itemize}
 \item the implementation of a framework that validates conceptual design requirements against work-in-progress architectural designs
 \item the development of a multi-hierarchy that maps architectural concepts at the conceptual level to spatial patterns in the quantitative level
 \item the use of formal qualitative spatial representation and reasoning techniques to bridge the gap between each level of the design hierarchy
 \end{itemize}
 
-From a user perspective, the CRR provides a designer with design assistance for a work-in-progress design. The CRR does this through a query engine that allows a designer to validate conceptual requirements. For example, a designer is provided with a set of pre-defined architectural concepts, such as continuity, privacy, visibility, and enclosure, and spatial qualities found in architectural, such as orientation, proximity, positioning, and sequencing, which he or she can use to construct queries to the CRR. For example if a designer wants to check if a door and window are facing each other (as might be a requirement for air circulation purposes) the designer can simply makes the following query to the CRR:
+From a user perspective, the CRR provides a designer with design assistance for a work-in-progress design. The CRR does this through a query engine that allows a designer to validate conceptual requirements. For example, a designer is provided with a set of pre-defined architectural concepts, such as continuity, privacy, visibility, and enclosure, and spatial qualities found in architectural, such as orientation, proximity, positioning, and sequencing, which the designer uses to construct queries to the CRR. For example if a designer wants to check if a door and window are facing each other (as might be a requirement for air circulation purposes) the designer can simply makes the following query to the CRR:
 \begin{verbatim}
     ?- facing(door, window).
 \end{verbatim} The CRR will respond to the query with a \emph{true} if they are facing and \emph{fail} if they are not. 
-
 
 %  - main problem: how to go from high level conceptualization of a design to low level quantitative level
 %  - solution: use intermediate spatial level: i.e. qualitative space
@@ -392,16 +385,35 @@ From a user perspective, the CRR provides a designer with design assistance for 
 %         	- design to quality downward connected via spatial definition (interpretation) of design concept into qualitative spatial relationships
 %         	- quality to quantity upward connection via qualification
 %         + complexity of spatial reasoning / representation of design is hidden from architect
-      
+
+%The main problem being addressed in this thesis is how to validate conceptual design requirements in a practical design workflow involving a CAAD based design representation. As discussed in the previous section, designs are represented quantitatively in CAAD based systems using spatial primitives of point, lines, and polygons that do not incorporate the semantics needed for reasoning at higher levels of abstraction, such as conceptual requirements validation. 
+
+%Given the need to bridge the gap between the conceptual and the quantitative levels of the design hierarchy in this context the following issues have been identified as crucial:
+
+%focuses on supporting a designer by validating conceptual requirements against a work-in-progress design from a CAAD-based system. The framework built for this thesis is referred to as the Conceptual Requirements Reasoner or CRR.
+     
       
 %This representation allows an architect to validate a work-in-progress design from a conceptual and qualitative perspective against the physical and precise real world geometrical representation of the design \cite{Bhatt}.
 
 %The crux of this is that it bridges the gap between the quantified geometries and the functional / qualitative requirements of the design, thus allowing the reasoner to validate a high level requirement against its precise geometric representation. 
 
 
-
-
 \section{High Level Design of the CRR}
+%  - Design
+%      - based on multi-hierarchy
+%      - design space
+%      		- concepts / qualities explicit characterization
+%      		- downward connection via spatial interpretation 
+%      - quality space: 
+%       		- qualitative spatial constraint solvers
+% 				- orientation, topology, distance
+% 			- upward connection via spatial abstraction 
+%      - quantity space
+%      		- physical, artefactual     
+%  - introduction to implementation
+%      - declarative framework / clp
+%      - details will be discussed in subsequent chapters
+
 The design multi-hierarchy developed in this section is built on the mapping of the design problem into a design space, a quality space, and a quantity space. At the highest level, the design space involves the architectural design semantics (architectural concepts) and qualities (qualitative spatial attributes found in architecture) that emerge in architecture. At the lowest level, the quantitative space involves the precise geometries of the architectural structures found in the design. The qualitative space mediates between the abstractions of the design layer and the concreteness of the quantitative later using qualitative spatial representation and reasoning.
  
 \begin{figure}[H]
@@ -412,25 +424,6 @@ The design multi-hierarchy developed in this section is built on the mapping of 
 \end{figure}
 
 Figure \ref{hierarchy} shows the design multi-hierarchy used in the DSpace reasoner. Conceptual design requirements are built from the architectural concepts and qualitative spatial attributes found in architecture (QSA) of the highest level of the multi-hierarchy. Within the multi-hierarchy, architectural concepts are built using QSA, but are not limited to only these, spatial relationships of orientation, topology, and distance can be used, as well as other geometric primitives such as area, angle, and length measurements. QSA are defined by the qualitative spatial relationships of orientation, topology, and distance. These qualitative spatial relationships emerge from the quantitative, physical, and artefactual geometries of the the design. TBD: physical structures define the way the architecture is experiences and influences the functional / performance of the design from a conceptual design perspective. 
-
-
-  - Design
-      - based on multi-hierarchy
-      - design space
-      		- concepts / qualities explicit characterization
-      		- downward connection via spatial interpretation 
-      - quality space: 
-       		- qualitative spatial constraint solvers
- 				- orientation, topology, distance
- 			- upward connection via spatial abstraction 
-      - quantity space
-      		- physical, artefactual
-      
-  - introduction to implementation
-      - declarative framework / clp
-      - details will be discussed in subsequent chapters
-
-
 
 \begin{figure}[H]
 \centering
