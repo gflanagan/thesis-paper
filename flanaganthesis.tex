@@ -399,7 +399,7 @@ The following section introduces the high level design and implementation of the
 
 
 \section{Design and Approach}
-The design and implementation of the CRR is based on the design hierarchy as illustrated in Figure \ref{hierarchy no-links}, in which the problem space for conceptual requirements reasoning is broken down into a design space, quality space, and quantitative space. The highest level of the hierarchy, the design space, represents the design concepts and architectural spatial qualities that describe the design from a experiential perspective. In this level of the hierarchy, design concepts are characterized based on architectural spatial qualities. For example, the concept of \emph{privacy} is characterized based on the architectural spatial qualities of facing, positioning and visibility. The middle level of the hierarchy, the quality space, represents the design based on qualitative spatial relationships of orientation, topology and distance. Qualitative spatial relationships, in the CRR, are defined using formal qualitative spatial calculi such as the Region Connection Calculus for topological relationships, the Single Cross Calculus for extrinsic orientational relationships and the Oriented Point Relational Algebra for intrinsic orientational relationships. The lowest level of the hierarchy, the quantity space, represents the design in terms of its precise spatial geometries. This representation is similar to what is represented in a CAAD-based system.
+The design and implementation of the CRR is based on the design hierarchy as illustrated in Figure \ref{hierarchy no-links}, in which the problem space for conceptual requirements reasoning is broken down into a design space, quality space, and quantitative space. The highest level of the hierarchy, the design space, represents the design concepts and architectural spatial qualities that describe the design from a experiential perspective. In this level of the hierarchy, design concepts are characterized based on architectural spatial qualities. For example, the concept of privacy in an architectural context, is characterized based on the architectural spatial qualities of facing, positioning and visibility. The middle level of the hierarchy, the quality space, represents the design based on qualitative spatial relationships of orientation, topology and distance. Qualitative spatial relationships, in the CRR, are defined using formal qualitative spatial calculi such as the Region Connection Calculus for topological relationships, the Single Cross Calculus for extrinsic orientational relationships and the Oriented Point Relational Algebra for intrinsic orientational relationships. The lowest level of the hierarchy, the quantity space, represents the design in terms of its precise spatial geometries. This representation is similar to what is represented in a CAAD-based system.
 
 \begin{figure}[t]
 \centering
@@ -408,11 +408,13 @@ The design and implementation of the CRR is based on the design hierarchy as ill
 \label{hierarchy no-links}
 \end{figure}
 
-Given the three hierarchical levels of the design space, the main issue now becomes how each level is connected to and interfaces with each other. In other words, how do concepts in the design space map to qualitative spatial relationships in the quality space, and similarly, how do qualitative spatial relationships in the quality space map to geometric objects in the quantity space. At the core of this is the qualitative spatial level, an intermediary layer that interfaces between the highest and lowest levels of the design hierarchy. 
+Given the three hierarchical levels of the design space, the main issue now becomes how each level is connected to and interfaces with each other. In other words, how do concepts in the design space relate to qualitative spatial relationships in the quality space, and similarly, how do qualitative spatial relationships in the quality space relate to geometric objects in the quantity space. At the core of this is the qualitative spatial level, an intermediary layer that interfaces between the highest and lowest levels of the design hierarchy. 
 
-The concepts and spatial qualities in the design space are connected to qualitative spatial relationships in the qualitative space through a process of spatially interpreting and characterizing design concepts and spatial qualities individually.  In other words, concepts in the design space are explicitly defined based on the spatial relationships at qualitative spatial level. Take for example the architectural spatial quality of positioning. One interpretation of this quality is based on extrinsic orientational spatial patterns that are based on qualitative spatial relationships. In this case, the orientational relationships of the structural form define the design's positioning qualities. Chapter \ref{conceptual requirements} goes into detail the spatial interpretation and characterization of each architectural concept and spatial quality identified in the thesis.
+The conceptual and qualitative levels of the design hierarchy are connected through an individual mapping of each concept and spatial quality to qualitative spatial design patterns. In other words, concepts in the design space are explicitly defined based on the spatial relationships at the qualitative level. Take for example the architectural spatial quality of positioning, where objects can be spatially situated at the same or opposing sides of a room. The positioning quality is defined in the CRR based on extrinsic orientational spatial patterns as interpreted by an architect. Chapter \ref{conceptual requirements} will go into further detail regarding the specific spatial interpretation and characterization of each concept and spatial quality as identified in the thesis.
 
-The geometric quantities in the quantitative level are connected to the qualitative spatial relationships in the qualitative level through spatial abstraction and qualification. This process involves abstracting the quantitative geometries of the design to abstract spatial objects that can be used for qualification of spatial relationships. Chapter \ref{representation and reasoning}  goes into the details regarding the underlying spatial representation structure (quantitative space) and the spatial reasoning (spatial abstraction, and qualification) necessary for conceptual requirements reasoning.  
+%One interpretation of this quality is based on extrinsic orientational spatial patterns that are based on qualitative spatial relationships. In this case, the orientational relationships of the structural form define the design's positioning qualities. 
+
+%The concepts and spatial qualities in the design space are connected to qualitative spatial relationships in the qualitative space through a process of spatially interpreting and characterizing design concepts and spatial qualities individually.
 \begin{figure}[t]
 \centering
 \includegraphics[width=140mm]{spatial-qualities-hierarchy}
@@ -420,20 +422,24 @@ The geometric quantities in the quantitative level are connected to the qualitat
 \label{hierarchy}
 \end{figure}
 
-The implementation of the CRR is broken down into three modules as specified in the design hierarchy, and is illustrated in Figure \ref{crr design implementation}. The design space module is where concepts and spatial qualities are defined and is the interface through which  users will query the CRR. The quantitative space module represents the design's precise geometries as defined in a CAAD-based system. The qualitative space module is responsible for the spatial abstraction and qualification of the quantitative model and is implemented as a series of spatial constraint solvers for topological, orientational, and distance reasoning. 
+The geometric quantities in the quantitative level are connected to the qualitative spatial relationships in the qualitative level through spatial abstraction and qualification. This process involves abstracting the quantitative geometries of the design to abstract spatial objects that can be used for qualification of spatial relationships. Chapter \ref{representation and reasoning}  will go into the details regarding the CRR's underlying spatial representation structure at the quantitative level and the spatial reasoning necessary to spatially abstract and qualify the quantitative representation.  
 
-\begin{figure}[H]
+\begin{figure}[t]
 \centering
-\includegraphics[width=105mm]{design}
+\includegraphics[width=100mm]{design}
 \caption{CRR Design Implementation}
 \label{crr design implementation}
 \end{figure}
 
+The implementation of the CRR is broken down into three modules as specified in the design hierarchy, and is illustrated in Figure \ref{crr design implementation}. The top level module is where architectural concepts and spatial qualities are defined in terms of qualitative spatial patterns and is the interface through which  users will query the CRR. The quantitative space module represents the design's precise geometries as defined in a CAAD-based system. The data at this level is imported from a multi-modal access framework \cite{carl} based on the IFC standard for CAAD-based systems. The qualitative space module is responsible for the spatial abstraction and qualification of the quantitative model and is implemented as a series of spatial constraint solvers for topological, orientational, and distance reasoning. 
 
-From a user perspective, the CRR provides a designer with design assistance for a work-in-progress design. The CRR does this through a query engine that allows a designer to validate conceptual requirements. For example, a designer is provided with a set of pre-defined architectural concepts, such as continuity, privacy, visibility, and enclosure, and spatial qualities found in architectural, such as orientation, proximity, positioning, and sequencing, which the designer uses to construct queries to the CRR. For example if a designer wants to check if a door and window are facing each other (as might be a requirement for air circulation purposes) the designer can simply makes the following query to the CRR:
+
+
+
+From a user perspective, the CRR provides a designer with design assistance for a work-in-progress design. The CRR does this through a query engine that allows a designer to validate conceptual requirements. For example, a designer is provided with a set of architectural concepts and spatial qualities, which the designer uses to construct queries to the CRR. For example if a designer wants to check if a door and window are facing each other (as might be a requirement for air circulation purposes) the designer can simply makes the following query to the CRR:
 \begin{verbatim}
     ?- facing(door, window).
-\end{verbatim} The CRR will respond to the query with a \emph{true} if they are facing and \emph{fail} if they are not.
+\end{verbatim} The CRR will respond to the query with a \emph{true} if the door and window are facing each other and a \emph{fail} if they are not.
 
 %  - Design
 %      - based on multi-hierarchy
@@ -785,7 +791,7 @@ The distance constraint solver calculates minimum distance queries and uses the 
 The distance constraint solver is written using CHR that break down the constraints until they can be solved for. This process involves finding the located on each object that is the closest to the other, so that the minimum distance can be calculated between the two. 
 
 
-\chapter{Conceptual Requirements Reasoner}
+\chapter{Conceptual Requirements Reasoner} \label{conceptual requirements}
 This chapter presents the conceptual requirements reasoning framework of the DSpace reasoner. It shows how architectural concepts and qualitative spatial attributes found in architecture (QSA) can be spatially interpreted using formal qualitative spatial calculi and shows how they can be represented and reasoned with to validate conceptual design requirements in the conceptual requirements reasoner (CCR). 
 
 Conceptual design requirements were ascertained from literature on architectural design \cite{tbd}, museum research on visitor behavior \cite{tbd}, and building regulations and codes \cite{tbd}. Their definitions are explicit characterizations of architectural concepts and spatial design qualities that are based on heuristic architectural knowledge and common sense notions of spatial relationships. The objective is not to be an exhaustive discussion of these requirements or a validation for their interpretation in terms of a spatial or design perspective; rather it is to demonstrate how each can be represented and reasoned with in the DSpace CLP framework to validate conceptual design requirements against the quantitative form of a design. 
