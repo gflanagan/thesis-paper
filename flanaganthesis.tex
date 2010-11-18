@@ -1154,9 +1154,13 @@ Consider the design requirement for a bedroom being private. This requirement ca
 
 
 \chapter{Museum Case Study}
-This chapter is a case study that demonstrates the application of the DSpace reasoner to the design of an art museum. The purpose is twofold: first, to examine several design requirements of an art museum with regards to the spatial interpretation of the requirements; and second, to show how the museum design requirements can be represented and reasoned about in a computational framework, in order to detect design inconsistencies as per the design requirements.
+This chapter is a case study that demonstrates the application of the CRR in the context of design for an art museum. The purpose is twofold: first, to examine design requirements of an art museum with regards to their affects on visitors experiences in a museum; and second, to demonstrate the application of the CRR for validating these design requirements within a real world museum scenario. 
 
-The remainder of the chapter is divided into three sections. The first section examines design requirements in art museums in three parts: the first part looks at requirements that influence museum visitors' behaviour. The second part looks at requirements for promoting exploration in the museum. The third part looks at the requirements of accessibility and security within the museum. The second section, looks at how these requirements can be interpreted spatially and represented in the DSpace reasoner. The third section tests the DSpace reasoner using sample museum floor plans that are both consistent and inconsistent per the design requirements for several art museums. The objective of this demonstration is to show that the DSpace reasoner can validate a design against its design requirements.
+%how the museum design requirements can be represented and reasoned about in a computational framework, in order to detect design inconsistencies as per the design requirements.
+
+This chapter is divided into two sections. The first section sets up the context of the case study by examining museum design characteristics that influence visitors' behavior and experiences within an art museum. This section has two parts: the first part looks at museum characteristics that affect how visitors behave with museums galleries. The second part looks at the characteristics of a museum's Lobby that influence visitors orientation. The second section of the Chapter demonstrates the application of the CRR to the previously identified museum requirements.  
+
+%examines design requirements in art museums in three parts: the first part looks at requirements that influence museum visitors' behavior. The second part looks at requirements for promoting exploration in the museum. The third part looks at the requirements of accessibility and security within the museum. The second section, looks at how these requirements can be interpreted spatially and represented in the CRR. The third section tests the DSpace reasoner using sample museum floor plans that are both consistent and inconsistent per the design requirements for several art museums. The objective of this demonstration is to show that the DSpace reasoner can validate a design against its design requirements.
 
 
 \section{Museums}
@@ -1296,8 +1300,26 @@ Bathrooms are an important services for museum visitors. Surprisingly, the place
 \end{description}
 
 
+\section{Application of CRR for Museum Design}
+This section presents a use case example for the application of the CRR in validating art museum design requirements using a real world scenario. This use case is from the perspective of a museum designer and covers the process of importing a museums design from an architectural design tool (ArchiCAD) into the CRR, the building of museum requirements using architectural concepts and QSA, and finally validation of the requirements using the CRR query engine.  
 
-%\chapter{Case Study: Ranch Style House}
+
+\subsection{The Philadelphia Art Museum}
+The museum floor plan used in this case study is based off the Asian Art wing of the Philadelphia Art Museum \cite{PhiladelphiaArtMuseum}. The motivation behind basing the design off a real world museum instead of a contrived example is to demonstrate the CRR in a real world context with regards to the applicability museum design requirements using a real world design example.
+\begin{figure}[t]
+\centering
+\includegraphics[width=78mm]{philadelphiamuseum}
+\caption{Philadelphia Art Museum Floor-plan - Source \cite{philadelphiamusem}}
+\label{multi-perspective-reps}
+\end{figure}
+The 
+
+\subsection{Import}
+
+
+\subsection{Building Museum Requirements}
+
+\subsection{Validation}
 
 %\subsection{A Private Room}
 %In a particular apartment, the designer wants the bedroom to be private. Given the definition of privacy in this chapter, privacy entails that the bedroom is on the opposing side of the apartment from the main entrance, the bedroom's doorway does not face towards any other doorways, and the doorway is not visible from the main entrance.
@@ -1337,11 +1359,6 @@ Bathrooms are an important services for museum visitors. Surprisingly, the place
 %The query will return \emph{true} for Figure \ref{?} and will fail for Figure \ref{?}.
 
 %The $artefactual\_interaction$ predicate is broken down into topological constraints that check for partially overlapping topological relationships between the artefactual extensions of the bathroom doorway and sink. The topological constraints are solved in the topological constraint solver. 
-
-
-
-
-\chapter{Evaluation}
 
 
 \chapter{Future Work / Conclusion}
