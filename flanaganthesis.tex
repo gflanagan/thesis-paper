@@ -158,19 +158,24 @@ Humans reason about space on a qualitative level, this means we think about our 
 
 
 
-\chapter{Background and Related Work} 
-This chapter is broken down into two sections. The first section presents an introduction to the background knowledge that will be needed throughout this thesis. The second section presents related work and provides a brief discussion on the differences and similarities of each.  
+\chapter{Background and Related Works} 
+%This chapter presents the background knowledge required for this thesis and the related works.  
 
 \section{Background}
 \label{background}
-For this thesis there are two areas of background that need to be discussed: Qualitative Spatial Reasoning (QSR) and Constraint Logic Programming (CLP). QSR plays a mediating role within the CRR between the high level semantics of a design to the low level geometric quantities of a CAAD based representation. CLP is used in the CRR to solve spatial constraint problems.
+For this thesis there are two required areas of background knowledge: Qualitative Spatial Reasoning (QSR) and Constraint Logic Programming (CLP).
 
 \subsection{Qualitative Spatial Representation and Reasoning}
-The field of Qualitative Spatial Reasoning (QSR) investigates techniques for representing and reasoning about abstract features of space in a computational framework while preserving its fundamental properties. The aim of which is to represent space at a level of abstraction that hides unnecessary details while preserving important domain specific aspects \cite{freksa1991qsr} \cite{bhattSpatialComputing}. 
+The field of Qualitative Spatial Reasoning (QSR) investigates techniques for representing and reasoning about abstract features of space in a computational framework while preserving its fundamental properties. In this regard, QSR represents space at a qualitative level as opposed to a quantitative level. At the qualitative level, space is defined by symbolic and abstract spatial relationships, such as \emph{behind}, \emph{left-of} and \emph{close-to}, while at the quantitative level, space is defined by precise numeric values \cite{freksa1991qsr} \cite{bhattSpatialComputing}. 
 
-Take for example the task of describing the relative location of a chair within a room. To solve this task it is unnecessary to have knowledge about the precise spatial characteristics of the room -- such as the size, shape, and weight of objects, metric measurements such as distance, etc. -- because the solution does not require an absolute location of the chair. Rather, a qualitative description of the room in terms of the orientational relationships between objects and the observer (\emph{left-of, righ-of, behind}) within the room should suffice. A specific qualitative description for this problem could be, the chair is \emph{left-of} the doorway and \emph{behind} the desk. This problem was solved from a qualitative spatial perspective by abstracting away the insignificant details and focusing on the aspects of space that are necessary for the problem domain. 
+Qualitative representations of space can be quite useful. Take for example the task of describing the location of a chair to your friend. 
+In order to effectively communicate the location of the chair, it is unnecessary to use precise numeric values that characterize the chair, such as its size, shape and weight, and metric spatial measurements that relate the chair to other objects, such as distance. Communicating qualitative spatial relationships, such as the orientation of the chair, is sufficient for effectively describing its location. An example could be, ``the chair is \emph{behind} the table and on the \emph{left-hand} side of the room''. By using qualitative relationships, you are representing space at a level of abstraction that hides away unnecessary details so that you are only dealing with those aspects of space that are important for the problem at hand.
 
-The qualitative description used in the example above is informal. Formal qualitative representations of space preserve universal aspects of space such as uniqueness (objects exist exactly once each location can have at most one object), and conceptual spatial structures (properties that related the composition of spatial arrangements) while providing a computational apparatus to reason about space from an abstract level \cite{freksa1991qsr}. The following subsection will introduce several formal qualitative spatial representation calculi with respect to topology and orientation. 
+While the example above is informal, formal qualitative representations of space preserve universal spatial aspects such as uniqueness (objects exist exactly once and each spatial location can have at most one object), and realizability (properties that related the compositional structures of spatial) while providing a computational apparatus to reason about space from an abstract level \cite{freksa1991qsr}. The following subsection will introduce several formal qualitative spatial representation calculi with respect to topology and orientation. 
+
+%To solve this task it is unnecessary to have knowledge about the precise spatial characteristics of the room -- such as the size, shape, and weight of objects, metric measurements such as distance, etc. -- because the solution does not require an absolute location of the chair. Rather, a qualitative description of the room in terms of the orientational relationships between objects and the observer (\emph{left-of, righ-of, behind}) within the room should suffice. A specific qualitative description for this problem could be, the chair is \emph{left-of} the doorway and \emph{behind} the desk. This problem was solved from a qualitative spatial perspective by abstracting away the insignificant details and focusing on the aspects of space that are necessary for the problem domain. 
+
+%As with any abstracting mechanism, QSR deals with high level abstractions by hiding away unnecessary details while preserving important domain specific aspects
 
 %The advantages to QSR include reducing the search space of the spatial environment, using a higher level of abstraction that is closer to the conceptual representation of space that humans use...
 
@@ -186,20 +191,25 @@ The qualitative description used in the example above is informal. Formal qualit
 \label{Qualitative Spatial Calculi}
 \end{figure}
 
-Formal qualitative spatial calculi are explicit characterizations of qualitative spatial relationships from a given perspective, i.e. topology, orientation, distance, etc., that logically define intrinsic spatial properties such as spatial uniqueness and spatial composition. Examples of qualitative spatial calculi include the Region Connection Calculus (RCC) \cite{Randell92aspatial} for topological relationships, the Single Cross Calculus (SCC) for extrinsic orientational relationships \cite{Freksa92usingorientation} and Oriented Point Relation Algebra (OPRA) \cite{Moratz} for intrinsic orientational relationships.
+Formal qualitative spatial calculi are explicit characterizations of qualitative spatial relationships from a given perspective, i.e. topology, orientation, distance, etc., that logically define intrinsic spatial properties such as spatial uniqueness and spatial composition. Examples of qualitative spatial calculi that are important for this thesis include, the Region Connection Calculus (RCC) \cite{Randell92aspatial} for topological relationships, the Single Cross Calculus (SCC) for extrinsic orientational relationships \cite{Freksa92usingorientation} and Oriented Point Relation Algebra (OPRA) \cite{Moratz} for intrinsic orientational relationships.
 
-RCC defines eight topological relationships over regions: disconnected, partial overlap, externally connected, equals, non-tangential proper part, inverse non-tangential proper part, tangential proper part, and inverse tangential proper part. Refer to figure \ref{RCC} for an illustration of the relationships. Axiomatic rules of jointly exhaustive, mutually disjoint and pairwise disjoint (JEPD) enforce the spatial uniques of each relationship. For example, two regions may \emph{not} be partially overlapping and disconnected with each other at the same time. Additionally, composition tables define the realizable spatial arrangements of a set of regions. For example, if region \emph{A} is inside region \emph{B} and region \emph{B} is inside region \emph{C}, then region \emph{A} must also be in region \emph{C}.
+RCC defines eight topological relationships over regions: disconnected, partial overlap, externally connected, equals, non-tangential proper part, inverse non-tangential proper part, tangential proper part, and inverse tangential proper part. Refer to figure \ref{RCC} for an illustration of these relationships. Axiomatic rules of jointly exhaustive, mutually disjoint and pairwise disjoint (JEPD) enforce the spatial uniques of each relationship \cite{Randell92aspatial}. For example, two regions can \emph{not} be partially overlapping and disconnected to each other at the same point in time. Additionally, composition tables define the set of realizable spatial arrangements for a collection of regions. For example, if region \emph{A} is inside region \emph{B} and region \emph{B} is inside region \emph{C}, then region \emph{A} must also be in region \emph{C}.
 
-Orientational spatial relationships can be broken down into intrinsic and extrinsic relationships. Extrinsic orientational relationship define a relationship based on an external reference point. This type of relationship is characterized in SCC, in which an external reference point is used to related two point based objects together. Figure \ref{SCC} illustrates SCC partitioning of space. Intrinsic orientational relationships define a spatial relationship based on an observers internal perspective. This type of relationship is characterized in OPRA, in which the relationship of an external object is defined by the internal direction of the observing object. Figure \ref{OPRA} shows the relationship between two points, \emph{A} and \emph{B}. In this example point \emph{B} has an OPRA$_{2}$ relationship with \emph{A} of \emph{7} and point \emph{A} has an OPRA$_{2}$ relationship with \emph{B} of \emph{1}. As with RCC, axiomatic rules of JEPD and composition tables enforce spatial properties of uniqueness and composition.
+Orientational relationships can be broken down into intrinsic and extrinsic spatial relationships. Extrinsic relationships are defined by  an external reference point. This type of orientational relationship is characterized in the SCC, in which an external reference point is used to related two objects together. Figure \ref{SCC} illustrates the SCC partitioning of space for three points, \emph{A}, \emph{B}, and \emph{C}. In this example, \emph{C} is related to \emph{A} through \emph{B}, and has an \emph{L2} SCC relationship. 
+
+Intrinsic relationships are defined by an internal perspective. This type of relationship is characterized in OPRA, in which the relationship of an external object is defined by the internal direction of the observing object. Figure \ref{OPRA} shows the relationship between two points, \emph{A} and \emph{B}. In this example point \emph{B} has an OPRA$_{2}$ relationship with \emph{A} of \emph{7} and point \emph{A} has an OPRA$_{2}$ relationship with \emph{B} of \emph{1}. 
+
+As with RCC, axiomatic rules of JEPD and composition tables enforce spatial properties of uniqueness and composition for these two orientational calculi.
 
 \subsection{Constraint Logic Programming}
-Constraint Logic Programming (CLP) combines logic programing with constraint solving \cite{GavanelliCLP} \cite{WallaceCLP} \cite{Jaffar:1987:CLP}. Logic programming is based on declarative semantics in which a program is defined in terms of \emph{what} should be computed instead of \emph{how} the program should compute something (i.e. procedural style). In this regard a logic programing language relies on built-in search and unification algorithms to automatically solve logic based formula. This type of computation can be viewed as a form of constraint solving \cite{GavanelliCLP}. 
+Constraint Logic Programming (CLP) combines logic programing with constraint solving \cite{GavanelliCLP} \cite{WallaceCLP} \cite{Jaffar:1987:CLP}. Logic programming is based on a declarative semantic, in which programs are defined in terms of \emph{what} should be computed instead of \emph{how} programs should compute something (i.e. procedural style). In this regard, a logic programing language relies on built-in search and unification algorithms to solve logic based formula. At its essence, logic programming can be viewed as a basic form of constraint solving \cite{GavanelliCLP}. 
 
-For example, Prolog, one of the most well known and used logic programming languages, is based on predicate logic, unification, logic conjunction, and depth-first search \cite{Sterling:1986}. From a constraint perspective, Prolog solves constraints over the set of uninterpreted structures, i.e. Prolog's unification algorithm works entirely on a syntactic level. What this means is that Prolog does not internally know about any of the semantics of internal data, and can only unify terms based on their syntax. Take for example the arithmetic expression 5 + 1 = 6. In Prolog this expression will fail because equality holds only when two terms are syntactically identical (6 = 6).  
+Prolog is one of the most well known and used logic programming languages. It is based on predicate logic, unification, logic conjunction, and depth-first search \cite{Sterling:1986}. From a constraint perspective, Prolog solves constraints over the set of uninterpreted structures, i.e. Prolog's unification algorithm works entirely on a syntactic level. What this means is that Prolog does not internally 
+represent data beyond its syntax and can only unify terms based on this. Take for example the arithmetic expression 5 + 1 = 6. In Prolog this expression will fail because equality is true only on the syntactically level, i.e. 6 = 6.  
 
-Constraint solving techniques can help logic programming by increasing the expressiveness of the language. In general, constraint solving is based on constraints, which are simply restrictions over a the values a set of variables can bind to. For specific constraint solvers, the variables and the constraints over the variables are based on a specific domain, such as arithmetic expressions, boolean logic, etc., which encode the semantics and unification algorithms for solving the logical formula directly in a logic based language. In the example above, an constraint solver for arithmetic expression would be able to resolve the expression 5 + 1 = 6 as true because it knows directly about the semantics of addition and equality. 
+Constraint solving techniques can help logic programming by increasing the expressiveness of the language beyond the syntactic. In general, constraint solving is based on constraints, which are simply restrictions over a the values a set of variables can bind to. For specific constraint solvers, the variables and the constraints over the variables are based on a specific domain, such as arithmetic expressions, boolean logic, etc., which encode the semantics and unification algorithms for solving the logical formula directly in a logic based language. In the example above, an constraint solver for arithmetic expression would be able to resolve the expression 5 + 1 = 6 as true because it knows directly about the semantics of addition and equality. 
 
-Building a new constraint solver can be difficult because it usually requires that the constraint solver is \emph{hard-wired} into a complier or interpreter \cite{GavanelliCLP}. The use of Constraint Handling Rules (CHR) can help this process by providing a high level programming framework designed for the implementation and integrate constraint solvers into logic based languages. The aim is ease the process of building constraint solvers in terms of defining a new domain of constraints and integrating these constraints into a logic programming framework \cite{CHR}. CHR works by using logic based rules that rewrite constraints via simplification and propagation rules and constraints are solved by continually rewriting constraints until they are in a solvable form. Because these rules are based on logic themselves it integrates seamlessly into other logic based frameworks. 
+Building new constraint solvers is laborious because it typically requires \emph{hard-wired} the constraint solver into the complier or interpreter \cite{GavanelliCLP}. The use of Constraint Handling Rules (CHR) can help this process by providing a high level programming framework designed for the implementation and integrate constraint solvers into logic based languages. The aim is ease the process of building constraint solvers in terms of defining a new domain of constraints and integrating these constraints into a logic programming framework \cite{CHR}. CHR works by using logic based rules that rewrite constraints via simplification and propagation rules and constraints are solved by continually rewriting constraints until they are in a solvable form. Because these rules are based on logic themselves it integrates seamlessly into other logic based frameworks. 
 
 
 \section{Related Works}
@@ -484,16 +494,26 @@ An artefactual extension is a non-physical, spatial extension of an architectura
 
 There are three types of spatial artefacts identified by Bhatt\cite{Bhatt} that are represented in the CRR: \emph{operational space}, \emph{functional space}, and \emph{range space}.
 
+
 \begin{figure}[H]
  \centering
- \subfloat[operational space]{\label{operational-space}\includegraphics[width=43mm]{operational-space}}
+ \subfloat[Artefactual Extensions]{\label{Artefactual Extensions}\includegraphics[width=60mm]{artefacts2}}
  \hspace{7 mm}
- \subfloat[functional space]{\label{functional-space}\includegraphics[width=40mm]{functional-space}}
-  \hspace{7 mm}
- \subfloat[range space]{\label{range-space}\includegraphics[width=43mm]{operational-space}}
- \caption{Artefactual Extensions}
+ \subfloat[Functional Space (FS), Operational Space (OS), Range Space (RS)]{\label{artefactual extensions seperate}\includegraphics[width=70mm]{artefacts}}
+ \caption{Artefactual Extensions, Source \cite{bhatt-spatial-computing}}
 \label{artefactual-extensions}
 \end{figure}
+
+%\begin{figure}[H]
+% \centering
+% \subfloat[operational space]{\label{operational-space}\includegraphics[width=43mm]{operational-space}}
+% \hspace{7 mm}
+% \subfloat[functional space]{\label{functional-space}\includegraphics[width=40mm]{functional-space}}
+%  \hspace{7 mm}
+% \subfloat[range space]{\label{range-space}\includegraphics[width=43mm]{operational-space}}
+% \caption{Artefactual Extensions}
+%\label{artefactual-extensions}
+%\end{figure}
 
 The operational space encompasses the region of space required by an object to preform its function. For example, the operational space of a door is the area in which a door can occupy during its operation, opening and closing (see figure \ref{operational-space}). This space is dynamic in the sense that it represents the configurable space of the physical doorway. 
 
@@ -1197,13 +1217,14 @@ In an important study, Melton \cite{Melton} discovered that the most influential
 
 The crux of Melton's experiments suggested that visitors exit through the first door they encounter, which he referred to as the exit gradient. Figure \ref{Melton-studies} shows the results of an extensive study of visitors circulation patterns and stopping frequencies in an art museum. The studies reported that almost 80 percent of visitors exited through the first exit they encountered before viewing the entire exhibition. Additionally, the studied showed that the most frequently visited objects where those located along the shortest path from the entrance to the exit. 
 
-Furthermore, Bitgood suggests that visitors tend to follow along the wall that is closest to the door they entered \cite{Bitgood95}. Given that visitors also tend to exit through the first doorway they encounter, doorways should not be positioned in a wall that is adjacent to an entrance. 
+Furthermore, Bitgood suggests that visitors tend to follow along the wall that is closest to the door they entered \cite{Bitgood95}. Given that visitors also tend to exit through the first doorway they encounter, doorways should not be positioned in a wall that is close to an entrance. 
 
 The results of Melton's and Bitgood's studies inform architects of spatial characteristics that influence movement patterns in exhibitions. Specifically, doorways that are positioned on the same side of the room and doorways that are position in a wall adjacent to an entrance cause visitors to pay attention to fewer exhibits than doorways that are positioned on opposing sides of the room and in walls that are not adjacent to entrances.
 
 \begin{description}
-\item[Requirement 1:] \emph{Exhibition doorways should be positioned on opposing sides of a gallery room and should not be positioned on a wall that is adjacent to another doorway.} 
+\item[Requirement 1:] \emph{Gallery doorways should be positioned on opposing sides of a gallery room and should not be contained in walls that are close to other doorways.} 
 \end{description}
+
 
 Figure \ref{door-position} shows a possible exhibition design where the red door is positioned on the same side of the room as the entrance, while the black door is positioned on the opposing side.
 \begin{figure}[H]
@@ -1217,7 +1238,7 @@ Figure \ref{door-position} shows a possible exhibition design where the red door
 \subsubsection{Spatial arrangement of display cases}
 The spatial arrangement of display cases in galleries has been shown to influence visitors' movement patterns. \cite{Bitgood92} showed that display case arrangements that form a perimeter or a peninsula generate the most amount of attention, while display case arrangements that form an island in the middle of the room received the lowest amount of attention.
 
-   \begin{figure}[H]
+\begin{figure}[H]
  \centering
  \subfloat[island]{\label{fig:door-opposite}\includegraphics[width=35mm]{island}}
  \hspace{10 mm}
@@ -1235,7 +1256,7 @@ The spatial arrangement of display cases in galleries has been shown to influenc
 Circulation patterns can be disrupted when a peninsula arrangement cuts horizontally across the view of a visitor as they are entering the room. This type of display pattern will cut off part of the room from the visitor and will make it less likely to be visited.
 
 \begin{description}
-\item[Requirement 3:] \emph{Display cases arrangements that form a peninsula should not cut horizontally across the view of a visitor located at an entrance.}
+\item[Requirement 3:] \emph{Display cases arrangements should not cut horizontally across the view of a visitor located at an entrance.}
 \end{description} 
 
 \begin{figure}[H]
@@ -1271,7 +1292,7 @@ The orientation of a statue to doorways can increase the attention the statue re
 The way visitors explore an exhibition is influenced by the spatial characteristics of the layout, as well as the characteristics of each gallery room. Layouts that are sequential, i.e. one way in / one way out, promote a controlled and orderly flow of movement. Museums of history and science are well served by this type of design because they have a narrative to tell that is chronological. On the other hand, layouts that present the visitor with path choices, i.e. multiple doorways, promote free-flowing exploration. In this type of layout it is important that visitors are aware of the path choices that are available. This means that doorways are visible between each other throughout the layout. This concept of visibility between a network of points is referred to as continuity and is an important characteristic of layouts that present visitors with multiple path choices.  
 
 \begin{description}
-\item[Requirement 10:] The layout of the museum should maintain continuity between doorways within each exhibition and gallery room.
+\item[Requirement 7:] The layout of the museum should maintain continuity between doorways within each exhibition and gallery room.
 \end{description}
 
 %Within a Gallery, rooms that are open promote more free-flowing exploration than rooms that are narrow. Narrow rooms inhibit exploration because of space limitations and confinement. Rooms that are open provide more space for visitors to explore the room in a free-flowing manner.
@@ -1285,7 +1306,7 @@ The lobby is the first place visitors encounter when they enter a museum. The de
 
 Upon entering the lobby most visitors need to find the ticket area and/or an information desk. It is important, therefore, that the ticketing area and information desk are visible from the entrance. Additionally, studies have shown that people first look to their right hand side when entering a building. By placing the ticket and information desks on the right hand side of the lobby, visitors are more likely to notice them immediately when they enter the lobby. Finally, the ticketing area should be close to visitors when they enter because it is likely one of the first places they will need to visit.
 \begin{description}
-\item[Requirement 7:] \emph{The ticketing and information desks should be visible from the main entrance, they should be on the right hand side of the lobby from the main entrance, and they should be on the same side fo the lobby as the  entrance.}
+\item[Requirement 8:] \emph{The ticketing and information desks should be visible from the main entrance, they should be on the right hand side of the lobby from the main entrance, and they should be on the same side fo the lobby as the  entrance.}
 \end{description}
 
 After obtaining a ticket most visitors will be trying to locate the entrance to the exhibitions. Therefore, exhibition entrances should be clearly visible from several parts of the lobby, including the ticketing desk, information desk, and a central lobby location, to make it easy for visitors to find where they need to go. 
@@ -1301,25 +1322,94 @@ Bathrooms are an important services for museum visitors. Surprisingly, the place
 
 
 \section{Application of CRR for Museum Design}
-This section presents a use case example for the application of the CRR in validating art museum design requirements using a real world scenario. This use case is from the perspective of a museum designer and covers the process of importing a museums design from an architectural design tool (ArchiCAD) into the CRR, the building of museum requirements using architectural concepts and QSA, and finally validation of the requirements using the CRR query engine.  
+This section presents the application of the CRR for validating art museum design requirements using a real world scenario. The first part of this section introduces the museums, including illustrations of their floor plans, which will be used in the case study and gives a brief overview of process of importing the designs into the CRR. The second part of this section presents the results of applying the museum design requirements identified in the beginning of this Chapter to the museum design presented here within the CRR.
 
+%This use case is from the perspective of a museum designer and covers the process of importing a museums design from an architectural design tool (ArchiCAD) into the CRR, the building of museum requirements using architectural concepts and QSA, and finally validation of the requirements using the CRR query engine. 
 
-\subsection{The Philadelphia Art Museum}
-The museum floor plan used in this case study is based off the Asian Art wing of the Philadelphia Art Museum \cite{PhiladelphiaArtMuseum}. The motivation behind basing the design off a real world museum instead of a contrived example is to demonstrate the CRR in a real world context with regards to the applicability museum design requirements using a real world design example.
-\begin{figure}[t]
-\centering
-\includegraphics[width=78mm]{philadelphiamuseum}
-\caption{Philadelphia Art Museum Floor-plan - Source \cite{philadelphiamusem}}
-\label{multi-perspective-reps}
+\subsection{Museum Designs and Import}
+The museum floor plans used in this case study are based off the Asian Art Wing of the Philadelphia Museum of Art \cite{PhiladelphiaArtMuseum} and the lobby of the Museu Calouste Gulbenkian. The Philadelphia Museum of Art will be used for the demonstration of the gallery requirements and the Museu Calouste Gulbenkian will be used for the demonstration of the lobby requirements. The motivation behind basing the designs off a real world museums instead of a contrived examples is to demonstrate the CRR in a real world context with regards to the applicability of museum design requirements using a real world design examples.
+
+\begin{figure}[H]
+ \centering
+ \subfloat[2nd Floor]{\label{art museum}\includegraphics[width=78mm]{philadelphiamuseum}}
+ \hspace{10 mm}
+ \subfloat[Asian Wing]{\label{asian wing}\includegraphics[width=45mm]{asianwing}}
+ \caption{Philadelphia Art Museum Floor-plan - Source \cite{philadelphiamusem}}
+\label{art-museums}
 \end{figure}
-The 
 
-\subsection{Import}
+Gallery rooms 226 and 238 - 244 of the Asian Wing at the \emph{Philadelphia Museum of Art} and the lobby of the \emph{Museu Calouste Gulbenkian} were manually built in ArchiCAD 14. The dimension and scale of the rooms where obtained from the museum to ensure as much accuracy to the real design as possible. Benches, display cases and states were manually added to demonstrate some of the museum requirements. Figure \ref{art museum in archiCAD} shows the floor plans in ArchiCAD.
 
 
-\subsection{Building Museum Requirements}
+\begin{figure}[h]
+\centering
+\includegraphics[width=90mm]{art-museum-archicad-crop}
+\caption{Asian Wing in ArchiCAD}
+\label{art museum in archiCAD}
+\end{figure}
 
-\subsection{Validation}
+%\begin{figure}[h]
+%\centering
+%\includegraphics[width=100mm]{lobby}
+%\caption{Asian Wing in ArchiCAD}
+%\label{art museum in archiCAD}
+%\end{figure}
+
+Once an initial design has been built in ArchiCAD it can be imported into the CRR via a Multi-Modal Spatial Data Access Framework for Architectural Design \cite{carl}. This framework provides the CRR with access to the representational information such as structural spatial and containment relationships involving rooms/spaces and architectural entities. The current version of this framework does not provide spatial data for artefactual representations or wall to door/window containment relationships, so these need to be manually added to the CRR's design representation model.    
+
+
+\subsection{Validating Museum Requirements}
+This section presents the results of applying the museum requirements identified in the beginning of this Chapter against the museum floor plans imported in the previous section. 
+
+Table \ref{} shows the CRR query used for each museum requirement along with any violations found in the design. Each violation can be visually confirmed in the museum design floor plans provided above. The take away from this demonstration is that the CRR is able to check high level design requirements as they occur in real world concrete designs. 
+
+%In this section, the museum requirements identified in the beginning of this Chapter will be check for against the \emph{Philadelphia Museum of Art} and the \emph{Museu Calouste Gulbenkian} floor plan imported in previous section. Checking for design requirements will follow a general pattern of querying the CRR using architectural concepts, QSAs, and qualitative spatial relationships. 
+
+\begin{table}[H]
+  \begin{center}
+  \begin{tabular}{ | c | p{7.5cm} | p{6cm} |}
+    \hline
+    Req. & CRR Query & Violations\\ \hline
+    GR1 & opposing\_side(\emph{door\_id}, \emph{door\_id}, \emph{room\_id}) & - door4, door5, gallery234 
+    													\newline - door2, door1, gallery256 
+    													\newline - door3, door6, gallery245 \\ \hline
+    GR2 &  &  \\ \hline
+    GR3 & island(\emph{display\_id}) & - display4 \\ \hline
+    GR4 & horizontal(\emph{display\_list}) & - (display1, display2, display3) \\ \hline
+    GR5 & artefact\_interference(\emph{id}, \emph{id}) &  \\ \hline
+    GR6 & facing\_away(\emph{bench\_id}, \emph{door\_id}) & - bench, door
+                               \newline - bench, door \\ \hline
+    GR7 & facing\_away(\emph{statue\_id}, \emph{door\_id}) & - statue1, door4 \\ \hline
+    GR8 & continuity(\emph{gallery\_id}) &  - gallery344 \\ \hline
+    LR1 & right\_side(\emph{door\_id}, \emph{desk\_id})& - no violations \\ \hline
+    LR2 & visibility(\emph{door\_id}, \emph{door\_id})& - no violations\\
+    \hline
+  \end{tabular}
+  \end{center}
+\caption{Spatial Abstractions for Architectural Entities}
+\label{spatial abstractions}
+\end{table} 
+
+Gallery Requirement 1 specifies that doorways should be positioned on opposing sides of a gallery room. The opposing side relationship can be checked for using the CRR with the following query:
+\begin{verbatim}
+    ?- opposing_side(door_id, door_id, gallery_id).
+\end{verbatim} The opposing side relationship takes three crr\_ids as arguments. In this requirement the first and second arguments refer to doorways and the third refers to the gallery room. This requirement can be checked for in the Philadelphia Museum of Art by making opposing-side queries to the CRR. For the galleries which have doorways on opposing sides the query will respond with a true and will fail when they are not. A failure indicates to the designer that the requirement has been violated. The following two queries show an example of a one query passing and one failing.  
+\begin{verbatim}
+    ?- opposing_side(door1, door2, gallery244).
+    - true.
+    ?- opposing_side(door7, door8, gallery233).
+    - fail.
+\end{verbatim} Visually checking the floor plan in Figure \ref{} in fact shows that doorways door1 and door2 are on opposing sides of gallery244 while doorways door7 and door8 are on the same side of gallery233.
+
+
+%Gallery Requirement 4 specifies that display cases arrangements should not cut horizontally across the view of a visitor located at a doorway to a gallery. This requirement can be check for using the horizontal rule in the CRR. The horizontal query takes a list of crr\_id that represent a series of objects and a vantage point (in this case a doorway) and returns true if they cut horizontally from the perspective of the vantage point. Give the Philadelphia Museum of Art this requirement can be check for using the following query:
+%\begin{verbatim} 
+%     ?- horizontal(door1, [dispaly1, display2, display3, display4]).
+%      - true.
+%\end{verbatim} In this case the query returns true because this sequence of display cases cut horizontally across the view from point of view at doorway 1. Visually checking this in the floor plan show that the display cases do cut horizontally.
+
+
+
 
 %\subsection{A Private Room}
 %In a particular apartment, the designer wants the bedroom to be private. Given the definition of privacy in this chapter, privacy entails that the bedroom is on the opposing side of the apartment from the main entrance, the bedroom's doorway does not face towards any other doorways, and the doorway is not visible from the main entrance.
