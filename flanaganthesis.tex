@@ -169,7 +169,7 @@ For this thesis there are two required areas of background knowledge: Qualitativ
 The field of Qualitative Spatial Reasoning (QSR) investigates techniques for representing and reasoning about abstract features of space in a computational framework while preserving its fundamental properties. In this regard, QSR represents space at a qualitative level as opposed to a quantitative level. At the qualitative level, space is defined by symbolic and abstract spatial relationships, such as \emph{behind}, \emph{left-of} and \emph{close-to}, while at the quantitative level, space is defined by precise numeric values \cite{freksa1991qsr} \cite{bhattSpatialComputing}. 
 
 Qualitative representations of space can be quite useful. Take for example the task of describing the location of a chair to your friend. 
-In order to effectively communicate the location of the chair, it is unnecessary to use precise numeric values that characterize the chair, such as its size, shape and weight, and metric spatial measurements that relate the chair to other objects, such as distance. Communicating qualitative spatial relationships, such as the orientation of the chair, is sufficient for effectively describing its location. An example could be, ``the chair is \emph{behind} the table and on the \emph{left-hand} side of the room''. By using qualitative relationships, you are representing space at a level of abstraction that hides away unnecessary details so that you are only dealing with those aspects of space that are important for the problem at hand.
+In order to effectively communicate the location of the chair it is unnecessary to use precise numeric values that characterize the chair, such as its size, shape and weight, and metric spatial measurements that relate the chair to other objects, such as distance. Communicating qualitative spatial relationships, such as the orientation of the chair, is sufficient for effectively describing its location. An example could be, ``the chair is \emph{behind} the table and on the \emph{left-hand} side of the room''. By using qualitative relationships, you are representing space at a level of abstraction that hides away unnecessary details so that you are only dealing with those aspects of space that are important for the problem at hand.
 
 While the example above is informal, formal qualitative representations of space preserve universal spatial aspects such as uniqueness (objects exist exactly once and each spatial location can have at most one object), and realizability (properties that related the compositional structures of spatial) while providing a computational apparatus to reason about space from an abstract level \cite{freksa1991qsr}. The following subsection will introduce several formal qualitative spatial representation calculi with respect to topology and orientation. 
 
@@ -202,7 +202,7 @@ Intrinsic relationships are defined by an internal perspective. This type of rel
 As with RCC, axiomatic rules of JEPD and composition tables enforce spatial properties of uniqueness and composition for these two orientational calculi.
 
 \subsection{Constraint Logic Programming}
-Constraint Logic Programming (CLP) combines logic programing with constraint solving \cite{GavanelliCLP} \cite{WallaceCLP} \cite{Jaffar:1987:CLP}. Logic programming is based on a declarative semantic, in which programs are defined in terms of \emph{what} should be computed instead of \emph{how} programs should compute something (i.e. procedural style). In this regard, a logic programing language relies on built-in search and unification algorithms to solve logic based formula. At its essence, logic programming can be viewed as a basic form of constraint solving \cite{GavanelliCLP}. 
+Constraint Logic Programming (CLP) combines logic programing with constraint solving \cite{GavanelliCLP} \cite{WallaceCLP} \cite{Jaffar:1987:CLP}. Logic programming is based on a declarative semantic in which programs are defined in terms of \emph{what} should be computed instead of \emph{how} it should be computed (i.e. procedural style). In this regard, a logic programing language relies on built-in search and unification algorithms to solve logic based formula. At its essence, logic programming can be viewed as a basic form of constraint solving \cite{GavanelliCLP}. 
 
 Prolog is one of the most well known and used logic programming languages. It is based on predicate logic, unification, logic conjunction, and depth-first search \cite{Sterling:1986}. From a constraint perspective, Prolog solves constraints over the set of uninterpreted structures, i.e. Prolog's unification algorithm works entirely on a syntactic level. What this means is that Prolog does not internally 
 represent data beyond its syntax and can only unify terms based on this. Take for example the arithmetic expression 5 + 1 = 6. In Prolog this expression will fail because equality is true only on the syntactically level, i.e. 6 = 6.  
@@ -219,11 +219,7 @@ There is a large body of research on tools for conceptual design assistance. The
 %either reason about qualitative (i.e. experiential, spatial) or functional (i.e. noise insulation, energy conservation, smart home security) design aspects / requirements or evaluate a design utilizing spatial reasoning techniques. The last part of this section will discuss and summarize the different approaches in the context of the work that is being done in this thesis.
 
 \subsection{Intelligent Critic System}
-The intelligent computer-aided architectural design system (ICAAD) \cite{IntelligentCritic} is a tool that evaluates architectural floor plans based on government regulations and interior design guidelines. The research here focuses on  the spatial representation model for architectural design.
-
-%The focus of this research is on how to representation spatial information in the context of architectural design requirement checking.
-
-In this respect, ICAAD represents designs in an object oriented hierarchical model, which is grounded to architectural containment relationships, i.e. windows are contained by rooms, rooms are contained by apartments, and apartments are contained by buildings. Various architectural entities, such as rooms, windows and furniture are all represented individually as ICAAD objects in the hierarchical structure. Each ICAAD object is responsible for storing spatial data about the entity, including dimension, shape, and direction. Spatial relationships between entities, such as proximity and visibility, are extracted from the spatial ICAAD data and represented as a network that connects entities together based on spatial relationships. 
+The intelligent computer-aided architectural design system (ICAAD) \cite{IntelligentCritic} is a tool that evaluates architectural floor plans based on government regulations and interior design guidelines. The research here focuses on the spatial representation model for architectural designs in the context of checking for requirements. In this respect, ICAAD represents designs in an object oriented hierarchical model, which is grounded to architectural containment relationships, i.e., windows are contained by rooms, rooms are contained by apartments, and apartments are contained by buildings. Various architectural entities, such as rooms, windows and furniture are all represented individually as ICAAD objects in the hierarchical structure. Each ICAAD object is responsible for storing spatial data about the entity, including dimension, shape, and direction. Spatial relationships between entities, such as proximity and visibility, are extracted from the spatial ICAAD data and represented as a network that connects entities together based on spatial relationships. 
 
 ICAAD uses Prolog's inference capabilities to match design rules (i.e., government regulations and interior deigns guidelines) against the ICAADs representation model. Violations are detected when a spatial relationship between entities are matched to a design requirement rule.
 
@@ -341,9 +337,13 @@ The CRR is the only tool in the group which provides support for every type of s
 
 
 \chapter{Conceptual Requirements Reasoner}
-The CRR is a framework for validating conceptual design requirements against CAAD based architectural design plans. Conceptual design requirements here refer to requirements as they pertain to the functional and experiential aspects of the design from a semantic and qualitative perspective. For example, architects commonly describe aspects of a design in a qualitative fashion, such as a design being private, accessible, or continuous. These architectural aspects emerge from the spatial structures / arrangements of the building form and are experienced in the building. 
+This Chapter is an introduction to the Conceptual Requirements Reasoner (CRR), a framework for validating conceptual design requirements against CAAD-based design plans. Conceptual requirements in this thesis refer to experiential and qualitative spatial aspects of a design.
 
-The goal of the CRR is to build a computational framework that represents and reasons about design requirements in the context of conceptual design requirement validation.     
+The remainder of this Chapter is organized as follows. Section one presents the problem statement that this thesis addresses. Section two presents the scope and contribution of the thesis. And Section three introduces the high level design and implementation of the CRR in the context of the problem statement.
+
+%The CRR is a framework for validating conceptual design requirements against CAAD based architectural design plans. Conceptual design requirements here refer to requirements as they pertain to the functional and experiential aspects of the design from a semantic and qualitative perspective. For example, architects commonly describe aspects of a design in a qualitative fashion, such as a design being private, accessible, or continuous. These architectural aspects emerge from the spatial structures / arrangements of the building form and are experienced in the building. 
+
+%The goal of the CRR is to build a computational framework that represents and reasons about design requirements in the context of conceptual design requirement validation.     
 
 \section{Design Problem}
 The field of Spatial Computing for Architectural Design \cite{bhatt-spatial-computing} investigates the computation apparatus that is necessary to represent and reasoning about architectural form and function from multiple levels of abstraction: \emph{conceptual}, \emph{qualitative}, and \emph{quantitative}. At the conceptual level the architect perceives the design at a high level of abstraction. For example, at this level the architect would think in terms of spaciousness, privacy, continuity, and visibility. At the quantitative level the architect engages the design at a low level of abstraction. Now the architect considers concrete, physical aspects of the design. These include the geometric shape and spacial location of the design's structural form. These levels of abstraction are referred to in this thesis as the architectural design hierarchy, where the top of the hierarchy corresponds to the conceptual, the middle corresponds to the qualitative, and the bottom corresponds to the quantitative. 
@@ -495,18 +495,18 @@ This chapter introduces the computational framework of the CRR. It presents two 
 This chapter is organized into two sections. The first section looks at the internal architectural design representation structure and how it is implemented in Prolog. The second section looks at the spatial constraint solvers and how each is implemented in CLP.
 
 \section{Design Representation}
-The CRR internally represents two distinct aspects of an architectural design. It represents the design's physical form and non-physical artefactual extensions. The physical form pertains to the precise geometric data that defines the design's structural elements (walls, doors, windows, slabs, stairs, columns, etc.) with regard to layout, location and shape. Artefactual extension pertains to the non-physical but geometric data that defines the functional characteristics of structural elements, such as the space used by a person to operate a doorway.
+The CRR represents two distinct aspects of an architectural design. It represents the design's physical form and non-physical artefactual extensions. The physical form pertains to the precise geometric data that defines the design's architectural entities with regard to layout, location and shape. In this thesis architectural entities refer to the structural elements of walls, doors, windows, slabs, stairs, and columns. Artefactual extension pertains to the non-physical but geometric data that defines the functional characteristics of architectural entities, such as the space used by a person to operate a doorway.
 
-The physical representation of the design is automatically imported into the CRR from a multi-modal spatial data access framework \cite{MultiModal} built by the DesignSpace project \cite{DesignSpace}. For each architectural entity, the CRR imports the structural geometric coordinate data and a unique identifier, referred to in the CRR as the \emph{crr\_id}. Currently, artefactual extensions are manually imported in the CRR, but the intent for future versions is to automate this directly from the multi-modal spatial data access framework.  
+The physical representation of the design is automatically imported into the CRR from a multi-modal spatial data access framework \cite{MultiModal} built by the DesignSpace project \cite{DesignSpace}. For each architectural entity, the CRR imports the structural geometric coordinate data, as it is represented in a CAAD-based system, and a unique identifier referred to in the CRR as the \emph{crr\_id}. Currently, artefactual extensions are manually imported, but the intent for future versions is to automate this directly from the multi-modal spatial data access framework.  
 
-The remainder of this section is broken up into three subsections. The first subsection looks at the physical representation structure. The second subsection looks at the artefactual representation structure. The final subsection looks at how each are implemented in the CRR.
+The remainder of this section is broken up into three subsections. The first subsection looks at the physical representation structure. The second subsection looks at the artefactual representation structure. The third subsection looks at how both are implemented in the CRR.
 
 \subsection{Physical Design Representation}
-The physical representation of a design models its' structural form in terms of precise physical geometric features (i.e., layout, shape, location). Architectural entities, such as walls, windows, doorways, columns, and rooms, are represented in the CRR as geometric primitives of polygons, lines and points that correspond to the physical dimensions (length, width, shape) of the entities as they occur in the real world. The physical representation of the design is analogous to the design perspective that is represented by CAAD programs. 
+The CRR represents a design's physical form in terms of geometric features of layout, shape, and location. Each architectural entity is represented in the CRR as a polygon made up of Cartesian points that correspond to the physical dimensions (length, width, shape) of the entity as is occurs in the real world. The physical representation of the design is analogous to the design perspective that is represented by CAAD programs. 
 
 
 \subsection{Artefactual Design Representation}
-An artefactual extension is a non-physical, spatial extension of an architectural entity that pertain to a specific functional quality. While artefactual extension does not have a physical manifestation, it is an important aspect of the design representation model because it affects the functionality and performance of a design from an experiential perspective. 
+An artefactual extension is a non-physical, spatial extension of an architectural entity that pertains to a specific functional quality. While an artefactual extension does not have a physical manifestation, it is none the less an important aspect of the design representation model because it affects the functionality and performance of a design from an experiential perspective. 
 
 There are three types of spatial artefacts identified by Bhatt\cite{Bhatt} that are represented in the CRR: \emph{operational space}, \emph{functional space}, and \emph{range space}.
 
@@ -544,21 +544,31 @@ The range space pertains to a region of space that encompass the range of a sens
 \label{door-sink}
 \end{figure}
 
-Artefactual extensions directly affect the experiential quality of a design. For example, a sink in a bathroom has a functional space, the space a person occupies while washing his/her hands at the sink. If this space interferes with (i.e., topologically overlapping) the functional and/or physical space of a doorway, this will cause a circulation problem when both the doorway and sink are simultaneously being operated, i.e., a collision between the person washing his/her hands and the doorway itself or the person operating the doorway. In this example, the functional aspects of the bathrooms design with regard to the mitigation of circulation problems is directly influenced by the spatial configuration of the non-physical artefactual extensions of the design. It should be noted that this type of occurrence can not be modeled in current CAAD program because they do not have a way to represent artefactual extension.
+Each artefactual extension is represented in the CRR as a polygon that corresponds to its spatial dimensions.
+
+Artefactual extensions directly affect the experiential quality of a design. For example, a sink in a bathroom has a functional space, the space a person occupies while washing his/her hands at the sink. If this space interferes with (i.e., topologically overlapping) the functional and/or physical space of a doorway, this will cause a circulation problem when both the doorway and sink are simultaneously being operated, i.e., a collision between the person washing his/her hands and the doorway itself or the person operating the doorway. In this example, the functional aspects of the bathrooms design with regard to the mitigation of circulation problems is directly influenced by the spatial configuration of the non-physical artefactual extensions of the design. It should be noted that this type of occurrence can not be modeled in current CAAD-based system because they do not represent artefactual extension.
 
 
 \subsection{Implementation}
-Within the CLP framework of the CRR, the physical and artefactual design representation model is implemented as several factbases and rulebases. There are two factbases that can be described as in memory database-like structures. The first factbase is used as a catalog, which relates each architectural entity to it's architectural type (wall, window, door, room, interior design object, etc.) via its \emph{crr\_id}. Each entry in the factbase is a Prolog predicate of the form $architectural \mathunderscore type(crr \mathunderscore id, type)$.
+Within the CLP framework of the CRR, the physical and artefactual representations are implemented as factbases and rulebases. There are two factbases that are in memory database-like structures. One of the factbases is used as a catalog, which relates each architectural entity to its architectural type (wall, window, door, room, interior design object, etc.) via its \emph{crr\_id}. Each entry in this factbase is a Prolog predicate of the form $architectural \mathunderscore type(crr \mathunderscore id, type)$.
 \begin{verbatim}
    architectural_type(door42, door).
    architectural_type(wall49, wall).
-\end{verbatim} The second factbase is used as a linking table that relates two architectural entities based on structural containment relationships, i.e. door42 is contained by wall5, wall5 in contained by room6. Each containment relationship is implemented as a Prolog predicate of the form $contained(contained \mathunderscore crr \mathunderscore id, containing \mathunderscore crr \mathunderscore id)$.
+\end{verbatim} The other factbase is used as a linking table that relates two architectural entities based on their containment relationship, i.e., door42 is contained by wall5, wall5 in contained by room6. Each containment relationship is implemented as a Prolog predicate of the form $contained(contained \mathunderscore crr \mathunderscore id, containing \mathunderscore crr \mathunderscore id)$.
 \begin{verbatim}
    contained(door42, wall5).
    contained(wall5, room3).
 \end{verbatim} 
 
-Rulebases link architectural entities to geometric representations, and each representation, physical, functional, operational, and range, has a separate rulebase. However, they are all implemented using a similar form. Each rulebase is comprised as a series of Prolog rules each with a head and a body. The head links an entity to a variable that represents its' geometric structure. The body of each rule is responsible for transforming coordinate point data (from import) into internally defined spatial primitives of points, lines, and polygons. The following rules show the physical, functional and operational rules for a door with a \emph{crr\_id} of door42. Note the similarities and differences between rules.
+Rulebases link architectural entities to their physical and artefactual representations. There is a separate rulebase for the physical, functional, operational, and range representations that are implemented using a similar form. Each rulebase is built as a series of Prolog rules. The head of each rule links an architectural entity to a variable that is bound to its spatial representation. The body of each rule is responsible for handling coordinate point data by internally defining spatial primitives of points, lines, and polygons. The $spatial \mathunderscore primitive$ rule transforms coordinate data into spatial primitives and binds a variable to the spatial representation. The $spatial \mathunderscore primitive$ rule works by matching arguments. For example, the following call to the $spatial \mathunderscore primitive$ rule with a single point in the second argument instantiates the the variable, \emph{SpatialPrimitive}, as a point object primitive.
+\begin{verbatim}
+   spatial_primitive(SpatialPrimitive, (5,7)).
+\end{verbatim} Similarly, a call to $spatial \mathunderscore primitive$ with a list of points instantiates the variable as a polygon object primitive.
+\begin{verbatim}
+   spatial_primitive(SpatialPrimitive, [(5,7), (5,9), (7,7)]).
+\end{verbatim} 
+
+The following rules show the physical, functional and operational rules for a door with a \emph{crr\_id} of door42. Note the similarities and differences between rules.
 \begin{verbatim}
     physical_representation(door42, Geometry) :-
             spatial_primitive(Geometry, [(1,3),(1,4),(4,4),(4,3)]).
@@ -568,17 +578,7 @@ Rulebases link architectural entities to geometric representations, and each rep
             
     operational_representation(door42, OpGeometry) :-
             spatial_primitive(OpGeometry, [(1,4),(4,6),(4,3)]).
-\end{verbatim} 
-
-The $spatial \mathunderscore primitive$ rule transforms coordinate data into spatial primitives and binds a variable (its' second argument) to the spatial primitive representation. The $spatial \mathunderscore primitive$ rule works by matching arguments. For example, the following call to the $spatial \mathunderscore primitive$ rule with a single point in the second argument instantiates the the variable, \emph{SpatialPrimitive}, as a point object primitive.
-\begin{verbatim}
-   spatial_primitive(SpatialPrimitive, (5,7)).
-\end{verbatim} Similarly, a call to $spatial \mathunderscore primitive$ with a list of points instantiates the variable as a polygon object primitive.
-\begin{verbatim}
-   spatial_primitive(SpatialPrimitive, [(5,7), (5,9), (7,7)]).
-\end{verbatim} 
-
-Every architectural entity has a physical representation but may or may not have a functional, operational, or range representation. For example, a doorway usually has a functional and operational representation but may not have a range representation. Some entities, such as columns, have no artefactual representations. However, there is no limitation to which entities can or can not have certain artefactual extensions.
+\end{verbatim} Every architectural entity has a physical representation but may or may not have a functional, operational, or range representation. For example, a doorway usually has a functional and operational representation but may not have a range representation. Some entities, such as columns, have no artefactual representations. However, there are no limitation imposed on which entities can or can not have certain artefactual extensions.
 
 \begin{figure}[H]
 \centering
@@ -587,12 +587,12 @@ Every architectural entity has a physical representation but may or may not have
 \label{clp-design}
 \end{figure}
 
-Factbases and rulebases can be queried using a Prolog interpretor. A call to the $architectural \mathunderscore type$ factbase can be used to get an entity's type given its' \emph{crr\_id}, such as the following query.
+These factbases and rulebases can be queried using a Prolog interpretor to retrieve information about architectural entities. A call to the $architectural \mathunderscore type$ factbase can be used to get an entity's type given its' \emph{crr\_id}, such as the following query.
 \begin{verbatim}
     architectural_type(door42, Type).
-\end{verbatim} The return of this call instantiates the Type variable with the door's type, which is \emph{door}. Similarly, a query to a rulebase will return and instantiated variable with the respective spatial representations. Figure \ref{clp-design} shows the implementation structure for the rulebases. For example, a query to the \emph{physical\_representation} rulebase will instantiate the $Geometry$ variable with a physical representation. \begin{verbatim}
+\end{verbatim} The return of this call instantiates the \emph{Type} variable with the door's type, which is \emph{door}. Similarly, a query to a rulebase will return and instantiated variable with the respective spatial representations. Figure \ref{clp-design} shows the implementation structure for querying the rulebases. For example, the following query to the \emph{physical\_representation} rulebase will instantiate the $Geometry$ variable with door42's physical representation. \begin{verbatim}
     physical_representation(door42, Geometry).
-\end{verbatim} Calls to the functional, operational, and range representation rulebases work in the exact same fashion.
+\end{verbatim} Calls to the functional, operational, and range rulebases work in the exact same fashion.
 
 
 %Given an entity and its \emph{crr\_id}, a query to the DSpace rulebase will return an instantiated variable with the entity's quantitative geometry.  
@@ -611,7 +611,7 @@ Factbases and rulebases can be queried using a Prolog interpretor. A call to the
 
 
 \section{Spatial Reasoning}
-Qualitative spatial representation and reasoning is used in the CRR to bridge the gap between a design's high level conceptual requirements and its' low level geometric representation. This process begins by spatially abstracting the design's (quantitative) geometric representation into spatially abstract (qualitative) objects and are used by the constraint solvers to qualify topological, orientational, and distance relationship over the design, as is illustrated in Figure \ref{reasoner-design}. 
+Qualitative spatial representation and reasoning is used in the CRR to bridge the gap between a design's high level conceptual requirements and its low level geometric representations. This process begins by spatially abstracting the design's (quantitative) geometric representation into spatially abstract objects that are used by the spatial constraint solvers to qualify topological, orientational, and distance relationship over the design, as is illustrated in Figure \ref{reasoner-design}. 
 
 \begin{figure}[H]
 \centering
@@ -621,25 +621,25 @@ Qualitative spatial representation and reasoning is used in the CRR to bridge th
 \end{figure}
 % house image from http://www.tinyhomes.com/TH2163_SimpleElegance.html
 
-The spatial constraint solvers uses formal qualitative spatial calculi for topological (Region Connected Calculus \cite{Freksa}), orientational (Single Cross \cite{Freksa}, Oriented Point Relation Algebra \cite{Moratz}) and distance to qualitatively represent and reason over the design. Within the CLP framework of the CRR, the spatial constraint solvers are implemented in CLP($\mathbb{R}$) (CLP over Reals) and Constrain Handling Rules (CHR). The topological and distance constraint solvers extend Sindalog \cite{Sindalog}, a spatial constraint solver written in CHR.
+These spatial constraint solvers use formal qualitative spatial calculi for topological (Region Connected Calculus \cite{Freksa}), orientational (Single Cross \cite{Freksa}, Oriented Point Relation Algebra \cite{Moratz}) and distance to qualitatively represent and reason over an architectural design. Within the CLP framework of the CRR, the spatial constraint solvers are implemented using CLP($\mathbb{R}$) (CLP over Reals) and Constrain Handling Rules (CHR). The topological and distance constraint solvers extend Sindalog \cite{Sindalog}, a spatial constraint solver written in CHR.
 
-Within the CRR, each spatial constraint solver can be used as a query engine that qualifies spatial relationships to answer spatial queries.  A spatial query involves three step:
+Each spatial constraint solver is a query engine that qualifies spatial relationships to answer qualitative spatial queries.  A qualitative spatial query involves three step:
 \begin{enumerate}
 \item retrieval of quantitative representation 
 \item spatial abstraction of quantitative representation
-\item qualification via constraint solving
+\item qualification of spatial relationships
 \end{enumerate}  
-As an example, the following query involves the inside topological relationship between a desk and a room. 
+As an example, the following topological query involves the inside relationship between a desk and a room. 
 \begin{verbatim}
    inside(desk3, room1).
-\end{verbatim} In the first step, the quantitative geometries of the desk and room are retrieved from the physical representation rulebase. The second step uses transformation rules (as will be discussed in the next section) to spatially abstract these geometries into abstract spatial objects. Finally, the spatially abstracted objects are used by the topological constraint solver to qualify the inside relationship. The constraint solver will respond \emph{true} if the desk has an inside spatial relationship with the room, and \emph{fail} if it does not.   
+\end{verbatim} In step one, the quantitative geometries of the desk and room are retrieved from the physical representation rulebase. The second step uses transformation rules (this will be discussed in the next section) to spatially abstract the physical representation into abstract spatial objects. In the final step, the abstract objects are used by the topological constraint solver to qualify the inside relationship. The constraint solver will respond \emph{true} if the desk has an inside spatial relationship with the room, and \emph{fail} if it does not.   
 
 %The spatial constraint solvers work directly over the design representation structure via the spatial abstraction representation layer and the design factbase. The main service of the reasoner is qualification of the quantitative architectural space into the qualitative feature space of topology, orientation, and distance. It should be noted that the distance constraint solver is different from the topological and orientational constraint solvers because it does not qualify distance relationships, rather it solves minimum distance constraints over quantitative objects. The topological and distance constraint solvers extend The Sindalog spatial constraint solver \cite{Sindalong}, a spatial constraint solver written in CHR. These qualitative spatial relationships are, in turn, used to reason about conceptual design requirements.
 
-The remainder of this section is structured as follow. The first subsection looks at how the quantitative representation of entities in a design are spatially abstracted. The second, third and forth subsections look at topological, orientational and distance based reasoning respectively.
+The remainder of this section is structured as follow. The first subsection looks at how the quantitative representations are spatially abstracted. The second, third and forth subsections look at topological, orientational and distance based reasoning.
 
 \subsection{Spatial Abstraction}
-Spatial abstraction is the process of generalizing a precise spatial representation so as to represent only those features that are necessary for qualitative spatial reasoning. Within the context of the CRR, quantitative representations (physical and aretefactual) are abstracted to points, directed points and convex hulls in order to reason about the design's qualitative spatial relationships of topology, orientation and distance. For example, one approach to reasoning about the qualitative orientational relationship between two doors requires that both doors are spatially represented as directed points. Because doors are naturally represented as polygons, spatial abstraction is needed to transform their quantitative polygonal representation into a qualitative directed point representation.
+Spatial abstraction is the process of generalizing a precise spatial representation so as to represent only those features that are necessary for qualitative spatial reasoning. Within the context of the CRR, quantitative representations are abstracted to points, directed points and convex hulls in order to reason about the design's qualitative spatial relationships of topology, orientation and distance. For example, one approach to reasoning about the qualitative orientational relationship between two doors requires that both doors are spatially represented as directed points. Because doors are naturally represented as polygons, spatial abstraction is needed to transform their quantitative polygonal representation into a qualitative directed point representation.
 
 %In DSpace architectural entities can be spatially abstracted. This allows DSpace to reason about a design from a qualitative level of abstraction with regards to its spatial characteristics of topology, orientation and distance. This type of qualitative spatial reasoning reasons over the abstract feature space of the design using abstract spatial objects of points, directed points, and convex hulls. 
 
@@ -647,17 +647,17 @@ Spatial abstraction is the process of generalizing a precise spatial representat
 
 The process of spatially abstracting an architectural entity depends on the following:
 \begin{enumerate} \label{abs dependencies}
-\item the type of spatial abstraction, eg. line to point, polygon to convex hull
-\item an interpretation of the intrinsic nature of an entity within an architectural and design context
+\item the type of spatial transformation, eg. line to point, polygon to convex hull
+\item the interpretation of the intrinsic nature of an entity within an architectural and design context
 \end{enumerate}
-For example, the abstracted representation of a doorway as a directed point is not only defined by its physical form (a polygon) but also by the interpretation of the doorway's intrinsic direction in the context of its' situation in the design. Further discussion on this topic can be found in \ref{spatial abstraction}.
+For example, the abstracted representation of a doorway as a directed point is not only defined by its physical form (a polygon) but also by the interpretation of the doorway's intrinsic direction in the context of its situation in the design. Further discussion on this topic can be found in \ref{spatial abstraction}.
 
-Within the CLP framework of the CRR, architectural entities are spatial abstracted using Prolog rules. These rules transform an entity's quantitative representation into objects of points, directed points and convex hulls. Transformation rules take an \emph{crr\_id}, retrieve the quantitative geometry and preform a series of geometric transformations based on the dependencies discussed earlier in this section. As an example, the rule for spatially abstracting a door represented as polygon into a point first retrieves the physical polygonal representation and transforms the polygon into a point by calculating the polygons centroid. 
+Within the CLP framework of the CRR, architectural entities are spatial abstracted using Prolog rules. These rules transform an entity's quantitative representation into abstracted objects of points, directed points and convex hulls. Transformation rules take an \emph{crr\_id}, retrieve the quantitative geometry and preform a series of geometric transformations based on the dependencies discussed earlier in this section. As an example, the rule for spatially abstracting a door represented as polygon into a point first retrieves the physical polygonal representation and transforms the polygon into a point by calculating the polygons centroid. 
 \begin{verbatim}
     point_abstraction(crr_id, PtAbs) :-
            physical_representation(crr_id, Polygon),
            centroid(Polygon, PtAbs).
-\end{verbatim} Given an crr\_id, a query to abstraction rule will return an instantiated variable with the entity's spatially abstracted geometry. For example, if the following query to the point abstraction rule is made for a doorway with \emph{crr\_id} of \emph{door42}, then the point abstraction geometry of \emph{door42} will be instantiated in the PtAbs variable.
+\end{verbatim} Given a crr\_id, a query to an abstraction rule will return an instantiated variable with the entity's spatially abstracted geometry. For example, if the following query to the point abstraction rule is made for a doorway with \emph{crr\_id} of \emph{door42}, then the point abstraction geometry of \emph{door42} will be instantiated in the PtAbs variable.
 \begin{verbatim}
     point_abstraction(door55, PtAbs).
 \end{verbatim}
@@ -704,7 +704,7 @@ The implementation of the partially overlapping relationship begins with a top l
 \begin{verbatim}
    intersect_segment_hull((Pt1, Pt2), [Pt3, Pt4|PS]) <=>
            intersection_segment_segment((Pt1, Pt2), (Pt3, Pt4)),
-           intersection_segment_hull(Pt1, Pt2, [Pt4|PS]).
+           intersection_segment_hull((Pt1, Pt2), [Pt4|PS]).
 \end{verbatim} The \emph{intersection\_segement\_segmenet} constraint represents the intersection between two line segments and is in a solvable form. The \emph{intersect\_segment\_hull} constraint is a recursive call that will propagate the \emph{intersection\_segement\_segmenet} constraint for the rest of the convex hull. The qualification for the other topological relationships is similar to the partially overlapping constraint presented here, but in addition to the line intersection constraint some relationships use the geometric properties of convex hull to point containment.
 
 %into the constraint store and will be solved when all points in its arguments are fully instantiated. 
@@ -717,12 +717,11 @@ The topological constraint solver is used in the CRR to query topological relati
     ?- outside(crr_id1, crr_id2).
     ?- partially_overlapping(crr_id1, crr_id2).
     ?- disconnected(crr_id1, crr_id2).
-\end{verbatim}Because the topological constraint solver
-does not know anything about designs there is an intermediate layer between a topological spatial query (above) and the topological constraint solver that is responsible for retrieving quantitative geometries and transforming them into convex hull abstractions. The following rule handles queries for the inside topological relationship.
+\end{verbatim}Because the topological constraint solver does not know anything about architectural entities there is an intermediate layer between a topological spatial query and the topological constraint solver that is responsible for retrieving quantitative geometries and transforming them into convex hull abstractions. The following rule handles queries for the inside topological relationship.
 \begin{verbatim}
-    inside(Id1, Id2) :-
-            convexhull_abstraction(Id1, Convex1),
-            convexhull_abstraction(Id2, Convex2),
+    inside(CRR1, CRR2) :-
+            convexhull_abstraction(CRR1, Convex1),
+            convexhull_abstraction(CRR2, Convex2),
             insdie_convexhull(Convex1, Convex2).
 \end{verbatim}
 
@@ -730,7 +729,7 @@ does not know anything about designs there is an intermediate layer between a to
 
 
 \subsection{Orientation} \label{orientation}
-The CRR can qualify two types of orientational relationships, intrinsic and extrinsic. Intrinsic orientational reasoning is based on OPRA$_{m}$. OPRA$_{m}$ partitions space into half-planes, which are defined by lines emanating from a reference point, and defines the qualitative orientational relationships by the half plane in which a second point is located in relation to the reference point. The granularity of an OPRA$_{m}$ relationship, specified by $m$, defines the number of lines emanating from the reference point. 
+The CRR can qualify two types of orientational relationships, intrinsic and extrinsic. Intrinsic orientational reasoning is based on the OPRA$_{m}$ calculus \cite{opra}. OPRA$_{m}$ partitions space into half-planes, which are defined by lines emanating from a reference point, and defines the qualitative orientational relationships by the half plane in which a second point is located in relation to the reference point. The granularity of an OPRA$_{m}$ relationship, specified by $m$, defines the number of lines emanating from the reference point. 
 
 \begin{figure}[H]
 \centering
@@ -784,7 +783,7 @@ The orientational constraint solver is used in the CRR to query orientational re
 \begin{verbatim}
     ?- scc(crr_id1, crr_id2, crr_id3, base_relation).
     ?- opra(crr_id1, crr_id2, m, i).
-\end{verbatim} Because the orientational constraint solver does not know anything about designs there is an intermediate layer between an orientational spatial query (above) and the orientational constraint solver that is responsible for retrieving quantitative geometries and transforming them into point and directed point abstractions. The following rule handles queries for the scc and opra relationships.
+\end{verbatim} Because the orientational constraint solver does not know anything about architectural entities there is an intermediate layer between an orientational spatial query and the orientational constraint solver that is responsible for retrieving quantitative geometries and transforming them into point and directed point abstractions. The following rule handles queries for the scc and opra relationships.
 \begin{verbatim}
     scc(Id1, Id2, Id3, BR) :-
             point_abstraction(Id1, Pt1),
@@ -950,7 +949,7 @@ The facing attribute is represented in DSpace as Prolog rules. There is one rule
             opra(Obj1, Obj2, 32)).
                                  
    facing_away(Obj1, Obj2) :- 
-           not facing_towards(Obj1, Obj2).                     
+           (facing_towards(Obj1, Obj2) -> fail; true).                     
 \end{verbatim}
 
 In DSpace, the facing attribute can be used to check if two architectural structures, artefactual extensions, or interior design elements are facing towards or away from each other. For example, doorways and windows that face towards each other promote airflow through the space they inhibit. A design that requires good air circulation could use this knowledge to ensure proper airflow. Figure \ref{door-window-facing} shows two example floor plans of a room with a window and doorway. Figure \ref{fig:door-window-towards} shows a configuration were the doorway and window are facing towards each other, while figure \ref{fig:door-window-away} shows a configuration where the doorway and window are facing away from each other. 
@@ -1539,7 +1538,7 @@ TODO: figure for convex hull abs
 
 \clearpage
 \bibliographystyle{abbrv}
-\bibliography{thesis}
+\bibliography{thesis, museum}
 
 
 %\addcontentsline{toc}{chapter}{Bibliography}
