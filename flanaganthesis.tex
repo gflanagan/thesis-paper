@@ -490,9 +490,9 @@ From a user perspective, the CRR provides a designer with design assistance for 
 
 
 \chapter{Design Representation and Spatial Reasoning} \label{representation and reasoning}
-This chapter introduces the computational framework of the CRR. It presents two of the three components of the framework: 1) the internal architectural design representation structure and 2) the spatial constraint solvers. The third component  of the CRR, the conceptual requirements component, will be presented in the following Chapter. Additionally, this chapter presents each component in the context of the declarative programming paradigm used for the implementation of the CRR, namely Prolog and Constraint Logic Programming (CLP). 
+This Chapter presents the quantity and quality levels of the architectural design hierarchy as they are implemented in the CRR. For the quantity level, this Chapter present the internal architectural design representation model. For the quality level, this Chapter presents spatial constraint solvers that are used by the CRR to qualify the spatial relationships between architectural entities. Additionally, this chapter presents each level in the context of the declarative programming paradigm used for the implementation of the CRR, namely Prolog and Constraint Logic Programming (CLP). 
 
-This chapter is organized into two sections. The first section looks at the internal architectural design representation structure and how it is implemented in Prolog. The second section looks at the spatial constraint solvers and how each is implemented in CLP.
+This chapter contains two sections. Section One presents the internal architectural design representation structure and how it is implemented in Prolog. The second section looks at the spatial constraint solvers and how each is implemented in CLP.
 
 \section{Design Representation}
 The CRR represents two distinct aspects of an architectural design. It represents the design's physical form and non-physical artefactual extensions. The physical form pertains to the precise geometric data that defines the design's architectural entities with regard to layout, location and shape. In this thesis architectural entities refer to the structural elements of walls, doors, windows, slabs, stairs, and columns. Artefactual extension pertains to the non-physical but geometric data that defines the functional characteristics of architectural entities, such as the space used by a person to operate a doorway.
@@ -550,15 +550,19 @@ Artefactual extensions directly affect the experiential quality of a design. For
 
 
 \subsection{Implementation}
-Within the CLP framework of the CRR, the physical and artefactual representations are implemented as factbases and rulebases. There are two factbases that are in memory database-like structures. One of the factbases is used as a catalog, which relates each architectural entity to its architectural type (wall, window, door, room, interior design object, etc.) via its \emph{crr\_id}. Each entry in this factbase is a Prolog predicate of the form $architectural \mathunderscore type(crr \mathunderscore id, type)$.
+Within the CLP framework of the CRR, the physical and artefactual representations are implemented as factbases and rulebases. There are two factbases that are in memory database-like structures. One of these factbases is used as a catalog, which relates each architectural entity to its architectural type (wall, window, door, room, interior design object, etc.) via its \emph{crr\_id}. Each entry in this factbase is a Prolog predicate of the form $architectural \mathunderscore type(crr \mathunderscore id, type)$.
 \begin{verbatim}
    architectural_type(door42, door).
    architectural_type(wall49, wall).
-\end{verbatim} The other factbase is used as a linking table that relates two architectural entities based on their containment relationship, i.e., door42 is contained by wall5, wall5 in contained by room6. Each containment relationship is implemented as a Prolog predicate of the form $contained(contained \mathunderscore crr \mathunderscore id, containing \mathunderscore crr \mathunderscore id)$.
+\end{verbatim} The other factbase is used as a linking table to relate architectural entities together based on containment relationships. The CRR represents two types of containment relationships. The first is the containment relationship between rooms and architectural entities and interior design elements. This containment relationship defines which architecural entities and interior design elements are contained in which rooms. In a specific architectural design, desk2 is contained in room6, and wall5 in contained by room6. Each containment relationship is implemented as a Prolog predicate of the form $contained\_room(contained \mathunderscore crr \mathunderscore id, containing \mathunderscore crr \mathunderscore id)$.
 \begin{verbatim}
-   contained(door42, wall5).
-   contained(wall5, room3).
+   contained_room(desk2, room6).
+   contained_room(wall5, room6).
+\end{verbatim} The second containment relationship is between doors / windows and walls. This containment relationship defined which doors / windows are contained by which walls. For example, door42 is contained in wall6. This is implemented as a Prolog Predicate of the form $contained\_wall(contained \mathunderscore crr \mathunderscore id, containing \mathunderscore crr \mathunderscore id)$.
+\begin{verbatim}
+   contained_wall(door42, wall6).
 \end{verbatim} 
+
 
 Rulebases link architectural entities to their physical and artefactual representations. There is a separate rulebase for the physical, functional, operational, and range representations that are implemented using a similar form. Each rulebase is built as a series of Prolog rules. The head of each rule links an architectural entity to a variable that is bound to its spatial representation. The body of each rule is responsible for handling coordinate point data by internally defining spatial primitives of points, lines, and polygons. The $spatial \mathunderscore primitive$ rule transforms coordinate data into spatial primitives and binds a variable to the spatial representation. The $spatial \mathunderscore primitive$ rule works by matching arguments. For example, the following call to the $spatial \mathunderscore primitive$ rule with a single point in the second argument instantiates the the variable, \emph{SpatialPrimitive}, as a point object primitive.
 \begin{verbatim}
@@ -639,7 +643,7 @@ As an example, the following topological query involves the inside relationship 
 The remainder of this section is structured as follow. The first subsection looks at how the quantitative representations are spatially abstracted. The second, third and forth subsections look at topological, orientational and distance based reasoning.
 
 \subsection{Spatial Abstraction}
-Spatial abstraction is the process of generalizing a precise spatial representation so as to represent only those features that are necessary for qualitative spatial reasoning. Within the context of the CRR, quantitative representations are abstracted to points, directed points and convex hulls in order to reason about the design's qualitative spatial relationships of topology, orientation and distance. For example, one approach to reasoning about the qualitative orientational relationship between two doors requires that both doors are spatially represented as directed points. Because doors are naturally represented as polygons, spatial abstraction is needed to transform their quantitative polygonal representation into a qualitative directed point representation.
+Spatial abstraction is the process of generalizing a spatial representation so as to represent only those features that are necessary for solving a specific problem. Within the context of the CRR, quantitative representations can be abstracted to points, directed points and convex hulls in order to reason about the design's qualitative spatial relationships of topology, orientation and distance. For example, one approach to reasoning about the qualitative orientational relationship between two doors requires that both doors are spatially represented as directed points. Because doors are naturally represented as polygons, spatial abstraction is needed to transform their quantitative polygonal representation into a qualitative directed point representation.
 
 %In DSpace architectural entities can be spatially abstracted. This allows DSpace to reason about a design from a qualitative level of abstraction with regards to its spatial characteristics of topology, orientation and distance. This type of qualitative spatial reasoning reasons over the abstract feature space of the design using abstract spatial objects of points, directed points, and convex hulls. 
 
@@ -652,7 +656,7 @@ The process of spatially abstracting an architectural entity depends on the foll
 \end{enumerate}
 For example, the abstracted representation of a doorway as a directed point is not only defined by its physical form (a polygon) but also by the interpretation of the doorway's intrinsic direction in the context of its situation in the design. Further discussion on this topic can be found in \ref{spatial abstraction}.
 
-Within the CLP framework of the CRR, architectural entities are spatial abstracted using Prolog rules. These rules transform an entity's quantitative representation into abstracted objects of points, directed points and convex hulls. Transformation rules take an \emph{crr\_id}, retrieve the quantitative geometry and preform a series of geometric transformations based on the dependencies discussed earlier in this section. As an example, the rule for spatially abstracting a door represented as polygon into a point first retrieves the physical polygonal representation and transforms the polygon into a point by calculating the polygons centroid. 
+Within the CLP framework of the CRR, architectural entities are spatial abstracted using Prolog rules. These rules transform an entity's quantitative representation into abstracted objects of points, directed points and convex hulls. Transformation rules take an \emph{crr\_id}, retrieve the quantitative geometry and preform a series of geometric transformations based on the dependencies discussed earlier in this section. For example, the rule to spatially abstract a door, which is represented as polygon, into a point first retrieves the door's physical representation and transforms the polygonal representation into a point by calculating the polygons centroid. 
 \begin{verbatim}
     point_abstraction(crr_id, PtAbs) :-
            physical_representation(crr_id, Polygon),
