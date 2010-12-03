@@ -830,20 +830,20 @@ The distance constraint solver calculates minimum distance queries and uses the 
 The distance constraint solver is written using CHR that break down the constraints until they can be solved for. This process involves finding the located on each object that is the closest to the other, so that the minimum distance can be calculated between the two. 
 
 
-\chapter{Conceptual Requirements Reasoner} \label{conceptual requirements}
-This chapter presents the conceptual requirements reasoning framework of the DSpace reasoner. It shows how architectural concepts and qualitative spatial attributes found in architecture (QSA) can be spatially interpreted using formal qualitative spatial calculi and shows how they can be represented and reasoned with to validate conceptual design requirements in the conceptual requirements reasoner (CCR). 
+\chapter{Design Space} \label{conceptual requirements}
+This Chapter presents the conceptual requirements reasoning framework of the CRR that pertains to the design space in the architectural design hierarchy. It shows how architectural concepts and qualitative spatial attributes found in architecture (QSA) can be spatially interpreted using formal qualitative spatial calculi and shows how they can be represented and reasoned with to validate conceptual design requirements. 
 
-Conceptual design requirements were ascertained from literature on architectural design \cite{tbd}, museum research on visitor behavior \cite{tbd}, and building regulations and codes \cite{tbd}. Their definitions are explicit characterizations of architectural concepts and spatial design qualities that are based on heuristic architectural knowledge and common sense notions of spatial relationships. The objective is not to be an exhaustive discussion of these requirements or a validation for their interpretation in terms of a spatial or design perspective; rather it is to demonstrate how each can be represented and reasoned with in the DSpace CLP framework to validate conceptual design requirements against the quantitative form of a design. 
+Conceptual design requirements were ascertained from literature on architectural design \cite{tbd}, museum research on visitor behavior \cite{tbd}, and building regulations and codes \cite{tbd}. Their definitions are explicit characterizations of architectural concepts and spatial design qualities that are based on heuristic architectural knowledge and common sense notions of spatial relationships. The objective is not to be an exhaustive discussion of these requirements or a validation for their interpretation in terms of a spatial or design perspective; rather it is to demonstrate how each can be represented and reasoned with in the CRR CLP framework. 
 
-In the DSpace CLP framework, QSA and architectural concepts utilize the DSpace design representation structure, via the spatial abstraction layer, and the DSpace spatial reasoner to validate conceptual design requirements. QSA and architectural concepts are implemented as Prolog rules. Each rule is implemented as a conjunction of predicates that spatially define the QSA and architectural concepts from a qualitative perspective. Conceptual design requirements can be specified using QSA, architectural concepts, and qualitative spatial relationships. Validating a design requirement happens by making a Prolog query to the CCR that will return \emph{true} if the design is consistent per the requirement or \emph{fail} if the design is inconsistent per the requirement. 
+In the CRR CLP framework, QSA and architectural concepts utilize the CRR design representation structure, via the spatial abstraction layer, and the DSpace spatial reasoner to validate conceptual design requirements. QSA and architectural concepts are implemented as Prolog rules. Each rule is implemented as a conjunction of predicates that spatially define the QSA and architectural concepts from a qualitative perspective. Conceptual design requirements can be specified using QSA, architectural concepts, and qualitative spatial relationships. Validating a design requirement happens by making a Prolog query to the CCR that will return \emph{true} if the design is consistent per the requirement or \emph{fail} if the design is inconsistent per the requirement. 
 
-The chapter is structured as follows: Section 1 presents a set of qualitative spatial attributes found in architecture, shows how each can be interpreted using formal qualitative spatial calculi, and represented formally within DSpace CRR. Section 2 presents a set of architectural concepts that are built using the spatial qualities presented in the Section 1 and shows how they can be used to reason about design requirements within the DSpace CRR. Section 3 shows how conceptual design requirements can be validated in using the CRR.
+The chapter is structured as follows: Section one presents a set of qualitative spatial attributes found in architecture, and shows how each can be interpreted using formal qualitative spatial calculi and represented within the CRR. Section two presents a set of architectural concepts that can be used to reason about design requirements within the CRR. Section 3 shows how conceptual design requirements can be validated using the CRR.
 
 
 \section{Qualitative Spatial Attributes found in Architecture}
-This section presents a set of qualitative spatial attributes found in architecture (QSA) and shows how each QSA is spatially interpreted and represented in DSpace. QSAs are architectural qualities that emerge from the spatial structures that form from the physical elements of the building (doors, walls, columns, windows, etc.), artefactual extensions (functional space, operational space, range space, etc.) and interior design elements (furniture, lights, decorations, etc.). QSAs can be perceptual qualities that are described from a specific vantage point, or intrinsic qualities that are inherent in the build's spatial structure. 
+This section presents a set of qualitative spatial attributes found in architecture (QSA) and shows how each QSA is spatially interpreted and represented in the CRR. QSAs are architectural qualities that emerge from the spatial characteristics that are formed by architectural entities with regard to their spatial relationships to each other. QSAs can be perceptual qualities that are described from a specific vantage point, or intrinsic qualities that are inherent in the build's spatial structure. 
 
-This section presents five QSAs: positioning, positioning for sequences, facing, visibility, and proximity. The goal of this section is to develop a tool-kit of QSAs that qualitatively describe architectural designs in the spatial environments in which they emerge. Some boundary cases are identified and handled, but it is not the purpose here to explore all possible case scenarios.
+This section presents five QSAs: positioning, positioning for sequences, facing, visibility, and proximity. The goal of this section is to develop a set of QSAs that qualitatively describe architectural designs from an experiential perspective. Some boundary cases are identified and handled, but it is not the purpose here to explore all possible case scenarios.
 
 \subsection{Positioning}
 The positioning attribute defines an orientational relationship between a pair of objects as each object relates to the other within an extrinsic context, i.e., a defined space such as a room, apartment, building, or user defined space. There are four positioning relationships using this scheme: opposing-side of space, same-side of space, left-side of space, and right-side of space. The opposing-side and same-side relationships can be combined, via conjunction, with the left-side or right-side relationships to form the following compound relationships: opposing-left-side, opposing-right-side, same-left-side, same-right-side.
@@ -855,7 +855,7 @@ The positioning attribute defines an orientational relationship between a pair o
 \label{position}
 \end{figure}
 
-The positioning attribute is interpreted spatially, in DSpace, using the Single Cross Calculus (SCC) \cite{Freksa92usingorientation}. SCC defines the orientation of a point C (referent) with respect to a point B (relatum) from the viewpoint of a point A (origin). The positioning attribute uses the SCC partitioning scheme to orientationally relate two points (origin, referent) in the context of an external frame of reference (relatum). In DSpace, the reference point is defined as the centroid of the context space. By partitioning space using the centroid, an approximation is made that divides the space into the positioning relationships. An assumption made in DSpace is that the space will generally be rectangular in shape.
+The positioning attribute is interpreted spatially using the SCC \cite{Freksa92usingorientation}. As discussed earlier, the SCC defines the orientation of a point C (referent) with respect to a point B (relatum) from the viewpoint of a point A (origin). The positioning attribute uses the SCC partitioning scheme to orientationally relate two points (origin, referent) in the context of an external frame of reference (relatum). In the CRR, the reference point is defined as the centroid of the context space. By partitioning space using the centroid, an approximation is made that divides the space into the positioning relationships. An assumption made here is that this space will generally be rectangular in shape.
 
 \begin{figure}[H]
 \centering
@@ -864,9 +864,9 @@ The positioning attribute is interpreted spatially, in DSpace, using the Single 
 \label{scc}
 \end{figure}
 
-Under this scheme, two points are defined as being on opposing sides of a space if they have an SCC relationship of 0, 1 or 7, as related by the centroid of the space. Conversely, a pair of points are defined as being on the same side of a space if they have an SCC relationship of 3, 4 or 5, as related by the centroid of the  space. A point is defined as being on the left side of a space from another point if it has an SCC relationship of 5, 6, or 7, and is on the right side if it has an SCC relationship of 1, 2, or 3. Using the union set operation these relationships can be combined to form the opposing-left/right, and same-left/right relationships.
+Using this scheme, two points are defined as being on opposing sides of a space if they have an SCC relationship of 0, 1 or 7, as related by the centroid of the space. Conversely, a pair of points are defined as being on the same side of a space if they have an SCC relationship of 3, 4 or 5, as related by the centroid of the  space. A point is defined as being on the left side of a space from another point if it has an SCC relationship of 5, 6, or 7, and is on the right side if it has an SCC relationship of 1, 2, or 3. Using the union set operation these relationships can be combined to form the opposing-left/right, and same-left/right relationships.
 
-Th positioning relationships are represented in the DSpace CLP framework as Prolog rules. There is a single rule for each relationships: opposing side, same-side, left-side, and right-side. The head of each rule takes three arguments, the first two for the architectural objects being related and one for the context space. The body of the rule ....  The following is Prolog code for the positioning rules.
+Th positioning relationships are represented in the CRR CLP framework as Prolog rules. There is a single rule for each relationships: opposing side, same-side, left-side, and right-side. The head of each rule takes three arguments, the first two are crr\_ids for the architectural entities being related and one for the context space. The body of the rule defines the SCC relationships of each positioning quality. The following is Prolog code for opposing-side and same-side positioning rules.
 \begin{verbatim}
    opposing_side(Obj1, Obj2, Context) :- 
            centroid(Context, Centroid),
@@ -895,15 +895,13 @@ The positioning attribute can be used to check if architectural structures, arte
 
 
 \subsection{Positioning for Sequences}
-The positioning for a sequences attribute defines a perceptual orientational relationship of a sequence of objects as each relates to a vantage point in an extrinsic context, i.e., a defined space such as a room, apartment, building, or user defined space. A sequence is a set of architectural entities (columns), or interior design objects (display cases) that are grouped together and comprised of the same entity or object type. In general sequences are grouped together based on the proximity of the objects (near to each other) but any relationship can define a sequence. There are three positioning relationships for a sequence of objects: horizontal perceived, vertical perceived, and neither.  
+The positioning for a sequences attribute defines a perceptual orientational relationship of a sequence of objects as each relates to a vantage point in an extrinsic context, i.e., a defined space such as a room, apartment, building, or user defined space. A sequence is a set of architectural entities, or interior design objects that are grouped together. In general sequences are grouped together based on the proximity of the objects (near to each other) but any relationship can define a sequence. There are three positioning relationships for a sequence of objects: horizontal perceived, vertical perceived, and neither.  
 
-The positioning for a sequence of objects attribute can be spatially interpreted using SCC, similar to the positioning attribute above. The positioning for a sequence of objects attribute uses the SCC partitioning scheme to orientationally relate a sequence of points (origin, referents) in the context of an external frame of reference (relatum). In DSpace, the reference point is defined as the centroid of the context space. By partitioning space using the centroid, an approximation is made that divides the space into the positioning relationships. As with the positioning attribute, an assumption made in DSpace is that the space will generally be rectangular in shape.
+The positioning for a sequence of objects attribute can be spatially interpreted using SCC, similar to the positioning attribute above. The positioning for a sequence of objects attribute uses the SCC partitioning scheme to orientationally relate a sequence of points (origin, referents) in the context of an external frame of reference (relatum). In the CRR, the reference point is defined as the centroid of the context space. By partitioning space using the centroid, an approximation is made that divides the space into the positioning relationships. As with the positioning attribute, an assumption made here is that the space will generally be rectangular in shape.
 
-Using the SCC partitioning of space, a sequence of objects is perceived horizontally from the vantage point if the sequence of points have the following combination of SCC relationships (origin = vantage point, relatum = context centroid, referent = sequence point): at least one point in the sequence has an SCC$_{5}$ or SCC$_{6}$ or SCC$_{7}$ relationship and at least one point has an SCC$_{1}$ or SCC$_{2}$ or SCC$_{3}$ relationships. A sequence of points is perceived vertically if they have the following combination of SCC relationships: at least one point in the sequence has an SCC$_{5}$ or SCC$_{3}$ relationship and at least one point in the sequence has an SCC$_{0}$ or SCC$_{1}$ or SCC$_{7}$ relationship. Sequences can be both vertical and horizontal at the same time or they can be neither. The neither relationship is defined by a sequence of object that do not match any of the sets above.
+Using the SCC partitioning of space, a sequence of objects is perceived horizontally from the vantage point if the sequence of points have the following combination of SCC relationships (origin is vantage point, relatum is context centroid, referent is sequence point): at least one point in the sequence has an SCC relationship of 5, 6, or 7 and at least one point has an SCC relationship of 1,2, or 3. A sequence of points is perceived vertically if they have the following combination of SCC relationships: at least one point in the sequence has an SCC relationship of 5 or 3 and at least one point in the sequence has an SCC relationship of 0, 1, or 7. Sequences can be both vertical and horizontal at the same time or they can be neither. The neither relationship is defined by a sequence of object that do not match any of the sets above.
 
-TODO: figures
-
-Th positioning for a sequence of objects relationships are represented in DSpace as Prolog rules. There is a single rule for each relationship: horizontally perceived, vertically perceived, diagonally perceived, and . The head of each rule takes three arguments, the first for the the vantage point, the second is a list of objects that represent the sequence and the third is the context space. The body of the rule .... Given a vantage point, a sequence of objects and a context space, the rule returns true if the objects are on the horizontally perceived, vertically perceived, diagonally perceived, or confined as defined by its' rule, and fails if they are not. The following is Prolog code for the positioning rules.
+Th positioning for a sequence of objects relationships are represented in the CRR as Prolog rules. There is a single rule for each relationship: horizontally perceived, vertically perceived, or neither. The head of each rule takes three arguments, the first for the the vantage point, the second is a list of architectural entities that represent the sequence and the third is the context space. Given a vantage point, a sequence of objects and a context space, the rule returns true if the objects are on the horizontally perceived, vertically perceived, diagonally perceived, or confined as defined by its rule, and fails if they are not. The following is Prolog code for the positioning rules.
 \begin{verbatim}
    horizontally_perceived(vantage_point, seq_list, context) :-
            centroid(context, Centroid),
@@ -927,9 +925,11 @@ The facing attribute defines an intrinsic orientational relationship between two
 \label{display-arrangement}
 \end{figure}
 
-The facing attribute is spatially modelled in DSpace using the Oriented Point Relation Algebra \cite{Moratz} (OPRA). The advantage of using OPRA is that it models the intrinsic orientational relationships between a pair of directed points. TODO: mention something about the section that talks about OPRA. Using OPRA$_{8}$, the facing attribute can be defined in terms of the half plane sectors. Point \emph{A} is facing towards point \emph{B}, if \emph{B} is located in sectors 0, 1, or 32 of \emph{A}'s partitioned space. Similarly, if \emph{A} is located in sectors 0, 1, or 32 of \emph{B}'s partitioned space then \emph{B} is facing towards \emph{A}. In this case, both points are facing towards each other. Conversely, point \emph{A} is facing away from point \emph{B} if \emph{B} is located in sectors 2 - 31 of \emph{A's} partitioned space. A granularity of 8 is used (i.e., OPRA$_{8}$) to define a narrow interpretation of the facing attribute. Within a room, doorways, windows, and walls are generally face towards each other. By narrowing the space that is considered facing towards, it allows DSpace to detect elements that are more directly facing towards each other.
+The facing attribute is spatially modelled in the CRR using the Oriented Point Relation Algebra \cite{Moratz} (OPRA). The advantage of using OPRA is that it models the intrinsic orientational relationships between a pair of directed points. Using OPRA$_{8}$, the facing attribute can be defined in terms of the half plane sectors. Point \emph{A} is facing towards point \emph{B}, if \emph{B} is located in sectors 0, 1, or 31 of \emph{A}'s partitioned space. Similarly, if \emph{A} is located in sectors 0, 1, or 31 of \emph{B}'s partitioned space then \emph{B} is facing towards \emph{A}. In this case, both points are facing towards each other. Conversely, point \emph{A} is facing away from point \emph{B} if \emph{B} is located in sectors 2 - 30 of \emph{A's} partitioned space. A granularity of 8 is used (i.e., OPRA$_{8}$) to define a narrow interpretation of the facing attribute. 
 
-Figure \ref{fig:facing-opra-towards} shows an example of two points facing towards each other; note that each point is located in sector 32 of the other's partitioned space.  Figure \ref{fig:facing-opra-away} shows an example of two points that are facing away from each other and are not located in sectors 0, 1, 32 of the other's partitioned space. 
+%Within a room, doorways, windows, and walls are generally face towards each other. By narrowing the space that is considered facing towards, it allows DSpace to detect elements that are more directly facing towards each other.
+
+Figure \ref{fig:facing-opra-towards} shows an example of two points facing towards each other; note that each point is located in sector 31 of the other's partitioned space.  Figure \ref{fig:facing-opra-away} shows an example of two points that are facing away from each other and are not located in sectors 0, 1, 31 of the other's partitioned space. 
 
 \begin{figure}[H]
  \centering
@@ -944,7 +944,7 @@ Figure \ref{fig:facing-opra-towards} shows an example of two points facing towar
 \label{opra-facing}
 \end{figure}
 
-The facing attribute is represented in DSpace as Prolog rules. There is one rule for facing-towards and one for facing-away. The head of each rule takes two arguments for the objects being related. The body of the rule is a single disjunctive clause that checks for the OPRA$_{8}$ relationship between the objects. Given two objects, the rule returns true if the objects are facing towards or away from each other as defined by the rule, and fails if they are not. The following is Prolog code for the facing rules.
+The facing attribute is represented in the CRR as Prolog rules. There is one rule for facing-towards and one for facing-away. The head of each rule takes two arguments for the architectural entities being related. The body of the rule is a single disjunctive clause that checks for the OPRA$_{8}$ relationship between the architectural entities. Given two architectural objects, the rule returns true if the architectural entities are facing towards or away from each other as defined by the rule, and fails if they are not. The following is Prolog code for the facing rules.
 
 \begin{verbatim}
    facing_towards(Obj1, Obj2) :- 
@@ -956,7 +956,7 @@ The facing attribute is represented in DSpace as Prolog rules. There is one rule
            (facing_towards(Obj1, Obj2) -> fail; true).                     
 \end{verbatim}
 
-In DSpace, the facing attribute can be used to check if two architectural structures, artefactual extensions, or interior design elements are facing towards or away from each other. For example, doorways and windows that face towards each other promote airflow through the space they inhibit. A design that requires good air circulation could use this knowledge to ensure proper airflow. Figure \ref{door-window-facing} shows two example floor plans of a room with a window and doorway. Figure \ref{fig:door-window-towards} shows a configuration were the doorway and window are facing towards each other, while figure \ref{fig:door-window-away} shows a configuration where the doorway and window are facing away from each other. 
+In the CRR, the facing attribute can be used to check if two architectural structures, artefactual extensions, or interior design elements are facing towards or away from each other. For example, doorways and windows that face towards each other promote airflow through the space they inhibit. A design that requires good air circulation could use this knowledge to ensure proper airflow. Figure \ref{door-window-facing} shows two example floor plans of a room with a window and doorway. Figure \ref{fig:door-window-towards} shows a configuration were the doorway and window are facing towards each other, while figure \ref{fig:door-window-away} shows a configuration where the doorway and window are facing away from each other. 
 
 \begin{figure}[H]
  \centering
@@ -967,12 +967,11 @@ In DSpace, the facing attribute can be used to check if two architectural struct
 \label{door-window-facing}
 \end{figure}
 
-Within the context of architecture, care needs to be taken to account for architectural structures that are long in one axis, such as walls, because the spatial abstraction for OPRA is a directed point. This means that an object is defined as facing towards a wall if it is facing towards the wall's directed point abstraction (usually the centroid of the wall). Under this definition, there are configurations where an object should be considered to be facing a wall but it is not. DSpace handles this special case by modifying the OPRA$_{8}$ relationships that correspond to facing towards and away from a wall. 
+%Within the context of architecture, care needs to be taken to account for architectural structures that are long in one axis, such as walls, because the spatial abstraction for OPRA is a directed point. This means that an object is defined as facing towards a wall if it is facing towards the wall's directed point abstraction (usually the centroid of the wall). Under this definition, there are configurations where an object should be considered to be facing a wall but it is not. DSpace handles this special case by modifying the OPRA$_{8}$ relationships that correspond to facing towards and away from a wall. 
 
-fig: wall example
 
 \subsection{Proximity}
-The proximity attribute defines a qualitative distance relationship between two objects. In DSpace, there are three proximity relationships: near, near+, and far. The spatial interpretation of proximity is defined in the context of architecture, which is restricted here to be \emph{within a building}. Based on this interpretation, proximity is formally defined using heuristics based on what is consider near, near+, and far within a building.   
+The proximity attribute defines a qualitative distance relationship between two objects. In the CRR, there are three proximity relationships: near, near+, and far. The spatial interpretation of proximity is defined in the context of architecture, which is restricted here to be \emph{within a building}. Based on this interpretation, proximity is formally defined using heuristics based on what is consider near, near+, and far within a building.   
 
 
 \begin{figure}[H]
@@ -984,7 +983,7 @@ The proximity attribute defines a qualitative distance relationship between two 
 
 Using these heuristics, two objects are near if the minimum distance between them is less then or equal to 3 meters, near+ if the minimum distance between then is between 3 - 6 meters, and far if the minimum distance between them is greater then 3 meters. While the definition of proximity pivots around 3 and 6 meters, it can easily be changed by using an extra parameter in a proximity predicate. 
 
-Proximity is represented in DSpace as three Prolog rules. There is one rule for near, one for near+, and one for far. The head of each rule takes two arguments for the architectural objects being related. The body of the rule .... Given two objects, the rule returns true if the objects are near, near+, or far from each other as defined by the rule, and fails if they are not. The following is Prolog code for the proximity rules.
+Proximity is represented in the CRR as three Prolog rules. There is one rule for near, one for near+, and one for far. The head of each rule takes two arguments for the architectural entities being related. Given two architectural entities, the rule returns true if the objects are near, near+, or far from each other as defined by the rule, and fails if they are not. The following is Prolog code for the proximity rules.
 
 \begin{verbatim}
    near(Obj1, Obj2) :- 
@@ -999,7 +998,7 @@ Proximity is represented in DSpace as three Prolog rules. There is one rule for 
 
 \end{verbatim}
 
-The proximity attribute can be used to check whether two architectural structures, artefactual extension, or interior design elements are near or far. For example, a computer desk should be located near a power outlet to make it easy to power up the desk's computer and desk's lamp. Another example is the bathroom should be far away from the kitchen, in order to keep a separation between the two.
+The proximity attribute can be used to check whether two architectural entities are near or far. For example, a computer desk should be located near a power outlet to make it easy to power up the desk's computer and desk's lamp. Another example is the bathroom should be far away from the kitchen, in order to keep a separation between the two.
 
 \begin{figure}[H]
  \centering
@@ -1022,8 +1021,9 @@ The spatial interpretation of visibility is based on the topological characteris
 \label{Visibility}
 \end{figure}
 
-Visibility is represented in DSpace as a single Prolog rule. The head of the rule takes two arguments, the viewpoint and the object that is being check for visibility. The body of the clause calculates the view-space and checks the surrounding objects for a topological obstruction. Given a viewpoint and an object, the rule returns true if the object is visible, and fails if it is not. The following is the Prolog code for the visibility rule.
+Visibility is represented in the CRR as a single Prolog rule. The head of the rule takes two arguments, the viewpoint and the object that is being check for visibility. The body of the clause calculates the view-space and checks the surrounding objects for a topological obstruction. Surrounding objects are all of the architectural entities that are contained in the same room as the vantage point and object. If the vantage point and object are in different rooms they are not defined as being not visible.
 
+Given a viewpoint and an object, the rule returns true if the object is visible, and fails if it is not. The following is the Prolog code for the visibility rule.
 \begin{verbatim}
    is_visible(ViewPoint, Obj) :- 
            view_space(ViewPoint, Obj, ViewSpace),
@@ -1040,31 +1040,24 @@ The visibility attribute can be used to check if an architectural structure or i
 \end{figure}
 
 
-
 \section{Architectural Concepts}
-Architectural concepts, such as privacy, continuity, and enclosure, are experiential aspects of architecture that are used by architects to describe the functionality of a design \cite{Koile}. These terms are defined in DSpace in a hierarchical manner in which architectural concepts are built using QSAs and geometric primitives (orientation, topology, distance). 
+Architectural concepts, such as privacy, continuity, and enclosure, are experiential aspects of architecture that are used by architects to describe the functionality of a design \cite{Koile}. These terms are defined in the CRR in a hierarchical manner in which architectural concepts are built using QSAs and geometric primitives (orientation, topology, distance). 
 
-This section presents four architectural concepts and demonstrates how each is defined in DSpace. As in the previous section, the purpose is not to investigate the correctness of the concepts or an attempt to compile a complete list, rather it is to look at how these concepts can be defined logically using architectural qualities and spatial / geometric primitives.
+This section presents four architectural concepts and demonstrates how each is defined in the CRR. As in the previous section, the purpose is not to investigate the correctness of the concepts or an attempt to compile a complete list, rather it is to look at how these concepts can be defined logically using architectural qualities and spatial / geometric primitives.
 
 \subsection{Privacy}
-In architecture, the concept of privacy implies a notion of separation and obscurity (not being visible). In the case of a room, privacy can be defined as being separated from the main entrance of the building and having doorways that enhances the room's privacy. A doorway can be be defined as private with respect to its functionality of connecting two adjacent areas (rooms, hallways, etc.). Under this consideration, a doorway can enhance or hinder the privacy of a room. A doorway enhances privacy of a room if the doorway faces away from other local doorways (doorways in adjacent rooms) and if it is not visible from the main living space. 
+In architecture, the concept of privacy implies a notion of separation and obscurity (not being visible). In the case of a room, privacy can be defined as being separated from the main entrance of the building and having doorways that enhances the room's privacy. A doorway can be be defined as private with respect to its functionality of connecting two adjacent areas (rooms, hallways, etc.). Under this consideration, a doorway can enhance or hinder the privacy of a room. A doorway enhances privacy of a room if the doorway is not visible from the main entrance.
 
-Within DSpace, the concept of privacy has been formally defined for rooms and doorways. A door is private if it has the following attributes: (1) it is not visible from the main living space, (2) it does not mutually face towards another doorway and (3) it does not face towards the centroid of an adjacent room. A room is private if it has the following attributes: (1) it is positioned on the opposing side of the building with regard to the main entrance and (2) all doorways into the room are private, per the doorway privacy definition.
+Within the CRR, the concept of privacy has been formally defined for rooms. A room is private if it has the following attributes: (1) it is positioned on the opposing side of the building with regard to the main entrance and (2) all doorways into the room are not visible from the main entrance.
  
-Privacy is represented in DSpace as Prolog rules. The rules take a single argument, in the head, which indicates if the rule is for a room or doorway. The body of the rule defines the properties of the privacy using QSAs, as defined above. Note that there are two predicates, one for the definition of privacy for a room and one for privacy of a doorway.  
-
+Privacy is represented in the CRR as a Prolog rule. The rule takes a single argument, in the head, which is the room's crr\_id. The body of the rule defines the properties of the privacy using QSAs, as defined above. 
 \begin{verbatim}
    private(room) :-  
            opposing_side(room, main_entrance, building), 
            private(doorway).
-                     
-   private(door) :- 
-           facing_away(door, door),
-           facing_away(door, adjacent_space),
-           not_visible(door, main_living_space). 
 \end{verbatim}
 
-Figure \ref{room-privacy} shows two floor plans for a small single bedroom house; figure \ref{fig:private-room-con} shows a floor plan with a bedroom that is  private, while figure \ref{fig:private-room-incon} shows a similar floor plan with a bedroom that is not private. The numbers in the figures represent the following privacy requirements: (1) the bedroom is positioned on the opposing side of the building with regards to the main entrance, (2) the doorway is not visible from the main living space, and (3) the doorway does not mutually face towards another doorway. Numbers that are colored red indicate that the requirement has been broken, while numbers in green indicate that the requirement has been met.
+Figure \ref{room-privacy} shows two floor plans for a small single bedroom house; figure \ref{fig:private-room-con} shows a floor plan with a bedroom that is  private, while figure \ref{fig:private-room-incon} shows a similar floor plan with a bedroom that is not private. The numbers in the figures represent the following privacy requirements: (1) the bedroom is positioned on the opposing side of the building with regards to the main entrance, and (2) the doorway is not visible from the main entrance. Numbers that are colored red indicate that the requirement has been broken, while numbers in green indicate that the requirement has been met.
 
 \begin{figure}[H]
  \centering
@@ -1076,7 +1069,7 @@ Figure \ref{room-privacy} shows two floor plans for a small single bedroom house
 \end{figure}
 
 \subsection{Continuity}
-In architecture, the concept of continuity describes a network of points that are mutually visible \cite{Key}. In DSpace, continuity is interpreted in the context of building navigation and wayfinding and is therefore dependent on continuity between doorways withing the design. Other interpretations of continuity can use any element of the design (beyond doorways), however for the purposes here, continuity only deals with doorways. Under this interpretation, a building, room or apartment is continuous if there is continuity between the doorways contained in a given space: room, building, or apartment. 
+In architecture, the concept of continuity describes a network of points that are mutually visible \cite{Key}. In the CRR, continuity is interpreted in the context of building navigation and wayfinding and is therefore dependent on continuity between doorways withing the design. Other interpretations of continuity can use any element of the design (beyond doorways), however for the purposes here, continuity only deals with doorways. Under this interpretation, a building, room or apartment is continuous if there is continuity between the doorways contained in a given space: room, building, or apartment. 
 
 Continuity is defined as a network of doorways that are mutually visible. The partitioning of doorways that should be mutually visible is based on a localized containment hierarchy between rooms and doorways, in which doorways that are contained in the same room should maintain continuity. It does not make sense for doorways that are located on opposite sides of a building to be visible to each other, but doorways that are in the same room should be. 
 
@@ -1093,7 +1086,7 @@ With respect to this definition, continuity is represented as a recursive rule i
            continuity([Obj2|OS]).
 \end{verbatim}
 
-Figure \ref{continuity} shows a floor plan for a single room with three doors. Figure \ref{fig:continuity-con} shows a configuration in which each door is mutually visible to the other doors. This design is continuous. Conversely, figure \ref{fig:continuity-incon} shows a configuration in which door 1 is not mutually visible to door 2 and door 1 is not mutually visible door 3. The visibility between door 1 and door 2 is obstructed by a column and the visibility between door 1 and door 3 is obstructed by a wall. Structural elements that are colored red indicated a visibility obstruction. This design is not continuous. 
+Figure \ref{continuity} shows a floor plan for a single room with three doors. Figure \ref{fig:continuity-con} shows a configuration in which each door is mutually visible to the other doors. This design is continuous. Conversely, figure \ref{fig:continuity-incon} shows a configuration in which door1 is not mutually visible to door2 and door1 is not mutually visible door3. The visibility between door1 and door2 is obstructed by a column and the visibility between door1 and door3 is obstructed by a wall. Structural elements that are colored red indicated a visibility obstruction. This design is not continuous. 
 
 \begin{figure}[H]
  \centering
@@ -1105,9 +1098,9 @@ Figure \ref{continuity} shows a floor plan for a single room with three doors. F
 \end{figure}
 
 \subsection{Enclosure} 
-In architecture, the concept of enclosure defines a space, as experienced from a given vantage point, as being confined or open. A tbdspace space is defined as being confined by walls or columns, while an open space is defined as being spacious. In DSpace, enclosure is defined by localized spatial structures in terms of their proximity to a given point. Under this interpretation, a room, apartment, or building can be experienced as both confined and open based on the location of the vantage point within the space. Such a definition takes into account that enclosure is locally experienced. For example, an alcove in an otherwise open room, feels confined when experienced from inside the alcove.
+In architecture, the concept of enclosure defines a space, as experienced from a given vantage point, as being confined or open. In the CRR, enclosure is defined by localized spatial structures in terms of their proximity to a given point. Under this interpretation, a room, apartment, or building can be experienced as both confined and open based on the location of the vantage point within the space. Such a definition takes into account that enclosure is locally experienced. For example, an alcove in an otherwise open room, feels confined when experienced from inside the alcove.
 
-In Dspace, a point is defined as open if less then three walls or columns are near-to the point. Conversely, a point is defined as confined if three or more walls or columns are near-to the point. While this interpretation of enclosure is naive, it maintains the notion that proximity defines the spatial structures of openness and confinement in a localized environment.   
+In the CRR, a point is defined as open if less then three walls or columns are near-to the point. Conversely, a point is defined as confined if three or more walls or columns are near-to the point. While this interpretation of enclosure is naive, it maintains the notion that proximity defines the spatial structures of openness and confinement in a localized environment.   
 
 \begin{verbatim}
 confined(point) :-  
@@ -1129,7 +1122,7 @@ Figure \ref{enclosure} shows a floor plan for a single room with various enclosu
 \subsection{Artefactual Requirements}
 Artefactual requirements are a special case in this section because they are not strictly architectural concepts. However, they provide a unique set of architectural requirements that incorporate a breadth of design aspects. This section will take a look at two examples of artefactual interference. 
 
-Artefactual interference deals with the unintentional interactions of the operational and functional spaces of a building's structural form. For example, the operational space of a bathroom doorway that overlaps with the functional space of the bathroom sink will cause circulation problems into and out of the bathroom. In DSpace, this type of interaction can be detected using topological reasoning over the artefactual extensions of the entities. 
+Artefactual interference deals with the unintentional interactions of the operational and functional spaces of a building's structural form. For example, the operational space of a bathroom doorway that overlaps with the functional space of the bathroom sink will cause circulation problems into and out of the bathroom. In the CRR, this type of interaction can be detected using topological reasoning over the artefactual extensions of the entities. 
 
 \begin{figure}[H]
 \centering
@@ -1138,7 +1131,7 @@ Artefactual interference deals with the unintentional interactions of the operat
 \label{door-sink-example}
 \end{figure}
 
-This type of artefactual interaction can be checked for in DSpace using a single rule that takes two arguments in the head of the rule. The body of the rule retrieves the artefactual geometry of each element and checks their topological relationship. It fails if the artefacts have an overlapping relationship.
+This type of artefactual interaction can be checked for in the CRR using a single rule that takes two arguments in the head of the rule. The body of the rule retrieves the artefactual geometry of each element and checks their topological relationship. It fails if the artefacts have an overlapping relationship.
 
 \begin{verbatim}
    bathroom_sink_door(sink, door) :- 
@@ -1147,11 +1140,9 @@ This type of artefactual interaction can be checked for in DSpace using a single
            not_overlapping(Artefact_sink, Artefact_door).
 \end{verbatim}
 
-Artefactual interactions can be between a physical structure (door, wall, column, ect.) and artefactual extension. For example, the landing space (operational space in DSpace parlance) of a stair should be clear. Representing this requirement is similar to the bathroom sink example except that it checks for interactions between the stair's artefactual space with the building physical space.
+Artefactual interactions can be between an architectural entity and artefactual extension. For example, the landing space (i.e., operational space) of a stair should be clear. Representing this requirement is similar to the bathroom sink example except that it checks for interactions between the stair's artefactual space with the building physical space.
 
-In DSpace this can be represented as a single rule. The body of the rule checks for an overlapping relationship between the landing space of the stair and both the artefactual extension and physical structure of surrounding elements.
-
-TBD: figure of stair landing
+In the CRR this can be represented as a single rule. The body of the rule checks for an overlapping relationship between the landing space of the stair and both the artefactual extension and physical structure of surrounding elements.
 
 \begin{verbatim}
     clear_stair_landing(stair, Obj) :- 
@@ -1163,7 +1154,7 @@ TBD: figure of stair landing
 \end{verbatim}  
 
 \section{Conceptual Requirement Validation}
-The conceptual requirement reasoner (CCR) validates design requirements by querying an architectural design using predicate calls to architectural concepts and QSA. Requirement queries will return \emph{true} if the architectural design is consistent, or \emph{fail} if the design is inconsistent per the design requirement. A design is considered consistent if the design's spatial characteristics, as represented in its physical and functional geometries, matches with the definition of the designs requirement specification. For example, a design is consistent per a design requirement of a window and doorway facing towards each other, if the spatial characteristic of the design, with regards to the window and doorway, match the spatial specification of facing towards each other.    
+The CCR validates design requirements by querying the architectural design representation (i.e., quantity space) using predicate calls to architectural concepts and QSA. Requirement queries will return \emph{true} if the architectural design is consistent, or \emph{fail} if the design is inconsistent per the design requirement. A design is considered consistent if the design's spatial characteristics, as represented in its physical and functional geometries, matches with the definition of the designs requirement specification. For example, a design is consistent per a design requirement of a window and doorway facing towards each other, if the spatial characteristic of the design, with regards to the window and doorway, match the spatial specification of facing towards each other.    
 
 Given the example scenario above, a doorway with crr\_id \emph{door543}, and a window with crr\_id \emph{window15}, the following query is made to the CRR to validate the requirement.
 \begin{verbatim}
@@ -1183,7 +1174,7 @@ Note that the direct query is specific to \emph{door543} and \emph{window15}, wh
     ?- facing_and_near(desk52, door6).
 \end{verbatim}
 
-Consider the design requirement for a bedroom being private. This requirement can be validated for a design by querying the privacy predicate, as demonstrated above. However, this definition of privacy might not be enough for a particular user. In DSpace, the user can easily extend the definition of privacy by building new Prolog rules that join additional architectural concepts, QSA, and spatial qualities to the existing definition. If the user wants the definition of privacy to include an additional requirement that the bedroom is far away from the living room, the user can construct a new rule by joining the privacy predicate with the proximity predicate. The following is the new predicate for privacy:
+Consider the design requirement for a bedroom being private. This requirement can be validated for a design by querying the privacy predicate, as demonstrated above. However, this definition of privacy might not be enough for a particular user. In the CRR, the user can easily extend the definition of privacy by building new Prolog rules that join additional architectural concepts, QSA, and spatial qualities to the existing definition. If the user wants the definition of privacy to include an additional requirement that the bedroom is far away from the living room, the user can construct a new rule by joining the privacy predicate with the proximity predicate. The following is the new predicate for privacy:
 \begin{verbatim}
     privacy_new(IdRoom, IdLivingRoom) :-
             privacy(IdRoom),
