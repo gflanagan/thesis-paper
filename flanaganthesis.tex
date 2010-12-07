@@ -179,17 +179,17 @@ While the example above is informal, formal qualitative representations of space
 
 %The advantages to QSR include reducing the search space of the spatial environment, using a higher level of abstraction that is closer to the conceptual representation of space that humans use...
 
-%\subsubsection{Qualitative Spatial Calculi}
-%\begin{figure}[t]
-% \centering
-% \subfloat[RCC]{\label{RCC}\includegraphics[width=43mm]{rcc8-primitives}}
-% \hspace{7 mm}
-% \subfloat[SCC]{\label{SCC}\includegraphics[width=40mm]{scc-dcc-xfig}}
-%  \hspace{7 mm}
-% \subfloat[OPRA$_{2}$]{\label{OPRA}\includegraphics[width=43mm]{OPRA2_Example}}
-% \caption{Artefactual Extensions}
-%\label{Qualitative Spatial Calculi}
-%\end{figure}
+\subsubsection{Qualitative Spatial Calculi}
+\begin{figure}[t]
+ \centering
+ \subfloat[RCC]{\label{RCC}\includegraphics[width=43mm]{rcc8-primitives}}
+ \hspace{7 mm}
+ \subfloat[SCC]{\label{SCC}\includegraphics[width=40mm]{scc-dcc-xfig}}
+  \hspace{7 mm}
+ \subfloat[OPRA$_{2}$]{\label{OPRA}\includegraphics[width=43mm]{OPRA2_Example}}
+ \caption{Artefactual Extensions}
+\label{Qualitative Spatial Calculi}
+\end{figure}
 
 Formal qualitative spatial calculi are explicit characterizations of qualitative spatial relationships from a given perspective, i.e. topology, orientation, distance, etc., that logically define intrinsic spatial properties such as spatial uniqueness and spatial composition. Examples of qualitative spatial calculi that are important for this thesis include, the Region Connection Calculus (RCC) \cite{Randell92aspatial} for topological relationships, the Single Cross Calculus (SCC) for extrinsic orientational relationships \cite{Freksa92usingorientation} and Oriented Point Relation Algebra (OPRA) \cite{Moratz} for intrinsic orientational relationships.
 
@@ -428,12 +428,12 @@ The following section introduces the high level design and implementation of the
 \section{Design and Approach}
 The design and implementation of the CRR is based on the design hierarchy as illustrated in Figure \ref{hierarchy no-links}. As with the architectural design hierarchy, the CRR breaks the problem down into a design space module, quality space module, and quantitative space module. At the top level, the design space model is responsible for the representation of and reasoning about architectural concepts and spatial qualities found in architecture. This module will be used as the basis for building conceptual requirements. The middle level of the hierarchy, the quality space module, represents the design based on qualitative spatial relationships of orientation, topology and distance. Within the CRR, qualitative spatial relationships are defined using formal qualitative spatial calculi such as the Region Connection Calculus for topological relationships, the Single Cross Calculus for extrinsic orientational relationships and the Oriented Point Relational Algebra for intrinsic orientational relationships. The lowest level of the hierarchy, the quantity space module, is responsible for representing the design in terms of its physical and artefactual form.
 
-%\begin{figure}[t]
-%\centering
-%\includegraphics[width=140mm]{spatial-qualities-hierarchy-nolinks}
-%\caption{Design Space Multi-Hierarchy}
-%\label{hierarchy no-links}
-%\end{figure}
+\begin{figure}[t]
+\centering
+\includegraphics[width=140mm]{spatial-qualities-hierarchy-nolinks}
+\caption{Design Space Multi-Hierarchy}
+\label{hierarchy no-links}
+\end{figure}
 
 Given these three modules, the main issue now becomes how each level interfaces with each other. In other words, how do concepts in the design space relate to qualitative spatial relationships in the quality space, and similarly, how do qualitative spatial relationships in the quality space relate to geometric objects in the quantity space. At the core of this is the qualitative module, an intermediary layer that interfaces between the design and quantitative modules. 
 
@@ -511,14 +511,14 @@ An artefactual extension is a non-physical, spatial extension of an architectura
 There are three types of spatial artefacts identified by Bhatt\cite{Bhatt} that are represented in the CRR: \emph{operational space}, \emph{functional space}, and \emph{range space}.
 
 
-%\begin{figure}[H]
-% \centering
-% \subfloat[Artefactual Extensions]{\label{Artefactual Extensions}\includegraphics[width=60mm]{artefacts2}}
-% \hspace{7 mm}
-% \subfloat[Functional Space (FS), Operational Space (OS), Range Space (RS)]{\label{artefactual extensions seperate}\includegraphics[width=70mm]{artefacts}}
-% \caption{Artefactual Extensions, Source \cite{bhatt-spatial-computing}}
-%\label{artefactual-extensions}
-%\end{figure}
+\begin{figure}[H]
+ \centering
+ \subfloat[Artefactual Extensions]{\label{Artefactual Extensions}\includegraphics[width=60mm]{artefacts2}}
+ \hspace{7 mm}
+ \subfloat[Functional Space (FS), Operational Space (OS), Range Space (RS)]{\label{artefactual extensions seperate}\includegraphics[width=70mm]{artefacts}}
+ \caption{Artefactual Extensions, Source \cite{bhatt-spatial-computing}}
+\label{artefactual-extensions}
+\end{figure}
 
 %\begin{figure}[H]
 % \centering
@@ -864,24 +864,40 @@ The positioning attribute is interpreted spatially using the SCC \cite{Freksa92u
 \label{scc}
 \end{figure}
 
-Using this scheme, two points are defined as being on opposing sides of a space if they have an SCC relationship of 0, 1 or 7, as related by the centroid of the space. Conversely, a pair of points are defined as being on the same side of a space if they have an SCC relationship of 2, 3, 4, 5 or 6, as related by the centroid of the  space. A point is defined as being on the left side of a space from another point if it has an SCC relationship of 5, 6, or 7, and is on the right side if it has an SCC relationship of 1, 2, or 3. Using the union set operation these relationships can be combined to form the opposing-left/right, and same-left/right relationships.
+Using this scheme, two points are defined as being on opposing sides of a space if they have an SCC relationship of 0, 1 or 7, as related by the centroid of the space. Conversely, a pair of points are defined as being on the same side of a space if they have an SCC relationship of 2, 3, 4, 5 or 6, as related by the centroid of the  space. A point is defined as being on the left side of a space from another point if it has an SCC relationship of 5, 6, or 7, and is on the right side if it has an SCC relationship of 1, 2, or 3. If a point has an SCC relationship of 0 or 4 as related from the origin and referent then it is neither on the left or right side. Using the union set operation these relationships can be combined to form the opposing-left/right, and same-left/right relationships.
 
 These positioning relationships are implemented in the CRR as Prolog rules. There is a single rule for each relationships: opposing-side, same-side, left-side, and right-side. The head of each rule takes three arguments, the first two are crr\_ids for the architectural entities being related and one for the context space. The body of the rule defines the SCC relationships of each positioning quality. The following is Prolog code for opposing-side and same-side positioning rules.
 \begin{verbatim}
-   opposing_side(Origin, Referent, Relatum) :- 
-           centroid(Relatum, Centroid),
-           (scc(Origin, Centroid, Relatum, 0);
-            scc(Obj1, Centroid, Obj2, 1);
-            scc(Obj1, Centroid, Obj2, 7)).
+    opposing_side(Id1, Id2, Id3) :- 
+           ( scc(Id1, Id2, Id3, scc0);
+             scc(Id1, Id2, Id3, scc1);
+             scc(Id1, Id2, Id3, scc7) ).
                                           
-   same_side(Obj1, Obj2, Context) :- 
-           centroid(Context, Centroid),
-           (scc(Obj1, Centroid, Obj2, 2) ;
-            scc(Obj1, Centroid, Obj2, 3) ;
-            scc(Obj1, Centroid, Obj2, 4) ;
-            scc(Obj1, Centroid, Obj2, 5) ;
-            scc(Obj1, Centroid, Obj2) 6)).   
+    same_side(Id1, Id2, Id3) :- 
+           ( scc(Id1, Id2, Id3, scc2);
+             scc(Id1, Id2, Id3, scc3);
+             scc(Id1, Id2, Id3, scc4);
+             scc(Id1, Id2, Id3, scc5);
+             scc(Id1, Id2, Id3, scc6) ).
+             
+    left_side(Id1, Id2, Id3) :- 
+           ( scc(Id1, Id2, Id3, scc5);
+             scc(Id1, Id2, Id3, scc6);
+             scc(Id1, Id2, Id3, scc7) ).
+             
+    right_side(Id1, Id2, Id3) :- 
+           ( scc(Id1, Id2, Id3, scc1);
+             scc(Id1, Id2, Id3, scc2);
+             scc(Id1, Id2, Id3, scc3) ).                    
+\end{verbatim} Conjunction can be used to build the same-left, same-right, opposing-left and opposing-right rules. 
+\begin{verbatim}
+    opposing_left(Id1, Id2, Id3) :- 
+           opposing-side(Id1, Id2, Id3),
+           left-side(Id1, Id2, Id3).
 
+    same_right(Id1, Id2, Id3) :- 
+           same-side(Id1, Id2, Id3),
+           right-side(Id1, Id2, Id3).                                         
 \end{verbatim}
 
 The positioning attribute can be used to query if architectural entities or interior design elements are on the opposing or same, left, or right side of a space to the other. For example, a design requirement might state that a bedroom should be positioned to the back of a house from the main entrance. The reason for this requirement is that rooms that are in the back of a house are more private than rooms in the front of the house. In this requirement, the origin is the entrance, the referent is the bedroom, and the relatum is the centroid of the house. Figure \ref{bedroom-positioning} shows a bedroom that is on the opposing side of and apartment from the main entrance. 
@@ -895,17 +911,29 @@ The positioning attribute can be used to query if architectural entities or inte
 
 
 \subsection{Positioning for Sequences}
-The positioning for sequences attribute defines a perceptual orientational relationship of a sequence of objects as each relates to a vantage point in an extrinsic context, i.e., a defined space such as a room, apartment or building. A sequence is a set of architectural entities, or interior design objects that are grouped together. In general sequences are grouped together based on the proximity of the objects (near to each other) but any relationship can define a sequence. There are three positioning relationships for a sequence of objects: horizontal perceived, vertical perceived, and neither.  
+The positioning for sequences attribute defines a perceptual orientational relationship of a sequence of objects as each relates to a vantage point in an extrinsic context, i.e., a defined space such as a room, apartment or building. A sequence is a set of architectural entities, or interior design objects that are grouped together. In general sequences are grouped together based on the proximity of the objects (near to each other) but any relationship can define a sequence. There are two positioning relationships for a sequence of objects: horizontal perceived and vertical perceived.  
 
 The positioning for sequence of objects attribute can be spatially interpreted using SCC. This quality uses the SCC partitioning scheme to orientationally relate a sequence of points (origin, referents) in the context of an external frame of reference (relatum). In the CRR, the reference point is defined as the centroid of the context space. By partitioning space using the centroid, an approximation is made that divides the space into the positioning relationships. As with the positioning attribute, an assumption made here is that the space will generally be rectangular in shape.
 
-Using the SCC partitioning of space, a sequence of objects is perceived horizontally from the vantage point if at least one point in the sequence has an SCC relationship of 5, 6, or 7 and at least one point has an SCC relationship of 1,2, or 3. A sequence of points is perceived vertically if they have the following combination of SCC relationships: at least one point in the sequence has an SCC relationship of 5 or 3 and at least one point in the sequence has an SCC relationship of 0, 1, or 7. Sequences can be both vertical and horizontal at the same time or they can be neither. The neither relationship is defined by a sequence of object that do not match any of the above sets.
+Using the SCC partitioning of space, a sequence of objects is perceived horizontally from the vantage point if at least one point in the sequence is on the left-side of the space and at least one point has is on the right. A sequence of points is perceived vertically if they have the following combination of SCC relationships: at least one point in the sequence is on the opposing side of the room and at least one point in the sequence is on the same side of the room. Sequences can be both vertical and horizontal or they can be neither.
 
-Th positioning for a sequence of objects relationships are represented in the CRR as Prolog rules. There is a single rule for each relationship: horizontally perceived, vertically perceived, or neither. The head of each rule takes three arguments, the first for the the vantage point, the second is a list of architectural entities that represent the sequence and the third is the context space. The following is Prolog code for the positioning rules.
+Th positioning for a sequence of objects relationships are represented in the CRR as Prolog rules. There is a single rule for each relationship: horizontally perceived and vertically perceived. The head of each rule takes three arguments, the first for the the vantage point, the second is the context space and the third represents the sequence of objects (list of crr\_ids). The following is Prolog code for the horizontal positioning rules. The rule uses two recursive helper predicates (left\_r and right\_r) to iterate through the sequence of objects.
 \begin{verbatim}
-   horizontally_perceived(vantage_point, seq_list, context) :-
-           centroid(context, Centroid),
-           horizontally_
+   horizontally_perceived(Id1, Id2, Seq) :-
+           left_r(Id1, Id2, Seq),
+           riht_r(Id1, Id2, Seq).
+           
+   left_r(_, _, []) :- fail, !.           
+   
+   left_r(Id1, Id2, [Id3, Rest]):-
+          ( left_side(Id1, Id2, Id3) -> true ;
+            left_r(Id1, Id2, Rest) ).
+ 	 
+   right_r(_, _, []) :- fail, !.           
+   
+   right_r(Id1, Id2, [Id3, Rest]):-
+          ( right_side(Id1, Id2, Id3) -> true ;
+            right_r(Id1, Id2, Rest) ).
 \end{verbatim}
 
 
@@ -947,13 +975,13 @@ Figure \ref{fig:facing-opra-towards} shows an example of two points facing towar
 The facing attribute is implemented in the CRR as Prolog rules. There is one rule for facing-towards and one for facing-away. The head of each rule takes two arguments for the architectural entities being related. The body of the rule is a single disjunctive clause that checks for the OPRA$_{8}$ relationship between the architectural entities. Given two architectural objects, the rule returns true if the architectural entities are facing towards or away from each other as defined by the rule, and fails if they are not. The following is Prolog code for the facing rules.
 
 \begin{verbatim}
-   facing_towards(Obj1, Obj2) :- 
-           (opra(Obj1, Obj2, 0) ;
-            opra(Obj1, Obj2, 1) ;
-            opra(Obj1, Obj2, 32)).
+   facing_towards(Id1, Id2) :- 
+          ( opra(Id1, Id2, 8, 0) ;
+            opra(Id1, Id2, 8, 1) ;
+            opra(Id1, Id2, 8, 31) ).
                                  
-   facing_away(Obj1, Obj2) :- 
-           (facing_towards(Obj1, Obj2) -> fail; true).                     
+   facing_away(Id1, Id2) :- 
+          ( facing_towards(Id1, Id2) -> fail; true).                     
 \end{verbatim}
 
 In the CRR, the facing attribute can be used to check if two architectural entities or interior design elements are facing towards or away from each other. For example, doorways and windows that face towards each other promote airflow through the space they inhibit. A design that requires good air circulation could use this knowledge to ensure proper airflow. Figure \ref{door-window-facing} shows two example floor plans of a room with a window and doorway. Figure \ref{fig:door-window-towards} shows a configuration were the doorway and window are facing towards each other, while figure \ref{fig:door-window-away} shows a configuration where the doorway and window are facing away from each other. 
@@ -986,15 +1014,15 @@ Using these heuristics, two objects are near if the minimum distance between the
 Proximity is represented in the CRR as three Prolog rules. There is one rule for near, one for near+, and one for far. The head of each rule takes two arguments for the architectural entities being related. Given two architectural entities, the rule returns true if the objects are near, near+, or far from each other as defined by the rule, and fails if they are not. The following is Prolog code for the proximity rules.
 
 \begin{verbatim}
-   near(Obj1, Obj2) :- 
-           minimum_distance_compare(Obj1, Obj2, <=, 3).
+   near(Id1, Id2) :- 
+           minimum_distance_compare(Id1, Id2, <=, 3).
    
-   near_plus(Obj1, Obj2) :-
-           minimum_distance_compare(Obj1, Obj2, <=, 6),
-           minimum_distance_compare(Obj1, Obj2, >, 3).   
+   near_plus(Id1, Id2) :-
+           minimum_distance_compare(Id1, Id2, <=, 6),
+           minimum_distance_compare(Id1, Id2, >, 3).   
    
-   far(Obj1, Obj2) :- 
-           minimum_distance_compare(Obj1, Obj2, >, 6)
+   far(Id1, Id2) :- 
+           minimum_distance_compare(Id1, Id2, >, 6)
 
 \end{verbatim}
 
@@ -1016,7 +1044,7 @@ The spatial interpretation of visibility is based on the topological characteris
  \centering
  \subfloat[obstructed view]{\label{fig:obstructed-view}\includegraphics[width=55mm]{visibility}}
   \hspace{10 mm}
- \subfloat[non-obstructed view]{\label{fig:no-obstruction}\includegraphics[width=55mm]{visibility-no-obstruction}}
+ \subfloat[non-obstructed view]{\label{fig:no-obstruction}\includegraphics[width=45mm]{visibility-no-obstruction}}
  \caption{Visibility}
 \label{Visibility}
 \end{figure}
@@ -1025,10 +1053,17 @@ Visibility is represented in the CRR as a single Prolog rule. The head of the ru
 
 Given a viewpoint and an object, the rule returns true if the object is visible, and fails if it is not. The following is the Prolog code for the visibility rule.
 \begin{verbatim}
-   is_visible(ViewPoint, Obj) :- 
-           view_space(ViewPoint, Obj, ViewSpace),
-           topology(ViewSpace, SurroundingStructs).
-\end{verbatim}
+   is_visible(Id1, Id2) :-
+           entities_in_same_room(Id1, Id2, Entities), 
+           generate_viewspace(Id1, Id2, ViewSpace),
+           obstructed_r(ViewSpace, Entities).
+           
+   obstructed_r(_, []).           
+           
+   obstructed_r(ViewSpace, [E,Rest]) :-
+           disconnected(ViewSpace, E),
+           obstructed_r(ViewSpace, Rest).
+\end{verbatim} The rule first collects all surrounding objects in the same room as the vantage point and object. It then generates the view-space and then recursively checks for obstructions over the view-space. 
 
 The visibility attribute can be used to check if an architectural structure or interior design element is visible from a given viewpoint. For example, an architect might want to ensure that a staircase is visible from the main entrance of a building, because she doesn't want the staircase to go unnoticed. Figure \ref{visibility-door-stair} shows an example floor plan where the stairway is not visible from the doorway. In this example both the wall in red and column are obstructing the view from the doorway. 
 
@@ -1041,23 +1076,31 @@ The visibility attribute can be used to check if an architectural structure or i
 
 
 \section{Architectural Concepts}
-Architectural concepts, such as privacy, continuity, and enclosure, are experiential aspects of architecture that are used by architects to describe the functionality of a design \cite{Koile}. These terms are defined in the CRR in a hierarchical manner in which architectural concepts are built using QSAs and geometric primitives (orientation, topology, distance). 
+Architectural concepts, such as privacy, continuity, and enclosure, are concepts that describe experiential aspects of a design \cite{Koile}. These terms are defined in the CRR in a hierarchical manner in which they are built using QSA and qualitative spatial relationships. 
 
-This section presents four architectural concepts and demonstrates how each is defined in the CRR. As in the previous section, the purpose is not to investigate the correctness of the concepts or an attempt to compile a complete list, rather it is to look at how these concepts can be defined logically using architectural qualities and spatial / geometric primitives.
+This section presents three architectural concepts and demonstrates how each is defined in the CRR. Additionally, this Chapter presents characteristics that are influenced by artefactual extension. As in the previous section, the purpose is not to investigate the correctness of the concepts or an attempt to compile a complete list, rather it is to look at how these concepts can be defined logically using architectural qualities and spatial / geometric primitives.
 
 \subsection{Privacy}
-In architecture, the concept of privacy implies a notion of separation and obscurity (not being visible). In the case of a room, privacy can be defined as being separated from the main entrance of the building and having doorways that enhances the room's privacy. A doorway can be be defined as private with respect to its functionality of connecting two adjacent areas (rooms, hallways, etc.). Under this consideration, a doorway can enhance or hinder the privacy of a room. A doorway enhances privacy of a room if the doorway is not visible from the main entrance.
+In architecture, the concept of privacy implies a notion of separation and obscurity (not being visible). In the case of a room, privacy can be defined as being separated from the main entrance of the building and having doorways that enhances the room's privacy. A doorway can be be defined as private with respect to its functionality of connecting the room to the main area of the house. Under this consideration, a doorway can enhance or hinder the privacy of a room by being visible or not visible from the main entrance.
 
 Within the CRR, the concept of privacy has been formally defined for rooms. A room is private if it has the following attributes: (1) it is positioned on the opposing side of the building with regard to the main entrance and (2) all doorways into the room are not visible from the main entrance.
  
-Privacy is represented in the CRR as a Prolog rule. The rule takes a single argument, in the head, which is the room's crr\_id. The body of the rule defines the properties of the privacy using QSAs, as defined above. 
+Privacy is represented in the CRR as a Prolog rule. The rule takes a single argument, in the head, which is the room's crr\_id. The following is the Prolog rule for privacy. 
 \begin{verbatim}
-   private(room) :-  
-           opposing_side(room, main_entrance, building), 
-           private(doorway).
+   private(RoomId, EntranceId, BuildingId) :-  
+           opposing_side(RoomId, EntranceId, BuildingId),
+           get_doors_in_room(RoomId, Doors),
+           not_visible_r(EntranceId, Doors). 
+
+   not_visible_r(_,[]).
+   
+   not_visible_r(Id1, [Id2, Rest]) :-
+           not_visible(Id1, Id2),
+           not_visible_r(Id1, Rest).   
+   
 \end{verbatim}
 
-Figure \ref{room-privacy} shows two floor plans for a small single bedroom house; figure \ref{fig:private-room-con} shows a floor plan with a bedroom that is  private, while figure \ref{fig:private-room-incon} shows a similar floor plan with a bedroom that is not private. The numbers in the figures represent the following privacy requirements: (1) the bedroom is positioned on the opposing side of the building with regards to the main entrance, and (2) the doorway is not visible from the main entrance. Numbers that are colored red indicate that the requirement has been broken, while numbers in green indicate that the requirement has been met.
+Figure \ref{room-privacy} demonstrates the privacy concept for two floor plans; figure \ref{fig:private-room-con} shows a floor plan with a bedroom that is  private, while figure \ref{fig:private-room-incon} shows a similar floor plan with a bedroom that is not private. The numbers represent the following privacy requirements: (1) the bedroom is positioned on the opposing side of the building with regards to the main entrance, and (2) the doorway is not visible from the main entrance. Numbers that are colored red indicate that the requirement has been broken, while numbers in green indicate that the requirement has been met.
 
 \begin{figure}[H]
  \centering
@@ -1069,24 +1112,33 @@ Figure \ref{room-privacy} shows two floor plans for a small single bedroom house
 \end{figure}
 
 \subsection{Continuity}
-In architecture, the concept of continuity describes a network of points that are mutually visible \cite{Key}. In the CRR, continuity is interpreted in the context of building navigation and wayfinding and is therefore dependent on continuity between doorways withing the design. Other interpretations of continuity can use any element of the design (beyond doorways), however for the purposes here, continuity only deals with doorways. Under this interpretation, a building, room or apartment is continuous if there is continuity between the doorways contained in a given space: room, building, or apartment. 
+In architecture, the concept of continuity describes a network of points that are mutually visible \cite{Key}. In the CRR, continuity is interpreted in the context of building navigation and wayfinding and is therefore dependent on continuity between doorways withing the design. Other interpretations of continuity can use any element of the design (beyond doorways), however for the purposes here, continuity only deals with doorways. Under this interpretation a room is continuous if there is continuity between the doorways contained in it. 
 
 Continuity is defined as a network of doorways that are mutually visible. The partitioning of doorways that should be mutually visible is based on a localized containment hierarchy between rooms and doorways, in which doorways that are contained in the same room should maintain continuity. It does not make sense for doorways that are located on opposite sides of a building to be visible to each other, but doorways that are in the same room should be. 
 
-With respect to this definition, continuity is represented as a recursive rule in Prolog, which takes a list of doorways and checks that each doorway is mutually visible to the others within the list. (need to mention doorways within a room). TBD: arguments: list of doors or room id that indicates containment level???
+With respect to this definition, continuity is represented as a Prolog rule, which takes a crr\_id for a room, and checks the visibility structures between each doorway located in the room. The following is the Prolog rule for continuity. 
 
 \begin{verbatim}
-   continuous([Obj1,Obj2|[]]) :- 
-           is_visible(Obj1, Obj2).
+   continuous(RoomId) :-
+           get_doors_in_room(RoomId, Doors),
+           mutually_visible_r(Doors).
+ 
+   mutually_visible_r(_, []).
 
-   continuous([Obj1,Obj2|OS]) :- 
-           is_visible(Obj1, Obj2),
-	       is_visible(Obj2, Obj1),
-           continuity([Obj1|OS]),
-           continuity([Obj2|OS]).
+   mutually_visible_r(Id1, [Id2, Rest]):-
+           mutually_visible_h(Id1, [Id2, Rest]),
+           mutually_visible_r(Id2, Rest).
+
+   mutually_visible_h(_, []).
+   
+   mutually_visible_h(Id1, [Id2, Rest]) :-
+           is_visible(Id1, Id2),
+           is_visible(Id2, Id1),
+           mutually_visible_h(Id1, Rest).
+
 \end{verbatim}
 
-Figure \ref{continuity} shows a floor plan for a single room with three doors. Figure \ref{fig:continuity-con} shows a configuration in which each door is mutually visible to the other doors. This design is continuous. Conversely, figure \ref{fig:continuity-incon} shows a configuration in which door1 is not mutually visible to door2 and door1 is not mutually visible door3. The visibility between door1 and door2 is obstructed by a column and the visibility between door1 and door3 is obstructed by a wall. Structural elements that are colored red indicated a visibility obstruction. This design is not continuous. 
+Figure \ref{continuity} demonstrates the continuity concept for two floor plans. Figure \ref{fig:continuity-con} shows a configuration in which each door is mutually visible to the other doors, and therefore is continuous. Conversely, figure \ref{fig:continuity-incon} shows a configuration in which door1 is not visible to door2 and door1 is not visible door3. The visibility between door1 and door2 is obstructed by a column and the visibility between door1 and door3 is obstructed by a wall. Architectural entities that are red indicated a visibility obstruction. This design is not continuous. 
 
 \begin{figure}[H]
  \centering
@@ -1102,10 +1154,27 @@ In architecture, the concept of enclosure defines a space, as experienced from a
 
 In the CRR, a point is defined as open if less then three walls or columns are near-to the point. Conversely, a point is defined as confined if three or more walls or columns are near-to the point. While this interpretation of enclosure is naive, it maintains the notion that proximity defines the spatial structures of openness and confinement in a localized environment.   
 
+Enclosure is implemented as two Prolog rules, one for confined spaces and one for open spaces. Both rules take a single argument that is a crr\_id for the point being evaluated. The body of each rule calculates the distances characteristics of the local architectural entities to the point being evaluated.
 \begin{verbatim}
-confined(point) :-  
+    confined_space(Id) :-
+            room_containment(Id, Rm),
+            get_entities_in_room(Rm, Entities),
+            num_near(Id, Entities, N),
+            N >= 3.            
+            
+    open_space(Id) :-
+            room_containment(Id, Rm),
+            get_entities_in_room(Rm, Entities),
+            num_near(Id, Entities, N),  
+            N < 3.
 
-spacious(point) :-
+    num_near(_,[],0).
+
+    num_near(Id1, [Id2|Rest], N) :-
+           num_near(Id1, Rest, NRest),
+         ( near(Id1, Id2) -> N is NRest + 1 ;
+                             N is NRest + 0 ).
+
 
 \end{verbatim} 
 
@@ -1134,27 +1203,25 @@ Artefactual interference deals with the unintentional interactions of the operat
 This type of artefactual interaction can be checked for in the CRR using a single rule that takes two arguments in the head of the rule. The body of the rule retrieves the artefactual geometry of each element and checks their topological relationship. It fails if the artefacts have an overlapping relationship.
 
 \begin{verbatim}
-   bathroom_sink_door(sink, door) :- 
-           artefact_geometry(sink, Artefact_sink),
-           artefact_geometry(door, Artefact_door),
-           not_overlapping(Artefact_sink, Artefact_door).
+   bathroom_sink_door(sink_id, door_id) :- 
+           functional_representation(sink_id, SinkFunc),
+           operational_representation(door_id, DoorOps),
+           not_overlapping(SinkFunc, DoorOps).
 \end{verbatim}
 
 Artefactual interactions can be between an architectural entity and artefactual extension. For example, the landing space (i.e., operational space) of a stair should be clear. Representing this requirement is similar to the bathroom sink example except that it checks for interactions between the stair's artefactual space with the building physical space.
 
-In the CRR this can be represented as a single rule. The body of the rule checks for an overlapping relationship between the landing space of the stair and both the artefactual extension and physical structure of surrounding elements.
+In the CRR this can be represented as a single rule. The body of the rule checks for an overlapping relationship between the landing space of the stair and physical structure of surrounding elements.
 
 \begin{verbatim}
-    clear_stair_landing(stair, Obj) :- 
-            artefact_geometry(stair, Artefact_stair),
-            artefact_geometry(Obj, Artefact_obj),
-            physical_geometry(Obj, Physical),
-            not_overlapping(Artefact_stair, Artefact_obj),
-            not_overlapping(Artefact_stair, Physical)
+    clear_stair_landing(stair_id, physical_id) :- 
+            operational_representation(stair, StairOps),
+            physical_representation(physical_id, Physical),
+            not_overlapping(StairOps, Physical)
 \end{verbatim}  
 
 \section{Conceptual Requirement Validation}
-The CCR validates design requirements by querying the architectural design representation (i.e., quantity space) using predicate calls to architectural concepts and QSA. Requirement queries will return \emph{true} if the architectural design is consistent, or \emph{fail} if the design is inconsistent per the design requirement. A design is considered consistent if the design's spatial characteristics, as represented in its physical and functional geometries, matches with the definition of the designs requirement specification. For example, a design is consistent per a design requirement of a window and doorway facing towards each other, if the spatial characteristic of the design, with regards to the window and doorway, match the spatial specification of facing towards each other.    
+The CCR validates design requirements by querying the architectural design representation (i.e., quantity space) using predicate calls to architectural concepts and QSA. Requirement queries will return \emph{true} if the architectural design is consistent, or \emph{fail} if the design is inconsistent per the query. A design is considered consistent if the design's spatial characteristics, as represented in its physical and functional geometries, matches with the definition of the designs requirement specification. For example, a design is consistent per a design requirement of a window and doorway facing towards each other, if the spatial characteristic of the design, with regards to the window and doorway, match the spatial specification of facing towards each other.    
 
 Given the example scenario above, a doorway with crr\_id \emph{door543}, and a window with crr\_id \emph{window15}, the following query is made to the CRR to validate the requirement.
 \begin{verbatim}
@@ -1188,7 +1255,7 @@ This chapter is a case study that demonstrates the application of the CRR in the
 
 %how the museum design requirements can be represented and reasoned about in a computational framework, in order to detect design inconsistencies as per the design requirements.
 
-This chapter is divided into two sections. The first section sets up the context of the case study by examining museum design characteristics that influence visitors' behavior and experiences within an art museum. This section has two parts: the first part looks at museum characteristics that affect how visitors behave with museums galleries. The second part looks at the characteristics of a museum's Lobby that influence visitors orientation. The second section of the Chapter demonstrates the application of the CRR to the previously identified museum requirements.  
+This chapter is divided into two sections. The first section sets up the context of the case study by examining museum design characteristics that influence visitors' behavior and experiences within an art museum. This section has two parts: the first part looks at museum characteristics that affect how visitors behave with museums galleries. The second part looks at the characteristics of a museum's lobby that influence visitors orientation. The second section of the Chapter demonstrates the application of the CRR to the previously identified museum requirements.  
 
 %examines design requirements in art museums in three parts: the first part looks at requirements that influence museum visitors' behavior. The second part looks at requirements for promoting exploration in the museum. The third part looks at the requirements of accessibility and security within the museum. The second section, looks at how these requirements can be interpreted spatially and represented in the CRR. The third section tests the DSpace reasoner using sample museum floor plans that are both consistent and inconsistent per the design requirements for several art museums. The objective of this demonstration is to show that the DSpace reasoner can validate a design against its design requirements.
 
@@ -1203,17 +1270,17 @@ Pretend for a moment that you are an architect working on the initial design for
 
 \begin{enumerate}
 \item Maximize visitor utilization of exhibitions
-\item Visitor Orientation in Lobby
+\item Maximize visitor orientation in lobby
 \end{enumerate}
 
-TBD: explain how these high level requirements can be interpreted into concrete properties of the museums design. from here the requirements can be spatially interpreted and represented in the DSpace reasoner.
+%TBD: explain how these high level requirements can be interpreted into concrete properties of the museums design. from here the requirements can be spatially interpreted and represented in the DSpace reasoner.
 
 \subsection{Maximizing Visitor Utilization of Exhibitions}
 This portion of the case study will look into four factors that influence visitors' movement patters: positioning of doorways, spatial arrangement of display cases, positioning of furniture and statues, congestion, and exploration. These properties inform museum architects, during the design process, about the spatial characteristics that can maximize the utilization of the museum by increasing the frequency and duration with which visitors view exhibition objects. 
 
 
 \subsubsection{Positioning of doorways}
-In an important study, Melton \cite{Melton} discovered that the most influential factor to determine  the amount of attention an exhibition piece receives is the pieces's position relative to doorways in a gallery room. Prior to this, museum researchers believed that the pieces's intrinsic properties of 'interestingness', color, and size were the real factors that determined the amount of attention a piece received. Melton explained why this happens; he demonstrated that the amount of attention a piece receives is directly related to the visitor circulation patterns within the museum and these circulation patterns emerge from the spatial characteristics of the museum's architecture.
+In an important study, Melton \cite{Melton} discovered that the most influential factor to determine  the amount of attention an exhibition piece receives is the pieces's position relative to doorways in a gallery room. Prior to this, museum researchers believed that the pieces's intrinsic properties of `interestingness', color, and size were the real factors that determined the amount of attention a piece received. Melton explained why this happens; he demonstrated that the amount of attention a piece receives is directly related to the visitor circulation patterns within the museum and these circulation patterns emerge from the spatial characteristics of the museum's architecture.
 
 \begin{figure}[H]
  \centering
@@ -1227,16 +1294,16 @@ In an important study, Melton \cite{Melton} discovered that the most influential
 
 The crux of Melton's experiments suggested that visitors exit through the first door they encounter, which he referred to as the exit gradient. Figure \ref{Melton-studies} shows the results of an extensive study of visitors circulation patterns and stopping frequencies in an art museum. The studies reported that almost 80 percent of visitors exited through the first exit they encountered before viewing the entire exhibition. Additionally, the studied showed that the most frequently visited objects where those located along the shortest path from the entrance to the exit. 
 
-Furthermore, Bitgood suggests that visitors tend to follow along the wall that is closest to the door they entered \cite{Bitgood95}. Given that visitors also tend to exit through the first doorway they encounter, doorways should not be positioned in a wall that is close to an entrance. 
+%Furthermore, Bitgood suggests that visitors tend to follow along the wall that is closest to the door they entered \cite{Bitgood95}. Given that visitors also tend to exit through the first doorway they encounter, doorways should not be positioned in a wall that is close to an entrance. 
 
-The results of Melton's and Bitgood's studies inform architects of spatial characteristics that influence movement patterns in exhibitions. Specifically, doorways that are positioned on the same side of the room and doorways that are position in a wall adjacent to an entrance cause visitors to pay attention to fewer exhibits than doorways that are positioned on opposing sides of the room and in walls that are not adjacent to entrances.
+The results of Melton's studies inform architects of spatial characteristics that influence movement patterns in exhibitions. Specifically, doorways that are positioned on the same side of the room and doorways that are near to each other cause visitors to pay attention to fewer exhibits than doorways that are positioned on opposing sides of the room and doorways that are far away from each other.
 
 \begin{description}
-\item[Requirement 1:] \emph{Gallery doorways should be positioned on opposing sides of a gallery room and should not be contained in walls that are close to other doorways.} 
+\item[Gallery Requirement 1:] \emph{Gallery doorways should be positioned on opposing sides of the gallery room.} 
+\item[Gallery Requirement 2:] \emph{Gallery doorways should far away from each other.} 
 \end{description}
 
-
-Figure \ref{door-position} shows a possible exhibition design where the red door is positioned on the same side of the room as the entrance, while the black door is positioned on the opposing side.
+Figure \ref{door-position} shows an exhibition design with doorways the same and opposing side of the gallery from the entrance.
 \begin{figure}[H]
 \centering
 \subfloat[consistent design]{\label{fig:door-opposite}\includegraphics[width=85mm]{door-possitioning}}
@@ -1246,63 +1313,65 @@ Figure \ref{door-position} shows a possible exhibition design where the red door
 
 
 \subsubsection{Spatial arrangement of display cases}
-The spatial arrangement of display cases in galleries has been shown to influence visitors' movement patterns. \cite{Bitgood92} showed that display case arrangements that form a perimeter or a peninsula generate the most amount of attention, while display case arrangements that form an island in the middle of the room received the lowest amount of attention.
+The spatial arrangement of display cases in galleries has been shown to influence visitors' movement patterns. Bitgood \cite{Bitgood92} showed that display cases that are located at perimeter of the gallery generate the most amount of attention, while display cases that are isolated in the middle of the room received the lowest amount of attention.
 
 \begin{figure}[H]
  \centering
- \subfloat[island]{\label{fig:door-opposite}\includegraphics[width=35mm]{island}}
+ \subfloat[Isolated]{\label{fig:door-opposite}\includegraphics[width=35mm]{island}}
  \hspace{10 mm}
- \subfloat[perimeter]{\label{fig:door-opposite}\includegraphics[width=35mm]{perimeter}}
-  \hspace{10 mm}
- \subfloat[peninsula]{\label{fig:door-opposite}\includegraphics[width=35mm]{peninsula}}
+ \subfloat[Perimeter]{\label{fig:door-opposite}\includegraphics[width=35mm]{perimeter}}
+%  \hspace{10 mm}
+% \subfloat[peninsula]{\label{fig:door-opposite}\includegraphics[width=35mm]{peninsula}}
  \caption{Display case arrangements}
 \label{display-arrangement}
 \end{figure}
  
 \begin{description}
-\item[Requirement 2:] \emph{Display case arrangements should not form an island near the center of the room.}
+\item[Gallery Requirement 3:] \emph{Display cases should not be isolated near the center of the room.}
 \end{description} 
 
-Circulation patterns can be disrupted when a peninsula arrangement cuts horizontally across the view of a visitor as they are entering the room. This type of display pattern will cut off part of the room from the visitor and will make it less likely to be visited.
+Circulation patterns can be disrupted when a sequence of display cases cuts horizontally across the view of a visitor as they are entering the room. This type of display pattern will cut off part of the room from the visitors normal visitation patterns by changing circulation pathways.
 
 \begin{description}
-\item[Requirement 3:] \emph{Display cases arrangements should not cut horizontally across the view of a visitor located at an entrance.}
+\item[Gallery Requirement 4:] \emph{Display cases sequences should not cut horizontally across the view of a visitor located at an entrance.}
 \end{description} 
 
-\begin{figure}[H]
+\begin{figure}[H]\label{cut-horizontal}
 \centering
-\subfloat[consistent design]{\label{fig:door-opposite}\includegraphics[width=65mm]{display-not-cut}}
+\subfloat[Vertical]{\label{not-cut}\includegraphics[width=65mm]{display-not-cut}}
 \hspace{10 mm}
-\subfloat[inconsistent design]{\label{fig:door-opposite}\includegraphics[width=65mm]{door-cut-room}}
+\subfloat[Horizontal]{\label{cut}\includegraphics[width=65mm]{door-cut-room}}
+\caption{Display Case Sequence}
 \end{figure}
 
+Figure \ref{cut-horizontal} shows an example gallery with two display cases examples. Figure \ref{not-cut} shows an example where the display case sequence does not cut horizontally across the visitor's view, while Figure \ref{cut} shows an example where the display cases sequence does cut horizontally.
 
 \subsubsection{Congestion}
 Congestion in museums can be caused by interference of displayed objects and their viewing spaces with movement pathways of visitors. In order to reduce congestion in museums, designers should be aware of the placement of display cases, statues, furniture (seating benches), and information kiosks within the gallery. The following are requirements that should be followed to reduce congestion in museums:
 
 \begin{description}
-\item[Requirement 4:] \emph{There should be no artefactual interference between architectural entities, museum display cases, museum seating, and information kiosks.}
+\item[Gallery Requirement 5:] \emph{There should be no artefactual interference between museum display cases, museum seating and architectural entities.}
 \end{description}
 
 
 \subsubsection{Positioning of benches, statues, and information kiosks}
-The positioning and orientation of benches and statues can increase the amount of attention an exhibition receives and change circulation patterns within a gallery \cite{Stavroulaki} \cite{Museum}. Studies have shown that seating directly facing an object will increase the attention the object receives, even if no one uses the seating. 
+The positioning and orientation of benches and statues can increase the amount of attention an exhibition receives and change circulation patterns within a gallery \cite{Stavroulaki} \cite{Museum}. Studies have shown that seating facing a doorway or window will decrease attention in the Gallery.
 
 \begin{description}
-\item[Requirement 5:] \emph{Seating should directly face a gallery wall or display case.}
+\item[Gallery Requirement 6:] \emph{Gallery seating should face away from doorways and windows.}
 \end{description}
 
-The orientation of a statue to doorways can increase the attention the statue receives as well as the object close to it. Statues that face away from doorways encourage visitors to move around the statues in order to get a better view.  
+The orientation of a statue to doorways can increase the attention the statue receives as well as objects close to it. Statues that face away from doorways encourage visitors to move around the statues in order to get a better view.  
 \begin{description}
-\item[Requirement 6:] \emph{Statues should face away from doorways.}
+\item[Gallery Requirement 7:] \emph{Statues should face away from doorways.}
 \end{description}
 
 
 \subsubsection{Exploration}
-The way visitors explore an exhibition is influenced by the spatial characteristics of the layout, as well as the characteristics of each gallery room. Layouts that are sequential, i.e. one way in / one way out, promote a controlled and orderly flow of movement. Museums of history and science are well served by this type of design because they have a narrative to tell that is chronological. On the other hand, layouts that present the visitor with path choices, i.e. multiple doorways, promote free-flowing exploration. In this type of layout it is important that visitors are aware of the path choices that are available. This means that doorways are visible between each other throughout the layout. This concept of visibility between a network of points is referred to as continuity and is an important characteristic of layouts that present visitors with multiple path choices.  
+The way visitors explore an exhibition is influenced by the spatial characteristics of the layout, as well as the characteristics of each gallery room. Layouts that are sequential (one way in, one way out), promote a controlled and orderly flow of movement. Museums of history and science are well served by this type of design because they have a narrative to tell that is chronological. On the other hand, layouts that present the visitor with path choices (multiple doorways), promote free-flowing exploration. In this type of layout it is important that visitors are aware of the path choices that are available. This means that doorways are visible between each other throughout the layout. This concept of visibility between a network of points is referred to as continuity and is an important characteristic of layouts that present visitors with multiple path choices.  
 
 \begin{description}
-\item[Requirement 7:] The layout of the museum should maintain continuity between doorways within each exhibition and gallery room.
+\item[Gallery Requirement 8:] \emph{The layout of the museum should maintain continuity between doorways within each gallery room.}
 \end{description}
 
 %Within a Gallery, rooms that are open promote more free-flowing exploration than rooms that are narrow. Narrow rooms inhibit exploration because of space limitations and confinement. Rooms that are open provide more space for visitors to explore the room in a free-flowing manner.
@@ -1312,51 +1381,53 @@ The way visitors explore an exhibition is influenced by the spatial characterist
 
 
 \subsection{Visitor Orientation in the lobby}
-The lobby is the first place visitors encounter when they enter a museum. The design of the lobby is important because it not only provides a first glimpse of the museum's exhibits but it is the place where the museum provides services to its visitors, including: a ticketing desk, bathrooms, an information desk, and entrances to exhibitions \cite{Bitgood02}. The aim of the requirements for the lobby focus on making it easy for visitors to locate services and orient themselves to the new environment. 
+The lobby is the first place visitors encounter when they enter a museum. The design of the lobby is important because it not only provides a first glimpse of the museum's exhibits but it is the place where the museum provides services to its visitors, including: a ticketing desk, bathrooms, and entrances to exhibitions \cite{Bitgood02}. The aim of the requirements for the lobby focus on making it easy for visitors to locate services and orient themselves to the new environment. 
 
-Upon entering the lobby most visitors need to find the ticket area and/or an information desk. It is important, therefore, that the ticketing area and information desk are visible from the entrance. Additionally, studies have shown that people first look to their right hand side when entering a building. By placing the ticket and information desks on the right hand side of the lobby, visitors are more likely to notice them immediately when they enter the lobby. Finally, the ticketing area should be close to visitors when they enter because it is likely one of the first places they will need to visit.
+Upon entering the lobby most visitors need to find the ticket area. It is important, therefore, that the ticketing area is visible from the entrance. Additionally, studies have shown that people first look to their right hand side when entering a building. By placing the ticket area on the right hand side of the lobby, visitors are more likely to notice it immediately upon entering the lobby. Finally, the ticketing area should be close to visitors when they enter because it is likely one of the first places they will need to visit.
 \begin{description}
-\item[Requirement 8:] \emph{The ticketing and information desks should be visible from the main entrance, they should be on the right hand side of the lobby from the main entrance, and they should be on the same side fo the lobby as the  entrance.}
+\item[Lobby Requirement 1:] \emph{The ticketing area should be visible from the main entrance.}
+\item[Lobby Requirement 2:] \emph{The ticketing area should be on the right hand side of the lobby from the entrance.}
+\item[Lobby Requirement 3:] \emph{The ticketing area should be close to the entrance.}
 \end{description}
 
-After obtaining a ticket most visitors will be trying to locate the entrance to the exhibitions. Therefore, exhibition entrances should be clearly visible from several parts of the lobby, including the ticketing desk, information desk, and a central lobby location, to make it easy for visitors to find where they need to go. 
+After obtaining a ticket most visitors will try to locate the entrance to the exhibitions. Therefore, exhibition entrances should be clearly visible from the ticketing area to make it easy for visitors to find where they need to go next. 
 \begin{description}
-\item[Requirement 8:] \emph{Exhibit entrances should be visible from the ticketing desk, information desk, and a central lobby location.}
+\item[Lobby Requirement 4:] \emph{Exhibit entrances should be visible from the ticketing area.}
 \end{description}
 
-Bathrooms are an important services for museum visitors. Surprisingly, the place of the bathroom can have an impact on how long visitors stay in the museum. Studies \cite{tbd} have found that bathrooms that are located on the same side of the lobby as the entrance / exit encourage visitors to leave earlier compared to museums with bathrooms on the opposing side of the lobby from the entrance / exit. Additionally, the doorways to the bathroom should be private to maintain as much privacy in the bathroom as possible.
+Bathrooms are an important services for museum visitors. Surprisingly, the place of the bathroom can have an impact on how long visitors stay in the museum. Studies \cite{tbd} have found that bathrooms that are located on the same side of the lobby as the entrance encourage visitors to leave earlier compared to museums with bathrooms on the opposing side of the lobby from the entrance. 
 
 \begin{description}
-\item[Requirement 9:] \emph{The bathroom should be on the opposing side of the lobby from the entrance / exit and the bathroom doorways should be private.}
+\item[Lobby Requirement 5:] \emph{The bathroom should be on the opposing side of the lobby from the entrance.}
 \end{description}
 
 
 \section{Application of CRR for Museum Design}
-This section presents the application of the CRR for validating art museum design requirements using a real world scenario. The first part of this section introduces the museums, including illustrations of their floor plans, which will be used in the case study and gives a brief overview of process of importing the designs into the CRR. The second part of this section presents the results of applying the museum design requirements identified in the beginning of this Chapter to the museum design presented here within the CRR.
+This section presents the application of the CRR for validating art museum design requirements using real world scenarios. The first part of this section introduces the museums that will be used in the case study and gives a brief overview of process of importing them into the CRR. The second part of this section presents the results of applying the museum design requirements identified above to these museums.
 
 %This use case is from the perspective of a museum designer and covers the process of importing a museums design from an architectural design tool (ArchiCAD) into the CRR, the building of museum requirements using architectural concepts and QSA, and finally validation of the requirements using the CRR query engine. 
 
 \subsection{Museum Designs and Import}
-The museum floor plans used in this case study are based off the Asian Art Wing of the Philadelphia Museum of Art \cite{PhiladelphiaArtMuseum} and the lobby of the Museu Calouste Gulbenkian. The Philadelphia Museum of Art will be used for the demonstration of the gallery requirements and the Museu Calouste Gulbenkian will be used for the demonstration of the lobby requirements. The motivation behind basing the designs off a real world museums instead of a contrived examples is to demonstrate the CRR in a real world context with regards to the applicability of museum design requirements using a real world design examples.
+The museum floor plans used in this case study are based off the Asian Art Wing of the Philadelphia Museum of Art \cite{PhiladelphiaArtMuseum} and the lobby of the Museu Calouste Gulbenkian. The Philadelphia Museum of Art will be used for the demonstration of the gallery requirements and the Museu Calouste Gulbenkian will be used for the demonstration of the lobby requirements. The motivation behind basing the designs off a real world museums instead of contrived examples is to demonstrate the CRR in a real world context with regards to the applicability of museum design requirements using a real world design examples.
 
-%\begin{figure}[H]
-% \centering
-% \subfloat[2nd Floor]{\label{art museum}\includegraphics[width=78mm]{philadelphiamuseum}}
-% \hspace{10 mm}
-% \subfloat[Asian Wing]{\label{asian wing}\includegraphics[width=45mm]{asianwing}}
-% \caption{Philadelphia Art Museum Floor-plan - Source \cite{philadelphiamusem}}
-%\label{art-museums}
-%\end{figure}
+\begin{figure}[H]
+ \centering
+ \subfloat[2nd Floor]{\label{art museum}\includegraphics[width=78mm]{philadelphiamuseum}}
+ \hspace{10 mm}
+ \subfloat[Asian Wing]{\label{asian wing}\includegraphics[width=45mm]{asianwing}}
+ \caption{Philadelphia Art Museum Floor-plan - Source \cite{philadelphiamusem}}
+\label{art-museums}
+\end{figure}
 
-Gallery rooms 226 and 238 - 244 of the Asian Wing at the \emph{Philadelphia Museum of Art} and the lobby of the \emph{Museu Calouste Gulbenkian} were manually built in ArchiCAD 14. The dimension and scale of the rooms where obtained from the museum to ensure as much accuracy to the real design as possible. Benches, display cases and states were manually added to demonstrate some of the museum requirements. Figure \ref{art museum in archiCAD} shows the floor plans in ArchiCAD.
+The gallery floor plans for gallery rooms 226 and 238 - 244 of the Asian Wing at the Philadelphia Museum of Art and the lobby of the Museu Calouste Gulbenkian were manually built in ArchiCAD 14. The dimension and scale of the rooms where obtained from the museum to ensure as much accuracy to the real design as possible. Benches, display cases and statues were manually added to demonstrate some of the museum requirements. Figure \ref{art museum in archiCAD} shows the floor plans in ArchiCAD.
 
 
-%\begin{figure}[h]
-%\centering
-%\includegraphics[width=90mm]{art-museum-archicad-crop}
-%\caption{Asian Wing in ArchiCAD}
-%\label{art museum in archiCAD}
-%\end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[width=90mm]{art-museum-archicad-crop}
+\caption{Asian Wing in ArchiCAD}
+\label{art museum in archiCAD}
+\end{figure}
 
 %\begin{figure}[h]
 %\centering
