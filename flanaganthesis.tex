@@ -1255,7 +1255,7 @@ This chapter is a case study that demonstrates the application of the CRR in the
 
 %how the museum design requirements can be represented and reasoned about in a computational framework, in order to detect design inconsistencies as per the design requirements.
 
-This chapter is divided into two sections. The first section sets up the context of the case study by examining museum design characteristics that influence visitors' behavior and experiences within an art museum. This section has two parts: the first part looks at museum characteristics that affect how visitors behave with museums galleries. The second part looks at the characteristics of a museum's lobby that influence visitors orientation. The second section of the Chapter demonstrates the application of the CRR to the previously identified museum requirements.  
+This chapter is divided into two sections. The first section sets up the context of the case study by examining museum design characteristics that influence visitors' behavior and experiences within an art museum. This section has two parts: first it looks at museum characteristics that affect how visitors behave with museums galleries, and second it looks at the characteristics of a museum's lobby that influence visitors orientation. The second section of the Chapter demonstrates the application of the CRR to the previously identified museum requirements.  
 
 %examines design requirements in art museums in three parts: the first part looks at requirements that influence museum visitors' behavior. The second part looks at requirements for promoting exploration in the museum. The third part looks at the requirements of accessibility and security within the museum. The second section, looks at how these requirements can be interpreted spatially and represented in the CRR. The third section tests the DSpace reasoner using sample museum floor plans that are both consistent and inconsistent per the design requirements for several art museums. The objective of this demonstration is to show that the DSpace reasoner can validate a design against its design requirements.
 
@@ -1266,17 +1266,19 @@ Museums are a place of public education, in which art, historical artefacts, and
 The art museum is a unique and fruitful choice for this case study because it provides a rich set of design properties that have been formally studied and reported \cite{Melton} \cite{Bitgood02} \cite{Falk}. Within museum studies, visitor behaviour has been one of the primary focuses, starting with experiments dating back to the 1930's. 
 
 \subsection{Museum Design Requirements}
-Pretend for a moment that you are an architect working on the initial design for a new modern art museum. During your first visit with the museum's curator you discuss several design requirements that are important for the new museum. Your discussion reveals that the curator wants the new art museum to adhere to the following requirements:
+Pretend for a moment that you are an architect working on the initial design for a new modern art museum. During your first visit with the museum's curator you discuss several design requirements that are important for the new museum. Your discussion reveals that the curator wants the new art museum to adhere to the following two requirements:
 
 \begin{enumerate}
 \item Maximize visitor utilization of exhibitions
 \item Maximize visitor orientation in lobby
 \end{enumerate}
 
+While these requirements are abstract, they can be mapped to concrete spatial characteristics of museum design. The following section looks at several of these characteristics.
 %TBD: explain how these high level requirements can be interpreted into concrete properties of the museums design. from here the requirements can be spatially interpreted and represented in the DSpace reasoner.
 
 \subsection{Maximizing Visitor Utilization of Exhibitions}
-This portion of the case study will look into four factors that influence visitors' movement patters: positioning of doorways, spatial arrangement of display cases, positioning of furniture and statues, congestion, and exploration. These properties inform museum architects, during the design process, about the spatial characteristics that can maximize the utilization of the museum by increasing the frequency and duration with which visitors view exhibition objects. 
+This portion of the case study will look into four factors that influence visitors' movement patters: positioning of doorways, spatial arrangement of display cases, positioning of furniture and statues, congestion, and exploration. These properties inform museum architects about the spatial characteristics that can maximize the utilization of the museum.
+% by increasing the frequency and duration with which visitors view exhibition objects. 
 
 
 \subsubsection{Positioning of doorways}
@@ -1303,7 +1305,7 @@ The results of Melton's studies inform architects of spatial characteristics tha
 \item[Gallery Requirement 2:] \emph{Gallery doorways should far away from each other.} 
 \end{description}
 
-Figure \ref{door-position} shows an exhibition design with doorways the same and opposing side of the gallery from the entrance.
+Figure \ref{door-position} shows an exhibition design with three doorways. Considering Gallery Requirement 1, doors 1 and 3 would be violation of this requirement because they are on the same-side of the gallery room.
 \begin{figure}[H]
 \centering
 \subfloat[consistent design]{\label{fig:door-opposite}\includegraphics[width=85mm]{door-possitioning}}
@@ -1312,8 +1314,8 @@ Figure \ref{door-position} shows an exhibition design with doorways the same and
 \end{figure} 
 
 
-\subsubsection{Spatial arrangement of display cases}
-The spatial arrangement of display cases in galleries has been shown to influence visitors' movement patterns. Bitgood \cite{Bitgood92} showed that display cases that are located at perimeter of the gallery generate the most amount of attention, while display cases that are isolated in the middle of the room received the lowest amount of attention.
+\subsubsection{Placement of display cases}
+The placement of display cases in galleries has been shown to influence visitors' movement patterns. Bitgood \cite{Bitgood92} showed in some environments that display cases that are located at the perimeter of a gallery generate the most amount of attention, while display cases that are isolated in the middle of the gallery received the lowest amount of attention.
 
 \begin{figure}[H]
  \centering
@@ -1330,7 +1332,9 @@ The spatial arrangement of display cases in galleries has been shown to influenc
 \item[Gallery Requirement 3:] \emph{Display cases should not be isolated near the center of the room.}
 \end{description} 
 
-Circulation patterns can be disrupted when a sequence of display cases cuts horizontally across the view of a visitor as they are entering the room. This type of display pattern will cut off part of the room from the visitors normal visitation patterns by changing circulation pathways.
+Figure \ref{display-arrangement} shows an illustration of a display case located on the perimeter and one that is isolated near the center of the gallery.
+
+Additionally, the placement of a sequence of display cases can disrupt circulation patterns when the sequence cuts horizontally across the view of a visitor as they are entering the room. This type of display pattern might cut off part of the gallery from the visitors normal visitation patterns by changing circulation pathways.
 
 \begin{description}
 \item[Gallery Requirement 4:] \emph{Display cases sequences should not cut horizontally across the view of a visitor located at an entrance.}
@@ -1344,17 +1348,17 @@ Circulation patterns can be disrupted when a sequence of display cases cuts hori
 \caption{Display Case Sequence}
 \end{figure}
 
-Figure \ref{cut-horizontal} shows an example gallery with two display cases examples. Figure \ref{not-cut} shows an example where the display case sequence does not cut horizontally across the visitor's view, while Figure \ref{cut} shows an example where the display cases sequence does cut horizontally.
+Figure \ref{cut-horizontal} shows an example gallery with two sequence examples. Figure \ref{not-cut} shows an example where the display case sequence does not cut horizontally across the visitor's view, while Figure \ref{cut} shows an example where the display cases sequence does cut horizontally.
 
 \subsubsection{Congestion}
-Congestion in museums can be caused by interference of displayed objects and their viewing spaces with movement pathways of visitors. In order to reduce congestion in museums, designers should be aware of the placement of display cases, statues, furniture (seating benches), and information kiosks within the gallery. The following are requirements that should be followed to reduce congestion in museums:
+Congestion in museums can be caused by interference of displayed objects and their viewing spaces with movement pathways of visitors. In order to reduce congestion in museums, designers should be aware of the placement of display cases, statues and furniture (seating benches) within the gallery. The following requirement should be followed to reduce congestion in museums.
 
 \begin{description}
 \item[Gallery Requirement 5:] \emph{There should be no artefactual interference between museum display cases, museum seating and architectural entities.}
 \end{description}
 
 
-\subsubsection{Positioning of benches, statues, and information kiosks}
+\subsubsection{Positioning of benches and statues}
 The positioning and orientation of benches and statues can increase the amount of attention an exhibition receives and change circulation patterns within a gallery \cite{Stavroulaki} \cite{Museum}. Studies have shown that seating facing a doorway or window will decrease attention in the Gallery.
 
 \begin{description}
