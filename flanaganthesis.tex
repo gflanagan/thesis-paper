@@ -1414,19 +1414,18 @@ This section presents the application of the CRR to two real world museums using
 %This use case is from the perspective of a museum designer and covers the process of importing a museums design from an architectural design tool (ArchiCAD) into the CRR, the building of museum requirements using architectural concepts and QSA, and finally validation of the requirements using the CRR query engine. 
 
 \subsection{Museum Designs and Import}
-The museum floor plans used in this case study are based off the Asian Art Wing of the Philadelphia Museum of Art \cite{PhiladelphiaArtMuseum} and the lobby of the Museu Calouste Gulbenkian. The Philadelphia Museum of Art will be used for the demonstration of the gallery requirements and the Museu Calouste Gulbenkian will be used for the demonstration of the lobby requirements. The motivation behind basing the designs off a real world museums instead of contrived examples is to demonstrate the CRR in a real world context with regards to the applicability of museum design requirements using a real world design examples.
+This case study uses the Asian Art Wing of the Philadelphia Museum of Art \cite{PhiladelphiaArtMuseum} and the lobby of the Museu Calouste Gulbenkian. The Asian Wing of the Philadelphia Museum of Art will be used for the demonstration of the gallery requirements, while the lobby of the Museu Calouste Gulbenkian will be used for the demonstration of the lobby requirements. The motivation behind using real world museums instead of contrived examples is to demonstrate the CRR in a real world context with regards to the practicality of museum design requirements.
 
 \begin{figure}[H]
  \centering
  \subfloat[2nd Floor]{\label{art museum}\includegraphics[width=78mm]{philadelphiamuseum}}
  \hspace{10 mm}
  \subfloat[Asian Wing]{\label{asian wing}\includegraphics[width=45mm]{asianwing}}
- \caption{Philadelphia Art Museum Floor-plan - Source \cite{philadelphiamusem}}
+ \caption{Philadelphia Museum of Art - Source \cite{philadelphiamusem}}
 \label{art-museums}
 \end{figure}
 
-The gallery floor plans for gallery rooms 226 and 238 - 244 of the Asian Wing at the Philadelphia Museum of Art and the lobby of the Museu Calouste Gulbenkian were manually built in ArchiCAD 14. The dimension and scale of the rooms where obtained from the museum to ensure as much accuracy to the real design as possible. Benches, display cases and statues were manually added to demonstrate some of the museum requirements. Figure \ref{art museum in archiCAD} shows the floor plans in ArchiCAD.
-
+The Asian Art Wing (gallery rooms 226 and 238-244) and the lobby of the Museu Calouste Gulbenkian were manually built in ArchiCAD 14. The dimension and scale of the rooms where obtained from the museums to ensure as much accuracy to the real design as possible. Benches, display cases and statues were added to demonstrate some of the museum requirements. Figure \ref{art museum in archiCAD} shows the floor plans for both museums in ArchiCAD.
 
 \begin{figure}[h]
 \centering
@@ -1442,17 +1441,17 @@ The gallery floor plans for gallery rooms 226 and 238 - 244 of the Asian Wing at
 %\label{art museum in archiCAD}
 %\end{figure}
 
-Once an initial design has been built in ArchiCAD it can be imported into the CRR via a Multi-Modal Spatial Data Access Framework for Architectural Design \cite{carl}. This framework provides the CRR with access to the representational information such as structural spatial and containment relationships involving rooms/spaces and architectural entities. The current version of this framework does not provide spatial data for artefactual representations or wall to door/window containment relationships, so these need to be manually added to the CRR's design representation model.    
+Once the museums are built in ArchiCAD they can be imported into the CRR via a Multi-Modal Spatial Data Access Framework \cite{carl}. This framework provides the CRR with access to various design information including: the physical representation for each architectural entity, and room / building / story containment relationships. Artefactual representations, room to wall boundary relationships, and wall to door / window containment relationships are manually added into the CRR. Future versions of the Multi-Modal Spatial Data Access Framework plan on supporting these informational design aspects. The import process consists of a parser written in Python which parses a Design Space schematized xml file (produced by the Multi-Modal Spatial Data Access Framework) and produces a Prolog representation of the design that is used by the CRR.
+
+%the representational information such as structural spatial and containment relationships involving rooms/spaces and architectural entities. The current version of this framework does not provide spatial data for artefactual representations or wall to door/window containment relationships, so these need to be manually added to the CRR's design representation model.    
 
 
 \subsection{Validating Museum Requirements}
-This section presents the results of applying the museum requirements identified in the beginning of this Chapter against the museum floor plans imported in the previous section. 
-
-Table \ref{} shows the CRR query used for each museum requirement along with any violations found in the design. Each violation can be visually confirmed in the museum design floor plans provided above. The take away from this demonstration is that the CRR is able to check high level design requirements as they occur in real world concrete designs. 
+The results of applying the museum requirements the Philadelphia Museum of Art and the Museu Calouste Gulbenkian are presented here. Table \ref{results} shows the CRR query used for each museum requirement along with any violations found in the design. Each violation can be visually confirmed in the museum design floor plans provided above. The take away from this demonstration is that the CRR is able to check high level design requirements as they occur in real world concrete designs. 
 
 %In this section, the museum requirements identified in the beginning of this Chapter will be check for against the \emph{Philadelphia Museum of Art} and the \emph{Museu Calouste Gulbenkian} floor plan imported in previous section. Checking for design requirements will follow a general pattern of querying the CRR using architectural concepts, QSAs, and qualitative spatial relationships. 
 
-\begin{table}[H]
+\begin{table}[H]\label{results}
   \begin{center}
   \begin{tabular}{ | c | p{7.5cm} | p{6cm} |}
     \hline
