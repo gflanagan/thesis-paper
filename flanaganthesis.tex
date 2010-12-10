@@ -1329,7 +1329,7 @@ The placement of display cases in galleries has been shown to influence visitors
 \end{figure}
  
 \begin{description}
-\item[Gallery Requirement 3:] \emph{Display cases should not be isolated near the center of the room.}
+\item[Gallery Requirement 3:] \emph{Display cases should be located on the perimeter.}
 \end{description} 
 
 Figure \ref{display-arrangement} shows an illustration of a display case located on the perimeter and one that is isolated near the center of the gallery.
@@ -1429,7 +1429,7 @@ The Asian Art Wing (gallery rooms 226 and 238-244) and the lobby of the Museu Ca
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=90mm]{art-museum-archicad-crop}
+\includegraphics[width=110mm]{museum-floor-plan-reqs3}
 \caption{Asian Wing in ArchiCAD}
 \label{art museum in archiCAD}
 \end{figure}
@@ -1447,9 +1447,8 @@ Once the museums are built in ArchiCAD they can be imported into the CRR via a M
 
 
 \subsection{Validating Museum Requirements}
-The results of applying the museum requirements the Philadelphia Museum of Art and the Museu Calouste Gulbenkian are presented here. Table \ref{results} shows the CRR query used for each museum requirement along with any violations found in the design. Each violation can be visually confirmed in the museum design floor plans provided above. The take away from this demonstration is that the CRR is able to check high level design requirements as they occur in real world concrete designs. 
+The results of applying the museum requirements to the Philadelphia Museum of Art and the Museu Calouste Gulbenkian are presented in Table \ref{results}. Table \ref{results} contains three columns. The first column identifies the museum requirement, the second column shows the CRR query used to check for the requirement, and the third column show all violations that were discovered by the CRR. It should be noted that logical quantification of requirements is not automatically handled in the CRR. For example, Gallery Requiement 6 can be specified as: for every pairing of benches and doorways within a gallery room, each pairing of bench and doorway should be facing away from each other. As another example, Gallery Requirement 4 can be specified as follows: for every display case there should be at least one wall that is near to it. To reiterate, the quantification over these requirement must be handled by the user.
 
-%In this section, the museum requirements identified in the beginning of this Chapter will be check for against the \emph{Philadelphia Museum of Art} and the \emph{Museu Calouste Gulbenkian} floor plan imported in previous section. Checking for design requirements will follow a general pattern of querying the CRR using architectural concepts, QSAs, and qualitative spatial relationships. 
 
 \begin{table}[H]\label{results}
   \begin{center}
@@ -1459,8 +1458,8 @@ The results of applying the museum requirements the Philadelphia Museum of Art a
     GR1 & opposing\_side(\emph{door\_id}, \emph{door\_id}, \emph{room\_id}) & - door4, door5, gallery234 
     													\newline - door2, door1, gallery256 
     													\newline - door3, door6, gallery245 \\ \hline
-    GR2 &  &  \\ \hline
-    GR3 & island(\emph{display\_id}) & - display4 \\ \hline
+    GR2 & far(\emph{door\_id}, \emph{door\_id})  &  \\ \hline
+    GR3 & near(\emph{display\_id}, \emph{wall\_id}) & - display4 \\ \hline
     GR4 & horizontal(\emph{display\_list}) & - (display1, display2, display3) \\ \hline
     GR5 & artefact\_interference(\emph{id}, \emph{id}) &  \\ \hline
     GR6 & facing\_away(\emph{bench\_id}, \emph{door\_id}) & - bench, door
@@ -1472,20 +1471,36 @@ The results of applying the museum requirements the Philadelphia Museum of Art a
     \hline
   \end{tabular}
   \end{center}
-\caption{Spatial Abstractions for Architectural Entities}
+\caption{Case Study Results}
 \label{spatial abstractions}
 \end{table} 
 
-Gallery Requirement 1 specifies that doorways should be positioned on opposing sides of a gallery room. The opposing side relationship can be checked for using the CRR with the following query:
-\begin{verbatim}
-    ?- opposing_side(door_id, door_id, gallery_id).
-\end{verbatim} The opposing side relationship takes three crr\_ids as arguments. In this requirement the first and second arguments refer to doorways and the third refers to the gallery room. This requirement can be checked for in the Philadelphia Museum of Art by making opposing-side queries to the CRR. For the galleries which have doorways on opposing sides the query will respond with a true and will fail when they are not. A failure indicates to the designer that the requirement has been violated. The following two queries show an example of a one query passing and one failing.  
-\begin{verbatim}
-    ?- opposing_side(door1, door2, gallery244).
-    - true.
-    ?- opposing_side(door7, door8, gallery233).
-    - fail.
-\end{verbatim} Visually checking the floor plan in Figure \ref{} in fact shows that doorways door1 and door2 are on opposing sides of gallery244 while doorways door7 and door8 are on the same side of gallery233.
+The results of the 
+\begin{figure}[h]
+\centering
+\includegraphics[width=110mm]{museum-floor-plan-reqs-crop2}
+\caption{Asian Wing in ArchiCAD}
+\label{art museum in archiCAD}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=120mm]{coninuity-req-view}
+\caption{Asian Wing in ArchiCAD}
+\label{art museum in archiCAD}
+\end{figure}
+
+
+%Gallery Requirement 1 specifies that doorways should be positioned on opposing sides of a gallery room. The opposing side relationship can be checked for using the CRR with the following query:
+%\begin{verbatim}
+%    ?- opposing_side(door_id, door_id, gallery_id).
+%\end{verbatim} The opposing side relationship takes three crr\_ids as arguments. In this requirement the first and second arguments refer to doorways and the third refers to the gallery room. This requirement can be checked for in the Philadelphia Museum of Art by making opposing-side queries to the CRR. For the galleries which have doorways on opposing sides the query will respond with a true and will fail when they are not. A failure indicates to the designer that the requirement has been violated. The following two queries show an example of a one query passing and one failing.  
+%\begin{verbatim}
+%    ?- opposing_side(door1, door2, gallery244).
+%    - true.
+%    ?- opposing_side(door7, door8, gallery233).
+%    - fail.
+%\end{verbatim} Visually checking the floor plan in Figure \ref{} in fact shows that doorways door1 and door2 are on opposing sides of gallery244 while doorways door7 and door8 are on the same side of gallery233.
 
 
 %Gallery Requirement 4 specifies that display cases arrangements should not cut horizontally across the view of a visitor located at a doorway to a gallery. This requirement can be check for using the horizontal rule in the CRR. The horizontal query takes a list of crr\_id that represent a series of objects and a vantage point (in this case a doorway) and returns true if they cut horizontally from the perspective of the vantage point. Give the Philadelphia Museum of Art this requirement can be check for using the following query:
@@ -1495,6 +1510,10 @@ Gallery Requirement 1 specifies that doorways should be positioned on opposing s
 %\end{verbatim} In this case the query returns true because this sequence of display cases cut horizontally across the view from point of view at doorway 1. Visually checking this in the floor plan show that the display cases do cut horizontally.
 
 
+%Each violation can be visually confirmed in the museum design floor plans provided above. The take away from this demonstration is that the CRR is able to check high level design requirements as they occur in real world concrete designs. While each requirement has a logical quantification, this version of the CRR does not support ... Therefore it is up to the user to keep track of the quantification. 
+
+
+%In this section, the museum requirements identified in the beginning of this Chapter will be check for against the \emph{Philadelphia Museum of Art} and the \emph{Museu Calouste Gulbenkian} floor plan imported in previous section. Checking for design requirements will follow a general pattern of querying the CRR using architectural concepts, QSAs, and qualitative spatial relationships.
 
 
 %\subsection{A Private Room}
