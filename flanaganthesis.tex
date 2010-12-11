@@ -584,6 +584,8 @@ The following rules show the physical, functional and operational rules for a do
             spatial_primitive(OpGeometry, [(1,4),(4,6),(4,3)]).
 \end{verbatim} Every architectural entity has a physical representation but may or may not have a functional, operational, or range representation. For example, a doorway usually has a functional and operational representation but may not have a range representation. Some entities, such as columns, have no artefactual representations. However, there are no limitation imposed on which entities can or can not have certain artefactual extensions.
 
+TODO: Doors case (windows are not handled here), which part of geometry is represented in which room???
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=120mm]{clp-design}
@@ -1399,15 +1401,17 @@ After obtaining a ticket most visitors will try to locate the entrance to the ex
 \item[Lobby Requirement 4:] \emph{Exhibit entrances should be visible from the ticketing area.}
 \end{description}
 
-Bathrooms are an important services for museum visitors. Surprisingly, the place of the bathroom can have an impact on how long visitors stay in the museum. Studies \cite{tbd} have found that bathrooms that are located on the same side of the lobby as the entrance encourage visitors to leave earlier compared to museums with bathrooms on the opposing side of the lobby from the entrance. 
+%Bathrooms are an important services for museum visitors. Surprisingly, the place of the bathroom can have an impact on how long visitors stay in the museum. Studies \cite{tbd} have found that bathrooms that are located on the same side of the lobby as the entrance encourage visitors to leave earlier compared to museums with bathrooms on the opposing side of the lobby from the entrance. 
 
-\begin{description}
-\item[Lobby Requirement 5:] \emph{The bathroom should be on the opposing side of the lobby from the entrance.}
-\end{description}
+%\begin{description}
+%\item[Lobby Requirement 5:] \emph{The bathroom should be on the opposing side of the lobby from the entrance.}
+%\end{description}
 
 
 \section{Application of CRR for Museum Design}
-This section presents the application of the CRR to two real world museums using the requirements identified above. This section is organized as follows. The first part introduces the two museums that are used in the case study and briefly describes the process of importing these museums into the CRR from ArchiCAD. The second part presents the results of applying the CRR to the museums to detect violations with regards to the museum design requirements. 
+This section presents the application of the CRR to two real world museums using the requirements identified above. This section is organized as follows. The first part introduces the two museums that are used in the case study and briefly describes the process of importing these museums into the CRR from ArchiCAD. The second part presents the results of using the CRR for requirements reasoning in the context of museum design.
+
+%of applying the CRR to the museums to detect violations with regards to the museum design requirements. 
 
 %for validating art museum design requirements using real world scenarios. The first part of this section introduces the museums that will be used in the case study and gives a brief overview of process of importing them into the CRR. The second part of this section presents the results of applying the museum design requirements identified above to these museums.
 
@@ -1425,71 +1429,87 @@ This case study uses the Asian Art Wing of the Philadelphia Museum of Art \cite{
 \label{art-museums}
 \end{figure}
 
-The Asian Art Wing (gallery rooms 226 and 238-244) and the lobby of the Museu Calouste Gulbenkian were manually built in ArchiCAD 14. The dimension and scale of the rooms where obtained from the museums to ensure as much accuracy to the real design as possible. Benches, display cases and statues were added to demonstrate some of the museum requirements. Figure \ref{art museum in archiCAD} shows the floor plans for both museums in ArchiCAD.
+The Asian Art Wing (gallery rooms 226 and 238-245) and the lobby of the Museu Calouste Gulbenkian were manually built in ArchiCAD 14. The dimension and scale of the rooms where obtained from the museums to ensure as much accuracy to the real design as possible. Benches, display cases and statues were added to demonstrate some of the museum requirements. Figure \ref{art museum in archiCAD} shows the floor plans for both museums in ArchiCAD.
 
-\begin{figure}[h]
+\pagebreak
+
+\begin{figure}[H]
 \centering
-\includegraphics[width=110mm]{museum-floor-plan-reqs3}
-\caption{Asian Wing in ArchiCAD}
-\label{art museum in archiCAD}
+\includegraphics[width=120mm]{lobby}
+\caption{Lobby of Museu Calouste Gulbenkianin}
+\label{lobby}
 \end{figure}
 
-%\begin{figure}[h]
-%\centering
-%\includegraphics[width=100mm]{lobby}
-%\caption{Asian Wing in ArchiCAD}
-%\label{art museum in archiCAD}
-%\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=90mm]{museum-floor-plan-reqs-p}
+\caption{Asian Wing of Philadelphia Museum of Art}
+\label{philadelphia-museum-floorplan}
+\end{figure}
 
-Once the museums are built in ArchiCAD they can be imported into the CRR via a Multi-Modal Spatial Data Access Framework \cite{carl}. This framework provides the CRR with access to various design information including: the physical representation for each architectural entity, and room / building / story containment relationships. Artefactual representations, room to wall boundary relationships, and wall to door / window containment relationships are manually added into the CRR. Future versions of the Multi-Modal Spatial Data Access Framework plan on supporting these informational design aspects. The import process consists of a parser written in Python which parses a Design Space schematized xml file (produced by the Multi-Modal Spatial Data Access Framework) and produces a Prolog representation of the design that is used by the CRR.
-
-%the representational information such as structural spatial and containment relationships involving rooms/spaces and architectural entities. The current version of this framework does not provide spatial data for artefactual representations or wall to door/window containment relationships, so these need to be manually added to the CRR's design representation model.    
+Once the museums are built in ArchiCAD they are imported into the CRR via a Multi-Modal Spatial Data Access Framework \cite{carl}. This framework provides the CRR with access to various design information including: the physical representation for each architectural entity, and room / building / story containment relationships. Artefactual representations, room to wall boundary relationships, and wall to door / window containment relationships are manually added into the CRR. Future versions of the Multi-Modal Spatial Data Access Framework plan on supporting these informational design aspects. The import process consists of a parser written in Python that parses a Design Space schematized xml file, produced by the Multi-Modal Spatial Data Access Framework, and outputs a Prolog representation of the design that is used by the CRR.
 
 
 \subsection{Validating Museum Requirements}
-The results of applying the museum requirements to the Philadelphia Museum of Art and the Museu Calouste Gulbenkian are presented in Table \ref{results}. Table \ref{results} contains three columns. The first column identifies the museum requirement, the second column shows the CRR query used to check for the requirement, and the third column show all violations that were discovered by the CRR. It should be noted that logical quantification of requirements is not automatically handled in the CRR. For example, Gallery Requiement 6 can be specified as: for every pairing of benches and doorways within a gallery room, each pairing of bench and doorway should be facing away from each other. As another example, Gallery Requirement 4 can be specified as follows: for every display case there should be at least one wall that is near to it. To reiterate, the quantification over these requirement must be handled by the user.
+The results of applying the museum requirements to the Philadelphia Museum of Art and the Museu Calouste Gulbenkian are presented in Table \ref{results}. This Table contains three columns. The first column identifies the museum requirement, the second column shows the CRR query used to check for the requirement, and the third column show all violations that were discovered by the CRR. The results here demonstrate two outcomes. The application of the gallery requirements to the Philadelphia Art Museum gives an examples of where the design is inconsistent with regards to the design requirement, while the application of the lobby requirements to the Museu Calouste Gulbenkia gives an example where the design is consistent with the design requirements. 
 
-
-\begin{table}[H]\label{results}
+\begin{table}[t]
   \begin{center}
-  \begin{tabular}{ | c | p{7.5cm} | p{6cm} |}
+  \begin{tabular}{ | c | p{7.2cm} | p{7.3cm} |}
     \hline
     Req. & CRR Query & Violations\\ \hline
-    GR1 & opposing\_side(\emph{door\_id}, \emph{door\_id}, \emph{room\_id}) & - door4, door5, gallery234 
-    													\newline - door2, door1, gallery256 
-    													\newline - door3, door6, gallery245 \\ \hline
-    GR2 & far(\emph{door\_id}, \emph{door\_id})  &  \\ \hline
-    GR3 & near(\emph{display\_id}, \emph{wall\_id}) & - display4 \\ \hline
-    GR4 & horizontal(\emph{display\_list}) & - (display1, display2, display3) \\ \hline
-    GR5 & artefact\_interference(\emph{id}, \emph{id}) &  \\ \hline
-    GR6 & facing\_away(\emph{bench\_id}, \emph{door\_id}) & - bench, door
-                               \newline - bench, door \\ \hline
-    GR7 & facing\_away(\emph{statue\_id}, \emph{door\_id}) & - statue1, door4 \\ \hline
-    GR8 & continuity(\emph{gallery\_id}) &  - gallery344 \\ \hline
-    LR1 & right\_side(\emph{door\_id}, \emph{desk\_id})& - no violations \\ \hline
-    LR2 & visibility(\emph{door\_id}, \emph{door\_id})& - no violations\\
+    GR1 & opposing\_side(\emph{door\_id}, \emph{door\_id}, \emph{room\_id}) & $\circ$ door4, door10, gallery240 
+    													\newline $\circ$ door5, door11, gallery243 
+    													\newline $\circ$ door7, door12, gallery241 \\ \hline
+    GR2 & far(\emph{door\_id}, \emph{door\_id})  &  $\circ$ door4, door10 
+                                          \newline  $\circ$ door5, door11
+                                          \newline  $\circ$ door7, door12 \\ \hline
+    GR3 & near(\emph{display\_id}, \emph{wall\_id}) & $\circ$ display4 \\ \hline
+    GR4 & horizontal(\emph{display\_list}) & $\circ$ (display0, display1, display2, display3) \\ \hline
+    GR5 & artefact\_interference(\emph{id}, \emph{id}) & $\circ$ door8, display8 \\ \hline
+    GR6 & facing\_away(\emph{bench\_id}, \emph{door\_id}) & $\circ$ bench0, door6
+                                                   \newline $\circ$ bench1, door3 \\ \hline
+    GR7 & facing\_away(\emph{statue\_id}, \emph{door\_id}) & $\circ$ statue0, door6 \\ \hline
+    GR8 & continuity(\emph{room\_id}) &  $\circ$ gallery239 \\ \hline
+    LR1 & visibility(\emph{entrance\_id}, \emph{desk\_id})& no violations\\ \hline
+    LR2 & right\_side(\emph{entrance\_id}, \emph{desk\_id})& no violations \\ \hline
+    LR3 & near(\emph{entrance\_id}, \emph{desk\_id})& no violations\\ \hline
+    LR4 & visibility(\emph{desk\_id}, \emph{door\_id})& no violations\\
     \hline
   \end{tabular}
   \end{center}
 \caption{Case Study Results}
-\label{spatial abstractions}
+\label{results}
 \end{table} 
 
-The results of the 
-\begin{figure}[h]
+It should be noted that the quantification of requirements is not handled in this version of the CRR. Therefore, checking requirements may involve several queries or special consideration from the user. For example, Gallery Requirement 6 can be quantified as: for every pairing of benches and doorways within a gallery room, each pairing should be facing away from each other. In this example the user is responsible for checking the facing relationship between each pair of doorways and benches. As another example, Gallery Requirement 4 can be quantified as follows: for every display case there should be at least one wall that is near to it. In this example the user is responsible for checking the proximity relationships between each display case and all walls surrounding it. 
+
+\begin{figure}[t]
 \centering
-\includegraphics[width=110mm]{museum-floor-plan-reqs-crop2}
-\caption{Asian Wing in ArchiCAD}
-\label{art museum in archiCAD}
+\includegraphics[width=90mm]{coninuity-req-view}
+\caption{Visibility in Gallery239}
+\label{continuity-gallery239}
 \end{figure}
+
+Requirement violations reported in Table \ref{results} can be visually verified by looking at Figure \ref{philadelphia-museum-floorplan}. For example, Gallery Requirement 1, which specifies that doorways should be on opposing sides of a gallery room, can be visually inspected to verify the CRR results. In this example, the CRR reported that the following doorways and gallery rooms are in violations of this requirements:
+\begin{itemize}
+\item door4, door10, gallery240
+\item door5, door11, gallery243
+\item door7, door12, gallery241
+\end{itemize} Visual inspection of Figure \ref{philadelphia-museum-floorplan} confirms that these doorways are \emph{not} on opposing sides of the gallery room and therefore are in violation of Gallery Requirement 1. As another example, Gallery Requirement 8 specifies that every Gallery should maintain continuity between doorways. The results of this case study shows that gallery 239 is in violation of the requirement. The cause of this violation is because door3 and door10 are not visible from door9. Figure \ref{continuity-gallery239} shows a 3-D view of gallery 239 from the perspective door10 (this graphic was rendered in ArchiCAD) and show that in fact door3 and door10 are not visible from door9 because there is a wall obstructing the view.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=120mm]{coninuity-req-view}
-\caption{Asian Wing in ArchiCAD}
+\includegraphics[width=90mm]{museum-floor-plan-reqs-crop2}
+\caption{Gallery Requirement Violations}
 \label{art museum in archiCAD}
 \end{figure}
 
+The process of manual verification can be used to inspect the other gallery requirement violations reported by the CRR. The result of doing so will show that the CRR accurately reported violations for this case study. To illustrate this, Figure \ref{art museum in archiCAD} shows the Philadelphia Art Museum floor plan with labels for corresponding gallery requirement violations as reported in Table \ref{results}. 
+
+Similarly, this same process can be used to verify that the lobby of the Museu Calouste Gulbenkian is consistent with the lobby requirements. For example, Lobby Requirement 2 specifies that the ticketing desk should be on the right hand side of the entrance from the perspective of entering the museum. Inspecting figure \ref{lobby} shows that in fact the ticketing desk is on the right hand side. Manual inspection of the other lobby requirements will show that the Museu Calouste Gulbenkian is consistent with the lobby requirements as reported by the CRR.
+
+This case study demonstrated the application of the CRR to reason about high level design requirements given an underlying low level representation of the design. the crux of the work here is the use of a qualitative spatial layer that intermediates between the high level and low level. The results show that the CRR is capable of accurately detecting design requirement violations and informs the designer when a design is consistent of inconsistent per the designs requirements.
 
 %Gallery Requirement 1 specifies that doorways should be positioned on opposing sides of a gallery room. The opposing side relationship can be checked for using the CRR with the following query:
 %\begin{verbatim}
