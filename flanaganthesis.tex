@@ -137,19 +137,17 @@
 
 \chapter{Introduction}
 \label{intro}
-Humans reason about space at an abstract level, this means we think about our spatial environments in terms of qualities rather than quantities. In other words, we cognitively represent our spatial environments using symbolic terms such as \emph{next-to}, \emph{in-front-of}, or \emph{close-by}, as opposed to using a precise spatial coordinate system of x, y, and z  \cite{freksa1991qsr} \cite{Cohn:2001:QSR}. Computers on the other hand are excellent at storing and computing over large amounts of precise, concrete data. From a spatial perspective, this means that computers are able to handle large amount of quantitative spatial information that is necessary for tasks such as geo-location and terrain mapping \cite{somebody}. 
+Humans reason about space at an abstract level, this means we think about our spatial environments in terms of qualities rather than quantities. In other words, we cognitively represent our spatial environments using symbolic terms like \emph{next-to}, \emph{in-front-of}, or \emph{close-by}, as opposed to using a precise spatial coordinate system of x, y, and z  \cite{freksa1991qsr} \cite{Cohn:2001:QSR}. Computers on the other hand are excellent at storing and computing over large amounts of precise, concrete data. From a spatial perspective, this means that computers are able to handle large amount of quantitative spatial information that is necessary for many tasks like geo-location and terrain mapping \cite{somebody}. 
 
-The area of architectural design is an interesting application domain with regards to the representation of space because it inherently involves multiple spatial perspectives: \emph{qualitative} and \emph{quantitative}. At the qualitative level, spatial aspects of the design define architectural qualities such as spaciousness, privacy, and continuity. These conceptual aspects encompass the way an architectural design is experienced. At the quantitative level, an architectural design is spatially modeled at a precise and concrete level that is necessary during the construction of the design in the real world.
+The area of architectural design is an interesting application domain with regards to the representation of space because it inherently involves multiple spatial perspectives: \emph{qualitative} and \emph{quantitative}. At the qualitative level, spatial aspects of the design define architectural qualities such as spaciousness, privacy, and continuity. These conceptual aspects encompass the way an architectural design is experienced. At the quantitative level, an architectural design is spatially modeled at a precise and concrete level so that is can be used during the construction of the design in the real world. These two spatial perspectives encompass very different aspects of an architectural design.
 
-Current state-of-the-art Computer Aided Architectural Design (CAAD) tools spatially represent architectural designs at a quantitative level \cite{archiCAD} \cite{autoCAD}. While a quantitative representations allows CAAD tools to produce accurate blueprints that can be used during construction, it lack the underlying computational apparatus necessary to reason about architectural design at a high level of abstraction. 
+Current state-of-the-art Computer Aided Architectural Design (CAAD) programs spatially represent architectural designs at a quantitative level \cite{ArchiCAD}. This allows CAAD programs to be effectively used to model the precise spatial characteristics that are necessary during the construction of the architectural design in the real world. Unfortunately, this type of representation model means that CAAD programs lack the underlying computational apparatus necessary to reason about architectural design at higher levels of abstraction, such as reasoning about its conceptual features. This happens because of the representational gap between the low level spatial representation of the architectural design in the CAAD program and the abstract representation necessary for reasoning at a conceptual level. 
 
-This thesis is an a first step towards building a framework that bridges the gap between the high level conceptual aspects of a design to the design's low level spatial representation. Specifically, the framework referred to as the Conceptual Requirements Reasoner (CRR), does so in the context of conceptual requirements reasoning. This framework will demonstrate how qualitative spatial representation and reasoning techniques can be used to bridge the gap between conceptual and quantitative levels.
+This thesis is an a first step towards building a framework that bridges this gap between the high level conceptual aspects of a design to its low level CAAD-based spatial representation. Specifically, this thesis presents a new framework, referred to as the Conceptual Requirements Reasoner (CRR), that provides an architect with a framework to validate conceptual design requirements. Conceptual design requirements in this thesis refer to qualitative and experiential features of an architectural design. They can be architectural concepts like spaciousness, privacy and continuity or qualitative spatial attributes found in architecture such as positioning, orientation, proximity, and visibility. The CRR will demonstrate how qualitative spatial representation and reasoning techniques can be used as the link between an architectural design's conceptual requirements and its underlying quantitative spatial representation.
 
-A Museum Case Study is presented to demonstrate the application of the CRR in a real world design context. It introduces a set of museum design requirements that were identified in museum research and applies these requirements to two real world museums. The results of the case study show that the CRR is an effective tool for detecting violations of design requirements.
+A Museum Case Study is presented to demonstrate the application of the CRR in a real world design context. It introduces a set of museum design requirements that were identified in museum research and applies these requirements to two real world museums. The results of the case study show that the CRR is an effective tool for conceptual requirements reasoning.
 
-Outline of thesis
-
-
+This thesis is organized as follows. Chapter \ref{background-relatedwork} presents the background knowledge that is necessary for the rest of the thesis and the related works. Chapter \ref{ccr} introduces the problem statement being addressed in the thesis and presents the thesis's main contributions and approach. Chapters \ref{representation and reasoning} presents the CRR's design representation model and spatial reasoning framework. Chapter \ref{design space} present the a set of architectural concepts and qualitative spatial attributes found in architecture and shows how they can be spatially defined. Chapter \ref{case study} presents the application of the CRR in the area of museum design through a case study and reports to results of the study. Chapter \ref{conclusion} presents concluding thought and future works to be completed. 
 
 
 %Where as an architect conceptualizes a design from an spatially abstract level, it is necessary for the architect to construct the concrete level that is precise enough for the design to be realized \cite{conceptual design stuff}. 
@@ -177,7 +175,7 @@ Outline of thesis
 
 
 
-\chapter{Background and Related Works} 
+\chapter{Background and Related Works} \label{background-relatedwork}
 %This chapter presents the background knowledge required for this thesis and the related works.  
 
 \section{Background}
@@ -185,7 +183,7 @@ Outline of thesis
 For this thesis there are two required areas of background knowledge: Qualitative Spatial Reasoning (QSR) and Constraint Logic Programming (CLP).
 
 \subsection{Qualitative Spatial Representation and Reasoning}
-The field of Qualitative Spatial Reasoning (QSR) investigates techniques for representing and reasoning about abstract features of space in a computational framework while preserving its fundamental properties. In this regard, QSR represents space at a qualitative level as opposed to a quantitative level. At the qualitative level, space is defined by symbolic and abstract spatial relationships, such as \emph{behind}, \emph{left-of} and \emph{close-to}, while at the quantitative level, space is defined by precise numeric values \cite{freksa1991qsr} \cite{bhattSpatialComputing}. 
+The field of Qualitative Spatial Reasoning (QSR) investigates techniques for representing and reasoning about abstract features of space in a computational framework while preserving its fundamental properties. In this regard, QSR represents space at a qualitative level as opposed to a quantitative level. At the qualitative level, space is defined by symbolic and abstract spatial relationships, such as \emph{behind}, \emph{left-of} and \emph{close-to}, while at the quantitative level, space is defined by precise numeric values \cite{freksa1991qsr} \cite{bhatt-spatial-computing}. 
 
 Qualitative representations of space can be quite useful. Take for example the task of describing the location of a chair to your friend. 
 In order to effectively communicate the location of the chair it is unnecessary to use precise numeric values that characterize the chair, such as its size, shape and weight, and metric spatial measurements that relate the chair to other objects, such as distance. Communicating qualitative spatial relationships, such as the orientation of the chair, is sufficient for effectively describing its location. An example could be, ``the chair is \emph{behind} the table and on the \emph{left-hand} side of the room''. By using qualitative relationships, you are representing space at a level of abstraction that hides away unnecessary details so that you are only dealing with those aspects of space that are important for the problem at hand.
@@ -201,22 +199,22 @@ While the example above is informal, formal qualitative representations of space
 \subsubsection{Qualitative Spatial Calculi}
 \begin{figure}[t]
  \centering
- \subfloat[RCC]{\label{RCC}\includegraphics[width=43mm]{rcc8-primitives}}
+ \subfloat[RCC]{\label{RCC-calc}\includegraphics[width=43mm]{rcc8-primitives}}
  \hspace{7 mm}
- \subfloat[SCC]{\label{SCC}\includegraphics[width=40mm]{scc-dcc-xfig}}
+ \subfloat[SCC]{\label{SCC-calc}\includegraphics[width=40mm]{scc-dcc-xfig}}
   \hspace{7 mm}
- \subfloat[OPRA$_{2}$]{\label{OPRA}\includegraphics[width=43mm]{OPRA2_Example}}
+ \subfloat[OPRA$_{2}$]{\label{OPRA-calc}\includegraphics[width=43mm]{OPRA2_Example}}
  \caption{Artefactual Extensions}
 \label{Qualitative Spatial Calculi}
 \end{figure}
 
 Formal qualitative spatial calculi are explicit characterizations of qualitative spatial relationships from a given perspective, i.e. topology, orientation, distance, etc., that logically define intrinsic spatial properties such as spatial uniqueness and spatial composition. Examples of qualitative spatial calculi that are important for this thesis include, the Region Connection Calculus (RCC) \cite{Randell92aspatial} for topological relationships, the Single Cross Calculus (SCC) for extrinsic orientational relationships \cite{Freksa92usingorientation} and Oriented Point Relation Algebra (OPRA) \cite{Moratz} for intrinsic orientational relationships.
 
-RCC defines eight topological relationships over regions: disconnected, partial overlap, externally connected, equals, non-tangential proper part, inverse non-tangential proper part, tangential proper part, and inverse tangential proper part. Refer to figure \ref{RCC} for an illustration of these relationships. Axiomatic rules of jointly exhaustive, mutually disjoint and pairwise disjoint (JEPD) enforce the spatial uniques of each relationship \cite{Randell92aspatial}. For example, two regions can \emph{not} be partially overlapping and disconnected to each other at the same point in time. Additionally, composition tables define the set of realizable spatial arrangements for a collection of regions. For example, if region \emph{A} is inside region \emph{B} and region \emph{B} is inside region \emph{C}, then region \emph{A} must also be in region \emph{C}.
+RCC defines eight topological relationships over regions: disconnected, partial overlap, externally connected, equals, non-tangential proper part, inverse non-tangential proper part, tangential proper part, and inverse tangential proper part. Refer to figure \ref{RCC-calc} for an illustration of these relationships. Axiomatic rules of jointly exhaustive, mutually disjoint and pairwise disjoint (JEPD) enforce the spatial uniques of each relationship \cite{Randell92aspatial}. For example, two regions can \emph{not} be partially overlapping and disconnected to each other at the same point in time. Additionally, composition tables define the set of realizable spatial arrangements for a collection of regions. For example, if region \emph{A} is inside region \emph{B} and region \emph{B} is inside region \emph{C}, then region \emph{A} must also be in region \emph{C}.
 
-Orientational relationships can be broken down into intrinsic and extrinsic spatial relationships. Extrinsic relationships are defined by  an external reference point. This type of orientational relationship is characterized in the SCC, in which an external reference point is used to related two objects together. Figure \ref{SCC} illustrates the SCC partitioning of space for three points, \emph{A}, \emph{B}, and \emph{C}. In this example, \emph{C} is related to \emph{A} through \emph{B}, and has an \emph{L2} SCC relationship. 
+Orientational relationships can be broken down into intrinsic and extrinsic spatial relationships. Extrinsic relationships are defined by  an external reference point. This type of orientational relationship is characterized in the SCC, in which an external reference point is used to related two objects together. Figure \ref{SCC-calc} illustrates the SCC partitioning of space for three points, \emph{A}, \emph{B}, and \emph{C}. In this example, \emph{C} is related to \emph{A} through \emph{B}, and has an \emph{L2} SCC relationship. 
 
-Intrinsic relationships are defined by an internal perspective. This type of relationship is characterized in OPRA, in which the relationship of an external object is defined by the internal direction of the observing object. Figure \ref{OPRA} shows the relationship between two points, \emph{A} and \emph{B}. In this example point \emph{B} has an OPRA$_{2}$ relationship with \emph{A} of \emph{7} and point \emph{A} has an OPRA$_{2}$ relationship with \emph{B} of \emph{1}. 
+Intrinsic relationships are defined by an internal perspective. This type of relationship is characterized in OPRA, in which the relationship of an external object is defined by the internal direction of the observing object. Figure \ref{OPRA-calc} shows the relationship between two points, \emph{A} and \emph{B}. In this example point \emph{B} has an OPRA$_{2}$ relationship with \emph{A} of \emph{7} and point \emph{A} has an OPRA$_{2}$ relationship with \emph{B} of \emph{1}. 
 
 As with RCC, axiomatic rules of JEPD and composition tables enforce spatial properties of uniqueness and composition for these two orientational calculi.
 
@@ -268,7 +266,7 @@ Given a design, the SEED project tries to automatically generates possible floor
 
 
 \subsection{Interior Design Configuration for a Virtual Environment}
-Calderon \emph{et. al} \cite{} proposed a system that automatically configures an indoor virtual environment, with respect to the placement interior design elements, by specifying the design problem in terms of spatial constraints. The system works by solving constraint satisfaction problem as specified over the space of the virtual environment.
+Calderon \emph{et. al} \cite{Calderon06} proposed a system that automatically configures an indoor virtual environment, with respect to the placement interior design elements, by specifying the design problem in terms of spatial constraints. The system works by solving constraint satisfaction problem as specified over the space of the virtual environment.
 
 The spatial constraint problems are defined as follows: Given a virtual environment represented as a discrete Cartesian grid, a set of interior design objects (desks, chairs, lamps, etc.), and a set of spatial constraints over the design objects (i.e., a desk should be at least 4 meters from a power outlet), the system searches for viable locations for each object within the virtual environment such that all of the spatial constraints are satisfied. 
 
@@ -355,7 +353,7 @@ Table \ref{spatial table} shows the spatial reasoning capabilities for each syst
 The CRR is the only tool in the group which provides support for every type of spatial reasoning. Additionally, it is the only system that does so using formal qualitative spatial reasoning and representation techniques. This is one of the main advantages of the CRR. Using a broad variety of of spatial relationships (topological, orientational, distance, metric) the CRR provides flexibility and a rich set of spatial relationships to build design requirements. This is important because the spatial configurations that make up a building are complex and need flexibility in terms of the way they are characterized and reasoned over. 
 
 
-\chapter{Conceptual Requirements Reasoner}
+\chapter{Conceptual Requirements Reasoner} \label{ccr}
 This Chapter is an introduction to the Conceptual Requirements Reasoner (CRR), a framework for validating conceptual design requirements against CAAD-based design plans. Conceptual requirements in this thesis refer to experiential and qualitative spatial aspects of a design.
 
 The remainder of this Chapter is organized as follows. Section one presents the problem statement that this thesis addresses. Section two presents the scope and contribution of the thesis. And Section three introduces the high level design and implementation of the CRR in the context of the problem statement.
@@ -516,7 +514,7 @@ This chapter contains two sections. Section One presents the internal architectu
 \section{Design Representation}
 The CRR represents two distinct aspects of an architectural design. It represents the design's physical form and non-physical artefactual extensions. The physical form pertains to the precise geometric data that defines the design's architectural entities with regard to layout, location and shape. In this thesis architectural entities refer to the structural elements of walls, doors, windows, slabs, stairs, and columns. Artefactual extension pertains to the non-physical but geometric data that defines the functional characteristics of architectural entities, such as the space used by a person to operate a doorway.
 
-The physical representation of the design is automatically imported into the CRR from a multi-modal spatial data access framework \cite{MultiModal} built by the DesignSpace project \cite{DesignSpace}. For each architectural entity, the CRR imports the structural geometric coordinate data, as it is represented in a CAAD-based system, and a unique identifier referred to in the CRR as the \emph{crr\_id}. Currently, artefactual extensions are manually imported, but the intent for future versions is to automate this directly from the multi-modal spatial data access framework.  
+The physical representation of the design is automatically imported into the CRR from a multi-modal spatial data access framework \cite{} built by the DesignSpace project \cite{DesignSpace}. For each architectural entity, the CRR imports the structural geometric coordinate data, as it is represented in a CAAD-based system, and a unique identifier referred to in the CRR as the \emph{crr\_id}. Currently, artefactual extensions are manually imported, but the intent for future versions is to automate this directly from the multi-modal spatial data access framework.  
 
 The remainder of this section is broken up into three subsections. The first subsection looks at the physical representation structure. The second subsection looks at the artefactual representation structure. The third subsection looks at how both are implemented in the CRR.
 
@@ -527,7 +525,7 @@ The CRR represents a design's physical form in terms of geometric features of la
 \subsection{Artefactual Design Representation}
 An artefactual extension is a non-physical, spatial extension of an architectural entity that pertains to a specific functional quality. While an artefactual extension does not have a physical manifestation, it is none the less an important aspect of the design representation model because it affects the functionality and performance of a design from an experiential perspective. 
 
-There are three types of spatial artefacts identified by Bhatt\cite{Bhatt} that are represented in the CRR: \emph{operational space}, \emph{functional space}, and \emph{range space}.
+There are three types of spatial artefacts identified by Bhatt\cite{BhattDH09} that are represented in the CRR: \emph{operational space}, \emph{functional space}, and \emph{range space}.
 
 
 \begin{figure}[H]
@@ -646,7 +644,7 @@ Qualitative spatial representation and reasoning is used in the CRR to bridge th
 \end{figure}
 % house image from http://www.tinyhomes.com/TH2163_SimpleElegance.html
 
-These spatial constraint solvers use formal qualitative spatial calculi for topological (Region Connected Calculus \cite{Freksa}), orientational (Single Cross \cite{Freksa}, Oriented Point Relation Algebra \cite{Moratz}) and distance to qualitatively represent and reason over an architectural design. Within the CLP framework of the CRR, the spatial constraint solvers are implemented using CLP($\mathbb{R}$) (CLP over Reals) and Constrain Handling Rules (CHR). The topological and distance constraint solvers extend Sindalog \cite{Sindalog}, a spatial constraint solver written in CHR.
+These spatial constraint solvers use formal qualitative spatial calculi for topological (Region Connected Calculus \cite{Randell92aspatial}), orientational (Single Cross \cite{Freksa92usingorientation}, Oriented Point Relation Algebra \cite{Moratz}) and distance to qualitatively represent and reason over an architectural design. Within the CLP framework of the CRR, the spatial constraint solvers are implemented using CLP($\mathbb{R}$) (CLP over Reals) and Constrain Handling Rules (CHR). The topological and distance constraint solvers extend Sindalog \cite{Almendros-Jimenez}, a spatial constraint solver written in CHR.
 
 Each spatial constraint solver is a query engine that qualifies spatial relationships to answer qualitative spatial queries.  A qualitative spatial query involves three step:
 \begin{enumerate}
@@ -710,7 +708,7 @@ The CRR can qualify four topological relationships for convex hulls: inside (\re
 \label{topoloy}
 \end{figure}
 
-An object \emph{A} has an inside relationship with an object \emph{B} if all \emph{A}'s points are inside the convex hull of \emph{B}. The inside relationship is qualified by checking the property of convex hull to point containment. A point in \emph{A} is contained inside the convex hull of \emph{B} if the polarity of the determinate between a point in \emph{A} and each line segment in \emph{B} is negative [need citation]. In the CRR, points in a convex hull are always ordered counterclockwise, therefore the polarity of the determinant between a point inside the convex hull will always be negative. 
+An object \emph{A} has an inside relationship with an object \emph{B} if all \emph{A}'s points are inside the convex hull of \emph{B}. The inside relationship is qualified by checking the property of convex hull to point containment. A point in \emph{A} is contained inside the convex hull of \emph{B} if the polarity of the determinate between a point in \emph{A} and each line segment in \emph{B} is negative \cite{compgeom:2000}. In the CRR, points in a convex hull are always ordered counterclockwise, therefore the polarity of the determinant between a point inside the convex hull will always be negative. 
 
 An object \emph{A} has an outside relationship with an object \emph{B} if all \emph{B}'s points are inside the convex hull of \emph{A}. Because the outside relationship is the inverse of the inside relation it is easy to qualify in DSpace by using the inside relationship ($inside(B,A)$). 
 
@@ -719,7 +717,7 @@ An object \emph{A} has a partially overlapping relationship with an object \emph
 An object \emph{A} has a disconnected relationship with an object \emph{B} if \emph{A} does not intersect with \emph{B}, there are no points in \emph{A} that are inside \emph{B}, and there are no points in \emph{B} that are inside \emph{A}. The disconnected relationship is qualified by checking for line segment intersection and convex hull to point containment. If there are no line segment intersections and no convex hull to point containment relationships, then two objects are disconnected.  
 
 \subsubsection{Spatial Constraint Solver: Topology}
-The topological constraint solver qualifies topological relationships over convex hull objects. Its implementation extends the Sindalog \ref{Sindalog} spatial constraint solver by integrating topological constraints over convex hulls. It is written using CHR that simplify and propagate topological constraints into less complex geometric constraints of line segment intersection and convex hull to point containment. For example, qualification for the partially overlapping topological relationship involves solving line segment intersection constraints between two convex hulls. The partially overlapping relationship is solved to true when there is at least one line intersection between the convex hulls and it fails when there are none. 
+The topological constraint solver qualifies topological relationships over convex hull objects. Its implementation extends the Sindalog \cite{Almendros-Jimenez} spatial constraint solver by integrating topological constraints over convex hulls. It is written using CHR that simplify and propagate topological constraints into less complex geometric constraints of line segment intersection and convex hull to point containment. For example, qualification for the partially overlapping topological relationship involves solving line segment intersection constraints between two convex hulls. The partially overlapping relationship is solved to true when there is at least one line intersection between the convex hulls and it fails when there are none. 
 
 %requires simplifying the overlapping constraint into line segment intersection constraints between the line segments of the convex hulls. The overlapping constraint is solved when at least one line intersection constraint is solved to true or when there are no more line intersection constraints left in the constraint store. In the former case the constraint returns true and in the latter case returns a failure. 
 
@@ -754,7 +752,7 @@ The topological constraint solver is used in the CRR to query topological relati
 
 
 \subsection{Orientation} \label{orientation}
-The CRR can qualify two types of orientational relationships, intrinsic and extrinsic. Intrinsic orientational reasoning is based on the OPRA$_{m}$ calculus \cite{opra}. OPRA$_{m}$ partitions space into half-planes, which are defined by lines emanating from a reference point, and defines the qualitative orientational relationships by the half plane in which a second point is located in relation to the reference point. The granularity of an OPRA$_{m}$ relationship, specified by $m$, defines the number of lines emanating from the reference point. 
+The CRR can qualify two types of orientational relationships, intrinsic and extrinsic. Intrinsic orientational reasoning is based on the OPRA$_{m}$ calculus \cite{Moratz}. OPRA$_{m}$ partitions space into half-planes, which are defined by lines emanating from a reference point, and defines the qualitative orientational relationships by the half plane in which a second point is located in relation to the reference point. The granularity of an OPRA$_{m}$ relationship, specified by $m$, defines the number of lines emanating from the reference point. 
 
 \begin{figure}[H]
 \centering
@@ -780,10 +778,10 @@ Extrinsic orientational reasoning is based on the SCC. SCC defines the orientati
 \centering
 \includegraphics[width=60mm]{scc}
 \caption{SCC Partitioning}
-\label{scc}
+\label{scc-partitioning}
 \end{figure}
 
-Figure \ref{scc} shows an SCC relationship between three points. The partitioning scheme is based on the orientation of the origin and relatum points. In this example, the third point, the referent, is located in half-plane 5 of the SCC partitioned space, so it has an SCC$_{5}$ relationship with point \emph{A} as related by \emph{B}. 
+Figure \ref{scc-partitioning} shows an SCC relationship between three points. The partitioning scheme is based on the orientation of the origin and relatum points. In this example, the third point, the referent, is located in half-plane 5 of the SCC partitioned space, so it has an SCC$_{5}$ relationship with point \emph{A} as related by \emph{B}. 
 
 \begin{equation}\label{scc-eq} 
 \begin{aligned}
@@ -843,7 +841,7 @@ The CRR can calculate the minimum euclidean distance between points, lines, and 
 \end{figure}
 
 \subsubsection{Spatial Constraint Solver: Distance}
-The distance constraint solver calculates minimum distance queries and uses the distance constraint services of the Sindalog \cite{sindalog} spatial constraint solver for all distance calculations. The distance constraint solver is different from the other two because it returns a specific value, instead of returning \emph{true} or \emph{fail} based on a query. For example, the following query will return the minimum distance between the two objects in D.
+The distance constraint solver calculates minimum distance queries and uses the distance constraint services of the Sindalog \cite{Almendros-Jimenez} spatial constraint solver for all distance calculations. The distance constraint solver is different from the other two because it returns a specific value, instead of returning \emph{true} or \emph{fail} based on a query. For example, the following query will return the minimum distance between the two objects in D.
 \begin{verbatim}
    min_distance(obj1, obj2, D). 
 \end{verbatim}
@@ -851,10 +849,10 @@ The distance constraint solver calculates minimum distance queries and uses the 
 The distance constraint solver is written using CHR that break down the constraints until they can be solved for. This process involves finding the located on each object that is the closest to the other, so that the minimum distance can be calculated between the two. 
 
 
-\chapter{Design Space} \label{conceptual requirements}
+\chapter{Design Space} \label{design space}
 This Chapter presents the design space module of the CRR. It identifies a set of qualitative spatial attributes found in architecture (QSA) and a set of architectural concepts and show how both can be spatially interpreted using formal qualitative spatial calculi. Additionally, it demonstrates how they can be used to validate conceptual design requirements. 
 
-QSA and architectural concepts were ascertained from literature on architectural design \cite{tbd}, museum research on visitor behavior \cite{tbd}, and building regulations and codes \cite{tbd}. Their definitions are explicit characterizations of spatial design concepts that are based on heuristic architectural knowledge and common sense notions of spatial relationships. The objective here is not to be an exhaustive discussion of spatial design concepts or a validation for their spatial interpretation; rather it is to demonstrate how each can be represented and reasoned with in the CRR CLP framework. 
+QSA and architectural concepts were ascertained from literature on architectural design \cite{formfunction} \cite{pattern-language} \cite{Bayazit} and museum research on visitor behavior \cite{Melton} \cite{Bitgood92} \cite{Falk} \cite{Stavroulaki}. Their definitions are explicit characterizations of spatial design concepts that are based on heuristic architectural knowledge and common sense notions of spatial relationships. The objective here is not to be an exhaustive discussion of spatial design concepts or a validation for their spatial interpretation; rather it is to demonstrate how each can be represented and reasoned with in the CRR CLP framework. 
 
 %In the CRR CLP framework, QSA and architectural concepts utilize the CRR design representation structure, via the spatial abstraction layer, and the DSpace spatial reasoner to validate conceptual design requirements. QSA and architectural concepts are implemented as Prolog rules. Each rule is implemented as a conjunction of predicates that spatially define the QSA and architectural concepts from a qualitative perspective. Conceptual design requirements can be specified using QSA, architectural concepts, and qualitative spatial relationships. Validating a design requirement happens by making a Prolog query to the CCR that will return \emph{true} if the design is consistent per the requirement or \emph{fail} if the design is inconsistent per the requirement. 
 
@@ -1271,7 +1269,7 @@ Consider the design requirement for a bedroom being private. This requirement ca
 
 
 
-\chapter{Museum Case Study}
+\chapter{Museum Case Study} \label{case study}
 This chapter is a case study that demonstrates the application of the CRR in the context of design for an art museum. The purpose is twofold: first, to examine design requirements of an art museum with regards to their affects on visitors experiences in a museum; and second, to demonstrate the application of the CRR for validating these design requirements within a real world museum scenario. 
 
 %how the museum design requirements can be represented and reasoned about in a computational framework, in order to detect design inconsistencies as per the design requirements.
@@ -1437,7 +1435,7 @@ This section presents the application of the CRR to two real world museums using
 %This use case is from the perspective of a museum designer and covers the process of importing a museums design from an architectural design tool (ArchiCAD) into the CRR, the building of museum requirements using architectural concepts and QSA, and finally validation of the requirements using the CRR query engine. 
 
 \subsection{Museum Designs and Import}
-This case study uses the Asian Art Wing of the Philadelphia Museum of Art \cite{PhiladelphiaArtMuseum} and the lobby of the Museu Calouste Gulbenkian. The Asian Wing of the Philadelphia Museum of Art will be used for the demonstration of the gallery requirements, while the lobby of the Museu Calouste Gulbenkian will be used for the demonstration of the lobby requirements. The motivation behind using real world museums instead of contrived examples is to demonstrate the CRR in a real world context with regards to the practicality of museum design requirements.
+This case study uses the Asian Art Wing of the Philadelphia Museum of Art \cite{Philadelphia} and the lobby of the Museu Calouste Gulbenkian \cite{Gulbenkian}. The Asian Wing of the Philadelphia Museum of Art will be used for the demonstration of the gallery requirements, while the lobby of the Museu Calouste Gulbenkian will be used for the demonstration of the lobby requirements. The motivation behind using real world museums instead of contrived examples is to demonstrate the CRR in a real world context with regards to the practicality of museum design requirements.
 
 \begin{figure}[H]
  \centering
@@ -1595,7 +1593,7 @@ This case study demonstrated the application of the CRR to reason about high lev
 %The $artefactual\_interaction$ predicate is broken down into topological constraints that check for partially overlapping topological relationships between the artefactual extensions of the bathroom doorway and sink. The topological constraints are solved in the topological constraint solver. 
 
 
-\chapter{Future Work / Conclusion}
+\chapter{Future Work / Conclusion} \label{conclusion}
 
 \appendix
 \chapter{Appendix}
@@ -1666,7 +1664,7 @@ TODO: figure for convex hull abs
 % ------------- End main chapters ----------------------
 
 \clearpage
-\bibliographystyle{abbrv}
+\bibliographystyle{alpha}
 \bibliography{thesis, museum}
 
 
