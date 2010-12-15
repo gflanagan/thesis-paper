@@ -100,24 +100,24 @@
 
 \begin{abstract}
  
-State-of-the-art computer-aided architectural design (CAAD) programs represent architectural design at a low level of spatial abstraction.                                                             While this representation model allows CAAD programs to capture the precise spatial characteristics of a design, it means that CAAD programs lacks the underlying computational apparatus necessary to reason about design at a conceptual level.
+Computer-aided architectural design (CAAD) programs represent architectural design at a low level of spatial abstraction.                                                             While this representation model allows CAAD programs to capture the precise spatial characteristics of a design, it means that CAAD programs lacks the underlying computational apparatus necessary to reason about design at a conceptual level.
 
 This thesis is an a first step towards building a framework that bridges the gap between the conceptual aspects of a design and its low level CAAD-based spatial representation. Specifically, this thesis presents a new framework, referred to as the Conceptual Requirements Reasoner (CRR), which provides an architect with a framework to validate conceptual design requirements. The CRR will demonstrate how qualitative spatial representation and reasoning techniques can be used as the link between a design's conceptual requirements and its underlying quantitative spatial representation.
 
-A museum case study is presented to demonstrate the application of the CRR in a real world design context. It introduces a set of museum design requirements identified in research and shows how these requirements can be validated using the CRR. The results of the case study show that the CRR is an effective tool for conceptual requirements reasoning.
+A museum case study is presented to demonstrate the application of the CRR in a real world design context. It introduces a set of museum design requirements identified in research and shows how these requirements can be validated using the CRR. The results of the case study shows that the CRR is an effective tool for conceptual requirements reasoning.
 
 
 \end{abstract}
 
 \begin{acknowledgements}
 
-\noindent Dr. Franz Kurfess: for all the guidance during my time as a graduate student and for supporting me in completing this thesis.\\ 
+\noindent Dr. Franz Kurfess: for all the guidance during my time as a graduate student and for supporting me while completing this thesis.\\ 
 
 \noindent Dr. Mehul Bhatt: for the opportunity to work in the Design Space group and for all the guidance and advice formulating my ideas for this thesis. \\
 
 \noindent My Parents: for all the support they have given me, especially during the last year as I completed this thesis. \\
 
-\noindent Justin Phillips: for being a good friend and helping me finish this thesis. \\
+\noindent Justin Phillips: for being a good friend and helping me finish this thing. \\
 
 \noindent Dr. Carl Schultz: for encouragement and insight into the process of completing a thesis.  \\
 
@@ -151,11 +151,13 @@ A museum case study is presented to demonstrate the application of the CRR in a 
 
 \chapter{Introduction}
 \label{intro}
-Humans reason about space at an abstract level, this means we think about our spatial environments in terms of qualities rather than quantities. In other words, we cognitively represent our spatial environments using symbolic terms like \emph{next-to}, \emph{in-front-of}, or \emph{close-by}, as opposed to using a precise spatial coordinate system of x, y, and z  \cite{freksa1991qsr} \cite{Cohn:2001:QSR}. Computers on the other hand are excellent at storing and computing over large amounts of precise, concrete data. From a spatial perspective, this means that computers are able to handle large amount of quantitative spatial information that is necessary for many tasks like localization \cite{tbd} and terrain mapping \cite{tbd}. 
+Humans reason about space at an abstract level, this means we think about our spatial environments in terms of qualities rather than quantities. In other words, we cognitively represent our spatial environments using symbolic terms like \emph{next-to}, \emph{in-front-of}, or \emph{close-by}, as opposed to using a precise spatial coordinate system of x, y, and z  \cite{freksa1991qsr} \cite{Cohn:2001:QSR}. Computers on the other hand are excellent at storing and computing over large amounts of precise, concrete data. From a spatial perspective, this means that computers are able to handle a large amount of quantitative spatial information \cite{Miller} \cite{Korte}.
+
+%that have been used in areas like Geographic Information Systems \cite{tbd} and Robotics \cite{tbd}. 
 
 The area of architectural design is an interesting application domain with regards to the representation of space because it inherently involves multiple spatial perspectives: \emph{qualitative} and \emph{quantitative}. At the qualitative level, spatial aspects of the design define architectural qualities such as spaciousness, privacy, and continuity. These conceptual aspects encompass the way an architectural design is experienced. At the quantitative level, an architectural design is spatially modeled at a precise and concrete level so that is can be used during the construction of the design in the real world. These two spatial perspectives encompass very different aspects of an architectural design, henceforth referred to as design.
 
-Current state-of-the-art Computer-Aided Architectural Design (CAAD) programs spatially represent a designs at a quantitative level \cite{ArchiCAD}. This allows CAAD programs to be effectively used to model the precise spatial characteristics that are necessary during the construction of the design in the real world. Unfortunately, this type of representation model means that CAAD programs lack the underlying computational apparatus necessary to reason about design at higher levels of abstraction, such as reasoning about its conceptual features. This happens because of the representational gap between the low level spatial representation of the design in the CAAD program and the abstract representation necessary for reasoning at a conceptual level. 
+Current state-of-the-art computer-aided architectural design (CAAD) programs spatially represent a designs at a quantitative level \cite{ArchiCAD}. This allows CAAD programs to be effectively used to model the precise spatial characteristics that are necessary during the construction of the design in the real world. Unfortunately, this type of representation model means that CAAD programs lack the underlying computational apparatus necessary to reason about design at higher levels of abstraction, such as reasoning about its conceptual features. This happens because of the representational gap between the low level spatial representation of the design in the CAAD program and the abstract representation necessary for reasoning at a conceptual level. 
 
 This thesis is an a first step towards building a framework that bridges this gap between the high level conceptual aspects of a design to its low level CAAD-based spatial representation. Specifically, this thesis presents a new framework, referred to as the Conceptual Requirements Reasoner (CRR), that provides an architect with a framework to validate conceptual design requirements. Conceptual design requirements in this thesis refer to qualitative and experiential features of a design. They can be architectural concepts like spaciousness, privacy and continuity or qualitative spatial attributes found in architecture (QSA) such as positioning, orientation, proximity, and visibility. The CRR will demonstrate how qualitative spatial representation and reasoning techniques can be used as the link between a design's conceptual requirements and its underlying quantitative spatial representation.
 
