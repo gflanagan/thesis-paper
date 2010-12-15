@@ -100,16 +100,21 @@
 
 \begin{abstract}
  
+State-of-the-art computer-aided architectural design (CAAD) programs represent architectural design at a low level of spatial abstraction.                                                             While this representation model allows CAAD programs to capture the precise spatial characteristics of a design, it means that CAAD programs lacks the underlying computational apparatus necessary to reason about design at a conceptual level.
 
+This thesis is an a first step towards building a framework that bridges the gap between the conceptual aspects of a design and its low level CAAD-based spatial representation. Specifically, this thesis presents a new framework, referred to as the Conceptual Requirements Reasoner (CRR), which provides an architect with a framework to validate conceptual design requirements. The CRR will demonstrate how qualitative spatial representation and reasoning techniques can be used as the link between a design's conceptual requirements and its underlying quantitative spatial representation.
+
+A museum case study is presented to demonstrate the application of the CRR in a real world design context. It introduces a set of museum design requirements identified in research and shows how these requirements can be validated using the CRR. The results of the case study show that the CRR is an effective tool for conceptual requirements reasoning.
 
 
 \end{abstract}
 
-%\begin{acknowledgements}
+\begin{acknowledgements}
+I would like to thank Professor Franz Kurfess for ...
 
 %   Thank you...
 
-%\end{acknowledgements}
+\end{acknowledgements}
 
 
 \tableofcontents
@@ -137,7 +142,7 @@
 
 \chapter{Introduction}
 \label{intro}
-Humans reason about space at an abstract level, this means we think about our spatial environments in terms of qualities rather than quantities. In other words, we cognitively represent our spatial environments using symbolic terms like \emph{next-to}, \emph{in-front-of}, or \emph{close-by}, as opposed to using a precise spatial coordinate system of x, y, and z  \cite{freksa1991qsr} \cite{Cohn:2001:QSR}. Computers on the other hand are excellent at storing and computing over large amounts of precise, concrete data. From a spatial perspective, this means that computers are able to handle large amount of quantitative spatial information that is necessary for many tasks like localizations and terrain mapping \cite{somebody}. 
+Humans reason about space at an abstract level, this means we think about our spatial environments in terms of qualities rather than quantities. In other words, we cognitively represent our spatial environments using symbolic terms like \emph{next-to}, \emph{in-front-of}, or \emph{close-by}, as opposed to using a precise spatial coordinate system of x, y, and z  \cite{freksa1991qsr} \cite{Cohn:2001:QSR}. Computers on the other hand are excellent at storing and computing over large amounts of precise, concrete data. From a spatial perspective, this means that computers are able to handle large amount of quantitative spatial information that is necessary for many tasks like localization \cite{tbd} and terrain mapping \cite{tbd}. 
 
 The area of architectural design is an interesting application domain with regards to the representation of space because it inherently involves multiple spatial perspectives: \emph{qualitative} and \emph{quantitative}. At the qualitative level, spatial aspects of the design define architectural qualities such as spaciousness, privacy, and continuity. These conceptual aspects encompass the way an architectural design is experienced. At the quantitative level, an architectural design is spatially modeled at a precise and concrete level so that is can be used during the construction of the design in the real world. These two spatial perspectives encompass very different aspects of an architectural design, henceforth referred to as design.
 
@@ -1605,55 +1610,52 @@ The architectural representation model in the CRR is based on room containment r
 An evaluation of the spatial constraint solvers in terms of handling large number of queries will be an important aspect in expanding the CRR to larger data sets. Currently, the spatial constraint solvers only handle a few ($<$ 10) queries at a time and therefore responds instantaneously. Expending the CRR to handle larger data sets and more complex spatial queries will require an investigation into how well the spatial constraint solvers scale.
 
 
+\clearpage
+\bibliographystyle{plain}
+\bibliography{thesis, museum}
+
 \appendix
 \chapter{Appendix}
-\section{Spatial Abstraction of Architectural Entities} \label{spatial abstraction}
-The remainder of this section shows how architectural entities and interior designs objects are spatially abstracted into points, directed points, and convex hulls and how they are transformed in DSpace. Table \ref{spatial abstractions} shows which spatial abstractions each architectural entity can be transformed into. 
+\section{Spatial Abstraction of Architectural \newline Entities} \label{spatial abstraction}
+This appendix shows how architectural entities and interior designs objects are spatially abstracted into points, directed points, and convex hulls. Table \ref{spatial abstractions} indicates which architectural entities and interior design objects can be abstracted to which spatial abstractions. 
 
 \begin{table}[H]
   \begin{center}
   \begin{tabular}{ | r | c | c | c |}
     \hline
-    entity & point & directed point & convex hull\\ \hline
+    architectural entity & point & directed point & convex hull\\ \hline
     doorway & X & X & X \\ \hline
     window & X & X & X \\ \hline
-    wall & X & X & X \\ \hline
+    wall & X &  & X \\ \hline
     column & X &  & X \\ \hline
     space & X &  & X \\ \hline
-    interior design object & X & X* & X \\
+    interior design object & X & X & X \\
     \hline
   \end{tabular}
   \end{center}
-\caption{Spatial Abstractions for Architectural Entities}
+\caption{Spatial Abstractions}
 \label{spatial abstractions}
 \end{table} 
 
-\noindent \emph{\large Point} \\
-\indent All architectural entities and interior design objects have a point abstraction that is defined as the centroid of the entity's physical polygon space. Figure \ref{point-abs} shows the point abstraction for a doorway. Note that the point is the centroid of the doorway's physical geometry. The point abstraction is used in orientational reasoning and is therefore used as an approximation of the object's location in the design. In general, the centroid is a good point approximation of location because it is a generalization of polygon space as a single point. 
-\begin{verbatim}
-   point_abstraction(door1, Point) :-
-           quantitative_geometry(door1, Quant),
-           centroid(Quant, Point).
-\end{verbatim}
 
-\begin{figure}[H]
+\noindent \emph{\large \\* Point} \\
+\indent All architectural entities and interior design objects have a point abstraction that is defined as the centroid of the entity's physical representation. Figure \ref{point-abs} shows the point abstraction for a doorway. Note that the point is the centroid of the doorway's physical representation. The point abstraction is commonly used in orientational reasoning and therefore is an approximation of the object's location in the design. The following Prolog code shows the transformation rule for point abstractions. 
+\begin{figure}[t]
 \centering
 \includegraphics[width=70mm]{point-abs}
 \caption{Doorway Point Abstraction}
 \label{point-abs}
 \end{figure}
 
-\noindent \emph{\large Directed Point} \\
-\indent Walls, doorways, windows, and some interior design objects have a directed point abstraction. A directed point is represented as a tuple (\emph{Cartesian point}, \emph{direction}). The point is defined as the centroid of the quantitative polygon space, as it is in the point abstraction. The direction is defined either by the user, as is the case for interior design objects, or by an intrinsic spatial property of the entity, as is the case for doorways, walls, and windows.
-
-For these entities, direction is based on the interpretation of the nature of the entity within the context of a design. Formally, direction is interpreted as a vector that emanates from an entity's point abstraction towards the room / space it is contained in. Specifically, direction is defined as the perpendicular vector to the intrinsic x-axis of the object. Figure \ref{dir-point-abs} shows the directed point abstraction for a doorway. Not that the direction is perpendicular to the x-axis of the doorway's physical geometry. Based on this definition there will be two perpendicular lines that define the direction. In this situation, the context of the space in which the entity is located is need to decided which of the two directions to use.  
-
 \begin{verbatim}
-   dir_point_abstraction(door1, (Point, Dir), room3) :-
-           quantitative_geometry(door1, Quant),
-           centroid(Quant, Point),
-           direction(Quant, Point, room3, Dir).
+   point_abstraction(Id, Pt) :-
+           physical_representation(Id, P),
+           centroid(P, Pt).
 \end{verbatim}
+
+
+\noindent \emph{\large Directed Point} \\
+\indent Doorways, windows, and some interior design objects have a directed point abstraction. A directed point is represented as a tuple (\emph{point}, \emph{direction}). The point is defined as the centroid of the physical representation, similar to the point abstraction. For interior design objects the direction is defined by the user, while for doorways and windows it is defined by an intrinsic spatial property of the doorway or window.
 
 \begin{figure}[H]\label{dir-point-abs}
 \centering
@@ -1661,21 +1663,28 @@ For these entities, direction is based on the interpretation of the nature of th
 \caption{Doorway Point Abstraction}
 \end{figure}
 
-\noindent \emph{\large Convex Hull} \\
-\indent All architectural entities have a convex hull abstraction. The convex hull is calculated over the quantitative polygon space by using the divide and conquer convex hull algorithm \cite{tbd}. The result of the algorithm is a convex hull representation that is a list of points sorted in counterclockwise order. Convex hulls are used in topological reasoning.
+For doorways and windows direction is based on the interpretation of the nature of the entity within the context of a design. In other words, the direction is interpreted as a vector that emanates from an entity's point abstraction towards the room it is contained in. Specifically, direction is defined as the perpendicular vector to the intrinsic x-axis of the object. Figure \ref{dir-point-abs} shows the directed point abstraction for a doorway. Not that the direction is perpendicular to the x-axis of the doorway's physical representation. Based on this definition there will be two perpendicular lines that define the direction. In this situation, the context of the space in which the entity is located is need to decided which of the two directions to use.  
+
 \begin{verbatim}
-   convex_hull_abstraction(door1, ConvexHull).
-           quantitative_geometry(door1, Quant),
-           convex_hull(convex, ConvexHull).
+   dir_point_abstraction(Id, (Pt, Dir), Rm) :-
+           physical_representation(Id, P),
+           centroid(P, Pt),
+           direction(P, Pt, Rm, Dir).
 \end{verbatim}
 
-TODO: figure for convex hull abs
+
+\noindent \emph{\large Convex Hull} \\
+\indent All architectural entities have a convex hull abstraction. The convex hull is calculated over the physical representation using the divide and conquer convex hull algorithm \cite{compgeom:2000}. The result of the algorithm is a convex hull representation that is a list of points sorted in counterclockwise order. Convex hulls are commonly used in topological reasoning.
+\begin{verbatim}
+   convex_hull_abstraction(Id, Convex) :-
+           physical_representation(Id, P),
+           convex_hull(P, Convex).
+\end{verbatim}
+
 
 % ------------- End main chapters ----------------------
 
-\clearpage
-\bibliographystyle{alpha}
-\bibliography{thesis, museum}
+
 
 
 %\addcontentsline{toc}{chapter}{Bibliography}
