@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="744.09448"
+   height="1052.3622"
+   id="svg3842">
+  <defs
+     id="defs3844">
+    <marker
+       refX="0"
+       refY="0"
+       orient="auto"
+       id="Arrow2Mend"
+       style="overflow:visible">
+      <path
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)"
+         id="path4616"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round" />
+    </marker>
+  </defs>
+  <g
+     id="layer1">
+    <path
+       d="m 140,382.36218 0,570"
+       id="path3856"
+       style="fill:none;stroke:#000000;stroke-width:1.19373369px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       d="m 300,952.36218 -160,0"
+       id="path3858"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       d="m 400,952.36218 250,0"
+       id="path3862"
+       style="fill:none;stroke:#000000;stroke-width:1.25px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       d="m 650,382.36219 0,569.99999"
+       id="path3864"
+       style="fill:none;stroke:#000000;stroke-width:1.19373369px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       d="m 300,852.36218 0,100"
+       id="path3866"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       d="m 400,952.36218 c -24.34451,-89.06401 -62.76825,-90.83685 -100,-100"
+       id="path3868"
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:6, 6;stroke-dashoffset:0;marker-end:none" />
+    <path
+       d="m 300,492.36218 a 20,20 0 1 1 -40,0 20,20 0 1 1 40,0 z"
+       transform="translate(-80,280)"
+       id="path4562"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <path
+       d="m 190,792.36217 0,60"
+       id="path4566"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:4, 4;stroke-dashoffset:0" />
+    <path
+       d="m 220,762.36217 60,0"
+       id="path4568"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:6, 6;stroke-dashoffset:0" />
+    <path
+       d="m 190,852.36217 c 37.03125,-10.66405 73.815,-22.00876 90,-90"
+       id="path4570"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:6, 6;stroke-dashoffset:0" />
+    <path
+       d="m 280,952.36218 0,-140"
+       id="path4572"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       d="m 420,952.36218 0,-140"
+       id="path4574"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       d="m 280,812.36218 140,0"
+       id="path4578"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <text
+       x="434"
+       y="849.36218"
+       id="text4580"
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+         x="434"
+         y="849.36218"
+         id="tspan4582">door funtional space</tspan></text>
+    <path
+       d="m 500,862.36218 -70,20"
+       id="path4584"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)" />
+    <text
+       x="220"
+       y="722.36218"
+       id="text5036"
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+         x="220"
+         y="722.36218"
+         id="tspan5038">kiosk functional space</tspan></text>
+    <path
+       d="m 650,382.36218 -510,0"
+       id="path5228"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <rect
+       width="30"
+       height="30"
+       x="160"
+       y="492.36218"
+       id="rect5230"
+       style="fill:none;stroke:#000900;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       width="110"
+       height="30"
+       x="290"
+       y="442.36218"
+       id="rect5234"
+       style="fill:none;stroke:#000900;stroke-width:2.70801282;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <path
+       d="m 270,432.36218 0,60"
+       id="path5236"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12, 12;stroke-dashoffset:0" />
+    <path
+       d="m 410,492.36218 -130,0"
+       id="path5240"
+       style="fill:none;stroke:#000000;stroke-width:2.17422915;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8.6969169, 8.6969169;stroke-dashoffset:0" />
+    <path
+       d="m 410,432.36218 0,60"
+       id="path5242"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:8, 8;stroke-dashoffset:0" />
+    <rect
+       width="30"
+       height="30"
+       x="160"
+       y="532.36218"
+       id="rect5230-4"
+       style="fill:none;stroke:#000900;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       width="30"
+       height="30"
+       x="160"
+       y="572.36218"
+       id="rect5230-4-2"
+       style="fill:none;stroke:#000900;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <path
+       d="m 160,482.36218 90,0"
+       id="path5294"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:16, 16;stroke-dashoffset:0" />
+    <path
+       d="m 160,612.36218 90,0"
+       id="path5298"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12, 12;stroke-dashoffset:0;display:inline" />
+    <path
+       d="m 250,482.36218 0,130"
+       id="path5300"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12, 12;stroke-dashoffset:0;display:inline" />
+    <text
+       x="300"
+       y="602.36218"
+       id="text5302"
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+         x="300"
+         y="602.36218"
+         id="tspan5304">display case functional space</tspan></text>
+    <text
+       x="430"
+       y="432.36218"
+       id="text5306"
+       xml:space="preserve"
+       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
+         x="430"
+         y="432.36218"
+         id="tspan5308">seating functional space</tspan></text>
+    <path
+       d="m 310,582.36218 -60,-40"
+       id="path5310"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)" />
+    <path
+       d="m 530,442.36218 -110,20"
+       id="path5496"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)" />
+    <path
+       d="m 270,422.36218 140,0"
+       id="path5682"
+       style="fill:none;stroke:#000000;stroke-width:2.0754981;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12.45298852, 12.45298852;stroke-dashoffset:0" />
+    <path
+       d="m 300,732.36218 -30,20"
+       id="path5728"
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)" />
+  </g>
+</svg>

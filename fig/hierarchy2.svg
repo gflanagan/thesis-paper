@@ -2,14 +2,60 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
    width="1060.1484"
    height="583.15698"
-   id="svg2">
+   id="svg2"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="hierarchy2.svg">
+  <metadata
+     id="metadata3048">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1280"
+     inkscape:window-height="951"
+     id="namedview3046"
+     showgrid="false"
+     inkscape:zoom="0.80938755"
+     inkscape:cx="530.07422"
+     inkscape:cy="291.57849"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
   <defs
-     id="defs4" />
+     id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 291.57849 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="1060.1484 : 291.57849 : 1"
+       inkscape:persp3d-origin="530.07422 : 194.38566 : 1"
+       id="perspective3050" />
+  </defs>
   <g
      transform="translate(-20.623047,-377.51834)"
      id="layer1">
@@ -21,7 +67,7 @@
        style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
          x="439.5"
          y="956.5152"
-         id="tspan2848">structural geometry</tspan></text>
+         id="tspan2848">physical geometry</tspan></text>
     <text
        x="520"
        y="812.36206"
@@ -57,7 +103,7 @@
        style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
          x="800"
          y="812.36206"
-         id="tspan2954">extended region</tspan></text>
+         id="tspan2954">convex hull</tspan></text>
     <text
        x="380"
        y="812.36206"
@@ -160,15 +206,6 @@
          x="700"
          y="552.36206"
          id="tspan2998">visbility</tspan></text>
-    <text
-       x="980"
-       y="552.36206"
-       id="text3000"
-       xml:space="preserve"
-       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
-         x="980"
-         y="552.36206"
-         id="tspan3002">symmetry</tspan></text>
     <text
        x="440"
        y="452.36212"
@@ -425,10 +462,5 @@
        transform="translate(20.623047,377.51834)"
        id="path4207"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-    <path
-       d="M 1000,153.15698 950,83.156982"
-       transform="translate(20.623047,377.51834)"
-       id="path4211"
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline" />
   </g>
 </svg>

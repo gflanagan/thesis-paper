@@ -2,15 +2,60 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
    width="187.98447"
    height="259.32205"
-   id="svg2">
+   id="svg2"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="visibility-no-obstruction.pdf">
+  <metadata
+     id="metadata3077">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="640"
+     inkscape:window-height="487"
+     id="namedview3075"
+     showgrid="false"
+     inkscape:zoom="0.9100653"
+     inkscape:cx="93.992233"
+     inkscape:cy="129.66103"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
   <defs
      id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 129.66103 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="187.98447 : 129.66103 : 1"
+       inkscape:persp3d-origin="93.992233 : 86.440684 : 1"
+       id="perspective3079" />
     <marker
        refX="0"
        refY="0"
@@ -41,16 +86,6 @@
          x="6.1313477"
          y="262.13702"
          id="tspan10408" /></text>
-    <text
-       x="82.084465"
-       y="490.00607"
-       id="text10410"
-       xml:space="preserve"
-       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
-         x="82.084465"
-         y="490.00607"
-         id="tspan10412"
-         style="font-size:12px">view point</tspan></text>
     <rect
        width="71.027603"
        height="51.762203"
@@ -64,21 +99,6 @@
        transform="translate(37,262.64538)"
        id="path10529"
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-    <text
-       x="193.91426"
-       y="408.79752"
-       id="text10410-5"
-       xml:space="preserve"
-       style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
-         x="193.91426"
-         y="408.79752"
-         id="tspan10412-6"
-         style="font-size:12px">view-space</tspan></text>
-    <path
-       d="m 190,152 c -40.65377,5.05248 -70.17733,-2.13827 -90,-20"
-       transform="translate(37,262.64538)"
-       id="path10556"
-       style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow2Mend)" />
     <path
        d="m 249.50767,545.77069 a 3.535535,3.535535 0 1 1 -7.07107,0 3.535535,3.535535 0 1 1 7.07107,0 z"
        transform="translate(-169.4736,-60.454921)"

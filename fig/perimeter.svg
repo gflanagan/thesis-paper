@@ -114,23 +114,16 @@
        d="m 260,642.36218 150,0"
        id="path2826"
        inkscape:connector-type="polyline" />
-    <rect
-       style="fill:#000000;fill-opacity:1;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none"
-       id="rect2828"
-       width="30"
-       height="30"
-       x="199.5"
-       y="412.86218" />
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
        x="239.5"
-       y="492.86218"
+       y="472.86218"
        id="text2830"><tspan
          sodipodi:role="line"
          id="tspan2832"
          x="239.5"
-         y="492.86218"
+         y="472.86218"
          style="font-size:22px">perimeter</tspan></text>
     <rect
        style="fill:#000000;fill-opacity:1;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none"
@@ -139,19 +132,5 @@
        height="30"
        x="199.5"
        y="452.86218" />
-    <rect
-       style="fill:#000000;fill-opacity:1;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none"
-       id="rect2828-4-1"
-       width="30"
-       height="30"
-       x="199.5"
-       y="492.86218" />
-    <rect
-       style="fill:#000000;fill-opacity:1;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none"
-       id="rect2828-4-1-5"
-       width="30"
-       height="30"
-       x="199.5"
-       y="532.86218" />
   </g>
 </svg>

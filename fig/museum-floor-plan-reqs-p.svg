@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2873"
+   version="1.1"
+   inkscape:version="0.47 r22583"
+   width="672"
+   height="764"
+   sodipodi:docname="museum-floor-plan-reqs-p.pdf">
+  <metadata
+     id="metadata2879">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs2877">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       id="perspective2881" />
+    <inkscape:perspective
+       id="perspective2897"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2922"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2947"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2972"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2997"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3022"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3047"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3072"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3101"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3126"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3151"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3176"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3201"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3226"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3251"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3276"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3301"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3326"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3351"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3376"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3401"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3426"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3451"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3476"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3501"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1280"
+     inkscape:window-height="951"
+     id="namedview2875"
+     showgrid="false"
+     inkscape:zoom="0.87370262"
+     inkscape:cx="336"
+     inkscape:cy="371.55229"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2873"
+     showguides="false">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3564" />
+  </sodipodi:namedview>
+  <image
+     xlink:href="file:///home/greg/thesis/thesis-paper/git/fig/museum-floor-plan-reqs.png"
+     width="672"
+     height="764"
+     id="image2883"
+     x="0"
+     y="0" />
+  <text
+     xml:space="preserve"
+     style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+     x="267.29648"
+     y="82.281303"
+     id="text2885"><tspan
+       sodipodi:role="line"
+       id="tspan2887"
+       x="267.29648"
+       y="82.281303"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:URW Palladio L;-inkscape-font-specification:URW Palladio L Medium">Gallery226</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+     x="81.584846"
+     y="169.99702"
+     id="text2885-5"><tspan
+       sodipodi:role="line"
+       id="tspan2887-9"
+       x="81.584846"
+       y="169.99702"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:URW Palladio L;-inkscape-font-specification:URW Palladio L Medium">Gallery245</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+     x="429.59332"
+     y="280.87415"
+     id="text2885-5-6"><tspan
+       sodipodi:role="line"
+       id="tspan2887-9-5"
+       x="429.59332"
+       y="280.87415"
+       style="font-size:20;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:URW Palladio L;-inkscape-font-specification:URW Palladio L Medium">Gallery238</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+     x="525.56738"
+     y="511.53091"
+     id="text2885-5-6-6"><tspan
+       sodipodi:role="line"
+       id="tspan2887-9-5-3"
+       x="525.56738"
+       y="511.53091"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:URW Palladio L;-inkscape-font-specification:URW Palladio L Medium">Gallery239</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+     x="219.78255"
+     y="431.74326"
+     id="text2885-5-6-6-3"><tspan
+       sodipodi:role="line"
+       id="tspan2887-9-5-3-0"
+       x="219.78255"
+       y="431.74326"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:URW Palladio L;-inkscape-font-specification:URW Palladio L Medium">Gallery244</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+     x="501.70435"
+     y="694.57654"
+     id="text2885-5-6-6-3-1"><tspan
+       sodipodi:role="line"
+       id="tspan2887-9-5-3-0-6"
+       x="501.70435"
+       y="694.57654"
+       style="font-size:20px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:URW Palladio L;-inkscape-font-specification:URW Palladio L Medium">Gallery240</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+     x="23.11729"
+     y="731.80536"
+     id="text2885-5-6-6-3-7"><tspan
+       sodipodi:role="line"
+       id="tspan2887-9-5-3-0-5"
+       x="23.11729"
+       y="731.80536"
+       style="font-size:19px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:URW Palladio L;-inkscape-font-specification:URW Palladio L Medium">Gallery243</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+     x="23.117289"
+     y="438.45609"
+     id="text2885-5-6-6-3-7-7"><tspan
+       sodipodi:role="line"
+       id="tspan2887-9-5-3-0-5-8"
+       x="23.117289"
+       y="438.45609"
+       style="font-size:19px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:URW Palladio L;-inkscape-font-specification:URW Palladio L Medium">Gallery242</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:13px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Utopia;-inkscape-font-specification:Utopia"
+     x="24.122984"
+     y="280.73532"
+     id="text2885-5-6-6-3-7-7-8"><tspan
+       sodipodi:role="line"
+       id="tspan2887-9-5-3-0-5-8-9"
+       x="24.122984"
+       y="280.73532"
+       style="font-size:19px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:URW Palladio L;-inkscape-font-specification:URW Palladio L Medium">Gallery241</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:13px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
+     x="333.06525"
+     y="29.196213"
+     id="text3089"><tspan
+       sodipodi:role="line"
+       id="tspan3091"
+       x="333.06525"
+       y="29.196213"
+       style="font-size:14;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lohit Kannada;-inkscape-font-specification:Lohit Kannada Italic">Door0</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:13px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
+     x="370"
+     y="275.61865"
+     id="text3089-1"><tspan
+       sodipodi:role="line"
+       id="tspan3091-4"
+       x="370"
+       y="275.61865"
+       style="font-size:14px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lohit Kannada;-inkscape-font-specification:Lohit Kannada Italic">Door1</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:13px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
+     x="360"
+     y="364"
+     id="text3089-9"><tspan
+       sodipodi:role="line"
+       id="tspan3091-7"
+       x="360"
+       y="364"
+       style="font-size:14px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lohit Kannada;-inkscape-font-specification:Lohit Kannada Italic">Door2</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:13px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
+     x="360"
+     y="504"
+     id="text3089-9-9"><tspan
+       sodipodi:role="line"
+       id="tspan3091-7-3"
+       x="360"
+       y="504"
+       style="font-size:14px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lohit Kannada;-inkscape-font-specification:Lohit Kannada Italic">Door3</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:13px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
+     x="360"
+     y="684"
+     id="text3089-9-9-7"><tspan
+       sodipodi:role="line"
+       id="tspan3091-7-3-1"
+       x="360"
+       y="684"
+       style="font-size:14px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lohit Kannada;-inkscape-font-specification:Lohit Kannada Italic">Door4</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:13px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
+     x="129.86247"
+     y="683.8772"
+     id="text3089-9-2"><tspan
+       sodipodi:role="line"
+       id="tspan3091-7-35"
+       x="129.86247"
+       y="683.8772"
+       style="font-size:14px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lohit Kannada;-inkscape-font-specification:Lohit Kannada Italic">Door5</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:13px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
+     x="130"
+     y="504"
+     id="text3089-9-2-7"><tspan
+       sodipodi:role="line"
+       id="tspan3091-7-35-0"
+       x="130"
+       y="504"
+       style="font-size:14px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lohit Kannada;-inkscape-font-specification:Lohit Kannada Italic">Door6</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:13px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
+     x="129.86247"
+     y="321.05353"
+     id="text3089-9-2-7-7"><tspan
+       sodipodi:role="line"
+       id="tspan3091-7-35-0-6"
+       x="129.86247"
+       y="321.05353"
+       style="font-size:14;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lohit Kannada;-inkscape-font-specification:Lohit Kannada Italic">Door7</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:13px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
+     x="42.402264"
+     y="362.87039"
+     id="text3089-9-2-7-7-8"><tspan
+       sodipodi:role="line"
+       id="tspan3091-7-35-0-6-9"
+       x="42.402264"
+       y="362.87039"
+       style="font-size:14px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lohit Kannada;-inkscape-font-specification:Lohit Kannada Italic">Door12</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:13px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
+     x="44.020908"
+     y="661.32135"
+     id="text3089-9-2-7-7-8-6"><tspan
+       sodipodi:role="line"
+       id="tspan3091-7-35-0-6-9-3"
+       x="44.020908"
+       y="661.32135"
+       style="font-size:14px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lohit Kannada;-inkscape-font-specification:Lohit Kannada Italic">Door11</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:13px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
+     x="429.79318"
+     y="646.44208"
+     id="text3089-9-2-7-7-8-6-9"><tspan
+       sodipodi:role="line"
+       id="tspan3091-7-35-0-6-9-3-6"
+       x="429.79318"
+       y="646.44208"
+       style="font-size:14px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lohit Kannada;-inkscape-font-specification:Lohit Kannada Italic">Door10</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:13px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
+     x="587.01373"
+     y="399.88889"
+     id="text3089-9-2-7-7-8-6-9-9"><tspan
+       sodipodi:role="line"
+       id="tspan3091-7-35-0-6-9-3-6-7"
+       x="587.01373"
+       y="399.88889"
+       style="font-size:14px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lohit Kannada;-inkscape-font-specification:Lohit Kannada Italic">Door9</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:13px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
+     x="177.57204"
+     y="278.0466"
+     id="text3089-9-2-7-7-3"><tspan
+       sodipodi:role="line"
+       id="tspan3091-7-35-0-6-4"
+       x="177.57204"
+       y="278.0466"
+       style="font-size:14px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lohit Kannada;-inkscape-font-specification:Lohit Kannada Italic">Door8</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:13px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
+     x="233.76733"
+     y="536.65594"
+     id="text3089-9-9-9"><tspan
+       sodipodi:role="line"
+       id="tspan3091-7-3-9"
+       x="233.76733"
+       y="536.65594"
+       style="font-size:14px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lohit Kannada;-inkscape-font-specification:Lohit Kannada Italic">Bench0,1</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:13px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
+     x="512.12085"
+     y="349.50229"
+     id="text3089-9-9-9-7"><tspan
+       sodipodi:role="line"
+       id="tspan3091-7-3-9-4"
+       x="512.12085"
+       y="349.50229"
+       style="font-size:14px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lohit Kannada;-inkscape-font-specification:Lohit Kannada Italic">Display4</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:13px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
+     x="308.63132"
+     y="160.10402"
+     id="text3089-9-9-9-7-9"><tspan
+       sodipodi:role="line"
+       id="tspan3091-7-3-9-4-3"
+       x="308.63132"
+       y="160.10402"
+       style="font-size:14px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lohit Kannada;-inkscape-font-specification:Lohit Kannada Italic">Display0,1,2,3</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:13px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
+     x="163.27295"
+     y="231.06639"
+     id="text3089-9-9-9-7-5"><tspan
+       sodipodi:role="line"
+       id="tspan3091-7-3-9-4-5"
+       x="163.27295"
+       y="231.06639"
+       style="font-size:14px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lohit Kannada;-inkscape-font-specification:Lohit Kannada Italic">Display5</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:13px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Sans Mono;-inkscape-font-specification:DejaVu Sans Mono"
+     x="27.901079"
+     y="526.36139"
+     id="text3089-9-9-9-7-5-9"><tspan
+       sodipodi:role="line"
+       id="tspan3091-7-3-9-4-5-0"
+       x="27.901079"
+       y="526.36139"
+       style="font-size:14px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lohit Kannada;-inkscape-font-specification:Lohit Kannada Italic">Statue0</tspan></text>
+  <rect
+     style="fill:#ffffff;fill-opacity:1;stroke:#000900;stroke-width:4;stroke-miterlimit:4;stroke-opacity:0.00476188;stroke-dasharray:none;stroke-dashoffset:0"
+     id="rect3520"
+     width="146.50293"
+     height="29.75841"
+     x="0"
+     y="5.1605668" />
+</svg>

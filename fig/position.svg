@@ -14,7 +14,7 @@
    height="427.27423"
    id="svg5200"
    inkscape:version="0.47 r22583"
-   sodipodi:docname="position.svg">
+   sodipodi:docname="position.pdf">
   <metadata
      id="metadata2894">
     <rdf:RDF>
@@ -23,6 +23,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -41,11 +42,11 @@
      showgrid="false"
      inkscape:zoom="1.1046769"
      inkscape:cx="176.7685"
-     inkscape:cy="213.63714"
+     inkscape:cy="211.82666"
      inkscape:window-x="0"
      inkscape:window-y="25"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg5200"
+     inkscape:current-layer="layer1"
      showguides="true"
      inkscape:guide-bbox="true">
     <inkscape:grid
@@ -112,92 +113,64 @@
        id="rect5210"
        style="fill:none;stroke:#000000;stroke-width:2.11166286;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
     <rect
-       width="30"
-       height="30"
-       x="220"
-       y="612.36218"
+       width="9.999999"
+       height="11.000049"
+       x="201.5571"
+       y="645.85608"
        id="rect5216"
-       style="fill:#008000;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
-    <rect
-       width="30"
-       height="30"
-       x="429.28571"
-       y="291.64792"
-       id="rect5216-5"
-       style="fill:#ffff00;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+       style="fill:#666666;stroke:#000000;stroke-width:0.69920743;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
     <path
-       d="M 250,613.63878 470,412.36218"
+       d="M 212.4692,645.77268 469.91657,412.44561"
        inkscape:connection-start="#rect5216"
        id="path5754"
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+       style="fill:none;stroke:#000000;stroke-width:1.16686571px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <path
        d="m 340,422.36218 110,110"
        id="path5756"
        style="fill:none;stroke:#000000;stroke-width:1.10000002px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     <text
-       x="346.92288"
-       y="639.36475"
+       x="345.9563"
+       y="623.36224"
        id="text5758"
        xml:space="preserve"
        style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
-         x="346.92288"
-         y="639.36475"
+         x="345.9563"
+         y="623.36224"
          id="tspan5760"
          style="font-size:16px">same-right side</tspan></text>
     <text
-       x="376.14285"
-       y="345.50507"
+       x="335.9563"
+       y="333.36224"
        id="text5758-7"
        xml:space="preserve"
        style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
-         x="376.14285"
-         y="345.50507"
+         x="335.9563"
+         y="333.36224"
          id="tspan5760-2"
          style="font-size:16px">opposing-left side</tspan></text>
-    <path
-       d="m 413.08226,609.36478 a 10,10 0 0 1 -20,0 10,10 0 1 1 20,0 z"
-       id="path5791"
-       style="fill:#ffff00;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
     <text
-       x="204.4212"
-       y="473.7403"
+       x="205.9563"
+       y="483.36224"
        id="text5758-3"
        xml:space="preserve"
        style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
-         x="204.4212"
-         y="473.7403"
+         x="205.9563"
+         y="483.36224"
          id="tspan5760-3"
          style="font-size:16px">same-left side</tspan></text>
     <text
-       x="442.68381"
-       y="489.76324"
+       x="445.9563"
+       y="483.36224"
        id="text5758-7-0"
        xml:space="preserve"
        style="font-size:20px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"><tspan
-         x="442.68381"
-         y="489.76324"
+         x="445.9563"
+         y="483.36224"
          id="tspan5760-2-4"
          style="font-size:16px">opposing-right side</tspan></text>
     <path
        d="m 401.60905,478.81987 a 5,5 0 0 1 -10,0 5,5 0 1 1 10,0 z"
        id="path5240-6"
-       style="fill:#ff0000;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+       style="fill:#666666;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
   </g>
-  <rect
-     style="fill:#ffff00;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-     id="rect2898"
-     width="34.565548"
-     height="11.52185"
-     x="59.673531"
-     y="177.43103" />
-  <path
-     sodipodi:type="arc"
-     style="fill:#ffff00;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-     id="path4850"
-     sodipodi:cx="349.42343"
-     sodipodi:cy="181.95364"
-     sodipodi:rx="5.4314523"
-     sodipodi:ry="14.483872"
-     d="m 354.85488,181.95364 a 5.4314523,14.483872 0 1 1 -10.8629,0 5.4314523,14.483872 0 1 1 10.8629,0 z"
-     transform="translate(-6.3366943,6.3366943)" />
 </svg>
