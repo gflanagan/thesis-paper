@@ -100,9 +100,9 @@
 
 \begin{abstract}
  
-Computer-aided architectural design (CAAD) programs represent architectural design at a low level of spatial abstraction.                                                             While this representation model allows CAAD programs to capture the precise spatial characteristics of a design, it means that CAAD programs lacks the underlying computational apparatus necessary to reason about design at a conceptual level.
+Computer-aided architectural design (CAAD) programs represent architectural design at a low level of spatial abstraction.                                                             While this representation model allows CAAD programs to capture the precise spatial characteristics of a design, it means that CAAD programs lack the underlying computational apparatus necessary to reason about design at a conceptual level.
 
-This thesis is an a first step towards building a framework that bridges the gap between the conceptual aspects of a design and its low level CAAD-based spatial representation. Specifically, this thesis presents a new framework, referred to as the Conceptual Requirements Reasoner (CRR), which provides an architect with a framework to validate conceptual design requirements. The CRR will demonstrate how qualitative spatial representation and reasoning techniques can be used as the link between a design's conceptual requirements and its underlying quantitative spatial representation.
+This thesis is a first step towards building a framework that bridges the gap between the conceptual aspects of a design and its low level CAAD-based spatial representation. Specifically, this thesis presents a new framework, referred to as the Conceptual Requirements Reasoner (CRR), which provides an architect with a framework to validate conceptual design requirements. The CRR will demonstrate how qualitative spatial representation and reasoning techniques can be used as the link between a design's conceptual requirements and its underlying quantitative spatial representation.
 
 A museum case study is presented to demonstrate the application of the CRR in a real world design context. It introduces a set of museum design requirements identified in research and shows how these requirements can be validated using the CRR. The results of the case study shows that the CRR is an effective tool for conceptual requirements reasoning.
 
@@ -151,19 +151,17 @@ A museum case study is presented to demonstrate the application of the CRR in a 
 
 \chapter{Introduction}
 \label{intro}
-Humans reason about space at an abstract level, this means we think about our spatial environments in terms of qualities rather than quantities. In other words, we cognitively represent our spatial environments using symbolic terms like \emph{next-to}, \emph{in-front-of}, or \emph{close-by}, as opposed to using a precise spatial coordinate system of x, y, and z  \cite{freksa1991qsr} \cite{Cohn:2001:QSR}. Computers on the other hand are excellent at storing and computing over large amounts of precise, concrete data. From a spatial perspective, this means that computers are able to handle a large amount of quantitative spatial information \cite{Miller} \cite{Korte}.
-
-%that have been used in areas like Geographic Information Systems \cite{tbd} and Robotics \cite{tbd}. 
+Humans reason about space at an abstract level; this means we think about our spatial environments in terms of qualities rather than quantities. In other words, we cognitively represent our spatial environments using symbolic terms like \emph{next-to}, \emph{in-front-of}, or \emph{close-by}, as opposed to using a precise spatial coordinate system of x, y, and z  \cite{freksa1991qsr} \cite{Cohn:2001:QSR}. Computers on the other hand are excellent at storing and computing over large amounts of precise, concrete data. From a spatial perspective, this means that computers are able to handle a large amount of quantitative spatial information \cite{Miller} \cite{Korte}.
 
 The area of architectural design is an interesting application domain with regards to the representation of space because it inherently involves multiple spatial perspectives: \emph{qualitative} and \emph{quantitative}. At the qualitative level, spatial aspects of the design define architectural qualities such as spaciousness, privacy, and continuity. These conceptual aspects encompass the way an architectural design is experienced. At the quantitative level, an architectural design is spatially modeled at a precise and concrete level so that is can be used during the construction of the design in the real world. These two spatial perspectives encompass very different aspects of an architectural design, henceforth referred to as design.
 
-Current state-of-the-art computer-aided architectural design (CAAD) programs spatially represent a designs at a quantitative level \cite{ArchiCAD}. This allows CAAD programs to be effectively used to model the precise spatial characteristics that are necessary during the construction of the design in the real world. Unfortunately, this type of representation model means that CAAD programs lack the underlying computational apparatus necessary to reason about design at higher levels of abstraction, such as reasoning about its conceptual features. This happens because of the representational gap between the low level spatial representation of the design in the CAAD program and the abstract representation necessary for reasoning at a conceptual level. 
+Current state-of-the-art computer-aided architectural design (CAAD) programs spatially represent a design at a quantitative level \cite{ArchiCAD}. This allows CAAD programs to be used effectively to model the precise spatial characteristics that are necessary during the construction of the design in the real world. Unfortunately, this type of representation model means that CAAD programs lack the underlying computational apparatus necessary to reason about design at higher levels of abstraction, such as reasoning about its conceptual features. This happens because of the representational gap between the low level spatial representation of the design in the CAAD program and the abstract representation necessary for reasoning at a conceptual level. 
 
-This thesis is an a first step towards building a framework that bridges this gap between the high level conceptual aspects of a design to its low level CAAD-based spatial representation. Specifically, this thesis presents a new framework, referred to as the Conceptual Requirements Reasoner (CRR), that provides an architect with a framework to validate conceptual design requirements. Conceptual design requirements in this thesis refer to qualitative and experiential features of a design. They can be architectural concepts like spaciousness, privacy and continuity or qualitative spatial attributes found in architecture (QSA) such as positioning, orientation, proximity, and visibility. The CRR will demonstrate how qualitative spatial representation and reasoning techniques can be used as the link between a design's conceptual requirements and its underlying quantitative spatial representation.
+This thesis is a first step towards building a framework that bridges this gap between the high level conceptual aspects of a design to its low level CAAD-based spatial representation. Specifically, this thesis presents a new framework, referred to as the Conceptual Requirements Reasoner (CRR), that provides an architect with a framework to validate conceptual design requirements. Conceptual design requirements in this thesis refer to qualitative and experiential features of a design. They can be architectural concepts like spaciousness, privacy and continuity or qualitative spatial attributes found in architecture (QSA) such as positioning, orientation, proximity, and visibility. The CRR will demonstrate how qualitative spatial representation and reasoning techniques can be used as the link between a design's conceptual requirements and its underlying quantitative spatial representation.
 
 A Museum Case Study is presented to demonstrate the application of the CRR in a real world design context. It introduces a set of museum design requirements that were identified in museum research and applies these requirements to two real world museums. The results of the case study show that the CRR is an effective tool for conceptual requirements reasoning.
 
-This thesis is organized as follows. Chapter \ref{background} presents the background knowledge that is necessary for the rest of the thesis. Chapter \ref{relatedwork} presents the related works. Chapter \ref{ccr} introduces the problem statement being addressed in the thesis and presents the thesis's main contributions and approach. Chapters \ref{representation and reasoning} presents the CRR's design representation model and spatial reasoning framework. Chapter \ref{design space} present the a set of architectural concepts and qualitative spatial attributes found in architecture and shows how they can be spatially defined. Chapter \ref{case study} presents the application of the CRR in the area of museum design through a case study and reports the results of the study. Chapter \ref{conclusion} presents concluding thought and future works to be completed. 
+This thesis is organized as follows. Chapter \ref{background} presents the background knowledge that is necessary for the rest of the thesis. Chapter \ref{relatedwork} presents the related works. Chapter \ref{ccr} introduces the problem statement being addressed in the thesis and presents the thesis's main contributions and approach. Chapters \ref{representation and reasoning} presents the CRR's design representation model and spatial reasoning framework. Chapter \ref{design space} presents a set of architectural concepts and qualitative spatial attributes found in architecture and shows how they can be spatially defined. Chapter \ref{case study} presents the application of the CRR in the area of museum design through a case study and reports the results of the study. Chapter \ref{conclusion} presents concluding thought and future works to be completed. 
 
 
 %Where as an architect conceptualizes a design from an spatially abstract level, it is necessary for the architect to construct the concrete level that is precise enough for the design to be realized \cite{conceptual design stuff}. 
@@ -192,7 +190,7 @@ This thesis is organized as follows. Chapter \ref{background} presents the backg
 
 
 \chapter{Background} \label{background}
-This Chapter presents the background information required for this thesis. There are two areas of background knowledge that will be required for the this thesis: Qualitative Spatial Reasoning (QSR) and Constraint Logic Programming (CLP).
+This chapter presents the background information required for this thesis. There are two areas of background knowledge that will be required for the this thesis: Qualitative Spatial Reasoning (QSR) and Constraint Logic Programming (CLP).
 
 \section{Qualitative Spatial Representation and Reasoning}
 The field of Qualitative Spatial Reasoning (QSR) investigates techniques for representing and reasoning about abstract features of space in a computational framework while preserving its fundamental properties. In this regard, QSR represents space at a qualitative level as opposed to a quantitative level. At the qualitative level space is defined by symbolic relationships, while at the quantitative level space is defined by precise numeric values \cite{freksa1991qsr} \cite{bhatt-spatial-computing}. 
@@ -200,7 +198,7 @@ The field of Qualitative Spatial Reasoning (QSR) investigates techniques for rep
 Qualitative representations of space can be quite useful. Take for example the task of describing the location of a chair to your friend. 
 In order to communicate the location of the chair effectively it is unnecessary to use precise numeric values that characterize the chair, such as its size, shape and weight, and metric spatial measurements such as distance that relate the chair to other objects. Communicating qualitative spatial relationships, such as the orientation of the chair, is sufficient for effectively describing its location. An example could be, ``the chair is \emph{behind} the table and on the \emph{left-hand} side of the room.'' By using qualitative relationships, you are representing space at a level of abstraction that hides unnecessary details so that you are dealing only with those aspects of space that are important for the problem at hand.
 
-While the example above is informal, formal qualitative representations of space preserve universal spatial aspects such as uniqueness (objects exist exactly once and each spatial location can have at most one object), and realizability while providing a computational apparatus to reason about space from an abstract level \cite{freksa1991qsr}. The following subsection will introduce several formal qualitative spatial representation calculi with respect to topology and orientation. 
+While the example above is informal, formal qualitative representations of space preserve universal spatial aspects such as uniqueness (objects exist exactly once), and realizability while providing a computational apparatus to reason about space from an abstract level \cite{freksa1991qsr}. The following subsection will introduce several formal qualitative spatial representation calculi with respect to topology and orientation. 
 
 
 \subsection{Qualitative Spatial Calculi}
@@ -217,7 +215,7 @@ Formal qualitative spatial calculi are explicit characterizations of qualitative
 \label{Qualitative Spatial Calculi}
 \end{figure}
 
-RCC defines eight topological relationships over regions: disconnected, partial overlap, externally connected, equals, non-tangential proper part, inverse non-tangential proper part, tangential proper part, and inverse tangential proper part. Refer to figure \ref{RCC-calc} for an illustration of these relationships. Axiomatic rules of jointly exhaustive, mutually disjoint and pairwise disjoint (JEPD) enforce the spatial uniques of each relationship \cite{Randell92aspatial}. For example, two regions can \emph{not} be partially overlapping and disconnected at the same point in time. Additionally, composition tables define the set of realizable spatial configurations for a collection of regions. For example, if region \emph{A} is inside region \emph{B} and region \emph{B} is inside region \emph{C}, then region \emph{A} must also be in region \emph{C}.
+RCC defines eight topological relationships over regions: disconnected, partial overlap, externally connected, equals, non-tangential proper part, inverse non-tangential proper part, tangential proper part, and inverse tangential proper part. Refer to Figure \ref{RCC-calc} for an illustration of these relationships. Axiomatic rules of jointly exhaustive, mutually disjoint and pairwise disjoint (JEPD) enforce the spatial uniques of each relationship \cite{Randell92aspatial}. For example, two regions can \emph{not} be partially overlapping and disconnected at the same point in time. Additionally, composition tables define the set of realizable spatial configurations for a collection of regions. For example, if region \emph{A} is inside region \emph{B} and region \emph{B} is inside region \emph{C}, then region \emph{A} must also be in region \emph{C}.
 
 Orientational relationships can be broken down into intrinsic and extrinsic spatial relationships. Extrinsic relationships are defined by  an external reference point. This type of orientational relationship is characterized in the SCC, in which an external reference point is used to relate two objects together. Figure \ref{SCC-calc} illustrates the SCC partitioning of space for three points, \emph{A}, \emph{B}, and \emph{C}. In this example, \emph{C} is related to \emph{A} through \emph{B}, and has an SCC 2 relationship. 
 
@@ -244,7 +242,7 @@ Building new constraint solvers is laborious because it typically requires hard-
 
 
 \chapter{Related Works} \label{relatedwork}
-This Chapter presents the related work for this thesis. There is a large body of research on tools for conceptual design assistance. The related works that will be discussed in this Chapter have been narrowed to tools that provide assistance to a designer and use spatial reasoning as the basis of its design analysis.
+This chapter presents the related work for this thesis. There is a large body of research on tools for conceptual design assistance. The related works that will be discussed in this Chapter have been narrowed to tools that provide assistance to a designer and use spatial reasoning as the basis of its design analysis.
 
 
 \section{Intelligent Critic System}
@@ -269,7 +267,7 @@ The Software Environment for Supporting the Early Phases in Building Design (SEE
 
 Within the SEED project, design knowledge is partitioned into two categories: design units and functional units. Design units represent the spatial and physical elements of a building. Functional units represent design requirements that constrain design units based on spatial attributes such as shape, size and placement, and non-spatial attributes such as material make-up. 
 
-Given a design, the SEED project automatically generate possible floor plans that adhere to all of the design requirements, given a set of design and functional units. The main contribution of this work is that the system utilizes the constraint solving abilities in a CLP framework to autonomously find design layouts that meet the design's requirement specifications.
+Given a design, the SEED project automatically generates possible floor plans that adhere to all of the design requirements, given a set of design and functional units. The main contribution of this work is that the system utilizes the constraint solving abilities in a CLP framework to autonomously find design layouts that meet the design's requirement specifications.
 
 
 \section{Interior Design Configuration for a Virtual \newline Environment}
@@ -290,7 +288,7 @@ Borrmann introduced the idea of including predefined spatial constraints directl
 
 
 \section{Discussion}
-Table \ref{related works table} shows the high level objectives of each tool discussed in this section. This Table includes requirements checking, design evaluation, and automatic floor plan configuration. Despite the differences, each system provides design assistance at a conceptual level.
+Table \ref{related works table} shows the high level objectives of each tool discussed in this section. This table includes requirements checking, design evaluation, and automatic floor plan configuration. Despite the differences, each system provides design assistance at a conceptual level.
 
 \begin{table}[H]
   \begin{center}
@@ -332,7 +330,7 @@ Table \ref{functionality table} shows various features provided by the related w
 \label{functionality table}
 \end{table} 
 
-The CRR provides provides five of the seven features. It does not provide feedback to the user and it does not evaluate a design based on metrics. The intention for this version of CRR is to provide a solid framework for spatial reasoning over architectural designs and requirement reasoning. Future versions of the tool might incorporate these aspects. 
+The CRR provides provides five of the seven features. It does not provide feedback to the user and it does not evaluate a design based on metrics. The intention for this version of CRR is to provide a solid framework for spatial reasoning over architectural designs and requirement reasoning. The omission of these features was based on time constraints and not any fundamental issues with the framework. 
 
 Table \ref{spatial table} shows the spatial reasoning capabilities for each system. It includes spatial reasoning for topological relationships, orientation (intrinsic and extrinsic), distance, and metric. Metric relationships refer to quantitative geometric functions such as the calculation of length or area.  
 
@@ -363,7 +361,7 @@ The CRR is the only tool in the group which provides support for every type of s
 
 
 \chapter{The Conceptual Requirements Reasoner} \label{ccr}
-This Chapter is an introduction to the Conceptual Requirements Reasoner (CRR), a framework for validating conceptual design requirements against CAAD-based design plans. The Chapter begins by presenting the problem statement that is addressed in this thesis. The next section presents the scope and contribution of the thesis. The final section introduces the high level design and implementation of the CRR in the context of the problem statement.
+This chapter is an introduction to the Conceptual Requirements Reasoner (CRR), a framework for validating conceptual design requirements against CAAD-based design plans. The Chapter begins by presenting the problem statement that is addressed in this thesis. The next section presents the scope and contribution of the thesis. The final section introduces the high level design and implementation of the CRR in the context of the problem statement.
  
 
 \section{Design Problem}
@@ -387,7 +385,7 @@ Take for example the tasks an architect might face during the design conceptuali
 \begin{quote}
 \emph{This sober, rational and markedly horizontal structure is distinctive for its laminar exterior, its modular repetition, austere design and the hard quality of the materials which shape it, concrete and glass.}
 \end{quote}
-Environmental aspects of the museum's design, such as these expressed in the above descriptions, encompass high level spatial design patterns that are identified at the design conceptualization phase. Because CAAD-based programs do not represent the design at a level of abstraction that is required to express these conceptualization, it is therefore incapable of providing the designer with assistance during this phase of the design process.
+Environmental aspects of the museum's design, such as these expressed in the above descriptions, encompass high level spatial design patterns that are identified at the design conceptualization phase. Because CAAD-based programs do not represent the design at a level of abstraction that is required to express these conceptualization, they are therefore incapable of providing the designer with assistance during this phase of the design process.
 
 Design reasoning at a conceptual level, such as the example above, requires the underlying model representation semantics at the same level of abstraction. In this regard, the design semantics at the conceptual level involve abstractions over architectural entities such as rooms, floors, buildings, doors, and walls, along with the relationships they share between each other, both spatially (facing, near-to, across-from, connected-to) and non-spatially (material composition, lighting attributes, and load bearing qualities). Conversely, the underlying model representation semantics of CAAD-based program are based on spatially general and low level geometric primitives of points, lines, and polygons that lack the notions at the higher levels of the architectural design hierarchy. Whereas an architect might conceptualize the design of a museum in terms such as galleries and the relative placement of objects within each gallery, e.g., ``the statue is on the \emph{left-hand-side} of the gallery as one enters from the main doors,'' the process of building the museum in a CAAD-based program restricts the architect to using points, lines and polygons. 
 
@@ -477,7 +475,7 @@ The geometric quantities in the quantitative level are connected to the qualitat
 
 The implementation of the CRR is broken down into three modules as identified in the design hierarchy, and is illustrated in Figure \ref{crr design implementation}. The top level module is where architectural concepts and QSA are defined in terms of qualitative spatial patterns and is the interface through which  users will query the CRR. The quantitative space module models the design's physical form and artefactual extension. The data at this level is imported from a multi-modal access framework \cite{carl} based on the IFC standard for CAAD-based systems. The qualitative space module is responsible for the spatial abstraction and qualification of the quantitative model and is implemented as a series of spatial constraint solvers for topological, orientational, and distance reasoning. 
 
-From a user perspective, the CRR provides the user with design assistance in validating requirements for a work-in-progress design. The CRR does this this by providing a query engine that allows a designer to validate conceptual requirements. For example, a designer is provided with a set of architectural concepts and QSA, which the designer uses to construct queries to the CRR. So if a designer wants to check if a door and window are facing each other (as might be a requirement for air circulation purposes) the designer can make the following query to the CRR:
+From a user perspective, the CRR provides the user with design assistance in validating requirements for a work-in-progress design. The CRR does this by providing a query engine that allows a designer to validate conceptual requirements. For example, a designer is provided with a set of architectural concepts and QSA, which the designer uses to construct queries to the CRR. So if a designer wants to check if a door and window are facing each other (as might be a requirement for air circulation purposes) the designer can make the following query to the CRR:
 \begin{verbatim}
     ?- facing(door, window).
 \end{verbatim} The CRR will respond \emph{true} to the query if the door and window are facing each other and respond \emph{fail} if they are not.
@@ -511,7 +509,7 @@ From a user perspective, the CRR provides the user with design assistance in val
 
 
 \chapter{Design Representation and Spatial Reasoning} \label{representation and reasoning}
-This Chapter presents the quantity and quality modules of the CRR. For the quantity module, this Chapter present the internal architectural design representation model. For the quality module, this Chapter presents spatial constraint solvers that are used by the CRR to qualify spatial relationships. Additionally, this chapter presents each module in the context of the declarative programming paradigm used for the implementation of the CRR, namely Prolog and Constraint Logic Programming (CLP). 
+This chapter presents the quantity and quality modules of the CRR. For the quantity module, this chapter introduces the internal architectural design representation model. For the quality module, this chapter introduces the spatial constraint solvers that are used by the CRR to qualify spatial relationships. Additionally, this chapter presents each module in the context of the declarative programming paradigm used for the implementation of the CRR, namely Prolog and Constraint Logic Programming (CLP). 
 
 This chapter has two sections. The first section presents the internal architectural design representation structure and shows how it is implemented in Prolog. The second section looks at the spatial constraint solvers and shows how each is implemented in CLP.
 
@@ -520,14 +518,14 @@ The CRR represents two distinct aspects of a design. It represents the design's 
 
 The physical representation of the design is automatically imported into the CRR from a multi-modal spatial data access framework \cite{carl} built by the DesignSpace project \cite{DesignSpace}. For each architectural entity, the CRR imports the structural geometric coordinate data, as it is represented in a CAAD-based program, and a unique identifier referred to in the CRR as the \emph{crr\_id}. Currently, artefactual extensions are manually imported, but the intent for future versions is to automate this directly from the multi-modal spatial data access framework.  
 
-The remainder of this section is broken up into three subsections. The first subsection looks at the physical representation structure. The second subsection looks at the artefactual representation structure. The third subsection looks at how both are implemented in the CRR.
+The remainder of this section is comprised of three subsections. The first subsection looks at the physical representation structure. The second subsection looks at the artefactual representation structure. The third subsection looks at how both are implemented in the CRR.
 
 \subsection{Physical Design Representation}
-The CRR represents a design's physical form in terms of geometric features of layout, shape, and location. Each architectural entity is represented in the CRR as a polygon made up of Cartesian points that correspond to the physical dimensions (length, width, shape) of the entity as is occurs in the real world. The physical representation of the design is analogous to the design perspective that is represented by CAAD programs. 
+The CRR represents a design's physical form in terms of geometric features of layout, shape, and location. Each architectural entity is represented in the CRR as a polygon composed of points that correspond to the physical dimensions (length, width, shape) of the entity as it occurs in the real world. The physical representation of the design is analogous to the design perspective that is represented by CAAD programs. 
 
 
 \subsection{Artefactual Design Representation}
-An artefactual extension is a non-physical, spatial extension of an architectural entity that pertains to a specific functional quality. While an artefactual extension does not have a physical manifestation, it is none the less an important aspect of the design representation model because it affects the functionality and performance of a design from an experiential perspective. 
+An artefactual extension is a non-physical, spatial extension of an architectural entity that pertains to a specific functional quality. While an artefactual extension does not have a physical manifestation, it is nonetheless an important aspect of the design representation model because it affects the functionality and performance of a design from an experiential perspective. 
 
 There are three types of spatial artefacts identified by Bhatt\cite{BhattDH09} that are represented in the CRR: \emph{operational space}, \emph{functional space}, and \emph{range space}.
 
@@ -541,11 +539,11 @@ There are three types of spatial artefacts identified by Bhatt\cite{BhattDH09} t
 \label{artefactual-extensions}
 \end{figure}
 
-The operational space encompasses the region of space required by an object to preform its function. For example, the operational space of a door is the area in which a door can occupy during its operation, opening and closing (see figure \ref{artefactual-extensions2}). This space is dynamic in the sense that it represents the configurable space of the physical doorway. 
+The operational space encompasses the region of space required by an object to perform its function. For example, the operational space of a door is the entire space which a door can occupy during its operation, opening and closing (see Figure \ref{artefactual-extensions2}). This space is dynamic in the sense that it represents the configurable space of the physical doorway. 
 
-The functional space encompasses the region of space that is required for an object to function itself or the space for a person to operate an object. For example, the functional space of a doorway is the total area needed for a person to operate, open and close, as well as any additional space need to navigate entirely through the doorway (see figure \ref{artefactual-extensions2}).
+The functional space encompasses the region of space that is required for an object to function itself or the space for a person to operate an object. For example, the functional space of a doorway is the total space required for a person to operate, open and close, as well as any additional space need to navigate entirely through the doorway (see Figure \ref{artefactual-extensions2}).
 
-The range space pertains to a region of space that encompass the range of a sensor (i.e., camera, motion sensor). For example, the range space of a camera is defined by its depth of field and angle of view. It represents the total space that is under surveillance of the camera (see figure \ref{artefactual-extensions2}).
+The range space pertains to a region of space that encompasses the range of a sensor (i.e., camera, motion sensor). For example, the range space of a camera is defined by its depth of field and angle of view. It represents the total space that is under surveillance of the camera (see Figure \ref{artefactual-extensions2}).
 
 \begin{figure}[H]
 \centering
@@ -556,19 +554,19 @@ The range space pertains to a region of space that encompass the range of a sens
 
 Each artefactual extension is represented in the CRR as a polygon that corresponds to its spatial dimensions.
 
-Artefactual extensions directly affect the experiential quality of a design. For example, a sink in a bathroom has a functional space, the space a person occupies while washing his/her hands at the sink. If this space interferes with (i.e., topologically overlapping) the functional and/or physical space of a doorway, this will cause a circulation problem when both the doorway and sink are simultaneously being operated, because it will cause a collision between the person washing his/her hands and the doorway. In this example, the functional aspects of the bathrooms design with regard to the mitigation of circulation problems is directly influenced by the spatial configuration of the non-physical artefactual extensions of the design. It should be noted that this type of occurrence can not be modeled in current CAAD-based program because they do not represent artefactual extension.
+Artefactual extensions directly affect the experiential quality of a design. For example, a sink in a bathroom has a functional space, the space a person occupies while washing his/her hands at the sink. If this space interferes with (i.e., topologically overlaps) the functional and/or physical space of a doorway, this will cause a circulation problem when both the doorway and sink are simultaneously being operated, because it will cause a collision between the person washing his/her hands and the doorway. In this example, the functional aspects of the bathroom's design with regard to the mitigation of circulation problems is directly influenced by the spatial configuration of the non-physical artefactual extensions of the design. It should be noted that this type of occurrence can not be modeled in current CAAD-based programs because they do not represent artefactual extension.
 
 
 \subsection{Implementation}
-Within the CLP framework of the CRR, the physical and artefactual representations are implemented as factbases and rulebases. There are two factbases that are in memory database-like structures. One of these factbases is used as a catalog, which relates each architectural entity to its architectural type (wall, window, door, room, interior design object, etc.) via its \emph{crr\_id}. Each entry in this factbase is a Prolog predicate of the form $architectural \mathunderscore type(crr \mathunderscore id, type)$.
+Within the CLP framework of the CRR, the physical and artefactual representations are implemented as factbases and rulebases. There are two factbases that are in-memory database-like structures. One of these factbases is used as a catalog, which relates each architectural entity to its architectural type (wall, window, door, room, interior design object, etc.) via its \emph{crr\_id}. Each entry in this factbase is a Prolog predicate of the form $architectural \mathunderscore type(crr \mathunderscore id, type)$.
 \begin{verbatim}
    architectural_type(door42, door).
    architectural_type(wall49, wall).
-\end{verbatim} The other factbase is used as a linking table to relate architectural entities together based on containment relationships. The CRR represents two types of containment relationships. The first is the containment relationship between rooms and architectural entities and interior design elements. This containment relationship defines which architecural entities and interior design elements are contained in which rooms. In a specific design, desk2 is contained in room6, and wall5 in contained by room6. Each containment relationship is implemented as a Prolog predicate of the form $contained\_room(contained \mathunderscore crr \mathunderscore id, containing \mathunderscore crr \mathunderscore id)$.
+\end{verbatim} The other factbase is used as a linking table to relate architectural entities together based on containment relationships. The CRR represents two types of containment relationships. The first is the containment relationship between rooms and architectural entities and interior design elements. This containment relationship defines which architecural entities and interior design elements are contained in which rooms. In a specific design, \emph{desk2} is contained in \emph{room6}, and \emph{wall5} in contained by \emph{room6}. Each containment relationship is implemented as a Prolog predicate of the form $contained\_room(contained \mathunderscore crr \mathunderscore id, containing \mathunderscore crr \mathunderscore id)$.
 \begin{verbatim}
    contained_room(desk2, room6).
    contained_room(wall5, room6).
-\end{verbatim} The second containment relationship is between doors / windows and walls. This containment relationship defined which doors / windows are contained by which walls. For example, door42 is contained in wall6. This is implemented as a Prolog Predicate of the form $contained\_wall(contained \mathunderscore crr \mathunderscore id, containing \mathunderscore crr \mathunderscore id)$.
+\end{verbatim} The second containment relationship is between doors / windows and walls. This containment relationship defines which doors / windows are contained by which walls. For example, \emph{door42} is contained in \emph{wall6}. This is implemented as a Prolog predicate of the form $contained\_wall(contained \mathunderscore crr \mathunderscore id, containing \mathunderscore crr \mathunderscore id)$.
 \begin{verbatim}
    contained_wall(door42, wall6).
 \end{verbatim} 
@@ -580,7 +578,7 @@ Within the CLP framework of the CRR, the physical and artefactual representation
 \label{clp-design}
 \end{figure}
 
-Rulebases link architectural entities to their physical and artefactual representations. There is a separate rulebase for the physical, functional, operational, and range representations that are implemented using a similar form. Each rulebase is built as a series of Prolog rules. The head of each rule links an architectural entity to a variable that is bound to its spatial representation. The body of each rule is responsible for handling coordinate point data by internally defining spatial primitives of points, lines, and polygons. The $spatial \mathunderscore primitive$ rule transforms coordinate data into spatial primitives and binds a variable to a spatial representation. The $spatial \mathunderscore primitive$ rule works by matching arguments. For example, the following call to the $spatial \mathunderscore primitive$ rule with a single point in the second argument instantiates the the variable, \emph{SpatialPrimitive}, as a point object primitive.
+Rulebases link architectural entities to their physical and artefactual representations. There is a separate rulebase for the physical, functional, operational, and range representations that are implemented using a similar form. Each rulebase is built as a series of Prolog rules. The head of each rule links an architectural entity to a variable that is bound to its spatial representation. The body of each rule is responsible for handling coordinate point data by internally defining spatial primitives of points, lines, and polygons. The $spatial \mathunderscore primitive$ rule transforms coordinate data into spatial primitives and binds a variable to a spatial representation. The $spatial \mathunderscore primitive$ rule works by matching arguments. For example, the following call to the $spatial \mathunderscore primitive$ rule with a single point in the second argument instantiates the variable, \emph{SpatialPrimitive}, as a point object primitive.
 \begin{verbatim}
    spatial_primitive(SpatialPrimitive, (5,7)).
 \end{verbatim} Similarly, a call to $spatial \mathunderscore primitive$ with a list of points instantiates the variable as a polygon object primitive.
@@ -588,7 +586,7 @@ Rulebases link architectural entities to their physical and artefactual represen
    spatial_primitive(SpatialPrimitive, [(5,7), (5,9), (7,7)]).
 \end{verbatim} 
 
-The following rules show the physical, functional and operational rules for a door with a \emph{crr\_id} of door42. Note the similarities and differences between rules.
+The following rules show the physical, functional and operational rules for a door with a \emph{crr\_id} of \emph{door42}. Note the similarities and differences between rules.
 \begin{verbatim}
     physical_representation(door42, Geometry) :-
             spatial_primitive(Geometry, [(1,3),(1,4),(4,4),(4,3)]).
@@ -598,13 +596,13 @@ The following rules show the physical, functional and operational rules for a do
             
     operational_representation(door42, OpGeometry) :-
             spatial_primitive(OpGeometry, [(1,4),(4,6),(4,3)]).
-\end{verbatim} Every architectural entity has a physical representation but may or may not have a functional, operational, or range representation. For example, a doorway usually has a functional and operational representation but may not have a range representation. Some entities, such as columns, have no artefactual representations. However, there are no limitation imposed on which entities can or can not have certain artefactual extensions.
+\end{verbatim} Every architectural entity has a physical representation but may or may not have a functional, operational, or range representation. For example, a doorway usually has a functional and operational representation but may not have a range representation. Some entities, such as columns, have no artefactual representations. However, there are no limitations imposed on which entities can or can not have certain artefactual extensions.
 
 
-These factbases and rulebases can be queried using a Prolog interpretor to retrieve information about architectural entities. A call to the $architectural \mathunderscore type$ factbase can be used to get an entity's type given its' \emph{crr\_id}, such as the following query.
+These factbases and rulebases can be queried using a Prolog interpreter to retrieve information about architectural entities. A call to the $architectural \mathunderscore type$ factbase can be used to get an entity's type given its \emph{crr\_id}, such as the following query.
 \begin{verbatim}
     architectural_type(door42, Type).
-\end{verbatim} The return of this call instantiates the \emph{Type} variable with the door's type, which is \emph{door}. Similarly, a query to a rulebase will return and instantiated variable with the respective spatial representations. Figure \ref{clp-design} shows the implementation structure for querying the rulebases. For example, the following query to the \emph{physical\_representation} rulebase will instantiate the $Geometry$ variable with door42's physical representation. \begin{verbatim}
+\end{verbatim} The return of this call instantiates the \emph{Type} variable with the door's type, which is \emph{door}. Similarly, a query to a rulebase will return an instantiated variable with the respective spatial representations. Figure \ref{clp-design} shows the implementation structure for querying the rulebases. For example, the following query to the \emph{physical\_representation} rulebase will instantiate the $Geometry$ variable with \emph{door42}'s physical representation. \begin{verbatim}
     physical_representation(door42, Geometry).
 \end{verbatim} Calls to the functional, operational, and range rulebases work in the exact same fashion.
 
@@ -638,7 +636,7 @@ Qualitative spatial representation and reasoning is used in the CRR as a link be
 
 These spatial constraint solvers use formal qualitative spatial calculi for topological (RCC), orientational (SCC, OPRA) and distance to qualitatively represent and reason over a design. Within the CLP framework of the CRR, the spatial constraint solvers are implemented using CLP($\mathbb{R}$) (CLP over Reals) and Constrain Handling Rules (CHR). The topological and distance constraint solvers extend Sindalog \cite{Almendros-Jimenez}, a spatial constraint solver written in CHR.
 
-Each spatial constraint solver is implemented as a query engine that qualifies spatial relationships to answer qualitative spatial queries.  A qualitative spatial query involves three step:
+Each spatial constraint solver is implemented as a query engine that qualifies spatial relationships to answer qualitative spatial queries.  A qualitative spatial query involves three steps:
 \begin{enumerate}
 \item retrieval of quantitative representation 
 \item spatial abstraction of quantitative representation
@@ -647,14 +645,14 @@ Each spatial constraint solver is implemented as a query engine that qualifies s
 As an example, the following topological query involves the inside relationship between a desk and a room. 
 \begin{verbatim}
    ?- inside(desk3, room1).
-\end{verbatim} In step one, the quantitative geometries of the desk and room are retrieved from the physical representation rulebase. The second step uses transformation rules (this will be discussed in the next section) to spatially abstract the physical representation into abstract spatial objects. In the final step, the abstract objects are used by the topological constraint solver to qualify the inside relationship. The constraint solver will respond \emph{true} if the desk has an inside spatial relationship with the room, and \emph{fail} if it does not.   
+\end{verbatim} In step one, the quantitative geometries of the desk and room are retrieved from the physical representation rulebase. The second step uses transformation rules (discussed in the next section) to spatially abstract the physical representation into abstract spatial objects. In the final step, the abstract objects are used by the topological constraint solver to qualify the inside relationship. The constraint solver will respond \emph{true} if the desk has an inside spatial relationship with the room, and \emph{fail} if it does not.   
 
 %The spatial constraint solvers work directly over the design representation structure via the spatial abstraction representation layer and the design factbase. The main service of the reasoner is qualification of the quantitative architectural space into the qualitative feature space of topology, orientation, and distance. It should be noted that the distance constraint solver is different from the topological and orientational constraint solvers because it does not qualify distance relationships, rather it solves minimum distance constraints over quantitative objects. The topological and distance constraint solvers extend The Sindalog spatial constraint solver \cite{Sindalong}, a spatial constraint solver written in CHR. These qualitative spatial relationships are, in turn, used to reason about conceptual design requirements.
 
-The remainder of this section is structured as follow. The first subsection looks at how the quantitative representations are spatially abstracted. The second, third and forth subsections look at topological, orientational and distance based reasoning.
+The remainder of this section is structured as follow. The first subsection looks at how the quantitative representations are spatially abstracted. The second, third and fourth subsections look at topological, orientational and distance based reasoning.
 
 \subsection{Spatial Abstraction}
-Spatial abstraction is the process of generalizing a spatial representation so as to represent only those features that are necessary for solving a specific problem. Within the context of the CRR, quantitative spatial representations can be abstracted to points, directed points and convex hulls in order to reason about the design's qualitative spatial relationships of topology, orientation and distance. For example, one approach to reasoning about the qualitative orientational relationship between two doors requires that both doors are spatially represented as directed points. Because doors are naturally represented as polygons, spatial abstraction is needed to transform their quantitative polygonal representation into a qualitative directed point representation.
+Spatial abstraction is the process of generalizing a spatial representation so as to represent only those features that are necessary for solving a specific problem. Within the context of the CRR, quantitative spatial representations can be abstracted to points, directed points and convex hulls in order to reason about the design's qualitative spatial relationships of topology, orientation and distance. For example, one approach to reasoning about the qualitative orientational relationship between two doors requires that both doors be spatially represented as directed points. Because doors are naturally represented as polygons, spatial abstraction is needed to transform their quantitative polygonal representation into a qualitative directed point representation.
 
 %In DSpace architectural entities can be spatially abstracted. This allows DSpace to reason about a design from a qualitative level of abstraction with regards to its spatial characteristics of topology, orientation and distance. This type of qualitative spatial reasoning reasons over the abstract feature space of the design using abstract spatial objects of points, directed points, and convex hulls. 
 
@@ -667,12 +665,12 @@ The process of spatially abstracting an architectural entity depends on the foll
 \end{enumerate}
 For example, the abstracted representation of a doorway as a directed point is not only defined by its physical form (a polygon) but also by the interpretation of the doorway's intrinsic direction in the context of its situation in the design. Further discussion on this topic can be found in \ref{spatial abstraction}.
 
-Within the CLP framework of the CRR, architectural entities are spatial abstracted using Prolog rules. These rules transform an entity's quantitative spatial representation into abstracted objects of points, directed points and convex hulls. Transformation rules take an \emph{crr\_id}, retrieve the quantitative geometry and preform a series of geometric transformations based on the dependencies discussed earlier. For example, the rule to spatially abstract a door into a point involves first retrieves the door's physical representation and then transforming the door's polygonal representation into a point by calculating the polygons centroid. 
+Within the CLP framework of the CRR, architectural entities are spatial abstracted using Prolog rules. These rules transform an entity's quantitative spatial representation into abstracted objects of points, directed points and convex hulls. Transformation rules take a \emph{crr\_id}, retrieve the quantitative geometry and perform a series of geometric transformations based on the dependencies discussed earlier. For example, the rule to spatially abstract a door into a point involves first retrieving the door's physical representation and then transforming the door's polygonal representation into a point by calculating the polygon's centroid. 
 \begin{verbatim}
     point_abstraction(Id, PtAbs) :-
            physical_representation(Id, Polygon),
            centroid(Polygon, PtAbs).
-\end{verbatim} Given a crr\_id, a query to an abstraction rule will return an instantiated variable with the entity's spatially abstracted geometry. For example, in the following query the point abstraction for door55 is bound to the PtAbs variable.
+\end{verbatim} Given a crr\_id, a query to an abstraction rule will return an instantiated variable with the entity's spatially abstracted geometry. For example, in the following query the point abstraction for \emph{door55} is bound to the PtAbs variable.
 \begin{verbatim}
     point_abstraction(door55, PtAbs).
 \end{verbatim}
@@ -719,7 +717,7 @@ The implementation of the partially overlapping relationship begins with a top l
    intersect_segment_hull((Pt1, Pt2), [Pt3, Pt4|PS]) <=>
            intersection_segment_segment((Pt1, Pt2), (Pt3, Pt4)),
            intersection_segment_hull((Pt1, Pt2), [Pt4|PS]).
-\end{verbatim} The \emph{intersection\_segement\_segmenet} constraint represents the intersection between two line segments and is in a solvable form. The \emph{intersect\_segment\_hull} constraint is a recursive call that will propagate the \emph{intersection\_segement\_segmenet} constraint for the rest of the convex hull. The qualification for the other topological relationships is similar to the partially overlapping constraint presented here, but in addition to the line intersection constraint some relationships use the geometric properties of convex hull to point containment.
+\end{verbatim} The \emph{intersection\_segment\_segment} constraint represents the intersection between two line segments and is in a solvable form. The \emph{intersect\_segment\_hull} constraint is a recursive call that will propagate the \emph{intersection\_segment\_segment} constraint for the rest of the convex hull. The qualification for the other topological relationships is similar to the partially overlapping constraint presented here, but in addition to the line intersection constraint some relationships use the geometric properties of convex hull to point containment.
 
 %into the constraint store and will be solved when all points in its arguments are fully instantiated. 
 
@@ -834,22 +832,22 @@ The CRR can calculate the minimum euclidean distance between points, lines, and 
 \subsubsection{Spatial Constraint Solver: Distance}
 The distance constraint solver calculates minimum distance queries and uses the distance constraint services of the Sindalog \cite{Almendros-Jimenez} spatial constraint solver for all distance calculations. The distance constraint solver is different from the other two because it returns a specific value, instead of returning \emph{true} or \emph{fail} based on a query. For example, the following query will return the minimum distance between the two objects in D.
 \begin{verbatim}
-   min_distance(obj1, obj2, D). 
+   min_distance(Id1, Id2, D). 
 \end{verbatim}
 
-The distance constraint solver is written using CHR that break down the constraints until they can be solved for. This process involves finding the located on each object that is the closest to the other, so that the minimum distance can be calculated between the two. 
+The distance constraint solver is written using CHR that break down distance constraints until they can be solved for. This process involves two steps. The first step calculates the point for each object that is closest to the other object, and second step calculates the minimum distance between these two points. 
 
 
 \chapter{Design Space} \label{design space}
-This Chapter presents the design space module of the CRR. It identifies a set of qualitative spatial attributes found in architecture (QSA) and a set of architectural concepts and show how both can be spatially interpreted using formal qualitative spatial calculi. Additionally, it demonstrates how they can be used to validate conceptual design requirements. 
+This chapter presents the design space module of the CRR. It identifies a set of qualitative spatial attributes found in architecture (QSA) and a set of architectural concepts and show how both can be spatially interpreted using formal qualitative spatial calculi. Additionally, it demonstrates how they can be used to validate conceptual design requirements. 
 
-QSA and architectural concepts were ascertained from literature on architectural design \cite{formfunction} \cite{pattern-language} \cite{Bayazit} and museum research on visitor behavior \cite{Melton} \cite{Bitgood92} \cite{Falk} \cite{Stavroulaki}. Their definitions are explicit characterizations of spatial design concepts that are based on heuristic architectural knowledge and common sense notions of spatial relationships. The objective here is not to be an exhaustive discussion of spatial design concepts or a validation for their spatial interpretation; rather it is to demonstrate how each can be represented and reasoned about in the CRR. 
+QSA and architectural concepts were ascertained from literature on architectural design \cite{formfunction} \cite{pattern-language} \cite{Bayazit} and museum research on visitor behavior \cite{Melton} \cite{Bitgood92} \cite{Falk} \cite{Stavroulaki}. Their definitions are explicit characterizations of spatial design concepts that are based on heuristic architectural knowledge and common sense notions of spatial relationships. The objective here is not to present an exhaustive discussion of spatial design concepts or a validation for their spatial interpretation; rather it is to demonstrate how each can be represented and reasoned about in the CRR. 
 
-This Chapter is structured as follows. The first section presents a set of QAS and defines each using formal qualitative spatial calculi. The second section presents a set of architectural concepts that are defined using QSA and spatial relationships. The third section demonstrates how conceptual design requirements can be validated within the framework presented in this Chapter.
+This chapter is structured as follows. The first section presents a set of QSA and defines each using formal qualitative spatial calculi. The second section presents a set of architectural concepts that are defined using QSA and spatial relationships. The third section demonstrates how conceptual design requirements can be validated within the framework presented in this chapter.
 
 
 \section{Qualitative Spatial Attributes found in Architecture}
-This section presents a set of qualitative spatial attributes found in architecture (QSA) and formally defines each QSA using qualitative spatial calculi. QSA are qualities that emerge from a design's spatial characteristics. In general they are defined by the spatial relationships between architectural entities. They can be a perceptual quality that is described from a specific vantage point, or an intrinsic quality that is inherent in the design's spatial structure. 
+This section presents a set of QSAs and formally defines each QSA using qualitative spatial calculi. QSA are qualities that emerge from a design's spatial characteristics. In general they are defined by the spatial relationships between architectural entities. They can be a perceptual quality that is described from a specific vantage point, or an intrinsic quality that is inherent in the design's spatial structure. 
 
 This section presents five QSA: positioning, positioning for sequences, facing, visibility, and proximity. The goal of this section is to develop a set of QSA that qualitatively describe architectural designs from an experiential perspective. 
 
@@ -873,9 +871,9 @@ The positioning attribute is interpreted spatially using the SCC. As discussed e
 \label{scc}
 \end{figure}
 
-Using this scheme, two points are defined as being on opposing sides of a space if they have an SCC relationship of 0, 1, 2, 6 or 7, as related by the centroid of the space. Conversely, a pair of points are defined as being on the same side of a space if they have an SCC relationship of 3, 4, or 5, as related by the centroid of the  space. The SCC relationships of 2 and 6 could have been defined for either positioning attribute, the convention here is that they represent an opposing-side relationships. A point is defined as being on the left side of a space from another point if it has an SCC relationship of 5, 6, or 7, and is on the right side if it has an SCC relationship of 0, 1, 2, 3, or 4. Again, the SCC relationships of 0 and 4 could have defined either left or right, the convention here is that they represent the right-side attribute. Using the union set operation these relationships can be combined to form the opposing-left/right, and same-left/right relationships.
+Using this scheme, two points are defined as being on opposing sides of a space if they have an SCC relationship of 0, 1, 2, 6 or 7, as related by the centroid of the space. Conversely, a pair of points are defined as being on the same side of a space if they have an SCC relationship of 3, 4, or 5, as related by the centroid of the  space. The SCC relationships of 2 and 6 could have been defined for either positioning attribute; the convention here is that they represent an opposing-side relationships. A point is defined as being on the left side of a space from another point if it has an SCC relationship of 5, 6, or 7, and is on the right side if it has an SCC relationship of 0, 1, 2, 3, or 4. Again, the SCC relationships of 0 and 4 could have defined either left or right; the convention here is that they represent the right-side attribute. Using the union set operation these relationships can be combined to form the opposing-left/right, and same-left/right relationships.
 
-These positioning relationships are implemented in the CRR as Prolog rules. There is a single rule for each relationships: opposing-side, same-side, left-side, and right-side. The head of each rule takes three arguments, the first two are crr\_ids for the architectural entities being related and one for the context space. The body of the rule defines the SCC relationships of each positioning quality. The following is Prolog code for opposing-side and same-side positioning rules.
+These positioning relationships are implemented in the CRR as Prolog rules. There is a single rule for each relationship: opposing-side, same-side, left-side, and right-side. The head of each rule takes three arguments: the first two are crr\_ids for the architectural entities being related and one for the context space. The body of the rule defines the SCC relationships of each positioning quality. The following is Prolog code for opposing-side and same-side positioning rules.
 \begin{verbatim}
     opposing_side(Id1, Id2, Id3) :- 
            ( scc(Id1, Id2, Id3, scc0);
@@ -911,7 +909,7 @@ These positioning relationships are implemented in the CRR as Prolog rules. Ther
            right-side(Id1, Id2, Id3).                                         
 \end{verbatim}
 
-The positioning attribute can be used to query if architectural entities or interior design elements are on the opposing or same, left, or right side of a space to the other. For example, a design requirement might state that a bedroom should be positioned to the back of a house from the main entrance. The reason for this requirement is that rooms that are in the back of a house are more private than rooms in the front of the house. In this requirement, the origin is the entrance, the referent is the bedroom, and the relatum is the centroid of the house. Figure \ref{bedroom-positioning} shows a bedroom that is on the opposing side of and apartment from the main entrance. 
+The positioning attribute can be used to query if architectural entities or interior design elements are on the opposing or same, left, or right side of a space to the other. For example, a design requirement might state that a bedroom should be positioned to the back of a house from the main entrance. The reason for this requirement is that rooms that are in the back of a house are more private than rooms in the front of the house. In this requirement, the origin is the entrance, the referent is the bedroom, and the relatum is the centroid of the house. Figure \ref{bedroom-positioning} shows a bedroom that is on the opposing side of an apartment from the main entrance. 
 \begin{figure}[t]
  \centering
  \includegraphics[width=75mm]{bedroom-back-house}
@@ -922,13 +920,13 @@ The positioning attribute can be used to query if architectural entities or inte
 
 
 \subsection{Positioning for Sequences}
-The positioning for sequences attribute defines a perceptual orientational relationship for a sequence of objects as each relates to a vantage point in an extrinsic context. A sequence is a set of architectural entities, or interior design objects that are grouped together. In general sequences are grouped together based on the proximity (near to each other) but any relationship can define a sequence. There are two positioning relationships for a sequence of objects: horizontal perceived and vertical perceived.  
+The positioning for sequences attribute defines a perceptual orientational relationship for a sequence of objects as each object relates to a vantage point in an extrinsic context. A sequence is a set of architectural entities, or interior design objects that are grouped together. In general, sequences are grouped together based on the proximity (near to each other) but any relationship can define a sequence. There are two positioning relationships for a sequence of objects: horizontal perceived and vertical perceived.  
 
 The positioning for sequence of objects attribute can be spatially interpreted using the SCC. This quality uses the SCC partitioning scheme to orientationally relate a sequence of points (origin, referents) in the context of an external frame of reference (relatum). In the CRR, the reference point is defined as the centroid of the context space. By partitioning space using the centroid, an approximation is made that divides the space into the positioning relationships. As with the positioning attribute, an assumption made here is that the space will generally be rectangular in shape.
 
-Using the SCC partitioning of space, a sequence of objects is perceived horizontally from the vantage point if at least one point in the sequence is on the left-side of the space and at least one point has is on the right. A sequence of points is perceived vertically if they have the following combination of SCC relationships: at least one point in the sequence is on the opposing side of the room and at least one point in the sequence is on the same side of the room. Sequences can be both vertical and horizontal or they can be neither.
+Using the SCC partitioning of space, a sequence of objects is perceived horizontally from the vantage point if at least one point in the sequence is on the left-side of the space and at least one point is on the right. A sequence of points is perceived vertically if they have the following combination of SCC relationships: at least one point in the sequence is on the opposing side of the room and at least one point in the sequence is on the same side of the room. Sequences can be both vertical and horizontal or they can be neither.
 
-Th positioning for a sequence of objects relationships are represented in the CRR as Prolog rules. There is a single rule for each relationship: horizontally perceived and vertically perceived. The head of each rule takes three arguments, the first for the the vantage point, the second is the context space and the third represents the sequence of objects (list of crr\_ids). The following is Prolog code for the horizontal positioning rules. The rule uses two recursive helper predicates (left\_r and right\_r) to iterate through the sequence of objects.
+The positioning for a sequence of objects relationships are represented in the CRR as Prolog rules. There is a single rule for each relationship: horizontally perceived and vertically perceived. The head of each rule takes three arguments, the first for the the vantage point, the second is the context space and the third represents the sequence of objects (list of crr\_ids). The following is Prolog code for the horizontal positioning rules. The rule uses two recursive helper predicates (left\_r and right\_r) to iterate through the sequence of objects.
 \begin{verbatim}
    horizontally_perceived(Id1, Id2, Seq) :-
            left_r(Id1, Id2, Seq),
@@ -995,7 +993,7 @@ The facing attribute is implemented in the CRR as Prolog rules. There is one rul
           ( facing_towards(Id1, Id2) -> fail; true).                     
 \end{verbatim}
 
-In the CRR, the facing attribute can be used to check if two architectural entities or interior design elements are facing towards or away from each other. For example, doorways and windows that face towards each other promote airflow through the space they inhibit. Figure \ref{door-window-facing} shows two example design of a room with a single window and doorway. Figure \ref{fig:door-window-towards} shows the configuration were the doorway and window are facing towards each other, while figure \ref{fig:door-window-away} shows the configuration where the doorway and window are facing away from each other. 
+In the CRR, the facing attribute can be used to check if two architectural entities or interior design elements are facing towards or away from each other. For example, doorways and windows that face towards each other promote airflow through the space they inhabit. Figure \ref{door-window-facing} shows two example designs of a room with a single window and doorway. Figure \ref{fig:door-window-towards} shows the configuration where the doorway and window are facing towards each other, while Figure \ref{fig:door-window-away} shows the configuration where the doorway and window are facing away from each other. 
 
 \begin{figure}[h]
  \centering
@@ -1010,7 +1008,7 @@ In the CRR, the facing attribute can be used to check if two architectural entit
 
 
 \subsection{Proximity}
-The proximity attribute defines a qualitative distance relationship between two objects. In the CRR, there are three proximity relationships: near, near+, and far. The spatial interpretation of proximity is defined in the context of architecture, which is restricted here to be \emph{within a building}. Based on this interpretation, proximity is formally defined using heuristics based on what is consider near, near+, and far within a building.   
+The proximity attribute defines a qualitative distance relationship between two objects. In the CRR, there are three proximity relationships: near, near+, and far. The spatial interpretation of proximity is defined in the context of architecture, which is restricted here to be \emph{within a building}. Based on this interpretation, proximity is formally defined using heuristics based on what is considered near, near+, and far within a building.   
 
 
 \begin{figure}[H]
@@ -1020,9 +1018,9 @@ The proximity attribute defines a qualitative distance relationship between two 
 \label{proximity}
 \end{figure}
 
-Using these heuristics, two objects are near if the minimum distance between them is less then or equal to 6 feet, near+ if the minimum distance between then is between 6 - 12 feet, and far if the minimum distance between them is greater then 12 feet. %While the definition of proximity pivots around 3 and 6 meters, it can easily be changed by using an extra parameter in a proximity predicate. 
+Using these heuristics, two objects are near if the minimum distance between them is less then or equal to 6 feet, near+ if the minimum distance between them is between 6 - 12 feet, and far if the minimum distance between them is greater than 12 feet. %While the definition of proximity pivots around 3 and 6 meters, it can easily be changed by using an extra parameter in a proximity predicate. 
 
-Proximity is represented in the CRR as three Prolog rules. There is one rule for near, one for near+, and one for far. The head of each rule takes two arguments for the architectural entities being related. Given two architectural entities, the rule returns true if the objects are near, near+, or far from each other as defined by the rule, and fails if they are not. The following is Prolog code for the proximity rules.
+Proximity is represented in the CRR as three Prolog rules. There is one rule for near, one for near+, and one for far. The head of each rule takes two arguments for the architectural entities being related. The following is Prolog code for the proximity rules.
 
 \begin{verbatim}
    near(Id1, Id2) :- 
@@ -1047,7 +1045,7 @@ The proximity attribute can be used to check whether two architectural entities 
 \end{figure}
 
 \subsection{Visibility}
-The visibility attribute defines a boolean relationship between a viewpoint and an object with respect to the object being visible from the viewpoint. This interpretation of visibility is based on the topological characteristics of an object blocking (obstructing) a view. It does not take into account the material characteristics of the obstructing object, such as glass, which would allow visibility through the obstructing object. Additionally it does not take into account the effects of distance on visibility, i.e., an object that is very far away is not visible. However, within the context of architecture, the magnitude of distances is limited to a point that it is not a factor in this interpretation of visibility. Under this definition, an objects is visible if the view-space, the space between the viewpoint and the object, is not obstructed.
+The visibility attribute defines a boolean relationship between a viewpoint and an object with respect to the object being visible from the viewpoint. This interpretation of visibility is based on the topological characteristics of an object blocking (obstructing) a view. It does not take into account the material characteristics of the obstructing object, such as glass, which would allow visibility through the obstructing object. Additionally it does not take into account the effects of distance on visibility, i.e., an object that is very far away is not visible. However, within the context of architecture, the magnitude of distances is limited to a point that it is not a factor in this interpretation of visibility. Under this definition, an object is visible if the view-space, the space between the viewpoint and the object, is not obstructed.
 
 The spatial interpretation of visibility is based on the topological characteristics of the space in-between the viewpoint and object. This space is referred to as the view-space. An object is visible if the view-space is not obstructed by surrounding structures or objects. An obstructing object is an object that has a partially overlapping or containing topological relationship with the view-space. Artefactual extension is not considered as an obstructing object because it does not have a physical form. This definition does not distinguish between visibility that is partially or totally obstructed.
 
@@ -1060,7 +1058,7 @@ The spatial interpretation of visibility is based on the topological characteris
 \label{Visibility}
 \end{figure}
 
-Visibility is represented in the CRR as a single Prolog rule. The head of the rule takes two arguments, the viewpoint and the object that is being check for visibility. The body of the clause calculates the view-space and checks the surrounding objects for a topological obstruction. Surrounding objects are architectural entities that are contained in the same room as the vantage point and object. If the vantage point and object are in different rooms the object is not visible.
+Visibility is represented in the CRR as a single Prolog rule. The head of the rule takes two arguments, the viewpoint and the object that is being checked for visibility. The body of the clause calculates the view-space and checks the surrounding objects for a topological obstruction. Surrounding objects are architectural entities that are contained in the same room as the vantage point and object. If the vantage point and object are in different rooms the object is not visible.
 
 Given a viewpoint and an object, the rule returns true if the object is visible, and fails if it is not. The following is the Prolog code for the visibility rule.
 \begin{verbatim}
@@ -1086,19 +1084,17 @@ Given a viewpoint and an object, the rule returns true if the object is visible,
 The visibility attribute can be used to check if an architectural structure or interior design element is visible from a given viewpoint. For example, an architect might want to ensure that a staircase is visible from the main entrance of a building, because she doesn't want the staircase to go unnoticed. Figure \ref{visibility-door-stair} shows an example floor plan where the stairway is not visible from the doorway. In this example both the wall in red and column are obstructing the view from the doorway. 
 
 
-
-
 \section{Architectural Concepts}
 The architectural concepts of privacy, continuity and enclosure describe experiential aspects of a design \cite{KoileTAC}. These terms are defined in the CRR in a hierarchical manner in which they are built using QSA and qualitative spatial relationships. 
 
-This section presents these three architectural concepts and demonstrates how each is defined in the CRR. Additionally, this Chapter presents characteristics that are influenced by artefactual extension. As in the previous section, the purpose is not to investigate the correctness of the concepts or an attempt to compile a complete list, rather it is to look at how these concepts can be defined logically using architectural qualities and spatial / geometric primitives.
+This section presents these three architectural concepts and demonstrates how each is defined in the CRR. Additionally, this section presents characteristics that are influenced by artefactual extension. As in the previous section, the purpose is not to investigate the correctness of the concepts or to attempt to compile a complete list; rather it is to look at how these concepts can be defined logically using architectural qualities and spatial / geometric primitives.
 
 \subsection{Privacy}
 In architecture, the concept of privacy implies a notion of separation and obscurity (not being visible). In the case of a room, privacy can be defined as being separated from the main entrance of the building and having doorways that enhances the room's privacy. A doorway can be be defined as private with respect to its functionality of connecting the room to the main area of the house. Under this consideration, a doorway can enhance or hinder the privacy of a room by being visible or not visible from the main entrance.
 
 Within the CRR, the concept of privacy has been formally defined for rooms. A room is private if it has the following attributes: (1) it is positioned on the opposing side of the building with regard to the main entrance and (2) all doorways into the room are not visible from the main entrance.
  
-Privacy is represented in the CRR as a Prolog rule. The rule takes a three arguments, which are the room's crr\_id, the entrance's crr\_id and the building's crr\_id. The following is the Prolog rule for privacy. 
+Privacy is represented in the CRR as a Prolog rule. The rule takes three arguments, which are the room's crr\_id, the entrance's crr\_id and the building's crr\_id. The following is the Prolog rule for privacy. 
 \begin{verbatim}
    private(RoomId, EntranceId, BuildingId) :-  
            opposing_side(RoomId, EntranceId, BuildingId),
@@ -1122,11 +1118,11 @@ Privacy is represented in the CRR as a Prolog rule. The rule takes a three argum
 \label{privacy}
 \end{figure}
 
-Figure \ref{privacy} demonstrates the privacy concept for two floor plans; figure \ref{fig:private-room-con} shows a floor plan with a bedroom that is  private, while figure \ref{fig:private-room-incon} shows a similar floor plan with a bedroom that is not private. The numbers represent the following privacy requirements: (1) the bedroom is positioned on the opposing side of the building with regards to the main entrance, and (2) the doorway is not visible from the main entrance.
+Figure \ref{privacy} demonstrates the privacy concept for two floor plans; Figure \ref{fig:private-room-con} shows a floor plan with a bedroom that is  private, while Figure \ref{fig:private-room-incon} shows a similar floor plan with a bedroom that is not private. The numbers represent the following privacy requirements: (1) the bedroom is positioned on the opposing side of the building with regards to the main entrance, and (2) the doorway is not visible from the main entrance.
 
 
 \subsection{Continuity}
-In architecture, the concept of continuity describes a network of points that are mutually visible \cite{Key}. In the CRR, continuity is interpreted in the context of building navigation and wayfinding and is therefore dependent on continuity between doorways withing the design. Other interpretations of continuity can use any element of the design (beyond doorways), however for the purposes here, continuity only deals with doorways. Under this interpretation a room is continuous if there is continuity between the doorways contained in it. 
+In architecture, the concept of continuity describes a network of points that are mutually visible \cite{Key}. In the CRR, continuity is interpreted in the context of building navigation and wayfinding and is therefore dependent on continuity between doorways within the design. Other interpretations of continuity can use any element of the design (beyond doorways); however for the purposes here, continuity only deals with doorways. Under this interpretation a room is continuous if there is continuity between the doorways contained in it. 
 
 Continuity is defined as a network of doorways that are mutually visible. The partitioning of doorways that should be mutually visible is based on a localized containment hierarchy between rooms and doorways, in which doorways that are contained in the same room should maintain continuity. It does not make sense for doorways that are located on opposite sides of a building to be visible to each other, but doorways that are in the same room should be. 
 
@@ -1152,7 +1148,7 @@ With respect to this definition, continuity is represented as a Prolog rule, whi
 
 \end{verbatim}
 
-Figure \ref{continuity} demonstrates the continuity concept for two floor plans. Figure \ref{fig:continuity-con} shows a configuration in which each door is mutually visible to the other doors, and therefore is continuous. Conversely, figure \ref{fig:continuity-incon} shows a configuration in which door1 is not visible to door2 and door1 is not visible door3. The visibility between door1 and door2 is obstructed by a column and the visibility between door1 and door3 is obstructed by a wall. Architectural entities that are red indicated a visibility obstruction. This design is not continuous. 
+Figure \ref{continuity} demonstrates the continuity concept for two floor plans. Figure \ref{fig:continuity-con} shows a configuration in which each door is mutually visible to the other doors, and therefore is continuous. Conversely, Figure \ref{fig:continuity-incon} shows a configuration in which \emph{door1} is not visible to \emph{door2} and \emph{door1} is not visible \emph{door3}. The visibility between \emph{door1} and \emph{door2} is obstructed by a column and the visibility between \emph{door1} and \emph{door3} is obstructed by a wall. Architectural entities that are red indicate a visibility obstruction. This design is not continuous. 
 
 \begin{figure}[H]
  \centering
@@ -1164,9 +1160,9 @@ Figure \ref{continuity} demonstrates the continuity concept for two floor plans.
 \end{figure}
 
 \subsection{Enclosure} 
-In architecture, the concept of enclosure defines a space, as experienced from a given vantage point, as being confined or open. In the CRR, enclosure is defined by localized spatial structures in terms of their proximity to a given point. Under this interpretation, a room, apartment, or building can be experienced as both confined and open based on the location of the vantage point within the space. Such a definition takes into account that enclosure is locally experienced. For example, an alcove in an otherwise open room, feels confined when experienced from inside the alcove.
+In architecture, the concept of enclosure defines a space, as experienced from a given vantage point, as being confined or open. In the CRR, enclosure is defined by localized spatial structures in terms of their proximity to a given point. Under this interpretation, a room, apartment, or building can be experienced as both confined and open based on the location of the vantage point within the space. Such a definition takes into account that enclosure is locally experienced. For example, an alcove in an otherwise open room feels confined when experienced from inside the alcove.
 
-In the CRR, a point is defined as open if less then three walls or columns are near-to the point. Conversely, a point is defined as confined if three or more walls or columns are near-to the point. While this interpretation of enclosure is naive, it maintains the notion that proximity defines the spatial structures of openness and confinement in a localized environment.   
+In the CRR, a point is defined as open if fewer than three walls or columns are near-to the point. Conversely, a point is defined as confined if three or more walls or columns are near-to the point. While this interpretation of enclosure is naive, it maintains the notion that proximity defines the spatial structures of openness and confinement in a localized environment.   
 
 Enclosure is implemented as two Prolog rules, one for confined spaces and one for open spaces. Both rules take a single argument that is a crr\_id for the point being evaluated. The body of each rule calculates the distances characteristics of the local architectural entities to the point being evaluated.
 \begin{verbatim}
@@ -1192,7 +1188,7 @@ Enclosure is implemented as two Prolog rules, one for confined spaces and one fo
 
 \end{verbatim} 
 
-Figure \ref{enclosure} shows a floor plan for a single room with various enclosure properties. The room contains an alcove and a sequence of columns that will provide an environment of confinement. Points in-between the columns and inside the alcove are confined because of the proximity of the walls and/or columns. The points outside of these areas are open because there are few structures nearby.
+Figure \ref{enclosure} shows a floor plan for a single room with various enclosure properties. The room contains an alcove and a sequence of columns that will provide an environment of confinement. Points in between the columns and inside the alcove are confined because of the proximity of the walls and/or columns. The points outside of these areas are open because there are few structures nearby.
 
 \begin{figure}[t]
 \centering
@@ -1223,7 +1219,7 @@ This type of artefactual interaction can be checked for in the CRR using a singl
            not_overlapping(SinkFunc, DoorOps).
 \end{verbatim}
 
-Artefactual interactions can be between an architectural entity and artefactual extension. For example, the landing space (i.e., operational space) of a stair should be clear. Representing this requirement is similar to the bathroom sink example except that it checks for interactions between the stair's artefactual space with the building physical space.
+Artefactual interactions can be between an architectural entity and artefactual extension. For example, the landing space (i.e., operational space) of a stair should be clear. Representing this requirement is similar to the bathroom sink example except that it checks for interactions between the stair's artefactual space with the design's physical space.
 
 In the CRR this can be represented as a single rule. The body of the rule checks for an overlapping relationship between the landing space of the stair and physical structure of surrounding elements.
 
@@ -1235,7 +1231,7 @@ In the CRR this can be represented as a single rule. The body of the rule checks
 \end{verbatim}  
 
 \section{Conceptual Requirement Validation}
-The CCR validates design requirements by querying the design's spatial representation using predicate calls to architectural concepts and QSA. Queries will return \emph{true} if the design is consistent, or \emph{fail} if the design is inconsistent per the query. A design is considered consistent if the design's spatial characteristics, as represented in its physical and functional geometries, matches with the definition of the design requirement specification. For example, a design is consistent per a design requirement of a window and doorway facing towards each other, if the spatial characteristic of the design, with regards to the window and doorway, match the spatial specification of facing towards each other. This requirement can be checked for using the following query given a door with crr\_id door543 and a window with crr\_id of window15.
+The CCR validates design requirements by querying the design's spatial representation using predicate calls to architectural concepts and QSA. Queries will return \emph{true} if the design is consistent, or \emph{fail} if the design is inconsistent per the query. A design is considered consistent if the design's spatial characteristics, as represented in its physical and functional geometries, matches with the definition of the design requirement specification. For example, a design is consistent per a design requirement of a window and doorway facing towards each other, if the spatial characteristic of the design, with regards to the window and doorway, match the spatial specification of facing towards each other. This requirement can be checked for using the following query given a door with \emph{crr\_id} \emph{door543} and a window with \emph{crr\_id} of \emph{window15}.
 \begin{verbatim}
    ?- facing(door543, window15).
 \end{verbatim}
@@ -1265,11 +1261,11 @@ Consider the design requirement for a bedroom being private. This requirement ca
 
 
 \chapter{Museum Case Study} \label{case study}
-This chapter presents a case study that demonstrates the application of the CRR in the context of design for an art museum. The purpose is twofold: first, to examine design requirements of an art museum with regards to their affects on visitors experiences in a museum; and second, to demonstrate the application of the CRR for validating these design requirements using a real world museum scenario. 
+This chapter presents a case study that demonstrates the application of the CRR in the context of design for an art museum. The purpose is twofold: first, to examine design requirements of an art museum with regards to their effects on visitors' experiences in a museum; and second, to demonstrate the application of the CRR for validating these design requirements using a real world museum scenario. 
 
 %how the museum design requirements can be represented and reasoned about in a computational framework, in order to detect design inconsistencies as per the design requirements.
 
-This chapter is divided into two sections. The first section sets up the context of the case study by examining museum design characteristics that influence visitors' behavior and experiences within an art museum. This section has two parts. The first it looks at museum characteristics that affect how visitors behave in museums galleries, and the second part looks at the characteristics of a museum's lobby that influence visitors orientation. The second section of this Chapter demonstrates the CRR by applying the museum requirements to two real world museum designs.  
+This chapter is divided into two sections. The first section sets up the context of the case study by examining museum design characteristics that influence visitors' behavior and experiences within an art museum. This section has two parts. The first looks at museum characteristics that affect how visitors behave in museums galleries, and the second part looks at the characteristics of a museum's lobby that influence visitors orientation. The second section of this chapter demonstrates the CRR by applying the museum requirements to two real world museum designs.  
 
 %examines design requirements in art museums in three parts: the first part looks at requirements that influence museum visitors' behavior. The second part looks at requirements for promoting exploration in the museum. The third part looks at the requirements of accessibility and security within the museum. The second section, looks at how these requirements can be interpreted spatially and represented in the CRR. The third section tests the DSpace reasoner using sample museum floor plans that are both consistent and inconsistent per the design requirements for several art museums. The objective of this demonstration is to show that the DSpace reasoner can validate a design against its design requirements.
 
@@ -1291,7 +1287,7 @@ While these requirements are abstract, they can be mapped to concrete spatial ch
 
 
 \subsection{Maximizing Visitor Utilization of Exhibitions}
-This portion of the case study will look into four factors that influence visitors' movement patters: positioning of doorways, spatial arrangement of display cases, positioning of furniture and statues, congestion, and exploration. These properties inform museum designers about the spatial characteristics that influence the utilization of the museum's exhibitions.
+This portion of the case study will look into four factors that influence visitors' movement patterns: positioning of doorways, spatial arrangement of display cases, positioning of furniture and statues, congestion, and exploration. These properties inform museum designers about the spatial characteristics that influence the utilization of the museum's exhibitions.
 
 
 \subsubsection{Positioning of doorways}
@@ -1307,15 +1303,15 @@ In an important study \cite{Melton}, Melton discovered that the most influential
 \label{Melton-studies}
 \end{figure}
 
-The crux of Melton's experiments suggested that visitors exit through the first door they encounter, which he referred to as the exit gradient. Figure \ref{Melton-studies} shows the results of an extensive study of visitors circulation patterns and stopping frequencies in an art museum. The studies reported that almost 80 percent of visitors exited through the first exit they encountered before viewing the entire exhibition. Additionally, the studied showed that the most frequently visited objects where those located along the shortest path from the entrance to the exit. 
+The crux of Melton's experiments suggested that visitors exit through the first door they encounter, which he referred to as the exit gradient. Figure \ref{Melton-studies} shows the results of an extensive study of visitors circulation patterns and stopping frequencies in an art museum. The study reported that almost 80 percent of visitors exited through the first exit they encountered before viewing the entire exhibition. Additionally, the study showed that the most frequently visited objects where those located along the shortest path from the entrance to the exit. 
 
 %Furthermore, Bitgood suggests that visitors tend to follow along the wall that is closest to the door they entered \cite{Bitgood95}. Given that visitors also tend to exit through the first doorway they encounter, doorways should not be positioned in a wall that is close to an entrance. 
 
-The results of Melton's studies inform architects of spatial characteristics that influence movement patterns in exhibitions. Specifically, doorways that are positioned on the same side of a gallery room and doorways that are near to each other cause visitors to pay attention to fewer exhibits than doorways that are positioned on opposing sides of a gallery room and doorways that are far away from each other.\footnote[1]{These two requirements pertain to galleries with exactly two doorways. Galleries with more or less doorways have not been studied.}
+The results of Melton's studies inform architects of spatial characteristics that influence movement patterns in exhibitions. Specifically, doorways that are positioned on the same side of a gallery room and doorways that are near to each other cause visitors to pay attention to fewer exhibits than doorways that are positioned on opposing sides of a gallery room and doorways that are far away from each other.\footnote[1]{These two requirements pertain to galleries with exactly two doorways. Galleries with more or fewer doorways have not been studied.}
 
 \begin{description}
 \item[Gallery Requirement 1:] \emph{Gallery doorways should be positioned on opposing sides of the gallery room.} 
-\item[Gallery Requirement 2:] \emph{Gallery doorways should far away from each other.} 
+\item[Gallery Requirement 2:] \emph{Gallery doorways should be far away from each other.} 
 \end{description}
 
 Figure \ref{museum-doors} shows two gallery exhibition designs. Considering Gallery Requirement 1, Figure \ref{door-positioning-con} shows a design that is consistent with the requirement, while Figure \ref{door-positioning-incon} shows a design that violates the requirement.
@@ -1346,7 +1342,7 @@ The placement of display cases in galleries has been shown to influence visitors
 \item[Gallery Requirement 3:] \emph{Display cases should be located on the perimeter.}
 \end{description} 
 
-Figure \ref{display-arrangement} shows two illustrations. Figure \ref{island} show a display case that is an isolated  near the center of the gallery, while Figure \ref{perimeter} shows a display case that is located at the perimeter of the gallery. 
+Figure \ref{display-arrangement} shows two illustrations. Figure \ref{island} show a display case that is isolated  near the center of the gallery, while Figure \ref{perimeter} shows a display case that is located at the perimeter of the gallery. 
 
 Additionally, the placement of a sequence of display cases can disrupt circulation patterns when the sequence cuts horizontally across the view of a visitor as they are entering the room. This type of display pattern might cut off part of the gallery from the visitors normal visitation patterns by changing circulation pathways.
 
@@ -1421,7 +1417,7 @@ After obtaining a ticket most visitors will try to locate the entrance to the ex
 
 
 \section{Application of CRR for Museum Design}
-This section presents the application of the CRR to two real world museums using the gallery and lobby requirements. This section is organized as follows. The first part introduces the two museums that are used in the case study and briefly describes the process of importing them into the CRR from ArchiCAD. The second part presents the results of using the CRR for for validating the museum gallery and lobby requirements to the two museums.
+This section presents the application of the CRR to two real world museums using the gallery and lobby requirements, and is organized as follows. The first part introduces the two museums that are used in the case study and briefly describes the process of importing them into the CRR from ArchiCAD. The second part presents the results of using the CRR for validating the museum gallery and lobby requirements to the two museums.
 
 %of applying the CRR to the museums to detect violations with regards to the museum design requirements. 
 
@@ -1448,7 +1444,7 @@ The Asian Art Wing (gallery rooms 226 and 238-245), shown in Figure \ref{asian w
 \begin{figure}[H]
 \centering
 \includegraphics[width=120mm]{lobby}
-\caption{Lobby of Museu Calouste Gulbenkianin}
+\caption{Lobby of Museu Calouste Gulbenkian}
 \label{lobby}
 \end{figure}
 
@@ -1459,11 +1455,11 @@ The Asian Art Wing (gallery rooms 226 and 238-245), shown in Figure \ref{asian w
 \label{philadelphia-museum-floorplan}
 \end{figure}
 
-Once the museums are built in ArchiCAD they are imported into the CRR via a Multi-Modal Spatial Data Access Framework \cite{carl}. This framework provides the CRR with access to various design information, via the Industry Foundation Class data exchange format \cite{IFC}, including: the physical representation for each architectural entity, and room / building / story containment relationships. Artefactual representations, room to wall boundary relationships, and wall to door / window containment relationships are manually added into the CRR. Future versions of the Multi-Modal Spatial Data Access Framework plan on supporting these informational design aspects. The import process consists of a parser written in Python that parses a Design Space schematized xml file, produced by the Multi-Modal Spatial Data Access Framework, and outputs a Prolog representation of the design that is used by the CRR.
+Once the museums are built in ArchiCAD they are imported into the CRR via a Multi-Modal Spatial Data Access Framework \cite{carl}. This framework provides the CRR with access to various design information, via the Industry Foundation Class data exchange format \cite{IFC}, including: the physical representation for each architectural entity, and room / building / story containment relationships. Artefactual representations, room to wall boundary relationships, and wall to door / window containment relationships are manually added into the CRR. Future versions of the Multi-Modal Spatial Data Access Framework plan on supporting these informational design aspects. The import process consists of a parser written in Python that parses a Design Space schematized XML file, produced by the Multi-Modal Spatial Data Access Framework, and outputs a Prolog representation of the design that is used by the CRR.
 
 
 \subsection{Validating Museum Requirements}
-The results of applying the museum gallery and lobby requirements to the Philadelphia Museum of Art and the Museu Calouste Gulbenkian are presented in Table \ref{results}. This Table contains three columns. The first column identifies the museum requirement, the second column shows the CRR query used to check for the requirement, and the third column show all violations that were discovered by the CRR. The results here demonstrate two outcomes. The application of the gallery requirements to the Philadelphia Art Museum gives an examples of where the design is inconsistent with regards to the requirements, while the application of the lobby requirements to the Museu Calouste Gulbenkia gives an example where the design is consistent with the requirements. 
+The results of applying the museum gallery and lobby requirements to the Philadelphia Museum of Art and the Museu Calouste Gulbenkian are presented in Table \ref{results}. This table contains three columns. The first column identifies the museum requirement, the second column shows the CRR query used to check for the requirement, and the third column show all violations that were discovered by the CRR. The results here demonstrate two outcomes. The application of the gallery requirements to the Philadelphia Art Museum gives an illustration of where the design is inconsistent with regards to the requirements, while the application of the lobby requirements to the Museu Calouste Gulbenkian gives an illustration where the design is consistent with the requirements. 
 
 \begin{table}[t]
   \begin{center}
@@ -1508,7 +1504,7 @@ Requirement violations reported in Table \ref{results} can be visually verified 
 \item door4, door10, gallery240
 \item door5, door11, gallery243
 \item door7, door12, gallery241
-\end{itemize} Visual inspection of Figure \ref{philadelphia-museum-floorplan} confirms that these doorways are \emph{not} on opposing sides of the gallery room and therefore are in violation of Gallery Requirement 1. As another example, Gallery Requirement 8 specifies that every Gallery should maintain continuity between doorways. The results of this case study shows that gallery 239 is in violation of the requirement. The cause of this violation is because door3 and door10 are not visible from door9, and vice versa. Figure \ref{continuity-gallery239} shows a 3-D view of gallery 239 from the perspective door10 (this graphic was rendered in ArchiCAD) and show that in fact door3 and door10 are not visible from door9 because there is a wall obstructing the view.
+\end{itemize} Visual inspection of Figure \ref{philadelphia-museum-floorplan} confirms that these doorways are \emph{not} on opposing sides of the gallery room and therefore are in violation of Gallery Requirement 1. As another example, Gallery Requirement 8 specifies that every Gallery should maintain continuity between doorways. The results of this case study shows that \emph{gallery 239} is in violation of the requirement. The cause of this violation is because \emph{door3} and \emph{door10} are not visible from \emph{door9}, and vice versa. Figure \ref{continuity-gallery239} shows a 3-D view of \emph{gallery 239} from the perspective \emph{door10} (this graphic was rendered in ArchiCAD) and shows that in fact \emph{door3} and \emph{door10} are not visible from \emph{door9} because there is a wall obstructing the view.
 
 \begin{figure}[h]
 \centering
@@ -1519,9 +1515,12 @@ Requirement violations reported in Table \ref{results} can be visually verified 
 
 The process of manual verification can be used to inspect the other gallery requirement violations reported by the CRR. The result of doing so will show that the CRR accurately reported violations for this case study. To illustrate this, Figure \ref{art museum in archiCAD} shows the Philadelphia Art Museum floor plan with labels for corresponding gallery requirement violations as reported in Table \ref{results}. 
 
-Similarly, this same process can be used to verify that the lobby of the Museu Calouste Gulbenkian is consistent with the lobby requirements. For example, Lobby Requirement 2 specifies that the ticketing desk should be on the right hand side of the entrance from the perspective of entering the museum. Inspecting figure \ref{lobby} shows that in fact the ticketing desk is on the right hand side. Manual inspection of the other lobby requirements will show that the Museu Calouste Gulbenkian is consistent with the lobby requirements as reported by the CRR.
+Similarly, this same process can be used to verify that the lobby of the Museu Calouste Gulbenkian is consistent with the lobby requirements. For example, Lobby Requirement 2 specifies that the ticketing desk should be on the right hand side of the entrance from the perspective of entering the museum. Inspecting Figure \ref{lobby} shows that in fact the ticketing desk is on the right hand side. Manual inspection of the other lobby requirements shows that the Museu Calouste Gulbenkian is consistent with the lobby requirements as reported by the CRR.
 
-This case study demonstrated the application of the CRR to reason about conceptual design requirements given an underlying CAAD-based spatial representation of the design. The crux of the work here is the use of a qualitative spatial layer that intermediates between the conceptual level and quantitative level. The results show that the CRR is capable of accurately detecting design requirement violations and informs the designer when a design is consistent of inconsistent per the designs requirements.
+This case study demonstrated the application of the CRR to reason about conceptual design requirements given an underlying CAAD-based spatial representation of the design. The crux of the work here is the use of a qualitative spatial layer that intermediates between the conceptual level and quantitative level. The results show that the CRR is capable of accurately detecting design requirement violations and informs the designer when a design is consistent or inconsistent per the designs requirements.
+
+\subsection{Discussion of Museum Requirements}
+
 
 %Gallery Requirement 1 specifies that doorways should be positioned on opposing sides of a gallery room. The opposing side relationship can be checked for using the CRR with the following query:
 %\begin{verbatim}
@@ -1588,7 +1587,7 @@ This case study demonstrated the application of the CRR to reason about conceptu
 %The $artefactual\_interaction$ predicate is broken down into topological constraints that check for partially overlapping topological relationships between the artefactual extensions of the bathroom doorway and sink. The topological constraints are solved in the topological constraint solver. 
 
 
-\chapter{Conclusion \& Future Work} \label{conclusion}
+\chapter{Conclusions \& Future Work} \label{conclusion}
 This thesis addressed the problem of validating conceptual design requirements given a CAAD-based spatial representation. The main objectives towards accomplishing this goal were identified as:
 \begin{itemize}
 \item the identification, formal modeling, and spatial interpretation of architectural concepts
@@ -1596,7 +1595,7 @@ This thesis addressed the problem of validating conceptual design requirements g
 \item the use of qualitative spatial representation and reasoning techniques to link high level concepts to low level spatial quantities
 \end{itemize}
 
-To accomplishing these objectives the CRR was implemented as a framework for validating conceptual design requirements against a CAAD-based spatial representation. The CRR development a design hierarchy that maps architectural concepts and QSA at the design level to spatial patterns at the quality level and links, via qualification, spatial quantities at quantity level to qualitative spatial relationships in the quality level. The main contributions of this thesis are:
+To accomplish these objectives the CRR was implemented as a framework for validating conceptual design requirements against a CAAD-based spatial representation. The development of the CRR was based on a design hierarchy that maps architectural concepts and QSA at the design level to spatial patterns at the quality level and links, via qualification, spatial quantities at quantity level to qualitative spatial relationships in the quality level. The main contributions of this thesis are:
 \begin{itemize}
 \item the implementation of a framework that validates conceptual design requirements against a CAAD-based spatial representation
 \item the identification of a set of QSA and architectural concepts
@@ -1612,13 +1611,13 @@ While this thesis addressed several key issues in the area of conceptual require
 In the current version of the CRR artefactual geometries are manually added to the design representation. This limitation means that arefactual reasoning can not happen automatically over a CAAD-based spatial representation. Future work in the area of automatically generating artefactual geometries from a CAAD-based spatial representation will be beneficial to the usability of the CRR.
 
 \subsubsection{Quantification of design requirements}
-The current version of the CRR does not handle queries involving quantification over the design. This mean that each query is isolated to a specific instance in the design. Whereas a design requirement specifies that all doorways must face away from all windows in the same room, the user is responsible for checking each instance of doorway and window in the design. This requires the user to keep track of the results of previous queries in order to validate certain requirements. The ability to have the CRR automatically provide quantification over design requirements would allow the user to focus more on requirements reasoning and less on the book keeping of results.
+The current version of the CRR does not handle queries involving quantification over the design. This means that each query is isolated to a specific instance in the design. Whereas a design requirement specifies that all doorways must face away from all windows in the same room, the user is responsible for checking each instance of doorway and window in the design. This requires the user to keep track of the results of previous queries in order to validate certain requirements. The ability to have the CRR automatically provide quantification over design requirements would allow the user to focus more on requirements reasoning and less on the book keeping of results.
 
 \subsubsection{Data model for conceptual architectural design reasoning}
 The architectural representation model in the CRR is based on room containment relationships. Future work is needed to investigate the best data structures and representation models for reasoning about architectural design at a conceptual level. To this end two issues are identified here. 1) The containment relationship of walls withing a building context is still unclear. The question remains if walls should be contained in a room or if they are boundaries to rooms. In general the entire hierarchical containment structure of an architectural design needs to be studied. 2) The artefactual geometries for doorways are usually contained in two separate rooms. The question remains how this situation should be represented to effectively reason about artefactual requirements.
 
 \subsubsection{Benchmark of spatial constraint solvers}
-An evaluation of the spatial constraint solvers in terms of handling large number of queries will be an important aspect in expanding the CRR to larger data sets. Currently, the spatial constraint solvers only handle a few ($<$ 10) queries at a time and therefore responds instantaneously. Expending the CRR to handle larger data sets and more complex spatial queries will require an investigation into how well the spatial constraint solvers scale.
+An evaluation of the spatial constraint solvers in terms of handling large number of queries will be an important aspect in expanding the CRR to larger data sets. Currently, the spatial constraint solvers handle only a few ($<$ 10) queries at a time and therefore respond instantaneously. Expanding the CRR to handle larger data sets and more complex spatial queries will require an investigation into how well the spatial constraint solvers scale.
 
 
 \clearpage
